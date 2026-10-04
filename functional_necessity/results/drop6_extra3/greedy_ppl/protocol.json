@@ -1,0 +1,39 @@
+{
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "universal_drop": [
+    1,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "suspected_universal_keep": [
+    0,
+    7
+  ],
+  "candidates": [
+    0,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "extra_k": 3,
+  "global_fisher_extra3": [
+    2,
+    3,
+    10
+  ],
+  "per_task_calib": "16x8",
+  "seed": 42,
+  "skip": "skip_llm_layers / DTR Appendix B; score on skip(U) graph",
+  "note": "U is locked from global Fisher Drop-6. PPL must not redefine U. extra-3 is chosen from the remaining 12 layers including L0/L7."
+}

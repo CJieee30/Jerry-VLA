@@ -1,0 +1,17 @@
+{
+  "method": "cossim",
+  "k": 4,
+  "drop": [
+    3,
+    4,
+    5,
+    6
+  ],
+  "suite": "libero_10",
+  "episodes": 500,
+  "successes": 445,
+  "rate": 0.89,
+  "seed": 7,
+  "skip": "llama_decoder_identity",
+  "log": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/openvla_oft_libero/drop4/eval/k4_cossim/libero_10/EVAL-libero_10-openvla-2026_09_25-23_22_04--k4-cossim.txt"
+}

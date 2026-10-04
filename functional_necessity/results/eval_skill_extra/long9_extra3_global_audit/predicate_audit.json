@@ -1,0 +1,513 @@
+{
+  "kind": "bddl_predicate_audit",
+  "n_action_steps": 10,
+  "read_only": true,
+  "n_episodes": 10,
+  "n_success": 0,
+  "phase_counts": {
+    "place": 7,
+    "close": 3
+  },
+  "episodes": [
+    {
+      "episode_index": 0,
+      "task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it",
+      "task_id": 9,
+      "task_description": "put the yellow and white mug in the microwave and close it",
+      "env_step": 520,
+      "success": false,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "in",
+            "white_yellow_mug_1",
+            "microwave_1_heating_region"
+          ],
+          "key": "in:white_yellow_mug_1:microwave_1_heating_region",
+          "role": "place",
+          "ever": false,
+          "end": false,
+          "first_step": null,
+          "first_chunk": null,
+          "last_true_step": null
+        },
+        {
+          "pred": [
+            "close",
+            "microwave_1"
+          ],
+          "key": "close:microwave_1",
+          "role": "close",
+          "ever": false,
+          "end": false,
+          "first_step": null,
+          "first_chunk": null,
+          "last_true_step": null
+        }
+      ],
+      "n_steps": 520,
+      "classification": {
+        "place_ever": false,
+        "place_end": false,
+        "place_first_step": null,
+        "place_first_chunk": null,
+        "close_ever": false,
+        "close_end": false,
+        "close_first_step": null,
+        "close_first_chunk": null,
+        "failure_phase": "place"
+      }
+    },
+    {
+      "episode_index": 1,
+      "task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it",
+      "task_id": 9,
+      "task_description": "put the yellow and white mug in the microwave and close it",
+      "env_step": 520,
+      "success": false,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "in",
+            "white_yellow_mug_1",
+            "microwave_1_heating_region"
+          ],
+          "key": "in:white_yellow_mug_1:microwave_1_heating_region",
+          "role": "place",
+          "ever": false,
+          "end": false,
+          "first_step": null,
+          "first_chunk": null,
+          "last_true_step": null
+        },
+        {
+          "pred": [
+            "close",
+            "microwave_1"
+          ],
+          "key": "close:microwave_1",
+          "role": "close",
+          "ever": false,
+          "end": false,
+          "first_step": null,
+          "first_chunk": null,
+          "last_true_step": null
+        }
+      ],
+      "n_steps": 520,
+      "classification": {
+        "place_ever": false,
+        "place_end": false,
+        "place_first_step": null,
+        "place_first_chunk": null,
+        "close_ever": false,
+        "close_end": false,
+        "close_first_step": null,
+        "close_first_chunk": null,
+        "failure_phase": "place"
+      }
+    },
+    {
+      "episode_index": 2,
+      "task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it",
+      "task_id": 9,
+      "task_description": "put the yellow and white mug in the microwave and close it",
+      "env_step": 520,
+      "success": false,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "in",
+            "white_yellow_mug_1",
+            "microwave_1_heating_region"
+          ],
+          "key": "in:white_yellow_mug_1:microwave_1_heating_region",
+          "role": "place",
+          "ever": true,
+          "end": false,
+          "first_step": 322,
+          "first_chunk": 32,
+          "last_true_step": 391
+        },
+        {
+          "pred": [
+            "close",
+            "microwave_1"
+          ],
+          "key": "close:microwave_1",
+          "role": "close",
+          "ever": false,
+          "end": false,
+          "first_step": null,
+          "first_chunk": null,
+          "last_true_step": null
+        }
+      ],
+      "n_steps": 520,
+      "classification": {
+        "place_ever": true,
+        "place_end": false,
+        "place_first_step": 322,
+        "place_first_chunk": 32,
+        "close_ever": false,
+        "close_end": false,
+        "close_first_step": null,
+        "close_first_chunk": null,
+        "failure_phase": "place"
+      }
+    },
+    {
+      "episode_index": 3,
+      "task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it",
+      "task_id": 9,
+      "task_description": "put the yellow and white mug in the microwave and close it",
+      "env_step": 520,
+      "success": false,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "in",
+            "white_yellow_mug_1",
+            "microwave_1_heating_region"
+          ],
+          "key": "in:white_yellow_mug_1:microwave_1_heating_region",
+          "role": "place",
+          "ever": false,
+          "end": false,
+          "first_step": null,
+          "first_chunk": null,
+          "last_true_step": null
+        },
+        {
+          "pred": [
+            "close",
+            "microwave_1"
+          ],
+          "key": "close:microwave_1",
+          "role": "close",
+          "ever": false,
+          "end": false,
+          "first_step": null,
+          "first_chunk": null,
+          "last_true_step": null
+        }
+      ],
+      "n_steps": 520,
+      "classification": {
+        "place_ever": false,
+        "place_end": false,
+        "place_first_step": null,
+        "place_first_chunk": null,
+        "close_ever": false,
+        "close_end": false,
+        "close_first_step": null,
+        "close_first_chunk": null,
+        "failure_phase": "place"
+      }
+    },
+    {
+      "episode_index": 4,
+      "task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it",
+      "task_id": 9,
+      "task_description": "put the yellow and white mug in the microwave and close it",
+      "env_step": 520,
+      "success": false,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "in",
+            "white_yellow_mug_1",
+            "microwave_1_heating_region"
+          ],
+          "key": "in:white_yellow_mug_1:microwave_1_heating_region",
+          "role": "place",
+          "ever": false,
+          "end": false,
+          "first_step": null,
+          "first_chunk": null,
+          "last_true_step": null
+        },
+        {
+          "pred": [
+            "close",
+            "microwave_1"
+          ],
+          "key": "close:microwave_1",
+          "role": "close",
+          "ever": false,
+          "end": false,
+          "first_step": null,
+          "first_chunk": null,
+          "last_true_step": null
+        }
+      ],
+      "n_steps": 520,
+      "classification": {
+        "place_ever": false,
+        "place_end": false,
+        "place_first_step": null,
+        "place_first_chunk": null,
+        "close_ever": false,
+        "close_end": false,
+        "close_first_step": null,
+        "close_first_chunk": null,
+        "failure_phase": "place"
+      }
+    },
+    {
+      "episode_index": 5,
+      "task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it",
+      "task_id": 9,
+      "task_description": "put the yellow and white mug in the microwave and close it",
+      "env_step": 520,
+      "success": false,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "in",
+            "white_yellow_mug_1",
+            "microwave_1_heating_region"
+          ],
+          "key": "in:white_yellow_mug_1:microwave_1_heating_region",
+          "role": "place",
+          "ever": true,
+          "end": false,
+          "first_step": 225,
+          "first_chunk": 22,
+          "last_true_step": 281
+        },
+        {
+          "pred": [
+            "close",
+            "microwave_1"
+          ],
+          "key": "close:microwave_1",
+          "role": "close",
+          "ever": false,
+          "end": false,
+          "first_step": null,
+          "first_chunk": null,
+          "last_true_step": null
+        }
+      ],
+      "n_steps": 520,
+      "classification": {
+        "place_ever": true,
+        "place_end": false,
+        "place_first_step": 225,
+        "place_first_chunk": 22,
+        "close_ever": false,
+        "close_end": false,
+        "close_first_step": null,
+        "close_first_chunk": null,
+        "failure_phase": "place"
+      }
+    },
+    {
+      "episode_index": 6,
+      "task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it",
+      "task_id": 9,
+      "task_description": "put the yellow and white mug in the microwave and close it",
+      "env_step": 520,
+      "success": false,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "in",
+            "white_yellow_mug_1",
+            "microwave_1_heating_region"
+          ],
+          "key": "in:white_yellow_mug_1:microwave_1_heating_region",
+          "role": "place",
+          "ever": false,
+          "end": false,
+          "first_step": null,
+          "first_chunk": null,
+          "last_true_step": null
+        },
+        {
+          "pred": [
+            "close",
+            "microwave_1"
+          ],
+          "key": "close:microwave_1",
+          "role": "close",
+          "ever": false,
+          "end": false,
+          "first_step": null,
+          "first_chunk": null,
+          "last_true_step": null
+        }
+      ],
+      "n_steps": 520,
+      "classification": {
+        "place_ever": false,
+        "place_end": false,
+        "place_first_step": null,
+        "place_first_chunk": null,
+        "close_ever": false,
+        "close_end": false,
+        "close_first_step": null,
+        "close_first_chunk": null,
+        "failure_phase": "place"
+      }
+    },
+    {
+      "episode_index": 7,
+      "task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it",
+      "task_id": 9,
+      "task_description": "put the yellow and white mug in the microwave and close it",
+      "env_step": 520,
+      "success": false,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "in",
+            "white_yellow_mug_1",
+            "microwave_1_heating_region"
+          ],
+          "key": "in:white_yellow_mug_1:microwave_1_heating_region",
+          "role": "place",
+          "ever": true,
+          "end": true,
+          "first_step": 196,
+          "first_chunk": 19,
+          "last_true_step": 520
+        },
+        {
+          "pred": [
+            "close",
+            "microwave_1"
+          ],
+          "key": "close:microwave_1",
+          "role": "close",
+          "ever": false,
+          "end": false,
+          "first_step": null,
+          "first_chunk": null,
+          "last_true_step": null
+        }
+      ],
+      "n_steps": 520,
+      "classification": {
+        "place_ever": true,
+        "place_end": true,
+        "place_first_step": 196,
+        "place_first_chunk": 19,
+        "close_ever": false,
+        "close_end": false,
+        "close_first_step": null,
+        "close_first_chunk": null,
+        "failure_phase": "close"
+      }
+    },
+    {
+      "episode_index": 8,
+      "task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it",
+      "task_id": 9,
+      "task_description": "put the yellow and white mug in the microwave and close it",
+      "env_step": 520,
+      "success": false,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "in",
+            "white_yellow_mug_1",
+            "microwave_1_heating_region"
+          ],
+          "key": "in:white_yellow_mug_1:microwave_1_heating_region",
+          "role": "place",
+          "ever": true,
+          "end": true,
+          "first_step": 459,
+          "first_chunk": 45,
+          "last_true_step": 520
+        },
+        {
+          "pred": [
+            "close",
+            "microwave_1"
+          ],
+          "key": "close:microwave_1",
+          "role": "close",
+          "ever": false,
+          "end": false,
+          "first_step": null,
+          "first_chunk": null,
+          "last_true_step": null
+        }
+      ],
+      "n_steps": 520,
+      "classification": {
+        "place_ever": true,
+        "place_end": true,
+        "place_first_step": 459,
+        "place_first_chunk": 45,
+        "close_ever": false,
+        "close_end": false,
+        "close_first_step": null,
+        "close_first_chunk": null,
+        "failure_phase": "close"
+      }
+    },
+    {
+      "episode_index": 9,
+      "task": "KITCHEN_SCENE6_put_the_yellow_and_white_mug_in_the_microwave_and_close_it",
+      "task_id": 9,
+      "task_description": "put the yellow and white mug in the microwave and close it",
+      "env_step": 520,
+      "success": false,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "in",
+            "white_yellow_mug_1",
+            "microwave_1_heating_region"
+          ],
+          "key": "in:white_yellow_mug_1:microwave_1_heating_region",
+          "role": "place",
+          "ever": true,
+          "end": true,
+          "first_step": 506,
+          "first_chunk": 50,
+          "last_true_step": 520
+        },
+        {
+          "pred": [
+            "close",
+            "microwave_1"
+          ],
+          "key": "close:microwave_1",
+          "role": "close",
+          "ever": false,
+          "end": false,
+          "first_step": null,
+          "first_chunk": null,
+          "last_true_step": null
+        }
+      ],
+      "n_steps": 520,
+      "classification": {
+        "place_ever": true,
+        "place_end": true,
+        "place_first_step": 506,
+        "place_first_chunk": 50,
+        "close_ever": false,
+        "close_end": false,
+        "close_first_step": null,
+        "close_first_chunk": null,
+        "failure_phase": "close"
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+Allocation on device 0 would exceed allowed memory. (out of memory)
+Currently allocated     : 22.03 GiB
+Requested               : 95.00 MiB
+Device limit            : 23.56 GiB
+Free (according to CUDA): 26.94 MiB
+PyTorch limit (set by user-supplied memory fraction)
+                        : 17179869184.00 GiB

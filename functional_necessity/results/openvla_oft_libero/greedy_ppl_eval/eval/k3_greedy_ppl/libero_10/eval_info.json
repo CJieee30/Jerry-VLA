@@ -1,0 +1,16 @@
+{
+  "method": "greedy_ppl",
+  "k": 3,
+  "drop": [
+    3,
+    5,
+    29
+  ],
+  "suite": "libero_10",
+  "episodes": 500,
+  "successes": 461,
+  "rate": 0.922,
+  "seed": 7,
+  "skip": "llama_decoder_identity",
+  "log": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/openvla_oft_libero/greedy_ppl_eval/eval/k3_greedy_ppl/libero_10/EVAL-libero_10-openvla-2026_09_28-00_26_57--k3-greedy_ppl.txt"
+}

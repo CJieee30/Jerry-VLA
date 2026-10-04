@@ -1,0 +1,33 @@
+{
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "method": "cka",
+  "k": 9,
+  "drop_layers": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "keep_layers": [
+    0,
+    1,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "recovery": false,
+  "skip": "dtr_appendix_b_prefix_kv",
+  "n_action_steps": 10,
+  "compile_model": false,
+  "job_name": "k9_cka",
+  "seed": 1000
+}

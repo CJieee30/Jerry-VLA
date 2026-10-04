@@ -1,0 +1,12 @@
+# Functional Necessity 打分协议（Stage 2）
+# 运行时以各脚本 argparse 默认值为准；本文件是人读副本。
+
+checkpoint: lerobot/pi05_libero_finetuned_v044
+dataset_repo_id: lerobot/libero
+seed: 42
+num_calibration_batches: 64
+batch_size: 8
+drop_ks: [6, 9, 12, 16]
+profiled_module: paligemma   # 只打语言塔 18 层
+# Hessian 在 3090 上若 OOM，把 --microbatch-size 降到 2
+# CKA：相邻线性 CKA 从高到低删（不用 CLP 高原分块）

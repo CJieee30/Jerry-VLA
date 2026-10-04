@@ -1,0 +1,15 @@
+{
+  "checkpoint": "lerobot/smolvla_libero",
+  "n_action_steps": 10,
+  "num_steps": 10,
+  "rename_map": {
+    "observation.images.image": "observation.images.camera1",
+    "observation.images.image2": "observation.images.camera2"
+  },
+  "state": "LIBERO 8-dim (eef_pos, axis-angle, gripper); patch config 6 -> 8",
+  "task": "libero_spatial",
+  "task_ids": [
+    0
+  ],
+  "n_episodes": 1
+}

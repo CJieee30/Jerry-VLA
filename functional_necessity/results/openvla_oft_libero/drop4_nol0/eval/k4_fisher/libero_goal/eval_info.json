@@ -1,0 +1,17 @@
+{
+  "method": "fisher",
+  "k": 4,
+  "drop": [
+    3,
+    4,
+    30,
+    31
+  ],
+  "suite": "libero_goal",
+  "episodes": 500,
+  "successes": 35,
+  "rate": 0.07,
+  "seed": 7,
+  "skip": "llama_decoder_identity",
+  "log": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/openvla_oft_libero/drop4_nol0/eval/k4_fisher/libero_goal/EVAL-libero_goal-openvla-2026_09_26-12_07_59--k4-fisher.txt"
+}

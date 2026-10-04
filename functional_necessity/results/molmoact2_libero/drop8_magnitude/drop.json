@@ -1,0 +1,18 @@
+{
+  "methods": [
+    "magnitude"
+  ],
+  "k": 8,
+  "drop": [
+    1,
+    2,
+    3,
+    18,
+    19,
+    20,
+    21,
+    22
+  ],
+  "operator": "keep_kv_identity_residual",
+  "shared": false
+}

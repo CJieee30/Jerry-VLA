@@ -1,0 +1,56 @@
+{
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "scope": "language_prefix_only",
+  "prefix_seq": 968,
+  "skip": "dtr_appendix_b_keep_kv",
+  "drop": [
+    1,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "device": "NVIDIA GeForce RTX 3090",
+  "warmup": 5,
+  "repeats": 20,
+  "baseline": {
+    "drop": [],
+    "params_language_stored_m": 2508.531712,
+    "params_language_active_m": 2508.531712,
+    "flops_g": 3974.951585792,
+    "inference_ms": 78.099658203125
+  },
+  "fisher_drop6": {
+    "drop": [
+      1,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "params_language_stored_m": 2508.531712,
+    "params_language_active_m": 1854.208,
+    "flops_g": 2662.14806528,
+    "inference_ms": 53.426019287109376
+  },
+  "delta": {
+    "params_language_stored_m": {
+      "abs": 0.0,
+      "pct": 0.0
+    },
+    "params_language_active_m": {
+      "abs": -654.3237119999999,
+      "pct": -26.083932240917186
+    },
+    "flops_g": {
+      "abs": -1312.803520512,
+      "pct": -33.02690591765853
+    },
+    "inference_ms": {
+      "abs": -24.673638916015626,
+      "pct": -31.59250563151422
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "method": "igia",
+  "k": 4,
+  "drop": [
+    3,
+    29,
+    30,
+    31
+  ],
+  "suite": "libero_object",
+  "episodes": 500,
+  "successes": 7,
+  "rate": 0.014,
+  "seed": 7,
+  "skip": "llama_decoder_identity",
+  "log": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/openvla_oft_libero/drop4_nol0/eval/k4_igia/libero_object/EVAL-libero_object-openvla-2026_09_26-09_50_04--k4-igia.txt"
+}

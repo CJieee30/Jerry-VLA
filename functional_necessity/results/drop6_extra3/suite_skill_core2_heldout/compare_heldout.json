@@ -1,0 +1,573 @@
+{
+  "gap_min": 0.01,
+  "exclude_discovery_seeds": [
+    42,
+    43
+  ],
+  "val_seeds": [
+    44,
+    45
+  ],
+  "turn": {
+    "gap_min": 0.01,
+    "go": false,
+    "seeds": [
+      {
+        "seed": 44,
+        "goal_matched_27": 0.21642362768761814,
+        "goal_swapped_29": 0.19787980080582201,
+        "goal_advantage": -0.01854382688179612,
+        "goal_prefers_matched": false,
+        "long_matched_29": 0.1651125424541533,
+        "long_swapped_27": 0.19010229455307126,
+        "long_advantage": 0.02498975209891796,
+        "long_prefers_matched": true,
+        "goal_L2": 0.09699931624345481,
+        "long_L2": 0.08103695837780833,
+        "diagonal": false
+      },
+      {
+        "seed": 45,
+        "goal_matched_27": 0.22581674251705408,
+        "goal_swapped_29": 0.20877004321664572,
+        "goal_advantage": -0.017046699300408363,
+        "goal_prefers_matched": false,
+        "long_matched_29": 0.14834539289586246,
+        "long_swapped_27": 0.1677650313358754,
+        "long_advantage": 0.019419638440012932,
+        "long_prefers_matched": true,
+        "goal_L2": 0.09850118961185217,
+        "long_L2": 0.07201529922895133,
+        "diagonal": false
+      }
+    ],
+    "matched_cores": {
+      "goal_like": [
+        2,
+        7
+      ],
+      "long_like": [
+        2,
+        9
+      ]
+    },
+    "cells": [
+      "Goal/turn",
+      "Long/turn"
+    ]
+  },
+  "place": {
+    "gap_min": 0.01,
+    "go": false,
+    "seeds": [
+      {
+        "seed": 44,
+        "object_matched_28": 0.14865870750509202,
+        "object_swapped_27": 0.1503781124483794,
+        "object_advantage": 0.0017194049432873726,
+        "object_prefers_matched": false,
+        "spatial_matched_27": 0.2054757308214903,
+        "spatial_swapped_28": 0.21462576743215322,
+        "spatial_advantage": 0.009150036610662937,
+        "spatial_prefers_matched": false,
+        "long_matched_27": 0.1586724012158811,
+        "long_swapped_28": 0.18571967678144574,
+        "long_advantage": 0.027047275565564632,
+        "long_prefers_matched": true,
+        "diagonal": false
+      },
+      {
+        "seed": 45,
+        "object_matched_28": 0.13521078671328723,
+        "object_swapped_27": 0.14035191829316318,
+        "object_advantage": 0.005141131579875946,
+        "object_prefers_matched": false,
+        "spatial_matched_27": 0.22101934859529138,
+        "spatial_swapped_28": 0.23623447259888053,
+        "spatial_advantage": 0.015215124003589153,
+        "spatial_prefers_matched": true,
+        "long_matched_27": 0.17553873523138463,
+        "long_swapped_28": 0.19557195878587663,
+        "long_advantage": 0.020033223554491997,
+        "long_prefers_matched": true,
+        "diagonal": false
+      }
+    ],
+    "matched_cores": {
+      "object_like": [
+        2,
+        8
+      ],
+      "spatial_long_like": [
+        2,
+        7
+      ]
+    },
+    "cells": [
+      "Object/place",
+      "Spatial/place",
+      "Long/place"
+    ],
+    "note": "Place GO requires Object to prefer {2,8} and both Spatial and Long to prefer {2,7}."
+  },
+  "by_seed": {
+    "44": {
+      "scope": "suite_skill_core2_heldout",
+      "calib_seed": 44,
+      "calib_dir": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_heldout_32x8_seed44",
+      "gap_min": 0.01,
+      "pools": [
+        {
+          "name": "Goal/turn",
+          "suite": "Goal",
+          "skill": "turn",
+          "calib_seed": 44,
+          "n_calib_batches": 32,
+          "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_heldout_32x8_seed44/goal_turn.pt",
+          "baseline_loss": 0.25453498563729227,
+          "masks": {
+            "U_only": {
+              "extra": [],
+              "loss": 0.25453498563729227,
+              "delta": 0.0,
+              "seconds": 0.0
+            },
+            "L2_only": {
+              "extra": [
+                2
+              ],
+              "loss": 0.3515343018807471,
+              "delta": 0.09699931624345481,
+              "seconds": 15.46
+            },
+            "core_27": {
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.4709586133249104,
+              "delta": 0.21642362768761814,
+              "seconds": 14.67
+            },
+            "core_29": {
+              "extra": [
+                2,
+                9
+              ],
+              "loss": 0.4524147864431143,
+              "delta": 0.19787980080582201,
+              "seconds": 14.707
+            }
+          },
+          "seconds": 61.528
+        },
+        {
+          "name": "Long/turn",
+          "suite": "Long",
+          "skill": "turn",
+          "calib_seed": 44,
+          "n_calib_batches": 32,
+          "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_heldout_32x8_seed44/long_turn.pt",
+          "baseline_loss": 0.22481959778815508,
+          "masks": {
+            "U_only": {
+              "extra": [],
+              "loss": 0.22481959778815508,
+              "delta": 0.0,
+              "seconds": 0.0
+            },
+            "L2_only": {
+              "extra": [
+                2
+              ],
+              "loss": 0.3058565561659634,
+              "delta": 0.08103695837780833,
+              "seconds": 15.84
+            },
+            "core_27": {
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.41492189234122634,
+              "delta": 0.19010229455307126,
+              "seconds": 14.861
+            },
+            "core_29": {
+              "extra": [
+                2,
+                9
+              ],
+              "loss": 0.3899321402423084,
+              "delta": 0.1651125424541533,
+              "seconds": 14.914
+            }
+          },
+          "seconds": 62.352
+        },
+        {
+          "name": "Object/place",
+          "suite": "Object",
+          "skill": "place",
+          "calib_seed": 44,
+          "n_calib_batches": 32,
+          "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_heldout_32x8_seed44/object_place.pt",
+          "baseline_loss": 0.28071713843382895,
+          "masks": {
+            "U_only": {
+              "extra": [],
+              "loss": 0.28071713843382895,
+              "delta": 0.0,
+              "seconds": 0.0
+            },
+            "L2_only": {
+              "extra": [
+                2
+              ],
+              "loss": 0.3620636682026088,
+              "delta": 0.08134652976877987,
+              "seconds": 15.877
+            },
+            "core_27": {
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.43109525088220835,
+              "delta": 0.1503781124483794,
+              "seconds": 14.945
+            },
+            "core_28": {
+              "extra": [
+                2,
+                8
+              ],
+              "loss": 0.429375845938921,
+              "delta": 0.14865870750509202,
+              "seconds": 14.951
+            }
+          },
+          "seconds": 62.638
+        },
+        {
+          "name": "Spatial/place",
+          "suite": "Spatial",
+          "skill": "place",
+          "calib_seed": 44,
+          "n_calib_batches": 32,
+          "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_heldout_32x8_seed44/spatial_place.pt",
+          "baseline_loss": 0.2934243977069855,
+          "masks": {
+            "U_only": {
+              "extra": [],
+              "loss": 0.2934243977069855,
+              "delta": 0.0,
+              "seconds": 0.0
+            },
+            "L2_only": {
+              "extra": [
+                2
+              ],
+              "loss": 0.39635572163388133,
+              "delta": 0.10293132392689586,
+              "seconds": 15.943
+            },
+            "core_27": {
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.49890012852847576,
+              "delta": 0.2054757308214903,
+              "seconds": 14.967
+            },
+            "core_28": {
+              "extra": [
+                2,
+                8
+              ],
+              "loss": 0.5080501651391387,
+              "delta": 0.21462576743215322,
+              "seconds": 14.97
+            }
+          },
+          "seconds": 62.814
+        },
+        {
+          "name": "Long/place",
+          "suite": "Long",
+          "skill": "place",
+          "calib_seed": 44,
+          "n_calib_batches": 32,
+          "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_heldout_32x8_seed44/long_place.pt",
+          "baseline_loss": 0.23807716462761164,
+          "masks": {
+            "U_only": {
+              "extra": [],
+              "loss": 0.23807716462761164,
+              "delta": 0.0,
+              "seconds": 0.0
+            },
+            "L2_only": {
+              "extra": [
+                2
+              ],
+              "loss": 0.3124550306238234,
+              "delta": 0.07437786599621177,
+              "seconds": 15.944
+            },
+            "core_27": {
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.39674956584349275,
+              "delta": 0.1586724012158811,
+              "seconds": 14.981
+            },
+            "core_28": {
+              "extra": [
+                2,
+                8
+              ],
+              "loss": 0.4237968414090574,
+              "delta": 0.18571967678144574,
+              "seconds": 15.03
+            }
+          },
+          "seconds": 62.896
+        }
+      ],
+      "out_json": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/drop6_extra3/suite_skill_core2_heldout/seed44/heldout.json"
+    },
+    "45": {
+      "scope": "suite_skill_core2_heldout",
+      "calib_seed": 45,
+      "calib_dir": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_heldout_32x8_seed45",
+      "gap_min": 0.01,
+      "pools": [
+        {
+          "name": "Goal/turn",
+          "suite": "Goal",
+          "skill": "turn",
+          "calib_seed": 45,
+          "n_calib_batches": 32,
+          "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_heldout_32x8_seed45/goal_turn.pt",
+          "baseline_loss": 0.25815402902662754,
+          "masks": {
+            "U_only": {
+              "extra": [],
+              "loss": 0.25815402902662754,
+              "delta": 0.0,
+              "seconds": 0.0
+            },
+            "L2_only": {
+              "extra": [
+                2
+              ],
+              "loss": 0.3566552186384797,
+              "delta": 0.09850118961185217,
+              "seconds": 15.427
+            },
+            "core_27": {
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.4839707715436816,
+              "delta": 0.22581674251705408,
+              "seconds": 14.597
+            },
+            "core_29": {
+              "extra": [
+                2,
+                9
+              ],
+              "loss": 0.46692407224327326,
+              "delta": 0.20877004321664572,
+              "seconds": 14.618
+            }
+          },
+          "seconds": 61.312
+        },
+        {
+          "name": "Long/turn",
+          "suite": "Long",
+          "skill": "turn",
+          "calib_seed": 45,
+          "n_calib_batches": 32,
+          "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_heldout_32x8_seed45/long_turn.pt",
+          "baseline_loss": 0.24070923426188529,
+          "masks": {
+            "U_only": {
+              "extra": [],
+              "loss": 0.24070923426188529,
+              "delta": 0.0,
+              "seconds": 0.0
+            },
+            "L2_only": {
+              "extra": [
+                2
+              ],
+              "loss": 0.3127245334908366,
+              "delta": 0.07201529922895133,
+              "seconds": 15.653
+            },
+            "core_27": {
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.4084742655977607,
+              "delta": 0.1677650313358754,
+              "seconds": 14.714
+            },
+            "core_29": {
+              "extra": [
+                2,
+                9
+              ],
+              "loss": 0.38905462715774775,
+              "delta": 0.14834539289586246,
+              "seconds": 14.77
+            }
+          },
+          "seconds": 61.747
+        },
+        {
+          "name": "Object/place",
+          "suite": "Object",
+          "skill": "place",
+          "calib_seed": 45,
+          "n_calib_batches": 32,
+          "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_heldout_32x8_seed45/object_place.pt",
+          "baseline_loss": 0.3024836543481797,
+          "masks": {
+            "U_only": {
+              "extra": [],
+              "loss": 0.3024836543481797,
+              "delta": 0.0,
+              "seconds": 0.0
+            },
+            "L2_only": {
+              "extra": [
+                2
+              ],
+              "loss": 0.3741357068065554,
+              "delta": 0.07165205245837569,
+              "seconds": 15.724
+            },
+            "core_27": {
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.4428355726413429,
+              "delta": 0.14035191829316318,
+              "seconds": 14.784
+            },
+            "core_28": {
+              "extra": [
+                2,
+                8
+              ],
+              "loss": 0.43769444106146693,
+              "delta": 0.13521078671328723,
+              "seconds": 14.76
+            }
+          },
+          "seconds": 61.952
+        },
+        {
+          "name": "Spatial/place",
+          "suite": "Spatial",
+          "skill": "place",
+          "calib_seed": 45,
+          "n_calib_batches": 32,
+          "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_heldout_32x8_seed45/spatial_place.pt",
+          "baseline_loss": 0.31638656137511134,
+          "masks": {
+            "U_only": {
+              "extra": [],
+              "loss": 0.31638656137511134,
+              "delta": 0.0,
+              "seconds": 0.0
+            },
+            "L2_only": {
+              "extra": [
+                2
+              ],
+              "loss": 0.43151795491576195,
+              "delta": 0.1151313935406506,
+              "seconds": 15.688
+            },
+            "core_27": {
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.5374059099704027,
+              "delta": 0.22101934859529138,
+              "seconds": 14.739
+            },
+            "core_28": {
+              "extra": [
+                2,
+                8
+              ],
+              "loss": 0.5526210339739919,
+              "delta": 0.23623447259888053,
+              "seconds": 14.727
+            }
+          },
+          "seconds": 61.82
+        },
+        {
+          "name": "Long/place",
+          "suite": "Long",
+          "skill": "place",
+          "calib_seed": 45,
+          "n_calib_batches": 32,
+          "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_heldout_32x8_seed45/long_place.pt",
+          "baseline_loss": 0.2557290408294648,
+          "masks": {
+            "U_only": {
+              "extra": [],
+              "loss": 0.2557290408294648,
+              "delta": 0.0,
+              "seconds": 0.0
+            },
+            "L2_only": {
+              "extra": [
+                2
+              ],
+              "loss": 0.32956000813283026,
+              "delta": 0.07383096730336547,
+              "seconds": 15.742
+            },
+            "core_27": {
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.43126777606084943,
+              "delta": 0.17553873523138463,
+              "seconds": 14.803
+            },
+            "core_28": {
+              "extra": [
+                2,
+                8
+              ],
+              "loss": 0.4513009996153414,
+              "delta": 0.19557195878587663,
+              "seconds": 14.781
+            }
+          },
+          "seconds": 62.021
+        }
+      ],
+      "out_json": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/drop6_extra3/suite_skill_core2_heldout/seed45/heldout.json"
+    }
+  }
+}

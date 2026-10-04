@@ -1,0 +1,954 @@
+{
+  "kind": "greedy_ppl_extra3_skill_close_seed42",
+  "method": "greedy_ppl",
+  "k": 9,
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "universal_drop": [
+    1,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "remaining_layers": [
+    0,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "extra_k": 3,
+  "eval_seed": 1000,
+  "compile_model": false,
+  "n_action_steps": 10,
+  "skip": "skip_llm_layers / DTR Appendix B prefix K/V; drop = U \u222a extra3(task)",
+  "tasks": [
+    {
+      "suite": "libero_spatial",
+      "task_id": 0,
+      "task": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+      "short": "Spa0",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 1,
+      "task": "pick up the black bowl next to the ramekin and place it on the plate",
+      "short": "Spa1",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 2,
+      "task": "pick up the black bowl from table center and place it on the plate",
+      "short": "Spa2",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 3,
+      "task": "pick up the black bowl on the cookie box and place it on the plate",
+      "short": "Spa3",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 4,
+      "task": "pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate",
+      "short": "Spa4",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 5,
+      "task": "pick up the black bowl on the ramekin and place it on the plate",
+      "short": "Spa5",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 6,
+      "task": "pick up the black bowl next to the cookie box and place it on the plate",
+      "short": "Spa6",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 7,
+      "task": "pick up the black bowl on the stove and place it on the plate",
+      "short": "Spa7",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 8,
+      "task": "pick up the black bowl next to the plate and place it on the plate",
+      "short": "Spa8",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 9,
+      "task": "pick up the black bowl on the wooden cabinet and place it on the plate",
+      "short": "Spa9",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 0,
+      "task": "pick up the alphabet soup and place it in the basket",
+      "short": "Obj0",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 1,
+      "task": "pick up the cream cheese and place it in the basket",
+      "short": "Obj1",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 2,
+      "task": "pick up the salad dressing and place it in the basket",
+      "short": "Obj2",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 3,
+      "task": "pick up the bbq sauce and place it in the basket",
+      "short": "Obj3",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 4,
+      "task": "pick up the ketchup and place it in the basket",
+      "short": "Obj4",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 5,
+      "task": "pick up the tomato sauce and place it in the basket",
+      "short": "Obj5",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 6,
+      "task": "pick up the butter and place it in the basket",
+      "short": "Obj6",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 7,
+      "task": "pick up the milk and place it in the basket",
+      "short": "Obj7",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 8,
+      "task": "pick up the chocolate pudding and place it in the basket",
+      "short": "Obj8",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 9,
+      "task": "pick up the orange juice and place it in the basket",
+      "short": "Obj9",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 0,
+      "task": "open the middle drawer of the cabinet",
+      "short": "Goal0",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 1,
+      "task": "put the bowl on the stove",
+      "short": "Goal1",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 2,
+      "task": "put the wine bottle on top of the cabinet",
+      "short": "Goal2",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 3,
+      "task": "open the top drawer and put the bowl inside",
+      "short": "Goal3",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 4,
+      "task": "put the bowl on top of the cabinet",
+      "short": "Goal4",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 5,
+      "task": "push the plate to the front of the stove",
+      "short": "Goal5",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 6,
+      "task": "put the cream cheese in the bowl",
+      "short": "Goal6",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 7,
+      "task": "turn on the stove",
+      "short": "Goal7",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 8,
+      "task": "put the bowl on the plate",
+      "short": "Goal8",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 9,
+      "task": "put the wine bottle on the rack",
+      "short": "Goal9",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 0,
+      "task": "put both the alphabet soup and the tomato sauce in the basket",
+      "short": "Long0",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 1,
+      "task": "put both the cream cheese box and the butter in the basket",
+      "short": "Long1",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 2,
+      "task": "turn on the stove and put the moka pot on it",
+      "short": "Long2",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 3,
+      "task": "put the black bowl in the bottom drawer of the cabinet and close it",
+      "short": "Long3",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 4,
+      "task": "put the white mug on the left plate and put the yellow and white mug on the right plate",
+      "short": "Long4",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 5,
+      "task": "pick up the book and place it in the back compartment of the caddy",
+      "short": "Long5",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 6,
+      "task": "put the white mug on the plate and put the chocolate pudding to the right of the plate",
+      "short": "Long6",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 7,
+      "task": "put both the alphabet soup and the cream cheese box in the basket",
+      "short": "Long7",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 8,
+      "task": "put both moka pots on the stove",
+      "short": "Long8",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 9,
+      "task": "put the yellow and white mug in the microwave and close it",
+      "short": "Long9",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    }
+  ],
+  "summary": {
+    "n_tasks": 40,
+    "n_unique_triples": 1,
+    "n_match_global_fisher_extra3": 0,
+    "n_symdiff_ge1": 40,
+    "n_extra3_contains_l0": 0,
+    "n_extra3_contains_l7": 40,
+    "histogram": {
+      "[2, 7, 10]": 40
+    },
+    "should_run_closed_loop": true,
+    "gate": "main triple <=32/40 and >=2 other triples, or >=8/40 with symmetric difference >=1 vs [2,3,10]"
+  },
+  "pooling": "constant skill mask stamped on 40 tasks for bookkeeping",
+  "skill": "close",
+  "calib_seed": 42,
+  "vs_global_greedy": {
+    "extra_drop": [
+      2,
+      7,
+      10
+    ],
+    "global_greedy_extra3": [
+      2,
+      7,
+      11
+    ],
+    "intersection": [
+      2,
+      7
+    ],
+    "symdiff": [
+      10,
+      11
+    ],
+    "jaccard": 0.5,
+    "differs": true
+  },
+  "note": "Closed-loop step 3 should use --drop-layers on a Goal0/Goal7 subset, not 40-task routing."
+}

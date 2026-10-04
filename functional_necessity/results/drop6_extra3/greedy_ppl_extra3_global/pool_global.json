@@ -1,0 +1,694 @@
+{
+  "name": "global",
+  "suite": null,
+  "n_tasks": 40,
+  "n_calib_batches": 640,
+  "expected_batches": 640,
+  "sources": [
+    {
+      "short": "Spa0",
+      "suite": "libero_spatial",
+      "task_id": 0,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa0.pt"
+    },
+    {
+      "short": "Spa1",
+      "suite": "libero_spatial",
+      "task_id": 1,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa1.pt"
+    },
+    {
+      "short": "Spa2",
+      "suite": "libero_spatial",
+      "task_id": 2,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa2.pt"
+    },
+    {
+      "short": "Spa3",
+      "suite": "libero_spatial",
+      "task_id": 3,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa3.pt"
+    },
+    {
+      "short": "Spa4",
+      "suite": "libero_spatial",
+      "task_id": 4,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa4.pt"
+    },
+    {
+      "short": "Spa5",
+      "suite": "libero_spatial",
+      "task_id": 5,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa5.pt"
+    },
+    {
+      "short": "Spa6",
+      "suite": "libero_spatial",
+      "task_id": 6,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa6.pt"
+    },
+    {
+      "short": "Spa7",
+      "suite": "libero_spatial",
+      "task_id": 7,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa7.pt"
+    },
+    {
+      "short": "Spa8",
+      "suite": "libero_spatial",
+      "task_id": 8,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa8.pt"
+    },
+    {
+      "short": "Spa9",
+      "suite": "libero_spatial",
+      "task_id": 9,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa9.pt"
+    },
+    {
+      "short": "Obj0",
+      "suite": "libero_object",
+      "task_id": 0,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj0.pt"
+    },
+    {
+      "short": "Obj1",
+      "suite": "libero_object",
+      "task_id": 1,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj1.pt"
+    },
+    {
+      "short": "Obj2",
+      "suite": "libero_object",
+      "task_id": 2,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj2.pt"
+    },
+    {
+      "short": "Obj3",
+      "suite": "libero_object",
+      "task_id": 3,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj3.pt"
+    },
+    {
+      "short": "Obj4",
+      "suite": "libero_object",
+      "task_id": 4,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj4.pt"
+    },
+    {
+      "short": "Obj5",
+      "suite": "libero_object",
+      "task_id": 5,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj5.pt"
+    },
+    {
+      "short": "Obj6",
+      "suite": "libero_object",
+      "task_id": 6,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj6.pt"
+    },
+    {
+      "short": "Obj7",
+      "suite": "libero_object",
+      "task_id": 7,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj7.pt"
+    },
+    {
+      "short": "Obj8",
+      "suite": "libero_object",
+      "task_id": 8,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj8.pt"
+    },
+    {
+      "short": "Obj9",
+      "suite": "libero_object",
+      "task_id": 9,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj9.pt"
+    },
+    {
+      "short": "Goal0",
+      "suite": "libero_goal",
+      "task_id": 0,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal0.pt"
+    },
+    {
+      "short": "Goal1",
+      "suite": "libero_goal",
+      "task_id": 1,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal1.pt"
+    },
+    {
+      "short": "Goal2",
+      "suite": "libero_goal",
+      "task_id": 2,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal2.pt"
+    },
+    {
+      "short": "Goal3",
+      "suite": "libero_goal",
+      "task_id": 3,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal3.pt"
+    },
+    {
+      "short": "Goal4",
+      "suite": "libero_goal",
+      "task_id": 4,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal4.pt"
+    },
+    {
+      "short": "Goal5",
+      "suite": "libero_goal",
+      "task_id": 5,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal5.pt"
+    },
+    {
+      "short": "Goal6",
+      "suite": "libero_goal",
+      "task_id": 6,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal6.pt"
+    },
+    {
+      "short": "Goal7",
+      "suite": "libero_goal",
+      "task_id": 7,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal7.pt"
+    },
+    {
+      "short": "Goal8",
+      "suite": "libero_goal",
+      "task_id": 8,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal8.pt"
+    },
+    {
+      "short": "Goal9",
+      "suite": "libero_goal",
+      "task_id": 9,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal9.pt"
+    },
+    {
+      "short": "Long0",
+      "suite": "libero_10",
+      "task_id": 0,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long0.pt"
+    },
+    {
+      "short": "Long1",
+      "suite": "libero_10",
+      "task_id": 1,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long1.pt"
+    },
+    {
+      "short": "Long2",
+      "suite": "libero_10",
+      "task_id": 2,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long2.pt"
+    },
+    {
+      "short": "Long3",
+      "suite": "libero_10",
+      "task_id": 3,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long3.pt"
+    },
+    {
+      "short": "Long4",
+      "suite": "libero_10",
+      "task_id": 4,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long4.pt"
+    },
+    {
+      "short": "Long5",
+      "suite": "libero_10",
+      "task_id": 5,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long5.pt"
+    },
+    {
+      "short": "Long6",
+      "suite": "libero_10",
+      "task_id": 6,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long6.pt"
+    },
+    {
+      "short": "Long7",
+      "suite": "libero_10",
+      "task_id": 7,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long7.pt"
+    },
+    {
+      "short": "Long8",
+      "suite": "libero_10",
+      "task_id": 8,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long8.pt"
+    },
+    {
+      "short": "Long9",
+      "suite": "libero_10",
+      "task_id": 9,
+      "n_batches": 16,
+      "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long9.pt"
+    }
+  ],
+  "extra_drop": [
+    2,
+    7,
+    11
+  ],
+  "keep_candidates": [
+    0,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9,
+    10,
+    12
+  ],
+  "union_drop": [
+    1,
+    2,
+    7,
+    11,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "baseline_loss": 0.27508003583643587,
+  "loss": 0.559771844628267,
+  "delta": 0.28469180879183115,
+  "matches_global_fisher_extra3": false,
+  "symdiff_vs_global": [
+    3,
+    7,
+    10,
+    11
+  ],
+  "n_cache": 34,
+  "steps": [
+    {
+      "step": 1,
+      "picked": 2,
+      "extra_after": [
+        2
+      ],
+      "loss": 0.3522338406299241,
+      "delta": 0.07715380479348821,
+      "candidates": [
+        {
+          "layer": 2,
+          "extra": [
+            2
+          ],
+          "loss": 0.3522338406299241,
+          "delta": 0.07715380479348821,
+          "seconds": 318.032
+        },
+        {
+          "layer": 7,
+          "extra": [
+            7
+          ],
+          "loss": 0.36302075422136115,
+          "delta": 0.08794071838492529,
+          "seconds": 319.051
+        },
+        {
+          "layer": 5,
+          "extra": [
+            5
+          ],
+          "loss": 0.3803970106644556,
+          "delta": 0.10531697482801972,
+          "seconds": 318.801
+        },
+        {
+          "layer": 11,
+          "extra": [
+            11
+          ],
+          "loss": 0.382532831991557,
+          "delta": 0.10745279615512116,
+          "seconds": 319.223
+        },
+        {
+          "layer": 9,
+          "extra": [
+            9
+          ],
+          "loss": 0.3834454290452413,
+          "delta": 0.10836539320880545,
+          "seconds": 319.094
+        },
+        {
+          "layer": 4,
+          "extra": [
+            4
+          ],
+          "loss": 0.38534853762248533,
+          "delta": 0.11026850178604947,
+          "seconds": 318.628
+        },
+        {
+          "layer": 10,
+          "extra": [
+            10
+          ],
+          "loss": 0.38882669623708355,
+          "delta": 0.11374666040064768,
+          "seconds": 319.153
+        },
+        {
+          "layer": 8,
+          "extra": [
+            8
+          ],
+          "loss": 0.39689323329366744,
+          "delta": 0.12181319745723157,
+          "seconds": 319.049
+        },
+        {
+          "layer": 3,
+          "extra": [
+            3
+          ],
+          "loss": 0.40621005529537796,
+          "delta": 0.1311300194589421,
+          "seconds": 318.232
+        },
+        {
+          "layer": 12,
+          "extra": [
+            12
+          ],
+          "loss": 0.41619174275547266,
+          "delta": 0.1411117069190368,
+          "seconds": 319.163
+        },
+        {
+          "layer": 6,
+          "extra": [
+            6
+          ],
+          "loss": 0.4439991860301234,
+          "delta": 0.16891915019368753,
+          "seconds": 318.966
+        },
+        {
+          "layer": 0,
+          "extra": [
+            0
+          ],
+          "loss": 1.8474935499951244,
+          "delta": 1.5724135141586886,
+          "seconds": 318.934
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "picked": 11,
+      "extra_after": [
+        2,
+        11
+      ],
+      "loss": 0.4503837384050712,
+      "delta": 0.1753037025686353,
+      "candidates": [
+        {
+          "layer": 11,
+          "extra": [
+            2,
+            11
+          ],
+          "loss": 0.4503837384050712,
+          "delta": 0.1753037025686353,
+          "seconds": 300.134
+        },
+        {
+          "layer": 7,
+          "extra": [
+            2,
+            7
+          ],
+          "loss": 0.4526983705232851,
+          "delta": 0.17761833468684923,
+          "seconds": 300.021
+        },
+        {
+          "layer": 9,
+          "extra": [
+            2,
+            9
+          ],
+          "loss": 0.46141829828266057,
+          "delta": 0.1863382624462247,
+          "seconds": 300.143
+        },
+        {
+          "layer": 10,
+          "extra": [
+            2,
+            10
+          ],
+          "loss": 0.4635906587587669,
+          "delta": 0.18851062292233106,
+          "seconds": 300.109
+        },
+        {
+          "layer": 8,
+          "extra": [
+            2,
+            8
+          ],
+          "loss": 0.4762474827934057,
+          "delta": 0.2011674469569698,
+          "seconds": 300.115
+        },
+        {
+          "layer": 12,
+          "extra": [
+            2,
+            12
+          ],
+          "loss": 0.48095664926804604,
+          "delta": 0.20587661343161018,
+          "seconds": 300.412
+        },
+        {
+          "layer": 5,
+          "extra": [
+            2,
+            5
+          ],
+          "loss": 0.4938280442263931,
+          "delta": 0.21874800838995723,
+          "seconds": 299.952
+        },
+        {
+          "layer": 4,
+          "extra": [
+            2,
+            4
+          ],
+          "loss": 0.4980680190259591,
+          "delta": 0.22298798318952323,
+          "seconds": 299.917
+        },
+        {
+          "layer": 6,
+          "extra": [
+            2,
+            6
+          ],
+          "loss": 0.5345927885966375,
+          "delta": 0.25951275276020164,
+          "seconds": 299.961
+        },
+        {
+          "layer": 3,
+          "extra": [
+            2,
+            3
+          ],
+          "loss": 0.5561662909574807,
+          "delta": 0.28108625512104485,
+          "seconds": 300.159
+        },
+        {
+          "layer": 0,
+          "extra": [
+            0,
+            2
+          ],
+          "loss": 2.2426891272887586,
+          "delta": 1.9676090914523228,
+          "seconds": 301.657
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "picked": 7,
+      "extra_after": [
+        2,
+        7,
+        11
+      ],
+      "loss": 0.559771844628267,
+      "delta": 0.28469180879183115,
+      "candidates": [
+        {
+          "layer": 7,
+          "extra": [
+            2,
+            7,
+            11
+          ],
+          "loss": 0.559771844628267,
+          "delta": 0.28469180879183115,
+          "seconds": 282.036
+        },
+        {
+          "layer": 8,
+          "extra": [
+            2,
+            8,
+            11
+          ],
+          "loss": 0.5695171090308577,
+          "delta": 0.29443707319442186,
+          "seconds": 282.037
+        },
+        {
+          "layer": 4,
+          "extra": [
+            2,
+            4,
+            11
+          ],
+          "loss": 0.5714306151261553,
+          "delta": 0.2963505792897195,
+          "seconds": 281.981
+        },
+        {
+          "layer": 9,
+          "extra": [
+            2,
+            9,
+            11
+          ],
+          "loss": 0.5738546555861831,
+          "delta": 0.29877461974974723,
+          "seconds": 282.036
+        },
+        {
+          "layer": 5,
+          "extra": [
+            2,
+            5,
+            11
+          ],
+          "loss": 0.5816950666019693,
+          "delta": 0.3066150307655335,
+          "seconds": 282.04
+        },
+        {
+          "layer": 10,
+          "extra": [
+            2,
+            10,
+            11
+          ],
+          "loss": 0.5826280864654109,
+          "delta": 0.307548050628975,
+          "seconds": 281.884
+        },
+        {
+          "layer": 6,
+          "extra": [
+            2,
+            6,
+            11
+          ],
+          "loss": 0.6093125390354543,
+          "delta": 0.3342325031990185,
+          "seconds": 282.097
+        },
+        {
+          "layer": 12,
+          "extra": [
+            2,
+            11,
+            12
+          ],
+          "loss": 0.6096571072703227,
+          "delta": 0.3345770714338869,
+          "seconds": 281.587
+        },
+        {
+          "layer": 3,
+          "extra": [
+            2,
+            3,
+            11
+          ],
+          "loss": 0.6217225704807788,
+          "delta": 0.34664253464434297,
+          "seconds": 281.903
+        },
+        {
+          "layer": 0,
+          "extra": [
+            0,
+            2,
+            11
+          ],
+          "loss": 2.2577716467902063,
+          "delta": 1.9826916109537704,
+          "seconds": 283.125
+        }
+      ]
+    }
+  ],
+  "seconds": 10287.235
+}

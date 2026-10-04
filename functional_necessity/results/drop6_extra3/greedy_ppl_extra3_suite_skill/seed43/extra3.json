@@ -1,0 +1,4417 @@
+{
+  "method": "greedy_ppl",
+  "scope": "suite_skill",
+  "kind": "greedy_ppl_extra3_suite_skill_seed43",
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "calib_dir": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_32x8_seed43",
+  "calib_seed": 43,
+  "pooling": "AtomicVLA suite\u00d7skill pools, 32\u00d78, interior margin filter, Goal-pick excludes Goal5",
+  "protocol": {
+    "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+    "universal_drop": [
+      1,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "suspected_universal_keep": [
+      0,
+      7
+    ],
+    "candidates": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "extra_k": 3,
+    "global_fisher_extra3": [
+      2,
+      3,
+      10
+    ],
+    "per_task_calib": "16x8",
+    "seed": 42,
+    "skip": "skip_llm_layers / DTR Appendix B; score on skip(U) graph",
+    "note": "U is locked from global Fisher Drop-6. PPL must not redefine U. extra-3 is chosen from the remaining 12 layers including L0/L7.",
+    "global_greedy_extra3": [
+      2,
+      7,
+      11
+    ],
+    "skill_boundary_margin": 10,
+    "cells": [
+      "Spatial/pick",
+      "Spatial/place",
+      "Object/pick",
+      "Object/place",
+      "Goal/pick",
+      "Goal/place",
+      "Goal/turn",
+      "Long/pick",
+      "Long/place",
+      "Long/turn"
+    ]
+  },
+  "pools": [
+    {
+      "name": "Spatial/pick",
+      "suite": "Spatial",
+      "skill": "pick",
+      "calib_seed": 43,
+      "n_calib_batches": 32,
+      "n_source_frames": 20662,
+      "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_32x8_seed43/spatial_pick.pt",
+      "extra_drop": [
+        2,
+        4,
+        9
+      ],
+      "keep_candidates": [
+        0,
+        3,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12
+      ],
+      "union_drop": [
+        1,
+        2,
+        4,
+        9,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "baseline_loss": 0.3528735525906086,
+      "loss": 0.743442190811038,
+      "delta": 0.3905686382204294,
+      "matches_global_fisher_extra3": false,
+      "symdiff_vs_global": [
+        3,
+        4,
+        9,
+        10
+      ],
+      "n_cache": 34,
+      "steps": [
+        {
+          "step": 1,
+          "picked": 2,
+          "extra_after": [
+            2
+          ],
+          "loss": 0.4351987955160439,
+          "delta": 0.0823252429254353,
+          "candidates": [
+            {
+              "layer": 2,
+              "extra": [
+                2
+              ],
+              "loss": 0.4351987955160439,
+              "delta": 0.0823252429254353,
+              "seconds": 15.508
+            },
+            {
+              "layer": 7,
+              "extra": [
+                7
+              ],
+              "loss": 0.47636781353503466,
+              "delta": 0.12349426094442606,
+              "seconds": 15.66
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4
+              ],
+              "loss": 0.48321137158200145,
+              "delta": 0.13033781899139285,
+              "seconds": 15.601
+            },
+            {
+              "layer": 9,
+              "extra": [
+                9
+              ],
+              "loss": 0.49700666358694434,
+              "delta": 0.14413311099633574,
+              "seconds": 15.666
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5
+              ],
+              "loss": 0.49873197823762894,
+              "delta": 0.14585842564702034,
+              "seconds": 15.63
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3
+              ],
+              "loss": 0.5225821197964251,
+              "delta": 0.1697085672058165,
+              "seconds": 15.594
+            },
+            {
+              "layer": 11,
+              "extra": [
+                11
+              ],
+              "loss": 0.5255300775170326,
+              "delta": 0.17265652492642403,
+              "seconds": 15.734
+            },
+            {
+              "layer": 10,
+              "extra": [
+                10
+              ],
+              "loss": 0.5265725459903479,
+              "delta": 0.17369899339973927,
+              "seconds": 15.676
+            },
+            {
+              "layer": 8,
+              "extra": [
+                8
+              ],
+              "loss": 0.529975812882185,
+              "delta": 0.17710226029157639,
+              "seconds": 15.7
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6
+              ],
+              "loss": 0.5560349468141794,
+              "delta": 0.20316139422357082,
+              "seconds": 15.648
+            },
+            {
+              "layer": 12,
+              "extra": [
+                12
+              ],
+              "loss": 0.5589339854195714,
+              "delta": 0.2060604328289628,
+              "seconds": 15.71
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0
+              ],
+              "loss": 2.2285491973161697,
+              "delta": 1.8756756447255611,
+              "seconds": 15.597
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "picked": 9,
+          "extra_after": [
+            2,
+            9
+          ],
+          "loss": 0.5827492577955127,
+          "delta": 0.22987570520490408,
+          "candidates": [
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                9
+              ],
+              "loss": 0.5827492577955127,
+              "delta": 0.22987570520490408,
+              "seconds": 14.799
+            },
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.5828697644174099,
+              "delta": 0.2299962118268013,
+              "seconds": 14.768
+            },
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                11
+              ],
+              "loss": 0.6024744296446443,
+              "delta": 0.24960087705403566,
+              "seconds": 14.769
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                10
+              ],
+              "loss": 0.6122958296909928,
+              "delta": 0.25942227710038424,
+              "seconds": 14.764
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8
+              ],
+              "loss": 0.6173266330733895,
+              "delta": 0.26445308048278093,
+              "seconds": 14.785
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4
+              ],
+              "loss": 0.6177100650966167,
+              "delta": 0.26483651250600815,
+              "seconds": 14.765
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5
+              ],
+              "loss": 0.6284885611385107,
+              "delta": 0.2756150085479021,
+              "seconds": 14.8
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                12
+              ],
+              "loss": 0.6346301268786192,
+              "delta": 0.2817565742880106,
+              "seconds": 14.769
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6
+              ],
+              "loss": 0.6614369871094823,
+              "delta": 0.3085634345188737,
+              "seconds": 14.782
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3
+              ],
+              "loss": 0.6884862296283245,
+              "delta": 0.3356126770377159,
+              "seconds": 14.763
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2
+              ],
+              "loss": 2.753170069307089,
+              "delta": 2.4002965167164803,
+              "seconds": 14.838
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "picked": 4,
+          "extra_after": [
+            2,
+            4,
+            9
+          ],
+          "loss": 0.743442190811038,
+          "delta": 0.3905686382204294,
+          "candidates": [
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4,
+                9
+              ],
+              "loss": 0.743442190811038,
+              "delta": 0.3905686382204294,
+              "seconds": 13.822
+            },
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7,
+                9
+              ],
+              "loss": 0.7468852493911982,
+              "delta": 0.39401169680058956,
+              "seconds": 13.843
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5,
+                9
+              ],
+              "loss": 0.7633316237479448,
+              "delta": 0.41045807115733624,
+              "seconds": 13.826
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                9,
+                12
+              ],
+              "loss": 0.777960829436779,
+              "delta": 0.4250872768461704,
+              "seconds": 13.84
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8,
+                9
+              ],
+              "loss": 0.7793655078858137,
+              "delta": 0.4264919552952051,
+              "seconds": 13.822
+            },
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                9,
+                11
+              ],
+              "loss": 0.7890335284173489,
+              "delta": 0.43615997582674026,
+              "seconds": 13.825
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                9,
+                10
+              ],
+              "loss": 0.7901542307808995,
+              "delta": 0.43728067819029093,
+              "seconds": 13.82
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3,
+                9
+              ],
+              "loss": 0.8113643294200301,
+              "delta": 0.4584907768294215,
+              "seconds": 13.858
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6,
+                9
+              ],
+              "loss": 0.8256135992705822,
+              "delta": 0.4727400466799736,
+              "seconds": 13.852
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2,
+                9
+              ],
+              "loss": 2.8222547471523285,
+              "delta": 2.46938119456172,
+              "seconds": 13.91
+            }
+          ]
+        }
+      ],
+      "vs_global_greedy": {
+        "extra_drop": [
+          2,
+          4,
+          9
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2
+        ],
+        "symdiff": [
+          4,
+          7,
+          9,
+          11
+        ],
+        "jaccard": 0.2,
+        "differs": true
+      },
+      "seconds": 505.453
+    },
+    {
+      "name": "Spatial/place",
+      "suite": "Spatial",
+      "skill": "place",
+      "calib_seed": 43,
+      "n_calib_batches": 32,
+      "n_source_frames": 14932,
+      "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_32x8_seed43/spatial_place.pt",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "keep_candidates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        12
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "baseline_loss": 0.28083882317878306,
+      "loss": 0.5872414307668805,
+      "delta": 0.30640260758809745,
+      "matches_global_fisher_extra3": false,
+      "symdiff_vs_global": [
+        3,
+        7,
+        10,
+        11
+      ],
+      "n_cache": 34,
+      "steps": [
+        {
+          "step": 1,
+          "picked": 7,
+          "extra_after": [
+            7
+          ],
+          "loss": 0.36618062667548656,
+          "delta": 0.0853418034967035,
+          "candidates": [
+            {
+              "layer": 7,
+              "extra": [
+                7
+              ],
+              "loss": 0.36618062667548656,
+              "delta": 0.0853418034967035,
+              "seconds": 15.763
+            },
+            {
+              "layer": 2,
+              "extra": [
+                2
+              ],
+              "loss": 0.3825811161659658,
+              "delta": 0.10174229298718274,
+              "seconds": 15.76
+            },
+            {
+              "layer": 8,
+              "extra": [
+                8
+              ],
+              "loss": 0.3855215762741864,
+              "delta": 0.10468275309540331,
+              "seconds": 15.714
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5
+              ],
+              "loss": 0.3868282735347748,
+              "delta": 0.10598945035599172,
+              "seconds": 15.716
+            },
+            {
+              "layer": 11,
+              "extra": [
+                11
+              ],
+              "loss": 0.3887618547305465,
+              "delta": 0.10792303155176342,
+              "seconds": 15.728
+            },
+            {
+              "layer": 9,
+              "extra": [
+                9
+              ],
+              "loss": 0.3927697604522109,
+              "delta": 0.11193093727342784,
+              "seconds": 15.714
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4
+              ],
+              "loss": 0.3937124665826559,
+              "delta": 0.11287364340387285,
+              "seconds": 15.72
+            },
+            {
+              "layer": 10,
+              "extra": [
+                10
+              ],
+              "loss": 0.399343672208488,
+              "delta": 0.11850484902970493,
+              "seconds": 15.751
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3
+              ],
+              "loss": 0.4141526045277715,
+              "delta": 0.1333137813489884,
+              "seconds": 15.736
+            },
+            {
+              "layer": 12,
+              "extra": [
+                12
+              ],
+              "loss": 0.42549769999459386,
+              "delta": 0.1446588768158108,
+              "seconds": 15.717
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6
+              ],
+              "loss": 0.5184192089363933,
+              "delta": 0.2375803857576102,
+              "seconds": 15.719
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0
+              ],
+              "loss": 1.6152519211173058,
+              "delta": 1.3344130979385227,
+              "seconds": 15.771
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "picked": 2,
+          "extra_after": [
+            2,
+            7
+          ],
+          "loss": 0.47571492847055197,
+          "delta": 0.1948761052917689,
+          "candidates": [
+            {
+              "layer": 2,
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.47571492847055197,
+              "delta": 0.1948761052917689,
+              "seconds": 14.77
+            },
+            {
+              "layer": 11,
+              "extra": [
+                7,
+                11
+              ],
+              "loss": 0.5016054827719927,
+              "delta": 0.22076665959320962,
+              "seconds": 14.769
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4,
+                7
+              ],
+              "loss": 0.5023428360000253,
+              "delta": 0.2215040128212422,
+              "seconds": 14.79
+            },
+            {
+              "layer": 8,
+              "extra": [
+                7,
+                8
+              ],
+              "loss": 0.5028559090569615,
+              "delta": 0.22201708587817848,
+              "seconds": 14.776
+            },
+            {
+              "layer": 10,
+              "extra": [
+                7,
+                10
+              ],
+              "loss": 0.509169734083116,
+              "delta": 0.228330910904333,
+              "seconds": 14.769
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5,
+                7
+              ],
+              "loss": 0.5223968299105763,
+              "delta": 0.24155800673179328,
+              "seconds": 14.794
+            },
+            {
+              "layer": 9,
+              "extra": [
+                7,
+                9
+              ],
+              "loss": 0.5237083001993597,
+              "delta": 0.2428694770205766,
+              "seconds": 14.811
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3,
+                7
+              ],
+              "loss": 0.5330682955682278,
+              "delta": 0.2522294723894447,
+              "seconds": 14.767
+            },
+            {
+              "layer": 12,
+              "extra": [
+                7,
+                12
+              ],
+              "loss": 0.5369681157171726,
+              "delta": 0.25612929253838956,
+              "seconds": 14.769
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6,
+                7
+              ],
+              "loss": 0.6098435102030635,
+              "delta": 0.32900468702428043,
+              "seconds": 14.769
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                7
+              ],
+              "loss": 1.6143912598490715,
+              "delta": 1.3335524366702884,
+              "seconds": 14.816
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "picked": 11,
+          "extra_after": [
+            2,
+            7,
+            11
+          ],
+          "loss": 0.5872414307668805,
+          "delta": 0.30640260758809745,
+          "candidates": [
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                7,
+                11
+              ],
+              "loss": 0.5872414307668805,
+              "delta": 0.30640260758809745,
+              "seconds": 13.821
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                7,
+                8
+              ],
+              "loss": 0.5987449688836932,
+              "delta": 0.31790614570491016,
+              "seconds": 13.857
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                7,
+                10
+              ],
+              "loss": 0.6115040546283126,
+              "delta": 0.33066523144952953,
+              "seconds": 13.819
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                7,
+                12
+              ],
+              "loss": 0.6192894466221333,
+              "delta": 0.3384506234433502,
+              "seconds": 13.822
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                7,
+                9
+              ],
+              "loss": 0.631853842176497,
+              "delta": 0.3510150189977139,
+              "seconds": 13.821
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4,
+                7
+              ],
+              "loss": 0.6330835362896323,
+              "delta": 0.35224471311084926,
+              "seconds": 13.828
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5,
+                7
+              ],
+              "loss": 0.6482250317931175,
+              "delta": 0.36738620861433446,
+              "seconds": 13.825
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3,
+                7
+              ],
+              "loss": 0.6920959549024701,
+              "delta": 0.41125713172368705,
+              "seconds": 13.865
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6,
+                7
+              ],
+              "loss": 0.7002963023260236,
+              "delta": 0.4194574791472405,
+              "seconds": 13.841
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2,
+                7
+              ],
+              "loss": 1.908178973942995,
+              "delta": 1.627340150764212,
+              "seconds": 13.899
+            }
+          ]
+        }
+      ],
+      "vs_global_greedy": {
+        "extra_drop": [
+          2,
+          7,
+          11
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2,
+          7,
+          11
+        ],
+        "symdiff": [],
+        "jaccard": 1.0,
+        "differs": false
+      },
+      "seconds": 506.521
+    },
+    {
+      "name": "Object/pick",
+      "suite": "Object",
+      "skill": "pick",
+      "calib_seed": 43,
+      "n_calib_batches": 32,
+      "n_source_frames": 27566,
+      "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_32x8_seed43/object_pick.pt",
+      "extra_drop": [
+        2,
+        9,
+        10
+      ],
+      "keep_candidates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        11,
+        12
+      ],
+      "union_drop": [
+        1,
+        2,
+        9,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "baseline_loss": 0.28402222134172916,
+      "loss": 0.49846586771309376,
+      "delta": 0.2144436463713646,
+      "matches_global_fisher_extra3": false,
+      "symdiff_vs_global": [
+        3,
+        9
+      ],
+      "n_cache": 34,
+      "steps": [
+        {
+          "step": 1,
+          "picked": 2,
+          "extra_after": [
+            2
+          ],
+          "loss": 0.3378083505667746,
+          "delta": 0.05378612922504544,
+          "candidates": [
+            {
+              "layer": 2,
+              "extra": [
+                2
+              ],
+              "loss": 0.3378083505667746,
+              "delta": 0.05378612922504544,
+              "seconds": 15.716
+            },
+            {
+              "layer": 7,
+              "extra": [
+                7
+              ],
+              "loss": 0.3575947619974613,
+              "delta": 0.07357254065573215,
+              "seconds": 15.746
+            },
+            {
+              "layer": 9,
+              "extra": [
+                9
+              ],
+              "loss": 0.3682729210704565,
+              "delta": 0.08425069972872734,
+              "seconds": 15.715
+            },
+            {
+              "layer": 10,
+              "extra": [
+                10
+              ],
+              "loss": 0.3686132812872529,
+              "delta": 0.08459105994552374,
+              "seconds": 15.716
+            },
+            {
+              "layer": 11,
+              "extra": [
+                11
+              ],
+              "loss": 0.37156566698104143,
+              "delta": 0.08754344563931227,
+              "seconds": 15.712
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5
+              ],
+              "loss": 0.3746187733486295,
+              "delta": 0.09059655200690031,
+              "seconds": 15.715
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4
+              ],
+              "loss": 0.38457270571962,
+              "delta": 0.10055048437789083,
+              "seconds": 15.741
+            },
+            {
+              "layer": 8,
+              "extra": [
+                8
+              ],
+              "loss": 0.3866644618101418,
+              "delta": 0.10264224046841264,
+              "seconds": 15.711
+            },
+            {
+              "layer": 12,
+              "extra": [
+                12
+              ],
+              "loss": 0.3884792933240533,
+              "delta": 0.10445707198232412,
+              "seconds": 15.713
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3
+              ],
+              "loss": 0.3926601866260171,
+              "delta": 0.10863796528428793,
+              "seconds": 15.732
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6
+              ],
+              "loss": 0.432596780359745,
+              "delta": 0.14857455901801586,
+              "seconds": 15.73
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0
+              ],
+              "loss": 1.6235981956124306,
+              "delta": 1.3395759742707014,
+              "seconds": 15.766
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "picked": 10,
+          "extra_after": [
+            2,
+            10
+          ],
+          "loss": 0.4212799179367721,
+          "delta": 0.13725769659504294,
+          "candidates": [
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                10
+              ],
+              "loss": 0.4212799179367721,
+              "delta": 0.13725769659504294,
+              "seconds": 14.767
+            },
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                11
+              ],
+              "loss": 0.42322457814589143,
+              "delta": 0.13920235680416226,
+              "seconds": 14.762
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                9
+              ],
+              "loss": 0.4248209004290402,
+              "delta": 0.14079867908731103,
+              "seconds": 14.799
+            },
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.42730465857312083,
+              "delta": 0.14328243723139167,
+              "seconds": 14.77
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                12
+              ],
+              "loss": 0.43319241469725966,
+              "delta": 0.1491701933555305,
+              "seconds": 14.765
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8
+              ],
+              "loss": 0.44492951733991504,
+              "delta": 0.16090729599818587,
+              "seconds": 14.784
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5
+              ],
+              "loss": 0.45793379936367273,
+              "delta": 0.17391157802194357,
+              "seconds": 14.791
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4
+              ],
+              "loss": 0.46562608797103167,
+              "delta": 0.1816038666293025,
+              "seconds": 14.773
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3
+              ],
+              "loss": 0.49834947055205703,
+              "delta": 0.21432724921032786,
+              "seconds": 14.77
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6
+              ],
+              "loss": 0.5017283414490521,
+              "delta": 0.21770612010732293,
+              "seconds": 14.789
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2
+              ],
+              "loss": 2.004753917455673,
+              "delta": 1.720731696113944,
+              "seconds": 14.836
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "picked": 9,
+          "extra_after": [
+            2,
+            9,
+            10
+          ],
+          "loss": 0.49846586771309376,
+          "delta": 0.2144436463713646,
+          "candidates": [
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                9,
+                10
+              ],
+              "loss": 0.49846586771309376,
+              "delta": 0.2144436463713646,
+              "seconds": 13.821
+            },
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                10,
+                11
+              ],
+              "loss": 0.5000167679972947,
+              "delta": 0.2159945466555655,
+              "seconds": 13.816
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                10,
+                12
+              ],
+              "loss": 0.5138787794858217,
+              "delta": 0.22985655814409256,
+              "seconds": 13.833
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8,
+                10
+              ],
+              "loss": 0.5194994914345443,
+              "delta": 0.23547727009281516,
+              "seconds": 13.816
+            },
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7,
+                10
+              ],
+              "loss": 0.5226261192001402,
+              "delta": 0.23860389785841107,
+              "seconds": 13.85
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4,
+                10
+              ],
+              "loss": 0.5307800681330264,
+              "delta": 0.2467578467912972,
+              "seconds": 13.823
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5,
+                10
+              ],
+              "loss": 0.5314915874041617,
+              "delta": 0.24746936606243253,
+              "seconds": 13.821
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3,
+                10
+              ],
+              "loss": 0.5516409147530794,
+              "delta": 0.26761869341135025,
+              "seconds": 13.844
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6,
+                10
+              ],
+              "loss": 0.5570435118861496,
+              "delta": 0.2730212905444205,
+              "seconds": 13.832
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2,
+                10
+              ],
+              "loss": 2.0572997145354748,
+              "delta": 1.7732774931937456,
+              "seconds": 13.902
+            }
+          ]
+        }
+      ],
+      "vs_global_greedy": {
+        "extra_drop": [
+          2,
+          9,
+          10
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2
+        ],
+        "symdiff": [
+          7,
+          9,
+          10,
+          11
+        ],
+        "jaccard": 0.2,
+        "differs": true
+      },
+      "seconds": 506.385
+    },
+    {
+      "name": "Object/place",
+      "suite": "Object",
+      "skill": "place",
+      "calib_seed": 43,
+      "n_calib_batches": 32,
+      "n_source_frames": 21179,
+      "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_32x8_seed43/object_place.pt",
+      "extra_drop": [
+        2,
+        8,
+        11
+      ],
+      "keep_candidates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        12
+      ],
+      "union_drop": [
+        1,
+        2,
+        8,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "baseline_loss": 0.27624731604009867,
+      "loss": 0.4720894764177501,
+      "delta": 0.19584216037765145,
+      "matches_global_fisher_extra3": false,
+      "symdiff_vs_global": [
+        3,
+        8,
+        10,
+        11
+      ],
+      "n_cache": 34,
+      "steps": [
+        {
+          "step": 1,
+          "picked": 2,
+          "extra_after": [
+            2
+          ],
+          "loss": 0.3453432733658701,
+          "delta": 0.06909595732577145,
+          "candidates": [
+            {
+              "layer": 2,
+              "extra": [
+                2
+              ],
+              "loss": 0.3453432733658701,
+              "delta": 0.06909595732577145,
+              "seconds": 15.728
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5
+              ],
+              "loss": 0.34974046307615936,
+              "delta": 0.07349314703606069,
+              "seconds": 15.714
+            },
+            {
+              "layer": 11,
+              "extra": [
+                11
+              ],
+              "loss": 0.3525033090263605,
+              "delta": 0.07625599298626184,
+              "seconds": 15.741
+            },
+            {
+              "layer": 7,
+              "extra": [
+                7
+              ],
+              "loss": 0.3567032557912171,
+              "delta": 0.08045593975111842,
+              "seconds": 15.731
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4
+              ],
+              "loss": 0.3580355169251561,
+              "delta": 0.08178820088505745,
+              "seconds": 15.712
+            },
+            {
+              "layer": 8,
+              "extra": [
+                8
+              ],
+              "loss": 0.3596919300034642,
+              "delta": 0.08344461396336555,
+              "seconds": 15.738
+            },
+            {
+              "layer": 9,
+              "extra": [
+                9
+              ],
+              "loss": 0.36197491409257054,
+              "delta": 0.08572759805247188,
+              "seconds": 15.713
+            },
+            {
+              "layer": 10,
+              "extra": [
+                10
+              ],
+              "loss": 0.3702638722024858,
+              "delta": 0.09401655616238713,
+              "seconds": 15.726
+            },
+            {
+              "layer": 12,
+              "extra": [
+                12
+              ],
+              "loss": 0.3704099329188466,
+              "delta": 0.09416261687874794,
+              "seconds": 15.709
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3
+              ],
+              "loss": 0.3965657283551991,
+              "delta": 0.12031841231510043,
+              "seconds": 15.746
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6
+              ],
+              "loss": 0.4056357271037996,
+              "delta": 0.12938841106370091,
+              "seconds": 15.715
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0
+              ],
+              "loss": 1.116120720282197,
+              "delta": 0.8398734042420983,
+              "seconds": 15.768
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "picked": 11,
+          "extra_after": [
+            2,
+            11
+          ],
+          "loss": 0.41137073608115315,
+          "delta": 0.1351234200410545,
+          "candidates": [
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                11
+              ],
+              "loss": 0.41137073608115315,
+              "delta": 0.1351234200410545,
+              "seconds": 14.762
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8
+              ],
+              "loss": 0.41921045538038015,
+              "delta": 0.1429631393402815,
+              "seconds": 14.805
+            },
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.42644350975751877,
+              "delta": 0.1501961937174201,
+              "seconds": 14.768
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                12
+              ],
+              "loss": 0.43010608898475766,
+              "delta": 0.153858772944659,
+              "seconds": 14.763
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                9
+              ],
+              "loss": 0.43183016451075673,
+              "delta": 0.15558284847065806,
+              "seconds": 14.766
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                10
+              ],
+              "loss": 0.4338604691438377,
+              "delta": 0.15761315310373902,
+              "seconds": 14.763
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5
+              ],
+              "loss": 0.4350005225278437,
+              "delta": 0.15875320648774505,
+              "seconds": 14.789
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4
+              ],
+              "loss": 0.440550921484828,
+              "delta": 0.16430360544472933,
+              "seconds": 14.779
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6
+              ],
+              "loss": 0.47440016781911254,
+              "delta": 0.19815285177901387,
+              "seconds": 14.767
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3
+              ],
+              "loss": 0.4969028406776488,
+              "delta": 0.22065552463755012,
+              "seconds": 14.76
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2
+              ],
+              "loss": 1.3090566489845514,
+              "delta": 1.0328093329444528,
+              "seconds": 14.834
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "picked": 8,
+          "extra_after": [
+            2,
+            8,
+            11
+          ],
+          "loss": 0.4720894764177501,
+          "delta": 0.19584216037765145,
+          "candidates": [
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8,
+                11
+              ],
+              "loss": 0.4720894764177501,
+              "delta": 0.19584216037765145,
+              "seconds": 13.82
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4,
+                11
+              ],
+              "loss": 0.48167792335152626,
+              "delta": 0.2054306073114276,
+              "seconds": 13.819
+            },
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7,
+                11
+              ],
+              "loss": 0.489538851659745,
+              "delta": 0.2132915356196463,
+              "seconds": 13.826
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5,
+                11
+              ],
+              "loss": 0.4918622924014926,
+              "delta": 0.21561497636139393,
+              "seconds": 13.83
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                9,
+                11
+              ],
+              "loss": 0.49432435212656856,
+              "delta": 0.2180770360864699,
+              "seconds": 13.819
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6,
+                11
+              ],
+              "loss": 0.511037481483072,
+              "delta": 0.23479016544297338,
+              "seconds": 13.856
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                10,
+                11
+              ],
+              "loss": 0.5186438420787454,
+              "delta": 0.2423965260386467,
+              "seconds": 13.819
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3,
+                11
+              ],
+              "loss": 0.5253070937469602,
+              "delta": 0.2490597777068615,
+              "seconds": 13.823
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                11,
+                12
+              ],
+              "loss": 0.5281207403168082,
+              "delta": 0.25187342427670956,
+              "seconds": 13.855
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2,
+                11
+              ],
+              "loss": 1.3213789034634829,
+              "delta": 1.0451315874233842,
+              "seconds": 13.925
+            }
+          ]
+        }
+      ],
+      "vs_global_greedy": {
+        "extra_drop": [
+          2,
+          8,
+          11
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2,
+          11
+        ],
+        "symdiff": [
+          7,
+          8
+        ],
+        "jaccard": 0.5,
+        "differs": true
+      },
+      "seconds": 506.409
+    },
+    {
+      "name": "Goal/pick",
+      "suite": "Goal",
+      "skill": "pick",
+      "calib_seed": 43,
+      "n_calib_batches": 32,
+      "n_source_frames": 12411,
+      "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_32x8_seed43/goal_pick.pt",
+      "extra_drop": [
+        2,
+        10,
+        11
+      ],
+      "keep_candidates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        12
+      ],
+      "union_drop": [
+        1,
+        2,
+        10,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "baseline_loss": 0.326432968955487,
+      "loss": 0.6703239399939775,
+      "delta": 0.34389097103849053,
+      "matches_global_fisher_extra3": false,
+      "symdiff_vs_global": [
+        3,
+        11
+      ],
+      "n_cache": 34,
+      "steps": [
+        {
+          "step": 1,
+          "picked": 2,
+          "extra_after": [
+            2
+          ],
+          "loss": 0.4107344765216112,
+          "delta": 0.0843015075661242,
+          "candidates": [
+            {
+              "layer": 2,
+              "extra": [
+                2
+              ],
+              "loss": 0.4107344765216112,
+              "delta": 0.0843015075661242,
+              "seconds": 15.724
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4
+              ],
+              "loss": 0.45042703207582235,
+              "delta": 0.12399406312033534,
+              "seconds": 15.707
+            },
+            {
+              "layer": 7,
+              "extra": [
+                7
+              ],
+              "loss": 0.4536133776418865,
+              "delta": 0.12718040868639946,
+              "seconds": 15.724
+            },
+            {
+              "layer": 11,
+              "extra": [
+                11
+              ],
+              "loss": 0.4654976185411215,
+              "delta": 0.13906464958563447,
+              "seconds": 15.745
+            },
+            {
+              "layer": 10,
+              "extra": [
+                10
+              ],
+              "loss": 0.47602670174092054,
+              "delta": 0.14959373278543353,
+              "seconds": 15.721
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5
+              ],
+              "loss": 0.47649439610540867,
+              "delta": 0.15006142714992166,
+              "seconds": 15.708
+            },
+            {
+              "layer": 9,
+              "extra": [
+                9
+              ],
+              "loss": 0.48432324454188347,
+              "delta": 0.15789027558639646,
+              "seconds": 15.706
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3
+              ],
+              "loss": 0.49203681759536266,
+              "delta": 0.16560384863987565,
+              "seconds": 15.744
+            },
+            {
+              "layer": 12,
+              "extra": [
+                12
+              ],
+              "loss": 0.501054598018527,
+              "delta": 0.17462162906304002,
+              "seconds": 15.715
+            },
+            {
+              "layer": 8,
+              "extra": [
+                8
+              ],
+              "loss": 0.5085477875545621,
+              "delta": 0.18211481859907508,
+              "seconds": 15.745
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6
+              ],
+              "loss": 0.5575148202478886,
+              "delta": 0.23108185129240155,
+              "seconds": 15.712
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0
+              ],
+              "loss": 2.4783991165459156,
+              "delta": 2.1519661475904286,
+              "seconds": 15.766
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "picked": 11,
+          "extra_after": [
+            2,
+            11
+          ],
+          "loss": 0.5321366852149367,
+          "delta": 0.20570371625944972,
+          "candidates": [
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                11
+              ],
+              "loss": 0.5321366852149367,
+              "delta": 0.20570371625944972,
+              "seconds": 14.761
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                10
+              ],
+              "loss": 0.5501156933605671,
+              "delta": 0.22368272440508008,
+              "seconds": 14.776
+            },
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.5524118579924107,
+              "delta": 0.22597888903692365,
+              "seconds": 14.77
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                12
+              ],
+              "loss": 0.568514266051352,
+              "delta": 0.242081297095865,
+              "seconds": 14.763
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                9
+              ],
+              "loss": 0.5693908017128706,
+              "delta": 0.24295783275738358,
+              "seconds": 14.795
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4
+              ],
+              "loss": 0.582978785969317,
+              "delta": 0.25654581701382995,
+              "seconds": 14.763
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8
+              ],
+              "loss": 0.5984311569482088,
+              "delta": 0.2719981879927218,
+              "seconds": 14.778
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5
+              ],
+              "loss": 0.6150472108274698,
+              "delta": 0.2886142418719828,
+              "seconds": 14.778
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6
+              ],
+              "loss": 0.6596952360123396,
+              "delta": 0.3332622670568526,
+              "seconds": 14.797
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3
+              ],
+              "loss": 0.66978963278234,
+              "delta": 0.34335666382685304,
+              "seconds": 14.764
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2
+              ],
+              "loss": 2.93440418317914,
+              "delta": 2.607971214223653,
+              "seconds": 14.836
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "picked": 10,
+          "extra_after": [
+            2,
+            10,
+            11
+          ],
+          "loss": 0.6703239399939775,
+          "delta": 0.34389097103849053,
+          "candidates": [
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                10,
+                11
+              ],
+              "loss": 0.6703239399939775,
+              "delta": 0.34389097103849053,
+              "seconds": 13.818
+            },
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7,
+                11
+              ],
+              "loss": 0.6724163247272372,
+              "delta": 0.3459833557717502,
+              "seconds": 13.858
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4,
+                11
+              ],
+              "loss": 0.6802392220124602,
+              "delta": 0.3538062530569732,
+              "seconds": 13.84
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5,
+                11
+              ],
+              "loss": 0.6979816304519773,
+              "delta": 0.37154866149649024,
+              "seconds": 13.824
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8,
+                11
+              ],
+              "loss": 0.7062096372246742,
+              "delta": 0.3797766682691872,
+              "seconds": 13.823
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                11,
+                12
+              ],
+              "loss": 0.7071673590689898,
+              "delta": 0.38073439011350274,
+              "seconds": 13.818
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                9,
+                11
+              ],
+              "loss": 0.7095249406993389,
+              "delta": 0.3830919717438519,
+              "seconds": 13.819
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6,
+                11
+              ],
+              "loss": 0.7371464194729924,
+              "delta": 0.4107134505175054,
+              "seconds": 13.833
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3,
+                11
+              ],
+              "loss": 0.7425435353070498,
+              "delta": 0.41611056635156274,
+              "seconds": 13.841
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2,
+                11
+              ],
+              "loss": 2.94051768258214,
+              "delta": 2.614084713626653,
+              "seconds": 13.891
+            }
+          ]
+        }
+      ],
+      "vs_global_greedy": {
+        "extra_drop": [
+          2,
+          10,
+          11
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2,
+          11
+        ],
+        "symdiff": [
+          7,
+          10
+        ],
+        "jaccard": 0.5,
+        "differs": true
+      },
+      "seconds": 506.364
+    },
+    {
+      "name": "Goal/place",
+      "suite": "Goal",
+      "skill": "place",
+      "calib_seed": 43,
+      "n_calib_batches": 32,
+      "n_source_frames": 8750,
+      "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_32x8_seed43/goal_place.pt",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "keep_candidates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        12
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "baseline_loss": 0.23517787898890674,
+      "loss": 0.5583014879375696,
+      "delta": 0.3231236089486629,
+      "matches_global_fisher_extra3": false,
+      "symdiff_vs_global": [
+        3,
+        7,
+        10,
+        11
+      ],
+      "n_cache": 34,
+      "steps": [
+        {
+          "step": 1,
+          "picked": 7,
+          "extra_after": [
+            7
+          ],
+          "loss": 0.32427582144737244,
+          "delta": 0.0890979424584657,
+          "candidates": [
+            {
+              "layer": 7,
+              "extra": [
+                7
+              ],
+              "loss": 0.32427582144737244,
+              "delta": 0.0890979424584657,
+              "seconds": 15.722
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5
+              ],
+              "loss": 0.3272365506272763,
+              "delta": 0.09205867163836956,
+              "seconds": 15.706
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4
+              ],
+              "loss": 0.33571522147394717,
+              "delta": 0.10053734248504043,
+              "seconds": 15.718
+            },
+            {
+              "layer": 11,
+              "extra": [
+                11
+              ],
+              "loss": 0.33930962649174035,
+              "delta": 0.1041317475028336,
+              "seconds": 15.754
+            },
+            {
+              "layer": 10,
+              "extra": [
+                10
+              ],
+              "loss": 0.3479627559427172,
+              "delta": 0.11278487695381045,
+              "seconds": 15.709
+            },
+            {
+              "layer": 9,
+              "extra": [
+                9
+              ],
+              "loss": 0.3480759081430733,
+              "delta": 0.11289802915416658,
+              "seconds": 15.71
+            },
+            {
+              "layer": 8,
+              "extra": [
+                8
+              ],
+              "loss": 0.3507738192565739,
+              "delta": 0.11559594026766717,
+              "seconds": 15.707
+            },
+            {
+              "layer": 2,
+              "extra": [
+                2
+              ],
+              "loss": 0.3535664426162839,
+              "delta": 0.11838856362737715,
+              "seconds": 15.719
+            },
+            {
+              "layer": 12,
+              "extra": [
+                12
+              ],
+              "loss": 0.3774590902030468,
+              "delta": 0.14228121121414006,
+              "seconds": 15.717
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3
+              ],
+              "loss": 0.3887716121971607,
+              "delta": 0.15359373320825398,
+              "seconds": 15.758
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6
+              ],
+              "loss": 0.38913646433502436,
+              "delta": 0.15395858534611762,
+              "seconds": 15.746
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0
+              ],
+              "loss": 1.7571715228259563,
+              "delta": 1.5219936438370496,
+              "seconds": 15.764
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "picked": 11,
+          "extra_after": [
+            7,
+            11
+          ],
+          "loss": 0.45318333338946104,
+          "delta": 0.2180054544005543,
+          "candidates": [
+            {
+              "layer": 11,
+              "extra": [
+                7,
+                11
+              ],
+              "loss": 0.45318333338946104,
+              "delta": 0.2180054544005543,
+              "seconds": 14.772
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4,
+                7
+              ],
+              "loss": 0.45835520420223475,
+              "delta": 0.223177325213328,
+              "seconds": 14.769
+            },
+            {
+              "layer": 10,
+              "extra": [
+                7,
+                10
+              ],
+              "loss": 0.46172991162166,
+              "delta": 0.22655203263275325,
+              "seconds": 14.773
+            },
+            {
+              "layer": 2,
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.4636639170348644,
+              "delta": 0.22848603804595768,
+              "seconds": 14.801
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5,
+                7
+              ],
+              "loss": 0.46762449480593204,
+              "delta": 0.2324466158170253,
+              "seconds": 14.763
+            },
+            {
+              "layer": 8,
+              "extra": [
+                7,
+                8
+              ],
+              "loss": 0.47629397874698043,
+              "delta": 0.2411160997580737,
+              "seconds": 14.79
+            },
+            {
+              "layer": 12,
+              "extra": [
+                7,
+                12
+              ],
+              "loss": 0.4814444398507476,
+              "delta": 0.24626656086184084,
+              "seconds": 14.807
+            },
+            {
+              "layer": 9,
+              "extra": [
+                7,
+                9
+              ],
+              "loss": 0.4876392865553498,
+              "delta": 0.2524614075664431,
+              "seconds": 14.789
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3,
+                7
+              ],
+              "loss": 0.523122007958591,
+              "delta": 0.28794412896968424,
+              "seconds": 14.782
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6,
+                7
+              ],
+              "loss": 0.5232930728234351,
+              "delta": 0.2881151938345283,
+              "seconds": 14.767
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                7
+              ],
+              "loss": 1.758490614593029,
+              "delta": 1.5233127356041223,
+              "seconds": 14.822
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "picked": 2,
+          "extra_after": [
+            2,
+            7,
+            11
+          ],
+          "loss": 0.5583014879375696,
+          "delta": 0.3231236089486629,
+          "candidates": [
+            {
+              "layer": 2,
+              "extra": [
+                2,
+                7,
+                11
+              ],
+              "loss": 0.5583014879375696,
+              "delta": 0.3231236089486629,
+              "seconds": 13.822
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4,
+                7,
+                11
+              ],
+              "loss": 0.5598181122913957,
+              "delta": 0.3246402333024889,
+              "seconds": 13.822
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5,
+                7,
+                11
+              ],
+              "loss": 0.601077722851187,
+              "delta": 0.36589984386228025,
+              "seconds": 13.856
+            },
+            {
+              "layer": 8,
+              "extra": [
+                7,
+                8,
+                11
+              ],
+              "loss": 0.6081278808414936,
+              "delta": 0.37295000185258687,
+              "seconds": 13.822
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3,
+                7,
+                11
+              ],
+              "loss": 0.620311077684164,
+              "delta": 0.3851331986952573,
+              "seconds": 13.823
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6,
+                7,
+                11
+              ],
+              "loss": 0.6379362354055047,
+              "delta": 0.40275835641659796,
+              "seconds": 13.832
+            },
+            {
+              "layer": 10,
+              "extra": [
+                7,
+                10,
+                11
+              ],
+              "loss": 0.6391393160447478,
+              "delta": 0.4039614370558411,
+              "seconds": 13.864
+            },
+            {
+              "layer": 9,
+              "extra": [
+                7,
+                9,
+                11
+              ],
+              "loss": 0.6570505294948816,
+              "delta": 0.4218726505059749,
+              "seconds": 13.832
+            },
+            {
+              "layer": 12,
+              "extra": [
+                7,
+                11,
+                12
+              ],
+              "loss": 0.6861201887950301,
+              "delta": 0.4509423098061234,
+              "seconds": 13.829
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                7,
+                11
+              ],
+              "loss": 1.7760241068899632,
+              "delta": 1.5408462279010564,
+              "seconds": 13.876
+            }
+          ]
+        }
+      ],
+      "vs_global_greedy": {
+        "extra_drop": [
+          2,
+          7,
+          11
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2,
+          7,
+          11
+        ],
+        "symdiff": [],
+        "jaccard": 1.0,
+        "differs": false
+      },
+      "seconds": 506.444
+    },
+    {
+      "name": "Goal/turn",
+      "suite": "Goal",
+      "skill": "turn",
+      "calib_seed": 43,
+      "n_calib_batches": 32,
+      "n_source_frames": 3454,
+      "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_32x8_seed43/goal_turn.pt",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "keep_candidates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        11,
+        12
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "baseline_loss": 0.2602247395552695,
+      "loss": 0.5779979713261127,
+      "delta": 0.31777323177084327,
+      "matches_global_fisher_extra3": false,
+      "symdiff_vs_global": [
+        3,
+        7
+      ],
+      "n_cache": 34,
+      "steps": [
+        {
+          "step": 1,
+          "picked": 7,
+          "extra_after": [
+            7
+          ],
+          "loss": 0.3387251435779035,
+          "delta": 0.07850040402263403,
+          "candidates": [
+            {
+              "layer": 7,
+              "extra": [
+                7
+              ],
+              "loss": 0.3387251435779035,
+              "delta": 0.07850040402263403,
+              "seconds": 15.735
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5
+              ],
+              "loss": 0.33894941210746765,
+              "delta": 0.07872467255219817,
+              "seconds": 15.718
+            },
+            {
+              "layer": 9,
+              "extra": [
+                9
+              ],
+              "loss": 0.3430046010762453,
+              "delta": 0.08277986152097583,
+              "seconds": 15.723
+            },
+            {
+              "layer": 2,
+              "extra": [
+                2
+              ],
+              "loss": 0.34915275825187564,
+              "delta": 0.08892801869660616,
+              "seconds": 15.73
+            },
+            {
+              "layer": 10,
+              "extra": [
+                10
+              ],
+              "loss": 0.36097402684390545,
+              "delta": 0.10074928728863597,
+              "seconds": 15.733
+            },
+            {
+              "layer": 11,
+              "extra": [
+                11
+              ],
+              "loss": 0.3631701092235744,
+              "delta": 0.10294536966830492,
+              "seconds": 15.75
+            },
+            {
+              "layer": 8,
+              "extra": [
+                8
+              ],
+              "loss": 0.36944859428331256,
+              "delta": 0.10922385472804308,
+              "seconds": 15.719
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4
+              ],
+              "loss": 0.3757304549217224,
+              "delta": 0.11550571536645293,
+              "seconds": 15.727
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3
+              ],
+              "loss": 0.40551200322806835,
+              "delta": 0.14528726367279887,
+              "seconds": 15.746
+            },
+            {
+              "layer": 12,
+              "extra": [
+                12
+              ],
+              "loss": 0.41651382902637124,
+              "delta": 0.15628908947110176,
+              "seconds": 15.73
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6
+              ],
+              "loss": 0.41889524227008224,
+              "delta": 0.15867050271481276,
+              "seconds": 15.747
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0
+              ],
+              "loss": 3.434103511273861,
+              "delta": 3.1738787717185915,
+              "seconds": 15.772
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "picked": 10,
+          "extra_after": [
+            7,
+            10
+          ],
+          "loss": 0.4565430385991931,
+          "delta": 0.19631829904392362,
+          "candidates": [
+            {
+              "layer": 10,
+              "extra": [
+                7,
+                10
+              ],
+              "loss": 0.4565430385991931,
+              "delta": 0.19631829904392362,
+              "seconds": 14.774
+            },
+            {
+              "layer": 2,
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.4573187120258808,
+              "delta": 0.19709397247061133,
+              "seconds": 14.801
+            },
+            {
+              "layer": 11,
+              "extra": [
+                7,
+                11
+              ],
+              "loss": 0.4734332598745823,
+              "delta": 0.2132085203193128,
+              "seconds": 14.787
+            },
+            {
+              "layer": 9,
+              "extra": [
+                7,
+                9
+              ],
+              "loss": 0.47390707675367594,
+              "delta": 0.21368233719840646,
+              "seconds": 14.808
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4,
+                7
+              ],
+              "loss": 0.49574792571365833,
+              "delta": 0.23552318615838885,
+              "seconds": 14.773
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5,
+                7
+              ],
+              "loss": 0.5051317792385817,
+              "delta": 0.24490703968331218,
+              "seconds": 14.77
+            },
+            {
+              "layer": 12,
+              "extra": [
+                7,
+                12
+              ],
+              "loss": 0.5155148655176163,
+              "delta": 0.2552901259623468,
+              "seconds": 14.81
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3,
+                7
+              ],
+              "loss": 0.5287932548671961,
+              "delta": 0.2685685153119266,
+              "seconds": 14.791
+            },
+            {
+              "layer": 8,
+              "extra": [
+                7,
+                8
+              ],
+              "loss": 0.5337388068437576,
+              "delta": 0.27351406728848815,
+              "seconds": 14.789
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6,
+                7
+              ],
+              "loss": 0.5582663975656033,
+              "delta": 0.2980416580103338,
+              "seconds": 14.773
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                7
+              ],
+              "loss": 3.457793213427067,
+              "delta": 3.1975684738717973,
+              "seconds": 14.826
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "picked": 2,
+          "extra_after": [
+            2,
+            7,
+            10
+          ],
+          "loss": 0.5779979713261127,
+          "delta": 0.31777323177084327,
+          "candidates": [
+            {
+              "layer": 2,
+              "extra": [
+                2,
+                7,
+                10
+              ],
+              "loss": 0.5779979713261127,
+              "delta": 0.31777323177084327,
+              "seconds": 13.826
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4,
+                7,
+                10
+              ],
+              "loss": 0.6088511859998107,
+              "delta": 0.3486264464445412,
+              "seconds": 13.825
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3,
+                7,
+                10
+              ],
+              "loss": 0.6271314509212971,
+              "delta": 0.3669067113660276,
+              "seconds": 13.824
+            },
+            {
+              "layer": 11,
+              "extra": [
+                7,
+                10,
+                11
+              ],
+              "loss": 0.6294950768351555,
+              "delta": 0.369270337279886,
+              "seconds": 13.833
+            },
+            {
+              "layer": 9,
+              "extra": [
+                7,
+                9,
+                10
+              ],
+              "loss": 0.6339384075254202,
+              "delta": 0.3737136679701507,
+              "seconds": 13.859
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5,
+                7,
+                10
+              ],
+              "loss": 0.6409767232835293,
+              "delta": 0.3807519837282598,
+              "seconds": 13.828
+            },
+            {
+              "layer": 12,
+              "extra": [
+                7,
+                10,
+                12
+              ],
+              "loss": 0.6508712023496628,
+              "delta": 0.3906464627943933,
+              "seconds": 13.845
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6,
+                7,
+                10
+              ],
+              "loss": 0.6803184188902378,
+              "delta": 0.42009367933496833,
+              "seconds": 13.829
+            },
+            {
+              "layer": 8,
+              "extra": [
+                7,
+                8,
+                10
+              ],
+              "loss": 0.6840055771172047,
+              "delta": 0.4237808375619352,
+              "seconds": 13.838
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                7,
+                10
+              ],
+              "loss": 3.659270830452442,
+              "delta": 3.3990460908971727,
+              "seconds": 13.881
+            }
+          ]
+        }
+      ],
+      "vs_global_greedy": {
+        "extra_drop": [
+          2,
+          7,
+          10
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2,
+          7
+        ],
+        "symdiff": [
+          10,
+          11
+        ],
+        "jaccard": 0.5,
+        "differs": true
+      },
+      "seconds": 506.629
+    },
+    {
+      "name": "Long/pick",
+      "suite": "Long",
+      "skill": "pick",
+      "calib_seed": 43,
+      "n_calib_batches": 32,
+      "n_source_frames": 37270,
+      "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_32x8_seed43/long_pick.pt",
+      "extra_drop": [
+        2,
+        7,
+        10
+      ],
+      "keep_candidates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        11,
+        12
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "baseline_loss": 0.236311488552019,
+      "loss": 0.5112360827624798,
+      "delta": 0.2749245942104608,
+      "matches_global_fisher_extra3": false,
+      "symdiff_vs_global": [
+        3,
+        7
+      ],
+      "n_cache": 34,
+      "steps": [
+        {
+          "step": 1,
+          "picked": 2,
+          "extra_after": [
+            2
+          ],
+          "loss": 0.29862351482734084,
+          "delta": 0.06231202627532184,
+          "candidates": [
+            {
+              "layer": 2,
+              "extra": [
+                2
+              ],
+              "loss": 0.29862351482734084,
+              "delta": 0.06231202627532184,
+              "seconds": 15.727
+            },
+            {
+              "layer": 7,
+              "extra": [
+                7
+              ],
+              "loss": 0.323238140437752,
+              "delta": 0.08692665188573301,
+              "seconds": 15.741
+            },
+            {
+              "layer": 9,
+              "extra": [
+                9
+              ],
+              "loss": 0.3472187132574618,
+              "delta": 0.11090722470544279,
+              "seconds": 15.738
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5
+              ],
+              "loss": 0.34997084829956293,
+              "delta": 0.11365935974754393,
+              "seconds": 15.748
+            },
+            {
+              "layer": 10,
+              "extra": [
+                10
+              ],
+              "loss": 0.35471111815422773,
+              "delta": 0.11839962960220873,
+              "seconds": 15.729
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4
+              ],
+              "loss": 0.35976889450103045,
+              "delta": 0.12345740594901145,
+              "seconds": 15.749
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3
+              ],
+              "loss": 0.3608140810392797,
+              "delta": 0.1245025924872607,
+              "seconds": 15.724
+            },
+            {
+              "layer": 11,
+              "extra": [
+                11
+              ],
+              "loss": 0.36319672502577305,
+              "delta": 0.12688523647375405,
+              "seconds": 15.726
+            },
+            {
+              "layer": 8,
+              "extra": [
+                8
+              ],
+              "loss": 0.36734700947999954,
+              "delta": 0.13103552092798054,
+              "seconds": 15.756
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6
+              ],
+              "loss": 0.39929673494771123,
+              "delta": 0.16298524639569223,
+              "seconds": 15.736
+            },
+            {
+              "layer": 12,
+              "extra": [
+                12
+              ],
+              "loss": 0.40307800145819783,
+              "delta": 0.16676651290617883,
+              "seconds": 15.749
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0
+              ],
+              "loss": 1.6076988838613033,
+              "delta": 1.3713873953092843,
+              "seconds": 15.785
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "picked": 7,
+          "extra_after": [
+            2,
+            7
+          ],
+          "loss": 0.3969145631417632,
+          "delta": 0.1606030745897442,
+          "candidates": [
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.3969145631417632,
+              "delta": 0.1606030745897442,
+              "seconds": 14.782
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                9
+              ],
+              "loss": 0.41165422927588224,
+              "delta": 0.17534274072386324,
+              "seconds": 14.786
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                10
+              ],
+              "loss": 0.416068933904171,
+              "delta": 0.179757445352152,
+              "seconds": 14.823
+            },
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                11
+              ],
+              "loss": 0.41799329221248627,
+              "delta": 0.18168180366046727,
+              "seconds": 14.792
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8
+              ],
+              "loss": 0.4320412455126643,
+              "delta": 0.19572975696064532,
+              "seconds": 14.786
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5
+              ],
+              "loss": 0.4388760244473815,
+              "delta": 0.2025645358953625,
+              "seconds": 14.812
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                12
+              ],
+              "loss": 0.4508411940187216,
+              "delta": 0.21452970546670258,
+              "seconds": 14.781
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4
+              ],
+              "loss": 0.4615301424637437,
+              "delta": 0.2252186539117247,
+              "seconds": 14.792
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6
+              ],
+              "loss": 0.4682761896401644,
+              "delta": 0.23196470108814538,
+              "seconds": 14.793
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3
+              ],
+              "loss": 0.49899047799408436,
+              "delta": 0.26267898944206536,
+              "seconds": 14.786
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2
+              ],
+              "loss": 1.8859066925942898,
+              "delta": 1.6495952040422708,
+              "seconds": 14.865
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "picked": 10,
+          "extra_after": [
+            2,
+            7,
+            10
+          ],
+          "loss": 0.5112360827624798,
+          "delta": 0.2749245942104608,
+          "candidates": [
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                7,
+                10
+              ],
+              "loss": 0.5112360827624798,
+              "delta": 0.2749245942104608,
+              "seconds": 13.849
+            },
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                7,
+                11
+              ],
+              "loss": 0.5176361417397857,
+              "delta": 0.28132465318776667,
+              "seconds": 13.838
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                7,
+                12
+              ],
+              "loss": 0.5199311021715403,
+              "delta": 0.28361961361952126,
+              "seconds": 13.866
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                7,
+                9
+              ],
+              "loss": 0.5266073318198323,
+              "delta": 0.2902958432678133,
+              "seconds": 13.866
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                7,
+                8
+              ],
+              "loss": 0.541205215267837,
+              "delta": 0.30489372671581805,
+              "seconds": 13.848
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5,
+                7
+              ],
+              "loss": 0.5619796076789498,
+              "delta": 0.32566811912693083,
+              "seconds": 13.837
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4,
+                7
+              ],
+              "loss": 0.5700802002102137,
+              "delta": 0.33376871165819466,
+              "seconds": 13.84
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6,
+                7
+              ],
+              "loss": 0.5709763132035732,
+              "delta": 0.3346648246515542,
+              "seconds": 13.837
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3,
+                7
+              ],
+              "loss": 0.6067216265946627,
+              "delta": 0.37041013804264367,
+              "seconds": 13.852
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2,
+                7
+              ],
+              "loss": 1.9185610599815845,
+              "delta": 1.6822495714295655,
+              "seconds": 13.927
+            }
+          ]
+        }
+      ],
+      "vs_global_greedy": {
+        "extra_drop": [
+          2,
+          7,
+          10
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2,
+          7
+        ],
+        "symdiff": [
+          10,
+          11
+        ],
+        "jaccard": 0.5,
+        "differs": true
+      },
+      "seconds": 507.003
+    },
+    {
+      "name": "Long/place",
+      "suite": "Long",
+      "skill": "place",
+      "calib_seed": 43,
+      "n_calib_batches": 32,
+      "n_source_frames": 28590,
+      "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_32x8_seed43/long_place.pt",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "keep_candidates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        12
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "baseline_loss": 0.24496456910856068,
+      "loss": 0.5458478564396501,
+      "delta": 0.3008832873310894,
+      "matches_global_fisher_extra3": false,
+      "symdiff_vs_global": [
+        3,
+        7,
+        10,
+        11
+      ],
+      "n_cache": 34,
+      "steps": [
+        {
+          "step": 1,
+          "picked": 2,
+          "extra_after": [
+            2
+          ],
+          "loss": 0.33189702220261097,
+          "delta": 0.08693245309405029,
+          "candidates": [
+            {
+              "layer": 2,
+              "extra": [
+                2
+              ],
+              "loss": 0.33189702220261097,
+              "delta": 0.08693245309405029,
+              "seconds": 15.734
+            },
+            {
+              "layer": 7,
+              "extra": [
+                7
+              ],
+              "loss": 0.33479222375899553,
+              "delta": 0.08982765465043485,
+              "seconds": 15.746
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5
+              ],
+              "loss": 0.3529350063763559,
+              "delta": 0.1079704372677952,
+              "seconds": 15.763
+            },
+            {
+              "layer": 9,
+              "extra": [
+                9
+              ],
+              "loss": 0.3591680019162595,
+              "delta": 0.11420343280769885,
+              "seconds": 15.732
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4
+              ],
+              "loss": 0.3624764299020171,
+              "delta": 0.11751186079345644,
+              "seconds": 15.748
+            },
+            {
+              "layer": 10,
+              "extra": [
+                10
+              ],
+              "loss": 0.3627263745293021,
+              "delta": 0.11776180542074144,
+              "seconds": 15.729
+            },
+            {
+              "layer": 11,
+              "extra": [
+                11
+              ],
+              "loss": 0.3627566108480096,
+              "delta": 0.1177920417394489,
+              "seconds": 15.736
+            },
+            {
+              "layer": 8,
+              "extra": [
+                8
+              ],
+              "loss": 0.37723992858082056,
+              "delta": 0.13227535947225988,
+              "seconds": 15.768
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3
+              ],
+              "loss": 0.3924961630254984,
+              "delta": 0.1475315939169377,
+              "seconds": 15.737
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6
+              ],
+              "loss": 0.3967364807613194,
+              "delta": 0.15177191165275872,
+              "seconds": 15.734
+            },
+            {
+              "layer": 12,
+              "extra": [
+                12
+              ],
+              "loss": 0.41085469629615545,
+              "delta": 0.16589012718759477,
+              "seconds": 15.752
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0
+              ],
+              "loss": 1.5330546032637358,
+              "delta": 1.288090034155175,
+              "seconds": 15.778
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "picked": 7,
+          "extra_after": [
+            2,
+            7
+          ],
+          "loss": 0.4329702127724886,
+          "delta": 0.1880056436639279,
+          "candidates": [
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.4329702127724886,
+              "delta": 0.1880056436639279,
+              "seconds": 14.777
+            },
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                11
+              ],
+              "loss": 0.4423373746685684,
+              "delta": 0.1973728055600077,
+              "seconds": 14.778
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                9
+              ],
+              "loss": 0.44927168963477015,
+              "delta": 0.20430712052620947,
+              "seconds": 14.791
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                10
+              ],
+              "loss": 0.45189033448696136,
+              "delta": 0.20692576537840068,
+              "seconds": 14.812
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8
+              ],
+              "loss": 0.46454750280827284,
+              "delta": 0.21958293369971216,
+              "seconds": 14.778
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5
+              ],
+              "loss": 0.4696190096437931,
+              "delta": 0.22465444053523242,
+              "seconds": 14.814
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4
+              ],
+              "loss": 0.483512694016099,
+              "delta": 0.2385481249075383,
+              "seconds": 14.794
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                12
+              ],
+              "loss": 0.4840707993134856,
+              "delta": 0.23910623020492494,
+              "seconds": 14.78
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6
+              ],
+              "loss": 0.4950531483627856,
+              "delta": 0.2500885792542249,
+              "seconds": 14.782
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3
+              ],
+              "loss": 0.5523214191198349,
+              "delta": 0.3073568500112742,
+              "seconds": 14.781
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2
+              ],
+              "loss": 1.781784689053893,
+              "delta": 1.5368201199453324,
+              "seconds": 14.879
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "picked": 11,
+          "extra_after": [
+            2,
+            7,
+            11
+          ],
+          "loss": 0.5458478564396501,
+          "delta": 0.3008832873310894,
+          "candidates": [
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                7,
+                11
+              ],
+              "loss": 0.5458478564396501,
+              "delta": 0.3008832873310894,
+              "seconds": 13.833
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                7,
+                10
+              ],
+              "loss": 0.5563868377357721,
+              "delta": 0.31142226862721145,
+              "seconds": 13.83
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                7,
+                12
+              ],
+              "loss": 0.5771146109327674,
+              "delta": 0.3321500418242067,
+              "seconds": 13.858
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                7,
+                9
+              ],
+              "loss": 0.5813969625160098,
+              "delta": 0.3364323934074491,
+              "seconds": 13.867
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                7,
+                8
+              ],
+              "loss": 0.5880902986973524,
+              "delta": 0.34312572958879173,
+              "seconds": 13.84
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4,
+                7
+              ],
+              "loss": 0.5966515215113759,
+              "delta": 0.3516869524028152,
+              "seconds": 13.823
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6,
+                7
+              ],
+              "loss": 0.615796385332942,
+              "delta": 0.3708318162243813,
+              "seconds": 13.825
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5,
+                7
+              ],
+              "loss": 0.616941487416625,
+              "delta": 0.37197691830806434,
+              "seconds": 13.824
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3,
+                7
+              ],
+              "loss": 0.6592336073517799,
+              "delta": 0.41426903824321926,
+              "seconds": 13.846
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2,
+                7
+              ],
+              "loss": 1.8075783364474773,
+              "delta": 1.5626137673389167,
+              "seconds": 13.926
+            }
+          ]
+        }
+      ],
+      "vs_global_greedy": {
+        "extra_drop": [
+          2,
+          7,
+          11
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2,
+          7,
+          11
+        ],
+        "symdiff": [],
+        "jaccard": 1.0,
+        "differs": false
+      },
+      "seconds": 506.929
+    },
+    {
+      "name": "Long/turn",
+      "suite": "Long",
+      "skill": "turn",
+      "calib_seed": 43,
+      "n_calib_batches": 32,
+      "n_source_frames": 4366,
+      "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_32x8_seed43/long_turn.pt",
+      "extra_drop": [
+        2,
+        9,
+        11
+      ],
+      "keep_candidates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        12
+      ],
+      "union_drop": [
+        1,
+        2,
+        9,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "baseline_loss": 0.2577611291781068,
+      "loss": 0.5226914174854755,
+      "delta": 0.26493028830736876,
+      "matches_global_fisher_extra3": false,
+      "symdiff_vs_global": [
+        3,
+        9,
+        10,
+        11
+      ],
+      "n_cache": 34,
+      "steps": [
+        {
+          "step": 1,
+          "picked": 2,
+          "extra_after": [
+            2
+          ],
+          "loss": 0.3339245426468551,
+          "delta": 0.07616341346874833,
+          "candidates": [
+            {
+              "layer": 2,
+              "extra": [
+                2
+              ],
+              "loss": 0.3339245426468551,
+              "delta": 0.07616341346874833,
+              "seconds": 15.727
+            },
+            {
+              "layer": 7,
+              "extra": [
+                7
+              ],
+              "loss": 0.33833869779482484,
+              "delta": 0.08057756861671805,
+              "seconds": 15.769
+            },
+            {
+              "layer": 9,
+              "extra": [
+                9
+              ],
+              "loss": 0.3386164540424943,
+              "delta": 0.08085532486438751,
+              "seconds": 15.725
+            },
+            {
+              "layer": 10,
+              "extra": [
+                10
+              ],
+              "loss": 0.3521363497711718,
+              "delta": 0.09437522059306502,
+              "seconds": 15.729
+            },
+            {
+              "layer": 11,
+              "extra": [
+                11
+              ],
+              "loss": 0.35935233579948545,
+              "delta": 0.10159120662137866,
+              "seconds": 15.736
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5
+              ],
+              "loss": 0.3598250555805862,
+              "delta": 0.10206392640247941,
+              "seconds": 15.73
+            },
+            {
+              "layer": 8,
+              "extra": [
+                8
+              ],
+              "loss": 0.3622452039271593,
+              "delta": 0.10448407474905252,
+              "seconds": 15.729
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4
+              ],
+              "loss": 0.3774868240579963,
+              "delta": 0.11972569487988949,
+              "seconds": 15.773
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3
+              ],
+              "loss": 0.39293038193136454,
+              "delta": 0.13516925275325775,
+              "seconds": 15.732
+            },
+            {
+              "layer": 12,
+              "extra": [
+                12
+              ],
+              "loss": 0.4000472789630294,
+              "delta": 0.1422861497849226,
+              "seconds": 15.774
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6
+              ],
+              "loss": 0.40936149656772614,
+              "delta": 0.15160036738961935,
+              "seconds": 15.727
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0
+              ],
+              "loss": 2.8054867684841156,
+              "delta": 2.547725639306009,
+              "seconds": 15.769
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "picked": 9,
+          "extra_after": [
+            2,
+            9
+          ],
+          "loss": 0.4112735977396369,
+          "delta": 0.1535124685615301,
+          "candidates": [
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                9
+              ],
+              "loss": 0.4112735977396369,
+              "delta": 0.1535124685615301,
+              "seconds": 14.824
+            },
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.4215074982494116,
+              "delta": 0.1637463690713048,
+              "seconds": 14.783
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                10
+              ],
+              "loss": 0.4311760663986206,
+              "delta": 0.17341493722051382,
+              "seconds": 14.801
+            },
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                11
+              ],
+              "loss": 0.4323120629414916,
+              "delta": 0.17455093376338482,
+              "seconds": 14.785
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8
+              ],
+              "loss": 0.44360740669071674,
+              "delta": 0.18584627751260996,
+              "seconds": 14.787
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                12
+              ],
+              "loss": 0.4584369817748666,
+              "delta": 0.2006758525967598,
+              "seconds": 14.801
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5
+              ],
+              "loss": 0.4677124563604593,
+              "delta": 0.20995132718235254,
+              "seconds": 14.789
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4
+              ],
+              "loss": 0.4855892425402999,
+              "delta": 0.2278281133621931,
+              "seconds": 14.828
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6
+              ],
+              "loss": 0.49843104369938374,
+              "delta": 0.24066991452127695,
+              "seconds": 14.782
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3
+              ],
+              "loss": 0.540676748380065,
+              "delta": 0.2829156192019582,
+              "seconds": 14.784
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2
+              ],
+              "loss": 3.5558332577347755,
+              "delta": 3.2980721285566688,
+              "seconds": 14.855
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "picked": 11,
+          "extra_after": [
+            2,
+            9,
+            11
+          ],
+          "loss": 0.5226914174854755,
+          "delta": 0.26493028830736876,
+          "candidates": [
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                9,
+                11
+              ],
+              "loss": 0.5226914174854755,
+              "delta": 0.26493028830736876,
+              "seconds": 13.858
+            },
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7,
+                9
+              ],
+              "loss": 0.5227226195856929,
+              "delta": 0.2649614904075861,
+              "seconds": 13.885
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                9,
+                10
+              ],
+              "loss": 0.5227814791724086,
+              "delta": 0.2650203499943018,
+              "seconds": 13.84
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8,
+                9
+              ],
+              "loss": 0.5286828707903624,
+              "delta": 0.2709217416122556,
+              "seconds": 13.844
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5,
+                9
+              ],
+              "loss": 0.5394562603905797,
+              "delta": 0.2816951312124729,
+              "seconds": 13.836
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4,
+                9
+              ],
+              "loss": 0.5544063095003366,
+              "delta": 0.29664518032222986,
+              "seconds": 13.831
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                9,
+                12
+              ],
+              "loss": 0.5565750645473599,
+              "delta": 0.29881393536925316,
+              "seconds": 13.874
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6,
+                9
+              ],
+              "loss": 0.573011671192944,
+              "delta": 0.31525054201483727,
+              "seconds": 13.838
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3,
+                9
+              ],
+              "loss": 0.5945327486842871,
+              "delta": 0.3367716195061803,
+              "seconds": 13.833
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2,
+                9
+              ],
+              "loss": 3.5898391380906105,
+              "delta": 3.3320780089125037,
+              "seconds": 13.935
+            }
+          ]
+        }
+      ],
+      "vs_global_greedy": {
+        "extra_drop": [
+          2,
+          9,
+          11
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2,
+          11
+        ],
+        "symdiff": [
+          7,
+          9
+        ],
+        "jaccard": 0.5,
+        "differs": true
+      },
+      "seconds": 507.035
+    }
+  ],
+  "out_json": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/drop6_extra3/greedy_ppl_extra3_suite_skill/seed43/extra3.json"
+}

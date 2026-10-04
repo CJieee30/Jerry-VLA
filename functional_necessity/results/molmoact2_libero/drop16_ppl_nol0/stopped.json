@@ -1,0 +1,20 @@
+{
+  "stopped": true,
+  "remaining_marked_zero": true,
+  "method": "ppl",
+  "k": 16,
+  "exclude_layer0": true,
+  "completed_tasks": 9,
+  "completed_task_success_rates_pct": [0.0, 0.0, 12.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+  "in_progress": {"suite": "libero_spatial", "task_id": 9, "episodes": 12, "n_episodes": 50, "running_success_rate_pct": 0.0},
+  "successes_observed": 6,
+  "episodes_observed": 462,
+  "suite_success_pct_remaining_zero": {
+    "libero_spatial": 1.2,
+    "libero_object": 0.0,
+    "libero_goal": 0.0,
+    "libero_10": 0.0,
+    "avg": 0.30
+  },
+  "n_episodes_denom": 2000
+}

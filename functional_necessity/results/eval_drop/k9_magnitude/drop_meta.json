@@ -1,0 +1,33 @@
+{
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "method": "magnitude",
+  "k": 9,
+  "drop_layers": [
+    0,
+    1,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "keep_layers": [
+    2,
+    3,
+    6,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "recovery": false,
+  "skip": "dtr_appendix_b_prefix_kv",
+  "n_action_steps": 10,
+  "compile_model": false,
+  "job_name": "k9_magnitude",
+  "seed": 1000
+}

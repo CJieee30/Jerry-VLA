@@ -1,0 +1,82 @@
+{
+  "model": "moojink/openvla-7b-oft-finetuned-libero-spatial-object-goal-10",
+  "k": 4,
+  "n_layers": 32,
+  "skip": "llama_decoder_identity",
+  "rule": "drop the four most redundant layers other than layer 0",
+  "methods": {
+    "fisher": {
+      "drop": [
+        3,
+        4,
+        30,
+        31
+      ],
+      "excluded": [
+        0
+      ],
+      "rule": "four lowest scores after removing layer 0"
+    },
+    "igia": {
+      "drop": [
+        3,
+        29,
+        30,
+        31
+      ],
+      "excluded": [
+        0
+      ],
+      "rule": "four lowest scores after removing layer 0"
+    },
+    "gateprobe": {
+      "drop": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "excluded": [
+        0
+      ],
+      "rule": "four lowest scores after removing layer 0"
+    },
+    "taylor": {
+      "drop": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "excluded": [
+        0
+      ],
+      "rule": "four lowest scores after removing layer 0"
+    },
+    "magnitude": {
+      "drop": [
+        1,
+        2,
+        3,
+        6
+      ],
+      "excluded": [
+        0
+      ],
+      "rule": "four lowest scores after removing layer 0"
+    }
+  },
+  "unique_representatives": [
+    "fisher",
+    "igia",
+    "gateprobe",
+    "taylor",
+    "magnitude"
+  ],
+  "aliases": {
+    "gateprobe": [
+      "cossim_drop4",
+      "ppl_drop4"
+    ]
+  }
+}

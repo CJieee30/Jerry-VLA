@@ -1,0 +1,120 @@
+{
+  "checkpoint": "lerobot/smolvla_libero",
+  "snapshot": "/home/guorj/.cache/huggingface/hub/models--lerobot--smolvla_libero/snapshots/31d453f7edd78c839a8bbc39744a292686daf0de",
+  "cameras": {
+    "config_keys": [
+      "observation.images.camera1",
+      "observation.images.camera2",
+      "observation.images.camera3"
+    ],
+    "saved_preprocessor_rename_map": {
+      "observation.images.image": "observation.images.camera1",
+      "observation.images.image2": "observation.images.camera2"
+    },
+    "eval_rename_map": {
+      "observation.images.image": "observation.images.camera1",
+      "observation.images.image2": "observation.images.camera2"
+    },
+    "empty_cameras": 0
+  },
+  "state": {
+    "config_shape": [
+      6
+    ],
+    "preprocessor_json_shape": [
+      6
+    ],
+    "normalizer_stats_shapes": {
+      "action.count": [
+        1
+      ],
+      "action.max": [
+        7
+      ],
+      "action.mean": [
+        7
+      ],
+      "action.min": [
+        7
+      ],
+      "action.q01": [
+        7
+      ],
+      "action.q10": [
+        7
+      ],
+      "action.q50": [
+        7
+      ],
+      "action.q90": [
+        7
+      ],
+      "action.q99": [
+        7
+      ],
+      "action.std": [
+        7
+      ],
+      "observation.state.count": [
+        1
+      ],
+      "observation.state.max": [
+        8
+      ],
+      "observation.state.mean": [
+        8
+      ],
+      "observation.state.min": [
+        8
+      ],
+      "observation.state.q01": [
+        8
+      ],
+      "observation.state.q10": [
+        8
+      ],
+      "observation.state.q50": [
+        8
+      ],
+      "observation.state.q90": [
+        8
+      ],
+      "observation.state.q99": [
+        8
+      ],
+      "observation.state.std": [
+        8
+      ]
+    },
+    "libero_processor_dim": 8,
+    "patched_processor_steps": [
+      "step5:NormalizerProcessorStep"
+    ],
+    "preprocessor_features_shape_after_patch": [
+      8
+    ],
+    "policy_config_shape_after_patch": [
+      8
+    ],
+    "patched_policy": true,
+    "max_state_dim": 32
+  },
+  "arch": {
+    "n_action_steps_ckpt": 50,
+    "chunk_size": 50,
+    "num_steps": 10,
+    "num_vlm_layers_config": 16,
+    "num_vlm_layers_runtime": 16,
+    "text_model_n_layers": 16,
+    "num_expert_layers": 16,
+    "expert_width_multiplier": 0.75,
+    "vlm_model_name": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+    "state_proj": [
+      32,
+      960
+    ]
+  },
+  "ok_state_stats_8": true,
+  "ok_rename_map": true,
+  "ok_16_vlm": true
+}

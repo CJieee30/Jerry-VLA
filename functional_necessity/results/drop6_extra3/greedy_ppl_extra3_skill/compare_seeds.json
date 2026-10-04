@@ -1,0 +1,309 @@
+{
+  "global_greedy_extra3": [
+    2,
+    7,
+    11
+  ],
+  "skills_diff_seed42": [
+    "close",
+    "turn"
+  ],
+  "skills_diff_seed43": [
+    "pick",
+    "close",
+    "turn"
+  ],
+  "skills_diff_both": [
+    "close",
+    "turn"
+  ],
+  "gate_a": true,
+  "skills": [
+    {
+      "skill": "pick",
+      "extra_seed42": [
+        2,
+        7,
+        11
+      ],
+      "extra_seed43": [
+        2,
+        7,
+        10
+      ],
+      "same_across_seeds": false,
+      "differs_both_seeds": false,
+      "vs_global_seed42": {
+        "extra_drop": [
+          2,
+          7,
+          11
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2,
+          7,
+          11
+        ],
+        "symdiff": [],
+        "jaccard": 1.0,
+        "differs": false
+      },
+      "vs_global_seed43": {
+        "extra_drop": [
+          2,
+          7,
+          10
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2,
+          7
+        ],
+        "symdiff": [
+          10,
+          11
+        ],
+        "jaccard": 0.5,
+        "differs": true
+      }
+    },
+    {
+      "skill": "place",
+      "extra_seed42": [
+        2,
+        7,
+        11
+      ],
+      "extra_seed43": [
+        2,
+        7,
+        11
+      ],
+      "same_across_seeds": true,
+      "differs_both_seeds": false,
+      "vs_global_seed42": {
+        "extra_drop": [
+          2,
+          7,
+          11
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2,
+          7,
+          11
+        ],
+        "symdiff": [],
+        "jaccard": 1.0,
+        "differs": false
+      },
+      "vs_global_seed43": {
+        "extra_drop": [
+          2,
+          7,
+          11
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2,
+          7,
+          11
+        ],
+        "symdiff": [],
+        "jaccard": 1.0,
+        "differs": false
+      }
+    },
+    {
+      "skill": "open",
+      "extra_seed42": [
+        2,
+        7,
+        11
+      ],
+      "extra_seed43": [
+        2,
+        7,
+        11
+      ],
+      "same_across_seeds": true,
+      "differs_both_seeds": false,
+      "vs_global_seed42": {
+        "extra_drop": [
+          2,
+          7,
+          11
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2,
+          7,
+          11
+        ],
+        "symdiff": [],
+        "jaccard": 1.0,
+        "differs": false
+      },
+      "vs_global_seed43": {
+        "extra_drop": [
+          2,
+          7,
+          11
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2,
+          7,
+          11
+        ],
+        "symdiff": [],
+        "jaccard": 1.0,
+        "differs": false
+      }
+    },
+    {
+      "skill": "close",
+      "extra_seed42": [
+        2,
+        7,
+        10
+      ],
+      "extra_seed43": [
+        2,
+        7,
+        9
+      ],
+      "same_across_seeds": false,
+      "differs_both_seeds": true,
+      "vs_global_seed42": {
+        "extra_drop": [
+          2,
+          7,
+          10
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2,
+          7
+        ],
+        "symdiff": [
+          10,
+          11
+        ],
+        "jaccard": 0.5,
+        "differs": true
+      },
+      "vs_global_seed43": {
+        "extra_drop": [
+          2,
+          7,
+          9
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2,
+          7
+        ],
+        "symdiff": [
+          9,
+          11
+        ],
+        "jaccard": 0.5,
+        "differs": true
+      }
+    },
+    {
+      "skill": "turn",
+      "extra_seed42": [
+        2,
+        9,
+        11
+      ],
+      "extra_seed43": [
+        2,
+        5,
+        9
+      ],
+      "same_across_seeds": false,
+      "differs_both_seeds": true,
+      "vs_global_seed42": {
+        "extra_drop": [
+          2,
+          9,
+          11
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2,
+          11
+        ],
+        "symdiff": [
+          7,
+          9
+        ],
+        "jaccard": 0.5,
+        "differs": true
+      },
+      "vs_global_seed43": {
+        "extra_drop": [
+          2,
+          5,
+          9
+        ],
+        "global_greedy_extra3": [
+          2,
+          7,
+          11
+        ],
+        "intersection": [
+          2
+        ],
+        "symdiff": [
+          5,
+          7,
+          9,
+          11
+        ],
+        "jaccard": 0.2,
+        "differs": true
+      }
+    }
+  ]
+}

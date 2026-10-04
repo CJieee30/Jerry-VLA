@@ -1,0 +1,44 @@
+{
+  "name": "Long/turn",
+  "suite": "Long",
+  "skill": "turn",
+  "calib_seed": 45,
+  "n_calib_batches": 32,
+  "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_heldout_32x8_seed45/long_turn.pt",
+  "baseline_loss": 0.24070923426188529,
+  "masks": {
+    "U_only": {
+      "extra": [],
+      "loss": 0.24070923426188529,
+      "delta": 0.0,
+      "seconds": 0.0
+    },
+    "L2_only": {
+      "extra": [
+        2
+      ],
+      "loss": 0.3127245334908366,
+      "delta": 0.07201529922895133,
+      "seconds": 15.653
+    },
+    "core_27": {
+      "extra": [
+        2,
+        7
+      ],
+      "loss": 0.4084742655977607,
+      "delta": 0.1677650313358754,
+      "seconds": 14.714
+    },
+    "core_29": {
+      "extra": [
+        2,
+        9
+      ],
+      "loss": 0.38905462715774775,
+      "delta": 0.14834539289586246,
+      "seconds": 14.77
+    }
+  },
+  "seconds": 61.747
+}

@@ -1,0 +1,33 @@
+{
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "method": "hessian",
+  "k": 6,
+  "drop_layers": [
+    2,
+    3,
+    5,
+    15,
+    16,
+    17
+  ],
+  "keep_layers": [
+    0,
+    1,
+    4,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "recovery": false,
+  "skip": "dtr_appendix_b_prefix_kv",
+  "n_action_steps": 10,
+  "compile_model": false,
+  "job_name": "k6_hessian",
+  "seed": 1000
+}

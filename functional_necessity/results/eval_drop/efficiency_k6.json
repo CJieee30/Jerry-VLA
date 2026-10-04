@@ -1,0 +1,55 @@
+{
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "path": "official_prefix_cache_plus_expert_denoise",
+  "llm_seq": 200,
+  "num_inference_steps": 10,
+  "baseline": {
+    "name": "baseline",
+    "drop_layers": [],
+    "n_drop": 0,
+    "measured_gflops": 5024.398949376,
+    "predict_action_chunk_ms": 631.3291625976562,
+    "analytical": {
+      "llm_seq": 200,
+      "n_drop": 0,
+      "n_denoise": 10,
+      "prefix_language_gflops": 798.621696,
+      "denoise_expert_gflops": 329.859072,
+      "vision_gflops": 656.9,
+      "other_gflops": 3.6,
+      "total_gflops": 1788.980768,
+      "dropped_layer_full_gflops": 44.367872,
+      "dropped_layer_kept_kv_gflops": 0.4194304
+    }
+  },
+  "skipped": {
+    "name": "gateprobe_drop6",
+    "drop_layers": [
+      2,
+      4,
+      14,
+      15,
+      16,
+      17
+    ],
+    "n_drop": 6,
+    "measured_gflops": 3711.595428864,
+    "predict_action_chunk_ms": 607.2171630859375,
+    "analytical": {
+      "llm_seq": 200,
+      "n_drop": 6,
+      "n_denoise": 10,
+      "prefix_language_gflops": 534.9310464,
+      "denoise_expert_gflops": 329.859072,
+      "vision_gflops": 656.9,
+      "other_gflops": 3.6,
+      "total_gflops": 1525.2901184,
+      "dropped_layer_full_gflops": 44.367872,
+      "dropped_layer_kept_kv_gflops": 0.4194304
+    }
+  },
+  "measured_flops_ratio": 0.7387143151371286,
+  "measured_time_ratio": 0.9618075626151849,
+  "measured_flops_speedup": 1.353703291663393,
+  "measured_time_speedup": 1.03970902171009
+}

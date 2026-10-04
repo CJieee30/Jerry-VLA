@@ -1,0 +1,44 @@
+{
+  "name": "Spatial/place",
+  "suite": "Spatial",
+  "skill": "place",
+  "calib_seed": 44,
+  "n_calib_batches": 32,
+  "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_heldout_32x8_seed44/spatial_place.pt",
+  "baseline_loss": 0.2934243977069855,
+  "masks": {
+    "U_only": {
+      "extra": [],
+      "loss": 0.2934243977069855,
+      "delta": 0.0,
+      "seconds": 0.0
+    },
+    "L2_only": {
+      "extra": [
+        2
+      ],
+      "loss": 0.39635572163388133,
+      "delta": 0.10293132392689586,
+      "seconds": 15.943
+    },
+    "core_27": {
+      "extra": [
+        2,
+        7
+      ],
+      "loss": 0.49890012852847576,
+      "delta": 0.2054757308214903,
+      "seconds": 14.967
+    },
+    "core_28": {
+      "extra": [
+        2,
+        8
+      ],
+      "loss": 0.5080501651391387,
+      "delta": 0.21462576743215322,
+      "seconds": 14.97
+    }
+  },
+  "seconds": 62.814
+}

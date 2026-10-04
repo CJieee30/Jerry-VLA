@@ -1,0 +1,17 @@
+{
+  "method": "gateprobe",
+  "k": 4,
+  "drop": [
+    0,
+    3,
+    4,
+    5
+  ],
+  "suite": "libero_10",
+  "episodes": 500,
+  "successes": 0,
+  "rate": 0.0,
+  "seed": 7,
+  "skip": "llama_decoder_identity",
+  "log": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/openvla_oft_libero/drop4/eval/k4_gateprobe/libero_10/EVAL-libero_10-openvla-2026_09_25-17_23_23--k4-gateprobe.txt"
+}

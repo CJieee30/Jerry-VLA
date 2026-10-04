@@ -1,0 +1,36 @@
+{
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "device": "NVIDIA GeForce RTX 3090",
+  "compile_model": false,
+  "n_action_steps": 10,
+  "chunk_size": 50,
+  "num_inference_steps": 10,
+  "prefix_seq": 968,
+  "language_token_seq": 200,
+  "n_image_views": 3,
+  "vision_tokens_per_view": 256,
+  "vision_tokens_total": 768,
+  "warmup": 5,
+  "repeats": 20,
+  "params_m": {
+    "vision": 414.803696,
+    "language": 2508.531712,
+    "action": 693.422112,
+    "stored_total": 4143.404816
+  },
+  "flops_g": {
+    "vision": 660.529741824,
+    "language": 3974.951585792,
+    "action": 388.91762176,
+    "sum_modules": 5024.398949376,
+    "full_chunk": 5024.398949376
+  },
+  "inference_ms": {
+    "vision": 56.0385986328125,
+    "language": 78.55211791992187,
+    "action": 387.140087890625,
+    "language_token_embed": 0.08550400137901307,
+    "sum_modules": 521.7308044433594,
+    "full_chunk": 531.988232421875
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "method": "greedy_ppl",
+  "k": 4,
+  "drop": [
+    3,
+    4,
+    5,
+    29
+  ],
+  "suite": "libero_spatial",
+  "episodes": 500,
+  "successes": 449,
+  "rate": 0.898,
+  "seed": 7,
+  "skip": "llama_decoder_identity",
+  "log": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/openvla_oft_libero/greedy_ppl_eval/eval/k4_greedy_ppl/libero_spatial/EVAL-libero_spatial-openvla-2026_09_27-02_05_49--k4-greedy_ppl.txt"
+}

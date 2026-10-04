@@ -1,0 +1,3042 @@
+{
+  "method": "greedy_ppl",
+  "scope": "suite",
+  "kind": "greedy_ppl_extra3_suite",
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "calib_dir": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42",
+  "pooling": "concat 10\u00d716\u00d78 per-task dumps inside each suite",
+  "protocol": {
+    "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+    "universal_drop": [
+      1,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "suspected_universal_keep": [
+      0,
+      7
+    ],
+    "candidates": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "extra_k": 3,
+    "global_fisher_extra3": [
+      2,
+      3,
+      10
+    ],
+    "per_task_calib": "16x8",
+    "seed": 42,
+    "skip": "skip_llm_layers / DTR Appendix B; score on skip(U) graph",
+    "note": "U is locked from global Fisher Drop-6. PPL must not redefine U. extra-3 is chosen from the remaining 12 layers including L0/L7."
+  },
+  "summary": {
+    "n_tasks": 40,
+    "n_unique_triples": 2,
+    "n_match_global_fisher_extra3": 0,
+    "n_symdiff_ge1": 40,
+    "n_extra3_contains_l0": 0,
+    "n_extra3_contains_l7": 30,
+    "histogram": {
+      "[2, 7, 11]": 30,
+      "[2, 8, 11]": 10
+    },
+    "should_run_closed_loop": true,
+    "gate": "main triple <=32/40 and >=2 other triples, or >=8/40 with symmetric difference >=1 vs [2,3,10]"
+  },
+  "pools": [
+    {
+      "name": "Spatial",
+      "suite": "libero_spatial",
+      "n_tasks": 10,
+      "n_calib_batches": 160,
+      "expected_batches": 160,
+      "sources": [
+        {
+          "short": "Spa0",
+          "suite": "libero_spatial",
+          "task_id": 0,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa0.pt"
+        },
+        {
+          "short": "Spa1",
+          "suite": "libero_spatial",
+          "task_id": 1,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa1.pt"
+        },
+        {
+          "short": "Spa2",
+          "suite": "libero_spatial",
+          "task_id": 2,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa2.pt"
+        },
+        {
+          "short": "Spa3",
+          "suite": "libero_spatial",
+          "task_id": 3,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa3.pt"
+        },
+        {
+          "short": "Spa4",
+          "suite": "libero_spatial",
+          "task_id": 4,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa4.pt"
+        },
+        {
+          "short": "Spa5",
+          "suite": "libero_spatial",
+          "task_id": 5,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa5.pt"
+        },
+        {
+          "short": "Spa6",
+          "suite": "libero_spatial",
+          "task_id": 6,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa6.pt"
+        },
+        {
+          "short": "Spa7",
+          "suite": "libero_spatial",
+          "task_id": 7,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa7.pt"
+        },
+        {
+          "short": "Spa8",
+          "suite": "libero_spatial",
+          "task_id": 8,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa8.pt"
+        },
+        {
+          "short": "Spa9",
+          "suite": "libero_spatial",
+          "task_id": 9,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Spa9.pt"
+        }
+      ],
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "keep_candidates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        12
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "baseline_loss": 0.32084753457456827,
+      "loss": 0.6656029616482556,
+      "delta": 0.34475542707368734,
+      "matches_global_fisher_extra3": false,
+      "symdiff_vs_global": [
+        3,
+        7,
+        10,
+        11
+      ],
+      "n_cache": 34,
+      "steps": [
+        {
+          "step": 1,
+          "picked": 2,
+          "extra_after": [
+            2
+          ],
+          "loss": 0.4164085779339075,
+          "delta": 0.09556104335933924,
+          "candidates": [
+            {
+              "layer": 2,
+              "extra": [
+                2
+              ],
+              "loss": 0.4164085779339075,
+              "delta": 0.09556104335933924,
+              "seconds": 78.755
+            },
+            {
+              "layer": 7,
+              "extra": [
+                7
+              ],
+              "loss": 0.4199585758149624,
+              "delta": 0.0991110412403941,
+              "seconds": 78.84
+            },
+            {
+              "layer": 9,
+              "extra": [
+                9
+              ],
+              "loss": 0.4478326041251421,
+              "delta": 0.12698506955057381,
+              "seconds": 78.822
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4
+              ],
+              "loss": 0.4514291583560407,
+              "delta": 0.13058162378147242,
+              "seconds": 78.821
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5
+              ],
+              "loss": 0.4546128261834383,
+              "delta": 0.13376529160887002,
+              "seconds": 78.827
+            },
+            {
+              "layer": 11,
+              "extra": [
+                11
+              ],
+              "loss": 0.45499932747334243,
+              "delta": 0.13415179289877416,
+              "seconds": 78.825
+            },
+            {
+              "layer": 8,
+              "extra": [
+                8
+              ],
+              "loss": 0.46052016168832777,
+              "delta": 0.1396726271137595,
+              "seconds": 78.815
+            },
+            {
+              "layer": 10,
+              "extra": [
+                10
+              ],
+              "loss": 0.461952967569232,
+              "delta": 0.14110543299466372,
+              "seconds": 78.817
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3
+              ],
+              "loss": 0.47713770233094693,
+              "delta": 0.15629016775637866,
+              "seconds": 78.811
+            },
+            {
+              "layer": 12,
+              "extra": [
+                12
+              ],
+              "loss": 0.4953895272687078,
+              "delta": 0.1745419926941395,
+              "seconds": 78.84
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6
+              ],
+              "loss": 0.5425142317079008,
+              "delta": 0.22166669713333254,
+              "seconds": 78.836
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0
+              ],
+              "loss": 2.020909707993269,
+              "delta": 1.7000621734187007,
+              "seconds": 78.627
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "picked": 7,
+          "extra_after": [
+            2,
+            7
+          ],
+          "loss": 0.5287911066785455,
+          "delta": 0.20794357210397718,
+          "candidates": [
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.5287911066785455,
+              "delta": 0.20794357210397718,
+              "seconds": 74.256
+            },
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                11
+              ],
+              "loss": 0.5369911265559495,
+              "delta": 0.21614359198138122,
+              "seconds": 74.263
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                9
+              ],
+              "loss": 0.5431904666125774,
+              "delta": 0.22234293203800914,
+              "seconds": 74.272
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                10
+              ],
+              "loss": 0.5556422631256283,
+              "delta": 0.23479472855105998,
+              "seconds": 74.155
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8
+              ],
+              "loss": 0.5573909745551646,
+              "delta": 0.23654343998059635,
+              "seconds": 74.165
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                12
+              ],
+              "loss": 0.5767901809886098,
+              "delta": 0.2559426464140415,
+              "seconds": 74.133
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4
+              ],
+              "loss": 0.587007745821029,
+              "delta": 0.2661602112464607,
+              "seconds": 74.151
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5
+              ],
+              "loss": 0.5925344789400697,
+              "delta": 0.27168694436550145,
+              "seconds": 74.214
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6
+              ],
+              "loss": 0.6489841669797898,
+              "delta": 0.3281366324052215,
+              "seconds": 74.142
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3
+              ],
+              "loss": 0.6504917442798615,
+              "delta": 0.3296442097052932,
+              "seconds": 74.175
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2
+              ],
+              "loss": 2.4196250557899477,
+              "delta": 2.0987775212153794,
+              "seconds": 74.396
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "picked": 11,
+          "extra_after": [
+            2,
+            7,
+            11
+          ],
+          "loss": 0.6656029616482556,
+          "delta": 0.34475542707368734,
+          "candidates": [
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                7,
+                11
+              ],
+              "loss": 0.6656029616482556,
+              "delta": 0.34475542707368734,
+              "seconds": 69.641
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                7,
+                10
+              ],
+              "loss": 0.6781118964776397,
+              "delta": 0.3572643619030714,
+              "seconds": 69.65
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                7,
+                12
+              ],
+              "loss": 0.6839084232226014,
+              "delta": 0.3630608886480331,
+              "seconds": 69.666
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                7,
+                8
+              ],
+              "loss": 0.6843751380220056,
+              "delta": 0.3635276034474373,
+              "seconds": 69.554
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                7,
+                9
+              ],
+              "loss": 0.6880530340597033,
+              "delta": 0.36720549948513503,
+              "seconds": 69.665
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4,
+                7
+              ],
+              "loss": 0.7300572771579027,
+              "delta": 0.4092097425833344,
+              "seconds": 69.531
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5,
+                7
+              ],
+              "loss": 0.746687019430101,
+              "delta": 0.4258394848555327,
+              "seconds": 69.38
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6,
+                7
+              ],
+              "loss": 0.770884158462286,
+              "delta": 0.4500366238877177,
+              "seconds": 69.532
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3,
+                7
+              ],
+              "loss": 0.7824110850691796,
+              "delta": 0.4615635504946113,
+              "seconds": 69.438
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2,
+                7
+              ],
+              "loss": 2.461020639538765,
+              "delta": 2.1401731049641968,
+              "seconds": 69.811
+            }
+          ]
+        }
+      ],
+      "seconds": 2541.121
+    },
+    {
+      "name": "Object",
+      "suite": "libero_object",
+      "n_tasks": 10,
+      "n_calib_batches": 160,
+      "expected_batches": 160,
+      "sources": [
+        {
+          "short": "Obj0",
+          "suite": "libero_object",
+          "task_id": 0,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj0.pt"
+        },
+        {
+          "short": "Obj1",
+          "suite": "libero_object",
+          "task_id": 1,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj1.pt"
+        },
+        {
+          "short": "Obj2",
+          "suite": "libero_object",
+          "task_id": 2,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj2.pt"
+        },
+        {
+          "short": "Obj3",
+          "suite": "libero_object",
+          "task_id": 3,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj3.pt"
+        },
+        {
+          "short": "Obj4",
+          "suite": "libero_object",
+          "task_id": 4,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj4.pt"
+        },
+        {
+          "short": "Obj5",
+          "suite": "libero_object",
+          "task_id": 5,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj5.pt"
+        },
+        {
+          "short": "Obj6",
+          "suite": "libero_object",
+          "task_id": 6,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj6.pt"
+        },
+        {
+          "short": "Obj7",
+          "suite": "libero_object",
+          "task_id": 7,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj7.pt"
+        },
+        {
+          "short": "Obj8",
+          "suite": "libero_object",
+          "task_id": 8,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj8.pt"
+        },
+        {
+          "short": "Obj9",
+          "suite": "libero_object",
+          "task_id": 9,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Obj9.pt"
+        }
+      ],
+      "extra_drop": [
+        2,
+        8,
+        11
+      ],
+      "keep_candidates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        12
+      ],
+      "union_drop": [
+        1,
+        2,
+        8,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "baseline_loss": 0.2886353761423379,
+      "loss": 0.5081463489681483,
+      "delta": 0.21951097282581034,
+      "matches_global_fisher_extra3": false,
+      "symdiff_vs_global": [
+        3,
+        8,
+        10,
+        11
+      ],
+      "n_cache": 34,
+      "steps": [
+        {
+          "step": 1,
+          "picked": 2,
+          "extra_after": [
+            2
+          ],
+          "loss": 0.35450184983201327,
+          "delta": 0.06586647368967535,
+          "candidates": [
+            {
+              "layer": 2,
+              "extra": [
+                2
+              ],
+              "loss": 0.35450184983201327,
+              "delta": 0.06586647368967535,
+              "seconds": 79.071
+            },
+            {
+              "layer": 7,
+              "extra": [
+                7
+              ],
+              "loss": 0.36612941734492777,
+              "delta": 0.07749404120258985,
+              "seconds": 78.991
+            },
+            {
+              "layer": 11,
+              "extra": [
+                11
+              ],
+              "loss": 0.37388994977809487,
+              "delta": 0.08525457363575695,
+              "seconds": 78.964
+            },
+            {
+              "layer": 9,
+              "extra": [
+                9
+              ],
+              "loss": 0.37691087466664613,
+              "delta": 0.08827549852430822,
+              "seconds": 79.028
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5
+              ],
+              "loss": 0.3780715666245669,
+              "delta": 0.089436190482229,
+              "seconds": 79.018
+            },
+            {
+              "layer": 10,
+              "extra": [
+                10
+              ],
+              "loss": 0.37998155704699454,
+              "delta": 0.09134618090465663,
+              "seconds": 78.995
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4
+              ],
+              "loss": 0.38382528983056546,
+              "delta": 0.09518991368822755,
+              "seconds": 78.917
+            },
+            {
+              "layer": 8,
+              "extra": [
+                8
+              ],
+              "loss": 0.3847592976409942,
+              "delta": 0.09612392149865628,
+              "seconds": 78.924
+            },
+            {
+              "layer": 12,
+              "extra": [
+                12
+              ],
+              "loss": 0.38788858549669386,
+              "delta": 0.09925320935435594,
+              "seconds": 78.978
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3
+              ],
+              "loss": 0.3945167343597859,
+              "delta": 0.10588135821744799,
+              "seconds": 79.078
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6
+              ],
+              "loss": 0.4379988906439394,
+              "delta": 0.14936351450160146,
+              "seconds": 78.995
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0
+              ],
+              "loss": 1.4624208632856608,
+              "delta": 1.1737854871433229,
+              "seconds": 79.516
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "picked": 11,
+          "extra_after": [
+            2,
+            11
+          ],
+          "loss": 0.4278884313069284,
+          "delta": 0.13925305516459047,
+          "candidates": [
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                11
+              ],
+              "loss": 0.4278884313069284,
+              "delta": 0.13925305516459047,
+              "seconds": 74.253
+            },
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.43900301642715933,
+              "delta": 0.1503676402848214,
+              "seconds": 74.233
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                9
+              ],
+              "loss": 0.43903493066318333,
+              "delta": 0.1503995545208454,
+              "seconds": 74.235
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                12
+              ],
+              "loss": 0.4401172368787229,
+              "delta": 0.15148186073638498,
+              "seconds": 74.191
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                10
+              ],
+              "loss": 0.4405887592583895,
+              "delta": 0.15195338311605155,
+              "seconds": 74.212
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8
+              ],
+              "loss": 0.44487559674307703,
+              "delta": 0.1562402206007391,
+              "seconds": 74.178
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5
+              ],
+              "loss": 0.4698483510874212,
+              "delta": 0.18121297494508326,
+              "seconds": 74.256
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4
+              ],
+              "loss": 0.4729347685351968,
+              "delta": 0.18429939239285886,
+              "seconds": 74.213
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3
+              ],
+              "loss": 0.5058840185403823,
+              "delta": 0.21724864239804442,
+              "seconds": 74.255
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6
+              ],
+              "loss": 0.509764302894473,
+              "delta": 0.22112892675213514,
+              "seconds": 74.211
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2
+              ],
+              "loss": 1.7847678497433663,
+              "delta": 1.4961324736010284,
+              "seconds": 74.501
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "picked": 8,
+          "extra_after": [
+            2,
+            8,
+            11
+          ],
+          "loss": 0.5081463489681483,
+          "delta": 0.21951097282581034,
+          "candidates": [
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8,
+                11
+              ],
+              "loss": 0.5081463489681483,
+              "delta": 0.21951097282581034,
+              "seconds": 69.499
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                9,
+                11
+              ],
+              "loss": 0.5103784441947937,
+              "delta": 0.2217430680524558,
+              "seconds": 69.447
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4,
+                11
+              ],
+              "loss": 0.5143933649174869,
+              "delta": 0.22575798877514897,
+              "seconds": 69.582
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                10,
+                11
+              ],
+              "loss": 0.5202086849138141,
+              "delta": 0.2315733087714762,
+              "seconds": 69.484
+            },
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7,
+                11
+              ],
+              "loss": 0.5240391223691404,
+              "delta": 0.2354037462268025,
+              "seconds": 69.476
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                11,
+                12
+              ],
+              "loss": 0.5353392845019698,
+              "delta": 0.24670390835963185,
+              "seconds": 69.457
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5,
+                11
+              ],
+              "loss": 0.5358131159096956,
+              "delta": 0.24717773976735768,
+              "seconds": 69.475
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3,
+                11
+              ],
+              "loss": 0.5409368216991425,
+              "delta": 0.25230144555680456,
+              "seconds": 69.436
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6,
+                11
+              ],
+              "loss": 0.5462303075008095,
+              "delta": 0.25759493135847156,
+              "seconds": 69.525
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2,
+                11
+              ],
+              "loss": 1.797495498880744,
+              "delta": 1.508860122738406,
+              "seconds": 69.759
+            }
+          ]
+        }
+      ],
+      "seconds": 2544.341
+    },
+    {
+      "name": "Goal",
+      "suite": "libero_goal",
+      "n_tasks": 10,
+      "n_calib_batches": 160,
+      "expected_batches": 160,
+      "sources": [
+        {
+          "short": "Goal0",
+          "suite": "libero_goal",
+          "task_id": 0,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal0.pt"
+        },
+        {
+          "short": "Goal1",
+          "suite": "libero_goal",
+          "task_id": 1,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal1.pt"
+        },
+        {
+          "short": "Goal2",
+          "suite": "libero_goal",
+          "task_id": 2,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal2.pt"
+        },
+        {
+          "short": "Goal3",
+          "suite": "libero_goal",
+          "task_id": 3,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal3.pt"
+        },
+        {
+          "short": "Goal4",
+          "suite": "libero_goal",
+          "task_id": 4,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal4.pt"
+        },
+        {
+          "short": "Goal5",
+          "suite": "libero_goal",
+          "task_id": 5,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal5.pt"
+        },
+        {
+          "short": "Goal6",
+          "suite": "libero_goal",
+          "task_id": 6,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal6.pt"
+        },
+        {
+          "short": "Goal7",
+          "suite": "libero_goal",
+          "task_id": 7,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal7.pt"
+        },
+        {
+          "short": "Goal8",
+          "suite": "libero_goal",
+          "task_id": 8,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal8.pt"
+        },
+        {
+          "short": "Goal9",
+          "suite": "libero_goal",
+          "task_id": 9,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Goal9.pt"
+        }
+      ],
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "keep_candidates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        12
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "baseline_loss": 0.2576453519519418,
+      "loss": 0.5559469485655427,
+      "delta": 0.2983015966136009,
+      "matches_global_fisher_extra3": false,
+      "symdiff_vs_global": [
+        3,
+        7,
+        10,
+        11
+      ],
+      "n_cache": 34,
+      "steps": [
+        {
+          "step": 1,
+          "picked": 2,
+          "extra_after": [
+            2
+          ],
+          "loss": 0.339525259565562,
+          "delta": 0.08187990761362018,
+          "candidates": [
+            {
+              "layer": 2,
+              "extra": [
+                2
+              ],
+              "loss": 0.339525259565562,
+              "delta": 0.08187990761362018,
+              "seconds": 79.004
+            },
+            {
+              "layer": 7,
+              "extra": [
+                7
+              ],
+              "loss": 0.35021394593641164,
+              "delta": 0.09256859398446982,
+              "seconds": 78.998
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5
+              ],
+              "loss": 0.3572376812342554,
+              "delta": 0.0995923292823136,
+              "seconds": 78.99
+            },
+            {
+              "layer": 11,
+              "extra": [
+                11
+              ],
+              "loss": 0.35991863207891583,
+              "delta": 0.10227328012697401,
+              "seconds": 79.022
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4
+              ],
+              "loss": 0.36159623274579644,
+              "delta": 0.10395088079385462,
+              "seconds": 79.023
+            },
+            {
+              "layer": 10,
+              "extra": [
+                10
+              ],
+              "loss": 0.37099103853106496,
+              "delta": 0.11334568657912314,
+              "seconds": 78.963
+            },
+            {
+              "layer": 9,
+              "extra": [
+                9
+              ],
+              "loss": 0.3720942881889641,
+              "delta": 0.11444893623702229,
+              "seconds": 79.002
+            },
+            {
+              "layer": 8,
+              "extra": [
+                8
+              ],
+              "loss": 0.38675595745444297,
+              "delta": 0.12911060550250114,
+              "seconds": 78.947
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3
+              ],
+              "loss": 0.39614611659199,
+              "delta": 0.13850076464004818,
+              "seconds": 78.99
+            },
+            {
+              "layer": 12,
+              "extra": [
+                12
+              ],
+              "loss": 0.40207513365894554,
+              "delta": 0.1444297817070037,
+              "seconds": 79.039
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6
+              ],
+              "loss": 0.42025191988795996,
+              "delta": 0.16260656793601813,
+              "seconds": 78.979
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0
+              ],
+              "loss": 2.2076437897980212,
+              "delta": 1.9499984378460793,
+              "seconds": 79.153
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "picked": 11,
+          "extra_after": [
+            2,
+            11
+          ],
+          "loss": 0.4341707882471383,
+          "delta": 0.17652543629519646,
+          "candidates": [
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                11
+              ],
+              "loss": 0.4341707882471383,
+              "delta": 0.17652543629519646,
+              "seconds": 74.277
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                10
+              ],
+              "loss": 0.45122741600498556,
+              "delta": 0.19358206405304373,
+              "seconds": 74.217
+            },
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.45502606630325315,
+              "delta": 0.19738071435131133,
+              "seconds": 74.28
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                9
+              ],
+              "loss": 0.458472718950361,
+              "delta": 0.2008273669984192,
+              "seconds": 74.283
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                12
+              ],
+              "loss": 0.47461093561723827,
+              "delta": 0.21696558366529645,
+              "seconds": 74.208
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8
+              ],
+              "loss": 0.48146911188960073,
+              "delta": 0.2238237599376589,
+              "seconds": 74.218
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4
+              ],
+              "loss": 0.48257060078904035,
+              "delta": 0.22492524883709852,
+              "seconds": 74.274
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5
+              ],
+              "loss": 0.4857646135613322,
+              "delta": 0.2281192616093904,
+              "seconds": 74.298
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6
+              ],
+              "loss": 0.524734977632761,
+              "delta": 0.2670896256808192,
+              "seconds": 74.278
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3
+              ],
+              "loss": 0.5711091907694936,
+              "delta": 0.3134638388175518,
+              "seconds": 74.283
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2
+              ],
+              "loss": 2.7564106240868567,
+              "delta": 2.4987652721349147,
+              "seconds": 74.596
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "picked": 7,
+          "extra_after": [
+            2,
+            7,
+            11
+          ],
+          "loss": 0.5559469485655427,
+          "delta": 0.2983015966136009,
+          "candidates": [
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7,
+                11
+              ],
+              "loss": 0.5559469485655427,
+              "delta": 0.2983015966136009,
+              "seconds": 69.485
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4,
+                11
+              ],
+              "loss": 0.5592607043683528,
+              "delta": 0.301615352416411,
+              "seconds": 69.538
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5,
+                11
+              ],
+              "loss": 0.5679490400478244,
+              "delta": 0.3103036880958826,
+              "seconds": 69.468
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                10,
+                11
+              ],
+              "loss": 0.5714914518408477,
+              "delta": 0.3138460998889059,
+              "seconds": 69.532
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                9,
+                11
+              ],
+              "loss": 0.5737989927642048,
+              "delta": 0.31615364081226294,
+              "seconds": 69.476
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8,
+                11
+              ],
+              "loss": 0.5778735162690282,
+              "delta": 0.32022816431708634,
+              "seconds": 69.54
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6,
+                11
+              ],
+              "loss": 0.5950710359960795,
+              "delta": 0.33742568404413764,
+              "seconds": 69.534
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                11,
+                12
+              ],
+              "loss": 0.6061751084402204,
+              "delta": 0.34852975648827855,
+              "seconds": 69.468
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3,
+                11
+              ],
+              "loss": 0.636058596521616,
+              "delta": 0.3784132445696742,
+              "seconds": 69.47
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2,
+                11
+              ],
+              "loss": 2.771456614136696,
+              "delta": 2.513811262184754,
+              "seconds": 69.799
+            }
+          ]
+        }
+      ],
+      "seconds": 2544.487
+    },
+    {
+      "name": "Long",
+      "suite": "libero_10",
+      "n_tasks": 10,
+      "n_calib_batches": 160,
+      "expected_batches": 160,
+      "sources": [
+        {
+          "short": "Long0",
+          "suite": "libero_10",
+          "task_id": 0,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long0.pt"
+        },
+        {
+          "short": "Long1",
+          "suite": "libero_10",
+          "task_id": 1,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long1.pt"
+        },
+        {
+          "short": "Long2",
+          "suite": "libero_10",
+          "task_id": 2,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long2.pt"
+        },
+        {
+          "short": "Long3",
+          "suite": "libero_10",
+          "task_id": 3,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long3.pt"
+        },
+        {
+          "short": "Long4",
+          "suite": "libero_10",
+          "task_id": 4,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long4.pt"
+        },
+        {
+          "short": "Long5",
+          "suite": "libero_10",
+          "task_id": 5,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long5.pt"
+        },
+        {
+          "short": "Long6",
+          "suite": "libero_10",
+          "task_id": 6,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long6.pt"
+        },
+        {
+          "short": "Long7",
+          "suite": "libero_10",
+          "task_id": 7,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long7.pt"
+        },
+        {
+          "short": "Long8",
+          "suite": "libero_10",
+          "task_id": 8,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long8.pt"
+        },
+        {
+          "short": "Long9",
+          "suite": "libero_10",
+          "task_id": 9,
+          "n_batches": 16,
+          "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/per_task_16x8_seed42/Long9.pt"
+        }
+      ],
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "keep_candidates": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        12
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "baseline_loss": 0.2331918806768954,
+      "loss": 0.4934983459301293,
+      "delta": 0.2603064652532339,
+      "matches_global_fisher_extra3": false,
+      "symdiff_vs_global": [
+        3,
+        7,
+        10,
+        11
+      ],
+      "n_cache": 34,
+      "steps": [
+        {
+          "step": 1,
+          "picked": 2,
+          "extra_after": [
+            2
+          ],
+          "loss": 0.2984996751882136,
+          "delta": 0.06530779451131818,
+          "candidates": [
+            {
+              "layer": 2,
+              "extra": [
+                2
+              ],
+              "loss": 0.2984996751882136,
+              "delta": 0.06530779451131818,
+              "seconds": 79.057
+            },
+            {
+              "layer": 7,
+              "extra": [
+                7
+              ],
+              "loss": 0.3157810777891427,
+              "delta": 0.08258919711224733,
+              "seconds": 79.016
+            },
+            {
+              "layer": 5,
+              "extra": [
+                5
+              ],
+              "loss": 0.33166596861556175,
+              "delta": 0.09847408793866635,
+              "seconds": 79.019
+            },
+            {
+              "layer": 9,
+              "extra": [
+                9
+              ],
+              "loss": 0.336943949200213,
+              "delta": 0.10375206852331759,
+              "seconds": 79.039
+            },
+            {
+              "layer": 11,
+              "extra": [
+                11
+              ],
+              "loss": 0.341323418635875,
+              "delta": 0.10813153795897962,
+              "seconds": 79.058
+            },
+            {
+              "layer": 10,
+              "extra": [
+                10
+              ],
+              "loss": 0.3423812218010426,
+              "delta": 0.10918934112414719,
+              "seconds": 78.994
+            },
+            {
+              "layer": 4,
+              "extra": [
+                4
+              ],
+              "loss": 0.3445434695575386,
+              "delta": 0.11135158888064323,
+              "seconds": 79.045
+            },
+            {
+              "layer": 8,
+              "extra": [
+                8
+              ],
+              "loss": 0.3555375163909048,
+              "delta": 0.12234563571400942,
+              "seconds": 78.956
+            },
+            {
+              "layer": 3,
+              "extra": [
+                3
+              ],
+              "loss": 0.35703966789878905,
+              "delta": 0.12384778722189366,
+              "seconds": 79.031
+            },
+            {
+              "layer": 6,
+              "extra": [
+                6
+              ],
+              "loss": 0.37523170188069344,
+              "delta": 0.14203982120379804,
+              "seconds": 79.002
+            },
+            {
+              "layer": 12,
+              "extra": [
+                12
+              ],
+              "loss": 0.37941372459754347,
+              "delta": 0.14622184392064808,
+              "seconds": 78.985
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0
+              ],
+              "loss": 1.6989998389035463,
+              "delta": 1.465807958226651,
+              "seconds": 79.235
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "picked": 7,
+          "extra_after": [
+            2,
+            7
+          ],
+          "loss": 0.3879732926841825,
+          "delta": 0.15478141200728712,
+          "candidates": [
+            {
+              "layer": 7,
+              "extra": [
+                2,
+                7
+              ],
+              "loss": 0.3879732926841825,
+              "delta": 0.15478141200728712,
+              "seconds": 74.272
+            },
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                11
+              ],
+              "loss": 0.4024846075102687,
+              "delta": 0.16929272683337332,
+              "seconds": 74.274
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                9
+              ],
+              "loss": 0.4049750769045204,
+              "delta": 0.171783196227625,
+              "seconds": 74.257
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                10
+              ],
+              "loss": 0.40690419664606453,
+              "delta": 0.17371231596916914,
+              "seconds": 74.305
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                8
+              ],
+              "loss": 0.42125424798578026,
+              "delta": 0.18806236730888487,
+              "seconds": 74.331
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5
+              ],
+              "loss": 0.4271647333167493,
+              "delta": 0.19397285263985392,
+              "seconds": 74.256
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                12
+              ],
+              "loss": 0.4323082435876131,
+              "delta": 0.19911636291071771,
+              "seconds": 74.314
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4
+              ],
+              "loss": 0.44975896095857026,
+              "delta": 0.21656708028167487,
+              "seconds": 74.321
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6
+              ],
+              "loss": 0.4548877068795264,
+              "delta": 0.221695826202631,
+              "seconds": 74.334
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3
+              ],
+              "loss": 0.49718021024018527,
+              "delta": 0.2639883295632899,
+              "seconds": 74.223
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2
+              ],
+              "loss": 2.0099529795348645,
+              "delta": 1.7767610988579692,
+              "seconds": 74.557
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "picked": 11,
+          "extra_after": [
+            2,
+            7,
+            11
+          ],
+          "loss": 0.4934983459301293,
+          "delta": 0.2603064652532339,
+          "candidates": [
+            {
+              "layer": 11,
+              "extra": [
+                2,
+                7,
+                11
+              ],
+              "loss": 0.4934983459301293,
+              "delta": 0.2603064652532339,
+              "seconds": 69.457
+            },
+            {
+              "layer": 10,
+              "extra": [
+                2,
+                7,
+                10
+              ],
+              "loss": 0.5013752129860223,
+              "delta": 0.2681833323091269,
+              "seconds": 69.502
+            },
+            {
+              "layer": 9,
+              "extra": [
+                2,
+                7,
+                9
+              ],
+              "loss": 0.5122880510054528,
+              "delta": 0.27909617032855744,
+              "seconds": 69.481
+            },
+            {
+              "layer": 12,
+              "extra": [
+                2,
+                7,
+                12
+              ],
+              "loss": 0.5152728491462767,
+              "delta": 0.2820809684693813,
+              "seconds": 69.494
+            },
+            {
+              "layer": 8,
+              "extra": [
+                2,
+                7,
+                8
+              ],
+              "loss": 0.5345687633380294,
+              "delta": 0.301376882661134,
+              "seconds": 69.503
+            },
+            {
+              "layer": 4,
+              "extra": [
+                2,
+                4,
+                7
+              ],
+              "loss": 0.5521153643727302,
+              "delta": 0.31892348369583484,
+              "seconds": 69.487
+            },
+            {
+              "layer": 6,
+              "extra": [
+                2,
+                6,
+                7
+              ],
+              "loss": 0.5561985078267753,
+              "delta": 0.3230066271498799,
+              "seconds": 69.478
+            },
+            {
+              "layer": 5,
+              "extra": [
+                2,
+                5,
+                7
+              ],
+              "loss": 0.5597969952970743,
+              "delta": 0.3266051146201789,
+              "seconds": 69.526
+            },
+            {
+              "layer": 3,
+              "extra": [
+                2,
+                3,
+                7
+              ],
+              "loss": 0.5960471278056503,
+              "delta": 0.3628552471287549,
+              "seconds": 69.544
+            },
+            {
+              "layer": 0,
+              "extra": [
+                0,
+                2,
+                7
+              ],
+              "loss": 2.0482321813702584,
+              "delta": 1.815040300693363,
+              "seconds": 69.815
+            }
+          ]
+        }
+      ],
+      "seconds": 2545.129
+    }
+  ],
+  "tasks": [
+    {
+      "suite": "libero_spatial",
+      "task_id": 0,
+      "task": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+      "short": "Spa0",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Spatial",
+      "baseline_loss": 0.32084753457456827,
+      "loss": 0.6656029616482556,
+      "delta": 0.34475542707368734
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 1,
+      "task": "pick up the black bowl next to the ramekin and place it on the plate",
+      "short": "Spa1",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Spatial",
+      "baseline_loss": 0.32084753457456827,
+      "loss": 0.6656029616482556,
+      "delta": 0.34475542707368734
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 2,
+      "task": "pick up the black bowl from table center and place it on the plate",
+      "short": "Spa2",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Spatial",
+      "baseline_loss": 0.32084753457456827,
+      "loss": 0.6656029616482556,
+      "delta": 0.34475542707368734
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 3,
+      "task": "pick up the black bowl on the cookie box and place it on the plate",
+      "short": "Spa3",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Spatial",
+      "baseline_loss": 0.32084753457456827,
+      "loss": 0.6656029616482556,
+      "delta": 0.34475542707368734
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 4,
+      "task": "pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate",
+      "short": "Spa4",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Spatial",
+      "baseline_loss": 0.32084753457456827,
+      "loss": 0.6656029616482556,
+      "delta": 0.34475542707368734
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 5,
+      "task": "pick up the black bowl on the ramekin and place it on the plate",
+      "short": "Spa5",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Spatial",
+      "baseline_loss": 0.32084753457456827,
+      "loss": 0.6656029616482556,
+      "delta": 0.34475542707368734
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 6,
+      "task": "pick up the black bowl next to the cookie box and place it on the plate",
+      "short": "Spa6",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Spatial",
+      "baseline_loss": 0.32084753457456827,
+      "loss": 0.6656029616482556,
+      "delta": 0.34475542707368734
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 7,
+      "task": "pick up the black bowl on the stove and place it on the plate",
+      "short": "Spa7",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Spatial",
+      "baseline_loss": 0.32084753457456827,
+      "loss": 0.6656029616482556,
+      "delta": 0.34475542707368734
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 8,
+      "task": "pick up the black bowl next to the plate and place it on the plate",
+      "short": "Spa8",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Spatial",
+      "baseline_loss": 0.32084753457456827,
+      "loss": 0.6656029616482556,
+      "delta": 0.34475542707368734
+    },
+    {
+      "suite": "libero_spatial",
+      "task_id": 9,
+      "task": "pick up the black bowl on the wooden cabinet and place it on the plate",
+      "short": "Spa9",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Spatial",
+      "baseline_loss": 0.32084753457456827,
+      "loss": 0.6656029616482556,
+      "delta": 0.34475542707368734
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 0,
+      "task": "pick up the alphabet soup and place it in the basket",
+      "short": "Obj0",
+      "extra_drop": [
+        2,
+        8,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        8,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Object",
+      "baseline_loss": 0.2886353761423379,
+      "loss": 0.5081463489681483,
+      "delta": 0.21951097282581034
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 1,
+      "task": "pick up the cream cheese and place it in the basket",
+      "short": "Obj1",
+      "extra_drop": [
+        2,
+        8,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        8,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Object",
+      "baseline_loss": 0.2886353761423379,
+      "loss": 0.5081463489681483,
+      "delta": 0.21951097282581034
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 2,
+      "task": "pick up the salad dressing and place it in the basket",
+      "short": "Obj2",
+      "extra_drop": [
+        2,
+        8,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        8,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Object",
+      "baseline_loss": 0.2886353761423379,
+      "loss": 0.5081463489681483,
+      "delta": 0.21951097282581034
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 3,
+      "task": "pick up the bbq sauce and place it in the basket",
+      "short": "Obj3",
+      "extra_drop": [
+        2,
+        8,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        8,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Object",
+      "baseline_loss": 0.2886353761423379,
+      "loss": 0.5081463489681483,
+      "delta": 0.21951097282581034
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 4,
+      "task": "pick up the ketchup and place it in the basket",
+      "short": "Obj4",
+      "extra_drop": [
+        2,
+        8,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        8,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Object",
+      "baseline_loss": 0.2886353761423379,
+      "loss": 0.5081463489681483,
+      "delta": 0.21951097282581034
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 5,
+      "task": "pick up the tomato sauce and place it in the basket",
+      "short": "Obj5",
+      "extra_drop": [
+        2,
+        8,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        8,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Object",
+      "baseline_loss": 0.2886353761423379,
+      "loss": 0.5081463489681483,
+      "delta": 0.21951097282581034
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 6,
+      "task": "pick up the butter and place it in the basket",
+      "short": "Obj6",
+      "extra_drop": [
+        2,
+        8,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        8,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Object",
+      "baseline_loss": 0.2886353761423379,
+      "loss": 0.5081463489681483,
+      "delta": 0.21951097282581034
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 7,
+      "task": "pick up the milk and place it in the basket",
+      "short": "Obj7",
+      "extra_drop": [
+        2,
+        8,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        8,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Object",
+      "baseline_loss": 0.2886353761423379,
+      "loss": 0.5081463489681483,
+      "delta": 0.21951097282581034
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 8,
+      "task": "pick up the chocolate pudding and place it in the basket",
+      "short": "Obj8",
+      "extra_drop": [
+        2,
+        8,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        8,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Object",
+      "baseline_loss": 0.2886353761423379,
+      "loss": 0.5081463489681483,
+      "delta": 0.21951097282581034
+    },
+    {
+      "suite": "libero_object",
+      "task_id": 9,
+      "task": "pick up the orange juice and place it in the basket",
+      "short": "Obj9",
+      "extra_drop": [
+        2,
+        8,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        8,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Object",
+      "baseline_loss": 0.2886353761423379,
+      "loss": 0.5081463489681483,
+      "delta": 0.21951097282581034
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 0,
+      "task": "open the middle drawer of the cabinet",
+      "short": "Goal0",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Goal",
+      "baseline_loss": 0.2576453519519418,
+      "loss": 0.5559469485655427,
+      "delta": 0.2983015966136009
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 1,
+      "task": "put the bowl on the stove",
+      "short": "Goal1",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Goal",
+      "baseline_loss": 0.2576453519519418,
+      "loss": 0.5559469485655427,
+      "delta": 0.2983015966136009
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 2,
+      "task": "put the wine bottle on top of the cabinet",
+      "short": "Goal2",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Goal",
+      "baseline_loss": 0.2576453519519418,
+      "loss": 0.5559469485655427,
+      "delta": 0.2983015966136009
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 3,
+      "task": "open the top drawer and put the bowl inside",
+      "short": "Goal3",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Goal",
+      "baseline_loss": 0.2576453519519418,
+      "loss": 0.5559469485655427,
+      "delta": 0.2983015966136009
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 4,
+      "task": "put the bowl on top of the cabinet",
+      "short": "Goal4",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Goal",
+      "baseline_loss": 0.2576453519519418,
+      "loss": 0.5559469485655427,
+      "delta": 0.2983015966136009
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 5,
+      "task": "push the plate to the front of the stove",
+      "short": "Goal5",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Goal",
+      "baseline_loss": 0.2576453519519418,
+      "loss": 0.5559469485655427,
+      "delta": 0.2983015966136009
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 6,
+      "task": "put the cream cheese in the bowl",
+      "short": "Goal6",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Goal",
+      "baseline_loss": 0.2576453519519418,
+      "loss": 0.5559469485655427,
+      "delta": 0.2983015966136009
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 7,
+      "task": "turn on the stove",
+      "short": "Goal7",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Goal",
+      "baseline_loss": 0.2576453519519418,
+      "loss": 0.5559469485655427,
+      "delta": 0.2983015966136009
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 8,
+      "task": "put the bowl on the plate",
+      "short": "Goal8",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Goal",
+      "baseline_loss": 0.2576453519519418,
+      "loss": 0.5559469485655427,
+      "delta": 0.2983015966136009
+    },
+    {
+      "suite": "libero_goal",
+      "task_id": 9,
+      "task": "put the wine bottle on the rack",
+      "short": "Goal9",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Goal",
+      "baseline_loss": 0.2576453519519418,
+      "loss": 0.5559469485655427,
+      "delta": 0.2983015966136009
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 0,
+      "task": "put both the alphabet soup and the tomato sauce in the basket",
+      "short": "Long0",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Long",
+      "baseline_loss": 0.2331918806768954,
+      "loss": 0.4934983459301293,
+      "delta": 0.2603064652532339
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 1,
+      "task": "put both the cream cheese box and the butter in the basket",
+      "short": "Long1",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Long",
+      "baseline_loss": 0.2331918806768954,
+      "loss": 0.4934983459301293,
+      "delta": 0.2603064652532339
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 2,
+      "task": "turn on the stove and put the moka pot on it",
+      "short": "Long2",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Long",
+      "baseline_loss": 0.2331918806768954,
+      "loss": 0.4934983459301293,
+      "delta": 0.2603064652532339
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 3,
+      "task": "put the black bowl in the bottom drawer of the cabinet and close it",
+      "short": "Long3",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Long",
+      "baseline_loss": 0.2331918806768954,
+      "loss": 0.4934983459301293,
+      "delta": 0.2603064652532339
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 4,
+      "task": "put the white mug on the left plate and put the yellow and white mug on the right plate",
+      "short": "Long4",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Long",
+      "baseline_loss": 0.2331918806768954,
+      "loss": 0.4934983459301293,
+      "delta": 0.2603064652532339
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 5,
+      "task": "pick up the book and place it in the back compartment of the caddy",
+      "short": "Long5",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Long",
+      "baseline_loss": 0.2331918806768954,
+      "loss": 0.4934983459301293,
+      "delta": 0.2603064652532339
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 6,
+      "task": "put the white mug on the plate and put the chocolate pudding to the right of the plate",
+      "short": "Long6",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Long",
+      "baseline_loss": 0.2331918806768954,
+      "loss": 0.4934983459301293,
+      "delta": 0.2603064652532339
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 7,
+      "task": "put both the alphabet soup and the cream cheese box in the basket",
+      "short": "Long7",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Long",
+      "baseline_loss": 0.2331918806768954,
+      "loss": 0.4934983459301293,
+      "delta": 0.2603064652532339
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 8,
+      "task": "put both moka pots on the stove",
+      "short": "Long8",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Long",
+      "baseline_loss": 0.2331918806768954,
+      "loss": 0.4934983459301293,
+      "delta": 0.2603064652532339
+    },
+    {
+      "suite": "libero_10",
+      "task_id": 9,
+      "task": "put the yellow and white mug in the microwave and close it",
+      "short": "Long9",
+      "extra_drop": [
+        2,
+        7,
+        11
+      ],
+      "union_drop": [
+        1,
+        2,
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "pool": "Long",
+      "baseline_loss": 0.2331918806768954,
+      "loss": 0.4934983459301293,
+      "delta": 0.2603064652532339
+    }
+  ],
+  "out_json": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/drop6_extra3/greedy_ppl_extra3_suite/extra3.json"
+}

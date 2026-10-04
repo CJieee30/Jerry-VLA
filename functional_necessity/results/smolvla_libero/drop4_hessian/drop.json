@@ -1,0 +1,28 @@
+{
+  "checkpoint": "lerobot/smolvla_libero",
+  "method": "hessian",
+  "k": 4,
+  "drop": [
+    8,
+    10,
+    12,
+    14
+  ],
+  "operator": "keep_kv_identity_residual",
+  "exclude_layer0": false,
+  "n_action_steps": 10,
+  "num_steps": 10,
+  "seed": 1000,
+  "n_episodes": 10,
+  "suites": [
+    "libero_spatial",
+    "libero_object",
+    "libero_goal",
+    "libero_10"
+  ],
+  "rename_map": {
+    "observation.images.image": "observation.images.camera1",
+    "observation.images.image2": "observation.images.camera2"
+  },
+  "state_dim": 8
+}

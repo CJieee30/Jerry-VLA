@@ -1,0 +1,513 @@
+{
+  "kind": "bddl_predicate_audit",
+  "n_action_steps": 10,
+  "read_only": true,
+  "n_episodes": 10,
+  "n_success": 9,
+  "phase_counts": {
+    "success": 9,
+    "place": 1
+  },
+  "episodes": [
+    {
+      "episode_index": 0,
+      "task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it",
+      "task_id": 2,
+      "task_description": "turn on the stove and put the moka pot on it",
+      "env_step": 233,
+      "success": true,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "turnon",
+            "flat_stove_1"
+          ],
+          "key": "turnon:flat_stove_1",
+          "role": "turn",
+          "ever": true,
+          "end": true,
+          "first_step": 77,
+          "first_chunk": 7,
+          "last_true_step": 233
+        },
+        {
+          "pred": [
+            "on",
+            "moka_pot_1",
+            "flat_stove_1_cook_region"
+          ],
+          "key": "on:moka_pot_1:flat_stove_1_cook_region",
+          "role": "place",
+          "ever": true,
+          "end": true,
+          "first_step": 233,
+          "first_chunk": 23,
+          "last_true_step": 233
+        }
+      ],
+      "n_steps": 233,
+      "classification": {
+        "place_ever": true,
+        "place_end": true,
+        "place_first_step": 233,
+        "place_first_chunk": 23,
+        "turn_ever": true,
+        "turn_end": true,
+        "turn_first_step": 77,
+        "turn_first_chunk": 7,
+        "failure_phase": "success"
+      }
+    },
+    {
+      "episode_index": 1,
+      "task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it",
+      "task_id": 2,
+      "task_description": "turn on the stove and put the moka pot on it",
+      "env_step": 240,
+      "success": true,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "turnon",
+            "flat_stove_1"
+          ],
+          "key": "turnon:flat_stove_1",
+          "role": "turn",
+          "ever": true,
+          "end": true,
+          "first_step": 85,
+          "first_chunk": 8,
+          "last_true_step": 240
+        },
+        {
+          "pred": [
+            "on",
+            "moka_pot_1",
+            "flat_stove_1_cook_region"
+          ],
+          "key": "on:moka_pot_1:flat_stove_1_cook_region",
+          "role": "place",
+          "ever": true,
+          "end": true,
+          "first_step": 240,
+          "first_chunk": 23,
+          "last_true_step": 240
+        }
+      ],
+      "n_steps": 240,
+      "classification": {
+        "place_ever": true,
+        "place_end": true,
+        "place_first_step": 240,
+        "place_first_chunk": 23,
+        "turn_ever": true,
+        "turn_end": true,
+        "turn_first_step": 85,
+        "turn_first_chunk": 8,
+        "failure_phase": "success"
+      }
+    },
+    {
+      "episode_index": 2,
+      "task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it",
+      "task_id": 2,
+      "task_description": "turn on the stove and put the moka pot on it",
+      "env_step": 245,
+      "success": true,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "turnon",
+            "flat_stove_1"
+          ],
+          "key": "turnon:flat_stove_1",
+          "role": "turn",
+          "ever": true,
+          "end": true,
+          "first_step": 87,
+          "first_chunk": 8,
+          "last_true_step": 245
+        },
+        {
+          "pred": [
+            "on",
+            "moka_pot_1",
+            "flat_stove_1_cook_region"
+          ],
+          "key": "on:moka_pot_1:flat_stove_1_cook_region",
+          "role": "place",
+          "ever": true,
+          "end": true,
+          "first_step": 245,
+          "first_chunk": 24,
+          "last_true_step": 245
+        }
+      ],
+      "n_steps": 245,
+      "classification": {
+        "place_ever": true,
+        "place_end": true,
+        "place_first_step": 245,
+        "place_first_chunk": 24,
+        "turn_ever": true,
+        "turn_end": true,
+        "turn_first_step": 87,
+        "turn_first_chunk": 8,
+        "failure_phase": "success"
+      }
+    },
+    {
+      "episode_index": 3,
+      "task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it",
+      "task_id": 2,
+      "task_description": "turn on the stove and put the moka pot on it",
+      "env_step": 520,
+      "success": false,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "turnon",
+            "flat_stove_1"
+          ],
+          "key": "turnon:flat_stove_1",
+          "role": "turn",
+          "ever": true,
+          "end": true,
+          "first_step": 84,
+          "first_chunk": 8,
+          "last_true_step": 520
+        },
+        {
+          "pred": [
+            "on",
+            "moka_pot_1",
+            "flat_stove_1_cook_region"
+          ],
+          "key": "on:moka_pot_1:flat_stove_1_cook_region",
+          "role": "place",
+          "ever": false,
+          "end": false,
+          "first_step": null,
+          "first_chunk": null,
+          "last_true_step": null
+        }
+      ],
+      "n_steps": 520,
+      "classification": {
+        "place_ever": false,
+        "place_end": false,
+        "place_first_step": null,
+        "place_first_chunk": null,
+        "turn_ever": true,
+        "turn_end": true,
+        "turn_first_step": 84,
+        "turn_first_chunk": 8,
+        "failure_phase": "place"
+      }
+    },
+    {
+      "episode_index": 4,
+      "task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it",
+      "task_id": 2,
+      "task_description": "turn on the stove and put the moka pot on it",
+      "env_step": 235,
+      "success": true,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "turnon",
+            "flat_stove_1"
+          ],
+          "key": "turnon:flat_stove_1",
+          "role": "turn",
+          "ever": true,
+          "end": true,
+          "first_step": 78,
+          "first_chunk": 7,
+          "last_true_step": 235
+        },
+        {
+          "pred": [
+            "on",
+            "moka_pot_1",
+            "flat_stove_1_cook_region"
+          ],
+          "key": "on:moka_pot_1:flat_stove_1_cook_region",
+          "role": "place",
+          "ever": true,
+          "end": true,
+          "first_step": 235,
+          "first_chunk": 23,
+          "last_true_step": 235
+        }
+      ],
+      "n_steps": 235,
+      "classification": {
+        "place_ever": true,
+        "place_end": true,
+        "place_first_step": 235,
+        "place_first_chunk": 23,
+        "turn_ever": true,
+        "turn_end": true,
+        "turn_first_step": 78,
+        "turn_first_chunk": 7,
+        "failure_phase": "success"
+      }
+    },
+    {
+      "episode_index": 5,
+      "task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it",
+      "task_id": 2,
+      "task_description": "turn on the stove and put the moka pot on it",
+      "env_step": 299,
+      "success": true,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "turnon",
+            "flat_stove_1"
+          ],
+          "key": "turnon:flat_stove_1",
+          "role": "turn",
+          "ever": true,
+          "end": true,
+          "first_step": 83,
+          "first_chunk": 8,
+          "last_true_step": 299
+        },
+        {
+          "pred": [
+            "on",
+            "moka_pot_1",
+            "flat_stove_1_cook_region"
+          ],
+          "key": "on:moka_pot_1:flat_stove_1_cook_region",
+          "role": "place",
+          "ever": true,
+          "end": true,
+          "first_step": 299,
+          "first_chunk": 29,
+          "last_true_step": 299
+        }
+      ],
+      "n_steps": 299,
+      "classification": {
+        "place_ever": true,
+        "place_end": true,
+        "place_first_step": 299,
+        "place_first_chunk": 29,
+        "turn_ever": true,
+        "turn_end": true,
+        "turn_first_step": 83,
+        "turn_first_chunk": 8,
+        "failure_phase": "success"
+      }
+    },
+    {
+      "episode_index": 6,
+      "task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it",
+      "task_id": 2,
+      "task_description": "turn on the stove and put the moka pot on it",
+      "env_step": 242,
+      "success": true,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "turnon",
+            "flat_stove_1"
+          ],
+          "key": "turnon:flat_stove_1",
+          "role": "turn",
+          "ever": true,
+          "end": true,
+          "first_step": 79,
+          "first_chunk": 7,
+          "last_true_step": 242
+        },
+        {
+          "pred": [
+            "on",
+            "moka_pot_1",
+            "flat_stove_1_cook_region"
+          ],
+          "key": "on:moka_pot_1:flat_stove_1_cook_region",
+          "role": "place",
+          "ever": true,
+          "end": true,
+          "first_step": 242,
+          "first_chunk": 24,
+          "last_true_step": 242
+        }
+      ],
+      "n_steps": 242,
+      "classification": {
+        "place_ever": true,
+        "place_end": true,
+        "place_first_step": 242,
+        "place_first_chunk": 24,
+        "turn_ever": true,
+        "turn_end": true,
+        "turn_first_step": 79,
+        "turn_first_chunk": 7,
+        "failure_phase": "success"
+      }
+    },
+    {
+      "episode_index": 7,
+      "task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it",
+      "task_id": 2,
+      "task_description": "turn on the stove and put the moka pot on it",
+      "env_step": 235,
+      "success": true,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "turnon",
+            "flat_stove_1"
+          ],
+          "key": "turnon:flat_stove_1",
+          "role": "turn",
+          "ever": true,
+          "end": true,
+          "first_step": 78,
+          "first_chunk": 7,
+          "last_true_step": 235
+        },
+        {
+          "pred": [
+            "on",
+            "moka_pot_1",
+            "flat_stove_1_cook_region"
+          ],
+          "key": "on:moka_pot_1:flat_stove_1_cook_region",
+          "role": "place",
+          "ever": true,
+          "end": true,
+          "first_step": 235,
+          "first_chunk": 23,
+          "last_true_step": 235
+        }
+      ],
+      "n_steps": 235,
+      "classification": {
+        "place_ever": true,
+        "place_end": true,
+        "place_first_step": 235,
+        "place_first_chunk": 23,
+        "turn_ever": true,
+        "turn_end": true,
+        "turn_first_step": 78,
+        "turn_first_chunk": 7,
+        "failure_phase": "success"
+      }
+    },
+    {
+      "episode_index": 8,
+      "task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it",
+      "task_id": 2,
+      "task_description": "turn on the stove and put the moka pot on it",
+      "env_step": 240,
+      "success": true,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "turnon",
+            "flat_stove_1"
+          ],
+          "key": "turnon:flat_stove_1",
+          "role": "turn",
+          "ever": true,
+          "end": true,
+          "first_step": 85,
+          "first_chunk": 8,
+          "last_true_step": 240
+        },
+        {
+          "pred": [
+            "on",
+            "moka_pot_1",
+            "flat_stove_1_cook_region"
+          ],
+          "key": "on:moka_pot_1:flat_stove_1_cook_region",
+          "role": "place",
+          "ever": true,
+          "end": true,
+          "first_step": 240,
+          "first_chunk": 23,
+          "last_true_step": 240
+        }
+      ],
+      "n_steps": 240,
+      "classification": {
+        "place_ever": true,
+        "place_end": true,
+        "place_first_step": 240,
+        "place_first_chunk": 23,
+        "turn_ever": true,
+        "turn_end": true,
+        "turn_first_step": 85,
+        "turn_first_chunk": 8,
+        "failure_phase": "success"
+      }
+    },
+    {
+      "episode_index": 9,
+      "task": "KITCHEN_SCENE3_turn_on_the_stove_and_put_the_moka_pot_on_it",
+      "task_id": 2,
+      "task_description": "turn on the stove and put the moka pot on it",
+      "env_step": 288,
+      "success": true,
+      "terminated": true,
+      "conjuncts": [
+        {
+          "pred": [
+            "turnon",
+            "flat_stove_1"
+          ],
+          "key": "turnon:flat_stove_1",
+          "role": "turn",
+          "ever": true,
+          "end": true,
+          "first_step": 81,
+          "first_chunk": 8,
+          "last_true_step": 288
+        },
+        {
+          "pred": [
+            "on",
+            "moka_pot_1",
+            "flat_stove_1_cook_region"
+          ],
+          "key": "on:moka_pot_1:flat_stove_1_cook_region",
+          "role": "place",
+          "ever": true,
+          "end": true,
+          "first_step": 288,
+          "first_chunk": 28,
+          "last_true_step": 288
+        }
+      ],
+      "n_steps": 288,
+      "classification": {
+        "place_ever": true,
+        "place_end": true,
+        "place_first_step": 288,
+        "place_first_chunk": 28,
+        "turn_ever": true,
+        "turn_end": true,
+        "turn_first_step": 81,
+        "turn_first_chunk": 8,
+        "failure_phase": "success"
+      }
+    }
+  ]
+}

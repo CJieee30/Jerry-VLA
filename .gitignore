@@ -1,0 +1,30 @@
+# 权重、环境、数据
+functional_necessity/checkpoints/
+functional_necessity/datasets/
+functional_necessity/dtr_drop9_recovered/checkpoints/
+functional_necessity/**/.venv/
+**/.venv/
+**/__pycache__/
+*.pyc
+
+# 校准缓存、视频、体积过大的评测产物
+functional_necessity/results/calib/
+functional_necessity/results/**/videos/
+functional_necessity/results/logs/
+**/*.mp4
+**/*.safetensors
+**/*.bin
+**/*.pt
+**/*.pth
+**/*.ckpt
+**/*.npz
+**/*.parquet
+
+# 系统与密钥
+.DS_Store
+*.swp
+.env
+
+
+*.log
+functional_necessity/results/**/eval_ckpt/

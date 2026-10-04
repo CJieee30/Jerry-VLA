@@ -1,0 +1,16 @@
+{
+  "checkpoint": "HuggingFaceVLA/smolvla_libero",
+  "n_action_steps": 10,
+  "num_steps": 10,
+  "chunk_size": 50,
+  "seed": 1000,
+  "n_episodes": 10,
+  "suites": [
+    "libero_spatial",
+    "libero_object",
+    "libero_goal",
+    "libero_10"
+  ],
+  "control_mode": "relative",
+  "contrast_to": "results/smolvla_libero/baseline_eval (n_action_steps=1)"
+}

@@ -1,0 +1,2 @@
+Task suite: libero_object
+Using default initial states

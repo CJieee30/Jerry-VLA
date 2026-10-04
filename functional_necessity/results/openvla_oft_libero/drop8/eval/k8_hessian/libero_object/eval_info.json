@@ -1,0 +1,21 @@
+{
+  "method": "hessian",
+  "k": 8,
+  "drop": [
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+  ],
+  "suite": "libero_object",
+  "episodes": 500,
+  "successes": 0,
+  "rate": 0.0,
+  "seed": 7,
+  "skip": "llama_decoder_identity",
+  "log": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/openvla_oft_libero/drop8/eval/k8_hessian/libero_object/EVAL-libero_object-openvla-2026_09_23-12_41_55--k8-hessian.txt"
+}

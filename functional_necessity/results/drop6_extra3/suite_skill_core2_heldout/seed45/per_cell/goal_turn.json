@@ -1,0 +1,44 @@
+{
+  "name": "Goal/turn",
+  "suite": "Goal",
+  "skill": "turn",
+  "calib_seed": 45,
+  "n_calib_batches": 32,
+  "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_heldout_32x8_seed45/goal_turn.pt",
+  "baseline_loss": 0.25815402902662754,
+  "masks": {
+    "U_only": {
+      "extra": [],
+      "loss": 0.25815402902662754,
+      "delta": 0.0,
+      "seconds": 0.0
+    },
+    "L2_only": {
+      "extra": [
+        2
+      ],
+      "loss": 0.3566552186384797,
+      "delta": 0.09850118961185217,
+      "seconds": 15.427
+    },
+    "core_27": {
+      "extra": [
+        2,
+        7
+      ],
+      "loss": 0.4839707715436816,
+      "delta": 0.22581674251705408,
+      "seconds": 14.597
+    },
+    "core_29": {
+      "extra": [
+        2,
+        9
+      ],
+      "loss": 0.46692407224327326,
+      "delta": 0.20877004321664572,
+      "seconds": 14.618
+    }
+  },
+  "seconds": 61.312
+}

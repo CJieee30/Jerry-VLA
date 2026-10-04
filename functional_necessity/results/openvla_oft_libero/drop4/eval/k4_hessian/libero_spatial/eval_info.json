@@ -1,0 +1,17 @@
+{
+  "method": "hessian",
+  "k": 4,
+  "drop": [
+    28,
+    29,
+    30,
+    31
+  ],
+  "suite": "libero_spatial",
+  "episodes": 500,
+  "successes": 58,
+  "rate": 0.116,
+  "seed": 7,
+  "skip": "llama_decoder_identity",
+  "log": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/openvla_oft_libero/drop4/eval/k4_hessian/libero_spatial/EVAL-libero_spatial-openvla-2026_09_24-23_54_10--k4-hessian.txt"
+}

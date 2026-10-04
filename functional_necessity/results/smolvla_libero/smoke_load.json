@@ -1,0 +1,35 @@
+{
+  "checkpoint": "HuggingFaceVLA/smolvla_libero",
+  "device": "cuda",
+  "gpu_name": "NVIDIA GeForce RTX 3090",
+  "mujoco": "3.8.1",
+  "n_action_steps": 1,
+  "chunk_size": 50,
+  "num_steps": 10,
+  "num_vlm_layers_config": 0,
+  "num_vlm_layers_runtime": 32,
+  "text_model_n_layers": 32,
+  "num_expert_layers": 32,
+  "expert_width_multiplier": 0.5,
+  "attention_mode": "cross_attn",
+  "vlm_model_name": "HuggingFaceTB/SmolVLM2-500M-Instruct",
+  "freeze_vision_encoder": true,
+  "train_expert_only": true,
+  "input_features": {
+    "observation.images.image": [
+      3,
+      256,
+      256
+    ],
+    "observation.images.image2": [
+      3,
+      256,
+      256
+    ],
+    "observation.state": [
+      8
+    ]
+  },
+  "ok_32_layers": true,
+  "ok_n_action_steps_1": true
+}

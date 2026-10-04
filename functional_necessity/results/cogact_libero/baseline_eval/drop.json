@@ -1,0 +1,23 @@
+{
+  "methods": [
+    "baseline"
+  ],
+  "k": 0,
+  "drop": [],
+  "operator": "identity_residual",
+  "checkpoint": "/home/guorj/Skill_Efficient_VLA/functional_necessity/checkpoints/libero-db-cogact",
+  "seed": 7,
+  "n_episodes": 50,
+  "num_steps_wait": 10,
+  "replan_step": {
+    "libero_spatial": 12,
+    "libero_object": 16,
+    "libero_goal": 16,
+    "libero_10": 15
+  },
+  "cfg_scale": 1.5,
+  "num_ddim_steps": 10,
+  "chunk_size": 16,
+  "discrete_gripper": true,
+  "camera": "agentview_flip180"
+}

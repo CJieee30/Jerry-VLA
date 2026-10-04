@@ -1,0 +1,28 @@
+{
+  "methods": [
+    "taylor"
+  ],
+  "k": 17,
+  "drop": [
+    1,
+    2,
+    3,
+    4,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35
+  ],
+  "operator": "keep_kv_identity_residual",
+  "exclude_layer0": true,
+  "shared": false
+}

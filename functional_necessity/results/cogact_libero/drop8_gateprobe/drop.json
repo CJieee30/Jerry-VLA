@@ -1,0 +1,30 @@
+{
+  "methods": [
+    "gateprobe"
+  ],
+  "k": 8,
+  "drop": [
+    1,
+    2,
+    3,
+    4,
+    9,
+    19,
+    21,
+    22
+  ],
+  "operator": "identity_residual",
+  "exclude_layer0": false,
+  "checkpoint": "/home/guorj/Skill_Efficient_VLA/functional_necessity/checkpoints/libero-db-cogact",
+  "seed": 7,
+  "n_episodes": 50,
+  "replan_step": {
+    "libero_spatial": 12,
+    "libero_object": 16,
+    "libero_goal": 16,
+    "libero_10": 15
+  },
+  "stopped_early": true,
+  "n_episodes_run": 237,
+  "result_recorded_as": 0.0
+}

@@ -1,0 +1,27 @@
+{
+  "methods": [
+    "cossim"
+  ],
+  "k": 8,
+  "drop": [
+    2,
+    4,
+    6,
+    7,
+    8,
+    9,
+    10,
+    19
+  ],
+  "operator": "identity_residual",
+  "exclude_layer0": false,
+  "checkpoint": "/home/guorj/Skill_Efficient_VLA/functional_necessity/checkpoints/libero-db-cogact",
+  "seed": 7,
+  "n_episodes": 50,
+  "replan_step": {
+    "libero_spatial": 12,
+    "libero_object": 16,
+    "libero_goal": 16,
+    "libero_10": 15
+  }
+}

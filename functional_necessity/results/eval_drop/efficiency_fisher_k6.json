@@ -1,0 +1,161 @@
+{
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "path": "official_prefix_cache_plus_expert_denoise",
+  "skip": "dtr_appendix_b_prefix_kv",
+  "llm_seq": 200,
+  "num_inference_steps": 10,
+  "warmup": 5,
+  "repeats": 20,
+  "baseline": {
+    "name": "baseline",
+    "drop_layers": [],
+    "n_drop": 0,
+    "params_stored_m": 4143.404816,
+    "params_active_m": 4143.404816,
+    "params_language_stored_m": 2508.531712,
+    "params_language_active_m": 2508.531712,
+    "params": {
+      "stored_params": 4143404816,
+      "active_params": 4143404816,
+      "skipped_language_compute_params": 0,
+      "language_stored_params": 2508531712,
+      "language_active_params": 2508531712,
+      "per_dropped_layer": []
+    },
+    "measured_gflops": 5024.398949376,
+    "predict_action_chunk_ms": 541.219921875,
+    "analytical": {
+      "llm_seq": 200,
+      "n_drop": 0,
+      "n_denoise": 10,
+      "prefix_language_gflops": 798.621696,
+      "denoise_expert_gflops": 329.859072,
+      "vision_gflops": 656.9,
+      "other_gflops": 3.6,
+      "total_gflops": 1788.980768,
+      "dropped_layer_full_gflops": 44.367872,
+      "dropped_layer_kept_kv_gflops": 0.4194304
+    }
+  },
+  "skipped": {
+    "name": "fisher_drop6",
+    "drop_layers": [
+      1,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "n_drop": 6,
+    "params_stored_m": 4143.404816,
+    "params_active_m": 3489.081104,
+    "params_language_stored_m": 2508.531712,
+    "params_language_active_m": 1854.208,
+    "params": {
+      "stored_params": 4143404816,
+      "active_params": 3489081104,
+      "skipped_language_compute_params": 654323712,
+      "language_stored_params": 2508531712,
+      "language_active_params": 1854208000,
+      "per_dropped_layer": [
+        {
+          "layer": 1,
+          "unused_numel": 109053952,
+          "unused": {
+            "q_proj": 4194304,
+            "o_proj": 4194304,
+            "mlp": 100663296,
+            "post_attention_layernorm": 2048
+          },
+          "kept_kv_ln_numel": 1050624
+        },
+        {
+          "layer": 13,
+          "unused_numel": 109053952,
+          "unused": {
+            "q_proj": 4194304,
+            "o_proj": 4194304,
+            "mlp": 100663296,
+            "post_attention_layernorm": 2048
+          },
+          "kept_kv_ln_numel": 1050624
+        },
+        {
+          "layer": 14,
+          "unused_numel": 109053952,
+          "unused": {
+            "q_proj": 4194304,
+            "o_proj": 4194304,
+            "mlp": 100663296,
+            "post_attention_layernorm": 2048
+          },
+          "kept_kv_ln_numel": 1050624
+        },
+        {
+          "layer": 15,
+          "unused_numel": 109053952,
+          "unused": {
+            "q_proj": 4194304,
+            "o_proj": 4194304,
+            "mlp": 100663296,
+            "post_attention_layernorm": 2048
+          },
+          "kept_kv_ln_numel": 1050624
+        },
+        {
+          "layer": 16,
+          "unused_numel": 109053952,
+          "unused": {
+            "q_proj": 4194304,
+            "o_proj": 4194304,
+            "mlp": 100663296,
+            "post_attention_layernorm": 2048
+          },
+          "kept_kv_ln_numel": 1050624
+        },
+        {
+          "layer": 17,
+          "unused_numel": 109053952,
+          "unused": {
+            "q_proj": 4194304,
+            "o_proj": 4194304,
+            "mlp": 100663296,
+            "post_attention_layernorm": 2048
+          },
+          "kept_kv_ln_numel": 1050624
+        }
+      ]
+    },
+    "measured_gflops": 3711.595428864,
+    "predict_action_chunk_ms": 521.185107421875,
+    "analytical": {
+      "llm_seq": 200,
+      "n_drop": 6,
+      "n_denoise": 10,
+      "prefix_language_gflops": 534.9310464,
+      "denoise_expert_gflops": 329.859072,
+      "vision_gflops": 656.9,
+      "other_gflops": 3.6,
+      "total_gflops": 1525.2901184,
+      "dropped_layer_full_gflops": 44.367872,
+      "dropped_layer_kept_kv_gflops": 0.4194304
+    }
+  },
+  "measured_flops_ratio": 0.7387143151371286,
+  "measured_time_ratio": 0.9629821193874084,
+  "measured_params_stored_ratio": 1.0,
+  "measured_params_active_ratio": 0.8420806701113801,
+  "measured_flops_speedup": 1.353703291663393,
+  "measured_time_speedup": 1.0384408805390282,
+  "delta_vs_baseline": {
+    "params_stored_m": 0.0,
+    "params_active_m": -654.3237120000003,
+    "params_stored_pct": 0.0,
+    "params_active_pct": -15.79193298886199,
+    "predict_action_chunk_ms": -20.03481445312491,
+    "predict_action_chunk_pct": -3.701788061259159,
+    "measured_gflops": -1312.803520512,
+    "measured_flops_pct": -26.12856848628714
+  }
+}

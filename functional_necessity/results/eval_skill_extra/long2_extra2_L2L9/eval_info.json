@@ -1,0 +1,68 @@
+{
+  "per_task": [
+    {
+      "task_group": "libero_10",
+      "task_id": 2,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    }
+  ],
+  "per_group": {
+    "libero_10": {
+      "avg_sum_reward": 0.9,
+      "avg_max_reward": 0.9,
+      "pc_success": 90.0,
+      "n_episodes": 10,
+      "video_paths": [],
+      "predicted_video_paths": []
+    }
+  },
+  "overall": {
+    "avg_sum_reward": 0.9,
+    "avg_max_reward": 0.9,
+    "pc_success": 90.0,
+    "n_episodes": 10,
+    "eval_s": 231.8309772014618,
+    "eval_ep_s": 23.183097815513612,
+    "video_paths": [],
+    "predicted_video_paths": []
+  }
+}

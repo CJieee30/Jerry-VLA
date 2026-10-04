@@ -1,0 +1,155 @@
+Task suite: libero_object
+Using default initial states
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 1...
+Success: True
+# episodes completed so far: 1
+# successes: 1 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 2...
+Success: True
+# episodes completed so far: 2
+# successes: 2 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 3...
+Success: True
+# episodes completed so far: 3
+# successes: 3 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 4...
+Success: True
+# episodes completed so far: 4
+# successes: 4 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 5...
+Success: True
+# episodes completed so far: 5
+# successes: 5 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 6...
+Success: True
+# episodes completed so far: 6
+# successes: 6 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 7...
+Success: True
+# episodes completed so far: 7
+# successes: 7 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 8...
+Success: True
+# episodes completed so far: 8
+# successes: 8 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 9...
+Success: True
+# episodes completed so far: 9
+# successes: 9 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 10...
+Success: True
+# episodes completed so far: 10
+# successes: 10 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 11...
+Success: True
+# episodes completed so far: 11
+# successes: 11 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 12...
+Success: True
+# episodes completed so far: 12
+# successes: 12 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 13...
+Success: True
+# episodes completed so far: 13
+# successes: 13 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 14...
+Success: True
+# episodes completed so far: 14
+# successes: 14 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 15...
+Success: True
+# episodes completed so far: 15
+# successes: 15 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 16...
+Success: True
+# episodes completed so far: 16
+# successes: 16 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 17...
+Success: True
+# episodes completed so far: 17
+# successes: 17 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 18...
+Success: True
+# episodes completed so far: 18
+# successes: 18 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 19...
+Success: True
+# episodes completed so far: 19
+# successes: 19 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 20...
+Success: True
+# episodes completed so far: 20
+# successes: 20 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 21...
+Success: True
+# episodes completed so far: 21
+# successes: 21 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 22...
+Success: True
+# episodes completed so far: 22
+# successes: 22 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 23...
+Success: True
+# episodes completed so far: 23
+# successes: 23 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 24...
+Success: True
+# episodes completed so far: 24
+# successes: 24 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 25...
+Success: True
+# episodes completed so far: 25
+# successes: 25 (100.0%)
+
+Task: pick up the alphabet soup and place it in the basket
+Starting episode 26...

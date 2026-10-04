@@ -1,0 +1,153 @@
+{
+  "checkpoint": "lerobot/smolvla_libero",
+  "device": "NVIDIA GeForce RTX 3090",
+  "compile_model": false,
+  "n_action_steps": 10,
+  "chunk_size": 50,
+  "num_inference_steps": 10,
+  "skip": "keep_kv_identity_residual",
+  "drop": [
+    12,
+    13,
+    14,
+    15
+  ],
+  "n_vlm_layers": 16,
+  "prefix_seq": 177,
+  "language_token_seq": 48,
+  "n_image_views": 2,
+  "vision_tokens_per_view": 64,
+  "vision_tokens_total": 128,
+  "warmup": 5,
+  "repeats": 20,
+  "params_m": {
+    "vision": 98.229504,
+    "language": 204.62688,
+    "action": 99.849312,
+    "stored_total": 450.046176
+  },
+  "flops_g": {
+    "vision": 430.637580288,
+    "language": 57.60423936,
+    "action": 110.190336,
+    "sum_modules": 598.432155648,
+    "full_chunk": 598.432217088
+  },
+  "inference_ms": {
+    "vision": 22.191346740722658,
+    "language": 45.373345947265626,
+    "action": 415.836962890625,
+    "sum_modules": 483.40165557861326,
+    "full_chunk": 493.171923828125
+  },
+  "baseline": {
+    "drop": [],
+    "params_stored_m": 450.046176,
+    "params_active_m": 450.046176,
+    "params_language_stored_m": 204.62688,
+    "params_language_active_m": 204.62688,
+    "measured_gflops": 598.432217088,
+    "predict_action_chunk_ms": 493.171923828125,
+    "language_flops_g": 57.60423936,
+    "language_ms": 45.373345947265626
+  },
+  "taylor_drop4": {
+    "drop": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "params": {
+      "stored_params": 450046176,
+      "active_params": 416864736,
+      "skipped_language_compute_params": 33181440,
+      "language_stored_params": 204626880,
+      "language_active_params": 171445440,
+      "per_dropped_layer": [
+        {
+          "layer": 12,
+          "unused_numel": 8295360,
+          "unused": {
+            "o_proj": 921600,
+            "mlp": 7372800,
+            "post_attention_layernorm": 960
+          },
+          "kept_kv_ln_numel": 1536960
+        },
+        {
+          "layer": 13,
+          "unused_numel": 8295360,
+          "unused": {
+            "o_proj": 921600,
+            "mlp": 7372800,
+            "post_attention_layernorm": 960
+          },
+          "kept_kv_ln_numel": 1536960
+        },
+        {
+          "layer": 14,
+          "unused_numel": 8295360,
+          "unused": {
+            "o_proj": 921600,
+            "mlp": 7372800,
+            "post_attention_layernorm": 960
+          },
+          "kept_kv_ln_numel": 1536960
+        },
+        {
+          "layer": 15,
+          "unused_numel": 8295360,
+          "unused": {
+            "o_proj": 921600,
+            "mlp": 7372800,
+            "post_attention_layernorm": 960
+          },
+          "kept_kv_ln_numel": 1536960
+        }
+      ]
+    },
+    "params_stored_m": 450.046176,
+    "params_active_m": 416.864736,
+    "params_language_stored_m": 204.62688,
+    "params_language_active_m": 171.44544,
+    "measured_gflops": 586.687346688,
+    "predict_action_chunk_ms": 485.097119140625,
+    "language_flops_g": 45.85936896,
+    "language_ms": 41.64427795410156
+  },
+  "delta_full": {
+    "params_active_m": {
+      "abs": -33.18144000000001,
+      "pct": -7.372896775818849
+    },
+    "predict_action_chunk_ms": {
+      "abs": -8.074804687499977,
+      "pct": -1.6373204347930659
+    },
+    "measured_gflops": {
+      "abs": -11.744870399999968,
+      "pct": -1.9626066352428473
+    }
+  },
+  "delta_language": {
+    "params_language_active_m": {
+      "abs": -33.18144000000001,
+      "pct": -16.215582234357484
+    },
+    "flops_g": {
+      "abs": -11.744870400000003,
+      "pct": -20.388899377005853
+    },
+    "inference_ms": {
+      "abs": -3.7290679931640653,
+      "pct": -8.218631258752907
+    }
+  },
+  "closed_loop": {
+    "setting": "Taylor Drop-4",
+    "avg": 78.5,
+    "delta_vs_anchor": -4.5,
+    "anchor": 83.0
+  }
+}

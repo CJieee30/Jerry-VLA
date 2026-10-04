@@ -1,0 +1,44 @@
+{
+  "name": "Long/place",
+  "suite": "Long",
+  "skill": "place",
+  "calib_seed": 45,
+  "n_calib_batches": 32,
+  "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_heldout_32x8_seed45/long_place.pt",
+  "baseline_loss": 0.2557290408294648,
+  "masks": {
+    "U_only": {
+      "extra": [],
+      "loss": 0.2557290408294648,
+      "delta": 0.0,
+      "seconds": 0.0
+    },
+    "L2_only": {
+      "extra": [
+        2
+      ],
+      "loss": 0.32956000813283026,
+      "delta": 0.07383096730336547,
+      "seconds": 15.742
+    },
+    "core_27": {
+      "extra": [
+        2,
+        7
+      ],
+      "loss": 0.43126777606084943,
+      "delta": 0.17553873523138463,
+      "seconds": 14.803
+    },
+    "core_28": {
+      "extra": [
+        2,
+        8
+      ],
+      "loss": 0.4513009996153414,
+      "delta": 0.19557195878587663,
+      "seconds": 14.781
+    }
+  },
+  "seconds": 62.021
+}

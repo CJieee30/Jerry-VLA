@@ -1,0 +1,21 @@
+{
+  "method": "ppl",
+  "k": 8,
+  "drop": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    23,
+    26,
+    29
+  ],
+  "suite": "libero_object",
+  "episodes": 500,
+  "successes": 364,
+  "rate": 0.728,
+  "seed": 7,
+  "skip": "llama_decoder_identity",
+  "log": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/openvla_oft_libero/drop8/eval/k8_ppl/libero_object/EVAL-libero_object-openvla-2026_09_24-14_38_48--k8-ppl.txt"
+}

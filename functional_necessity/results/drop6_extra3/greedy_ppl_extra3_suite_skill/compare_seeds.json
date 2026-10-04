@@ -1,0 +1,824 @@
+{
+  "global_greedy_extra3": [
+    2,
+    7,
+    11
+  ],
+  "goal5_excluded_from_goal_pick": true,
+  "skills_with_split_both_seeds": [
+    "pick",
+    "place",
+    "turn"
+  ],
+  "by_skill": {
+    "pick": {
+      "suites": [
+        {
+          "suite": "Spatial",
+          "extra_seed42": [
+            2,
+            7,
+            9
+          ],
+          "extra_seed43": [
+            2,
+            4,
+            9
+          ],
+          "same_across_seeds": false,
+          "differs_both_seeds": true,
+          "vs_global_seed42": {
+            "extra_drop": [
+              2,
+              7,
+              9
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2,
+              7
+            ],
+            "symdiff": [
+              9,
+              11
+            ],
+            "jaccard": 0.5,
+            "differs": true
+          },
+          "vs_global_seed43": {
+            "extra_drop": [
+              2,
+              4,
+              9
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2
+            ],
+            "symdiff": [
+              4,
+              7,
+              9,
+              11
+            ],
+            "jaccard": 0.2,
+            "differs": true
+          }
+        },
+        {
+          "suite": "Object",
+          "extra_seed42": [
+            2,
+            10,
+            11
+          ],
+          "extra_seed43": [
+            2,
+            9,
+            10
+          ],
+          "same_across_seeds": false,
+          "differs_both_seeds": true,
+          "vs_global_seed42": {
+            "extra_drop": [
+              2,
+              10,
+              11
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2,
+              11
+            ],
+            "symdiff": [
+              7,
+              10
+            ],
+            "jaccard": 0.5,
+            "differs": true
+          },
+          "vs_global_seed43": {
+            "extra_drop": [
+              2,
+              9,
+              10
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2
+            ],
+            "symdiff": [
+              7,
+              9,
+              10,
+              11
+            ],
+            "jaccard": 0.2,
+            "differs": true
+          }
+        },
+        {
+          "suite": "Goal",
+          "extra_seed42": [
+            2,
+            7,
+            11
+          ],
+          "extra_seed43": [
+            2,
+            10,
+            11
+          ],
+          "same_across_seeds": false,
+          "differs_both_seeds": false,
+          "vs_global_seed42": {
+            "extra_drop": [
+              2,
+              7,
+              11
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2,
+              7,
+              11
+            ],
+            "symdiff": [],
+            "jaccard": 1.0,
+            "differs": false
+          },
+          "vs_global_seed43": {
+            "extra_drop": [
+              2,
+              10,
+              11
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2,
+              11
+            ],
+            "symdiff": [
+              7,
+              10
+            ],
+            "jaccard": 0.5,
+            "differs": true
+          }
+        },
+        {
+          "suite": "Long",
+          "extra_seed42": [
+            2,
+            7,
+            11
+          ],
+          "extra_seed43": [
+            2,
+            7,
+            10
+          ],
+          "same_across_seeds": false,
+          "differs_both_seeds": false,
+          "vs_global_seed42": {
+            "extra_drop": [
+              2,
+              7,
+              11
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2,
+              7,
+              11
+            ],
+            "symdiff": [],
+            "jaccard": 1.0,
+            "differs": false
+          },
+          "vs_global_seed43": {
+            "extra_drop": [
+              2,
+              7,
+              10
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2,
+              7
+            ],
+            "symdiff": [
+              10,
+              11
+            ],
+            "jaccard": 0.5,
+            "differs": true
+          }
+        }
+      ],
+      "n_unique_seed42": 3,
+      "n_unique_seed43": 4,
+      "uniques_seed42": [
+        [
+          2,
+          7,
+          9
+        ],
+        [
+          2,
+          7,
+          11
+        ],
+        [
+          2,
+          10,
+          11
+        ]
+      ],
+      "uniques_seed43": [
+        [
+          2,
+          4,
+          9
+        ],
+        [
+          2,
+          7,
+          10
+        ],
+        [
+          2,
+          9,
+          10
+        ],
+        [
+          2,
+          10,
+          11
+        ]
+      ],
+      "split_both_seeds": true,
+      "suites_diff_global_both": [
+        "Spatial",
+        "Object"
+      ],
+      "pairwise": [
+        {
+          "a": "Spatial",
+          "b": "Object",
+          "same_seed42": false,
+          "same_seed43": false,
+          "stable_different": true
+        },
+        {
+          "a": "Spatial",
+          "b": "Goal",
+          "same_seed42": false,
+          "same_seed43": false,
+          "stable_different": true
+        },
+        {
+          "a": "Spatial",
+          "b": "Long",
+          "same_seed42": false,
+          "same_seed43": false,
+          "stable_different": true
+        },
+        {
+          "a": "Object",
+          "b": "Goal",
+          "same_seed42": false,
+          "same_seed43": false,
+          "stable_different": true
+        },
+        {
+          "a": "Object",
+          "b": "Long",
+          "same_seed42": false,
+          "same_seed43": false,
+          "stable_different": true
+        },
+        {
+          "a": "Goal",
+          "b": "Long",
+          "same_seed42": true,
+          "same_seed43": false,
+          "stable_different": false
+        }
+      ],
+      "n_stable_pairs": 5
+    },
+    "place": {
+      "suites": [
+        {
+          "suite": "Spatial",
+          "extra_seed42": [
+            2,
+            7,
+            8
+          ],
+          "extra_seed43": [
+            2,
+            7,
+            11
+          ],
+          "same_across_seeds": false,
+          "differs_both_seeds": false,
+          "vs_global_seed42": {
+            "extra_drop": [
+              2,
+              7,
+              8
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2,
+              7
+            ],
+            "symdiff": [
+              8,
+              11
+            ],
+            "jaccard": 0.5,
+            "differs": true
+          },
+          "vs_global_seed43": {
+            "extra_drop": [
+              2,
+              7,
+              11
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2,
+              7,
+              11
+            ],
+            "symdiff": [],
+            "jaccard": 1.0,
+            "differs": false
+          }
+        },
+        {
+          "suite": "Object",
+          "extra_seed42": [
+            2,
+            5,
+            8
+          ],
+          "extra_seed43": [
+            2,
+            8,
+            11
+          ],
+          "same_across_seeds": false,
+          "differs_both_seeds": true,
+          "vs_global_seed42": {
+            "extra_drop": [
+              2,
+              5,
+              8
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2
+            ],
+            "symdiff": [
+              5,
+              7,
+              8,
+              11
+            ],
+            "jaccard": 0.2,
+            "differs": true
+          },
+          "vs_global_seed43": {
+            "extra_drop": [
+              2,
+              8,
+              11
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2,
+              11
+            ],
+            "symdiff": [
+              7,
+              8
+            ],
+            "jaccard": 0.5,
+            "differs": true
+          }
+        },
+        {
+          "suite": "Goal",
+          "extra_seed42": [
+            2,
+            4,
+            11
+          ],
+          "extra_seed43": [
+            2,
+            7,
+            11
+          ],
+          "same_across_seeds": false,
+          "differs_both_seeds": false,
+          "vs_global_seed42": {
+            "extra_drop": [
+              2,
+              4,
+              11
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2,
+              11
+            ],
+            "symdiff": [
+              4,
+              7
+            ],
+            "jaccard": 0.5,
+            "differs": true
+          },
+          "vs_global_seed43": {
+            "extra_drop": [
+              2,
+              7,
+              11
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2,
+              7,
+              11
+            ],
+            "symdiff": [],
+            "jaccard": 1.0,
+            "differs": false
+          }
+        },
+        {
+          "suite": "Long",
+          "extra_seed42": [
+            2,
+            7,
+            10
+          ],
+          "extra_seed43": [
+            2,
+            7,
+            11
+          ],
+          "same_across_seeds": false,
+          "differs_both_seeds": false,
+          "vs_global_seed42": {
+            "extra_drop": [
+              2,
+              7,
+              10
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2,
+              7
+            ],
+            "symdiff": [
+              10,
+              11
+            ],
+            "jaccard": 0.5,
+            "differs": true
+          },
+          "vs_global_seed43": {
+            "extra_drop": [
+              2,
+              7,
+              11
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2,
+              7,
+              11
+            ],
+            "symdiff": [],
+            "jaccard": 1.0,
+            "differs": false
+          }
+        }
+      ],
+      "n_unique_seed42": 4,
+      "n_unique_seed43": 2,
+      "uniques_seed42": [
+        [
+          2,
+          4,
+          11
+        ],
+        [
+          2,
+          5,
+          8
+        ],
+        [
+          2,
+          7,
+          8
+        ],
+        [
+          2,
+          7,
+          10
+        ]
+      ],
+      "uniques_seed43": [
+        [
+          2,
+          7,
+          11
+        ],
+        [
+          2,
+          8,
+          11
+        ]
+      ],
+      "split_both_seeds": true,
+      "suites_diff_global_both": [
+        "Object"
+      ],
+      "pairwise": [
+        {
+          "a": "Spatial",
+          "b": "Object",
+          "same_seed42": false,
+          "same_seed43": false,
+          "stable_different": true
+        },
+        {
+          "a": "Spatial",
+          "b": "Goal",
+          "same_seed42": false,
+          "same_seed43": true,
+          "stable_different": false
+        },
+        {
+          "a": "Spatial",
+          "b": "Long",
+          "same_seed42": false,
+          "same_seed43": true,
+          "stable_different": false
+        },
+        {
+          "a": "Object",
+          "b": "Goal",
+          "same_seed42": false,
+          "same_seed43": false,
+          "stable_different": true
+        },
+        {
+          "a": "Object",
+          "b": "Long",
+          "same_seed42": false,
+          "same_seed43": false,
+          "stable_different": true
+        },
+        {
+          "a": "Goal",
+          "b": "Long",
+          "same_seed42": false,
+          "same_seed43": true,
+          "stable_different": false
+        }
+      ],
+      "n_stable_pairs": 3
+    },
+    "turn": {
+      "suites": [
+        {
+          "suite": "Goal",
+          "extra_seed42": [
+            2,
+            7,
+            11
+          ],
+          "extra_seed43": [
+            2,
+            7,
+            10
+          ],
+          "same_across_seeds": false,
+          "differs_both_seeds": false,
+          "vs_global_seed42": {
+            "extra_drop": [
+              2,
+              7,
+              11
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2,
+              7,
+              11
+            ],
+            "symdiff": [],
+            "jaccard": 1.0,
+            "differs": false
+          },
+          "vs_global_seed43": {
+            "extra_drop": [
+              2,
+              7,
+              10
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2,
+              7
+            ],
+            "symdiff": [
+              10,
+              11
+            ],
+            "jaccard": 0.5,
+            "differs": true
+          }
+        },
+        {
+          "suite": "Long",
+          "extra_seed42": [
+            2,
+            7,
+            9
+          ],
+          "extra_seed43": [
+            2,
+            9,
+            11
+          ],
+          "same_across_seeds": false,
+          "differs_both_seeds": true,
+          "vs_global_seed42": {
+            "extra_drop": [
+              2,
+              7,
+              9
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2,
+              7
+            ],
+            "symdiff": [
+              9,
+              11
+            ],
+            "jaccard": 0.5,
+            "differs": true
+          },
+          "vs_global_seed43": {
+            "extra_drop": [
+              2,
+              9,
+              11
+            ],
+            "global_greedy_extra3": [
+              2,
+              7,
+              11
+            ],
+            "intersection": [
+              2,
+              11
+            ],
+            "symdiff": [
+              7,
+              9
+            ],
+            "jaccard": 0.5,
+            "differs": true
+          }
+        }
+      ],
+      "n_unique_seed42": 2,
+      "n_unique_seed43": 2,
+      "uniques_seed42": [
+        [
+          2,
+          7,
+          9
+        ],
+        [
+          2,
+          7,
+          11
+        ]
+      ],
+      "uniques_seed43": [
+        [
+          2,
+          7,
+          10
+        ],
+        [
+          2,
+          9,
+          11
+        ]
+      ],
+      "split_both_seeds": true,
+      "suites_diff_global_both": [
+        "Long"
+      ],
+      "pairwise": [
+        {
+          "a": "Goal",
+          "b": "Long",
+          "same_seed42": false,
+          "same_seed43": false,
+          "stable_different": true
+        }
+      ],
+      "n_stable_pairs": 1
+    }
+  }
+}

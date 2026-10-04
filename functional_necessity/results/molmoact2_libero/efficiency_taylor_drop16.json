@@ -1,0 +1,281 @@
+{
+  "checkpoint": "/home/guorj/Skill_Efficient_VLA/functional_necessity/checkpoints/MolmoAct2-LIBERO-LeRobot",
+  "device": "NVIDIA GeForce RTX 3090",
+  "compile_model": false,
+  "enable_inference_cuda_graph": false,
+  "n_action_steps": 10,
+  "chunk_size": 10,
+  "num_inference_steps": 10,
+  "skip": "keep_kv_identity_residual",
+  "drop": [
+    1,
+    2,
+    3,
+    4,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35
+  ],
+  "n_vlm_layers": 36,
+  "prefix_seq": 505,
+  "n_image_views": 2,
+  "vision_tokens_per_view": 196,
+  "vision_tokens_total": 392,
+  "warmup": 5,
+  "repeats": 20,
+  "params_m": {
+    "vision": 439.117264,
+    "language": 4029.677056,
+    "action": 577.564448,
+    "stored_total": 5442.196208
+  },
+  "flops_g": {
+    "vision": 1291.181775872,
+    "language": 3820.068864,
+    "action": 82.1465088,
+    "sum_modules": 5193.397148672,
+    "full_chunk": 5250.586483712
+  },
+  "inference_ms": {
+    "vision": 38.44367370605469,
+    "language": 81.3228515625,
+    "action": 1019.740234375,
+    "sum_modules": 1139.5067596435547,
+    "full_chunk": 1170.85673828125
+  },
+  "baseline": {
+    "drop": [],
+    "params_stored_m": 5442.196208,
+    "params_active_m": 5442.196208,
+    "params_language_stored_m": 4029.677056,
+    "params_language_active_m": 4029.677056,
+    "measured_gflops": 5250.586483712,
+    "predict_action_chunk_ms": 1170.85673828125,
+    "language_flops_g": 3820.068864,
+    "language_ms": 81.3228515625
+  },
+  "taylor_drop16": {
+    "drop": [
+      1,
+      2,
+      3,
+      4,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "params": {
+      "stored_params": 5442196208,
+      "active_params": 4246778608,
+      "skipped_language_compute_params": 1195417600,
+      "language_stored_params": 4029677056,
+      "language_active_params": 2834259456,
+      "per_dropped_layer": [
+        {
+          "layer": 1,
+          "unused_numel": 74713600,
+          "unused": {
+            "mlp": 74711040,
+            "ff_norm": 2560
+          },
+          "kept_attn_numel": 26217216
+        },
+        {
+          "layer": 2,
+          "unused_numel": 74713600,
+          "unused": {
+            "mlp": 74711040,
+            "ff_norm": 2560
+          },
+          "kept_attn_numel": 26217216
+        },
+        {
+          "layer": 3,
+          "unused_numel": 74713600,
+          "unused": {
+            "mlp": 74711040,
+            "ff_norm": 2560
+          },
+          "kept_attn_numel": 26217216
+        },
+        {
+          "layer": 4,
+          "unused_numel": 74713600,
+          "unused": {
+            "mlp": 74711040,
+            "ff_norm": 2560
+          },
+          "kept_attn_numel": 26217216
+        },
+        {
+          "layer": 24,
+          "unused_numel": 74713600,
+          "unused": {
+            "mlp": 74711040,
+            "ff_norm": 2560
+          },
+          "kept_attn_numel": 26217216
+        },
+        {
+          "layer": 25,
+          "unused_numel": 74713600,
+          "unused": {
+            "mlp": 74711040,
+            "ff_norm": 2560
+          },
+          "kept_attn_numel": 26217216
+        },
+        {
+          "layer": 26,
+          "unused_numel": 74713600,
+          "unused": {
+            "mlp": 74711040,
+            "ff_norm": 2560
+          },
+          "kept_attn_numel": 26217216
+        },
+        {
+          "layer": 27,
+          "unused_numel": 74713600,
+          "unused": {
+            "mlp": 74711040,
+            "ff_norm": 2560
+          },
+          "kept_attn_numel": 26217216
+        },
+        {
+          "layer": 28,
+          "unused_numel": 74713600,
+          "unused": {
+            "mlp": 74711040,
+            "ff_norm": 2560
+          },
+          "kept_attn_numel": 26217216
+        },
+        {
+          "layer": 29,
+          "unused_numel": 74713600,
+          "unused": {
+            "mlp": 74711040,
+            "ff_norm": 2560
+          },
+          "kept_attn_numel": 26217216
+        },
+        {
+          "layer": 30,
+          "unused_numel": 74713600,
+          "unused": {
+            "mlp": 74711040,
+            "ff_norm": 2560
+          },
+          "kept_attn_numel": 26217216
+        },
+        {
+          "layer": 31,
+          "unused_numel": 74713600,
+          "unused": {
+            "mlp": 74711040,
+            "ff_norm": 2560
+          },
+          "kept_attn_numel": 26217216
+        },
+        {
+          "layer": 32,
+          "unused_numel": 74713600,
+          "unused": {
+            "mlp": 74711040,
+            "ff_norm": 2560
+          },
+          "kept_attn_numel": 26217216
+        },
+        {
+          "layer": 33,
+          "unused_numel": 74713600,
+          "unused": {
+            "mlp": 74711040,
+            "ff_norm": 2560
+          },
+          "kept_attn_numel": 26217216
+        },
+        {
+          "layer": 34,
+          "unused_numel": 74713600,
+          "unused": {
+            "mlp": 74711040,
+            "ff_norm": 2560
+          },
+          "kept_attn_numel": 26217216
+        },
+        {
+          "layer": 35,
+          "unused_numel": 74713600,
+          "unused": {
+            "mlp": 74711040,
+            "ff_norm": 2560
+          },
+          "kept_attn_numel": 26217216
+        }
+      ]
+    },
+    "params_stored_m": 5442.196208,
+    "params_active_m": 4246.778608,
+    "params_language_stored_m": 4029.677056,
+    "params_language_active_m": 2834.259456,
+    "measured_gflops": 4043.256077312,
+    "predict_action_chunk_ms": 1158.75947265625,
+    "language_flops_g": 2612.7384576,
+    "language_ms": 68.2951171875
+  },
+  "delta_full": {
+    "params_active_m": {
+      "abs": -1195.4176000000007,
+      "pct": -21.965720350963146
+    },
+    "predict_action_chunk_ms": {
+      "abs": -12.097265625000091,
+      "pct": -1.033197762756033
+    },
+    "measured_gflops": {
+      "abs": -1207.3304064,
+      "pct": -22.994200936320077
+    }
+  },
+  "delta_language": {
+    "params_language_active_m": {
+      "abs": -1195.4176000000002,
+      "pct": -29.66534497398692
+    },
+    "flops_g": {
+      "abs": -1207.3304064,
+      "pct": -31.604938271604933
+    },
+    "inference_ms": {
+      "abs": -13.027734375000009,
+      "pct": -16.01977073441362
+    }
+  },
+  "closed_loop": {
+    "setting": "Taylor Drop-16 no L0",
+    "avg": 98.1,
+    "delta_vs_anchor": 0.6,
+    "anchor": 97.5
+  }
+}

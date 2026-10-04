@@ -1,0 +1,21 @@
+{
+  "method": "cossim",
+  "k": 8,
+  "drop": [
+    3,
+    4,
+    5,
+    6,
+    19,
+    20,
+    23,
+    28
+  ],
+  "suite": "libero_goal",
+  "episodes": 500,
+  "successes": 195,
+  "rate": 0.39,
+  "seed": 7,
+  "skip": "llama_decoder_identity",
+  "log": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/openvla_oft_libero/drop8/eval/k8_cossim/libero_goal/EVAL-libero_goal-openvla-2026_09_23-18_47_04--k8-cossim.txt"
+}

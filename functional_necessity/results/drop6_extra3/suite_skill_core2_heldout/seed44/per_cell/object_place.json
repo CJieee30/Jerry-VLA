@@ -1,0 +1,44 @@
+{
+  "name": "Object/place",
+  "suite": "Object",
+  "skill": "place",
+  "calib_seed": 44,
+  "n_calib_batches": 32,
+  "calib_file": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/suite_skill_heldout_32x8_seed44/object_place.pt",
+  "baseline_loss": 0.28071713843382895,
+  "masks": {
+    "U_only": {
+      "extra": [],
+      "loss": 0.28071713843382895,
+      "delta": 0.0,
+      "seconds": 0.0
+    },
+    "L2_only": {
+      "extra": [
+        2
+      ],
+      "loss": 0.3620636682026088,
+      "delta": 0.08134652976877987,
+      "seconds": 15.877
+    },
+    "core_27": {
+      "extra": [
+        2,
+        7
+      ],
+      "loss": 0.43109525088220835,
+      "delta": 0.1503781124483794,
+      "seconds": 14.945
+    },
+    "core_28": {
+      "extra": [
+        2,
+        8
+      ],
+      "loss": 0.429375845938921,
+      "delta": 0.14865870750509202,
+      "seconds": 14.951
+    }
+  },
+  "seconds": 62.638
+}
