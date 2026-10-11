@@ -1,0 +1,61 @@
+{
+  "tag": "l5",
+  "methods": [
+    "l5"
+  ],
+  "checkpoint": "s1ghhh/VLADrop_pi05_LIBERO_Drop9Block_GateProbe",
+  "stage1_drop": [
+    7,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "extra_drop": [
+    5
+  ],
+  "keep": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    6,
+    8,
+    9
+  ],
+  "union_drop": [
+    5,
+    7,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "protocol": {
+    "n_trials_per_task": 10,
+    "seed": 7,
+    "suites": [
+      "libero_spatial",
+      "libero_object",
+      "libero_goal",
+      "libero_10"
+    ],
+    "replan_steps": 5,
+    "action_horizon": 10,
+    "num_steps_wait": 10,
+    "resize": 224,
+    "env_resolution": 256,
+    "recovery": false,
+    "backend": "openpi_serve_libero_client",
+    "config": "pi05_libero_dropped"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "stack": "smolvla",
+  "method": "taylor",
+  "shape": [
+    480,
+    16
+  ]
+}

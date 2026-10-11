@@ -1,0 +1,61 @@
+{
+  "suite": "libero_goal",
+  "successes": 3,
+  "episodes": 100,
+  "sr": 0.03,
+  "pc_success": 3.0,
+  "per_task": [
+    {
+      "task": "open the middle drawer of the cabinet",
+      "successes": 0,
+      "episodes": 10
+    },
+    {
+      "task": "put the bowl on the stove",
+      "successes": 1,
+      "episodes": 10
+    },
+    {
+      "task": "put the wine bottle on top of the cabinet",
+      "successes": 0,
+      "episodes": 10
+    },
+    {
+      "task": "open the top drawer and put the bowl inside",
+      "successes": 0,
+      "episodes": 10
+    },
+    {
+      "task": "put the bowl on top of the cabinet",
+      "successes": 0,
+      "episodes": 10
+    },
+    {
+      "task": "push the plate to the front of the stove",
+      "successes": 0,
+      "episodes": 10
+    },
+    {
+      "task": "put the cream cheese in the bowl",
+      "successes": 0,
+      "episodes": 10
+    },
+    {
+      "task": "turn on the stove",
+      "successes": 0,
+      "episodes": 10
+    },
+    {
+      "task": "put the bowl on the plate",
+      "successes": 2,
+      "episodes": 10
+    },
+    {
+      "task": "put the wine bottle on the rack",
+      "successes": 0,
+      "episodes": 10
+    }
+  ],
+  "seed": 7,
+  "num_trials": 10
+}

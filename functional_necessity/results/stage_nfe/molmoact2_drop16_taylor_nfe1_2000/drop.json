@@ -1,0 +1,28 @@
+{
+  "methods": [
+    "taylor_nfe1"
+  ],
+  "k": 16,
+  "drop": [
+    1,
+    2,
+    3,
+    4,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35
+  ],
+  "operator": "keep_kv_identity_residual",
+  "num_inference_steps": 1,
+  "n_episodes_per_task": 50,
+  "tag": "molmoact2_drop16_taylor_nfe1_2000"
+}

@@ -1,0 +1,41 @@
+{
+  "drop6_nol0": [
+    2,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "stage1_drop6_nol0": [
+    2,
+    4,
+    14,
+    15,
+    16,
+    17
+  ],
+  "jaccard_drop6": 0.7142857142857143,
+  "aggregation": "orig_batch_weighted_mean_signed_then_abs; 4x mb=2; 64 batches equal-weighted",
+  "drop8_nol0": [
+    2,
+    4,
+    9,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "stage1_drop8_nol0": [
+    2,
+    4,
+    10,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "jaccard_drop8": 0.7777777777777778
+}

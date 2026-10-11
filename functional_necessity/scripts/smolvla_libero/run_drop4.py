@@ -49,6 +49,10 @@ DROP4 = {
     "igia": [10, 12, 14, 15],
     "gateprobe": [7, 13, 14, 15],
     "hessian": [8, 10, 12, 14],
+    # Stage-2 action-discontinuity weighted Fisher; not the Stage-1 set.
+    "fisher_action_discontinuity": [10, 12, 13, 14],
+    # Same layers as Stage-1 Fisher Drop-4; new output dir so the 69.25 run is not overwritten.
+    "fisher_reval": [10, 11, 12, 14],
 }
 
 # Native Drop-3. Fisher equals IGIA at k=3, so the IGIA run covers both.

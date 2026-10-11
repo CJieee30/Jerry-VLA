@@ -1,0 +1,16 @@
+{
+  "name": "LEDGE v2 (tolerance crossing)",
+  "fixed_before_drift_was_computed": true,
+  "metric": "r(D) = mean over inference-noise seeds j of the CARE 7-d weighted mean over frames of ||a_D(eps_j) - a_full(eps_j)||_2, first 10 executed steps, all action dims",
+  "yardstick": "sigma_self = mean over seed pairs (j<l) of the CARE 7-d weighted mean over frames of ||a_full(eps_j) - a_full(eps_l)||_2, same steps and dims",
+  "rule": "D is predicted safe iff r(D) <= c * sigma_self; along an order, k_safe = (first k with r(prefix_k) > c * sigma_self) - 1",
+  "c": 1.0,
+  "seeds": {"pi05": 2, "molmoact2": 4, "smolvla": 4},
+  "sr_pass_label": "closed-loop SR >= anchor - 5 points (pi05 92.25, molmoact2 92.50, smolvla 78.00)",
+  "primary_test": "ROC-AUC of r(D) for separating fail from pass over all known no-L0 drop sets of a model",
+  "secondary_tests": [
+    "accuracy of the c = 1 rule on the same sets",
+    "predicted vs observed k_safe along every order with known SR at two or more k"
+  ],
+  "not_tuned_on_sr": ["c", "seeds", "pass label", "action steps", "weights"]
+}

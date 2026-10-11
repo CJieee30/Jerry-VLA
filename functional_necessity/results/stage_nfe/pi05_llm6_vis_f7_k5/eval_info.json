@@ -1,0 +1,1808 @@
+{
+  "per_task": [
+    {
+      "task_group": "libero_spatial",
+      "task_id": 0,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_spatial",
+      "task_id": 1,
+      "metrics": {
+        "sum_rewards": [
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_spatial",
+      "task_id": 2,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_spatial",
+      "task_id": 3,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_spatial",
+      "task_id": 4,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_spatial",
+      "task_id": 5,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          false,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true,
+          false,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_spatial",
+      "task_id": 6,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_spatial",
+      "task_id": 7,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_spatial",
+      "task_id": 8,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_spatial",
+      "task_id": 9,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_object",
+      "task_id": 0,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_object",
+      "task_id": 1,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_object",
+      "task_id": 2,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_object",
+      "task_id": 3,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_object",
+      "task_id": 4,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_object",
+      "task_id": 5,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_object",
+      "task_id": 6,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_object",
+      "task_id": 7,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_object",
+      "task_id": 8,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_object",
+      "task_id": 9,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_goal",
+      "task_id": 0,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_goal",
+      "task_id": 1,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_goal",
+      "task_id": 2,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_goal",
+      "task_id": 3,
+      "metrics": {
+        "sum_rewards": [
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "max_rewards": [
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "successes": [
+          false,
+          true,
+          true,
+          true,
+          false,
+          false,
+          true,
+          true,
+          true,
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_goal",
+      "task_id": 4,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_goal",
+      "task_id": 5,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_goal",
+      "task_id": 6,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_goal",
+      "task_id": 7,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_goal",
+      "task_id": 8,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_goal",
+      "task_id": 9,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 0,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 2,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 3,
+      "metrics": {
+        "sum_rewards": [
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 4,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 5,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 6,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 7,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          true,
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 8,
+      "metrics": {
+        "sum_rewards": [
+          1.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "max_rewards": [
+          1.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "successes": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          true,
+          true,
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 9,
+      "metrics": {
+        "sum_rewards": [
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "max_rewards": [
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "successes": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          true,
+          false,
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    }
+  ],
+  "per_group": {
+    "libero_spatial": {
+      "avg_sum_reward": 0.95,
+      "avg_max_reward": 0.95,
+      "pc_success": 95.0,
+      "n_episodes": 100,
+      "video_paths": [],
+      "predicted_video_paths": []
+    },
+    "libero_object": {
+      "avg_sum_reward": 1.0,
+      "avg_max_reward": 1.0,
+      "pc_success": 100.0,
+      "n_episodes": 100,
+      "video_paths": [],
+      "predicted_video_paths": []
+    },
+    "libero_goal": {
+      "avg_sum_reward": 0.93,
+      "avg_max_reward": 0.93,
+      "pc_success": 93.0,
+      "n_episodes": 100,
+      "video_paths": [],
+      "predicted_video_paths": []
+    },
+    "libero_10": {
+      "avg_sum_reward": 0.88,
+      "avg_max_reward": 0.88,
+      "pc_success": 88.0,
+      "n_episodes": 100,
+      "video_paths": [],
+      "predicted_video_paths": []
+    }
+  },
+  "overall": {
+    "avg_sum_reward": 0.94,
+    "avg_max_reward": 0.94,
+    "pc_success": 94.0,
+    "n_episodes": 400,
+    "eval_s": 8729.190933942795,
+    "eval_ep_s": 21.822977337241174,
+    "video_paths": [],
+    "predicted_video_paths": []
+  }
+}

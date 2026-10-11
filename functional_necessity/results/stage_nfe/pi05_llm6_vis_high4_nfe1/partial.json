@@ -1,0 +1,24 @@
+{
+  "tag": "pi05_llm6_vis_high4_nfe1",
+  "status": "killed_after_collapse",
+  "exit": 143,
+  "nfe": 1,
+  "language_drop": [1, 13, 14, 15, 16, 17],
+  "vision_drop": [0, 26, 2, 25],
+  "finished_tasks": {
+    "libero_spatial": {"n": 10, "pc_success": 1.0},
+    "libero_object": {"n": 10, "pc_success": 0.0},
+    "libero_goal": {"n": 4, "pc_success": 0.0}
+  },
+  "remaining_scored_as_zero": {
+    "libero_goal_tasks_left": 6,
+    "libero_10": 10
+  },
+  "suites_with_remainder_zero": {
+    "spatial": 1.0,
+    "object": 0.0,
+    "goal": 0.0,
+    "long": 0.0,
+    "avg": 0.25
+  }
+}

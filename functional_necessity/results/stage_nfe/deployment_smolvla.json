@@ -1,0 +1,53 @@
+{
+ "stack": "smolvla",
+ "drop": [
+  12,
+  13,
+  14,
+  15
+ ],
+ "tf32": false,
+ "full_load": {
+  "allocated_mib": 884.8,
+  "reserved_mib": 908.0
+ },
+ "eager_full": {
+  "nfe10_ms": 548.133154296875,
+  "nfe2_ms": 169.84473876953126,
+  "peak": {
+   "peak_allocated_mib": 920.3,
+   "peak_reserved_mib": 958.0
+  }
+ },
+ "compile_full": {
+  "ok": true,
+  "ms": 22.25718994140625,
+  "action_max_abs": 0.02210402488708496
+ },
+ "materialize": {
+  "params_before": 450046176,
+  "params_after": 413178336,
+  "freed": 36867840,
+  "freed_mib": 70.3
+ },
+ "action_vs_kvonly": {
+  "nfe2": 0.0
+ },
+ "pruned_load": {
+  "allocated_mib": 824.1,
+  "reserved_mib": 1056.0
+ },
+ "eager_pruned": {
+  "nfe10_ms": 542.13203125,
+  "nfe2_ms": 170.954638671875,
+  "peak": {
+   "peak_allocated_mib": 850.7,
+   "peak_reserved_mib": 1056.0
+  }
+ },
+ "compile_pruned": {
+  "ok": true,
+  "ms": 22.050918579101562,
+  "action_max_abs": 0.026430249214172363
+ }
+}

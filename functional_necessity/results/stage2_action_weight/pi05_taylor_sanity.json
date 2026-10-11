@@ -1,0 +1,7 @@
+{
+  "layer0_taylor_weighted_alpha1": 10.144543379545212,
+  "layer0_taylor_stage1_mb": 10.144543379545212,
+  "rel_abs_diff": 0.0,
+  "ok": true,
+  "forwards": "4 x batch=2 on both paths"
+}

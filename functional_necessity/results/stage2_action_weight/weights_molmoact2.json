@@ -1,0 +1,46 @@
+{
+  "stack": "molmoact2",
+  "horizon": 10,
+  "tensor": "loss keeps the stored 1-step (1,1,32) action; weights use the same preprocessor (masked normalizer + clamp, no PackInputs) on the next 10 frames of the same episode",
+  "stats7": {
+    "n": 32,
+    "n_filled": 0,
+    "median_raw": 0.09535505250096321,
+    "mean_raw": 0.12853331954102032,
+    "quantiles_raw": [
+      0.01518103014677763,
+      0.08348436467349529,
+      0.09535505250096321,
+      0.16019124537706375,
+      0.250850297510624,
+      0.3938153386116028
+    ],
+    "ess": 23.304766353587517,
+    "cv": 0.6108270364053054,
+    "weight_mean": 0.9999999999999999,
+    "weight_min": 0.11810968705225677,
+    "weight_max": 3.0639163449436935
+  },
+  "stats6": {
+    "n": 32,
+    "n_filled": 0,
+    "median_raw": 0.09438441321253777,
+    "mean_raw": 0.10870804285514168,
+    "quantiles_raw": [
+      0.01518103014677763,
+      0.06386264506727457,
+      0.09438441321253777,
+      0.1391010396182537,
+      0.19144398868083956,
+      0.25504788756370544
+    ],
+    "ess": 25.061145711918897,
+    "cv": 0.5261910089749487,
+    "weight_mean": 1.0,
+    "weight_min": 0.13964955810129917,
+    "weight_max": 2.3461731153008443
+  },
+  "spearman_7_vs_6": 0.7005131964809385,
+  "use_7d_on_gpu": false,
+  "first_step_max_abs_diff_max": 0.0
+}

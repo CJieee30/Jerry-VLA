@@ -1,0 +1,18 @@
+{
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "module": "siglip",
+  "method": "fisher",
+  "k": 4,
+  "drop": [
+    21,
+    22,
+    20,
+    17
+  ],
+  "operator": "identity_residual",
+  "language_drop": [],
+  "num_inference_steps": 10,
+  "n_action_steps": 10,
+  "n_episodes_per_task": 10,
+  "seed": 1000
+}

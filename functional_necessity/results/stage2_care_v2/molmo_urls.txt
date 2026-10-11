@@ -1,0 +1,165 @@
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-014.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-014.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-019.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-019.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-022.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-022.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-027.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-027.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-029.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-029.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-035.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-035.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-039.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-039.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-043.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-043.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-051.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-051.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-053.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-053.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-056.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-056.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-062.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-062.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-065.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-065.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-071.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-071.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-079.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-079.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-081.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-081.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-090.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-090.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-099.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-099.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-117.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-117.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-123.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-123.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-133.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-133.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-143.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-143.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-151.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-151.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-158.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-158.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-163.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-163.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-166.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-166.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-177.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-177.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-179.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-179.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-185.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-185.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-188.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-188.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-190.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-190.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-199.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-199.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-209.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-209.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-219.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-219.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-225.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-225.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-229.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-229.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-234.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-234.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-237.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-237.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-240.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-240.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-243.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-243.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-247.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-247.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-271.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-271.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-274.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-274.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-295.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-295.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-317.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-317.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-319.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-319.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-322.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-322.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-325.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-325.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-331.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-331.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-333.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-333.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-340.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-340.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-347.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-347.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-352.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-352.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-364.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-364.parquet
+https://hf-mirror.com/datasets/allenai/MolmoAct2-LIBERO-Dataset/resolve/main/data/chunk-000/file-370.parquet
+  dir=/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/molmo_root/data/chunk-000
+  out=file-370.parquet

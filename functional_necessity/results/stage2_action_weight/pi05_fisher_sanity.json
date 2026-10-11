@@ -1,0 +1,7 @@
+{
+  "layer0_fisher_weighted_alpha1": 0.00012143729006197646,
+  "layer0_fisher_orig_batch_mb": 0.00012143729006197646,
+  "rel_abs_diff": 0.0,
+  "ok": true,
+  "forwards": "4 x batch=2 on both paths"
+}

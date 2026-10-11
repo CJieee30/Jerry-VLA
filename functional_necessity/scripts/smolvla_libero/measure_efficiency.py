@@ -60,7 +60,7 @@ def _flops(fn) -> int:
 
 
 def count_params(policy, drop: list[int]) -> dict:
-    """Stored vs active: dropped VLM layer keeps input LN + Q/K/V; skips o_proj + MLP + post LN."""
+    """Stored vs active. Dropped VLM layers run input LN + K/V only, not Q/o_proj/MLP."""
     stored = _nparams(policy)
     blocks, _ = vlm_blocks(policy)
     text = policy.model.vlm_with_expert.get_vlm_model().text_model
@@ -70,13 +70,13 @@ def count_params(policy, drop: list[int]) -> dict:
     for idx in drop:
         layer = blocks[idx]
         unused = {
+            "q_proj": _nparams(layer.self_attn.q_proj),
             "o_proj": _nparams(layer.self_attn.o_proj),
             "mlp": _nparams(layer.mlp),
             "post_attention_layernorm": _nparams(layer.post_attention_layernorm),
         }
         kept = {
             "input_layernorm": _nparams(layer.input_layernorm),
-            "q_proj": _nparams(layer.self_attn.q_proj),
             "k_proj": _nparams(layer.self_attn.k_proj),
             "v_proj": _nparams(layer.self_attn.v_proj),
         }

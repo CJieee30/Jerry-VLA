@@ -127,3 +127,25 @@ L15 scores exactly 0 under PPL and GateProbe: the action expert reads L15's K/V,
 Baseline, Drop-1 (Taylor/GateProbe/PPL and IGIA/Fisher), Drop-2 (Taylor, IGIA, Fisher, GateProbe), Drop-3 (Taylor, IGIA/Fisher, GateProbe), and all nine Drop-4 runs wrote `eval_info.json` with `n_episodes=400` (40 tasks × 10), `pc_success` matching the per-task success bits, `EXIT:0`. Logs show `n_action_steps=10`, `num_steps=10`, `seed=1000`, `control_mode=relative`, cameras `camera1` / `camera2`, action shape 7; no tracebacks. `drop.json` in each run matches the Drop-1 / Drop-2 / Drop-3 / Drop-4 tables. The GPU2 Drop-1 queue, GPU3 Drop-2 queue, GPU0 Drop-3 queue, and the Drop-4 dispatcher started each run only after the previous run on that GPU had exited.
 
 Local full-model anchor is 83.00%, vs paper 87.3%. Use 83.00 as the referee.
+
+## CARE (Stage-2): action-discontinuity reweighting (2026-10-05)
+
+Full write-up: `main_results/care_libero.md`.
+
+No closed-loop. Weights from the first 10 valid steps of the stored 50-step normalized chunk. Taylor α is outside the loss. 7-d vs arm-6-d Spearman = 0.98, so only 7-d was scored.
+
+Weighted Taylor Drop-4 is still `[12, 13, 14, 15]`. The full redundancy order is identical to Stage-1. Jaccard = **1.0**. Stop. 78.50 is below the 83.00 anchor, but the drop set did not change, so there is no new closed-loop to run. Source: `results/stage2_action_weight/`.
+
+Weighted Fisher Drop-4 (α outside the loss, 7-d only) moves from `[10, 11, 12, 14]` to `[10, 12, 13, 14]` (L11 ↔ L13). Jaccard vs Stage-1 = **0.600**. Closed-loop (400 ep, seed=1000, EXIT:0):
+
+| Setting | Drop | Spatial | Object | Goal | Long | Avg. |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Fisher Stage-1 (historical) | `[10, 11, 12, 14]` | 69.0 | 86.0 | 72.0 | 50.0 | 69.25 |
+| Fisher Stage-1 reval (GPU2) | `[10, 11, 12, 14]` | 67.0 | 85.0 | 72.0 | 55.0 | 69.75 |
+| Fisher weighted (GPU3) | `[10, 12, 13, 14]` | 73.0 | 80.0 | 70.0 | 62.0 | **71.25** |
+
+Reval vs historical: +0.50 (noise). Weighted vs contemporaneous reval: **+1.50**. Still below Taylor Drop-4 78.50 and the 83.00 anchor. Direction of the L11↔L13 swap is right; Fisher remains a suboptimal selector on this stack. Do not overwrite the Stage-1 Fisher 69.25 row. Sources: `results/smolvla_libero/{drop4_fisher,drop4_fisher_reval,drop4_fisher_action_discontinuity}/eval_info.json`.
+
+CARE GateProbe Drop-4 is still `[7, 13, 14, 15]`. Jaccard vs Stage-1 = **1.0**. Stop. Do not re-evaluate 72.00. Later ranks swap L12 ↔ L9 at Drop-8; that is not a new Drop-4. Source: `results/stage2_action_weight/smolvla_gateprobe_action_discontinuity.json`.
+
+CARE IGIA Drop-4 is still `[10, 12, 14, 15]`. Jaccard vs Stage-1 = **1.0**. Stop. Do not re-evaluate 73.75. Source: `results/stage2_action_weight/smolvla_igia_action_discontinuity.json`.

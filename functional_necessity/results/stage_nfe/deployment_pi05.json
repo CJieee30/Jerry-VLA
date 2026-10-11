@@ -1,0 +1,57 @@
+{
+ "stack": "pi05",
+ "drop": [
+  1,
+  13,
+  14,
+  15,
+  16,
+  17
+ ],
+ "tf32": false,
+ "full_load": {
+  "allocated_mib": 8923.4,
+  "reserved_mib": 9150.0
+ },
+ "eager_full": {
+  "nfe10_ms": 629.769921875,
+  "nfe1_ms": 204.29532470703126,
+  "peak": {
+   "peak_allocated_mib": 9081.4,
+   "peak_reserved_mib": 9420.0
+  }
+ },
+ "compile_full": {
+  "ok": true,
+  "ms": 123.8228515625,
+  "action_max_abs": 1.1712101697921753,
+  "action_note": "This max-abs was computed against Drop-6 actions, not the full eager model. Do not use it as a compile equivalence check. The latency is the full model."
+ },
+ "materialize": {
+  "params_before": 4143404816,
+  "params_after": 3489081104,
+  "freed": 654323712,
+  "freed_mib": 1248.0
+ },
+ "action_vs_kvonly": {
+  "nfe1": 0.0,
+  "nfe10": 0.0
+ },
+ "pruned_load": {
+  "allocated_mib": 7684.9,
+  "reserved_mib": 8428.0
+ },
+ "eager_pruned": {
+  "nfe10_ms": 631.30595703125,
+  "nfe1_ms": 174.94427490234375,
+  "peak": {
+   "peak_allocated_mib": 7829.0,
+   "peak_reserved_mib": 8428.0
+  }
+ },
+ "compile_pruned": {
+  "ok": true,
+  "ms": 104.1270263671875,
+  "action_max_abs": 0.03961828351020813
+ }
+}

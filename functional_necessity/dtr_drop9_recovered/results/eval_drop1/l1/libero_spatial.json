@@ -1,0 +1,61 @@
+{
+  "suite": "libero_spatial",
+  "successes": 90,
+  "episodes": 100,
+  "sr": 0.9,
+  "pc_success": 90.0,
+  "per_task": [
+    {
+      "task": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+      "successes": 9,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the black bowl next to the ramekin and place it on the plate",
+      "successes": 10,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the black bowl from table center and place it on the plate",
+      "successes": 10,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the black bowl on the cookie box and place it on the plate",
+      "successes": 10,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate",
+      "successes": 8,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the black bowl on the ramekin and place it on the plate",
+      "successes": 9,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the black bowl next to the cookie box and place it on the plate",
+      "successes": 10,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the black bowl on the stove and place it on the plate",
+      "successes": 9,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the black bowl next to the plate and place it on the plate",
+      "successes": 10,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the black bowl on the wooden cabinet and place it on the plate",
+      "successes": 5,
+      "episodes": 10
+    }
+  ],
+  "seed": 7,
+  "num_trials": 10
+}

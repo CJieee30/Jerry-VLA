@@ -1,0 +1,8 @@
+{
+  "stack": "pi05",
+  "method": "fisher",
+  "shape": [
+    480,
+    18
+  ]
+}

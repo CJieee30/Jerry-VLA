@@ -1,0 +1,29 @@
+{
+  "stopped": true,
+  "remaining_marked_zero": true,
+  "method": "cossim",
+  "k": 16,
+  "exclude_layer0": true,
+  "drop": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 20, 21, 25],
+  "operator": "keep_kv_identity_residual",
+  "completed_tasks": 22,
+  "completed_task_success_rates_pct": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+  "in_progress": {
+    "suite": "libero_goal",
+    "task_id": 2,
+    "episodes": 6,
+    "n_episodes": 50,
+    "running_success_rate_pct": 0.0
+  },
+  "successes_observed": 0,
+  "episodes_observed": 1106,
+  "suite_success_pct_remaining_zero": {
+    "libero_spatial": 0.0,
+    "libero_object": 0.0,
+    "libero_goal": 0.0,
+    "libero_10": 0.0,
+    "avg": 0.0
+  },
+  "n_episodes_denom": 2000,
+  "note": "SIGTERM on GPU3 2026-10-10. All 22 finished tasks 0/50. Remaining Goal/Long marked 0. No eval_info.json."
+}

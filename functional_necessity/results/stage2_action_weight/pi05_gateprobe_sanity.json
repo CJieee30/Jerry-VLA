@@ -1,0 +1,6 @@
+{
+  "max_abs_diff_signed": 0.0,
+  "rel_to_max_orig": 0.0,
+  "ok": true,
+  "forwards": "4 x batch=2 on both paths"
+}

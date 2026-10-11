@@ -1,0 +1,93 @@
+{
+  "suite": "libero_object",
+  "successes": 94,
+  "episodes": 100,
+  "sr": 0.94,
+  "pc_success": 94.0,
+  "per_task": [
+    {
+      "task": "pick up the alphabet soup and place it in the basket",
+      "successes": 10,
+      "episodes": 10,
+      "extra_drop": [
+        2
+      ]
+    },
+    {
+      "task": "pick up the cream cheese and place it in the basket",
+      "successes": 8,
+      "episodes": 10,
+      "extra_drop": [
+        1
+      ]
+    },
+    {
+      "task": "pick up the salad dressing and place it in the basket",
+      "successes": 10,
+      "episodes": 10,
+      "extra_drop": [
+        5
+      ]
+    },
+    {
+      "task": "pick up the bbq sauce and place it in the basket",
+      "successes": 9,
+      "episodes": 10,
+      "extra_drop": [
+        2
+      ]
+    },
+    {
+      "task": "pick up the ketchup and place it in the basket",
+      "successes": 10,
+      "episodes": 10,
+      "extra_drop": [
+        2
+      ]
+    },
+    {
+      "task": "pick up the tomato sauce and place it in the basket",
+      "successes": 7,
+      "episodes": 10,
+      "extra_drop": [
+        5
+      ]
+    },
+    {
+      "task": "pick up the butter and place it in the basket",
+      "successes": 10,
+      "episodes": 10,
+      "extra_drop": [
+        2
+      ]
+    },
+    {
+      "task": "pick up the milk and place it in the basket",
+      "successes": 10,
+      "episodes": 10,
+      "extra_drop": [
+        2
+      ]
+    },
+    {
+      "task": "pick up the chocolate pudding and place it in the basket",
+      "successes": 10,
+      "episodes": 10,
+      "extra_drop": [
+        2
+      ]
+    },
+    {
+      "task": "pick up the orange juice and place it in the basket",
+      "successes": 10,
+      "episodes": 10,
+      "extra_drop": [
+        1
+      ]
+    }
+  ],
+  "seed": 7,
+  "num_trials": 10,
+  "task_extra_map": "/home/guorj/Skill_Efficient_VLA/functional_necessity/dtr_drop9_recovered/results/task_layer/map_oracle_k1.json",
+  "task_extra_kind": "oracle_k1_loo_sr"
+}

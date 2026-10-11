@@ -1,0 +1,25 @@
+{
+  "drop8_nol0": [
+    1,
+    2,
+    3,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "stage1_drop8_nol0": [
+    1,
+    2,
+    3,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "jaccard_drop8": 1.0,
+  "aggregation": "mb=2 mean(\u03b1 L); accumulate (g\u2299\u03b8); abs of global sum / N_mb",
+  "n_microbatches": 256
+}

@@ -1,0 +1,74 @@
+{
+ "stack": "molmoact2",
+ "skip": "kv_only",
+ "device": "NVIDIA GeForce RTX 3090",
+ "checkpoint": "/home/guorj/Skill_Efficient_VLA/functional_necessity/checkpoints/MolmoAct2-LIBERO-LeRobot",
+ "drop": [
+  1,
+  2,
+  3,
+  4,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35
+ ],
+ "warmup": 5,
+ "repeats": 20,
+ "prefix_seq": 505,
+ "n_views": 2,
+ "params_m": {
+  "full": 5442.196208,
+  "drop": 3911.23224,
+  "language_full": 4029.677056,
+  "language_drop": 2498.713088
+ },
+ "chunk": {
+  "full_nfe10": {
+   "ms": 1394.5294921875,
+   "flops_g": 5250.586483712
+  },
+  "drop_nfe10": {
+   "ms": 1331.41826171875,
+   "flops_g": 3637.503040512
+  },
+  "full_nfe1": {
+   "ms": 293.447119140625,
+   "flops_g": 5176.654625792
+  },
+  "drop_nfe1": {
+   "ms": 276.6195556640625,
+   "flops_g": 3563.571182592
+  }
+ },
+ "modules": {
+  "vision": {
+   "ms": 40.16788330078125,
+   "flops_g": 1291.181775872
+  },
+  "language_full": {
+   "ms": 88.68305053710938,
+   "flops_g": 3820.068864
+  },
+  "language_drop": {
+   "ms": 71.00682373046875,
+   "flops_g": 2206.9854208
+  },
+  "action_nfe10": {
+   "ms": 1184.39697265625,
+   "flops_g": 82.1465088
+  },
+  "action_drop_nfe1": {
+   "ms": 123.39051513671875,
+   "flops_g": 8.21465088
+  }
+ }
+}

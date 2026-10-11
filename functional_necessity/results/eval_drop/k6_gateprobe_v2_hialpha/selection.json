@@ -1,0 +1,12 @@
+{
+  "protocol": "care_v2_high_alpha_quartile",
+  "stack": "pi05",
+  "method": "gateprobe",
+  "k": 6,
+  "drop_layers": [2, 3, 14, 15, 16, 17],
+  "source": "mean of the 120 frames in the top quartile of whitened-7d alpha on the shared 480-frame set",
+  "uniform_drop": [2, 13, 14, 15, 16, 17],
+  "care_weighted_drop": [2, 13, 14, 15, 16, 17],
+  "note": "This set is the high-alpha quartile ranking, not the alpha-weighted mean. Single process, seed=1000, n_episodes=10, n_action_steps=10, compile_model=false, keep-KV.",
+  "gpu": 1
+}

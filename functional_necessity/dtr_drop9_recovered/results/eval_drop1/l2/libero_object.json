@@ -1,0 +1,61 @@
+{
+  "suite": "libero_object",
+  "successes": 96,
+  "episodes": 100,
+  "sr": 0.96,
+  "pc_success": 96.0,
+  "per_task": [
+    {
+      "task": "pick up the alphabet soup and place it in the basket",
+      "successes": 10,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the cream cheese and place it in the basket",
+      "successes": 9,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the salad dressing and place it in the basket",
+      "successes": 9,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the bbq sauce and place it in the basket",
+      "successes": 10,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the ketchup and place it in the basket",
+      "successes": 10,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the tomato sauce and place it in the basket",
+      "successes": 9,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the butter and place it in the basket",
+      "successes": 10,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the milk and place it in the basket",
+      "successes": 10,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the chocolate pudding and place it in the basket",
+      "successes": 10,
+      "episodes": 10
+    },
+    {
+      "task": "pick up the orange juice and place it in the basket",
+      "successes": 9,
+      "episodes": 10
+    }
+  ],
+  "seed": 7,
+  "num_trials": 10
+}

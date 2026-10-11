@@ -1,0 +1,17 @@
+{
+  "methods": [
+    "l0_only"
+  ],
+  "k": 1,
+  "drop": [
+    0
+  ],
+  "operator": "keep_kv_identity_residual",
+  "exclude_layer0": false,
+  "shared": false,
+  "tag": "l0_only",
+  "suite": "libero_spatial",
+  "n_episodes": 10,
+  "seed": 1000,
+  "compile_model": false
+}

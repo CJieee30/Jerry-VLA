@@ -1,0 +1,317 @@
+{
+  "tag": "magnitude",
+  "methods": [
+    "magnitude"
+  ],
+  "checkpoint": "s1ghhh/VLADrop_pi05_LIBERO_Drop9Block_GateProbe",
+  "stage1_drop": [
+    7,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "extra_drop": [
+    0,
+    5,
+    9
+  ],
+  "keep": [
+    1,
+    2,
+    3,
+    4,
+    6,
+    8
+  ],
+  "union_drop": [
+    0,
+    5,
+    7,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "protocol": {
+    "n_trials_per_task": 10,
+    "seed": 7,
+    "suites": [
+      "libero_spatial",
+      "libero_object",
+      "libero_goal",
+      "libero_10"
+    ],
+    "replan_steps": 5,
+    "action_horizon": 10,
+    "num_steps_wait": 10,
+    "resize": 224,
+    "env_resolution": 256,
+    "recovery": false,
+    "backend": "openpi_serve_libero_client",
+    "config": "pi05_libero_dropped"
+  },
+  "suites": {
+    "libero_spatial": {
+      "suite": "libero_spatial",
+      "successes": 0,
+      "episodes": 100,
+      "sr": 0.0,
+      "pc_success": 0.0,
+      "per_task": [
+        {
+          "task": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the black bowl next to the ramekin and place it on the plate",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the black bowl from table center and place it on the plate",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the black bowl on the cookie box and place it on the plate",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the black bowl on the ramekin and place it on the plate",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the black bowl next to the cookie box and place it on the plate",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the black bowl on the stove and place it on the plate",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the black bowl next to the plate and place it on the plate",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the black bowl on the wooden cabinet and place it on the plate",
+          "successes": 0,
+          "episodes": 10
+        }
+      ],
+      "seed": 7,
+      "num_trials": 10
+    },
+    "libero_object": {
+      "suite": "libero_object",
+      "successes": 0,
+      "episodes": 100,
+      "sr": 0.0,
+      "pc_success": 0.0,
+      "per_task": [
+        {
+          "task": "pick up the alphabet soup and place it in the basket",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the cream cheese and place it in the basket",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the salad dressing and place it in the basket",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the bbq sauce and place it in the basket",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the ketchup and place it in the basket",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the tomato sauce and place it in the basket",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the butter and place it in the basket",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the milk and place it in the basket",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the chocolate pudding and place it in the basket",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the orange juice and place it in the basket",
+          "successes": 0,
+          "episodes": 10
+        }
+      ],
+      "seed": 7,
+      "num_trials": 10
+    },
+    "libero_goal": {
+      "suite": "libero_goal",
+      "successes": 0,
+      "episodes": 100,
+      "sr": 0.0,
+      "pc_success": 0.0,
+      "per_task": [
+        {
+          "task": "open the middle drawer of the cabinet",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "put the bowl on the stove",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "put the wine bottle on top of the cabinet",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "open the top drawer and put the bowl inside",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "put the bowl on top of the cabinet",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "push the plate to the front of the stove",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "put the cream cheese in the bowl",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "turn on the stove",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "put the bowl on the plate",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "put the wine bottle on the rack",
+          "successes": 0,
+          "episodes": 10
+        }
+      ],
+      "seed": 7,
+      "num_trials": 10
+    },
+    "libero_10": {
+      "suite": "libero_10",
+      "successes": 0,
+      "episodes": 100,
+      "sr": 0.0,
+      "pc_success": 0.0,
+      "per_task": [
+        {
+          "task": "put both the alphabet soup and the tomato sauce in the basket",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "put both the cream cheese box and the butter in the basket",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "turn on the stove and put the moka pot on it",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "put the black bowl in the bottom drawer of the cabinet and close it",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "put the white mug on the left plate and put the yellow and white mug on the right plate",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "pick up the book and place it in the back compartment of the caddy",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "put the white mug on the plate and put the chocolate pudding to the right of the plate",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "put both the alphabet soup and the cream cheese box in the basket",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "put both moka pots on the stove",
+          "successes": 0,
+          "episodes": 10
+        },
+        {
+          "task": "put the yellow and white mug in the microwave and close it",
+          "successes": 0,
+          "episodes": 10
+        }
+      ],
+      "seed": 7,
+      "num_trials": 10
+    }
+  },
+  "overall": {
+    "pc_success_mean": 0.0,
+    "n_suites": 4,
+    "spatial": 0.0,
+    "object": 0.0,
+    "goal": 0.0,
+    "long": 0.0
+  }
+}

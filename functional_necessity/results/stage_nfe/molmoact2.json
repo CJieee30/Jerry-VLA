@@ -1,0 +1,78 @@
+{
+ "stack": "molmoact2",
+ "device": "NVIDIA GeForce RTX 3090",
+ "checkpoint": "/home/guorj/Skill_Efficient_VLA/functional_necessity/checkpoints/MolmoAct2-LIBERO-LeRobot",
+ "drop16": [
+  1,
+  2,
+  3,
+  4,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35
+ ],
+ "warmup": 5,
+ "repeats": 20,
+ "offline": {
+  "full_nfe10_replay": {
+   "max_abs": 0.0,
+   "l2": 0.0,
+   "ref_l2": 3.3767945766448975
+  },
+  "full_nfe1_vs_nfe10": {
+   "max_abs": 0.033935546875,
+   "l2": 0.10308752954006195,
+   "ref_l2": 3.3767945766448975
+  },
+  "drop16_nfe10_replay": {
+   "max_abs": 0.0,
+   "l2": 0.0,
+   "ref_l2": 3.8658716678619385
+  },
+  "drop16_nfe1_vs_nfe10": {
+   "max_abs": 0.2041015625,
+   "l2": 0.6773505210876465,
+   "ref_l2": 3.8658716678619385
+  },
+  "drop16_nfe10_vs_full_nfe10": {
+   "max_abs": 0.58349609375,
+   "l2": 1.831353783607483,
+   "ref_l2": 3.3767945766448975
+  }
+ },
+ "timing": {
+  "full_nfe10": {
+   "ms": 1166.35849609375,
+   "flops_g": 5250.586483712
+  },
+  "full_nfe1": {
+   "ms": 254.007080078125,
+   "flops_g": 5176.654625792
+  },
+  "drop16_nfe10": {
+   "ms": 1165.24033203125,
+   "flops_g": 4043.256077312
+  },
+  "drop16_nfe1": {
+   "ms": 246.931298828125,
+   "flops_g": 3969.324219392
+  },
+  "expert_nfe10": {
+   "ms": 1022.79423828125,
+   "flops_g": 82.1465088
+  },
+  "expert_nfe1": {
+   "ms": 103.72786865234374,
+   "flops_g": 8.21465088
+  }
+ }
+}

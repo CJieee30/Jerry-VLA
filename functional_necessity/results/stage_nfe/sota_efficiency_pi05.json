@@ -1,0 +1,63 @@
+{
+ "stack": "pi05",
+ "device": "NVIDIA GeForce RTX 3090",
+ "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+ "drop": [
+  1,
+  13,
+  14,
+  15,
+  16,
+  17
+ ],
+ "warmup": 5,
+ "repeats": 20,
+ "prefix_seq": 968,
+ "n_views": 3,
+ "params_m": {
+  "full": 4143.404816,
+  "drop": 3489.081104,
+  "language_full": 2508.531712,
+  "language_drop": 1854.208
+ },
+ "chunk": {
+  "full_nfe10": {
+   "ms": 524.30947265625,
+   "flops_g": 5024.398949376
+  },
+  "drop_nfe10": {
+   "ms": 501.959619140625,
+   "flops_g": 3711.595428864
+  },
+  "full_nfe1": {
+   "ms": 181.0925048828125,
+   "flops_g": 4674.373089792
+  },
+  "drop_nfe1": {
+   "ms": 155.90618896484375,
+   "flops_g": 3361.56956928
+  }
+ },
+ "modules": {
+  "vision": {
+   "ms": 56.18292236328125,
+   "flops_g": 660.529741824
+  },
+  "language_full": {
+   "ms": 79.56536254882812,
+   "flops_g": 3974.951585792
+  },
+  "language_drop": {
+   "ms": 54.26795654296875,
+   "flops_g": 2662.14806528
+  },
+  "action_nfe10": {
+   "ms": 383.699462890625,
+   "flops_g": 388.91762176
+  },
+  "action_drop_nfe1": {
+   "ms": 38.14017333984375,
+   "flops_g": 38.891762176
+  }
+ }
+}

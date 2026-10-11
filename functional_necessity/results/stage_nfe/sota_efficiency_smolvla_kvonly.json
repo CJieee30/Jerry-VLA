@@ -1,0 +1,65 @@
+{
+ "stack": "smolvla",
+ "skip": "kv_only",
+ "device": "NVIDIA GeForce RTX 3090",
+ "checkpoint": "lerobot/smolvla_libero",
+ "drop": [
+  12,
+  13,
+  14,
+  15
+ ],
+ "operating_nfe": 2,
+ "warmup": 5,
+ "repeats": 20,
+ "prefix_seq": 177,
+ "n_views": 2,
+ "chunk_size": 50,
+ "n_action_steps": 10,
+ "params_m": {
+  "full": 450.046176,
+  "drop": 413.178336,
+  "language_full": 204.62688,
+  "language_drop": 167.75904
+ },
+ "chunk": {
+  "full_nfe10": {
+   "ms": 546.5220703125,
+   "flops_g": 598.432217088
+  },
+  "drop_nfe10": {
+   "ms": 538.226220703125,
+   "flops_g": 584.901147648
+  },
+  "full_nfe2": {
+   "ms": 173.2099609375,
+   "flops_g": 510.279948288
+  },
+  "drop_nfe2": {
+   "ms": 164.9469482421875,
+   "flops_g": 496.748878848
+  }
+ },
+ "modules": {
+  "vision": {
+   "ms": 27.126785278320312,
+   "flops_g": 430.637580288
+  },
+  "language_full": {
+   "ms": 47.92826843261719,
+   "flops_g": 57.60423936
+  },
+  "language_drop": {
+   "ms": 39.818292236328126,
+   "flops_g": 44.07316992
+  },
+  "action_nfe10": {
+   "ms": 465.75458984375,
+   "flops_g": 110.190336
+  },
+  "action_drop_nfe2": {
+   "ms": 89.71329345703126,
+   "flops_g": 22.0380672
+  }
+ }
+}

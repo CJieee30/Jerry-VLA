@@ -1,0 +1,7 @@
+{
+  "layer0_igia_weighted_alpha1": 0.06664156234546681,
+  "layer0_igia_orig_batch_mb": 0.06664156234546681,
+  "rel_abs_diff": 0.0,
+  "ok": true,
+  "forwards": "4 x batch=2 on both paths"
+}

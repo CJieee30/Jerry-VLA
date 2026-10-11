@@ -51,8 +51,37 @@ def _flops(fn) -> int:
     return int(mode.get_total_flops())
 
 
+def _kv_only_param_split(layer) -> tuple[dict, dict]:
+    """Active weights are K/V (+ pre-norm). Q, attn_out, and the MLP do not run."""
+    attn = layer.self_attn
+    q_dim, k_dim, v_dim = (int(x) for x in attn.fused_dims)
+    hidden = int(attn.att_proj.in_features)
+    bias = attn.att_proj.bias is not None
+
+    def rows(out: int) -> int:
+        return out * hidden + (out if bias else 0)
+
+    post = type(layer).__name__ == "MolmoAct2PostNormDecoderLayer"
+    unused = {
+        "q_proj": rows(q_dim),
+        "attn_out": _nparams(attn.attn_out),
+        "mlp": _nparams(layer.mlp),
+        "ff_norm": _nparams(layer.ff_norm),
+    }
+    if attn.q_norm is not None:
+        unused["q_norm"] = _nparams(attn.q_norm)
+    if post:
+        unused["attn_norm"] = _nparams(layer.attn_norm)
+    kept = {"k_proj": rows(k_dim), "v_proj": rows(v_dim)}
+    if not post:
+        kept["attn_norm"] = _nparams(layer.attn_norm)
+    if attn.k_norm is not None:
+        kept["k_norm"] = _nparams(attn.k_norm)
+    return unused, kept
+
+
 def count_params(policy, drop: list[int]) -> dict:
-    """Stored vs active: keep-KV still runs attn_norm + self_attn; skips mlp + ff_norm."""
+    """Stored vs active. Dropped layers run K/V only (Appendix B), not Q/attn/MLP."""
     stored = _nparams(policy)
     blocks, _ = vlm_blocks(policy)
     language = _nparams(policy._backbone().transformer)
@@ -60,14 +89,7 @@ def count_params(policy, drop: list[int]) -> dict:
     per_layer = []
     for idx in drop:
         layer = blocks[idx]
-        unused = {
-            "mlp": _nparams(layer.mlp),
-            "ff_norm": _nparams(layer.ff_norm),
-        }
-        kept = {
-            "attn_norm": _nparams(layer.attn_norm),
-            "self_attn": _nparams(layer.self_attn),
-        }
+        unused, kept = _kv_only_param_split(layer)
         layer_skip = int(sum(unused.values()))
         skipped += layer_skip
         per_layer.append(
@@ -75,7 +97,7 @@ def count_params(policy, drop: list[int]) -> dict:
                 "layer": int(idx),
                 "unused_numel": layer_skip,
                 "unused": unused,
-                "kept_attn_numel": int(sum(kept.values())),
+                "kept_kv_numel": int(sum(kept.values())),
             }
         )
     return {

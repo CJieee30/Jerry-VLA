@@ -7,8 +7,9 @@ Two hooks, same Case 3 semantics:
   function (prefix is ``language_model.forward`` + KV-cache; denoise is expert
   only).
 - Prefix / closed-loop inference: wrap ``language_model.layers[i].forward``.
-  Residual is identity; K/V are still written into the cache so expert denoise
-  can cross-attend. Do not replace ``sample_actions``.
+  Residual is identity. ``keep_kv=True`` (paper operator) still writes K/V so
+  expert denoise can cross-attend. ``keep_kv=False`` writes zeros into those
+  cache slots. Do not replace ``sample_actions``.
 """
 
 from __future__ import annotations
@@ -39,6 +40,7 @@ def _repeat_kv(hidden_states: torch.Tensor, n_rep: int) -> torch.Tensor:
 
 
 _DROP_LLM_IDS: set[int] = set()
+_KEEP_KV = True
 _ORIGINAL_COMPUTE = pi05_mod.compute_layer_complete
 
 
@@ -91,8 +93,19 @@ def _joint_attention_llm_dropped(
     llm_normed, llm_gate = layernorm_forward(llm_layer.input_layernorm, llm_hidden, adarms_cond[0])
     llm_input_shape = llm_normed.shape[:-1]
     llm_hidden_shape = (*llm_input_shape, -1, llm_layer.self_attn.head_dim)
-    llm_key = llm_layer.self_attn.k_proj(llm_normed).view(llm_hidden_shape).transpose(1, 2)
-    llm_value = llm_layer.self_attn.v_proj(llm_normed).view(llm_hidden_shape).transpose(1, 2)
+    if _KEEP_KV:
+        llm_key = llm_layer.self_attn.k_proj(llm_normed).view(llm_hidden_shape).transpose(1, 2)
+        llm_value = llm_layer.self_attn.v_proj(llm_normed).view(llm_hidden_shape).transpose(1, 2)
+    else:
+        llm_key = torch.zeros(
+            llm_normed.shape[0],
+            llm_layer.self_attn.config.num_key_value_heads,
+            llm_normed.shape[1],
+            llm_layer.self_attn.head_dim,
+            device=llm_normed.device,
+            dtype=llm_normed.dtype,
+        )
+        llm_value = torch.zeros_like(llm_key)
 
     expert_normed, expert_gate = layernorm_forward(
         expert_layer.input_layernorm, expert_hidden, adarms_cond[1]
@@ -211,10 +224,37 @@ def _dropped_prefix_forward(
     return residual
 
 
+def _dropped_prefix_forward_no_kv(
+    self,
+    hidden_states: torch.Tensor,
+    attention_mask: torch.Tensor | None = None,
+    position_ids: torch.LongTensor | None = None,
+    past_key_values=None,
+    use_cache: bool = False,
+    cache_position: torch.LongTensor | None = None,
+    position_embeddings: tuple[torch.Tensor, torch.Tensor] | None = None,
+    adarms_cond: torch.Tensor | None = None,
+    **kwargs,
+) -> torch.Tensor:
+    """Identity residual and zero K/V. Expert cannot read this layer."""
+    del attention_mask, position_ids, use_cache, cache_position, position_embeddings, adarms_cond, kwargs
+    attn = self.self_attn
+    bsz, slen, _ = hidden_states.shape
+    n_kv = attn.config.num_key_value_heads
+    key_states = torch.zeros(
+        bsz, n_kv, slen, attn.head_dim, device=hidden_states.device, dtype=hidden_states.dtype
+    )
+    value_states = torch.zeros_like(key_states)
+    if past_key_values is None:
+        raise RuntimeError("no-KV skip still needs a cache slot so denoise layer_idx stays aligned")
+    past_key_values.update(key_states, value_states, attn.layer_idx)
+    return hidden_states
+
+
 @contextmanager
-def skip_llm_layers(policy, layer_indices: Iterable[int]):
+def skip_llm_layers(policy, layer_indices: Iterable[int], keep_kv: bool = True):
     """Temporarily drop the given PaliGemma layer indices (attn Q/O + MLP)."""
-    global _DROP_LLM_IDS
+    global _DROP_LLM_IDS, _KEEP_KV
     layers, _ = _paligemma_layers(policy)
     indices = [int(i) for i in layer_indices]
     if not indices:
@@ -225,10 +265,12 @@ def skip_llm_layers(policy, layer_indices: Iterable[int]):
         if idx < 0 or idx >= n_layers:
             raise IndexError(f"drop index {idx} out of range for {n_layers} language layers")
     _DROP_LLM_IDS = {id(layers[i]) for i in indices}
+    _KEEP_KV = bool(keep_kv)
+    fwd = _dropped_prefix_forward if _KEEP_KV else _dropped_prefix_forward_no_kv
     patched = []
     for idx in indices:
         layer = layers[idx]
-        layer.forward = types.MethodType(_dropped_prefix_forward, layer)
+        layer.forward = types.MethodType(fwd, layer)
         patched.append(layer)
     pi05_mod.compute_layer_complete = _compute_layer_complete_maybe_skip
     try:
@@ -241,6 +283,7 @@ def skip_llm_layers(policy, layer_indices: Iterable[int]):
             except AttributeError:
                 pass
         _DROP_LLM_IDS = set()
+        _KEEP_KV = True
 
 
 def dropped_prefix_indices(policy) -> list[int]:
@@ -249,7 +292,7 @@ def dropped_prefix_indices(policy) -> list[int]:
     for i, layer in enumerate(layers):
         fwd = getattr(layer, "forward", None)
         func = getattr(fwd, "__func__", None)
-        if func is _dropped_prefix_forward:
+        if func in (_dropped_prefix_forward, _dropped_prefix_forward_no_kv):
             out.append(i)
     return out
 

@@ -1,0 +1,83 @@
+{
+ "stack": "molmoact2",
+ "drop": [
+  1,
+  2,
+  3,
+  4,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35
+ ],
+ "tf32": false,
+ "full_load": {
+  "allocated_mib": 11551.8,
+  "reserved_mib": 11738.0
+ },
+ "eager_full": {
+  "nfe10_ms": 1392.758984375,
+  "nfe1_ms": 309.553857421875,
+  "peak": {
+   "peak_allocated_mib": 12590.1,
+   "peak_reserved_mib": 13756.0
+  }
+ },
+ "compile_full": {
+  "ok": true,
+  "ms": 215.2829345703125,
+  "action_max_abs": 0.0078125
+ },
+ "expert_graph_full": {
+  "nfe1_ms": 183.5694091796875,
+  "nfe10_ms": 273.9421142578125,
+  "peak": {
+   "peak_allocated_mib": 13060.6,
+   "peak_reserved_mib": 15390.0
+  },
+  "action_max_abs": 0.0
+ },
+ "materialize": {
+  "params_before": 5442196208,
+  "params_after": 3911232240,
+  "freed": 1530963968,
+  "freed_mib": 2920.1
+ },
+ "action_vs_kvonly": {
+  "nfe1": 0.0
+ },
+ "pruned_load": {
+  "allocated_mib": 8634.8,
+  "reserved_mib": 10504.0
+ },
+ "eager_pruned": {
+  "nfe10_ms": 1401.1998046875,
+  "nfe1_ms": 290.2341552734375,
+  "peak": {
+   "peak_allocated_mib": 9636.9,
+   "peak_reserved_mib": 10512.0
+  }
+ },
+ "compile_pruned": {
+  "ok": true,
+  "ms": 118.16165771484376,
+  "action_max_abs": 0.015625
+ },
+ "expert_graph_pruned": {
+  "nfe1_ms": 171.4903076171875,
+  "nfe10_ms": 253.997119140625,
+  "peak": {
+   "peak_allocated_mib": 10118.1,
+   "peak_reserved_mib": 12438.0
+  },
+  "action_max_abs": 0.0
+ }
+}

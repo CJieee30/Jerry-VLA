@@ -1,0 +1,11 @@
+{
+  "methods": [
+    "nfe1"
+  ],
+  "k": 0,
+  "drop": [],
+  "operator": "keep_kv_identity_residual",
+  "num_inference_steps": 1,
+  "n_episodes_per_task": 10,
+  "tag": "molmoact2_full_nfe1"
+}

@@ -1,0 +1,18 @@
+{
+  "stopped": true,
+  "remaining_marked_zero": true,
+  "drop": [
+    0
+  ],
+  "operator": "keep_kv_identity_residual",
+  "completed": "libero_spatial",
+  "suite_success_pct_remaining_zero": {
+    "libero_spatial": 0.0,
+    "libero_object": 0.0,
+    "libero_goal": 0.0,
+    "libero_10": 0.0
+  },
+  "avg": 0.0,
+  "n_episodes_denom": 400,
+  "note": "MolmoAct2 keep-KV skip [0] only. Spatial pc_success==0; Object/Goal/Long marked 0."
+}

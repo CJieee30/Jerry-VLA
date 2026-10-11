@@ -102,6 +102,12 @@ def _parse_ours(argv: list[str]) -> tuple[argparse.Namespace, list[str]]:
     parser.add_argument("--calib-file", type=Path, default=DEFAULT_CALIB_FILE)
     parser.add_argument("--task-extra-map", type=Path, default=None)
     parser.add_argument("--predicate-log", type=Path, default=None)
+    parser.add_argument(
+        "--skip-mode",
+        choices=("keep_kv", "no_kv"),
+        default="keep_kv",
+        help="keep_kv: DTR Appendix B (write K/V). no_kv: identity residual and zero cache slots.",
+    )
     ours, rest = parser.parse_known_args(argv)
     return ours, rest
 
@@ -149,7 +155,8 @@ def run_smoke(ours: argparse.Namespace) -> None:
         torch.manual_seed(0)
         if device.type == "cuda":
             torch.cuda.manual_seed_all(0)
-        ctx = skip_llm_layers(policy, indices) if indices else nullcontext()
+        keep_kv = ours.skip_mode != "no_kv"
+        ctx = skip_llm_layers(policy, indices, keep_kv=keep_kv) if indices else nullcontext()
         with torch.no_grad(), ctx:
             return policy.predict_action_chunk(batch).detach().cpu()
 
@@ -158,13 +165,22 @@ def run_smoke(ours: argparse.Namespace) -> None:
     skip0 = chunk_with([0])
     d17 = _action_l2(skip17, full)
     d0 = _action_l2(skip0, full)
-    LOGGER.info("smoke action-chunk L2 vs full: skip[17]=%.6g  skip[0]=%.6g", d17, d0)
-    print(f"smoke skip[17] L2={d17:.6g}")
-    print(f"smoke skip[0]  L2={d0:.6g}")
+    LOGGER.info(
+        "smoke skip_mode=%s action-chunk L2 vs full: skip[17]=%.6g  skip[0]=%.6g",
+        ours.skip_mode,
+        d17,
+        d0,
+    )
+    print(f"smoke skip_mode={ours.skip_mode} skip[17] L2={d17:.6g}")
+    print(f"smoke skip_mode={ours.skip_mode} skip[0]  L2={d0:.6g}")
     if d0 <= 1e-5 and d17 <= 1e-5:
         raise SystemExit(
             "skip looks like a no-op: skip[0] and skip[17] both match the full chunk. "
             "Prefix layer.forward hook is not affecting sample_actions."
+        )
+    if ours.skip_mode == "no_kv" and d17 <= 1e-5:
+        raise SystemExit(
+            "no_kv skip[17] still matches the full chunk; zero-KV cache write is not reaching the expert."
         )
     if d0 <= d17:
         LOGGER.warning(
@@ -206,6 +222,7 @@ def run_libero_eval(
     render_videos: bool,
     task_extra_map: Path | None = None,
     predicate_log: Path | None = None,
+    skip_mode: str = "keep_kv",
 ) -> None:
     from lerobot.envs import close_envs, make_env, make_env_pre_post_processors
     from lerobot.policies import make_policy, make_pre_post_processors
@@ -222,7 +239,16 @@ def run_libero_eval(
     cfg.output_dir = Path(cfg.output_dir)
     cfg.output_dir.mkdir(parents=True, exist_ok=True)
     logging.info(colored("Output dir:", "yellow", attrs=["bold"]) + f" {cfg.output_dir}")
-    logging.info("Drop %s k=%s layers=%s map=%s (recovery=false)", method, k, drop_layers, task_extra_map)
+    keep_kv = skip_mode != "no_kv"
+    skip_name = "dtr_appendix_b_prefix_kv" if keep_kv else "identity_zero_kv"
+    logging.info(
+        "Drop %s k=%s layers=%s map=%s skip=%s (recovery=false)",
+        method,
+        k,
+        drop_layers,
+        task_extra_map,
+        skip_name,
+    )
 
     auditor = None
     if predicate_log is not None:
@@ -281,18 +307,25 @@ def run_libero_eval(
         extra={
             "job_name": cfg.job_name,
             "seed": cfg.seed,
+            "num_inference_steps": int(cfg.policy.num_inference_steps),
+            "n_episodes_per_task": int(cfg.eval.n_episodes),
             "task_extra_map": None if task_extra_map is None else str(task_extra_map),
             "task_extra_kind": None if mapping is None else mapping.get("kind"),
             "universal_drop": list(UNIVERSAL_DROP) if mapping is not None else drop_layers,
             "per_task_union": mapping is not None,
             "predicate_log": None if predicate_log is None else str(predicate_log),
+            "skip": skip_name,
+            "skip_mode": skip_mode,
+            "keep_kv": keep_kv,
         },
     )
 
     amp = torch.autocast(device_type=device.type) if cfg.policy.use_amp else nullcontext()
     skip_ctx = nullcontext()
     if mapping is None:
-        skip_ctx = skip_llm_layers(policy, drop_layers) if drop_layers else nullcontext()
+        skip_ctx = (
+            skip_llm_layers(policy, drop_layers, keep_kv=keep_kv) if drop_layers else nullcontext()
+        )
     with torch.no_grad(), amp, skip_ctx:
         info = eval_policy_all(
             envs=envs,
@@ -367,6 +400,7 @@ def main() -> None:
             render_videos=ours.render_videos,
             task_extra_map=ours.task_extra_map,
             predicate_log=ours.predicate_log,
+            skip_mode=ours.skip_mode,
         )
 
     _wrapped()
