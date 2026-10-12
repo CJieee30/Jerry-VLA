@@ -37,6 +37,8 @@ from crop_vla import (  # noqa: E402
     GRID,
     SCOUT_LAYER,
     TOKENS_PER_VIEW,
+    bind_cuda_device,
+    cpu_selftest,
     crop_visual_tokens,
     first_exclusive_gpu,
     greedy_diversity,
@@ -150,11 +152,40 @@ def _action_stats(a: torch.Tensor, b: torch.Tensor) -> dict:
         "max_abs": float(d.abs().max()),
         "mae": float(d.abs().mean()),
         "l2": float(d.flatten(1).norm(dim=-1).mean()),
+        "finite": bool(torch.isfinite(x).all() and torch.isfinite(y).all()),
     }
 
 
+# Keep-all re-runs the same Drop-6 prefix + NFE=1 expert on identical embeddings
+# and noise. Residual error is bf16/CUDA rounding on O(1) actions. 2e-2 is an
+# upper bound (~2% of unit action), not a claim of bit-identity. Do not raise it
+# to hide drift.
+IDENTITY_MAX_ABS = 2e-2
+
+
+def _budget_ok(cam: dict) -> bool:
+    if cam["role"] == "empty":
+        return cam["n_keep"] == cam["n_full"] == TOKENS_PER_VIEW
+    budget = BUDGETS[cam["role"]]
+    return (
+        cam["n_keep"] == budget["relevance"] + budget["diversity"]
+        and len(cam["relevance"]) == budget["relevance"]
+        and len(cam["diversity"]) == budget["diversity"]
+        and not (set(cam["relevance"]) & set(cam["diversity"]))
+    )
+
+
+def _scout_calls_ok(calls: list[int] | None) -> bool:
+    if not calls or len(calls) < SCOUT_LAYER + 1:
+        return False
+    if calls[SCOUT_LAYER] < 1:
+        return False
+    return all(c == 0 for c in calls[SCOUT_LAYER + 1 :])
+
+
 def run_model_checks(gpu: int, calib, n_frames: int) -> dict:
-    device = torch.device(f"cuda:{gpu}")
+    device = bind_cuda_device(gpu)
+    print(f"bound physical GPU{gpu} -> {device} (current={torch.cuda.current_device()})", flush=True)
     policy = load_policy(DEFAULT_CHECKPOINT, device)
     policy.config.n_action_steps = 10
     policy.config.num_inference_steps = NFE
@@ -203,14 +234,29 @@ def run_model_checks(gpu: int, calib, n_frames: int) -> dict:
                 crop = policy.predict_action_chunk(batch, noise=noise, num_steps=NFE)
                 crop_stats = policy.model._crop_stats
             ident = _action_stats(same, base)
+            crop_finite = bool(torch.isfinite(crop[:, :10, :7].float()).all())
             identity.append(ident)
             n_live = sum(1 for c in crop_stats.cameras if c["role"] != "empty")
             expected_short = crop_stats.full_len - (TOKENS_PER_VIEW // 2) * n_live
+            offset_ok = id_stats is not None and (
+                crop_stats.orig_action_offset == id_stats.orig_action_offset
+                and id_stats.orig_action_offset == id_stats.short_pad_sum
+                and crop_stats.orig_action_offset > crop_stats.short_pad_sum
+            )
+            budgets_ok = all(_budget_ok(c) for c in crop_stats.cameras)
+            scout_ok = _scout_calls_ok(crop_stats.scout_layer_calls) and _scout_calls_ok(
+                None if id_stats is None else id_stats.scout_layer_calls
+            )
             length_ok = (
                 crop_stats.short_len == expected_short
                 and crop_stats.kv_len == crop_stats.short_len
                 and crop_stats.short_len < crop_stats.full_len
                 and (id_stats is None or id_stats.short_len == id_stats.full_len)
+                and offset_ok
+                and budgets_ok
+                and scout_ok
+                and ident["finite"]
+                and crop_finite
             )
             pruned.append(
                 {
@@ -219,9 +265,16 @@ def run_model_checks(gpu: int, calib, n_frames: int) -> dict:
                     "vs_baseline_max_abs": _action_stats(crop, base)["max_abs"],
                     "stats": stats_dict(crop_stats),
                     "length_ok": length_ok,
+                    "offset_ok": offset_ok,
+                    "budgets_ok": budgets_ok,
+                    "scout_ok": scout_ok,
+                    "crop_finite": crop_finite,
                     "identity_keep_all": ident,
                     "identity_full_len": None if id_stats is None else id_stats.full_len,
                     "identity_short_len": None if id_stats is None else id_stats.short_len,
+                    "orig_action_offset": crop_stats.orig_action_offset,
+                    "short_pad_sum": crop_stats.short_pad_sum,
+                    "scout_layer_calls": crop_stats.scout_layer_calls,
                 }
             )
             if fi < 3:
@@ -246,6 +299,7 @@ def run_model_checks(gpu: int, calib, n_frames: int) -> dict:
         "identity": identity,
         "pruned": pruned,
         "identity_max_abs_max": max(x["max_abs"] for x in identity),
+        "identity_max_abs_limit": IDENTITY_MAX_ABS,
         "all_lengths_ok": all(p["length_ok"] for p in pruned),
     }
     (OUT / "offline_check.json").write_text(json.dumps(payload, indent=2) + "\n")
@@ -281,6 +335,7 @@ def main() -> None:
     parser.add_argument("--n-frames", type=int, default=4)
     args = parser.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
+    cpu_selftest()
     cpu_select_selftest()
     calib = load_calib_data(DEFAULT_CALIB_FILE)
     recs = save_camera_examples(calib, OUT / "cameras")
@@ -314,10 +369,17 @@ def main() -> None:
         f"json={OUT / 'offline_check.json'}",
         flush=True,
     )
-    if ident > 2e-2:
-        raise SystemExit(f"keep-all path drifted from baseline (max_abs={ident}); inspect before eval")
+    if not all(x.get("finite", False) for x in payload["identity"]):
+        raise SystemExit("keep-all or baseline action is non-finite; inspect before eval")
+    if ident > IDENTITY_MAX_ABS:
+        raise SystemExit(
+            f"keep-all path drifted from baseline (max_abs={ident} > {IDENTITY_MAX_ABS}); "
+            "inspect before eval"
+        )
     if not ok_len:
-        raise SystemExit("pruned prefix/KV length is wrong; inspect offline_check.json")
+        raise SystemExit(
+            "pruned prefix/KV/budget/offset/scout-stop check failed; inspect offline_check.json"
+        )
     print("offline checks passed", flush=True)
 
 

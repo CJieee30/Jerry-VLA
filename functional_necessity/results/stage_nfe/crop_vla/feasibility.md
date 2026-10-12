@@ -65,7 +65,7 @@ LIBERO `lerobot/envs/libero.py`：`agentview_image` → `observation.images.imag
 核心：`scripts/pi05_libero/crop_vla.py`
 
 1. `embed_prefix` 只跑一次（视觉编码一次）。
-2. 在现有 `skip_llm_layers(..., keep_kv=True)` 下跑完整 prefix，hook `layers[2].self_attn`（eager）取 attention。
+2. Scout 只跑语言层 0..2（Drop-6 的 layer 1 仍走现有 keep-KV 包装），hook `layers[2].self_attn` 取 attention 后丢弃临时 cache。第 3 层及更深层在 scout 中不执行；正式压缩 prefix 再跑完整 18 层（含 keep-KV）。
 3. 按相机 gather 原始 embeddings / pad / 原始 `position_ids`。
 4. 再跑缩短后的 prefix，得到更短 KV；专家 denoise 用原始 action offset。
 
@@ -73,12 +73,13 @@ LIBERO `lerobot/envs/libero.py`：`agentview_image` → `observation.images.imag
 
 ## 离线检查
 
-CPU 已通过：`select_one_camera` 腕部/全局预算共 128、相关性与多样性不重叠、`keep_all` 返回全部 256、多样性不回取 seed。
+CPU 已通过：`select_one_camera` 腕部/全局预算共 128、相关性与多样性不重叠、`keep_all` 返回全部 256、多样性不回取 seed、增量多样性与朴素循环一致、timer 相邻段 pairing、scout 假层只执行 0..2。
 
-GPU 项（`check_crop_vla.py`，需空闲卡）：
+GPU 项（`check_crop_vla.py`，需空闲卡；`run_eval_crop.sh` 失败即不进 400 回合）：
 
-- 同一噪声下，keep-all（每相机 256）动作 vs Baseline；只允许可解释的数值误差（阈值 `max_abs>2e-2` 则中止评测）。
-- 剪枝后 `short_len == full_len - 128×n_live` 且 `kv_len == short_len`。
+- 同一噪声下，keep-all（每相机 256）动作 vs Baseline；非有限输出直接失败。阈值 `max_abs>2e-2` 中止（keep-all 应对齐同一 Drop-6 prefix；2e-2 是 O(1) 动作上 bf16 累积的上限，不放宽）。
+- 剪枝后 `short_len == full_len - 128×n_live` 且 `kv_len == short_len`；腕部 96+32、全局 32+96、空相机 256；动作 RoPE offset 仍为未剪 `sum(pad)`。
+- Scout 调用计数：layer 2 ≥1，layer ≥3 为 0。
 - 可视化：红框=相关性，蓝框=多样性，变暗=丢掉。将写到 `results/stage_nfe/crop_vla/viz/`。
 
 尚未得到动作误差、实际 KV 长度、可视化。identity 若失败，先修正确性，不进入 400 回合。
@@ -89,8 +90,8 @@ GPU 项（`check_crop_vla.py`，需空闲卡）：
 
 没有独占测量数字。定性瓶颈（供空闲后对照，不是结果）：
 
-- Scout 仍是一次 **968** token 的 Drop-6 prefix，只为第 2 层 attention。
-- 正式 prefix 省 256 token（约 −26% 序列），但前面多付了一次完整 prefix。
+- Scout 是一次 **968** token、只到第 2 层的 prefix，不再跑第 3–17 层。
+- 正式 prefix 省 256 token（约 −26% 序列），仍要付 scout（短栈）+ 第二次压缩 prefix。
 - 现有 Drop-6 × NFE=1 里，NFE=1 已经把专家压到约 40 ms，prefix+视觉仍占 chunk 的大部分。CROP 是否还有净加速，取决于 scout 的额外 prefix 是否小于第二次缩短省下的时间。这是本筛查要回答的效率问题。
 - 空相机 256 token 仍留在序列里（按需求不改）。
 
@@ -119,7 +120,7 @@ $PY check_crop_vla.py --cameras-only
 # GPU 空闲后：identity / 长度 / 可视化（脚本会拒绝占用中的卡）
 $PY check_crop_vla.py --gpu $GPU
 
-# GPU 空闲后：CROP 400 回合（不重跑 baseline）
+# GPU 空闲后：先离线检查，通过后才 400 回合（不重跑 baseline）
 bash run_eval_crop.sh $GPU
 
 # 独占 GPU 后：完整 chunk 中位数 / P95 + scout/select/prefix/expert 分解

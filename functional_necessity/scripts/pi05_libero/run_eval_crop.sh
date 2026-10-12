@@ -53,6 +53,12 @@ else:
 fi
 
 export CUDA_VISIBLE_DEVICES="$IDLE"
+echo "==== OFFLINE CHECK crop_vla gpu=$IDLE $(date -Iseconds) ====" | tee -a "$LOG"
+if ! "$PY" check_crop_vla.py --gpu "$IDLE" --n-frames 4 2>&1 | tee -a "$LOG"; then
+  echo "==== FAIL offline check; skip 400-ep eval $(date -Iseconds) ====" | tee -a "$LOG"
+  exit 1
+fi
+
 echo "==== START crop_vla gpu=$IDLE $(date -Iseconds) ====" | tee -a "$LOG"
 "$PY" eval_drop.py \
   --method fisher --k 6 --drop-layers "$DROP" --crop \

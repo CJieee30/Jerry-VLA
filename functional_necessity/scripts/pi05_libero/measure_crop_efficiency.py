@@ -32,6 +32,7 @@ from common import (  # noqa: E402
 from crop_vla import (  # noqa: E402
     FISHER_DROP6,
     SCOUT_LAYER,
+    bind_cuda_device,
     crop_visual_tokens,
     require_idle_gpu,
     stats_dict,
@@ -58,17 +59,18 @@ def _percentile(xs: list[float], p: float) -> float:
     return float(np.percentile(np.asarray(xs, dtype=np.float64), p))
 
 
-def _time_chunk(policy, batch, noise, repeats: int) -> list[float]:
+def _time_chunk(policy, batch, noise, repeats: int, device: torch.device) -> list[float]:
     times = []
+    stream = torch.cuda.current_stream(device)
     for _ in range(repeats):
         policy.reset()
-        torch.cuda.synchronize()
+        torch.cuda.synchronize(device)
         start = torch.cuda.Event(enable_timing=True)
         end = torch.cuda.Event(enable_timing=True)
-        start.record()
+        start.record(stream)
         policy.predict_action_chunk(batch, noise=noise, num_steps=NFE)
-        end.record()
-        torch.cuda.synchronize()
+        end.record(stream)
+        torch.cuda.synchronize(device)
         times.append(float(start.elapsed_time(end)))
     return times
 
@@ -83,7 +85,8 @@ def main() -> None:
     args = parser.parse_args()
 
     gpu = require_idle_gpu(args.gpu)
-    device = torch.device(f"cuda:{gpu}")
+    device = bind_cuda_device(gpu)
+    print(f"bound physical GPU{gpu} -> {device} (current={torch.cuda.current_device()})", flush=True)
     policy = load_policy(DEFAULT_CHECKPOINT, device)
     policy.config.n_action_steps = 10
     policy.config.num_inference_steps = NFE
@@ -113,7 +116,12 @@ def main() -> None:
         "warmup": args.warmup,
         "repeats": args.repeats,
         "compile_model": False,
-        "note": "full predict_action_chunk; CROP includes scout+select+re-prefix+expert",
+        "note": (
+            "full predict_action_chunk with profile=False (includes scout+select+"
+            "official prefix+expert). Segment breakdown is a separate profile=True pass."
+        ),
+        "device": str(device),
+        "physical_gpu": gpu,
     }
 
     with torch.no_grad(), skip_llm_layers(policy, DROP, keep_kv=True):
@@ -122,7 +130,7 @@ def main() -> None:
             policy.predict_action_chunk(frames[0], noise=noises[0], num_steps=NFE)
         base_ms = []
         for batch, noise in zip(frames, noises, strict=True):
-            base_ms.extend(_time_chunk(policy, batch, noise, args.repeats))
+            base_ms.extend(_time_chunk(policy, batch, noise, args.repeats, device))
         summary["baseline"] = {
             "samples_ms": base_ms,
             "median_ms": _percentile(base_ms, 50),
@@ -131,25 +139,36 @@ def main() -> None:
         }
 
         with crop_visual_tokens(
-            policy, keep_all=False, drop_layers=DROP, scout_layer=SCOUT_LAYER, profile=True
+            policy, keep_all=False, drop_layers=DROP, scout_layer=SCOUT_LAYER, profile=False
         ):
             for _ in range(args.warmup):
                 policy.reset()
                 policy.predict_action_chunk(frames[0], noise=noises[0], num_steps=NFE)
             crop_ms = []
-            parts = []
             for batch, noise in zip(frames, noises, strict=True):
-                crop_ms.extend(_time_chunk(policy, batch, noise, args.repeats))
-                stats = getattr(policy.model, "_crop_stats", None)
-                if stats is not None:
-                    parts.append(stats_dict(stats))
+                crop_ms.extend(_time_chunk(policy, batch, noise, args.repeats, device))
+            last = getattr(policy.model, "_crop_stats", None)
             summary["crop"] = {
                 "samples_ms": crop_ms,
                 "median_ms": _percentile(crop_ms, 50),
                 "p95_ms": _percentile(crop_ms, 95),
                 "mean_ms": float(np.mean(crop_ms)),
-                "last_stats": parts[-1] if parts else None,
+                "last_stats": None if last is None else stats_dict(last),
+                "profile": False,
             }
+
+        with crop_visual_tokens(
+            policy, keep_all=False, drop_layers=DROP, scout_layer=SCOUT_LAYER, profile=True
+        ):
+            policy.reset()
+            policy.predict_action_chunk(frames[0], noise=noises[0], num_steps=NFE)
+            parts = []
+            for batch, noise in zip(frames, noises, strict=True):
+                policy.reset()
+                policy.predict_action_chunk(batch, noise=noise, num_steps=NFE)
+                stats = getattr(policy.model, "_crop_stats", None)
+                if stats is not None:
+                    parts.append(stats_dict(stats))
             timed = [p["timing_ms"] for p in parts if p.get("timing_ms")]
             if timed:
                 keys = sorted({k for t in timed for k in t})
@@ -159,6 +178,9 @@ def main() -> None:
                 summary["crop"]["breakdown_p95_ms"] = {
                     k: _percentile([t[k] for t in timed if k in t], 95) for k in keys
                 }
+                summary["crop"]["breakdown_note"] = (
+                    "separate profile=True pass; not used for median/P95 full-chunk latency"
+                )
 
     base_med = summary["baseline"]["median_ms"]
     crop_med = summary["crop"]["median_ms"]
