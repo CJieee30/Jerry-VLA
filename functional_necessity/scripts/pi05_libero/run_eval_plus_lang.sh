@@ -28,12 +28,48 @@ fi
 
 # shellcheck disable=SC1091
 source /home/guorj/.libero_plus/env.sh
+export MAGICK_HOME="/home/guorj/.libero_plus/magick"
+export MAGICK_CONFIGURE_PATH="$MAGICK_HOME/etc/ImageMagick-7"
+export PATH="$MAGICK_HOME/bin:$PATH"
+export LD_LIBRARY_PATH="$MAGICK_HOME/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 export CUDA_VISIBLE_DEVICES="$GPU"
 export HF_ENDPOINT=https://hf-mirror.com
 export PYTHONUNBUFFERED=1
 export TORCHDYNAMO_DISABLE=1
 export TORCH_COMPILE_DISABLE=1
 export PYTORCH_CUDA_ALLOC_CONF="${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}"
+
+if [ "$CATEGORY" = "Sensor Noise" ]; then
+  # Magick's libtiff needs Magick's libjpeg. Torch/cv2 already load a
+  # different libjpeg.so.8; without this preload MagickWand fails with
+  # jpeg12_write_raw_data. Scoped to Sensor Noise only.
+  _MLIB="$MAGICK_HOME/lib"
+  export LD_PRELOAD="${_MLIB}/libjpeg.so.8:${_MLIB}/libpng16.so.16:${_MLIB}/libtiff.so.6:${_MLIB}/libMagickCore-7.Q16HDRI.so:${_MLIB}/libMagickWand-7.Q16HDRI.so${LD_PRELOAD:+:$LD_PRELOAD}"
+  if ! "$PY" - <<'PY'
+import torch
+from PIL import Image
+from libero.libero.envs import env_wrapper as ew
+assert ew.wandlibrary is not None, "wand/ImageMagick not loaded after torch"
+# Real Plus agentview is 360x360; 64x64 hid the fog plasma-size bug.
+for size in (128, 256, 360):
+    im = Image.new("RGB", (size, size), (7, 8, 9))
+    for name, fn, sev in [
+        ("motion_blur", ew.motion_blur, 2),
+        ("gaussian_blur", ew.gaussian_blur, 2),
+        ("zoom_blur", ew.zoom_blur, 2),
+        ("fog", ew.fog, 2),
+        ("glass_blur", ew.glass_blur, 2),
+    ]:
+        out = fn(im, severity=sev)
+        assert out is not None and tuple(out.shape[:2]) == (size, size), (name, size, getattr(out, "shape", None))
+        print("preflight", name, size, "OK", out.shape)
+print("preflight wand+torch all Sensor Noise corruptions OK", ew.wandlibrary)
+PY
+  then
+    echo "==== PREFLIGHT FAIL $TAG Sensor Noise needs ImageMagick+wand ====" | tee -a "$LOG"
+    exit 1
+  fi
+fi
 
 IDS="$("$PY" - "$CLASS" "$SUITE" "$CATEGORY" <<'PY'
 import json, sys
@@ -59,7 +95,7 @@ else
 fi
 
 cd "$ROOT/scripts/pi05_libero"
-echo "==== START $TAG $(date -Iseconds) gpu=$GPU suite=$SUITE category=$CATEGORY method=$METHOD k=$K drop=$DROP_ARG ====" | tee -a "$LOG"
+echo "==== START $TAG $(date -Iseconds) gpu=$GPU suite=$SUITE category=$CATEGORY method=$METHOD k=$K drop=$DROP_ARG MAGICK_HOME=${MAGICK_HOME:-} ====" | tee -a "$LOG"
 "$PY" eval_drop.py \
   --method "$METHOD" --k "$K" --drop-layers "$DROP_ARG" \
   --output_dir "$OUT" --job_name "$TAG" \

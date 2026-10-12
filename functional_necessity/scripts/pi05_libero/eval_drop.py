@@ -108,6 +108,17 @@ def _parse_ours(argv: list[str]) -> tuple[argparse.Namespace, list[str]]:
         default="keep_kv",
         help="keep_kv: DTR Appendix B (write K/V). no_kv: identity residual and zero cache slots.",
     )
+    parser.add_argument(
+        "--crop",
+        action="store_true",
+        help="CROP-VLA: scout visual tokens by camera role, then rerun a shorter prefix.",
+    )
+    parser.add_argument(
+        "--crop-keep-all",
+        action="store_true",
+        help="CROP path but keep every visual token (identity check).",
+    )
+    parser.add_argument("--crop-scout-layer", type=int, default=2)
     ours, rest = parser.parse_known_args(argv)
     return ours, rest
 
@@ -223,6 +234,9 @@ def run_libero_eval(
     task_extra_map: Path | None = None,
     predicate_log: Path | None = None,
     skip_mode: str = "keep_kv",
+    crop: bool = False,
+    crop_keep_all: bool = False,
+    crop_scout_layer: int = 2,
 ) -> None:
     from lerobot.envs import close_envs, make_env, make_env_pre_post_processors
     from lerobot.policies import make_policy, make_pre_post_processors
@@ -317,6 +331,9 @@ def run_libero_eval(
             "skip": skip_name,
             "skip_mode": skip_mode,
             "keep_kv": keep_kv,
+            "crop": bool(crop),
+            "crop_keep_all": bool(crop_keep_all),
+            "crop_scout_layer": int(crop_scout_layer) if crop else None,
         },
     )
 
@@ -326,7 +343,23 @@ def run_libero_eval(
         skip_ctx = (
             skip_llm_layers(policy, drop_layers, keep_kv=keep_kv) if drop_layers else nullcontext()
         )
-    with torch.no_grad(), amp, skip_ctx:
+    crop_ctx = nullcontext()
+    if crop:
+        from crop_vla import crop_visual_tokens
+
+        crop_ctx = crop_visual_tokens(
+            policy,
+            keep_all=crop_keep_all,
+            scout_layer=crop_scout_layer,
+            drop_layers=drop_layers,
+        )
+        logging.info(
+            "CROP-VLA enabled keep_all=%s scout_layer=%s drop=%s",
+            crop_keep_all,
+            crop_scout_layer,
+            drop_layers,
+        )
+    with torch.no_grad(), amp, skip_ctx, crop_ctx:
         info = eval_policy_all(
             envs=envs,
             policy=policy,
@@ -387,7 +420,11 @@ def main() -> None:
     def _wrapped(cfg: EvalPipelineConfig):
         apply_eval_protocol(cfg, original)
         if cfg.output_dir is None:
-            if ours.task_extra_map is not None:
+            if ours.crop:
+                cfg.output_dir = FN_ROOT / "results" / "stage_nfe" / "crop_vla" / (
+                    "eval_crop_keepall" if ours.crop_keep_all else "eval_crop"
+                )
+            elif ours.task_extra_map is not None:
                 cfg.output_dir = DEFAULT_EVAL_TASK_EXTRA_DIR / method
             else:
                 tag = method if k == 0 else f"k{k}_{method}"
@@ -401,6 +438,9 @@ def main() -> None:
             task_extra_map=ours.task_extra_map,
             predicate_log=ours.predicate_log,
             skip_mode=ours.skip_mode,
+            crop=ours.crop or ours.crop_keep_all,
+            crop_keep_all=ours.crop_keep_all,
+            crop_scout_layer=ours.crop_scout_layer,
         )
 
     _wrapped()

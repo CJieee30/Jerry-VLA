@@ -27,4 +27,5 @@ functional_necessity/results/logs/
 
 
 *.log
+*.log.gz
 functional_necessity/results/**/eval_ckpt/

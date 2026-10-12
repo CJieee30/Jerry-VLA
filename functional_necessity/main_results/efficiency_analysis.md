@@ -5,18 +5,19 @@ Protocol matches the π0.5 measurements: RTX 3090, `compile_model=false`, CUDA e
 Skip operators differ by stack and must not be mixed:
 
 - π0.5: DTR Appendix B (keep prefix K/V; skip language Q / attention / O / MLP).
-- MolmoAct2 / SmolVLA: keep-KV identity residual (the dropped VLM layer still writes K/V; Molmo skips MLP + ff_norm; SmolVLA skips VLM `o_proj` + MLP + post-attn LN). The action expert is never dropped.
+- MolmoAct2 / SmolVLA in §1–§2 and §4: keep-KV identity residual that still ran Q and attention (Molmo skipped MLP + `ff_norm`; SmolVLA skipped VLM `o_proj` + MLP + post-attn LN). §3 language tables and §5–§6: K/V-only Appendix B (only write K/V; skip Q, attention, output projection, and MLP). The action expert is never dropped.
 
 Table 1 time / FLOP shares are over the three isolated modules (Vision + Language + Action), not over `predict_action_chunk` wall time. Do not read closed-loop `eval_s` as efficiency; MuJoCo dominates LIBERO wall time.
 
 Source:
 
 - π0.5: `results/eval_drop/{efficiency_pi05_baseline_modules,efficiency_fisher_k6,efficiency_pi05_drop6_language_only}.json`
-- MolmoAct2 Taylor Drop-16 `[1–4,24–35]`: `results/molmoact2_libero/efficiency_taylor_drop16.json`
-- SmolVLA Taylor Drop-4 `[12–15]`: `results/smolvla_libero/efficiency_taylor_drop4.json`
+- MolmoAct2 Taylor Drop-16 `[1–4,24–35]`, §1–§2 / §4: `results/molmoact2_libero/efficiency_taylor_drop16.json`
+- SmolVLA Taylor Drop-4 `[12–15]`, §1–§2 / §4: `results/smolvla_libero/efficiency_taylor_drop4.json`
+- §3 Molmo / SmolVLA language tables and §5: `results/stage_nfe/sota_efficiency_{molmoact2,smolvla}_kvonly.json`
 - §4 paired remeasure (do not mix with the rows above): `results/stage_nfe/sota_efficiency_{pi05,molmoact2,smolvla}.json`
 
-Closed-loop Avg. is from the corresponding `eval_*.md` (this-machine anchors). §1–§3 are the NFE=10 reference. §4 is a separate paired run for the operating point and is the table to copy into the paper.
+Closed-loop Avg. is from the corresponding `eval_*.md` (this-machine anchors). §1–§2 and the π0.5 row of §3 are the original NFE=10 reference. §3 Molmo / SmolVLA language tables are K/V-only from the §5 session; do not mix those milliseconds with Table 1. §4 is a separate paired run for the operating point.
 
 ---
 
@@ -102,7 +103,7 @@ Closed-loop skip on `predict_action_chunk`. Param is **active** (stored params d
 
 ## 3. Language module only
 
-Same skip, prefix language forward only (vision embeddings cached; expert denoise not run).
+Prefix language forward only (vision embeddings cached; expert denoise not run). π0.5 is DTR Appendix B (`efficiency_pi05_drop6_language_only.json`). MolmoAct2 and SmolVLA are K/V-only (`sota_efficiency_{molmoact2,smolvla}_kvonly.json`): dropped layers write K/V and do not run Q, attention, the output projection, or the MLP. Those two tables replace the earlier keep-KV rows that still ran Q and attention (Molmo −29.7% / −16.0% / −31.6%; SmolVLA −16.2% / −8.2% / −20.4%). Do not mix Molmo / SmolVLA milliseconds here with Table 1 or §4.
 
 ### π0.5 language module
 
@@ -121,24 +122,24 @@ Same skip, prefix language forward only (vision embeddings cached; expert denois
 
 | MolmoAct2 language module | Params active (M) | Inference (ms) | FLOPs (G)        |
 | ------------------------- | ----------------- | -------------- | ---------------- |
-| Baseline 36/36            | 4029.68           | 81.32          | 3820.07          |
-| Drop-16 20/36             | 2834.26           | 68.30          | 2612.74          |
-| Δ                         | −1195.42（−29.7%）  | −13.03（−16.0%） | −1207.33（−31.6%） |
+| Baseline 36/36            | 4029.68           | 88.68          | 3820.07          |
+| Drop-16 20/36             | 2498.71           | 71.01          | 2206.99          |
+| Δ                         | −1530.96（−38.0%）  | −17.68（−19.9%） | −1613.08（−42.2%） |
 
 
-Language FLOPs Δ equals the full-chunk FLOPs Δ (−1207.33 G): keep-KV skip only removes VLM MLP compute. Prefix time −16.0% does not show up in Table 2 because Action is 89.5% of module time.
+Language FLOPs Δ equals the full-chunk FLOPs Δ (−1613.08 G): K/V-only skip removes Q, attention, the output projection, and the MLP. Active params also exclude Q and `att_proj` (the old skip only subtracted MLP + `ff_norm`, −29.7%). Prefix time −19.9% does not show up in Table 2 because that table is the pre-K/V-only session and Action is 89.5% of module time. Same numbers, 1-decimal rounding: §5 language 88.7 → 71.0 ms (−20.0%) and 3820.1 → 2207.0 G (−42.2%).
 
 ### SmolVLA language module
 
 
 | SmolVLA language module | Params active (M) | Inference (ms) | FLOPs (G)      |
 | ----------------------- | ----------------- | -------------- | -------------- |
-| Baseline 16/16          | 204.63            | 45.37          | 57.60          |
-| Drop-4 12/16            | 171.45            | 41.64          | 45.86          |
-| Δ                       | −33.18（−16.2%）    | −3.73（−8.2%）   | −11.74（−20.4%） |
+| Baseline 16/16          | 204.63            | 47.93          | 57.60          |
+| Drop-4 12/16            | 167.76            | 39.82          | 44.07          |
+| Δ                       | −36.87（−18.0%）    | −8.11（−16.9%）  | −13.53（−23.5%） |
 
 
-Language is only 9.6% of SmolVLA chunk FLOPs (Table 1), so Taylor Drop-4 saves 20.4% of the VLM prefix and about 2% of the full chunk. That is expected for a 16-layer VLM sitting next to a larger vision encoder and a 10-step expert.
+Language is only 9.6% of SmolVLA chunk FLOPs (Table 1). Taylor Drop-4 K/V-only saves 23.5% of the VLM prefix (the old skip was −20.4% FLOPs and −8.2% time because dropped layers still ran Q/K/V). Full-chunk FLOPs in the same session fall 598.4 → 584.9 G (−2.3%). That is expected for a 16-layer VLM sitting next to a larger vision encoder and a 10-step expert.
 
 ---
 
@@ -241,7 +242,7 @@ Action falls from 86.6% of module time to 55.6%. It is still the largest module.
 
 ## 5. K/V-only skip (2026-10-09)
 
-MolmoAct2 and SmolVLA dropped layers now follow π0.5 Appendix B: input norm (pre-norm Molmo only), K/V, RoPE, cache write. Q, attention, the output projection, and the MLP do not run. The action expert is not dropped. §1–§4 stay as measured; those Molmo/SmolVLA rows still ran Q and attention on dropped layers and then discarded the output. Do not subtract milliseconds across §4 and §5. Full-model FLOPs match (§4 5250.6 / 5176.7 G and 598.4 / 510.3 G). The full-model wall clock in this session is slower, so every delta below is inside `sota_efficiency_{molmoact2,smolvla}_kvonly.json`.
+MolmoAct2 and SmolVLA dropped layers now follow π0.5 Appendix B: input norm (pre-norm Molmo only), K/V, RoPE, cache write. Q, attention, the output projection, and the MLP do not run. The action expert is not dropped. §1, §2, and §4 stay as measured; those Molmo/SmolVLA rows still ran Q and attention on dropped layers and then discarded the output. §3 language tables use this session. Do not subtract milliseconds across §4 and §5. Full-model FLOPs match (§4 5250.6 / 5176.7 G and 598.4 / 510.3 G). The full-model wall clock in this session is slower, so every delta below is inside `sota_efficiency_{molmoact2,smolvla}_kvonly.json`.
 
 Checked on one calibration frame before the timing run. SmolVLA actions and the frozen-noise flow loss match the previous skip exactly (`max_abs=0`, loss 0.027666). Dropped `q_proj` is not called. Molmo `att_proj` is not called. Its K/V come from the K and V rows of the fused projection, so they differ from a slice of the fused GEMM by a few bf16 ulps; qwen3 K-norm makes the largest key element differ by 0.031. On that frame, NFE=1 actions differ by at most **7.8e-3**, and the flow loss moves 0.638279 → 0.631221. No closed-loop rerun. Existing success rates stay on the §4 rows.
 

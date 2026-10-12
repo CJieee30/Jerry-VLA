@@ -1,0 +1,93 @@
+{
+  "note": "LIBERO env maps agentview\u2192image (global) and wrist\u2192image2.",
+  "source": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/calib/pi05_v044_libero_64x8_seed42.pt",
+  "examples": [
+    {
+      "stem": "task00",
+      "task": "pick up the tomato sauce and place it in the basket",
+      "cameras": [
+        {
+          "role": "global",
+          "libero": "agentview_image",
+          "lerobot": "observation.images.image",
+          "file": "results/stage_nfe/crop_vla/cameras/task00_global.png",
+          "shape": [
+            256,
+            256,
+            3
+          ]
+        },
+        {
+          "role": "wrist",
+          "libero": "robot0_eye_in_hand_image",
+          "lerobot": "observation.images.image2",
+          "file": "results/stage_nfe/crop_vla/cameras/task00_wrist.png",
+          "shape": [
+            256,
+            256,
+            3
+          ]
+        }
+      ],
+      "pair": "results/stage_nfe/crop_vla/cameras/task00_pair_global_left_wrist_right.png"
+    },
+    {
+      "stem": "task01",
+      "task": "pick up the black bowl next to the cookie box and place it on the plate",
+      "cameras": [
+        {
+          "role": "global",
+          "libero": "agentview_image",
+          "lerobot": "observation.images.image",
+          "file": "results/stage_nfe/crop_vla/cameras/task01_global.png",
+          "shape": [
+            256,
+            256,
+            3
+          ]
+        },
+        {
+          "role": "wrist",
+          "libero": "robot0_eye_in_hand_image",
+          "lerobot": "observation.images.image2",
+          "file": "results/stage_nfe/crop_vla/cameras/task01_wrist.png",
+          "shape": [
+            256,
+            256,
+            3
+          ]
+        }
+      ],
+      "pair": "results/stage_nfe/crop_vla/cameras/task01_pair_global_left_wrist_right.png"
+    },
+    {
+      "stem": "task02",
+      "task": "pick up the salad dressing and place it in the basket",
+      "cameras": [
+        {
+          "role": "global",
+          "libero": "agentview_image",
+          "lerobot": "observation.images.image",
+          "file": "results/stage_nfe/crop_vla/cameras/task02_global.png",
+          "shape": [
+            256,
+            256,
+            3
+          ]
+        },
+        {
+          "role": "wrist",
+          "libero": "robot0_eye_in_hand_image",
+          "lerobot": "observation.images.image2",
+          "file": "results/stage_nfe/crop_vla/cameras/task02_wrist.png",
+          "shape": [
+            256,
+            256,
+            3
+          ]
+        }
+      ],
+      "pair": "results/stage_nfe/crop_vla/cameras/task02_pair_global_left_wrist_right.png"
+    }
+  ]
+}
