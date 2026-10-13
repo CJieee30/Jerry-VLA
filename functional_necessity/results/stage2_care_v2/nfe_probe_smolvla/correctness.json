@@ -1,0 +1,120 @@
+{
+  "velocity_calls": {
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "10": 10
+  },
+  "calls_ok": true,
+  "nfe10_vs_official_max_abs": 0.0,
+  "nfe10_vs_official_match": true,
+  "repeat_nfe10_match_after_reset": true,
+  "nfe1_equals_nfe10": false,
+  "noise_seed": 1000003000,
+  "noise_shape": [
+    1,
+    50,
+    32
+  ],
+  "action_exec_shape": [
+    10,
+    7
+  ],
+  "nfe10_velocity": {
+    "v_adj_cos_mean": 0.9986175497372946,
+    "v_adj_cos_min": 0.9905970096588135,
+    "v_first_last_cos": 0.9796701669692993,
+    "v_adj_norm_rel_mean": 0.009757188718556317,
+    "v_first_last_norm_rel": -0.07106851570156747
+  },
+  "nfe1_vs_nfe10": {
+    "cosine": 0.9969470500946045,
+    "rmse": 0.08974669128656387,
+    "max_abs": 0.3352295160293579,
+    "rmse_trans": 0.08222606778144836,
+    "rmse_rot": 0.10621166229248047,
+    "rmse_grip": 0.04748842865228653,
+    "max_abs_trans": 0.21193188428878784,
+    "max_abs_rot": 0.3352295160293579,
+    "max_abs_grip": 0.09448909759521484,
+    "rmse_tail3": 0.08686882257461548,
+    "gripper_disagree": 0.0,
+    "gripper_disagree_n": 0
+  },
+  "nfe2_vs_nfe10": {
+    "cosine": 0.9992187023162842,
+    "rmse": 0.04503044858574867,
+    "max_abs": 0.1309375762939453,
+    "rmse_trans": 0.053265150636434555,
+    "rmse_rot": 0.04294184222817421,
+    "rmse_grip": 0.012274134904146194,
+    "max_abs_trans": 0.1309375762939453,
+    "max_abs_rot": 0.11347173154354095,
+    "max_abs_grip": 0.02480560541152954,
+    "rmse_tail3": 0.048541948199272156,
+    "gripper_disagree": 0.0,
+    "gripper_disagree_n": 0
+  },
+  "image_keys": [
+    "observation.images.camera1",
+    "observation.images.camera1_is_pad",
+    "observation.images.camera2",
+    "observation.images.camera2_is_pad",
+    "observation.images.image2_is_pad",
+    "observation.images.image_is_pad"
+  ],
+  "compile_model": false,
+  "n_action_steps": 10,
+  "chunk_size": 50,
+  "num_steps_config_restored": 10,
+  "empty_cameras": 0,
+  "state_dim_cfg": 8,
+  "rename_map": {
+    "observation.images.image": "observation.images.camera1",
+    "observation.images.image2": "observation.images.camera2"
+  },
+  "gpu": {
+    "gpu": 1,
+    "memory": {
+      "total_mib": 24576,
+      "used_mib": 3319,
+      "free_mib": 20808,
+      "util": 97
+    },
+    "occupancy": [
+      {
+        "pid": 1011148,
+        "user": "sunxy",
+        "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+        "mem_mib": "1712",
+        "args": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python -m ts2audio.run /home/sunxy/ts2audio/runs/261012-fa-wavlm-moment-h2/impute-weather-fa_wavlm-h0-s13/v1/a1"
+      },
+      {
+        "pid": 988765,
+        "user": "lint",
+        "name": "python",
+        "mem_mib": "1592",
+        "args": "python -u -m exp.exp_worldts_forecasting --is_training 1 --eval_split test --model WorldTS --setting worldts_gpu1_first_run_Climate_h12_sym_e1_p2_h1_m3_o5_b32_s1lr0009_s2lr0003 --model_id Climate_h12_sym_e1_p2_h1_m3_o5_b32_s1lr0009_s2lr0003 --root_path /home/lint/WorldTS-main/TimeMMD-bench/data --data_path Climate.csv --freq m --seq_len 8 --label_len 4 --pred_len 12 --seed 2025 --gpu 0 --batch_size 32 --num_workers 0 --stage1_epochs 20 --stage2_epochs 20 --stage1_lr 0.0009 --stage2_lr 0.0003 --patience 5 --loss MAE --use_revin 1 --use_modal_condition 1 --use_time_condition 0 --llm_path /home/lint/WorldTS-main/TimeMMD-bench/language_model/openai-community/gpt2 --llm_dim 768 --llm_layers 6 --pool_type avg --text_embedding_batch_size 128 --latent_dim 128 --modal_feature_dim 128 --modal_hidden_dim 512 --state_encoder causal_patch --state_patch_len 2 --state_hidden_multiplier 1 --predictor_patch_len 2 --predictor_patch_stride 1 --predictor_d_model 128 --predictor_n_heads 4 --predictor_e_layers 3 --predictor_d_ff 256 --predictor_dropout 0 --predictor_activation gelu --predictor_factor 1 --modal_gate_init_logit 0 --cfa_reduction_factor 2 --cfa_dropout 0.1 --cfa_activation gelu --latent_alignment_loss mae --latent_mse_weight 10 --latent_cosine_weight 15 --latent_sigreg_weight 0.1 --latent_detach_target 1 --sigreg_std_weight 1 --sigreg_cov_weight 0.04 --sigreg_eps 1e-4 --decoder_type causal_patch --decoder_patch_len 2 --decoder_hidden_multiplier 1 --decoder_warmup_weight 0.3 --checkpoints /home/lint/WorldTS-main/TimeMMD-bench/checkpoints_worldts_gpu1_first_run --results /home/lint/WorldTS-main/TimeMMD-bench/results_worldts_gpu1_first_run_test"
+      }
+    ]
+  },
+  "action_mean": [
+    0.06278156489133835,
+    0.08684080839157104,
+    -0.09037306159734726,
+    0.0005407430580817163,
+    0.005643379874527454,
+    -0.0052290987223386765,
+    -0.0496407225728035
+  ],
+  "action_std": [
+    0.33552372455596924,
+    0.3784469962120056,
+    0.4447286128997803,
+    0.03924354165792465,
+    0.06339296698570251,
+    0.07797027379274368,
+    0.9987671375274658
+  ],
+  "load_s": 43.39814734458923
+}

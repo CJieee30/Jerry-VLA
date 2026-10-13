@@ -1,0 +1,1 @@
+python /home/guorj/Skill_Efficient_VLA/functional_necessity/scripts/stage2_care_v2/probe_smolvla_nfe.py --out-dir /home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_probe_smolvla --gpu 1 --allow-shared
