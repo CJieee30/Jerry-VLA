@@ -119,6 +119,11 @@ def _parse_ours(argv: list[str]) -> tuple[argparse.Namespace, list[str]]:
         help="CROP path but keep every visual token (identity check).",
     )
     parser.add_argument("--crop-scout-layer", type=int, default=2)
+    parser.add_argument(
+        "--crop-budget",
+        default="role",
+        help="role: wrist 96+32 / global 32+96. shared_mix: both cameras 64+64.",
+    )
     ours, rest = parser.parse_known_args(argv)
     return ours, rest
 
@@ -237,6 +242,7 @@ def run_libero_eval(
     crop: bool = False,
     crop_keep_all: bool = False,
     crop_scout_layer: int = 2,
+    crop_budget: str = "role",
 ) -> None:
     from lerobot.envs import close_envs, make_env, make_env_pre_post_processors
     from lerobot.policies import make_policy, make_pre_post_processors
@@ -334,6 +340,7 @@ def run_libero_eval(
             "crop": bool(crop),
             "crop_keep_all": bool(crop_keep_all),
             "crop_scout_layer": int(crop_scout_layer) if crop else None,
+            "crop_budget": crop_budget if crop else None,
         },
     )
 
@@ -345,19 +352,24 @@ def run_libero_eval(
         )
     crop_ctx = nullcontext()
     if crop:
-        from crop_vla import crop_visual_tokens
+        from crop_vla import crop_visual_tokens, resolve_budgets
 
+        budgets = resolve_budgets(crop_budget)
         crop_ctx = crop_visual_tokens(
             policy,
             keep_all=crop_keep_all,
             scout_layer=crop_scout_layer,
             drop_layers=drop_layers,
+            budgets=budgets,
+            budget_name=crop_budget,
         )
         logging.info(
-            "CROP-VLA enabled keep_all=%s scout_layer=%s drop=%s",
+            "CROP-VLA enabled keep_all=%s scout_layer=%s drop=%s budget=%s %s",
             crop_keep_all,
             crop_scout_layer,
             drop_layers,
+            crop_budget,
+            budgets,
         )
     with torch.no_grad(), amp, skip_ctx, crop_ctx:
         info = eval_policy_all(
@@ -421,9 +433,13 @@ def main() -> None:
         apply_eval_protocol(cfg, original)
         if cfg.output_dir is None:
             if ours.crop:
-                cfg.output_dir = FN_ROOT / "results" / "stage_nfe" / "crop_vla" / (
-                    "eval_crop_keepall" if ours.crop_keep_all else "eval_crop"
-                )
+                if ours.crop_keep_all:
+                    tag = "eval_crop_keepall"
+                elif ours.crop_budget and ours.crop_budget not in ("role", "crop", ""):
+                    tag = f"eval_crop_{ours.crop_budget}"
+                else:
+                    tag = "eval_crop"
+                cfg.output_dir = FN_ROOT / "results" / "stage_nfe" / "crop_vla" / tag
             elif ours.task_extra_map is not None:
                 cfg.output_dir = DEFAULT_EVAL_TASK_EXTRA_DIR / method
             else:
@@ -441,6 +457,7 @@ def main() -> None:
             crop=ours.crop or ours.crop_keep_all,
             crop_keep_all=ours.crop_keep_all,
             crop_scout_layer=ours.crop_scout_layer,
+            crop_budget=ours.crop_budget,
         )
 
     _wrapped()

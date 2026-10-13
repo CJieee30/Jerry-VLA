@@ -34,10 +34,30 @@ TOKENS_PER_VIEW = 256
 GRID = 16
 SCOUT_LAYER = 2
 FISHER_DROP6 = [1, 13, 14, 15, 16, 17]
-BUDGETS = {
-    "wrist": {"relevance": 96, "diversity": 32},
-    "global": {"relevance": 32, "diversity": 96},
+BUDGET_PRESETS = {
+    "role": {
+        "wrist": {"relevance": 96, "diversity": 32},
+        "global": {"relevance": 32, "diversity": 96},
+    },
+    "shared_mix": {
+        "wrist": {"relevance": 64, "diversity": 64},
+        "global": {"relevance": 64, "diversity": 64},
+    },
 }
+BUDGETS = BUDGET_PRESETS["role"]
+
+
+def resolve_budgets(name: str | dict | None = None) -> dict[str, dict[str, int]]:
+    if name is None:
+        return BUDGET_PRESETS["role"]
+    if isinstance(name, dict):
+        return name
+    key = str(name).strip().lower()
+    if key in ("", "role", "crop"):
+        return BUDGET_PRESETS["role"]
+    if key not in BUDGET_PRESETS:
+        raise ValueError(f"unknown CROP budget {name!r}; expected one of {sorted(BUDGET_PRESETS)}")
+    return BUDGET_PRESETS[key]
 
 
 @dataclass
@@ -62,6 +82,7 @@ class CropStats:
     keep_all: bool = False
     timing_ms: dict[str, float] | None = None
     scout_layer_calls: list[int] | None = None
+    budget_name: str = "role"
 
 
 def role_for_image_key(key: str) -> str:
@@ -296,8 +317,10 @@ def _select_indices(
     n_lang: int,
     *,
     keep_all: bool,
+    budgets: dict[str, dict[str, int]] | None = None,
 ) -> tuple[torch.Tensor, list[dict[str, Any]]]:
     """lang_q_full is bool [B, full_len] marking valid language queries."""
+    budgets = resolve_budgets(budgets)
     bsz = int(img_embs[0].shape[0])
     device = img_embs[0].device
     rows: list[torch.Tensor] = []
@@ -317,7 +340,7 @@ def _select_indices(
                 score = _relevance_scores(
                     attn_weights[b : b + 1], lang_q_full[b : b + 1], slot.start, slot.n_tokens
                 )[0]
-                budget = BUDGETS[slot.role]
+                budget = budgets[slot.role]
                 chosen, rel, div = select_one_camera(
                     score,
                     feats,
@@ -418,6 +441,8 @@ def sample_actions_crop(
     scout_layer: int = SCOUT_LAYER,
     drop_layers: list[int] | None = None,
     profile: bool = False,
+    budgets: dict[str, dict[str, int]] | str | None = None,
+    budget_name: str = "role",
     **kwargs,
 ):
     """Scout + select + shortened official prefix + expert. Same noise/NFE as baseline."""
@@ -431,6 +456,7 @@ def sample_actions_crop(
         )
     if getattr(model, "proprio_history_proj", None) is not None:
         raise RuntimeError("CROP assumes use_proprioceptive_memory=False (cameras then language)")
+    budgets = resolve_budgets(budgets)
 
     bsize = tokens.shape[0]
     device = tokens.device
@@ -507,6 +533,7 @@ def sample_actions_crop(
         lang_q_full,
         n_lang,
         keep_all=keep_all,
+        budgets=budgets,
     )
     timer.mark("select")
     gather = keep_idx.unsqueeze(-1).expand(-1, -1, prefix_embs.shape[-1])
@@ -545,6 +572,7 @@ def sample_actions_crop(
         keep_all=keep_all,
         timing_ms=timer.ms(),
         scout_layer_calls=list(scout_calls),
+        budget_name=budget_name,
     )
     model._crop_stats = stats
     return actions
@@ -559,6 +587,8 @@ def crop_visual_tokens(
     scout_layer: int = SCOUT_LAYER,
     drop_layers: list[int] | None = None,
     profile: bool = False,
+    budgets: dict[str, dict[str, int]] | str | None = None,
+    budget_name: str = "role",
 ):
     """Replace PI05Pytorch.sample_actions with the CROP scout path."""
     if not enabled:
@@ -582,6 +612,8 @@ def crop_visual_tokens(
             scout_layer=scout_layer,
             drop_layers=drop_layers,
             profile=profile,
+            budgets=resolve_budgets(budgets if budgets is not None else budget_name),
+            budget_name=budget_name,
             **kwargs,
         )
 
@@ -648,6 +680,10 @@ def gpu_occupancy(gpu: int) -> list[dict[str, Any]]:
 def gpu_is_exclusive(gpu: int, *, allow_users: tuple[str, ...] | None = None) -> tuple[bool, str]:
     """True iff the card has no compute apps. Formal CROP work needs a fully idle GPU."""
     del allow_users
+    if os.environ.get("CROP_ALLOW_OCCUPIED") == "1":
+        rows = gpu_occupancy(gpu)
+        desc = ", ".join(f"{r['user']}:{r['pid']}" for r in rows) or "idle"
+        return True, f"CROP_ALLOW_OCCUPIED=1 ({desc})"
     rows = gpu_occupancy(gpu)
     if not rows:
         return True, "idle"

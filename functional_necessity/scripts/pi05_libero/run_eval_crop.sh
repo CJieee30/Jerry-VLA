@@ -4,18 +4,27 @@
 # results/stage_nfe/pi05_k6_fisher_nfe1/. Refuses to start unless the GPU is idle.
 #
 # Usage:
-#   bash run_eval_crop.sh            # pick the first idle GPU
+#   bash run_eval_crop.sh            # pick the first idle GPU; role budgets
 #   bash run_eval_crop.sh 2          # require GPU 2 idle
+#   bash run_eval_crop.sh 3 shared_mix
 set -u
 set -o pipefail
 
 ROOT=/home/guorj/Skill_Efficient_VLA/functional_necessity
 SCRIPT_DIR="$ROOT/scripts/pi05_libero"
-OUT="$ROOT/results/stage_nfe/crop_vla/eval_crop"
-LOG="$ROOT/results/logs/eval_crop_vla.log"
 PY=/home/guorj/.miniforge3/envs/lerobot/bin/python
 DROP="1,13,14,15,16,17"
 GPU_REQ="${1:-}"
+BUDGET="${2:-role}"
+if [ "$BUDGET" = "role" ]; then
+  TAG="crop_vla"
+  OUT="$ROOT/results/stage_nfe/crop_vla/eval_crop"
+  LOG="$ROOT/results/logs/eval_crop_vla.log"
+else
+  TAG="crop_vla_${BUDGET}"
+  OUT="$ROOT/results/stage_nfe/crop_vla/eval_crop_${BUDGET}"
+  LOG="$ROOT/results/logs/eval_crop_vla_${BUDGET}.log"
+fi
 
 mkdir -p "$(dirname "$LOG")" "$OUT"
 export HF_ENDPOINT="${HF_ENDPOINT:-https://hf-mirror.com}"
@@ -53,16 +62,16 @@ else:
 fi
 
 export CUDA_VISIBLE_DEVICES="$IDLE"
-echo "==== OFFLINE CHECK crop_vla gpu=$IDLE $(date -Iseconds) ====" | tee -a "$LOG"
-if ! "$PY" check_crop_vla.py --gpu "$IDLE" --n-frames 4 2>&1 | tee -a "$LOG"; then
+echo "==== OFFLINE CHECK $TAG budget=$BUDGET gpu=$IDLE $(date -Iseconds) ====" | tee -a "$LOG"
+if ! "$PY" check_crop_vla.py --gpu "$IDLE" --n-frames 4 --budget "$BUDGET" 2>&1 | tee -a "$LOG"; then
   echo "==== FAIL offline check; skip 400-ep eval $(date -Iseconds) ====" | tee -a "$LOG"
   exit 1
 fi
 
-echo "==== START crop_vla gpu=$IDLE $(date -Iseconds) ====" | tee -a "$LOG"
+echo "==== START $TAG budget=$BUDGET gpu=$IDLE $(date -Iseconds) ====" | tee -a "$LOG"
 "$PY" eval_drop.py \
-  --method fisher --k 6 --drop-layers "$DROP" --crop \
-  --output_dir "$OUT" --job_name crop_vla \
+  --method fisher --k 6 --drop-layers "$DROP" --crop --crop-budget "$BUDGET" \
+  --output_dir "$OUT" --job_name "$TAG" \
   --policy.path=lerobot/pi05_libero_finetuned_v044 \
   --policy.n_action_steps=10 \
   --policy.num_inference_steps=1 \
@@ -76,5 +85,5 @@ echo "==== START crop_vla gpu=$IDLE $(date -Iseconds) ====" | tee -a "$LOG"
   --eval.n_episodes=10 \
   --seed=1000 2>&1 | tee -a "$LOG"
 RC=${PIPESTATUS[0]}
-echo "==== EXIT crop_vla exit=$RC $(date -Iseconds) ====" | tee -a "$LOG"
+echo "==== EXIT $TAG exit=$RC $(date -Iseconds) ====" | tee -a "$LOG"
 exit "$RC"

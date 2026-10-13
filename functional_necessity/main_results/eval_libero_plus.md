@@ -2,7 +2,7 @@
 
 π0.5-LIBERO-finetuned (`lerobot/pi05_libero_finetuned_v044`) vs Stage-1 Fisher Drop-6 `[1, 13, 14, 15, 16, 17]`, skip keep-KV. Official Plus recipe on this machine: 1 trial per variant, `seed=1000`, `n_action_steps=10`, `num_inference_steps=10`, `compile_model=false`. In-distribution LIBERO 400-ep anchors: full **97.25**, Drop-6 **97.75** (`eval_pi05_libero_v044.md`). Do not mix those with this table.
 
-Avg. is the unweighted mean of four suite rates (Spatial / Object / Goal / Long). Empty cells are not finished: Sensor Noise is still running on GPU0/2; Background Textures was not started.
+Avg. is the unweighted mean of four suite rates (Spatial / Object / Goal / Long). Sensor Noise is still running on GPU0/2 (Spatial json exists; Object is in progress). Background Textures finished on GPU1/3.
 
 ## Core: seven Plus dimensions (Avg. %)
 
@@ -14,9 +14,9 @@ Avg. is the unweighted mean of four suite rates (Spatial / Object / Goal / Long)
 | Sensor Noise |  |  |  |
 | Objects Layout | 86.52 | 82.41 | −4.11 |
 | Light Conditions | 98.47 | 95.01 | −3.46 |
-| Background Textures |  |  |  |
+| Background Textures | 96.62 | 92.36 | −4.26 |
 
-Finished five-dim mean (not a Plus overall): full **83.75**, Drop-6 **79.50**, **−4.24**. Drop-6 does not collapse on any finished slice. Camera is the largest gap; Light Long is the largest single-suite hole among finished dims (−13.50), then Layout Long (−12.82).
+Finished six-dim mean (not a Plus overall): full **85.89**, Drop-6 **81.65**, **−4.24**. Drop-6 does not collapse on any finished slice. Camera is the largest dim gap (−6.18). Largest single-suite holes: Background Goal (−14.59), Light Long (−13.50), Layout Long (−12.82).
 
 ## Core: finished dims by suite (%)
 
@@ -32,8 +32,10 @@ Finished five-dim mean (not a Plus overall): full **83.75**, Drop-6 **79.50**, *
 | Layout | Drop-6 | 96.36 | 87.84 | 66.59 | 78.85 | 82.41 |
 | Light | Full | 100.00 | 99.33 | 97.85 | 96.72 | 98.47 |
 | Light | Drop-6 | 99.66 | 99.33 | 97.85 | 83.21 | 95.01 |
+| Background | Full | 99.61 | 98.79 | 93.95 | 94.12 | 96.62 |
+| Background | Drop-6 | 99.61 | 98.79 | 79.36 | 91.70 | 92.36 |
 
-Counts: Language 1367/1537 vs 1306/1537; Init 1200/1550 vs 1143/1550; Camera 1064/1599 vs 965/1599; Layout 1309/1525 vs 1254/1525; Light 1125/1142 vs 1087/1142.
+Counts: Language 1367/1537 vs 1306/1537; Init 1200/1550 vs 1143/1550; Camera 1064/1599 vs 965/1599; Layout 1309/1525 vs 1254/1525; Light 1125/1142 vs 1087/1142; Background 1038/1076 vs 990/1076.
 
 Per-dimension protocol, disagreement, and jobs are in the sections below. Language 89.20 / 85.24 and Init 77.69 / 74.18 are not overwritten.
 
@@ -115,7 +117,7 @@ All `EXIT:0`. Times are UTC from `results/logs/eval_plus_*.log`.
 
 Plus language is a paraphrased-instruction OOD slice, 1 trial per variant. Fisher Drop-6 keeps the same keep-KV operator that is in-distribution neutral (97.75 vs 97.25). Here the cost is **−3.96** Avg., **−7.57** on Long, and Spatial/Object/Goal stay within about 2–4 points. That is a measured language-OOD gap, not a closed-loop collapse, and it is not a new selector. Do not put Plus rates into the in-distribution operating-point table.
 
-Per-dimension sections follow. Sensor Noise / Background are empty in the core table until json exists.
+Per-dimension sections follow. Sensor Noise is empty in the core table until all four suite json files exist.
 
 ---
 
@@ -326,7 +328,7 @@ Spatial/Object/Goal `EXIT:0`. Long end times are `eval_info.json` mtime (UTC).
 
 ## Reading
 
-Layout Avg. **86.52 → 82.41 (−4.11)**. Spatial/Object/Goal stay within about 0.5–2 points; Long is **−12.82**. Sensor Noise is still running on GPU0/2 and is empty in the core table. Background was not started.
+Layout Avg. **86.52 → 82.41 (−4.11)**. Spatial/Object/Goal stay within about 0.5–2 points; Long is **−12.82**. Sensor Noise is still running on GPU0/2 and is empty in the core table.
 
 ---
 
@@ -396,3 +398,72 @@ All `EXIT:0`. Times are UTC from `results/logs/eval_plus_*.log`.
 ## Reading
 
 Light Avg. **98.47 → 95.01 (−3.46)**. Spatial/Object/Goal are within 0.4 points (S+O+G macro −0.11). Long is **−13.50**, 40 vs 3 one-sided failures. This repeats the Layout pattern (Long −12.82 with S/O/G near flat): under OOD shifts that leave short tasks easy, the Drop-6 cost shows up on long-horizon tasks. Not a collapse. Do not put these rates into the in-distribution operating-point table.
+
+---
+
+# LIBERO-plus Background Textures（π0.5 Fisher Drop-6 vs full）
+
+Same protocol. Category **Background Textures** (1076 variants). GPU1 = full; GPU3 = Fisher Drop-6 `[1, 13, 14, 15, 16, 17]`. All eight jobs `EXIT:0`. Do not overwrite Language 89.20 / 85.24, Init 77.69 / 74.18, Camera 66.85 / 60.68, Layout 86.52 / 82.41, or Light 98.47 / 95.01.
+
+Source: `results/eval_libero_plus/plus_{full,fisher6}_background_{spatial,object,goal,10}/{eval_info.json,drop_meta.json}`. Script: `scripts/pi05_libero/run_eval_plus_dim.sh`, category `Background Textures`.
+
+Table: Background success rate (%). Avg. is the unweighted mean of four suite rates. Long = LIBERO-10.
+
+| Setting | Metric | Spatial | Object | Goal | Long | Avg. |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Full | — | 99.61 | 98.79 | 93.95 | 94.12 | 96.62 |
+| Drop-6 (6/18) | Fisher | 99.61 | 98.79 | 79.36 | 91.70 | 92.36 |
+
+Counts (successes / background variants):
+
+| Setting | Spatial | Object | Goal | Long | All |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Full | 257/258 | 245/248 | 264/281 | 272/289 | 1038/1076 |
+| Fisher Drop-6 | 257/258 | 245/248 | 223/281 | 265/289 | 990/1076 |
+
+Δ vs this-machine Plus-background full (macro Avg. **96.62** → **92.36**, **−4.26**):
+
+- Spatial **0.00** (257/258 → 257/258)
+- Object **0.00** (245/248 → 245/248)
+- Goal **−14.59** (264/281 → 223/281)
+- Long **−2.42** (272/289 → 265/289)
+- Micro (all 1076 variants): 96.47 → 92.01, **−4.46**
+- Spatial+Object+Goal only: macro **97.45** → **92.59**, **−4.86**
+
+Background Spatial/Object match full. The Drop-6 cost is concentrated on Goal (−14.59), not Long. That is not a collapse, but Goal is the weakest suite on this slice.
+
+## Drop / keep
+
+Same as Language. Skip keep-KV.
+
+## Same-variant disagreement (full vs Fisher Drop-6)
+
+| Suite | n | both success | both fail | full✓ drop✗ | full✗ drop✓ |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Spatial | 258 | 256 | 0 | 1 | 1 |
+| Object | 248 | 242 | 0 | 3 | 3 |
+| Goal | 281 | 216 | 10 | 48 | 7 |
+| Long | 289 | 252 | 4 | 20 | 13 |
+
+Net extra failures under Drop-6: Spatial 0, Object 0, Goal 41, Long 7. All 1076: 48 extra failures (1038 → 990).
+
+## Jobs
+
+All `EXIT:0`. Times are UTC from `results/logs/eval_plus_*.log`.
+
+| Job | GPU | Start | End |
+| --- | ---: | --- | --- |
+| plus_full_background_spatial | 1 | 2026-10-12T11:14:48Z | 2026-10-12T12:23:08Z |
+| plus_full_background_object | 1 | 2026-10-12T12:23:08Z | 2026-10-12T13:29:40Z |
+| plus_full_background_goal | 1 | 2026-10-12T13:29:41Z | 2026-10-12T14:53:43Z |
+| plus_full_background_10 | 1 | 2026-10-12T14:53:43Z | 2026-10-12T18:02:38Z |
+| plus_fisher6_background_spatial | 3 | 2026-10-12T11:14:48Z | 2026-10-12T12:22:39Z |
+| plus_fisher6_background_object | 3 | 2026-10-12T12:22:40Z | 2026-10-12T13:29:32Z |
+| plus_fisher6_background_goal | 3 | 2026-10-12T13:29:32Z | 2026-10-12T15:01:25Z |
+| plus_fisher6_background_10 | 3 | 2026-10-12T15:01:25Z | 2026-10-12T18:17:30Z |
+
+`eval_s`: full Spatial 3894 / Object 3808 / Goal 4859 / Long 11119; Drop-6 Spatial 3861 / Object 3831 / Goal 5327 / Long 11550. MuJoCo-dominated; do not use as efficiency.
+
+## Reading
+
+Background Avg. **96.62 → 92.36 (−4.26)**. Spatial/Object are identical to full (net 0 extra failures). Goal is **−14.59** (48 vs 7 one-sided failures), larger than Light Long (−13.50) and Layout Long (−12.82). Long is only **−2.42**. The Drop-6 OOD hole is not always long-horizon: here it is Goal. Not a collapse. Do not put these rates into the in-distribution operating-point table.

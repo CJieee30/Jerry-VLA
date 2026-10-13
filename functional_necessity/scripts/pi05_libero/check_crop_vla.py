@@ -32,7 +32,6 @@ from common import (  # noqa: E402
     slice_batch,
 )
 from crop_vla import (  # noqa: E402
-    BUDGETS,
     FISHER_DROP6,
     GRID,
     SCOUT_LAYER,
@@ -43,6 +42,7 @@ from crop_vla import (  # noqa: E402
     first_exclusive_gpu,
     greedy_diversity,
     gpu_is_exclusive,
+    resolve_budgets,
     select_one_camera,
     stats_dict,
 )
@@ -163,10 +163,10 @@ def _action_stats(a: torch.Tensor, b: torch.Tensor) -> dict:
 IDENTITY_MAX_ABS = 2e-2
 
 
-def _budget_ok(cam: dict) -> bool:
+def _budget_ok(cam: dict, budgets: dict) -> bool:
     if cam["role"] == "empty":
         return cam["n_keep"] == cam["n_full"] == TOKENS_PER_VIEW
-    budget = BUDGETS[cam["role"]]
+    budget = budgets[cam["role"]]
     return (
         cam["n_keep"] == budget["relevance"] + budget["diversity"]
         and len(cam["relevance"]) == budget["relevance"]
@@ -183,7 +183,14 @@ def _scout_calls_ok(calls: list[int] | None) -> bool:
     return all(c == 0 for c in calls[SCOUT_LAYER + 1 :])
 
 
-def run_model_checks(gpu: int, calib, n_frames: int) -> dict:
+def run_model_checks(
+    gpu: int,
+    calib,
+    n_frames: int,
+    *,
+    budget_name: str = "role",
+) -> dict:
+    budgets = resolve_budgets(budget_name)
     device = bind_cuda_device(gpu)
     print(f"bound physical GPU{gpu} -> {device} (current={torch.cuda.current_device()})", flush=True)
     policy = load_policy(DEFAULT_CHECKPOINT, device)
@@ -211,7 +218,8 @@ def run_model_checks(gpu: int, calib, n_frames: int) -> dict:
 
     identity = []
     pruned = []
-    viz_dir = OUT / "viz"
+    viz_dir = OUT / ("viz" if budget_name == "role" else f"viz_{budget_name}")
+    crop_kw = dict(drop_layers=DROP, scout_layer=SCOUT_LAYER, budgets=budgets, budget_name=budget_name)
     with torch.no_grad(), skip_llm_layers(policy, DROP, keep_kv=True):
         for fi, raw in enumerate(frames):
             batch = move_to_device(raw, device)
@@ -225,11 +233,11 @@ def run_model_checks(gpu: int, calib, n_frames: int) -> dict:
             ).to(device)
             policy.reset()
             base = policy.predict_action_chunk(batch, noise=noise, num_steps=NFE)
-            with crop_visual_tokens(policy, keep_all=True, drop_layers=DROP, scout_layer=SCOUT_LAYER):
+            with crop_visual_tokens(policy, keep_all=True, **crop_kw):
                 policy.reset()
                 same = policy.predict_action_chunk(batch, noise=noise, num_steps=NFE)
                 id_stats = getattr(policy.model, "_crop_stats", None)
-            with crop_visual_tokens(policy, keep_all=False, drop_layers=DROP, scout_layer=SCOUT_LAYER):
+            with crop_visual_tokens(policy, keep_all=False, **crop_kw):
                 policy.reset()
                 crop = policy.predict_action_chunk(batch, noise=noise, num_steps=NFE)
                 crop_stats = policy.model._crop_stats
@@ -243,7 +251,7 @@ def run_model_checks(gpu: int, calib, n_frames: int) -> dict:
                 and id_stats.orig_action_offset == id_stats.short_pad_sum
                 and crop_stats.orig_action_offset > crop_stats.short_pad_sum
             )
-            budgets_ok = all(_budget_ok(c) for c in crop_stats.cameras)
+            budgets_ok = all(_budget_ok(c, budgets) for c in crop_stats.cameras)
             scout_ok = _scout_calls_ok(crop_stats.scout_layer_calls) and _scout_calls_ok(
                 None if id_stats is None else id_stats.scout_layer_calls
             )
@@ -295,14 +303,18 @@ def run_model_checks(gpu: int, calib, n_frames: int) -> dict:
         "drop": DROP,
         "nfe": NFE,
         "scout_layer": SCOUT_LAYER,
-        "budgets": BUDGETS,
+        "budget_name": budget_name,
+        "budgets": budgets,
         "identity": identity,
         "pruned": pruned,
         "identity_max_abs_max": max(x["max_abs"] for x in identity),
         "identity_max_abs_limit": IDENTITY_MAX_ABS,
         "all_lengths_ok": all(p["length_ok"] for p in pruned),
     }
-    (OUT / "offline_check.json").write_text(json.dumps(payload, indent=2) + "\n")
+    json_name = "offline_check.json" if budget_name == "role" else f"offline_check_{budget_name}.json"
+    payload_path = OUT / json_name
+    payload_path.write_text(json.dumps(payload, indent=2) + "\n")
+    payload["_path"] = str(payload_path)
     return payload
 
 
@@ -324,6 +336,9 @@ def cpu_select_selftest() -> None:
     keep_all, _, _ = select_one_camera(score, feats, n_rel=96, n_div=32, keep_all=True)
     if keep_all != list(range(n)):
         raise SystemExit("keep_all did not return every token")
+    mix, mix_rel, mix_div = select_one_camera(score, feats, n_rel=64, n_div=64)
+    if len(mix) != 128 or len(mix_rel) != 64 or len(mix_div) != 64 or set(mix_rel) & set(mix_div):
+        raise SystemExit(f"shared_mix 64+64 failed keep={len(mix)} rel={len(mix_rel)} div={len(mix_div)}")
     print("cpu select selftest ok", flush=True)
 
 
@@ -333,6 +348,7 @@ def main() -> None:
     parser.add_argument("--cameras-only", action="store_true")
     parser.add_argument("--gpu", type=int, default=None)
     parser.add_argument("--n-frames", type=int, default=4)
+    parser.add_argument("--budget", default="role", help="role (default) or shared_mix")
     args = parser.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
     cpu_selftest()
@@ -361,12 +377,12 @@ def main() -> None:
         if not ok:
             raise SystemExit(f"GPU{gpu} is not exclusive ({why}). Will not load the policy.")
 
-    payload = run_model_checks(gpu, calib, args.n_frames)
+    payload = run_model_checks(gpu, calib, args.n_frames, budget_name=args.budget)
     ident = payload["identity_max_abs_max"]
     ok_len = payload["all_lengths_ok"]
     print(
-        f"identity max_abs over frames={ident:.6g}  prune_length_ok={ok_len}  "
-        f"json={OUT / 'offline_check.json'}",
+        f"budget={args.budget} identity max_abs over frames={ident:.6g}  prune_length_ok={ok_len}  "
+        f"json={payload.get('_path')}",
         flush=True,
     )
     if not all(x.get("finite", False) for x in payload["identity"]):
@@ -378,7 +394,7 @@ def main() -> None:
         )
     if not ok_len:
         raise SystemExit(
-            "pruned prefix/KV/budget/offset/scout-stop check failed; inspect offline_check.json"
+            f"pruned prefix/KV/budget/offset/scout-stop check failed; inspect {payload.get('_path')}"
         )
     print("offline checks passed", flush=True)
 
