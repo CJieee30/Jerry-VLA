@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Full action-chunk latency: Drop-6 baseline vs CROP greedy or CROP-Lite.
+"""Full action-chunk latency: Drop-6 baseline vs CROP / CROP-Lite / uniform-grid.
 
-Includes scout, token selection, the second prefix, and the action expert.
-Formal mode refuses to start unless the target GPU is fully idle.
+Full-chunk and segment timing both rotate groups inside each frame (and each
+repeat for the full pass). Formal mode refuses unless the target GPU is idle.
 Diagnostic mode may share a card only when --gpu is set explicitly.
 compile_model stays false. Do not use CROP_ALLOW_OCCUPIED as a bypass.
 """
@@ -40,7 +40,9 @@ from common import (  # noqa: E402
 from crop_vla import (  # noqa: E402
     BUDGET_PRESETS,
     FISHER_DROP6,
+    PROFILE_ALIGN_MAX_ABS,
     SCOUT_LAYER,
+    align_profiled_baseline,
     bind_cuda_device,
     count_official_velocity,
     crop_visual_tokens,
@@ -94,30 +96,22 @@ def _summarize(vals: list[float]) -> dict:
     }
 
 
-def _time_chunk(
-    policy, batch, noise, repeats: int, device: torch.device, nfe: int
-) -> list[dict[str, float | int]]:
-    """Synchronized wall-clock and CUDA-event times for a full chunk. profile=False path."""
-    rows = []
+def _time_one_chunk(policy, batch, noise, device: torch.device, nfe: int) -> dict[str, float]:
+    """One synchronized full-chunk sample. profile=False path."""
     stream = torch.cuda.current_stream(device)
-    for rep in range(repeats):
-        policy.reset()
-        torch.cuda.synchronize(device)
-        start = torch.cuda.Event(enable_timing=True)
-        end = torch.cuda.Event(enable_timing=True)
-        wall0 = time.perf_counter()
-        start.record(stream)
-        policy.predict_action_chunk(batch, noise=noise, num_steps=nfe)
-        end.record(stream)
-        torch.cuda.synchronize(device)
-        rows.append(
-            {
-                "repeat": rep,
-                "cuda_ms": float(start.elapsed_time(end)),
-                "wall_ms": (time.perf_counter() - wall0) * 1000.0,
-            }
-        )
-    return rows
+    policy.reset()
+    torch.cuda.synchronize(device)
+    start = torch.cuda.Event(enable_timing=True)
+    end = torch.cuda.Event(enable_timing=True)
+    wall0 = time.perf_counter()
+    start.record(stream)
+    policy.predict_action_chunk(batch, noise=noise, num_steps=nfe)
+    end.record(stream)
+    torch.cuda.synchronize(device)
+    return {
+        "cuda_ms": float(start.elapsed_time(end)),
+        "wall_ms": (time.perf_counter() - wall0) * 1000.0,
+    }
 
 
 def _git_version() -> dict:
@@ -245,37 +239,32 @@ def capture_layout(policy, batch, noise, name: str, nfe: int) -> dict:
     return payload
 
 
-def breakdown_pass(policy, frames, noises, name: str, nfe: int) -> dict:
-    parts = []
-    with group_forward(policy, name, profile=True):
-        for batch, noise in zip(frames, noises, strict=True):
-            policy.reset()
-            policy.predict_action_chunk(batch, noise=noise, num_steps=nfe)
-            stats = getattr(policy.model, "_crop_stats", None)
-            if stats is not None:
-                parts.append(stats_dict(stats))
-    timed = [p["timing_ms"] for p in parts if p.get("timing_ms")]
+def _timer_keys_note(name: str) -> str:
     spec = parse_group(name)
     if spec["kind"] == "baseline":
-        keys_note = "embed; prefix=official full prefix; expert=all velocity steps"
-    elif spec["selector"] == "grid":
-        keys_note = "embed; prefix=fixed-index pack + official compressed prefix; expert=all velocity steps"
-    else:
-        keys_note = (
-            "embed; scout; select=token choice; prefix=gather/pack + official compressed prefix; "
-            "expert=all velocity steps"
-        )
+        return "embed; prefix=official full prefix; expert=all velocity steps"
+    if spec["selector"] == "grid":
+        return "embed; prefix=fixed-index pack + official compressed prefix; expert=all velocity steps"
+    return (
+        "embed; scout; select=token choice; prefix=gather/pack + official compressed prefix; "
+        "expert=all velocity steps"
+    )
+
+
+def _summarize_breakdown(name: str, parts: list[dict]) -> dict:
+    timed = [p["timing_ms"] for p in parts if p.get("timing_ms")]
     out: dict = {
         "note": (
-            "separate profile=True pass; analyze with mean_ms; do not add segment medians; "
+            "separate interleaved profile=True pass; analyze with mean_ms; do not add segment medians; "
             "do not subtract from a different full-chunk pass"
         ),
         "analysis_stat": "mean",
-        "timer_keys": keys_note,
+        "timer_keys": _timer_keys_note(name),
         "n_frames": len(timed),
         "velocity_calls": [p.get("velocity_calls") for p in parts],
         "num_steps": [p.get("num_steps") for p in parts],
         "scout_layer_calls": [p.get("scout_layer_calls") for p in parts][:1],
+        "orders": [p.get("order") for p in parts],
     }
     if timed:
         keys = sorted({k for t in timed for k in t})
@@ -284,6 +273,25 @@ def breakdown_pass(policy, frames, noises, name: str, nfe: int) -> dict:
         out["p95_ms"] = {k: _percentile([t[k] for t in timed if k in t], 95) for k in keys}
         out["raw"] = timed
     return out
+
+
+def breakdown_interleaved(policy, frames, noises, groups: tuple[str, ...], nfe: int) -> dict:
+    """One profiled chunk per group per frame; rotate group order each frame."""
+    collected: dict[str, list[dict]] = {name: [] for name in groups}
+    for fi, (batch, noise) in enumerate(zip(frames, noises, strict=True)):
+        order = group_order(fi, groups)
+        for name in order:
+            with group_forward(policy, name, profile=True):
+                policy.reset()
+                policy.predict_action_chunk(batch, noise=noise, num_steps=nfe)
+                stats = getattr(policy.model, "_crop_stats", None)
+                if stats is None:
+                    raise RuntimeError(f"{name} profile=True did not write _crop_stats")
+                payload = stats_dict(stats)
+                payload["frame"] = fi
+                payload["order"] = list(order)
+                collected[name].append(payload)
+    return {name: _summarize_breakdown(name, collected[name]) for name in groups}
 
 
 def compare_to_baseline(group: dict, baseline: dict, *, diagnostic: bool) -> dict:
@@ -434,12 +442,22 @@ def main() -> None:
         "repeats": args.repeats,
         "group_names": list(groups),
         "budgets": {k: BUDGET_PRESETS[k] for k in ("role", "shared_mix")},
-        "interleave": "per-frame rotation of group order; not one group then the next",
+        "interleave": {
+            "full_chunk": (
+                "per (frame, repeat): rotate the three groups; not all repeats of one group, "
+                "then the next group"
+            ),
+            "breakdown": (
+                "per frame: one profiled chunk per group in rotated order; not all frames of "
+                "one group, then the next group"
+            ),
+        },
         "flops": "unmeasured",
         "note": (
-            "full predict_action_chunk with profile=False (includes vision encode, scout, "
-            "select, pack, official prefix, expert). Segment breakdown is a separate "
-            "profile=True pass. Model load and crop/baseline switching are outside the timer."
+            "full predict_action_chunk with profile=False (vision encode, select/pack, official "
+            "prefix, expert; role-lite also includes scout). Segment breakdown is a separate "
+            "interleaved profile=True pass. Baseline segments wrap original embed_prefix / "
+            "denoise_step / sample_actions. Model load and group switching are outside the timer."
         ),
         "gate": gate,
         "code_version": _git_version(),
@@ -449,12 +467,32 @@ def main() -> None:
 
     logging.getLogger().setLevel(logging.WARNING)
     with torch.no_grad(), skip_llm_layers(policy, DROP, keep_kv=True):
-        layouts = {}
-        for name in groups:
-            with group_forward(policy, name, profile=False):
-                for _ in range(args.warmup):
+        for w in range(args.warmup):
+            for name in group_order(w, groups):
+                with group_forward(policy, name, profile=False):
                     policy.reset()
                     policy.predict_action_chunk(frames[0], noise=noises[0], num_steps=nfe)
+
+        alignment = align_profiled_baseline(policy, frames[0], noises[0], nfe)
+        summary["baseline_profile"] = alignment
+        if not alignment["aligned"] or not alignment["finite"]:
+            raise RuntimeError(
+                f"profiled baseline drifted from official path "
+                f"(max_abs={alignment['max_abs']} > {PROFILE_ALIGN_MAX_ABS})"
+            )
+        if int(alignment.get("velocity_calls") or 0) != nfe:
+            raise RuntimeError(
+                f"profiled baseline velocity_calls={alignment.get('velocity_calls')} != num_steps={nfe}"
+            )
+        print(
+            f"baseline profile wrap aligned max_abs={alignment['max_abs']:.4g} "
+            f"dtype={alignment['official_dtype']} attn={alignment['attn_implementation']} "
+            f"nfe={alignment['velocity_calls']}",
+            flush=True,
+        )
+
+        layouts = {}
+        for name in groups:
             layouts[name] = capture_layout(policy, frames[0], noises[0], name, nfe)
             vel = layouts[name].get("velocity_calls")
             if vel is not None and int(vel) != nfe:
@@ -462,17 +500,18 @@ def main() -> None:
 
         collected: dict[str, list[dict]] = {name: [] for name in groups}
         for fi, (batch, noise) in enumerate(zip(frames, noises, strict=True)):
-            for name in group_order(fi, groups):
-                with group_forward(policy, name, profile=False):
-                    timed = _time_chunk(policy, batch, noise, args.repeats, device, nfe)
-                for row in timed:
+            for rep in range(args.repeats):
+                order = group_order(fi * args.repeats + rep, groups)
+                for name in order:
+                    with group_forward(policy, name, profile=False):
+                        timed = _time_one_chunk(policy, batch, noise, device, nfe)
                     collected[name].append(
                         {
                             "frame": fi,
-                            "repeat": int(row["repeat"]),
-                            "order": list(group_order(fi, groups)),
-                            "cuda_ms": row["cuda_ms"],
-                            "wall_ms": row["wall_ms"],
+                            "repeat": rep,
+                            "order": list(order),
+                            "cuda_ms": timed["cuda_ms"],
+                            "wall_ms": timed["wall_ms"],
                         }
                     )
 
@@ -494,11 +533,9 @@ def main() -> None:
                     groups_out[name], base, diagnostic=args.mode == "diagnostic"
                 )
         summary["groups"] = groups_out
-
-        summary["breakdown_profile_true"] = {
-            name: breakdown_pass(policy, frames, noises, name, nfe)
-            for name in groups
-        }
+        summary["breakdown_profile_true"] = breakdown_interleaved(
+            policy, frames, noises, groups, nfe
+        )
 
     occupancy_after = snapshot_all()
     summary["occupancy_after"] = occupancy_after

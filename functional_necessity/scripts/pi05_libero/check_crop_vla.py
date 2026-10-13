@@ -37,6 +37,7 @@ from crop_vla import (  # noqa: E402
     GRID,
     SCOUT_LAYER,
     TOKENS_PER_VIEW,
+    align_profiled_baseline,
     bind_cuda_device,
     count_official_velocity,
     cpu_selftest,
@@ -259,6 +260,7 @@ def run_model_checks(
         selector=selector,
     )
     official_velocity = None
+    baseline_profile = None
     with torch.no_grad(), skip_llm_layers(policy, DROP, keep_kv=True):
         first = move_to_device(frames[0], device)
         gen0 = torch.Generator(device="cpu")
@@ -275,6 +277,24 @@ def run_model_checks(
                 f"official denoise_step ran {official_velocity} times; expected num_steps={nfe}"
             )
         print(f"official path velocity calls={official_velocity} (num_steps={nfe})", flush=True)
+        baseline_profile = align_profiled_baseline(policy, first, noise0, nfe)
+        if not baseline_profile["aligned"] or not baseline_profile["finite"]:
+            raise RuntimeError(
+                "profiled baseline drifted from official path: "
+                f"max_abs={baseline_profile['max_abs']} dtype={baseline_profile['official_dtype']} "
+                f"attn={baseline_profile['attn_implementation']}"
+            )
+        if int(baseline_profile.get("velocity_calls") or 0) != nfe:
+            raise RuntimeError(
+                f"profiled baseline velocity_calls={baseline_profile.get('velocity_calls')} "
+                f"!= num_steps={nfe}"
+            )
+        print(
+            f"baseline profile wrap aligned max_abs={baseline_profile['max_abs']:.4g} "
+            f"dtype={baseline_profile['official_dtype']} "
+            f"attn={baseline_profile['attn_implementation']}",
+            flush=True,
+        )
         for fi, raw in enumerate(frames):
             batch = move_to_device(raw, device)
             gen = torch.Generator(device="cpu")
@@ -382,6 +402,7 @@ def run_model_checks(
         "scout_layer": SCOUT_LAYER,
         "selector": selector,
         "official_velocity_calls": official_velocity,
+        "baseline_profile": baseline_profile,
         "budget_name": budget_name,
         "budgets": budgets,
         "identity": identity,

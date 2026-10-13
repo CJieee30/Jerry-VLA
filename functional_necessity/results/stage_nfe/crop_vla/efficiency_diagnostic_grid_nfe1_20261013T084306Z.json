@@ -1,0 +1,4815 @@
+{
+  "measurement_mode": "diagnostic",
+  "disclaimer": "\u5171\u4eab GPU\uff0c\u4ec5\u4f9b\u8bca\u65ad\uff0c\u4e0d\u8fdb\u5165\u8bba\u6587\u6b63\u5f0f\u6548\u7387\u8868",
+  "not_for_paper_table": true,
+  "gpu": 1,
+  "device": "cuda:0",
+  "physical_gpu": 1,
+  "gpu_name": "NVIDIA GeForce RTX 3090",
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "drop": [
+    1,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "nfe": 1,
+  "selector": "grid",
+  "scout_layer": 2,
+  "compile_model": false,
+  "batch_size": 1,
+  "n_action_steps": 10,
+  "n_frames": 16,
+  "warmup": 5,
+  "repeats": 3,
+  "group_names": [
+    "baseline",
+    "uniform-grid",
+    "role-lite"
+  ],
+  "budgets": {
+    "role": {
+      "wrist": {
+        "relevance": 96,
+        "diversity": 32
+      },
+      "global": {
+        "relevance": 32,
+        "diversity": 96
+      }
+    },
+    "shared_mix": {
+      "wrist": {
+        "relevance": 64,
+        "diversity": 64
+      },
+      "global": {
+        "relevance": 64,
+        "diversity": 64
+      }
+    }
+  },
+  "interleave": {
+    "full_chunk": "per (frame, repeat): rotate the three groups; not all repeats of one group, then the next group",
+    "breakdown": "per frame: one profiled chunk per group in rotated order; not all frames of one group, then the next group"
+  },
+  "flops": "unmeasured",
+  "note": "full predict_action_chunk with profile=False (vision encode, select/pack, official prefix, expert; role-lite also includes scout). Segment breakdown is a separate interleaved profile=True pass. Baseline segments wrap original embed_prefix / denoise_step / sample_actions. Model load and group switching are outside the timer.",
+  "gate": {
+    "mode": "diagnostic",
+    "env_bypass_popped": true,
+    "CROP_ALLOW_OCCUPIED": null,
+    "exclusive": false,
+    "gpu": 1,
+    "precheck": {
+      "index": 1,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 1722.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 22405.0,
+      "util_gpu_pct": 86.0,
+      "util_mem_pct": 17.0,
+      "temp_c": 60.0,
+      "power_w": 273.21,
+      "compute_apps": [
+        {
+          "pid": 1011148,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1712"
+        }
+      ]
+    }
+  },
+  "code_version": {
+    "root": "/home/guorj/Skill_Efficient_VLA",
+    "head": "4fa6dac6966bdc9c32a7ffdc87943b9d6ff74de8",
+    "head_short": "4fa6dac",
+    "status": "M functional_necessity/scripts/pi05_libero/check_crop_vla.py\n M functional_necessity/scripts/pi05_libero/crop_vla.py\n M functional_necessity/scripts/pi05_libero/measure_crop_efficiency.py",
+    "file_hashes": {
+      "functional_necessity/scripts/pi05_libero/crop_vla.py": "731f228446e08e90dcca2b74779eef7f058a2fa1a1eaf341f87d3bbf3ae7070d",
+      "functional_necessity/scripts/pi05_libero/check_crop_vla.py": "fcdcc4b61f66e0baa5503a6e044e902c9bb911c8665815699db9e3d047bb1228",
+      "functional_necessity/scripts/pi05_libero/measure_crop_efficiency.py": "e031f128822e110fa9d4104152a6b012fe9797336d14eefba2e493fc655f9c14",
+      "functional_necessity/scripts/pi05_libero/eval_drop.py": "d97cc10ab53ea0ec8b12be4caca9722bb64fc0e460b273a932042070527f9bf0"
+    }
+  },
+  "occupancy_before": [
+    {
+      "index": 0,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 11573.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 12554.0,
+      "util_gpu_pct": 50.0,
+      "util_mem_pct": 11.0,
+      "temp_c": 57.0,
+      "power_w": 248.0,
+      "compute_apps": [
+        {
+          "pid": 1966126,
+          "user": "guorj",
+          "name": "/home/guorj/.miniforge3/envs/lerobot/bin/python",
+          "mem_mib": "9834"
+        },
+        {
+          "pid": 911212,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1714"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 1722.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 22405.0,
+      "util_gpu_pct": 84.0,
+      "util_mem_pct": 17.0,
+      "temp_c": 60.0,
+      "power_w": 261.11,
+      "compute_apps": [
+        {
+          "pid": 1011148,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1712"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 9852.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 14276.0,
+      "util_gpu_pct": 8.0,
+      "util_mem_pct": 3.0,
+      "temp_c": 44.0,
+      "power_w": 127.06,
+      "compute_apps": [
+        {
+          "pid": 2057595,
+          "user": "guorj",
+          "name": "/home/guorj/.miniforge3/envs/lerobot/bin/python",
+          "mem_mib": "9832"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 3513.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 20614.0,
+      "util_gpu_pct": 30.0,
+      "util_mem_pct": 15.0,
+      "temp_c": 59.0,
+      "power_w": 299.06,
+      "compute_apps": [
+        {
+          "pid": 1997700,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1786"
+        },
+        {
+          "pid": 1009712,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1712"
+        }
+      ]
+    }
+  ],
+  "started_utc": "20261013T084306Z",
+  "baseline_profile": {
+    "method": "wrap original embed_prefix, denoise_step, sample_actions; CUDA events only",
+    "max_abs": 0.0,
+    "max_abs_limit": 0.02,
+    "aligned": true,
+    "finite": true,
+    "official_dtype": "torch.float32",
+    "profiled_dtype": "torch.float32",
+    "param_dtype": "torch.bfloat16",
+    "attn_implementation": "eager",
+    "velocity_calls": 1,
+    "num_steps": 1,
+    "timing_keys": [
+      "embed",
+      "expert",
+      "prefix",
+      "total"
+    ]
+  },
+  "groups": {
+    "baseline": {
+      "layout": {
+        "budget_name": "baseline",
+        "selector": null,
+        "budgets": null,
+        "visual_prune": false,
+        "velocity_calls": 1,
+        "num_steps": 1,
+        "expected_prefix": "official 3*256 visual + language; not shortened"
+      },
+      "cuda": {
+        "median_ms": 230.35717010498047,
+        "p95_ms": 266.6516510009766,
+        "mean_ms": 225.8100668589274,
+        "n": 48,
+        "raw_ms": [
+          263.6668395996094,
+          264.99993896484375,
+          186.94143676757812,
+          204.93209838867188,
+          267.7780456542969,
+          242.48597717285156,
+          167.66358947753906,
+          232.42066955566406,
+          260.52813720703125,
+          215.58578491210938,
+          166.08563232421875,
+          256.8673400878906,
+          263.9349670410156,
+          208.90623474121094,
+          179.4535369873047,
+          262.44549560546875,
+          262.48193359375,
+          203.5731201171875,
+          201.74745178222656,
+          262.823486328125,
+          258.64898681640625,
+          171.54864501953125,
+          203.53158569335938,
+          266.8358154296875,
+          236.9740753173828,
+          169.62969970703125,
+          225.3096923828125,
+          266.18243408203125,
+          213.64122009277344,
+          167.56527709960938,
+          263.0827941894531,
+          269.6083068847656,
+          174.39642333984375,
+          228.29367065429688,
+          262.9433288574219,
+          226.65625,
+          171.92227172851562,
+          265.9325256347656,
+          262.34674072265625,
+          185.2241973876953,
+          192.24575805664062,
+          262.4266357421875,
+          258.6306457519531,
+          171.78941345214844,
+          202.46534729003906,
+          266.30963134765625,
+          251.33871459960938,
+          168.08140563964844
+        ]
+      },
+      "wall": {
+        "median_ms": 232.1851586457342,
+        "p95_ms": 268.1934652850032,
+        "mean_ms": 226.9958276495648,
+        "n": 48,
+        "raw_ms": [
+          263.7371439486742,
+          267.2550049610436,
+          186.9740830734372,
+          207.16657489538193,
+          267.8085449151695,
+          242.54911812022328,
+          167.80966706573963,
+          233.84604509919882,
+          262.77629006654024,
+          215.61759617179632,
+          167.90398908779025,
+          259.1459942050278,
+          266.17180928587914,
+          208.93823402002454,
+          181.71379109844565,
+          264.7554879076779,
+          264.7260599769652,
+          203.60238710418344,
+          203.05443881079555,
+          265.1084768585861,
+          258.6819757707417,
+          171.58158821985126,
+          205.73130901902914,
+          266.8721959926188,
+          237.0068752206862,
+          169.6609277278185,
+          226.75604838877916,
+          268.400730099529,
+          213.6697731912136,
+          169.78484904393554,
+          265.3678678907454,
+          271.7975419946015,
+          174.42857520654798,
+          230.52427219226956,
+          265.2179771102965,
+          226.686570327729,
+          174.19985216110945,
+          267.37260399386287,
+          264.51558666303754,
+          185.2540196850896,
+          193.58241092413664,
+          264.66062059625983,
+          258.66574980318546,
+          171.85533232986927,
+          204.78560775518417,
+          268.5654601082206,
+          251.39857782050967,
+          168.11409126967192
+        ]
+      },
+      "samples": [
+        {
+          "frame": 0,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 263.6668395996094,
+          "wall_ms": 263.7371439486742
+        },
+        {
+          "frame": 0,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 264.99993896484375,
+          "wall_ms": 267.2550049610436
+        },
+        {
+          "frame": 0,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 186.94143676757812,
+          "wall_ms": 186.9740830734372
+        },
+        {
+          "frame": 1,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 204.93209838867188,
+          "wall_ms": 207.16657489538193
+        },
+        {
+          "frame": 1,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 267.7780456542969,
+          "wall_ms": 267.8085449151695
+        },
+        {
+          "frame": 1,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 242.48597717285156,
+          "wall_ms": 242.54911812022328
+        },
+        {
+          "frame": 2,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 167.66358947753906,
+          "wall_ms": 167.80966706573963
+        },
+        {
+          "frame": 2,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 232.42066955566406,
+          "wall_ms": 233.84604509919882
+        },
+        {
+          "frame": 2,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 260.52813720703125,
+          "wall_ms": 262.77629006654024
+        },
+        {
+          "frame": 3,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 215.58578491210938,
+          "wall_ms": 215.61759617179632
+        },
+        {
+          "frame": 3,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 166.08563232421875,
+          "wall_ms": 167.90398908779025
+        },
+        {
+          "frame": 3,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 256.8673400878906,
+          "wall_ms": 259.1459942050278
+        },
+        {
+          "frame": 4,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 263.9349670410156,
+          "wall_ms": 266.17180928587914
+        },
+        {
+          "frame": 4,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 208.90623474121094,
+          "wall_ms": 208.93823402002454
+        },
+        {
+          "frame": 4,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 179.4535369873047,
+          "wall_ms": 181.71379109844565
+        },
+        {
+          "frame": 5,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 262.44549560546875,
+          "wall_ms": 264.7554879076779
+        },
+        {
+          "frame": 5,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 262.48193359375,
+          "wall_ms": 264.7260599769652
+        },
+        {
+          "frame": 5,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 203.5731201171875,
+          "wall_ms": 203.60238710418344
+        },
+        {
+          "frame": 6,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 201.74745178222656,
+          "wall_ms": 203.05443881079555
+        },
+        {
+          "frame": 6,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 262.823486328125,
+          "wall_ms": 265.1084768585861
+        },
+        {
+          "frame": 6,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 258.64898681640625,
+          "wall_ms": 258.6819757707417
+        },
+        {
+          "frame": 7,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 171.54864501953125,
+          "wall_ms": 171.58158821985126
+        },
+        {
+          "frame": 7,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 203.53158569335938,
+          "wall_ms": 205.73130901902914
+        },
+        {
+          "frame": 7,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 266.8358154296875,
+          "wall_ms": 266.8721959926188
+        },
+        {
+          "frame": 8,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 236.9740753173828,
+          "wall_ms": 237.0068752206862
+        },
+        {
+          "frame": 8,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 169.62969970703125,
+          "wall_ms": 169.6609277278185
+        },
+        {
+          "frame": 8,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 225.3096923828125,
+          "wall_ms": 226.75604838877916
+        },
+        {
+          "frame": 9,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 266.18243408203125,
+          "wall_ms": 268.400730099529
+        },
+        {
+          "frame": 9,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 213.64122009277344,
+          "wall_ms": 213.6697731912136
+        },
+        {
+          "frame": 9,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 167.56527709960938,
+          "wall_ms": 169.78484904393554
+        },
+        {
+          "frame": 10,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 263.0827941894531,
+          "wall_ms": 265.3678678907454
+        },
+        {
+          "frame": 10,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 269.6083068847656,
+          "wall_ms": 271.7975419946015
+        },
+        {
+          "frame": 10,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 174.39642333984375,
+          "wall_ms": 174.42857520654798
+        },
+        {
+          "frame": 11,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 228.29367065429688,
+          "wall_ms": 230.52427219226956
+        },
+        {
+          "frame": 11,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 262.9433288574219,
+          "wall_ms": 265.2179771102965
+        },
+        {
+          "frame": 11,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 226.65625,
+          "wall_ms": 226.686570327729
+        },
+        {
+          "frame": 12,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 171.92227172851562,
+          "wall_ms": 174.19985216110945
+        },
+        {
+          "frame": 12,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 265.9325256347656,
+          "wall_ms": 267.37260399386287
+        },
+        {
+          "frame": 12,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 262.34674072265625,
+          "wall_ms": 264.51558666303754
+        },
+        {
+          "frame": 13,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 185.2241973876953,
+          "wall_ms": 185.2540196850896
+        },
+        {
+          "frame": 13,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 192.24575805664062,
+          "wall_ms": 193.58241092413664
+        },
+        {
+          "frame": 13,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 262.4266357421875,
+          "wall_ms": 264.66062059625983
+        },
+        {
+          "frame": 14,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 258.6306457519531,
+          "wall_ms": 258.66574980318546
+        },
+        {
+          "frame": 14,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 171.78941345214844,
+          "wall_ms": 171.85533232986927
+        },
+        {
+          "frame": 14,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 202.46534729003906,
+          "wall_ms": 204.78560775518417
+        },
+        {
+          "frame": 15,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 266.30963134765625,
+          "wall_ms": 268.5654601082206
+        },
+        {
+          "frame": 15,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 251.33871459960938,
+          "wall_ms": 251.39857782050967
+        },
+        {
+          "frame": 15,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 168.08140563964844,
+          "wall_ms": 168.11409126967192
+        }
+      ],
+      "vs_baseline": null
+    },
+    "uniform-grid": {
+      "layout": {
+        "full_len": 968,
+        "short_len": 712,
+        "kv_len": 712,
+        "orig_action_offset": 560,
+        "short_pad_sum": 304,
+        "cameras": [
+          {
+            "key": "observation.images.image",
+            "role": "global",
+            "n_keep": 128,
+            "n_full": 256,
+            "relevance": [],
+            "diversity": [],
+            "keep": [
+              0,
+              2,
+              4,
+              6,
+              8,
+              10,
+              12,
+              14,
+              17,
+              19,
+              21,
+              23,
+              25,
+              27,
+              29,
+              31,
+              32,
+              34,
+              36,
+              38,
+              40,
+              42,
+              44,
+              46,
+              49,
+              51,
+              53,
+              55,
+              57,
+              59,
+              61,
+              63,
+              64,
+              66,
+              68,
+              70,
+              72,
+              74,
+              76,
+              78,
+              81,
+              83,
+              85,
+              87,
+              89,
+              91,
+              93,
+              95,
+              96,
+              98,
+              100,
+              102,
+              104,
+              106,
+              108,
+              110,
+              113,
+              115,
+              117,
+              119,
+              121,
+              123,
+              125,
+              127,
+              128,
+              130,
+              132,
+              134,
+              136,
+              138,
+              140,
+              142,
+              145,
+              147,
+              149,
+              151,
+              153,
+              155,
+              157,
+              159,
+              160,
+              162,
+              164,
+              166,
+              168,
+              170,
+              172,
+              174,
+              177,
+              179,
+              181,
+              183,
+              185,
+              187,
+              189,
+              191,
+              192,
+              194,
+              196,
+              198,
+              200,
+              202,
+              204,
+              206,
+              209,
+              211,
+              213,
+              215,
+              217,
+              219,
+              221,
+              223,
+              224,
+              226,
+              228,
+              230,
+              232,
+              234,
+              236,
+              238,
+              241,
+              243,
+              245,
+              247,
+              249,
+              251,
+              253,
+              255
+            ]
+          },
+          {
+            "key": "observation.images.image2",
+            "role": "wrist",
+            "n_keep": 128,
+            "n_full": 256,
+            "relevance": [],
+            "diversity": [],
+            "keep": [
+              0,
+              2,
+              4,
+              6,
+              8,
+              10,
+              12,
+              14,
+              17,
+              19,
+              21,
+              23,
+              25,
+              27,
+              29,
+              31,
+              32,
+              34,
+              36,
+              38,
+              40,
+              42,
+              44,
+              46,
+              49,
+              51,
+              53,
+              55,
+              57,
+              59,
+              61,
+              63,
+              64,
+              66,
+              68,
+              70,
+              72,
+              74,
+              76,
+              78,
+              81,
+              83,
+              85,
+              87,
+              89,
+              91,
+              93,
+              95,
+              96,
+              98,
+              100,
+              102,
+              104,
+              106,
+              108,
+              110,
+              113,
+              115,
+              117,
+              119,
+              121,
+              123,
+              125,
+              127,
+              128,
+              130,
+              132,
+              134,
+              136,
+              138,
+              140,
+              142,
+              145,
+              147,
+              149,
+              151,
+              153,
+              155,
+              157,
+              159,
+              160,
+              162,
+              164,
+              166,
+              168,
+              170,
+              172,
+              174,
+              177,
+              179,
+              181,
+              183,
+              185,
+              187,
+              189,
+              191,
+              192,
+              194,
+              196,
+              198,
+              200,
+              202,
+              204,
+              206,
+              209,
+              211,
+              213,
+              215,
+              217,
+              219,
+              221,
+              223,
+              224,
+              226,
+              228,
+              230,
+              232,
+              234,
+              236,
+              238,
+              241,
+              243,
+              245,
+              247,
+              249,
+              251,
+              253,
+              255
+            ]
+          },
+          {
+            "key": "observation.images.empty_camera_0",
+            "role": "empty",
+            "n_keep": 256,
+            "n_full": 256,
+            "relevance": [],
+            "diversity": [],
+            "keep": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              121,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              131,
+              132,
+              133,
+              134,
+              135,
+              136,
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143,
+              144,
+              145,
+              146,
+              147,
+              148,
+              149,
+              150,
+              151,
+              152,
+              153,
+              154,
+              155,
+              156,
+              157,
+              158,
+              159,
+              160,
+              161,
+              162,
+              163,
+              164,
+              165,
+              166,
+              167,
+              168,
+              169,
+              170,
+              171,
+              172,
+              173,
+              174,
+              175,
+              176,
+              177,
+              178,
+              179,
+              180,
+              181,
+              182,
+              183,
+              184,
+              185,
+              186,
+              187,
+              188,
+              189,
+              190,
+              191,
+              192,
+              193,
+              194,
+              195,
+              196,
+              197,
+              198,
+              199,
+              200,
+              201,
+              202,
+              203,
+              204,
+              205,
+              206,
+              207,
+              208,
+              209,
+              210,
+              211,
+              212,
+              213,
+              214,
+              215,
+              216,
+              217,
+              218,
+              219,
+              220,
+              221,
+              222,
+              223,
+              224,
+              225,
+              226,
+              227,
+              228,
+              229,
+              230,
+              231,
+              232,
+              233,
+              234,
+              235,
+              236,
+              237,
+              238,
+              239,
+              240,
+              241,
+              242,
+              243,
+              244,
+              245,
+              246,
+              247,
+              248,
+              249,
+              250,
+              251,
+              252,
+              253,
+              254,
+              255
+            ]
+          }
+        ],
+        "scout_layer": -1,
+        "keep_all": false,
+        "timing_ms": null,
+        "scout_layer_calls": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "budget_name": "grid",
+        "selector": "grid",
+        "num_steps": 1,
+        "velocity_calls": 1,
+        "budgets": null,
+        "keep_rule": "(row+col)%2==0; 128 unique tokens per live camera; no scout",
+        "visual_prune": true
+      },
+      "cuda": {
+        "median_ms": 211.7196807861328,
+        "p95_ms": 241.62959060668945,
+        "mean_ms": 202.7060022354126,
+        "n": 48,
+        "raw_ms": [
+          152.20736694335938,
+          239.87075805664062,
+          237.96421813964844,
+          187.89581298828125,
+          177.33529663085938,
+          229.44137573242188,
+          238.16390991210938,
+          154.42431640625,
+          185.101318359375,
+          238.69850158691406,
+          207.5361328125,
+          153.68397521972656,
+          205.5055389404297,
+          246.09478759765625,
+          216.300537109375,
+          152.12322998046875,
+          229.01344299316406,
+          231.23622131347656,
+          189.7479705810547,
+          153.3540496826172,
+          239.01593017578125,
+          231.66053771972656,
+          153.9088897705078,
+          151.8059539794922,
+          239.21420288085938,
+          223.8771209716797,
+          163.56045532226562,
+          180.7605743408203,
+          230.3426513671875,
+          215.90322875976562,
+          152.58522033691406,
+          241.1845703125,
+          238.34719848632812,
+          158.53237915039062,
+          187.56080627441406,
+          241.8692169189453,
+          219.39199829101562,
+          152.58419799804688,
+          204.8256378173828,
+          239.09129333496094,
+          177.06906127929688,
+          152.49746704101562,
+          239.5002899169922,
+          242.34649658203125,
+          184.3916473388672,
+          162.72280883789062,
+          238.90428161621094,
+          240.7352294921875
+        ]
+      },
+      "wall": {
+        "median_ms": 211.85947442427278,
+        "p95_ms": 243.58922422397882,
+        "mean_ms": 203.7233885397048,
+        "n": 48,
+        "raw_ms": [
+          152.282546274364,
+          240.01024896278977,
+          240.20098941400647,
+          187.94737104326487,
+          178.65270096808672,
+          231.6778302192688,
+          238.19395806640387,
+          154.45605712011456,
+          185.16301829367876,
+          239.02004305273294,
+          207.56924571469426,
+          153.71555695310235,
+          207.78526877984405,
+          246.12591182813048,
+          216.3330833427608,
+          152.1820006892085,
+          231.25345399603248,
+          233.49384497851133,
+          189.81439899653196,
+          155.64707294106483,
+          241.28489987924695,
+          233.92200423404574,
+          153.9395758882165,
+          154.09653121605515,
+          241.47349037230015,
+          223.93241804093122,
+          163.58949011191726,
+          180.97736686468124,
+          232.53113590180874,
+          215.9336800687015,
+          152.64419419690967,
+          242.48123494908214,
+          238.3779943920672,
+          158.563946839422,
+          189.8668948560953,
+          244.08134864643216,
+          219.42609222605824,
+          152.65403920784593,
+          207.07948319613934,
+          241.34426284581423,
+          177.09936294704676,
+          152.63682417571545,
+          241.80470779538155,
+          243.9235169440508,
+          184.4224501401186,
+          165.0110916234553,
+          241.13161582499743,
+          242.9683948867023
+        ]
+      },
+      "samples": [
+        {
+          "frame": 0,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 152.20736694335938,
+          "wall_ms": 152.282546274364
+        },
+        {
+          "frame": 0,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 239.87075805664062,
+          "wall_ms": 240.01024896278977
+        },
+        {
+          "frame": 0,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 237.96421813964844,
+          "wall_ms": 240.20098941400647
+        },
+        {
+          "frame": 1,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 187.89581298828125,
+          "wall_ms": 187.94737104326487
+        },
+        {
+          "frame": 1,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 177.33529663085938,
+          "wall_ms": 178.65270096808672
+        },
+        {
+          "frame": 1,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 229.44137573242188,
+          "wall_ms": 231.6778302192688
+        },
+        {
+          "frame": 2,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 238.16390991210938,
+          "wall_ms": 238.19395806640387
+        },
+        {
+          "frame": 2,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 154.42431640625,
+          "wall_ms": 154.45605712011456
+        },
+        {
+          "frame": 2,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 185.101318359375,
+          "wall_ms": 185.16301829367876
+        },
+        {
+          "frame": 3,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 238.69850158691406,
+          "wall_ms": 239.02004305273294
+        },
+        {
+          "frame": 3,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 207.5361328125,
+          "wall_ms": 207.56924571469426
+        },
+        {
+          "frame": 3,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 153.68397521972656,
+          "wall_ms": 153.71555695310235
+        },
+        {
+          "frame": 4,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 205.5055389404297,
+          "wall_ms": 207.78526877984405
+        },
+        {
+          "frame": 4,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 246.09478759765625,
+          "wall_ms": 246.12591182813048
+        },
+        {
+          "frame": 4,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 216.300537109375,
+          "wall_ms": 216.3330833427608
+        },
+        {
+          "frame": 5,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 152.12322998046875,
+          "wall_ms": 152.1820006892085
+        },
+        {
+          "frame": 5,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 229.01344299316406,
+          "wall_ms": 231.25345399603248
+        },
+        {
+          "frame": 5,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 231.23622131347656,
+          "wall_ms": 233.49384497851133
+        },
+        {
+          "frame": 6,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 189.7479705810547,
+          "wall_ms": 189.81439899653196
+        },
+        {
+          "frame": 6,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 153.3540496826172,
+          "wall_ms": 155.64707294106483
+        },
+        {
+          "frame": 6,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 239.01593017578125,
+          "wall_ms": 241.28489987924695
+        },
+        {
+          "frame": 7,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 231.66053771972656,
+          "wall_ms": 233.92200423404574
+        },
+        {
+          "frame": 7,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 153.9088897705078,
+          "wall_ms": 153.9395758882165
+        },
+        {
+          "frame": 7,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 151.8059539794922,
+          "wall_ms": 154.09653121605515
+        },
+        {
+          "frame": 8,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 239.21420288085938,
+          "wall_ms": 241.47349037230015
+        },
+        {
+          "frame": 8,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 223.8771209716797,
+          "wall_ms": 223.93241804093122
+        },
+        {
+          "frame": 8,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 163.56045532226562,
+          "wall_ms": 163.58949011191726
+        },
+        {
+          "frame": 9,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 180.7605743408203,
+          "wall_ms": 180.97736686468124
+        },
+        {
+          "frame": 9,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 230.3426513671875,
+          "wall_ms": 232.53113590180874
+        },
+        {
+          "frame": 9,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 215.90322875976562,
+          "wall_ms": 215.9336800687015
+        },
+        {
+          "frame": 10,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 152.58522033691406,
+          "wall_ms": 152.64419419690967
+        },
+        {
+          "frame": 10,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 241.1845703125,
+          "wall_ms": 242.48123494908214
+        },
+        {
+          "frame": 10,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 238.34719848632812,
+          "wall_ms": 238.3779943920672
+        },
+        {
+          "frame": 11,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 158.53237915039062,
+          "wall_ms": 158.563946839422
+        },
+        {
+          "frame": 11,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 187.56080627441406,
+          "wall_ms": 189.8668948560953
+        },
+        {
+          "frame": 11,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 241.8692169189453,
+          "wall_ms": 244.08134864643216
+        },
+        {
+          "frame": 12,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 219.39199829101562,
+          "wall_ms": 219.42609222605824
+        },
+        {
+          "frame": 12,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 152.58419799804688,
+          "wall_ms": 152.65403920784593
+        },
+        {
+          "frame": 12,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 204.8256378173828,
+          "wall_ms": 207.07948319613934
+        },
+        {
+          "frame": 13,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 239.09129333496094,
+          "wall_ms": 241.34426284581423
+        },
+        {
+          "frame": 13,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 177.06906127929688,
+          "wall_ms": 177.09936294704676
+        },
+        {
+          "frame": 13,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 152.49746704101562,
+          "wall_ms": 152.63682417571545
+        },
+        {
+          "frame": 14,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 239.5002899169922,
+          "wall_ms": 241.80470779538155
+        },
+        {
+          "frame": 14,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 242.34649658203125,
+          "wall_ms": 243.9235169440508
+        },
+        {
+          "frame": 14,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 184.3916473388672,
+          "wall_ms": 184.4224501401186
+        },
+        {
+          "frame": 15,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 162.72280883789062,
+          "wall_ms": 165.0110916234553
+        },
+        {
+          "frame": 15,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 238.90428161621094,
+          "wall_ms": 241.13161582499743
+        },
+        {
+          "frame": 15,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 240.7352294921875,
+          "wall_ms": 242.9683948867023
+        }
+      ],
+      "vs_baseline": {
+        "cuda": {
+          "delta_median_ms": -18.637489318847656,
+          "delta_mean_ms": -23.1040646235148,
+          "delta_p95_ms": -25.022060394287138,
+          "delta_median_pct": -8.09069208063027,
+          "delta_mean_pct": -10.231636235221009,
+          "relative_to_baseline": 0.9190930791936973,
+          "speedup_vs_baseline": 1.0880290828403156,
+          "note": "\u5171\u4eab GPU\uff0c\u4ec5\u4f9b\u8bca\u65ad\uff0c\u4e0d\u8fdb\u5165\u8bba\u6587\u6b63\u5f0f\u6548\u7387\u8868"
+        },
+        "wall": {
+          "delta_median_ms": -20.325684221461415,
+          "delta_mean_ms": -23.272439109859988,
+          "delta_p95_ms": -24.604241061024368,
+          "delta_median_pct": -8.754084171449627,
+          "delta_mean_pct": -10.25236426186118,
+          "relative_to_baseline": 0.9124591582855037,
+          "speedup_vs_baseline": 1.095939463064828,
+          "note": "\u5171\u4eab GPU\uff0c\u4ec5\u4f9b\u8bca\u65ad\uff0c\u4e0d\u8fdb\u5165\u8bba\u6587\u6b63\u5f0f\u6548\u7387\u8868"
+        }
+      }
+    },
+    "role-lite": {
+      "layout": {
+        "full_len": 968,
+        "short_len": 712,
+        "kv_len": 712,
+        "orig_action_offset": 560,
+        "short_pad_sum": 304,
+        "cameras": [
+          {
+            "key": "observation.images.image",
+            "role": "global",
+            "n_keep": 128,
+            "n_full": 256,
+            "relevance": [
+              193,
+              81,
+              82,
+              66,
+              24,
+              67,
+              49,
+              98,
+              65,
+              225,
+              80,
+              8,
+              114,
+              183,
+              167,
+              115,
+              99,
+              113,
+              47,
+              33,
+              182,
+              97,
+              253,
+              48,
+              105,
+              116,
+              137,
+              40,
+              100,
+              37,
+              135,
+              83
+            ],
+            "diversity": [
+              233,
+              230,
+              238,
+              226,
+              249,
+              228,
+              10,
+              221,
+              209,
+              232,
+              229,
+              237,
+              222,
+              213,
+              246,
+              205,
+              247,
+              63,
+              248,
+              245,
+              143,
+              5,
+              250,
+              191,
+              27,
+              242,
+              206,
+              29,
+              217,
+              244,
+              207,
+              189,
+              192,
+              111,
+              14,
+              159,
+              239,
+              227,
+              241,
+              30,
+              208,
+              231,
+              12,
+              235,
+              160,
+              26,
+              220,
+              127,
+              15,
+              210,
+              190,
+              201,
+              202,
+              200,
+              219,
+              204,
+              11,
+              216,
+              176,
+              252,
+              236,
+              234,
+              218,
+              212,
+              197,
+              195,
+              214,
+              251,
+              224,
+              142,
+              4,
+              45,
+              79,
+              41,
+              161,
+              194,
+              38,
+              254,
+              28,
+              57,
+              61,
+              255,
+              144,
+              203,
+              43,
+              211,
+              188,
+              162,
+              42,
+              163,
+              36,
+              94,
+              215,
+              44,
+              110,
+              46
+            ],
+            "keep": [
+              4,
+              5,
+              8,
+              10,
+              11,
+              12,
+              14,
+              15,
+              24,
+              26,
+              27,
+              28,
+              29,
+              30,
+              33,
+              36,
+              37,
+              38,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              57,
+              61,
+              63,
+              65,
+              66,
+              67,
+              79,
+              80,
+              81,
+              82,
+              83,
+              94,
+              97,
+              98,
+              99,
+              100,
+              105,
+              110,
+              111,
+              113,
+              114,
+              115,
+              116,
+              127,
+              135,
+              137,
+              142,
+              143,
+              144,
+              159,
+              160,
+              161,
+              162,
+              163,
+              167,
+              176,
+              182,
+              183,
+              188,
+              189,
+              190,
+              191,
+              192,
+              193,
+              194,
+              195,
+              197,
+              200,
+              201,
+              202,
+              203,
+              204,
+              205,
+              206,
+              207,
+              208,
+              209,
+              210,
+              211,
+              212,
+              213,
+              214,
+              215,
+              216,
+              217,
+              218,
+              219,
+              220,
+              221,
+              222,
+              224,
+              225,
+              226,
+              227,
+              228,
+              229,
+              230,
+              231,
+              232,
+              233,
+              234,
+              235,
+              236,
+              237,
+              238,
+              239,
+              241,
+              242,
+              244,
+              245,
+              246,
+              247,
+              248,
+              249,
+              250,
+              251,
+              252,
+              253,
+              254,
+              255
+            ]
+          },
+          {
+            "key": "observation.images.image2",
+            "role": "wrist",
+            "n_keep": 128,
+            "n_full": 256,
+            "relevance": [
+              220,
+              210,
+              194,
+              242,
+              193,
+              225,
+              254,
+              203,
+              224,
+              221,
+              253,
+              252,
+              237,
+              243,
+              251,
+              223,
+              209,
+              195,
+              236,
+              185,
+              47,
+              238,
+              239,
+              181,
+              97,
+              98,
+              255,
+              231,
+              240,
+              235,
+              48,
+              234,
+              82,
+              101,
+              226,
+              166,
+              165,
+              202,
+              241,
+              31,
+              227,
+              1,
+              81,
+              196,
+              136,
+              204,
+              141,
+              96,
+              245,
+              250,
+              91,
+              116,
+              140,
+              13,
+              246,
+              108,
+              107,
+              123,
+              156,
+              201,
+              104,
+              95,
+              180,
+              72,
+              163,
+              229,
+              167,
+              228,
+              211,
+              131,
+              87,
+              186,
+              184,
+              248,
+              115,
+              113,
+              197,
+              244,
+              232,
+              247,
+              124,
+              179,
+              162,
+              32,
+              168,
+              122,
+              132,
+              157,
+              146,
+              169,
+              112,
+              129,
+              147,
+              219,
+              125,
+              120
+            ],
+            "diversity": [
+              15,
+              216,
+              30,
+              158,
+              63,
+              143,
+              12,
+              5,
+              215,
+              217,
+              4,
+              6,
+              172,
+              2,
+              214,
+              206,
+              111,
+              213,
+              0,
+              57,
+              207,
+              192,
+              27,
+              230,
+              46,
+              14,
+              151,
+              75,
+              200,
+              35,
+              62,
+              21
+            ],
+            "keep": [
+              0,
+              1,
+              2,
+              4,
+              5,
+              6,
+              12,
+              13,
+              14,
+              15,
+              21,
+              27,
+              30,
+              31,
+              32,
+              35,
+              46,
+              47,
+              48,
+              57,
+              62,
+              63,
+              72,
+              75,
+              81,
+              82,
+              87,
+              91,
+              95,
+              96,
+              97,
+              98,
+              101,
+              104,
+              107,
+              108,
+              111,
+              112,
+              113,
+              115,
+              116,
+              120,
+              122,
+              123,
+              124,
+              125,
+              129,
+              131,
+              132,
+              136,
+              140,
+              141,
+              143,
+              146,
+              147,
+              151,
+              156,
+              157,
+              158,
+              162,
+              163,
+              165,
+              166,
+              167,
+              168,
+              169,
+              172,
+              179,
+              180,
+              181,
+              184,
+              185,
+              186,
+              192,
+              193,
+              194,
+              195,
+              196,
+              197,
+              200,
+              201,
+              202,
+              203,
+              204,
+              206,
+              207,
+              209,
+              210,
+              211,
+              213,
+              214,
+              215,
+              216,
+              217,
+              219,
+              220,
+              221,
+              223,
+              224,
+              225,
+              226,
+              227,
+              228,
+              229,
+              230,
+              231,
+              232,
+              234,
+              235,
+              236,
+              237,
+              238,
+              239,
+              240,
+              241,
+              242,
+              243,
+              244,
+              245,
+              246,
+              247,
+              248,
+              250,
+              251,
+              252,
+              253,
+              254,
+              255
+            ]
+          },
+          {
+            "key": "observation.images.empty_camera_0",
+            "role": "empty",
+            "n_keep": 256,
+            "n_full": 256,
+            "relevance": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              121,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              131,
+              132,
+              133,
+              134,
+              135,
+              136,
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143,
+              144,
+              145,
+              146,
+              147,
+              148,
+              149,
+              150,
+              151,
+              152,
+              153,
+              154,
+              155,
+              156,
+              157,
+              158,
+              159,
+              160,
+              161,
+              162,
+              163,
+              164,
+              165,
+              166,
+              167,
+              168,
+              169,
+              170,
+              171,
+              172,
+              173,
+              174,
+              175,
+              176,
+              177,
+              178,
+              179,
+              180,
+              181,
+              182,
+              183,
+              184,
+              185,
+              186,
+              187,
+              188,
+              189,
+              190,
+              191,
+              192,
+              193,
+              194,
+              195,
+              196,
+              197,
+              198,
+              199,
+              200,
+              201,
+              202,
+              203,
+              204,
+              205,
+              206,
+              207,
+              208,
+              209,
+              210,
+              211,
+              212,
+              213,
+              214,
+              215,
+              216,
+              217,
+              218,
+              219,
+              220,
+              221,
+              222,
+              223,
+              224,
+              225,
+              226,
+              227,
+              228,
+              229,
+              230,
+              231,
+              232,
+              233,
+              234,
+              235,
+              236,
+              237,
+              238,
+              239,
+              240,
+              241,
+              242,
+              243,
+              244,
+              245,
+              246,
+              247,
+              248,
+              249,
+              250,
+              251,
+              252,
+              253,
+              254,
+              255
+            ],
+            "diversity": [],
+            "keep": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              121,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              131,
+              132,
+              133,
+              134,
+              135,
+              136,
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143,
+              144,
+              145,
+              146,
+              147,
+              148,
+              149,
+              150,
+              151,
+              152,
+              153,
+              154,
+              155,
+              156,
+              157,
+              158,
+              159,
+              160,
+              161,
+              162,
+              163,
+              164,
+              165,
+              166,
+              167,
+              168,
+              169,
+              170,
+              171,
+              172,
+              173,
+              174,
+              175,
+              176,
+              177,
+              178,
+              179,
+              180,
+              181,
+              182,
+              183,
+              184,
+              185,
+              186,
+              187,
+              188,
+              189,
+              190,
+              191,
+              192,
+              193,
+              194,
+              195,
+              196,
+              197,
+              198,
+              199,
+              200,
+              201,
+              202,
+              203,
+              204,
+              205,
+              206,
+              207,
+              208,
+              209,
+              210,
+              211,
+              212,
+              213,
+              214,
+              215,
+              216,
+              217,
+              218,
+              219,
+              220,
+              221,
+              222,
+              223,
+              224,
+              225,
+              226,
+              227,
+              228,
+              229,
+              230,
+              231,
+              232,
+              233,
+              234,
+              235,
+              236,
+              237,
+              238,
+              239,
+              240,
+              241,
+              242,
+              243,
+              244,
+              245,
+              246,
+              247,
+              248,
+              249,
+              250,
+              251,
+              252,
+              253,
+              254,
+              255
+            ]
+          }
+        ],
+        "scout_layer": 2,
+        "keep_all": false,
+        "timing_ms": null,
+        "scout_layer_calls": [
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "budget_name": "role",
+        "selector": "lite",
+        "num_steps": 1,
+        "velocity_calls": 1,
+        "budgets": {
+          "wrist": {
+            "relevance": 96,
+            "diversity": 32
+          },
+          "global": {
+            "relevance": 32,
+            "diversity": 96
+          }
+        },
+        "visual_prune": true
+      },
+      "cuda": {
+        "median_ms": 223.54073333740234,
+        "p95_ms": 260.51586761474607,
+        "mean_ms": 218.22942860921225,
+        "n": 48,
+        "raw_ms": [
+          246.50425720214844,
+          162.94883728027344,
+          223.98463439941406,
+          248.26336669921875,
+          205.02249145507812,
+          161.05520629882812,
+          242.69619750976562,
+          256.334716796875,
+          176.87216186523438,
+          174.76083374023438,
+          257.2441711425781,
+          249.96351623535156,
+          169.40028381347656,
+          211.7022705078125,
+          251.69273376464844,
+          260.1778564453125,
+          163.76185607910156,
+          211.7508544921875,
+          261.138427734375,
+          222.1894073486328,
+          161.53919982910156,
+          234.47039794921875,
+          258.7975769042969,
+          206.4691162109375,
+          159.0179901123047,
+          259.37017822265625,
+          257.3639831542969,
+          202.60873413085938,
+          195.1293487548828,
+          258.85797119140625,
+          249.2928009033203,
+          161.33363342285156,
+          235.39712524414062,
+          260.5710144042969,
+          185.2403564453125,
+          185.84031677246094,
+          250.64346313476562,
+          243.1630096435547,
+          164.2782745361328,
+          196.93055725097656,
+          259.8533020019531,
+          223.09683227539062,
+          164.2782745361328,
+          237.30128479003906,
+          260.4134521484375,
+          221.10105895996094,
+          163.02777099609375,
+          262.1614685058594
+        ]
+      },
+      "wall": {
+        "median_ms": 223.5930289607495,
+        "p95_ms": 261.61488061770797,
+        "mean_ms": 219.21994931957065,
+        "n": 48,
+        "raw_ms": [
+          246.53658363968134,
+          162.98087500035763,
+          224.0561288781464,
+          250.44900365173817,
+          205.0840388983488,
+          163.30655571073294,
+          244.99556701630354,
+          258.56391014531255,
+          176.9041521474719,
+          177.04017786309123,
+          259.5000481233001,
+          249.9948861077428,
+          169.45495223626494,
+          214.00481462478638,
+          253.87241411954165,
+          260.2109080180526,
+          163.7939689680934,
+          214.00089375674725,
+          261.172148399055,
+          222.22188813611865,
+          162.11846377700567,
+          236.39373807236552,
+          261.0550210811198,
+          206.50113886222243,
+          161.30642499774694,
+          259.4483392313123,
+          259.6096429042518,
+          202.63973996043205,
+          197.10724567994475,
+          258.8898637332022,
+          249.32591477409005,
+          161.3636608235538,
+          237.6894331537187,
+          261.85327488929033,
+          185.27102703228593,
+          186.01543689146638,
+          252.83019663766026,
+          243.19402500987053,
+          164.30863412097096,
+          199.21407708898187,
+          262.1093220077455,
+          223.1299290433526,
+          164.31192308664322,
+          239.59461133927107,
+          260.4450508952141,
+          221.13249078392982,
+          165.32152192667127,
+          262.23350409418344
+        ]
+      },
+      "samples": [
+        {
+          "frame": 0,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 246.50425720214844,
+          "wall_ms": 246.53658363968134
+        },
+        {
+          "frame": 0,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 162.94883728027344,
+          "wall_ms": 162.98087500035763
+        },
+        {
+          "frame": 0,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 223.98463439941406,
+          "wall_ms": 224.0561288781464
+        },
+        {
+          "frame": 1,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 248.26336669921875,
+          "wall_ms": 250.44900365173817
+        },
+        {
+          "frame": 1,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 205.02249145507812,
+          "wall_ms": 205.0840388983488
+        },
+        {
+          "frame": 1,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 161.05520629882812,
+          "wall_ms": 163.30655571073294
+        },
+        {
+          "frame": 2,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 242.69619750976562,
+          "wall_ms": 244.99556701630354
+        },
+        {
+          "frame": 2,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 256.334716796875,
+          "wall_ms": 258.56391014531255
+        },
+        {
+          "frame": 2,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 176.87216186523438,
+          "wall_ms": 176.9041521474719
+        },
+        {
+          "frame": 3,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 174.76083374023438,
+          "wall_ms": 177.04017786309123
+        },
+        {
+          "frame": 3,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 257.2441711425781,
+          "wall_ms": 259.5000481233001
+        },
+        {
+          "frame": 3,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 249.96351623535156,
+          "wall_ms": 249.9948861077428
+        },
+        {
+          "frame": 4,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 169.40028381347656,
+          "wall_ms": 169.45495223626494
+        },
+        {
+          "frame": 4,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 211.7022705078125,
+          "wall_ms": 214.00481462478638
+        },
+        {
+          "frame": 4,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 251.69273376464844,
+          "wall_ms": 253.87241411954165
+        },
+        {
+          "frame": 5,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 260.1778564453125,
+          "wall_ms": 260.2109080180526
+        },
+        {
+          "frame": 5,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 163.76185607910156,
+          "wall_ms": 163.7939689680934
+        },
+        {
+          "frame": 5,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 211.7508544921875,
+          "wall_ms": 214.00089375674725
+        },
+        {
+          "frame": 6,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 261.138427734375,
+          "wall_ms": 261.172148399055
+        },
+        {
+          "frame": 6,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 222.1894073486328,
+          "wall_ms": 222.22188813611865
+        },
+        {
+          "frame": 6,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 161.53919982910156,
+          "wall_ms": 162.11846377700567
+        },
+        {
+          "frame": 7,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 234.47039794921875,
+          "wall_ms": 236.39373807236552
+        },
+        {
+          "frame": 7,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 258.7975769042969,
+          "wall_ms": 261.0550210811198
+        },
+        {
+          "frame": 7,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 206.4691162109375,
+          "wall_ms": 206.50113886222243
+        },
+        {
+          "frame": 8,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 159.0179901123047,
+          "wall_ms": 161.30642499774694
+        },
+        {
+          "frame": 8,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 259.37017822265625,
+          "wall_ms": 259.4483392313123
+        },
+        {
+          "frame": 8,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 257.3639831542969,
+          "wall_ms": 259.6096429042518
+        },
+        {
+          "frame": 9,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 202.60873413085938,
+          "wall_ms": 202.63973996043205
+        },
+        {
+          "frame": 9,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 195.1293487548828,
+          "wall_ms": 197.10724567994475
+        },
+        {
+          "frame": 9,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 258.85797119140625,
+          "wall_ms": 258.8898637332022
+        },
+        {
+          "frame": 10,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 249.2928009033203,
+          "wall_ms": 249.32591477409005
+        },
+        {
+          "frame": 10,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 161.33363342285156,
+          "wall_ms": 161.3636608235538
+        },
+        {
+          "frame": 10,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 235.39712524414062,
+          "wall_ms": 237.6894331537187
+        },
+        {
+          "frame": 11,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 260.5710144042969,
+          "wall_ms": 261.85327488929033
+        },
+        {
+          "frame": 11,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 185.2403564453125,
+          "wall_ms": 185.27102703228593
+        },
+        {
+          "frame": 11,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 185.84031677246094,
+          "wall_ms": 186.01543689146638
+        },
+        {
+          "frame": 12,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 250.64346313476562,
+          "wall_ms": 252.83019663766026
+        },
+        {
+          "frame": 12,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 243.1630096435547,
+          "wall_ms": 243.19402500987053
+        },
+        {
+          "frame": 12,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 164.2782745361328,
+          "wall_ms": 164.30863412097096
+        },
+        {
+          "frame": 13,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 196.93055725097656,
+          "wall_ms": 199.21407708898187
+        },
+        {
+          "frame": 13,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 259.8533020019531,
+          "wall_ms": 262.1093220077455
+        },
+        {
+          "frame": 13,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 223.09683227539062,
+          "wall_ms": 223.1299290433526
+        },
+        {
+          "frame": 14,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 164.2782745361328,
+          "wall_ms": 164.31192308664322
+        },
+        {
+          "frame": 14,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 237.30128479003906,
+          "wall_ms": 239.59461133927107
+        },
+        {
+          "frame": 14,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 260.4134521484375,
+          "wall_ms": 260.4450508952141
+        },
+        {
+          "frame": 15,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 221.10105895996094,
+          "wall_ms": 221.13249078392982
+        },
+        {
+          "frame": 15,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 163.02777099609375,
+          "wall_ms": 165.32152192667127
+        },
+        {
+          "frame": 15,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 262.1614685058594,
+          "wall_ms": 262.23350409418344
+        }
+      ],
+      "vs_baseline": {
+        "cuda": {
+          "delta_median_ms": -6.816436767578125,
+          "delta_mean_ms": -7.58063824971515,
+          "delta_p95_ms": -6.135783386230514,
+          "delta_median_pct": -2.9590729754457756,
+          "delta_mean_pct": -3.357086048095048,
+          "relative_to_baseline": 0.9704092702455422,
+          "speedup_vs_baseline": 1.0304930410928272,
+          "note": "\u5171\u4eab GPU\uff0c\u4ec5\u4f9b\u8bca\u65ad\uff0c\u4e0d\u8fdb\u5165\u8bba\u6587\u6b63\u5f0f\u6548\u7387\u8868"
+        },
+        "wall": {
+          "delta_median_ms": -8.592129684984684,
+          "delta_mean_ms": -7.775878329994157,
+          "delta_p95_ms": -6.5785846672952175,
+          "delta_median_pct": -3.7005507738306687,
+          "delta_mean_pct": -3.4255600248294105,
+          "relative_to_baseline": 0.9629944922616933,
+          "speedup_vs_baseline": 1.038427538304394,
+          "note": "\u5171\u4eab GPU\uff0c\u4ec5\u4f9b\u8bca\u65ad\uff0c\u4e0d\u8fdb\u5165\u8bba\u6587\u6b63\u5f0f\u6548\u7387\u8868"
+        }
+      }
+    }
+  },
+  "breakdown_profile_true": {
+    "baseline": {
+      "note": "separate interleaved profile=True pass; analyze with mean_ms; do not add segment medians; do not subtract from a different full-chunk pass",
+      "analysis_stat": "mean",
+      "timer_keys": "embed; prefix=official full prefix; expert=all velocity steps",
+      "n_frames": 16,
+      "velocity_calls": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "num_steps": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "scout_layer_calls": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "orders": [
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ],
+        [
+          "uniform-grid",
+          "role-lite",
+          "baseline"
+        ],
+        [
+          "role-lite",
+          "baseline",
+          "uniform-grid"
+        ],
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ],
+        [
+          "uniform-grid",
+          "role-lite",
+          "baseline"
+        ],
+        [
+          "role-lite",
+          "baseline",
+          "uniform-grid"
+        ],
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ],
+        [
+          "uniform-grid",
+          "role-lite",
+          "baseline"
+        ],
+        [
+          "role-lite",
+          "baseline",
+          "uniform-grid"
+        ],
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ],
+        [
+          "uniform-grid",
+          "role-lite",
+          "baseline"
+        ],
+        [
+          "role-lite",
+          "baseline",
+          "uniform-grid"
+        ],
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ],
+        [
+          "uniform-grid",
+          "role-lite",
+          "baseline"
+        ],
+        [
+          "role-lite",
+          "baseline",
+          "uniform-grid"
+        ],
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ]
+      ],
+      "mean_ms": {
+        "embed": 86.39436030387878,
+        "expert": 42.69968008995056,
+        "prefix": 94.99089550971985,
+        "total": 224.08493614196777
+      },
+      "median_ms": {
+        "embed": 93.95558547973633,
+        "expert": 43.00543975830078,
+        "prefix": 104.6430549621582,
+        "total": 227.196533203125
+      },
+      "p95_ms": {
+        "embed": 107.87225341796875,
+        "expert": 44.08722496032715,
+        "prefix": 118.61094093322754,
+        "total": 266.68848419189453
+      },
+      "raw": [
+        {
+          "embed": 103.24787139892578,
+          "prefix": 92.01663970947266,
+          "expert": 42.838016510009766,
+          "total": 238.10252380371094
+        },
+        {
+          "embed": 108.32383728027344,
+          "prefix": 110.8121566772461,
+          "expert": 41.87033462524414,
+          "total": 261.00634765625
+        },
+        {
+          "embed": 64.84172821044922,
+          "prefix": 118.29964447021484,
+          "expert": 41.034751892089844,
+          "total": 224.17613220214844
+        },
+        {
+          "embed": 64.6666259765625,
+          "prefix": 57.562400817871094,
+          "expert": 43.17871856689453,
+          "total": 165.40774536132812
+        },
+        {
+          "embed": 106.71199798583984,
+          "prefix": 81.00147247314453,
+          "expert": 42.503456115722656,
+          "total": 230.21693420410156
+        },
+        {
+          "embed": 107.72172546386719,
+          "prefix": 114.8559341430664,
+          "expert": 40.49817657470703,
+          "total": 263.0758361816406
+        },
+        {
+          "embed": 64.8120346069336,
+          "prefix": 117.16710662841797,
+          "expert": 40.978431701660156,
+          "total": 222.9575653076172
+        },
+        {
+          "embed": 64.63692474365234,
+          "prefix": 57.93289566040039,
+          "expert": 44.062625885009766,
+          "total": 166.6324462890625
+        },
+        {
+          "embed": 102.68262481689453,
+          "prefix": 88.90294647216797,
+          "expert": 42.82646560668945,
+          "total": 234.4120330810547
+        },
+        {
+          "embed": 104.68240356445312,
+          "prefix": 119.54483032226562,
+          "expert": 43.61318588256836,
+          "total": 267.8404235839844
+        },
+        {
+          "embed": 64.69942474365234,
+          "prefix": 104.6937255859375,
+          "expert": 44.1610221862793,
+          "total": 213.55416870117188
+        },
+        {
+          "embed": 63.6866569519043,
+          "prefix": 58.141822814941406,
+          "expert": 43.82195281982422,
+          "total": 165.6504364013672
+        },
+        {
+          "embed": 106.80115509033203,
+          "prefix": 117.39955139160156,
+          "expert": 42.10380935668945,
+          "total": 266.30450439453125
+        },
+        {
+          "embed": 105.03372955322266,
+          "prefix": 117.4128646850586,
+          "expert": 43.222015380859375,
+          "total": 265.6686096191406
+        },
+        {
+          "embed": 64.53247833251953,
+          "prefix": 104.5923843383789,
+          "expert": 43.30905532836914,
+          "total": 212.4339141845703
+        },
+        {
+          "embed": 85.22854614257812,
+          "prefix": 59.51795196533203,
+          "expert": 43.1728630065918,
+          "total": 187.9193572998047
+        }
+      ]
+    },
+    "uniform-grid": {
+      "note": "separate interleaved profile=True pass; analyze with mean_ms; do not add segment medians; do not subtract from a different full-chunk pass",
+      "analysis_stat": "mean",
+      "timer_keys": "embed; prefix=fixed-index pack + official compressed prefix; expert=all velocity steps",
+      "n_frames": 16,
+      "velocity_calls": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "num_steps": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "scout_layer_calls": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "orders": [
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ],
+        [
+          "uniform-grid",
+          "role-lite",
+          "baseline"
+        ],
+        [
+          "role-lite",
+          "baseline",
+          "uniform-grid"
+        ],
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ],
+        [
+          "uniform-grid",
+          "role-lite",
+          "baseline"
+        ],
+        [
+          "role-lite",
+          "baseline",
+          "uniform-grid"
+        ],
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ],
+        [
+          "uniform-grid",
+          "role-lite",
+          "baseline"
+        ],
+        [
+          "role-lite",
+          "baseline",
+          "uniform-grid"
+        ],
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ],
+        [
+          "uniform-grid",
+          "role-lite",
+          "baseline"
+        ],
+        [
+          "role-lite",
+          "baseline",
+          "uniform-grid"
+        ],
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ],
+        [
+          "uniform-grid",
+          "role-lite",
+          "baseline"
+        ],
+        [
+          "role-lite",
+          "baseline",
+          "uniform-grid"
+        ],
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ]
+      ],
+      "mean_ms": {
+        "embed": 90.2618579864502,
+        "expert": 43.67545223236084,
+        "prefix": 66.51989650726318,
+        "total": 200.45720672607422
+      },
+      "median_ms": {
+        "embed": 99.84099197387695,
+        "expert": 43.39660835266113,
+        "prefix": 78.69593811035156,
+        "total": 212.30182647705078
+      },
+      "p95_ms": {
+        "embed": 107.44325637817383,
+        "expert": 45.47353744506836,
+        "prefix": 87.8688735961914,
+        "total": 238.91879653930664
+      },
+      "raw": [
+        {
+          "embed": 64.19245147705078,
+          "prefix": 42.24614334106445,
+          "expert": 43.000831604003906,
+          "total": 149.43942260742188
+        },
+        {
+          "embed": 106.29017639160156,
+          "prefix": 43.56300735473633,
+          "expert": 42.65983963012695,
+          "total": 192.51303100585938
+        },
+        {
+          "embed": 107.38175964355469,
+          "prefix": 86.40921783447266,
+          "expert": 44.78585433959961,
+          "total": 238.5768280029297
+        },
+        {
+          "embed": 103.31852722167969,
+          "prefix": 87.61241912841797,
+          "expert": 44.62489700317383,
+          "total": 235.55584716796875
+        },
+        {
+          "embed": 69.5389404296875,
+          "prefix": 41.7116813659668,
+          "expert": 42.99750518798828,
+          "total": 154.2481231689453
+        },
+        {
+          "embed": 79.05075073242188,
+          "prefix": 43.21177673339844,
+          "expert": 42.2184944152832,
+          "total": 164.48101806640625
+        },
+        {
+          "embed": 107.62774658203125,
+          "prefix": 88.35254669189453,
+          "expert": 43.96441650390625,
+          "total": 239.9447021484375
+        },
+        {
+          "embed": 97.73766326904297,
+          "prefix": 85.47020721435547,
+          "expert": 44.300289154052734,
+          "total": 227.50816345214844
+        },
+        {
+          "embed": 64.15462493896484,
+          "prefix": 44.32998275756836,
+          "expert": 43.12985610961914,
+          "total": 151.61447143554688
+        },
+        {
+          "embed": 101.54000091552734,
+          "prefix": 43.290367126464844,
+          "expert": 42.287105560302734,
+          "total": 187.1174774169922
+        },
+        {
+          "embed": 100.23526763916016,
+          "prefix": 85.06060791015625,
+          "expert": 43.42988967895508,
+          "total": 228.7257537841797
+        },
+        {
+          "embed": 99.44671630859375,
+          "prefix": 85.03091430664062,
+          "expert": 45.38880157470703,
+          "total": 229.86642456054688
+        },
+        {
+          "embed": 64.64227294921875,
+          "prefix": 42.395423889160156,
+          "expert": 43.0643196105957,
+          "total": 150.10202026367188
+        },
+        {
+          "embed": 104.09471893310547,
+          "prefix": 72.3609619140625,
+          "expert": 43.36332702636719,
+          "total": 219.8190155029297
+        },
+        {
+          "embed": 101.4466552734375,
+          "prefix": 87.70764923095703,
+          "expert": 43.86406326293945,
+          "total": 233.01837158203125
+        },
+        {
+          "embed": 73.491455078125,
+          "prefix": 85.56543731689453,
+          "expert": 45.727745056152344,
+          "total": 204.78463745117188
+        }
+      ]
+    },
+    "role-lite": {
+      "note": "separate interleaved profile=True pass; analyze with mean_ms; do not add segment medians; do not subtract from a different full-chunk pass",
+      "analysis_stat": "mean",
+      "timer_keys": "embed; scout; select=token choice; prefix=gather/pack + official compressed prefix; expert=all velocity steps",
+      "n_frames": 16,
+      "velocity_calls": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "num_steps": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "scout_layer_calls": [
+        [
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "orders": [
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ],
+        [
+          "uniform-grid",
+          "role-lite",
+          "baseline"
+        ],
+        [
+          "role-lite",
+          "baseline",
+          "uniform-grid"
+        ],
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ],
+        [
+          "uniform-grid",
+          "role-lite",
+          "baseline"
+        ],
+        [
+          "role-lite",
+          "baseline",
+          "uniform-grid"
+        ],
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ],
+        [
+          "uniform-grid",
+          "role-lite",
+          "baseline"
+        ],
+        [
+          "role-lite",
+          "baseline",
+          "uniform-grid"
+        ],
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ],
+        [
+          "uniform-grid",
+          "role-lite",
+          "baseline"
+        ],
+        [
+          "role-lite",
+          "baseline",
+          "uniform-grid"
+        ],
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ],
+        [
+          "uniform-grid",
+          "role-lite",
+          "baseline"
+        ],
+        [
+          "role-lite",
+          "baseline",
+          "uniform-grid"
+        ],
+        [
+          "baseline",
+          "uniform-grid",
+          "role-lite"
+        ]
+      ],
+      "mean_ms": {
+        "embed": 91.17531633377075,
+        "expert": 43.82555055618286,
+        "prefix": 64.22234916687012,
+        "scout": 17.473884105682373,
+        "select": 1.101184006780386,
+        "total": 217.79828643798828
+      },
+      "median_ms": {
+        "embed": 101.77753829956055,
+        "expert": 44.00190544128418,
+        "prefix": 75.54764938354492,
+        "scout": 15.239680290222168,
+        "select": 0.49561598896980286,
+        "total": 222.04624938964844
+      },
+      "p95_ms": {
+        "embed": 110.65369606018066,
+        "expert": 46.05337715148926,
+        "prefix": 81.08646202087402,
+        "scout": 26.783743858337402,
+        "select": 2.851584017276764,
+        "total": 258.1693420410156
+      },
+      "raw": [
+        {
+          "embed": 102.53849792480469,
+          "scout": 25.496320724487305,
+          "select": 2.8487679958343506,
+          "prefix": 78.85215759277344,
+          "expert": 44.04115295410156,
+          "total": 253.7769012451172
+        },
+        {
+          "embed": 64.90294647216797,
+          "scout": 11.637760162353516,
+          "select": 0.4864000082015991,
+          "prefix": 65.24825286865234,
+          "expert": 45.76870346069336,
+          "total": 188.0440673828125
+        },
+        {
+          "embed": 90.69363403320312,
+          "scout": 12.130304336547852,
+          "select": 0.4986880123615265,
+          "prefix": 40.195072174072266,
+          "expert": 43.700225830078125,
+          "total": 187.21792602539062
+        },
+        {
+          "embed": 107.43705749511719,
+          "scout": 22.804479598999023,
+          "select": 0.49561598896980286,
+          "prefix": 80.29901123046875,
+          "expert": 46.76300811767578,
+          "total": 257.7991638183594
+        },
+        {
+          "embed": 104.10189056396484,
+          "scout": 19.677183151245117,
+          "select": 2.75763201713562,
+          "prefix": 78.92991638183594,
+          "expert": 45.81683349609375,
+          "total": 251.28346252441406
+        },
+        {
+          "embed": 63.80470275878906,
+          "scout": 11.686592102050781,
+          "select": 0.4864000082015991,
+          "prefix": 53.10771179199219,
+          "expert": 44.8092155456543,
+          "total": 173.89462280273438
+        },
+        {
+          "embed": 63.74195098876953,
+          "scout": 11.664383888244629,
+          "select": 0.48230400681495667,
+          "prefix": 39.361534118652344,
+          "expert": 45.29676818847656,
+          "total": 160.5469512939453
+        },
+        {
+          "embed": 103.77728271484375,
+          "scout": 26.98956871032715,
+          "select": 2.860032081604004,
+          "prefix": 79.0282211303711,
+          "expert": 43.97180938720703,
+          "total": 256.6269226074219
+        },
+        {
+          "embed": 111.20127868652344,
+          "scout": 18.87436866760254,
+          "select": 0.49561598896980286,
+          "prefix": 81.00863647460938,
+          "expert": 42.44684982299805,
+          "total": 254.02674865722656
+        },
+        {
+          "embed": 65.33324432373047,
+          "scout": 11.593728065490723,
+          "select": 0.4864000082015991,
+          "prefix": 72.28620910644531,
+          "expert": 45.75436782836914,
+          "total": 195.45394897460938
+        },
+        {
+          "embed": 91.74630737304688,
+          "scout": 11.727871894836426,
+          "select": 0.4925439953804016,
+          "prefix": 40.089599609375,
+          "expert": 42.493953704833984,
+          "total": 186.55027770996094
+        },
+        {
+          "embed": 110.4711685180664,
+          "scout": 26.71513557434082,
+          "select": 2.5630719661712646,
+          "prefix": 78.80908966064453,
+          "expert": 40.72140884399414,
+          "total": 259.2798767089844
+        },
+        {
+          "embed": 108.1692123413086,
+          "scout": 26.622976303100586,
+          "select": 1.1929600238800049,
+          "prefix": 79.69193267822266,
+          "expert": 40.79497528076172,
+          "total": 256.4720764160156
+        },
+        {
+          "embed": 64.16690826416016,
+          "scout": 11.713536262512207,
+          "select": 0.4864000082015991,
+          "prefix": 39.30828857421875,
+          "expert": 44.03200149536133,
+          "total": 159.70713806152344
+        },
+        {
+          "embed": 101.0165786743164,
+          "scout": 11.898880004882812,
+          "select": 0.49561598896980286,
+          "prefix": 40.02201461791992,
+          "expert": 42.164222717285156,
+          "total": 195.59730529785156
+        },
+        {
+          "embed": 105.70240020751953,
+          "scout": 18.349056243896484,
+          "select": 0.4904960095882416,
+          "prefix": 81.31993865966797,
+          "expert": 42.6333122253418,
+          "total": 248.4951934814453
+        }
+      ]
+    }
+  },
+  "occupancy_after": [
+    {
+      "index": 0,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 11573.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 12554.0,
+      "util_gpu_pct": 27.0,
+      "util_mem_pct": 6.0,
+      "temp_c": 57.0,
+      "power_w": 253.11,
+      "compute_apps": [
+        {
+          "pid": 1966126,
+          "user": "guorj",
+          "name": "/home/guorj/.miniforge3/envs/lerobot/bin/python",
+          "mem_mib": "9834"
+        },
+        {
+          "pid": 911212,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1714"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 11477.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 12650.0,
+      "util_gpu_pct": 97.0,
+      "util_mem_pct": 24.0,
+      "temp_c": 64.0,
+      "power_w": 328.86,
+      "compute_apps": [
+        {
+          "pid": 1011148,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1712"
+        },
+        {
+          "pid": 1106938,
+          "user": "guorj",
+          "name": "/home/guorj/.miniforge3/envs/lerobot/bin/python",
+          "mem_mib": "9750"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 9852.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 14275.0,
+      "util_gpu_pct": 0.0,
+      "util_mem_pct": 0.0,
+      "temp_c": 42.0,
+      "power_w": 106.83,
+      "compute_apps": [
+        {
+          "pid": 2057595,
+          "user": "guorj",
+          "name": "/home/guorj/.miniforge3/envs/lerobot/bin/python",
+          "mem_mib": "9832"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 3513.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 20614.0,
+      "util_gpu_pct": 98.0,
+      "util_mem_pct": 30.0,
+      "temp_c": 60.0,
+      "power_w": 301.11,
+      "compute_apps": [
+        {
+          "pid": 1997700,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1786"
+        },
+        {
+          "pid": 1009712,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1712"
+        }
+      ]
+    }
+  ],
+  "finished_utc": "20261013T084353Z"
+}

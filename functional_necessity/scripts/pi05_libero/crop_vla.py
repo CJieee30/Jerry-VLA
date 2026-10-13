@@ -936,124 +936,47 @@ def sample_actions_grid(
     return actions
 
 
-def sample_actions_official_profiled(
-    model,
-    images,
-    img_masks,
-    tokens,
-    masks,
-    states=None,
-    state_masks=None,
-    noise=None,
-    num_steps=None,
-    **kwargs,
-):
-    """Official PI05 sample_actions with CUDA-event marks. Same operators, extra events only."""
-    if num_steps is None:
-        num_steps = model.config.num_inference_steps
-    num_steps = int(num_steps)
-    bsize = tokens.shape[0]
-    device = tokens.device
-    if noise is None:
-        noise = model.sample_noise(
-            (bsize, model.config.chunk_size, model.config.max_action_dim),
-            device,
-        )
-    timer = _CudaTimer(True, device=device)
-    timer.mark("start")
-    prefix_embs, prefix_pad_masks, prefix_att_masks = model.embed_prefix(
-        images, img_masks, tokens, masks, states, state_masks
-    )
-    timer.mark("embed")
-    prefix_att_2d_masks = make_att_2d_masks(prefix_pad_masks, prefix_att_masks)
-    prefix_position_ids = torch.cumsum(prefix_pad_masks, dim=1) - 1
-    prefix_att_2d_masks_4d = prepare_attention_masks_4d(prefix_att_2d_masks)
-    model._paligemma_language_model_core().config._attn_implementation = "eager"
-    _, past_key_values = model.paligemma_with_expert.forward(
-        attention_mask=prefix_att_2d_masks_4d,
-        position_ids=prefix_position_ids,
-        past_key_values=None,
-        inputs_embeds=[prefix_embs, None],
-        use_cache=True,
-    )
-    timer.mark("prefix")
-    rtc_mode = "guided"
-    trained_prefix = trained_prefix_mask = None
-    if model._rtc_enabled():
-        rtc_mode = model.rtc_processor.rtc_config.mode
-        if rtc_mode == "trained":
-            from lerobot.policies.pi05.modeling_pi05 import _prepare_trained_rtc_prefix
-
-            training_max_delay = int(getattr(model.config, "rtc_training_max_delay", 0))
-            if training_max_delay <= 0:
-                raise ValueError(
-                    "RTC mode='trained' requires a checkpoint trained with "
-                    "policy.rtc_training_max_delay > 0."
-                )
-            trained_prefix, trained_prefix_mask = _prepare_trained_rtc_prefix(
-                noise,
-                kwargs.get("prev_chunk_left_over"),
-                int(kwargs.get("inference_delay") or 0),
-                training_max_delay,
-            )
-    n_vel = [0]
-
-    def _body(input_x_t, current_timestep):
-        n_vel[0] += 1
-        return model.denoise_step(
-            prefix_pad_masks=prefix_pad_masks,
-            past_key_values=past_key_values,
-            x_t=input_x_t,
-            timestep=current_timestep,
-        )
-
-    actions = euler_integrate(
-        _body,
-        noise,
-        num_steps,
-        rtc_processor=model.rtc_processor,
-        rtc_enabled=model._rtc_enabled() and rtc_mode == "guided",
-        inference_delay=kwargs.get("inference_delay"),
-        prev_chunk_left_over=kwargs.get("prev_chunk_left_over"),
-        execution_horizon=kwargs.get("execution_horizon"),
-        hard_prefix=trained_prefix,
-        hard_prefix_mask=trained_prefix_mask,
-    )
-    timer.mark("expert")
-    timing_ms = timer.ms()
-    if n_vel[0] != num_steps:
-        raise RuntimeError(f"official velocity evaluations {n_vel[0]} != num_steps={num_steps}")
-    n_layers = len(model._paligemma_language_model_core().layers)
-    full_len = int(prefix_embs.shape[1])
-    kv_len = _kv_seq_len(past_key_values)
-    model._crop_stats = CropStats(
-        full_len=full_len,
-        short_len=full_len,
-        kv_len=kv_len,
-        orig_action_offset=int(prefix_pad_masks[0].sum().item()),
-        short_pad_sum=int(prefix_pad_masks[0].sum().item()),
-        cameras=[],
-        scout_layer=-1,
-        keep_all=True,
-        timing_ms=timing_ms,
-        scout_layer_calls=[0] * n_layers,
-        budget_name="baseline",
-        selector="baseline",
-        num_steps=num_steps,
-        velocity_calls=n_vel[0],
-    )
-    return actions
+PROFILE_ALIGN_MAX_ABS = 2e-2
 
 
 @contextmanager
 def profile_official_actions(policy):
-    """Time official sample_actions stages. Does not change operators."""
-    model = policy.model
-    orig = model.sample_actions
+    """Time official sample_actions by wrapping the original methods.
 
-    def patched(images, img_masks, tokens, masks, states=None, state_masks=None, noise=None, num_steps=None, **kwargs):
-        return sample_actions_official_profiled(
-            model,
+    CUDA events only. embed_prefix, paligemma prefix forward, denoise_step, and
+    euler_integrate stay the original implementations.
+    """
+    model = policy.model
+    orig_sample = model.sample_actions
+    orig_embed = model.embed_prefix
+    orig_denoise = model.denoise_step
+    box: dict[str, Any] = {}
+
+    def embed_prefix(*args, **kwargs):
+        out = orig_embed(*args, **kwargs)
+        timer = box.get("timer")
+        if timer is not None:
+            timer.mark("embed")
+            box["prefix_embs"] = out[0]
+            box["prefix_pad"] = out[1]
+        return out
+
+    def denoise_step(*args, **kwargs):
+        timer = box.get("timer")
+        n_vel = int(box.get("n_vel") or 0)
+        if n_vel == 0 and timer is not None:
+            timer.mark("prefix")
+        box["n_vel"] = n_vel + 1
+        return orig_denoise(*args, **kwargs)
+
+    def sample_actions(images, img_masks, tokens, masks, states=None, state_masks=None, noise=None, num_steps=None, **kwargs):
+        device = tokens.device
+        timer = _CudaTimer(True, device=device)
+        box.clear()
+        box["timer"] = timer
+        box["n_vel"] = 0
+        timer.mark("start")
+        actions = orig_sample(
             images,
             img_masks,
             tokens,
@@ -1064,12 +987,77 @@ def profile_official_actions(policy):
             num_steps=num_steps,
             **kwargs,
         )
+        timer.mark("expert")
+        timing_ms = timer.ms()
+        n_vel = int(box.get("n_vel") or 0)
+        if num_steps is None:
+            num_steps = model.config.num_inference_steps
+        num_steps = int(num_steps)
+        if n_vel != num_steps:
+            raise RuntimeError(f"official velocity evaluations {n_vel} != num_steps={num_steps}")
+        embs = box.get("prefix_embs")
+        pads = box.get("prefix_pad")
+        full_len = int(embs.shape[1]) if embs is not None else 0
+        pad_sum = int(pads[0].sum().item()) if pads is not None else 0
+        n_layers = len(model._paligemma_language_model_core().layers)
+        model._crop_stats = CropStats(
+            full_len=full_len,
+            short_len=full_len,
+            kv_len=full_len,
+            orig_action_offset=pad_sum,
+            short_pad_sum=pad_sum,
+            cameras=[],
+            scout_layer=-1,
+            keep_all=True,
+            timing_ms=timing_ms,
+            scout_layer_calls=[0] * n_layers,
+            budget_name="baseline",
+            selector="baseline",
+            num_steps=num_steps,
+            velocity_calls=n_vel,
+        )
+        return actions
 
-    model.sample_actions = patched
+    model.embed_prefix = embed_prefix
+    model.denoise_step = denoise_step
+    model.sample_actions = sample_actions
     try:
         yield
     finally:
-        model.sample_actions = orig
+        model.embed_prefix = orig_embed
+        model.denoise_step = orig_denoise
+        model.sample_actions = orig_sample
+
+
+def align_profiled_baseline(policy, batch, noise, num_steps: int) -> dict[str, Any]:
+    """Same input/noise: original sample_actions vs profile-wrapped original path."""
+    num_steps = int(num_steps)
+    lang = policy.model._paligemma_language_model_core()
+    param = next(policy.model.parameters())
+    policy.reset()
+    official = policy.predict_action_chunk(batch, noise=noise, num_steps=num_steps)
+    with profile_official_actions(policy):
+        policy.reset()
+        profiled = policy.predict_action_chunk(batch, noise=noise, num_steps=num_steps)
+        stats = getattr(policy.model, "_crop_stats", None)
+    x = official[:, :10, :7].float()
+    y = profiled[:, :10, :7].float()
+    max_abs = float((x - y).abs().max())
+    timing_keys = sorted((stats.timing_ms or {}).keys()) if stats is not None else []
+    return {
+        "method": "wrap original embed_prefix, denoise_step, sample_actions; CUDA events only",
+        "max_abs": max_abs,
+        "max_abs_limit": PROFILE_ALIGN_MAX_ABS,
+        "aligned": max_abs <= PROFILE_ALIGN_MAX_ABS,
+        "finite": bool(torch.isfinite(x).all() and torch.isfinite(y).all()),
+        "official_dtype": str(official.dtype),
+        "profiled_dtype": str(profiled.dtype),
+        "param_dtype": str(param.dtype),
+        "attn_implementation": getattr(lang.config, "_attn_implementation", None),
+        "velocity_calls": None if stats is None else stats.velocity_calls,
+        "num_steps": num_steps,
+        "timing_keys": timing_keys,
+    }
 
 
 @contextmanager
