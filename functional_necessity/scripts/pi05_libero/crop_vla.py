@@ -17,7 +17,7 @@ import json
 import os
 import subprocess
 from contextlib import contextmanager
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass, field, fields
 from typing import Any
 
 import torch
@@ -45,6 +45,8 @@ BUDGET_PRESETS = {
     },
 }
 BUDGETS = BUDGET_PRESETS["role"]
+SELECTORS = ("greedy", "lite")
+LITE_N_ANCHORS = 4
 
 
 def resolve_budgets(name: str | dict | None = None) -> dict[str, dict[str, int]]:
@@ -58,6 +60,15 @@ def resolve_budgets(name: str | dict | None = None) -> dict[str, dict[str, int]]
     if key not in BUDGET_PRESETS:
         raise ValueError(f"unknown CROP budget {name!r}; expected one of {sorted(BUDGET_PRESETS)}")
     return BUDGET_PRESETS[key]
+
+
+def resolve_selector(name: str | None = None) -> str:
+    key = "greedy" if name is None else str(name).strip().lower()
+    if key in ("", "greedy", "crop", "fps"):
+        return "greedy"
+    if key in ("lite", "crop-lite", "crop_lite"):
+        return "lite"
+    raise ValueError(f"unknown CROP selector {name!r}; expected greedy or lite")
 
 
 @dataclass
@@ -83,6 +94,10 @@ class CropStats:
     timing_ms: dict[str, float] | None = None
     scout_layer_calls: list[int] | None = None
     budget_name: str = "role"
+    selector: str = "greedy"
+    num_steps: int | None = None
+    velocity_calls: int | None = None
+    deferred: dict[str, Any] = field(default_factory=dict)
 
 
 def role_for_image_key(key: str) -> str:
@@ -171,6 +186,46 @@ def select_one_camera(
     n_div = min(n_div, n - len(rel))
     div = greedy_diversity(feats, rel, n_div)
     keep = sorted(set(rel) | set(div))
+    return keep, rel, div
+
+
+def select_one_camera_lite(
+    score: torch.Tensor,
+    feats: torch.Tensor,
+    *,
+    n_rel: int,
+    n_div: int,
+    valid: torch.Tensor | None = None,
+    keep_all: bool = False,
+    n_anchors: int = LITE_N_ANCHORS,
+) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    """One-shot diversity vs greedy FPS. Stays on GPU; no .item/.tolist/nonzero."""
+    n = int(score.shape[0])
+    device = score.device
+    empty = torch.empty(0, device=device, dtype=torch.long)
+    if keep_all or n_rel + n_div >= n:
+        keep = torch.arange(n, device=device, dtype=torch.long)
+        return keep, keep, empty
+    work = score.detach().float()
+    if valid is not None:
+        work = work.masked_fill(~valid, -1e9)
+    n_rel = min(int(n_rel), n)
+    rel = torch.topk(work, k=n_rel).indices
+    n_div = min(int(n_div), n - n_rel)
+    if n_div <= 0:
+        keep = torch.sort(rel).values
+        return keep, rel, empty
+    n_anchor = min(int(n_anchors), n_rel)
+    anchors = torch.topk(work, k=n_anchor).indices
+    sim = feats @ feats.index_select(0, anchors).transpose(0, 1)
+    div_score = 1.0 - sim.max(dim=1).values
+    taken = torch.zeros(n, dtype=torch.bool, device=device)
+    taken.scatter_(0, rel, True)
+    div_score = div_score.masked_fill(taken, -1e9)
+    if valid is not None:
+        div_score = div_score.masked_fill(~valid, -1e9)
+    div = torch.topk(div_score, k=n_div).indices
+    keep = torch.sort(torch.cat([rel, div], dim=0)).values
     return keep, rel, div
 
 
@@ -298,6 +353,26 @@ def _relevance_scores(
     return torch.stack(scores, dim=0)
 
 
+def _relevance_scores_dense(
+    attn_weights: torch.Tensor,
+    lang_index: torch.Tensor,
+    vis_start: int,
+    vis_n: int,
+) -> torch.Tensor:
+    """Same mean as `_relevance_scores`, without nonzero()."""
+    w = attn_weights.float()
+    if w.ndim == 3:
+        w = w.unsqueeze(0)
+    if w.ndim != 4:
+        raise RuntimeError(f"expected attention [B,H,Q,K], got {tuple(w.shape)}")
+    vis = w[:, :, :, vis_start : vis_start + vis_n]
+    q_mask = lang_index.to(dtype=vis.dtype)[:, None, :, None]
+    num = (vis * q_mask).sum(dim=(1, 2))
+    n_q = lang_index.to(dtype=vis.dtype).sum(dim=1).clamp(min=1.0)
+    den = n_q * vis.shape[1]
+    return num / den[:, None]
+
+
 def _camera_is_live(mask: torch.Tensor) -> torch.Tensor:
     if mask.ndim == 1:
         return mask.bool()
@@ -318,14 +393,62 @@ def _select_indices(
     *,
     keep_all: bool,
     budgets: dict[str, dict[str, int]] | None = None,
+    selector: str = "greedy",
 ) -> tuple[torch.Tensor, list[dict[str, Any]]]:
     """lang_q_full is bool [B, full_len] marking valid language queries."""
     budgets = resolve_budgets(budgets)
+    selector = resolve_selector(selector)
     bsz = int(img_embs[0].shape[0])
     device = img_embs[0].device
     rows: list[torch.Tensor] = []
     meta_b0: list[dict[str, Any]] = []
     lang_start = slots[-1].start + slots[-1].n_tokens
+    if selector == "lite":
+        for b in range(bsz):
+            parts: list[torch.Tensor] = []
+            cam_meta = []
+            for slot, emb, mask in zip(slots, img_embs, img_masks, strict=True):
+                if slot.keep_all or keep_all:
+                    local = torch.arange(slot.n_tokens, device=device, dtype=torch.long)
+                    chosen_local, rel, div = local, local, local.new_empty(0)
+                else:
+                    feats = F.normalize(emb[b].float().reshape(slot.n_tokens, -1), dim=-1)
+                    valid = _camera_is_live(mask)[b].expand(slot.n_tokens)
+                    score = _relevance_scores_dense(
+                        attn_weights[b : b + 1], lang_q_full[b : b + 1], slot.start, slot.n_tokens
+                    )[0]
+                    budget = budgets[slot.role]
+                    chosen_local, rel, div = select_one_camera_lite(
+                        score,
+                        feats,
+                        n_rel=budget["relevance"],
+                        n_div=budget["diversity"],
+                        valid=valid,
+                        keep_all=False,
+                    )
+                parts.append(chosen_local + slot.start)
+                if b == 0:
+                    cam_meta.append(
+                        {
+                            "key": slot.key,
+                            "role": slot.role,
+                            "n_keep": int(chosen_local.shape[0]),
+                            "n_full": slot.n_tokens,
+                            "relevance": rel,
+                            "diversity": div,
+                            "keep": chosen_local,
+                        }
+                    )
+            lang_ids = torch.arange(lang_start, lang_start + n_lang, device=device, dtype=torch.long)
+            rows.append(torch.cat(parts + [lang_ids], dim=0))
+            if b == 0:
+                meta_b0 = cam_meta
+        n_keep = int(rows[0].shape[0])
+        for row in rows:
+            if int(row.shape[0]) != n_keep:
+                raise RuntimeError("CROP keep count differs across the batch; eval uses batch_size=1")
+        return torch.stack(rows, dim=0), meta_b0
+
     for b in range(bsz):
         keep: list[int] = []
         cam_meta = []
@@ -443,12 +566,15 @@ def sample_actions_crop(
     profile: bool = False,
     budgets: dict[str, dict[str, int]] | str | None = None,
     budget_name: str = "role",
+    selector: str = "greedy",
     **kwargs,
 ):
     """Scout + select + shortened official prefix + expert. Same noise/NFE as baseline."""
     del kwargs
     if num_steps is None:
         num_steps = model.config.num_inference_steps
+    num_steps = int(num_steps)
+    selector = resolve_selector(selector)
     drop_layers = list(drop_layers or [])
     if (not keep_all) and scout_layer in drop_layers:
         raise RuntimeError(
@@ -534,6 +660,7 @@ def sample_actions_crop(
         n_lang,
         keep_all=keep_all,
         budgets=budgets,
+        selector=selector,
     )
     timer.mark("select")
     gather = keep_idx.unsqueeze(-1).expand(-1, -1, prefix_embs.shape[-1])
@@ -548,7 +675,10 @@ def sample_actions_crop(
     if kv_len != short_len:
         raise RuntimeError(f"KV length {kv_len} != packed prefix {short_len}; sequence was not shortened")
 
+    n_vel = [0]
+
     def _body(input_x_t, current_timestep):
+        n_vel[0] += 1
         return _denoise_with_offset(
             model, short_pad, past, input_x_t, current_timestep, orig_offset
         )
@@ -561,18 +691,38 @@ def sample_actions_crop(
         rtc_enabled=False,
     )
     timer.mark("expert")
+    if n_vel[0] != num_steps:
+        raise RuntimeError(
+            f"CROP velocity evaluations {n_vel[0]} != num_steps={num_steps} passed to euler_integrate"
+        )
+    deferred = {
+        "orig_offset": orig_offset,
+        "short_pad": short_pad,
+        "cameras": cam_meta,
+    }
+    if selector == "lite":
+        orig_off, pad_sum, cameras_out = 0, 0, []
+    else:
+        orig_off = int(orig_offset[0].item())
+        pad_sum = int(short_pad[0].sum().item())
+        cameras_out = cam_meta
+        deferred = {}
     stats = CropStats(
         full_len=att_len,
         short_len=short_len,
         kv_len=kv_len,
-        orig_action_offset=int(orig_offset[0].item()),
-        short_pad_sum=int(short_pad[0].sum().item()),
-        cameras=cam_meta,
+        orig_action_offset=orig_off,
+        short_pad_sum=pad_sum,
+        cameras=cameras_out,
         scout_layer=scout_layer,
         keep_all=keep_all,
         timing_ms=timer.ms(),
         scout_layer_calls=list(scout_calls),
         budget_name=budget_name,
+        selector=selector,
+        num_steps=num_steps,
+        velocity_calls=n_vel[0],
+        deferred=deferred,
     )
     model._crop_stats = stats
     return actions
@@ -589,6 +739,7 @@ def crop_visual_tokens(
     profile: bool = False,
     budgets: dict[str, dict[str, int]] | str | None = None,
     budget_name: str = "role",
+    selector: str = "greedy",
 ):
     """Replace PI05Pytorch.sample_actions with the CROP scout path."""
     if not enabled:
@@ -596,6 +747,7 @@ def crop_visual_tokens(
         return
     model = policy.model
     orig = model.sample_actions
+    selector = resolve_selector(selector)
 
     def patched(images, img_masks, tokens, masks, states=None, state_masks=None, noise=None, num_steps=None, **kwargs):
         return sample_actions_crop(
@@ -614,6 +766,7 @@ def crop_visual_tokens(
             profile=profile,
             budgets=resolve_budgets(budgets if budgets is not None else budget_name),
             budget_name=budget_name,
+            selector=selector,
             **kwargs,
         )
 
@@ -715,8 +868,60 @@ def first_exclusive_gpu(gpus: tuple[int, ...] = (0, 1, 2, 3)) -> tuple[int | Non
     return None, "; ".join(notes)
 
 
+def _as_int_list(value: Any) -> list[int]:
+    if value is None:
+        return []
+    if isinstance(value, torch.Tensor):
+        return [int(v) for v in value.detach().cpu().reshape(-1).tolist()]
+    if isinstance(value, (list, tuple)):
+        return [int(v) for v in value]
+    return [int(value)]
+
+
+def _materialize_cam(cam: dict[str, Any]) -> dict[str, Any]:
+    out = dict(cam)
+    for key in ("relevance", "diversity", "keep"):
+        if key in out:
+            out[key] = _as_int_list(out[key])
+    if "n_keep" in out:
+        out["n_keep"] = int(out["n_keep"])
+    if "n_full" in out:
+        out["n_full"] = int(out["n_full"])
+    return out
+
+
 def stats_dict(stats: CropStats) -> dict[str, Any]:
-    return asdict(stats)
+    """CPU/debug export. Call after the timed chunk, not inside it."""
+    payload = {f.name: getattr(stats, f.name) for f in fields(stats) if f.name != "deferred"}
+    deferred = stats.deferred or {}
+    cameras = deferred.get("cameras", payload.get("cameras") or [])
+    payload["cameras"] = [_materialize_cam(cam) for cam in cameras]
+    off = deferred.get("orig_offset")
+    pad = deferred.get("short_pad")
+    if off is not None:
+        payload["orig_action_offset"] = int(off[0].detach().cpu())
+    if pad is not None:
+        payload["short_pad_sum"] = int(pad[0].sum().detach().cpu())
+    return payload
+
+
+def count_official_velocity(policy, batch, noise, num_steps: int) -> int:
+    """Count PI05 denoise_step calls on the official (non-CROP) path."""
+    model = policy.model
+    orig = model.denoise_step
+    n = [0]
+
+    def wrapped(*args, **kwargs):
+        n[0] += 1
+        return orig(*args, **kwargs)
+
+    model.denoise_step = wrapped
+    try:
+        policy.reset()
+        policy.predict_action_chunk(batch, noise=noise, num_steps=int(num_steps))
+    finally:
+        model.denoise_step = orig
+    return n[0]
 
 
 def save_stats_json(path, stats: CropStats) -> None:
@@ -766,6 +971,28 @@ def cpu_selftest() -> None:
     ref = _greedy_diversity_naive(feats, seed, 12)
     if got != ref:
         raise RuntimeError(f"incremental diversity {got} != naive {ref}")
+
+    torch.manual_seed(1)
+    n = 32
+    feats = F.normalize(torch.randn(n, 8), dim=-1)
+    score = torch.linspace(1.0, 0.0, n)
+    keep, rel, div = select_one_camera_lite(score, feats, n_rel=12, n_div=8)
+    if int(keep.shape[0]) != 20 or int(rel.shape[0]) != 12 or int(div.shape[0]) != 8:
+        raise RuntimeError(f"lite keep/rel/div shapes {tuple(keep.shape)} {tuple(rel.shape)} {tuple(div.shape)}")
+    keep_l, rel_l, div_l = keep.tolist(), rel.tolist(), div.tolist()
+    if keep_l != sorted(keep_l) or len(set(keep_l)) != 20 or set(rel_l) & set(div_l):
+        raise RuntimeError(f"lite uniqueness/sort failed keep={keep_l}")
+    if rel_l != list(range(12)):
+        raise RuntimeError(f"lite relevance should be top-12 scores, got {rel_l}")
+    anchors = set(torch.topk(score, k=4).indices.tolist())
+    naive_div_score = 1.0 - (feats @ feats[list(anchors)].T).max(dim=1).values
+    naive_div_score[list(range(12))] = -1e9
+    naive_div = set(torch.topk(naive_div_score, k=8).indices.tolist())
+    if set(div_l) != naive_div:
+        raise RuntimeError(f"lite diversity {set(div_l)} != naive {naive_div}")
+    keep_all, _, _ = select_one_camera_lite(score, feats, n_rel=12, n_div=8, keep_all=True)
+    if keep_all.tolist() != list(range(n)):
+        raise RuntimeError("lite keep_all did not return every token")
 
     class _Block(torch.nn.Module):
         def __init__(self, idx: int):

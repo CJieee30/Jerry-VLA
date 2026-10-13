@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -37,20 +38,22 @@ from crop_vla import (  # noqa: E402
     SCOUT_LAYER,
     TOKENS_PER_VIEW,
     bind_cuda_device,
+    count_official_velocity,
     cpu_selftest,
     crop_visual_tokens,
     first_exclusive_gpu,
     greedy_diversity,
     gpu_is_exclusive,
     resolve_budgets,
+    resolve_selector,
     select_one_camera,
+    select_one_camera_lite,
     stats_dict,
 )
 from layer_skip import skip_llm_layers  # noqa: E402
 
 OUT = FN_ROOT / "results" / "stage_nfe" / "crop_vla"
 DROP = FISHER_DROP6
-NFE = 1
 
 
 def _to_uint8(chw: torch.Tensor) -> np.ndarray:
@@ -189,13 +192,17 @@ def run_model_checks(
     n_frames: int,
     *,
     budget_name: str = "role",
+    selector: str = "lite",
+    nfe: int = 10,
 ) -> dict:
     budgets = resolve_budgets(budget_name)
+    selector = resolve_selector(selector)
+    nfe = int(nfe)
     device = bind_cuda_device(gpu)
     print(f"bound physical GPU{gpu} -> {device} (current={torch.cuda.current_device()})", flush=True)
     policy = load_policy(DEFAULT_CHECKPOINT, device)
     policy.config.n_action_steps = 10
-    policy.config.num_inference_steps = NFE
+    policy.config.num_inference_steps = nfe
     policy.config.compile_model = False
     policy.eval()
     layers = policy.model._paligemma_language_model_core().layers
@@ -218,9 +225,34 @@ def run_model_checks(
 
     identity = []
     pruned = []
-    viz_dir = OUT / ("viz" if budget_name == "role" else f"viz_{budget_name}")
-    crop_kw = dict(drop_layers=DROP, scout_layer=SCOUT_LAYER, budgets=budgets, budget_name=budget_name)
+    viz_tag = f"viz_{selector}_{budget_name}_nfe{nfe}"
+    if selector == "greedy" and budget_name == "role" and nfe == 1:
+        viz_tag = "viz"
+    viz_dir = OUT / viz_tag
+    crop_kw = dict(
+        drop_layers=DROP,
+        scout_layer=SCOUT_LAYER,
+        budgets=budgets,
+        budget_name=budget_name,
+        selector=selector,
+    )
+    official_velocity = None
     with torch.no_grad(), skip_llm_layers(policy, DROP, keep_kv=True):
+        first = move_to_device(frames[0], device)
+        gen0 = torch.Generator(device="cpu")
+        gen0.manual_seed(1000)
+        noise0 = torch.randn(
+            1,
+            int(policy.config.chunk_size),
+            int(policy.config.max_action_dim),
+            generator=gen0,
+        ).to(device)
+        official_velocity = count_official_velocity(policy, first, noise0, nfe)
+        if official_velocity != nfe:
+            raise RuntimeError(
+                f"official denoise_step ran {official_velocity} times; expected num_steps={nfe}"
+            )
+        print(f"official path velocity calls={official_velocity} (num_steps={nfe})", flush=True)
         for fi, raw in enumerate(frames):
             batch = move_to_device(raw, device)
             gen = torch.Generator(device="cpu")
@@ -232,37 +264,49 @@ def run_model_checks(
                 generator=gen,
             ).to(device)
             policy.reset()
-            base = policy.predict_action_chunk(batch, noise=noise, num_steps=NFE)
+            base = policy.predict_action_chunk(batch, noise=noise, num_steps=nfe)
             with crop_visual_tokens(policy, keep_all=True, **crop_kw):
                 policy.reset()
-                same = policy.predict_action_chunk(batch, noise=noise, num_steps=NFE)
+                same = policy.predict_action_chunk(batch, noise=noise, num_steps=nfe)
                 id_stats = getattr(policy.model, "_crop_stats", None)
             with crop_visual_tokens(policy, keep_all=False, **crop_kw):
                 policy.reset()
-                crop = policy.predict_action_chunk(batch, noise=noise, num_steps=NFE)
+                crop = policy.predict_action_chunk(batch, noise=noise, num_steps=nfe)
                 crop_stats = policy.model._crop_stats
             ident = _action_stats(same, base)
             crop_finite = bool(torch.isfinite(crop[:, :10, :7].float()).all())
             identity.append(ident)
-            n_live = sum(1 for c in crop_stats.cameras if c["role"] != "empty")
-            expected_short = crop_stats.full_len - (TOKENS_PER_VIEW // 2) * n_live
-            offset_ok = id_stats is not None and (
-                crop_stats.orig_action_offset == id_stats.orig_action_offset
-                and id_stats.orig_action_offset == id_stats.short_pad_sum
-                and crop_stats.orig_action_offset > crop_stats.short_pad_sum
+            crop_view = stats_dict(crop_stats)
+            id_view = None if id_stats is None else stats_dict(id_stats)
+            n_live = sum(1 for c in crop_view["cameras"] if c["role"] != "empty")
+            expected_short = crop_view["full_len"] - (TOKENS_PER_VIEW // 2) * n_live
+            unique_ok = all(
+                c["role"] == "empty" or len(c["keep"]) == len(set(c["keep"]))
+                for c in crop_view["cameras"]
             )
-            budgets_ok = all(_budget_ok(c, budgets) for c in crop_stats.cameras)
-            scout_ok = _scout_calls_ok(crop_stats.scout_layer_calls) and _scout_calls_ok(
-                None if id_stats is None else id_stats.scout_layer_calls
+            nfe_ok = (
+                int(crop_view.get("num_steps") or 0) == nfe
+                and int(crop_view.get("velocity_calls") or 0) == nfe
+                and (id_view is None or int(id_view.get("velocity_calls") or 0) == nfe)
+            )
+            offset_ok = id_view is not None and (
+                crop_view["orig_action_offset"] == id_view["orig_action_offset"]
+                and id_view["orig_action_offset"] == id_view["short_pad_sum"]
+                and crop_view["orig_action_offset"] > crop_view["short_pad_sum"]
+            )
+            budgets_ok = all(_budget_ok(c, budgets) for c in crop_view["cameras"]) and unique_ok
+            scout_ok = _scout_calls_ok(crop_view.get("scout_layer_calls")) and _scout_calls_ok(
+                None if id_view is None else id_view.get("scout_layer_calls")
             )
             length_ok = (
-                crop_stats.short_len == expected_short
-                and crop_stats.kv_len == crop_stats.short_len
-                and crop_stats.short_len < crop_stats.full_len
-                and (id_stats is None or id_stats.short_len == id_stats.full_len)
+                crop_view["short_len"] == expected_short
+                and crop_view["kv_len"] == crop_view["short_len"]
+                and crop_view["short_len"] < crop_view["full_len"]
+                and (id_view is None or id_view["short_len"] == id_view["full_len"])
                 and offset_ok
                 and budgets_ok
                 and scout_ok
+                and nfe_ok
                 and ident["finite"]
                 and crop_finite
             )
@@ -271,38 +315,45 @@ def run_model_checks(
                     "frame": fi,
                     "task": (raw.get("task") or ["?"])[0] if isinstance(raw.get("task"), list) else None,
                     "vs_baseline_max_abs": _action_stats(crop, base)["max_abs"],
-                    "stats": stats_dict(crop_stats),
+                    "stats": crop_view,
                     "length_ok": length_ok,
                     "offset_ok": offset_ok,
                     "budgets_ok": budgets_ok,
                     "scout_ok": scout_ok,
+                    "nfe_ok": nfe_ok,
+                    "unique_ok": unique_ok,
                     "crop_finite": crop_finite,
                     "identity_keep_all": ident,
-                    "identity_full_len": None if id_stats is None else id_stats.full_len,
-                    "identity_short_len": None if id_stats is None else id_stats.short_len,
-                    "orig_action_offset": crop_stats.orig_action_offset,
-                    "short_pad_sum": crop_stats.short_pad_sum,
-                    "scout_layer_calls": crop_stats.scout_layer_calls,
+                    "identity_full_len": None if id_view is None else id_view["full_len"],
+                    "identity_short_len": None if id_view is None else id_view["short_len"],
+                    "orig_action_offset": crop_view["orig_action_offset"],
+                    "short_pad_sum": crop_view["short_pad_sum"],
+                    "scout_layer_calls": crop_view["scout_layer_calls"],
+                    "num_steps": crop_view["num_steps"],
+                    "velocity_calls": crop_view["velocity_calls"],
                 }
             )
             if fi < 3:
-                for cam in crop_stats.cameras:
+                for cam in crop_view["cameras"]:
                     if cam["role"] == "empty":
                         continue
                     key = cam["key"]
                     overlay_grid(raw[key][0], cam, viz_dir / f"frame{fi:02d}_{cam['role']}.png")
             print(
                 f"frame {fi}: identity max_abs={ident['max_abs']:.4g}  "
-                f"full={crop_stats.full_len} short={crop_stats.short_len} kv={crop_stats.kv_len} "
-                f"action_off={crop_stats.orig_action_offset} length_ok={length_ok}",
+                f"full={crop_view['full_len']} short={crop_view['short_len']} kv={crop_view['kv_len']} "
+                f"action_off={crop_view['orig_action_offset']} nfe={crop_view['velocity_calls']} "
+                f"length_ok={length_ok}",
                 flush=True,
             )
 
     payload = {
         "gpu": gpu,
         "drop": DROP,
-        "nfe": NFE,
+        "nfe": nfe,
         "scout_layer": SCOUT_LAYER,
+        "selector": selector,
+        "official_velocity_calls": official_velocity,
         "budget_name": budget_name,
         "budgets": budgets,
         "identity": identity,
@@ -311,7 +362,10 @@ def run_model_checks(
         "identity_max_abs_limit": IDENTITY_MAX_ABS,
         "all_lengths_ok": all(p["length_ok"] for p in pruned),
     }
-    json_name = "offline_check.json" if budget_name == "role" else f"offline_check_{budget_name}.json"
+    if selector == "greedy" and budget_name == "role" and nfe == 1:
+        json_name = "offline_check.json"
+    else:
+        json_name = f"offline_check_{selector}_{budget_name}_nfe{nfe}.json"
     payload_path = OUT / json_name
     payload_path.write_text(json.dumps(payload, indent=2) + "\n")
     payload["_path"] = str(payload_path)
@@ -339,6 +393,19 @@ def cpu_select_selftest() -> None:
     mix, mix_rel, mix_div = select_one_camera(score, feats, n_rel=64, n_div=64)
     if len(mix) != 128 or len(mix_rel) != 64 or len(mix_div) != 64 or set(mix_rel) & set(mix_div):
         raise SystemExit(f"shared_mix 64+64 failed keep={len(mix)} rel={len(mix_rel)} div={len(mix_div)}")
+    lite, lite_rel, lite_div = select_one_camera_lite(score, feats, n_rel=96, n_div=32)
+    if int(lite.shape[0]) != 128 or int(lite_rel.shape[0]) != 96 or int(lite_div.shape[0]) != 32:
+        raise SystemExit(f"lite 96+32 failed {tuple(lite.shape)}")
+    if set(lite_rel.tolist()) & set(lite_div.tolist()) or lite.tolist() != sorted(lite.tolist()):
+        raise SystemExit("lite 96+32 overlap or unsorted")
+    lite_mix, lite_mrel, lite_mdiv = select_one_camera_lite(score, feats, n_rel=64, n_div=64)
+    if (
+        int(lite_mix.shape[0]) != 128
+        or int(lite_mrel.shape[0]) != 64
+        or int(lite_mdiv.shape[0]) != 64
+        or set(lite_mrel.tolist()) & set(lite_mdiv.tolist())
+    ):
+        raise SystemExit("lite 64+64 failed")
     print("cpu select selftest ok", flush=True)
 
 
@@ -349,6 +416,13 @@ def main() -> None:
     parser.add_argument("--gpu", type=int, default=None)
     parser.add_argument("--n-frames", type=int, default=4)
     parser.add_argument("--budget", default="role", help="role (default) or shared_mix")
+    parser.add_argument("--selector", default="lite", help="greedy (reference CROP) or lite")
+    parser.add_argument("--nfe", type=int, default=10)
+    parser.add_argument(
+        "--allow-shared",
+        action="store_true",
+        help="Allow an occupied GPU for correctness checks. Requires --gpu. Not for 400-ep eval.",
+    )
     args = parser.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
     cpu_selftest()
@@ -363,7 +437,12 @@ def main() -> None:
         return
 
     gpu = args.gpu
-    if gpu is None:
+    os.environ.pop("CROP_ALLOW_OCCUPIED", None)
+    if args.allow_shared:
+        if gpu is None:
+            raise SystemExit("--allow-shared requires an explicit --gpu N")
+        print(f"gpu{gpu}: shared-check allowed (not exclusive)", flush=True)
+    elif gpu is None:
         gpu, note = first_exclusive_gpu()
         print(note, flush=True)
         if gpu is None:
@@ -377,11 +456,19 @@ def main() -> None:
         if not ok:
             raise SystemExit(f"GPU{gpu} is not exclusive ({why}). Will not load the policy.")
 
-    payload = run_model_checks(gpu, calib, args.n_frames, budget_name=args.budget)
+    payload = run_model_checks(
+        gpu,
+        calib,
+        args.n_frames,
+        budget_name=args.budget,
+        selector=args.selector,
+        nfe=args.nfe,
+    )
     ident = payload["identity_max_abs_max"]
     ok_len = payload["all_lengths_ok"]
     print(
-        f"budget={args.budget} identity max_abs over frames={ident:.6g}  prune_length_ok={ok_len}  "
+        f"selector={args.selector} budget={args.budget} nfe={args.nfe} "
+        f"identity max_abs over frames={ident:.6g}  prune_length_ok={ok_len}  "
         f"json={payload.get('_path')}",
         flush=True,
     )

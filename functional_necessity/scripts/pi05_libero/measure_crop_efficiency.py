@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Full action-chunk latency: Drop-6 NFE=1 baseline vs CROP role / shared_mix.
+"""Full action-chunk latency: Drop-6 baseline vs CROP greedy or CROP-Lite.
 
 Includes scout, token selection, the second prefix, and the action expert.
 Formal mode refuses to start unless the target GPU is fully idle.
@@ -45,14 +45,15 @@ from crop_vla import (  # noqa: E402
     gpu_occupancy,
     require_idle_gpu,
     resolve_budgets,
+    resolve_selector,
     stats_dict,
 )
 from layer_skip import skip_llm_layers  # noqa: E402
 
 OUT = FN_ROOT / "results" / "stage_nfe" / "crop_vla"
 DROP = FISHER_DROP6
-NFE = 1
-GROUPS = ("baseline", "role", "shared_mix")
+GROUPS_GREEDY = ("baseline", "role", "shared_mix")
+GROUPS_LITE = ("baseline", "role-lite", "shared-lite")
 DIAGNOSTIC_NOTE = "共享GPU诊断，仅供参考，待独占复核"
 MIN_FREE_MIB_DIAGNOSTIC = 12000
 REPO_ROOT = FN_ROOT.parent
@@ -83,7 +84,9 @@ def _summarize(vals: list[float]) -> dict:
     }
 
 
-def _time_chunk(policy, batch, noise, repeats: int, device: torch.device) -> list[dict[str, float | int]]:
+def _time_chunk(
+    policy, batch, noise, repeats: int, device: torch.device, nfe: int
+) -> list[dict[str, float | int]]:
     """Synchronized wall-clock and CUDA-event times for a full chunk. profile=False path."""
     rows = []
     stream = torch.cuda.current_stream(device)
@@ -94,7 +97,7 @@ def _time_chunk(policy, batch, noise, repeats: int, device: torch.device) -> lis
         end = torch.cuda.Event(enable_timing=True)
         wall0 = time.perf_counter()
         start.record(stream)
-        policy.predict_action_chunk(batch, noise=noise, num_steps=NFE)
+        policy.predict_action_chunk(batch, noise=noise, num_steps=nfe)
         end.record(stream)
         torch.cuda.synchronize(device)
         rows.append(
@@ -162,14 +165,29 @@ def snapshot_all(gpus: tuple[int, ...] = (0, 1, 2, 3)) -> list[dict]:
     return [gpu_card_snapshot(g) for g in gpus]
 
 
-def group_order(frame_idx: int) -> tuple[str, ...]:
-    n = len(GROUPS)
-    return tuple(GROUPS[(frame_idx + k) % n] for k in range(n))
+def parse_group(name: str) -> dict:
+    if name == "baseline":
+        return {"kind": "baseline", "budget": None, "selector": None}
+    selector = "lite" if name.endswith("-lite") or name.endswith("_lite") else "greedy"
+    core = name.replace("-lite", "").replace("_lite", "")
+    if core in ("shared", "shared_mix"):
+        budget = "shared_mix"
+    elif core in ("role", "crop", ""):
+        budget = "role"
+    else:
+        budget = core
+    return {"kind": "crop", "budget": budget, "selector": selector}
+
+
+def group_order(frame_idx: int, groups: tuple[str, ...]) -> tuple[str, ...]:
+    n = len(groups)
+    return tuple(groups[(frame_idx + k) % n] for k in range(n))
 
 
 @contextmanager
 def group_forward(policy, name: str, *, profile: bool):
-    if name == "baseline":
+    spec = parse_group(name)
+    if spec["kind"] == "baseline":
         yield
         return
     with crop_visual_tokens(
@@ -178,20 +196,23 @@ def group_forward(policy, name: str, *, profile: bool):
         drop_layers=DROP,
         scout_layer=SCOUT_LAYER,
         profile=profile,
-        budgets=name,
-        budget_name=name,
+        budgets=spec["budget"],
+        budget_name=spec["budget"],
+        selector=spec["selector"],
     ):
         yield
 
 
-def capture_layout(policy, batch, noise, name: str) -> dict:
+def capture_layout(policy, batch, noise, name: str, nfe: int) -> dict:
     with group_forward(policy, name, profile=False):
         policy.reset()
-        policy.predict_action_chunk(batch, noise=noise, num_steps=NFE)
+        policy.predict_action_chunk(batch, noise=noise, num_steps=nfe)
         stats = getattr(policy.model, "_crop_stats", None)
-    if name == "baseline":
+    spec = parse_group(name)
+    if spec["kind"] == "baseline":
         return {
             "budget_name": "baseline",
+            "selector": None,
             "budgets": None,
             "visual_prune": False,
             "expected_prefix": "official 3*256 visual + language; not shortened",
@@ -199,17 +220,17 @@ def capture_layout(policy, batch, noise, name: str) -> dict:
     if stats is None:
         raise RuntimeError(f"{name} did not write _crop_stats")
     payload = stats_dict(stats)
-    payload["budgets"] = resolve_budgets(name)
+    payload["budgets"] = resolve_budgets(spec["budget"])
     payload["visual_prune"] = True
     return payload
 
 
-def breakdown_pass(policy, frames, noises, name: str) -> dict:
+def breakdown_pass(policy, frames, noises, name: str, nfe: int) -> dict:
     parts = []
     with group_forward(policy, name, profile=True):
         for batch, noise in zip(frames, noises, strict=True):
             policy.reset()
-            policy.predict_action_chunk(batch, noise=noise, num_steps=NFE)
+            policy.predict_action_chunk(batch, noise=noise, num_steps=nfe)
             stats = getattr(policy.model, "_crop_stats", None)
             if stats is not None:
                 parts.append(stats_dict(stats))
@@ -254,6 +275,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--n-frames", type=int, default=16)
     parser.add_argument("--warmup", type=int, default=5)
     parser.add_argument("--repeats", type=int, default=3)
+    parser.add_argument("--nfe", type=int, default=1)
+    parser.add_argument("--selector", default="greedy", help="greedy (reference CROP) or lite")
+    parser.add_argument(
+        "--groups",
+        default=None,
+        help="comma-separated group names. lite default: baseline,role-lite,shared-lite",
+    )
     parser.add_argument("--out", type=Path, default=None)
     return parser.parse_args()
 
@@ -296,8 +324,14 @@ def main() -> None:
         flush=True,
     )
     policy = load_policy(DEFAULT_CHECKPOINT, device)
+    nfe = int(args.nfe)
+    selector = resolve_selector(args.selector)
+    if args.groups:
+        groups = tuple(part.strip() for part in args.groups.split(",") if part.strip())
+    else:
+        groups = GROUPS_LITE if selector == "lite" else GROUPS_GREEDY
     policy.config.n_action_steps = 10
-    policy.config.num_inference_steps = NFE
+    policy.config.num_inference_steps = nfe
     policy.config.compile_model = False
     policy.eval()
     calib = load_calib_data(DEFAULT_CALIB_FILE)
@@ -319,7 +353,10 @@ def main() -> None:
     if args.out is not None:
         out_path = args.out
     elif args.mode == "diagnostic":
-        out_path = OUT / f"efficiency_diagnostic_{stamp}.json"
+        tag = "efficiency_diagnostic_lite" if selector == "lite" else "efficiency_diagnostic"
+        out_path = OUT / f"{tag}_nfe{nfe}_{stamp}.json"
+    elif selector == "lite":
+        out_path = OUT / f"efficiency_lite_nfe{nfe}.json"
     else:
         out_path = OUT / "efficiency.json"
 
@@ -333,7 +370,8 @@ def main() -> None:
         "gpu_name": occupancy_before[gpu]["name"] if gpu < len(occupancy_before) else None,
         "checkpoint": DEFAULT_CHECKPOINT,
         "drop": DROP,
-        "nfe": NFE,
+        "nfe": nfe,
+        "selector": selector,
         "scout_layer": SCOUT_LAYER,
         "compile_model": False,
         "batch_size": 1,
@@ -341,7 +379,7 @@ def main() -> None:
         "n_frames": len(frames),
         "warmup": args.warmup,
         "repeats": args.repeats,
-        "group_names": list(GROUPS),
+        "group_names": list(groups),
         "budgets": {k: BUDGET_PRESETS[k] for k in ("role", "shared_mix")},
         "interleave": "per-frame rotation of group order; not one group then the next",
         "flops": "unmeasured",
@@ -359,31 +397,31 @@ def main() -> None:
     logging.getLogger().setLevel(logging.WARNING)
     with torch.no_grad(), skip_llm_layers(policy, DROP, keep_kv=True):
         layouts = {}
-        for name in GROUPS:
+        for name in groups:
             with group_forward(policy, name, profile=False):
                 for _ in range(args.warmup):
                     policy.reset()
-                    policy.predict_action_chunk(frames[0], noise=noises[0], num_steps=NFE)
-            layouts[name] = capture_layout(policy, frames[0], noises[0], name)
+                    policy.predict_action_chunk(frames[0], noise=noises[0], num_steps=nfe)
+            layouts[name] = capture_layout(policy, frames[0], noises[0], name, nfe)
 
-        collected: dict[str, list[dict]] = {name: [] for name in GROUPS}
+        collected: dict[str, list[dict]] = {name: [] for name in groups}
         for fi, (batch, noise) in enumerate(zip(frames, noises, strict=True)):
-            for name in group_order(fi):
+            for name in group_order(fi, groups):
                 with group_forward(policy, name, profile=False):
-                    timed = _time_chunk(policy, batch, noise, args.repeats, device)
+                    timed = _time_chunk(policy, batch, noise, args.repeats, device, nfe)
                 for row in timed:
                     collected[name].append(
                         {
                             "frame": fi,
                             "repeat": int(row["repeat"]),
-                            "order": list(group_order(fi)),
+                            "order": list(group_order(fi, groups)),
                             "cuda_ms": row["cuda_ms"],
                             "wall_ms": row["wall_ms"],
                         }
                     )
 
         groups_out = {}
-        for name in GROUPS:
+        for name in groups:
             samples = collected[name]
             groups_out[name] = {
                 "layout": layouts[name],
@@ -392,7 +430,7 @@ def main() -> None:
                 "samples": samples,
             }
         base = groups_out["baseline"]
-        for name in GROUPS:
+        for name in groups:
             if name == "baseline":
                 groups_out[name]["vs_baseline"] = None
             else:
@@ -402,7 +440,9 @@ def main() -> None:
         summary["groups"] = groups_out
 
         summary["breakdown_profile_true"] = {
-            name: breakdown_pass(policy, frames, noises, name) for name in ("role", "shared_mix")
+            name: breakdown_pass(policy, frames, noises, name, nfe)
+            for name in groups
+            if parse_group(name)["kind"] == "crop"
         }
 
     occupancy_after = snapshot_all()
@@ -421,9 +461,9 @@ def main() -> None:
     extra = ""
     if args.mode == "diagnostic":
         extra = f"  [{DIAGNOSTIC_NOTE}]"
-    print(_line("baseline"), flush=True)
-    print(_line("role") + extra, flush=True)
-    print(_line("shared_mix") + extra, flush=True)
+    for name in groups:
+        suffix = extra if parse_group(name)["kind"] == "crop" else ""
+        print(_line(name) + suffix, flush=True)
     print(f"wrote {out_path}", flush=True)
 
 

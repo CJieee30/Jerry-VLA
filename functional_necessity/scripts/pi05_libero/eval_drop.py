@@ -124,6 +124,11 @@ def _parse_ours(argv: list[str]) -> tuple[argparse.Namespace, list[str]]:
         default="role",
         help="role: wrist 96+32 / global 32+96. shared_mix: both cameras 64+64.",
     )
+    parser.add_argument(
+        "--crop-selector",
+        default="greedy",
+        help="greedy: original FPS CROP. lite: one-shot 4-anchor diversity.",
+    )
     ours, rest = parser.parse_known_args(argv)
     return ours, rest
 
@@ -243,6 +248,7 @@ def run_libero_eval(
     crop_keep_all: bool = False,
     crop_scout_layer: int = 2,
     crop_budget: str = "role",
+    crop_selector: str = "greedy",
 ) -> None:
     from lerobot.envs import close_envs, make_env, make_env_pre_post_processors
     from lerobot.policies import make_policy, make_pre_post_processors
@@ -341,6 +347,7 @@ def run_libero_eval(
             "crop_keep_all": bool(crop_keep_all),
             "crop_scout_layer": int(crop_scout_layer) if crop else None,
             "crop_budget": crop_budget if crop else None,
+            "crop_selector": crop_selector if crop else None,
         },
     )
 
@@ -352,9 +359,10 @@ def run_libero_eval(
         )
     crop_ctx = nullcontext()
     if crop:
-        from crop_vla import crop_visual_tokens, resolve_budgets
+        from crop_vla import crop_visual_tokens, resolve_budgets, resolve_selector
 
         budgets = resolve_budgets(crop_budget)
+        selector = resolve_selector(crop_selector)
         crop_ctx = crop_visual_tokens(
             policy,
             keep_all=crop_keep_all,
@@ -362,13 +370,15 @@ def run_libero_eval(
             drop_layers=drop_layers,
             budgets=budgets,
             budget_name=crop_budget,
+            selector=selector,
         )
         logging.info(
-            "CROP-VLA enabled keep_all=%s scout_layer=%s drop=%s budget=%s %s",
+            "CROP-VLA enabled keep_all=%s scout_layer=%s drop=%s budget=%s selector=%s %s",
             crop_keep_all,
             crop_scout_layer,
             drop_layers,
             crop_budget,
+            selector,
             budgets,
         )
     with torch.no_grad(), amp, skip_ctx, crop_ctx:
@@ -433,8 +443,14 @@ def main() -> None:
         apply_eval_protocol(cfg, original)
         if cfg.output_dir is None:
             if ours.crop:
+                selector = ours.crop_selector or "greedy"
                 if ours.crop_keep_all:
                     tag = "eval_crop_keepall"
+                elif selector in ("lite", "crop-lite", "crop_lite"):
+                    if ours.crop_budget and ours.crop_budget not in ("role", "crop", ""):
+                        tag = f"eval_crop_lite_{ours.crop_budget}"
+                    else:
+                        tag = "eval_crop_lite"
                 elif ours.crop_budget and ours.crop_budget not in ("role", "crop", ""):
                     tag = f"eval_crop_{ours.crop_budget}"
                 else:
@@ -458,6 +474,7 @@ def main() -> None:
             crop_keep_all=ours.crop_keep_all,
             crop_scout_layer=ours.crop_scout_layer,
             crop_budget=ours.crop_budget,
+            crop_selector=ours.crop_selector,
         )
 
     _wrapped()
