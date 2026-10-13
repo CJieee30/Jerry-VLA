@@ -1,0 +1,50 @@
+{
+  "suite": "libero_10",
+  "suite_slug": "long",
+  "kind": "high",
+  "task": "put both the alphabet soup and the tomato sauce in the basket",
+  "task_index": 5,
+  "episode_index": 156,
+  "shared_index": 458,
+  "global_index": 42668,
+  "frame_in_episode": 213,
+  "timestamp_s": null,
+  "length": 255,
+  "horizon": 10,
+  "fps": 10.0,
+  "alpha": 1.8039095401763916,
+  "d_whitened": 3.6930233771600984,
+  "pool_rank": 1,
+  "pool_n": 12,
+  "median_target_alpha": null,
+  "window": [
+    213,
+    222
+  ],
+  "window_len": 10,
+  "clip": [
+    203,
+    232
+  ],
+  "context_notes": [],
+  "maxdiff_frame": 218,
+  "maxdiff_pair": [
+    217,
+    218
+  ],
+  "maxdiff_whitened": 6.603901269595167,
+  "maxdiff_timestamp_s": null,
+  "whitening_std": [
+    0.05375851375258111,
+    0.045300022456052406,
+    0.06353572610428114,
+    0.007690927155167576,
+    0.012292487402144343,
+    0.008634497491330419,
+    0.2400744514055428
+  ],
+  "video": "long_task0_high/clip.mp4",
+  "plot": "long_task0_high/actions.png",
+  "still_maxdiff": "long_task0_high/still_maxdiff.png",
+  "still_timestamp": "long_task0_high/still_timestamp.png"
+}

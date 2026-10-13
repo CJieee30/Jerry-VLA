@@ -128,19 +128,10 @@ def prefix_trim(policy, enabled: bool = True):
         return
     model = policy.model
     orig_sample = model.sample_actions
-    orig_embed = model.embed_prefix
-
-    def embed_prefix(images, img_masks, tokens, masks, states=None, state_masks=None):
-        out = orig_embed(images, img_masks, tokens, masks, states, state_masks)
-        info = getattr(model, "_trim_stats", None)
-        if info is not None:
-            info.physical_len = int(out[0].shape[1])
-            info.valid_prefix_len = int(out[1][0].sum().item())
-            model._trim_stats = info
-        return out
 
     def sample_actions(images, img_masks, tokens, masks, states=None, state_masks=None, noise=None, num_steps=None, **kwargs):
         images, img_masks, tokens, masks, info = trim_prefix_inputs(images, img_masks, tokens, masks)
+        info.physical_len = info.trimmed_physical
         model._trim_stats = info
         return orig_sample(
             images,
@@ -154,12 +145,10 @@ def prefix_trim(policy, enabled: bool = True):
             **kwargs,
         )
 
-    model.embed_prefix = embed_prefix
     model.sample_actions = sample_actions
     try:
         yield
     finally:
-        model.embed_prefix = orig_embed
         model.sample_actions = orig_sample
 
 

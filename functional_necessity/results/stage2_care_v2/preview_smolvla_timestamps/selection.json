@@ -1,0 +1,615 @@
+{
+  "protocol": "care_v2",
+  "stack_note": "timestamps and alpha are the shared CARE v2 480-frame set used by SmolVLA scoring",
+  "horizon": 10,
+  "fps": 10.0,
+  "n_pool_per_task": 12,
+  "selection": "within each suite's task-0 pool of 12: highest alpha, alpha closest to median, lowest alpha",
+  "not_global_rank": true,
+  "clips": [
+    {
+      "suite": "libero_spatial",
+      "suite_slug": "spatial",
+      "kind": "high",
+      "task": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+      "task_index": 34,
+      "episode_index": 1275,
+      "shared_index": 92,
+      "global_index": 222222,
+      "frame_in_episode": 106,
+      "timestamp_s": null,
+      "length": 128,
+      "horizon": 10,
+      "fps": 10.0,
+      "alpha": 3.0992016792297363,
+      "d_whitened": 6.34478852540872,
+      "pool_rank": 1,
+      "pool_n": 12,
+      "median_target_alpha": null,
+      "window": [
+        106,
+        115
+      ],
+      "window_len": 10,
+      "clip": [
+        96,
+        125
+      ],
+      "context_notes": [],
+      "maxdiff_frame": 114,
+      "maxdiff_pair": [
+        113,
+        114
+      ],
+      "maxdiff_whitened": 12.700729937968868,
+      "maxdiff_timestamp_s": null,
+      "whitening_std": [
+        0.05375851375258111,
+        0.045300022456052406,
+        0.06353572610428114,
+        0.007690927155167576,
+        0.012292487402144343,
+        0.008634497491330419,
+        0.2400744514055428
+      ],
+      "video": "spatial_task0_high/clip.mp4",
+      "plot": "spatial_task0_high/actions.png",
+      "still_maxdiff": "spatial_task0_high/still_maxdiff.png",
+      "still_timestamp": "spatial_task0_high/still_timestamp.png"
+    },
+    {
+      "suite": "libero_spatial",
+      "suite_slug": "spatial",
+      "kind": "mid",
+      "task": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+      "task_index": 34,
+      "episode_index": 1282,
+      "shared_index": 99,
+      "global_index": 222922,
+      "frame_in_episode": 11,
+      "timestamp_s": null,
+      "length": 84,
+      "horizon": 10,
+      "fps": 10.0,
+      "alpha": 1.7939382791519165,
+      "d_whitened": 3.6726100367042087,
+      "pool_rank": 6,
+      "pool_n": 12,
+      "median_target_alpha": 1.6722162365913391,
+      "window": [
+        11,
+        20
+      ],
+      "window_len": 10,
+      "clip": [
+        1,
+        30
+      ],
+      "context_notes": [],
+      "maxdiff_frame": 17,
+      "maxdiff_pair": [
+        16,
+        17
+      ],
+      "maxdiff_whitened": 6.448804429892241,
+      "maxdiff_timestamp_s": null,
+      "whitening_std": [
+        0.05375851375258111,
+        0.045300022456052406,
+        0.06353572610428114,
+        0.007690927155167576,
+        0.012292487402144343,
+        0.008634497491330419,
+        0.2400744514055428
+      ],
+      "video": "spatial_task0_mid/clip.mp4",
+      "plot": "spatial_task0_mid/actions.png",
+      "still_maxdiff": "spatial_task0_mid/still_maxdiff.png",
+      "still_timestamp": "spatial_task0_mid/still_timestamp.png"
+    },
+    {
+      "suite": "libero_spatial",
+      "suite_slug": "spatial",
+      "kind": "low",
+      "task": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+      "task_index": 34,
+      "episode_index": 1597,
+      "shared_index": 151,
+      "global_index": 261811,
+      "frame_in_episode": 26,
+      "timestamp_s": null,
+      "length": 96,
+      "horizon": 10,
+      "fps": 10.0,
+      "alpha": 0.8673811554908752,
+      "d_whitened": 1.7757315239459135,
+      "pool_rank": 12,
+      "pool_n": 12,
+      "median_target_alpha": null,
+      "window": [
+        26,
+        35
+      ],
+      "window_len": 10,
+      "clip": [
+        16,
+        45
+      ],
+      "context_notes": [],
+      "maxdiff_frame": 27,
+      "maxdiff_pair": [
+        26,
+        27
+      ],
+      "maxdiff_whitened": 5.949775005206964,
+      "maxdiff_timestamp_s": null,
+      "whitening_std": [
+        0.05375851375258111,
+        0.045300022456052406,
+        0.06353572610428114,
+        0.007690927155167576,
+        0.012292487402144343,
+        0.008634497491330419,
+        0.2400744514055428
+      ],
+      "video": "spatial_task0_low/clip.mp4",
+      "plot": "spatial_task0_low/actions.png",
+      "still_maxdiff": "spatial_task0_low/still_maxdiff.png",
+      "still_timestamp": "spatial_task0_low/still_timestamp.png"
+    },
+    {
+      "suite": "libero_object",
+      "suite_slug": "object",
+      "kind": "high",
+      "task": "pick up the alphabet soup and place it in the basket",
+      "task_index": 24,
+      "episode_index": 905,
+      "shared_index": 297,
+      "global_index": 167901,
+      "frame_in_episode": 67,
+      "timestamp_s": null,
+      "length": 154,
+      "horizon": 10,
+      "fps": 10.0,
+      "alpha": 1.4914014339447021,
+      "d_whitened": 3.0532463884567735,
+      "pool_rank": 1,
+      "pool_n": 12,
+      "median_target_alpha": null,
+      "window": [
+        67,
+        76
+      ],
+      "window_len": 10,
+      "clip": [
+        57,
+        86
+      ],
+      "context_notes": [],
+      "maxdiff_frame": 73,
+      "maxdiff_pair": [
+        72,
+        73
+      ],
+      "maxdiff_whitened": 5.082340145534238,
+      "maxdiff_timestamp_s": null,
+      "whitening_std": [
+        0.05375851375258111,
+        0.045300022456052406,
+        0.06353572610428114,
+        0.007690927155167576,
+        0.012292487402144343,
+        0.008634497491330419,
+        0.2400744514055428
+      ],
+      "video": "object_task0_high/clip.mp4",
+      "plot": "object_task0_high/actions.png",
+      "still_maxdiff": "object_task0_high/still_maxdiff.png",
+      "still_timestamp": "object_task0_high/still_timestamp.png"
+    },
+    {
+      "suite": "libero_object",
+      "suite_slug": "object",
+      "kind": "mid",
+      "task": "pick up the alphabet soup and place it in the basket",
+      "task_index": 24,
+      "episode_index": 825,
+      "shared_index": 237,
+      "global_index": 156188,
+      "frame_in_episode": 65,
+      "timestamp_s": null,
+      "length": 153,
+      "horizon": 10,
+      "fps": 10.0,
+      "alpha": 1.1326977014541626,
+      "d_whitened": 2.318896229862015,
+      "pool_rank": 6,
+      "pool_n": 12,
+      "median_target_alpha": 1.0314008295536041,
+      "window": [
+        65,
+        74
+      ],
+      "window_len": 10,
+      "clip": [
+        55,
+        84
+      ],
+      "context_notes": [],
+      "maxdiff_frame": 71,
+      "maxdiff_pair": [
+        70,
+        71
+      ],
+      "maxdiff_whitened": 4.043976265271698,
+      "maxdiff_timestamp_s": null,
+      "whitening_std": [
+        0.05375851375258111,
+        0.045300022456052406,
+        0.06353572610428114,
+        0.007690927155167576,
+        0.012292487402144343,
+        0.008634497491330419,
+        0.2400744514055428
+      ],
+      "video": "object_task0_mid/clip.mp4",
+      "plot": "object_task0_mid/actions.png",
+      "still_maxdiff": "object_task0_mid/still_maxdiff.png",
+      "still_timestamp": "object_task0_mid/still_timestamp.png"
+    },
+    {
+      "suite": "libero_object",
+      "suite_slug": "object",
+      "kind": "low",
+      "task": "pick up the alphabet soup and place it in the basket",
+      "task_index": 24,
+      "episode_index": 945,
+      "shared_index": 315,
+      "global_index": 173949,
+      "frame_in_episode": 100,
+      "timestamp_s": null,
+      "length": 154,
+      "horizon": 10,
+      "fps": 10.0,
+      "alpha": 0.21433238685131073,
+      "d_whitened": 0.4387883672435294,
+      "pool_rank": 12,
+      "pool_n": 12,
+      "median_target_alpha": null,
+      "window": [
+        100,
+        109
+      ],
+      "window_len": 10,
+      "clip": [
+        90,
+        119
+      ],
+      "context_notes": [],
+      "maxdiff_frame": 106,
+      "maxdiff_pair": [
+        105,
+        106
+      ],
+      "maxdiff_whitened": 0.9720269027843907,
+      "maxdiff_timestamp_s": null,
+      "whitening_std": [
+        0.05375851375258111,
+        0.045300022456052406,
+        0.06353572610428114,
+        0.007690927155167576,
+        0.012292487402144343,
+        0.008634497491330419,
+        0.2400744514055428
+      ],
+      "video": "object_task0_low/clip.mp4",
+      "plot": "object_task0_low/actions.png",
+      "still_maxdiff": "object_task0_low/still_maxdiff.png",
+      "still_timestamp": "object_task0_low/still_timestamp.png"
+    },
+    {
+      "suite": "libero_goal",
+      "suite_slug": "goal",
+      "kind": "high",
+      "task": "open the middle drawer of the cabinet",
+      "task_index": 19,
+      "episode_index": 497,
+      "shared_index": 85,
+      "global_index": 115952,
+      "frame_in_episode": 88,
+      "timestamp_s": null,
+      "length": 128,
+      "horizon": 10,
+      "fps": 10.0,
+      "alpha": 1.516980767250061,
+      "d_whitened": 3.1056132605969835,
+      "pool_rank": 1,
+      "pool_n": 12,
+      "median_target_alpha": null,
+      "window": [
+        88,
+        97
+      ],
+      "window_len": 10,
+      "clip": [
+        78,
+        107
+      ],
+      "context_notes": [],
+      "maxdiff_frame": 92,
+      "maxdiff_pair": [
+        91,
+        92
+      ],
+      "maxdiff_whitened": 5.09657963293712,
+      "maxdiff_timestamp_s": null,
+      "whitening_std": [
+        0.05375851375258111,
+        0.045300022456052406,
+        0.06353572610428114,
+        0.007690927155167576,
+        0.012292487402144343,
+        0.008634497491330419,
+        0.2400744514055428
+      ],
+      "video": "goal_task0_high/clip.mp4",
+      "plot": "goal_task0_high/actions.png",
+      "still_maxdiff": "goal_task0_high/still_maxdiff.png",
+      "still_timestamp": "goal_task0_high/still_timestamp.png"
+    },
+    {
+      "suite": "libero_goal",
+      "suite_slug": "goal",
+      "kind": "mid",
+      "task": "open the middle drawer of the cabinet",
+      "task_index": 19,
+      "episode_index": 779,
+      "shared_index": 164,
+      "global_index": 150228,
+      "frame_in_episode": 52,
+      "timestamp_s": null,
+      "length": 126,
+      "horizon": 10,
+      "fps": 10.0,
+      "alpha": 1.0914393663406372,
+      "d_whitened": 2.2344309028350495,
+      "pool_rank": 6,
+      "pool_n": 12,
+      "median_target_alpha": 0.9549681842327118,
+      "window": [
+        52,
+        61
+      ],
+      "window_len": 10,
+      "clip": [
+        42,
+        71
+      ],
+      "context_notes": [],
+      "maxdiff_frame": 59,
+      "maxdiff_pair": [
+        58,
+        59
+      ],
+      "maxdiff_whitened": 3.258844087628857,
+      "maxdiff_timestamp_s": null,
+      "whitening_std": [
+        0.05375851375258111,
+        0.045300022456052406,
+        0.06353572610428114,
+        0.007690927155167576,
+        0.012292487402144343,
+        0.008634497491330419,
+        0.2400744514055428
+      ],
+      "video": "goal_task0_mid/clip.mp4",
+      "plot": "goal_task0_mid/actions.png",
+      "still_maxdiff": "goal_task0_mid/still_maxdiff.png",
+      "still_timestamp": "goal_task0_mid/still_timestamp.png"
+    },
+    {
+      "suite": "libero_goal",
+      "suite_slug": "goal",
+      "kind": "low",
+      "task": "open the middle drawer of the cabinet",
+      "task_index": 19,
+      "episode_index": 780,
+      "shared_index": 165,
+      "global_index": 150399,
+      "frame_in_episode": 97,
+      "timestamp_s": null,
+      "length": 121,
+      "horizon": 10,
+      "fps": 10.0,
+      "alpha": 0.1694236844778061,
+      "d_whitened": 0.34684979377253744,
+      "pool_rank": 12,
+      "pool_n": 12,
+      "median_target_alpha": null,
+      "window": [
+        97,
+        106
+      ],
+      "window_len": 10,
+      "clip": [
+        87,
+        116
+      ],
+      "context_notes": [],
+      "maxdiff_frame": 98,
+      "maxdiff_pair": [
+        97,
+        98
+      ],
+      "maxdiff_whitened": 0.516924761308841,
+      "maxdiff_timestamp_s": null,
+      "whitening_std": [
+        0.05375851375258111,
+        0.045300022456052406,
+        0.06353572610428114,
+        0.007690927155167576,
+        0.012292487402144343,
+        0.008634497491330419,
+        0.2400744514055428
+      ],
+      "video": "goal_task0_low/clip.mp4",
+      "plot": "goal_task0_low/actions.png",
+      "still_maxdiff": "goal_task0_low/still_maxdiff.png",
+      "still_timestamp": "goal_task0_low/still_timestamp.png"
+    },
+    {
+      "suite": "libero_10",
+      "suite_slug": "long",
+      "kind": "high",
+      "task": "put both the alphabet soup and the tomato sauce in the basket",
+      "task_index": 5,
+      "episode_index": 156,
+      "shared_index": 458,
+      "global_index": 42668,
+      "frame_in_episode": 213,
+      "timestamp_s": null,
+      "length": 255,
+      "horizon": 10,
+      "fps": 10.0,
+      "alpha": 1.8039095401763916,
+      "d_whitened": 3.6930233771600984,
+      "pool_rank": 1,
+      "pool_n": 12,
+      "median_target_alpha": null,
+      "window": [
+        213,
+        222
+      ],
+      "window_len": 10,
+      "clip": [
+        203,
+        232
+      ],
+      "context_notes": [],
+      "maxdiff_frame": 218,
+      "maxdiff_pair": [
+        217,
+        218
+      ],
+      "maxdiff_whitened": 6.603901269595167,
+      "maxdiff_timestamp_s": null,
+      "whitening_std": [
+        0.05375851375258111,
+        0.045300022456052406,
+        0.06353572610428114,
+        0.007690927155167576,
+        0.012292487402144343,
+        0.008634497491330419,
+        0.2400744514055428
+      ],
+      "video": "long_task0_high/clip.mp4",
+      "plot": "long_task0_high/actions.png",
+      "still_maxdiff": "long_task0_high/still_maxdiff.png",
+      "still_timestamp": "long_task0_high/still_timestamp.png"
+    },
+    {
+      "suite": "libero_10",
+      "suite_slug": "long",
+      "kind": "mid",
+      "task": "put both the alphabet soup and the tomato sauce in the basket",
+      "task_index": 5,
+      "episode_index": 340,
+      "shared_index": 465,
+      "global_index": 91447,
+      "frame_in_episode": 271,
+      "timestamp_s": null,
+      "length": 282,
+      "horizon": 10,
+      "fps": 10.0,
+      "alpha": 0.7340838313102722,
+      "d_whitened": 1.5028407086839488,
+      "pool_rank": 6,
+      "pool_n": 12,
+      "median_target_alpha": 0.6865813136100769,
+      "window": [
+        271,
+        280
+      ],
+      "window_len": 10,
+      "clip": [
+        261,
+        281
+      ],
+      "context_notes": [
+        "post-context truncated: requested 10 frames (1s at 10 FPS), got 1"
+      ],
+      "maxdiff_frame": 279,
+      "maxdiff_pair": [
+        278,
+        279
+      ],
+      "maxdiff_whitened": 2.204689152894045,
+      "maxdiff_timestamp_s": null,
+      "whitening_std": [
+        0.05375851375258111,
+        0.045300022456052406,
+        0.06353572610428114,
+        0.007690927155167576,
+        0.012292487402144343,
+        0.008634497491330419,
+        0.2400744514055428
+      ],
+      "video": "long_task0_mid/clip.mp4",
+      "plot": "long_task0_mid/actions.png",
+      "still_maxdiff": "long_task0_mid/still_maxdiff.png",
+      "still_timestamp": "long_task0_mid/still_timestamp.png"
+    },
+    {
+      "suite": "libero_10",
+      "suite_slug": "long",
+      "kind": "low",
+      "task": "put both the alphabet soup and the tomato sauce in the basket",
+      "task_index": 5,
+      "episode_index": 317,
+      "shared_index": 464,
+      "global_index": 85130,
+      "frame_in_episode": 1,
+      "timestamp_s": null,
+      "length": 300,
+      "horizon": 10,
+      "fps": 10.0,
+      "alpha": 0.29001864790916443,
+      "d_whitened": 0.5937358111880082,
+      "pool_rank": 12,
+      "pool_n": 12,
+      "median_target_alpha": null,
+      "window": [
+        1,
+        10
+      ],
+      "window_len": 10,
+      "clip": [
+        0,
+        20
+      ],
+      "context_notes": [
+        "pre-context truncated: requested 10 frames (1s at 10 FPS), got 1"
+      ],
+      "maxdiff_frame": 10,
+      "maxdiff_pair": [
+        9,
+        10
+      ],
+      "maxdiff_whitened": 2.783643444658035,
+      "maxdiff_timestamp_s": null,
+      "whitening_std": [
+        0.05375851375258111,
+        0.045300022456052406,
+        0.06353572610428114,
+        0.007690927155167576,
+        0.012292487402144343,
+        0.008634497491330419,
+        0.2400744514055428
+      ],
+      "video": "long_task0_low/clip.mp4",
+      "plot": "long_task0_low/actions.png",
+      "still_maxdiff": "long_task0_low/still_maxdiff.png",
+      "still_timestamp": "long_task0_low/still_timestamp.png"
+    }
+  ]
+}

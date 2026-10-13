@@ -1,0 +1,50 @@
+{
+  "suite": "libero_goal",
+  "suite_slug": "goal",
+  "kind": "mid",
+  "task": "open the middle drawer of the cabinet",
+  "task_index": 19,
+  "episode_index": 779,
+  "shared_index": 164,
+  "global_index": 150228,
+  "frame_in_episode": 52,
+  "timestamp_s": null,
+  "length": 126,
+  "horizon": 10,
+  "fps": 10.0,
+  "alpha": 1.0914393663406372,
+  "d_whitened": 2.2344309028350495,
+  "pool_rank": 6,
+  "pool_n": 12,
+  "median_target_alpha": 0.9549681842327118,
+  "window": [
+    52,
+    61
+  ],
+  "window_len": 10,
+  "clip": [
+    42,
+    71
+  ],
+  "context_notes": [],
+  "maxdiff_frame": 59,
+  "maxdiff_pair": [
+    58,
+    59
+  ],
+  "maxdiff_whitened": 3.258844087628857,
+  "maxdiff_timestamp_s": null,
+  "whitening_std": [
+    0.05375851375258111,
+    0.045300022456052406,
+    0.06353572610428114,
+    0.007690927155167576,
+    0.012292487402144343,
+    0.008634497491330419,
+    0.2400744514055428
+  ],
+  "video": "goal_task0_mid/clip.mp4",
+  "plot": "goal_task0_mid/actions.png",
+  "still_maxdiff": "goal_task0_mid/still_maxdiff.png",
+  "still_timestamp": "goal_task0_mid/still_timestamp.png"
+}

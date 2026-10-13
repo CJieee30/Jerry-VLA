@@ -1,0 +1,26 @@
+{
+  "gpu": 3,
+  "memory": {
+    "total_mib": 24576,
+    "used_mib": 3593,
+    "free_mib": 20534,
+    "util": 71
+  },
+  "occupancy": [
+    {
+      "pid": 1997700,
+      "user": "sunxy",
+      "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+      "mem_mib": "1866",
+      "args": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python -m ts2audio.run /home/sunxy/ts2audio/runs/261012-fa-wavlm-moment-h2/impute-ecl-moment-h0-s13/v1/a1"
+    },
+    {
+      "pid": 1009712,
+      "user": "sunxy",
+      "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+      "mem_mib": "1712",
+      "args": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python -m ts2audio.run /home/sunxy/ts2audio/runs/261012-fa-wavlm-moment-h2/impute-ettm1-fa_wavlm-h0-s13/v1/a1"
+    }
+  ],
+  "project_eval_drop": []
+}

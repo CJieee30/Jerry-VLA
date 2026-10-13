@@ -1,0 +1,50 @@
+{
+  "suite": "libero_spatial",
+  "suite_slug": "spatial",
+  "kind": "high",
+  "task": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+  "task_index": 34,
+  "episode_index": 1275,
+  "shared_index": 92,
+  "global_index": 222222,
+  "frame_in_episode": 106,
+  "timestamp_s": null,
+  "length": 128,
+  "horizon": 10,
+  "fps": 10.0,
+  "alpha": 3.0992016792297363,
+  "d_whitened": 6.34478852540872,
+  "pool_rank": 1,
+  "pool_n": 12,
+  "median_target_alpha": null,
+  "window": [
+    106,
+    115
+  ],
+  "window_len": 10,
+  "clip": [
+    96,
+    125
+  ],
+  "context_notes": [],
+  "maxdiff_frame": 114,
+  "maxdiff_pair": [
+    113,
+    114
+  ],
+  "maxdiff_whitened": 12.700729937968868,
+  "maxdiff_timestamp_s": null,
+  "whitening_std": [
+    0.05375851375258111,
+    0.045300022456052406,
+    0.06353572610428114,
+    0.007690927155167576,
+    0.012292487402144343,
+    0.008634497491330419,
+    0.2400744514055428
+  ],
+  "video": "spatial_task0_high/clip.mp4",
+  "plot": "spatial_task0_high/actions.png",
+  "still_maxdiff": "spatial_task0_high/still_maxdiff.png",
+  "still_timestamp": "spatial_task0_high/still_timestamp.png"
+}

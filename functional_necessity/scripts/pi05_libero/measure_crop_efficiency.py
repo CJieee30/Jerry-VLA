@@ -466,7 +466,7 @@ def main() -> None:
             tag = "efficiency_diagnostic"
         out_path = OUT / f"{tag}_nfe{nfe}_{stamp}.json"
     elif any(parse_group(g).get("prefix_trim") for g in groups):
-        out_path = OUT / f"efficiency_trim_grid_nfe{nfe}.json"
+        out_path = OUT / f"efficiency_trim_grid_nfe{nfe}_{stamp}.json"
     elif selector == "grid":
         out_path = OUT / f"efficiency_grid_nfe{nfe}.json"
     elif selector == "lite":

@@ -1,0 +1,104 @@
+{
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "method": "fisher",
+  "k": 6,
+  "drop_layers": [
+    1,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "keep_layers": [
+    0,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "recovery": false,
+  "skip": "dtr_appendix_b_prefix_kv",
+  "n_action_steps": 10,
+  "compile_model": false,
+  "job_name": "eval_trim_only_nfe10",
+  "seed": 1000,
+  "num_inference_steps": 10,
+  "n_episodes_per_task": 10,
+  "task_extra_map": null,
+  "task_extra_kind": null,
+  "universal_drop": [
+    1,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "per_task_union": false,
+  "predicate_log": null,
+  "skip_mode": "keep_kv",
+  "keep_kv": true,
+  "crop": false,
+  "crop_keep_all": false,
+  "crop_scout_layer": null,
+  "crop_budget": null,
+  "crop_selector": null,
+  "prefix_trim": true,
+  "actual_nfe": 10,
+  "code_version": {
+    "head": "e957c92d0b080d4ecb02a88341394c68ffc4efa3",
+    "head_short": "e957c92",
+    "file_hashes": {
+      "functional_necessity/scripts/pi05_libero/crop_vla.py": "21ce2053ae326760149656ab6023412c7df1a558fce410a9edfab05f9847500b",
+      "functional_necessity/scripts/pi05_libero/prefix_trim.py": "b9792881fef5ba3957a6718a92ecef000d6f43077afea1c5722016e3a3505f2a",
+      "functional_necessity/scripts/pi05_libero/check_crop_vla.py": "222e6ebe14fbfc8f7d9e24379a6b330e6fbba6d52d0ba5021daca8d3c61d1155",
+      "functional_necessity/scripts/pi05_libero/eval_drop.py": "9fe8bf01a5e37c168b52a883f7aa1f95e5c2233c9f7588ac8c2fc8426680726a",
+      "functional_necessity/scripts/pi05_libero/measure_crop_efficiency.py": "447fdac4eba685371fb13eb02dbe5d1ba3ba91ee9e977853efc78174ffef0889"
+    }
+  },
+  "runtime_gpu": {
+    "cuda_visible_devices": "1",
+    "shared_eval": true,
+    "gpu_snapshot": {
+      "gpu": 1,
+      "memory": {
+        "total_mib": 24576,
+        "used_mib": 11133,
+        "free_mib": 12994,
+        "util": 12
+      },
+      "occupancy": [
+        {
+          "pid": 1011148,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1712",
+          "args": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python -m ts2audio.run /home/sunxy/ts2audio/runs/261012-fa-wavlm-moment-h2/impute-weather-fa_wavlm-h0-s13/v1/a1"
+        },
+        {
+          "pid": 830215,
+          "user": "guorj",
+          "name": "/home/guorj/.miniforge3/envs/lerobot/bin/python",
+          "mem_mib": "9406",
+          "args": "/home/guorj/.miniforge3/envs/lerobot/bin/python eval_drop.py --method fisher --k 6 --drop-layers 1,13,14,15,16,17 --prefix-trim --output_dir /home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage_nfe/crop_vla/eval_trim_only_nfe10 --job_name eval_trim_only_nfe10 --policy.path=lerobot/pi05_libero_finetuned_v044 --policy.n_action_steps=10 --policy.num_inference_steps=10 --policy.compile_model=false --policy.gradient_checkpointing=false --env.type=libero --env.task=libero_spatial,libero_object,libero_goal,libero_10 --env.control_mode=relative --env.max_parallel_tasks=1 --eval.batch_size=1 --eval.n_episodes=10 --seed=1000"
+        }
+      ],
+      "project_eval_drop": [
+        {
+          "pid": 830215,
+          "user": "guorj",
+          "mem_mib": "9406",
+          "args": "/home/guorj/.miniforge3/envs/lerobot/bin/python eval_drop.py --method fisher --k 6 --drop-layers 1,13,14,15,16,17 --prefix-trim --output_dir /home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage_nfe/crop_vla/eval_trim_only_nfe10 --job_name eval_trim_only_nfe10 --policy.path=lerobot/pi05_libero_finetuned_v044 --policy.n_action_steps=10 --policy.num_inference_steps=10 --policy.compile_model=false --policy.gradient_checkpointing=false --env.type=libero --env.task=libero_spatial,libero_object,libero_goal,libero_10 --env.control_mode=relative --env.max_parallel_tasks=1 --eval.batch_size=1 --eval.n_episodes=10 --seed=1000"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "gpu": 1,
+  "memory": {
+    "total_mib": 24576,
+    "used_mib": 1722,
+    "free_mib": 22405,
+    "util": 0
+  },
+  "occupancy": [
+    {
+      "pid": 1011148,
+      "user": "sunxy",
+      "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+      "mem_mib": "1712",
+      "args": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python -m ts2audio.run /home/sunxy/ts2audio/runs/261012-fa-wavlm-moment-h2/impute-weather-fa_wavlm-h0-s13/v1/a1"
+    }
+  ],
+  "project_eval_drop": []
+}

@@ -1,0 +1,52 @@
+{
+  "suite": "libero_10",
+  "suite_slug": "long",
+  "kind": "mid",
+  "task": "put both the alphabet soup and the tomato sauce in the basket",
+  "task_index": 5,
+  "episode_index": 340,
+  "shared_index": 465,
+  "global_index": 91447,
+  "frame_in_episode": 271,
+  "timestamp_s": null,
+  "length": 282,
+  "horizon": 10,
+  "fps": 10.0,
+  "alpha": 0.7340838313102722,
+  "d_whitened": 1.5028407086839488,
+  "pool_rank": 6,
+  "pool_n": 12,
+  "median_target_alpha": 0.6865813136100769,
+  "window": [
+    271,
+    280
+  ],
+  "window_len": 10,
+  "clip": [
+    261,
+    281
+  ],
+  "context_notes": [
+    "post-context truncated: requested 10 frames (1s at 10 FPS), got 1"
+  ],
+  "maxdiff_frame": 279,
+  "maxdiff_pair": [
+    278,
+    279
+  ],
+  "maxdiff_whitened": 2.204689152894045,
+  "maxdiff_timestamp_s": null,
+  "whitening_std": [
+    0.05375851375258111,
+    0.045300022456052406,
+    0.06353572610428114,
+    0.007690927155167576,
+    0.012292487402144343,
+    0.008634497491330419,
+    0.2400744514055428
+  ],
+  "video": "long_task0_mid/clip.mp4",
+  "plot": "long_task0_mid/actions.png",
+  "still_maxdiff": "long_task0_mid/still_maxdiff.png",
+  "still_timestamp": "long_task0_mid/still_timestamp.png"
+}

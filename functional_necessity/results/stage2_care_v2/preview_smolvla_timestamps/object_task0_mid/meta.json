@@ -1,0 +1,50 @@
+{
+  "suite": "libero_object",
+  "suite_slug": "object",
+  "kind": "mid",
+  "task": "pick up the alphabet soup and place it in the basket",
+  "task_index": 24,
+  "episode_index": 825,
+  "shared_index": 237,
+  "global_index": 156188,
+  "frame_in_episode": 65,
+  "timestamp_s": null,
+  "length": 153,
+  "horizon": 10,
+  "fps": 10.0,
+  "alpha": 1.1326977014541626,
+  "d_whitened": 2.318896229862015,
+  "pool_rank": 6,
+  "pool_n": 12,
+  "median_target_alpha": 1.0314008295536041,
+  "window": [
+    65,
+    74
+  ],
+  "window_len": 10,
+  "clip": [
+    55,
+    84
+  ],
+  "context_notes": [],
+  "maxdiff_frame": 71,
+  "maxdiff_pair": [
+    70,
+    71
+  ],
+  "maxdiff_whitened": 4.043976265271698,
+  "maxdiff_timestamp_s": null,
+  "whitening_std": [
+    0.05375851375258111,
+    0.045300022456052406,
+    0.06353572610428114,
+    0.007690927155167576,
+    0.012292487402144343,
+    0.008634497491330419,
+    0.2400744514055428
+  ],
+  "video": "object_task0_mid/clip.mp4",
+  "plot": "object_task0_mid/actions.png",
+  "still_maxdiff": "object_task0_mid/still_maxdiff.png",
+  "still_timestamp": "object_task0_mid/still_timestamp.png"
+}

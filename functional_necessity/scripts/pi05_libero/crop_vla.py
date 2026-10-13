@@ -112,6 +112,7 @@ class CropStats:
     valid_prefix_len: int | None = None
     untrimmed_physical: int | None = None
     trimmed_physical: int | None = None
+    kv_lens: list[int] | None = None
 
 
 def uniform_grid_local_indices(
@@ -387,15 +388,72 @@ def _prefix_vlm(model, embs, pad_masks, att_masks, position_ids=None):
     return past, int(embs.shape[1])
 
 
+def _kv_len_one(past, layer_idx: int) -> int:
+    if past is None:
+        return 0
+    layers = getattr(past, "layers", None)
+    if layers is not None:
+        if layer_idx >= len(layers) or layers[layer_idx] is None:
+            return 0
+        layer = layers[layer_idx]
+        keys = getattr(layer, "keys", None)
+        if keys is not None:
+            return 0 if keys.numel() == 0 else int(keys.shape[-2])
+        getter = getattr(layer, "get_seq_length", None)
+        if callable(getter):
+            return int(getter())
+        return 0
+    key_cache = getattr(past, "key_cache", None)
+    if key_cache is not None:
+        if layer_idx >= len(key_cache) or key_cache[layer_idx] is None:
+            return 0
+        keys = key_cache[layer_idx]
+        return 0 if keys.numel() == 0 else int(keys.shape[-2])
+    getter = getattr(past, "get_seq_length", None)
+    if callable(getter):
+        try:
+            return int(getter(layer_idx))
+        except TypeError:
+            if layer_idx == 0:
+                return int(getter())
+            raise
+    if isinstance(past, (list, tuple)):
+        if layer_idx >= len(past) or past[layer_idx] is None:
+            return 0
+        return int(past[layer_idx][0].shape[-2])
+    raise TypeError(f"unknown past_key_values type {type(past)}")
+
+
+def kv_lens_all_layers(past, n_layers: int) -> list[int]:
+    """K/V sequence length for every language layer, including dropped keep-KV layers."""
+    return [_kv_len_one(past, i) for i in range(int(n_layers))]
+
+
 def _kv_seq_len(past) -> int:
     if past is None:
         return 0
     getter = getattr(past, "get_seq_length", None)
     if callable(getter):
-        return int(getter())
+        try:
+            return int(getter(0))
+        except TypeError:
+            return int(getter())
     if isinstance(past, (list, tuple)) and past:
         return int(past[0][0].shape[-2])
+    layers = getattr(past, "layers", None)
+    if layers:
+        return _kv_len_one(past, 0)
     raise TypeError(f"unknown past_key_values type {type(past)}")
+
+
+def _assert_kv_shortened(past, short_len: int, n_layers: int) -> list[int]:
+    lens = kv_lens_all_layers(past, n_layers)
+    if len(lens) != n_layers or any(v != short_len for v in lens):
+        raise RuntimeError(
+            f"KV lengths {lens} != packed prefix {short_len} across {n_layers} layers "
+            f"(including Drop-6 keep-KV slots)"
+        )
+    return lens
 
 
 def _relevance_scores(
@@ -741,9 +799,9 @@ def sample_actions_crop(
 
     past, short_len = _prefix_vlm(model, short_embs, short_pad, short_att, short_pos)
     timer.mark("prefix")
-    kv_len = _kv_seq_len(past)
-    if kv_len != short_len:
-        raise RuntimeError(f"KV length {kv_len} != packed prefix {short_len}; sequence was not shortened")
+    n_layers = len(model._paligemma_language_model_core().layers)
+    kv_lens = _assert_kv_shortened(past, short_len, n_layers)
+    kv_len = kv_lens[0] if kv_lens else 0
 
     n_vel = [0]
 
@@ -793,6 +851,7 @@ def sample_actions_crop(
         num_steps=num_steps,
         velocity_calls=n_vel[0],
         deferred=deferred,
+        kv_lens=kv_lens,
         prefix_trim=trim_info is not None,
         n_views_in=None if trim_info is None else trim_info.n_views_in,
         n_views_out=None if trim_info is None else trim_info.n_views_out,
@@ -893,9 +952,9 @@ def sample_actions_grid(
     short_pos = torch.gather(orig_pos, 1, keep_idx)
     past, short_len = _prefix_vlm(model, short_embs, short_pad, short_att, short_pos)
     timer.mark("prefix")
-    kv_len = _kv_seq_len(past)
-    if kv_len != short_len:
-        raise RuntimeError(f"KV length {kv_len} != packed prefix {short_len}; sequence was not shortened")
+    n_layers = len(model._paligemma_language_model_core().layers)
+    kv_lens = _assert_kv_shortened(past, short_len, n_layers)
+    kv_len = kv_lens[0] if kv_lens else 0
 
     n_vel = [0]
 
@@ -951,6 +1010,7 @@ def sample_actions_grid(
         num_steps=num_steps,
         velocity_calls=n_vel[0],
         deferred={"orig_offset": orig_offset, "short_pad": short_pad, "cameras": meta_b0},
+        kv_lens=kv_lens,
         prefix_trim=trim_info is not None,
         n_views_in=None if trim_info is None else trim_info.n_views_in,
         n_views_out=None if trim_info is None else trim_info.n_views_out,
@@ -1189,6 +1249,9 @@ def bind_cuda_device(physical: int) -> torch.device:
     return torch.device(f"cuda:{logical}")
 
 
+MIN_FREE_MIB_SHARED_EVAL = 12000  # π0.5 Drop-6 peak ~10 GiB; keep ~2 GiB headroom
+
+
 def gpu_occupancy(gpu: int) -> list[dict[str, Any]]:
     """Processes currently using `gpu`, with usernames."""
     raw = subprocess.check_output(
@@ -1212,6 +1275,100 @@ def gpu_occupancy(gpu: int) -> list[dict[str, Any]]:
             user = "?"
         rows.append({"pid": pid, "user": user, "name": name, "mem_mib": mem})
     return rows
+
+
+def _pid_args(pid: int) -> str:
+    try:
+        return subprocess.check_output(["ps", "-o", "args=", "-p", str(pid)], text=True).strip()
+    except subprocess.CalledProcessError:
+        return ""
+
+
+def gpu_memory(gpu: int) -> dict[str, int]:
+    raw = subprocess.check_output(
+        [
+            "nvidia-smi",
+            f"--id={gpu}",
+            "--query-gpu=memory.total,memory.used,memory.free,utilization.gpu",
+            "--format=csv,noheader,nounits",
+        ],
+        text=True,
+    ).strip()
+    tot, used, free, util = [p.strip() for p in raw.split(",")]
+    return {
+        "total_mib": int(tot),
+        "used_mib": int(used),
+        "free_mib": int(free),
+        "util": int(util),
+    }
+
+
+def enrich_occupancy(gpu: int) -> list[dict[str, Any]]:
+    rows = []
+    for row in gpu_occupancy(gpu):
+        item = dict(row)
+        item["args"] = _pid_args(int(row["pid"]))
+        rows.append(item)
+    return rows
+
+
+def project_closed_loop_evals(gpu: int) -> list[dict[str, Any]]:
+    """This project's LIBERO eval_drop.py processes on `gpu` (not check/measure)."""
+    hits = []
+    for row in enrich_occupancy(gpu):
+        args = str(row.get("args") or "")
+        user = str(row.get("user") or "")
+        if user == "guorj" and "eval_drop.py" in args:
+            hits.append(row)
+    return hits
+
+
+def gpu_shared_snapshot(gpu: int) -> dict[str, Any]:
+    occ = enrich_occupancy(gpu)
+    evals = project_closed_loop_evals(gpu)
+    return {
+        "gpu": int(gpu),
+        "memory": gpu_memory(gpu),
+        "occupancy": occ,
+        "project_eval_drop": [
+            {
+                "pid": r["pid"],
+                "user": r["user"],
+                "mem_mib": r["mem_mib"],
+                "args": r.get("args", ""),
+            }
+            for r in evals
+        ],
+    }
+
+
+def shared_eval_ok(
+    gpu: int,
+    *,
+    min_free_mib: int = MIN_FREE_MIB_SHARED_EVAL,
+) -> tuple[bool, str, dict[str, Any]]:
+    """Closed-loop-only gate: enough free VRAM, at most one Jerry-VLA eval per GPU.
+
+    Does not require an idle card and does not kill other users. Formal
+    efficiency must still use gpu_is_exclusive / require_idle_gpu.
+    """
+    snap = gpu_shared_snapshot(gpu)
+    evals = snap["project_eval_drop"]
+    free = int(snap["memory"]["free_mib"])
+    others = (
+        ", ".join(f"{r['user']}:{r['pid']}:{r['mem_mib']}MiB" for r in snap["occupancy"])
+        or "no other compute apps"
+    )
+    if evals:
+        desc = ", ".join(f"pid={e['pid']}" for e in evals)
+        return False, f"GPU{gpu} already runs this project's eval_drop ({desc})", snap
+    if free < int(min_free_mib):
+        return (
+            False,
+            f"GPU{gpu} free {free} MiB < {min_free_mib} MiB headroom (peak ~10 GiB)",
+            snap,
+        )
+    return True, f"GPU{gpu} shared-eval ok free={free}MiB occupancy=({others})", snap
 
 
 def gpu_is_exclusive(gpu: int, *, allow_users: tuple[str, ...] | None = None) -> tuple[bool, str]:
@@ -1398,6 +1555,31 @@ def cpu_selftest() -> None:
     trimmed_all = packed_grid_keep_idx("cpu", 2, 48, (False, False), keep_all=True)
     if int(trimmed_all.numel()) != 2 * TOKENS_PER_VIEW + 48:
         raise RuntimeError("trim+grid keep-all pack is not 2*256+lang")
+
+    class _Layer:
+        def __init__(self, slen: int):
+            self.keys = torch.zeros(1, 1, slen, 4)
+
+    class _Cache:
+        def __init__(self, lens):
+            self.layers = [_Layer(n) for n in lens]
+
+        def get_seq_length(self, layer_idx: int = 0) -> int:
+            if layer_idx != 0:
+                raise RuntimeError("default-only get_seq_length must not be used for other layers")
+            return int(self.layers[0].keys.shape[-2])
+
+    fake = _Cache([304] * 18)
+    fake.layers[1].keys = torch.zeros(1, 1, 0, 4)
+    got = kv_lens_all_layers(fake, 18)
+    if got[0] != 304 or got[1] != 0 or got[13] != 304 or len(got) != 18:
+        raise RuntimeError(f"kv_lens_all_layers missed a layer: {got[:5]}...")
+    try:
+        _assert_kv_shortened(fake, 304, 18)
+        raise RuntimeError("layer 1 length 0 should fail all-layer KV check")
+    except RuntimeError as exc:
+        if "KV lengths" not in str(exc):
+            raise
 
     class _Block(torch.nn.Module):
         def __init__(self, idx: int):

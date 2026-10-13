@@ -11,8 +11,11 @@ Empty ``--drop-layers`` is the full-model anchor (same CLI, compile=false).
 """
 
 import argparse
+import hashlib
 import json
 import logging
+import os
+import subprocess
 import sys
 from contextlib import nullcontext
 from dataclasses import asdict
@@ -144,6 +147,110 @@ def apply_eval_protocol(cfg, original_argv: list[str]) -> None:
     cfg.policy.gradient_checkpointing = False
     if not any(arg.startswith("--policy.n_action_steps") for arg in original_argv):
         cfg.policy.n_action_steps = 10
+
+
+def _code_version() -> dict:
+    repo = FN_ROOT.parent
+    files = (
+        "functional_necessity/scripts/pi05_libero/crop_vla.py",
+        "functional_necessity/scripts/pi05_libero/prefix_trim.py",
+        "functional_necessity/scripts/pi05_libero/check_crop_vla.py",
+        "functional_necessity/scripts/pi05_libero/eval_drop.py",
+        "functional_necessity/scripts/pi05_libero/measure_crop_efficiency.py",
+    )
+
+    def _run(args: list[str]) -> str:
+        try:
+            return subprocess.check_output(args, cwd=str(repo), text=True, stderr=subprocess.DEVNULL).strip()
+        except (subprocess.CalledProcessError, FileNotFoundError):
+            return ""
+
+    return {
+        "head": _run(["git", "rev-parse", "HEAD"]),
+        "head_short": _run(["git", "rev-parse", "--short", "HEAD"]),
+        "file_hashes": {
+            rel: hashlib.sha256((repo / rel).read_bytes()).hexdigest()
+            for rel in files
+            if (repo / rel).is_file()
+        },
+    }
+
+
+def _runtime_gpu_note() -> dict:
+    vis = os.environ.get("CUDA_VISIBLE_DEVICES", "")
+    note = {
+        "cuda_visible_devices": vis,
+        "shared_eval": os.environ.get("TRIM_SHARED_EVAL") == "1",
+    }
+    gpu = None
+    if vis.strip():
+        try:
+            gpu = int(vis.split(",")[0].strip())
+        except ValueError:
+            gpu = None
+    if gpu is not None:
+        try:
+            from crop_vla import gpu_shared_snapshot
+
+            note["gpu_snapshot"] = gpu_shared_snapshot(gpu)
+        except Exception as exc:  # noqa: BLE001 — occupancy is diagnostics only
+            note["gpu_snapshot_error"] = str(exc)
+    return note
+
+
+def eval_results_status(
+    out_dir: Path,
+    *,
+    expected_nfe: int,
+    prefix_trim: bool,
+    crop: bool,
+    crop_selector: str | None = None,
+    n_episodes: int = 400,
+    n_tasks: int = 40,
+    n_ep_per_task: int = 10,
+) -> tuple[str, str]:
+    """Return (complete|missing|incomplete|mismatch, reason)."""
+    info_path = out_dir / "eval_info.json"
+    meta_path = out_dir / "drop_meta.json"
+    if not info_path.exists():
+        return "missing", f"no {info_path}"
+    try:
+        info = json.loads(info_path.read_text())
+    except json.JSONDecodeError as exc:
+        return "incomplete", f"eval_info.json not json: {exc}"
+    overall = info.get("overall") or {}
+    got_ep = int(overall.get("n_episodes") or 0)
+    tasks = info.get("per_task") or []
+    short_tasks = []
+    for task in tasks:
+        succ = ((task.get("metrics") or {}).get("successes")) or []
+        if len(succ) != n_ep_per_task:
+            short_tasks.append(
+                f"{task.get('task_group')}#{task.get('task_id')} n={len(succ)}"
+            )
+    complete_counts = got_ep == n_episodes and len(tasks) == n_tasks and not short_tasks
+    if meta_path.exists():
+        meta = json.loads(meta_path.read_text())
+        want_sel = crop_selector if crop else None
+        got_sel = meta.get("crop_selector")
+        mismatches = []
+        if int(meta.get("num_inference_steps") or -1) != int(expected_nfe):
+            mismatches.append(
+                f"nfe={meta.get('num_inference_steps')} != {expected_nfe}"
+            )
+        if bool(meta.get("prefix_trim")) != bool(prefix_trim):
+            mismatches.append(f"prefix_trim={meta.get('prefix_trim')} != {prefix_trim}")
+        if bool(meta.get("crop")) != bool(crop):
+            mismatches.append(f"crop={meta.get('crop')} != {crop}")
+        if want_sel is not None and got_sel != want_sel:
+            mismatches.append(f"crop_selector={got_sel} != {want_sel}")
+        if mismatches:
+            return "mismatch", "; ".join(mismatches)
+    if not complete_counts:
+        extra = f"; short_tasks={short_tasks[:4]}" if short_tasks else ""
+        return "incomplete", f"n_episodes={got_ep} n_tasks={len(tasks)}{extra}"
+    pc = overall.get("pc_success")
+    return "complete", f"n_episodes={got_ep} n_tasks={len(tasks)} pc_success={pc}"
 
 
 def write_drop_meta(out_dir: Path, *, method: str, k: int, drop_layers: list[int], extra: dict) -> None:
@@ -355,6 +462,9 @@ def run_libero_eval(
             "crop_budget": crop_budget if crop else None,
             "crop_selector": crop_selector if crop else None,
             "prefix_trim": bool(prefix_trim_enabled),
+            "actual_nfe": int(cfg.policy.num_inference_steps),
+            "code_version": _code_version(),
+            "runtime_gpu": _runtime_gpu_note(),
         },
     )
 
@@ -473,10 +583,10 @@ def main() -> None:
                 from crop_vla import resolve_selector as _resolve_sel
 
                 selector = _resolve_sel(ours.crop_selector)
-                tag = f"eval_trim_{selector}_nfe{nfe}"
+                tag = f"eval_trim_grid_nfe{nfe}" if selector == "grid" else f"eval_trim_{selector}_nfe{nfe}"
                 cfg.output_dir = FN_ROOT / "results" / "stage_nfe" / "crop_vla" / tag
             elif ours.prefix_trim:
-                tag = f"eval_trim_nfe{nfe}"
+                tag = f"eval_trim_only_nfe{nfe}"
                 cfg.output_dir = FN_ROOT / "results" / "stage_nfe" / "crop_vla" / tag
             elif ours.crop:
                 selector = ours.crop_selector or "greedy"
