@@ -129,6 +129,11 @@ def _parse_ours(argv: list[str]) -> tuple[argparse.Namespace, list[str]]:
         default="greedy",
         help="greedy: original FPS CROP. lite: one-shot 4-anchor diversity. grid: uniform checkerboard, no scout.",
     )
+    parser.add_argument(
+        "--prefix-trim",
+        action="store_true",
+        help="Drop empty cameras before vision encode and right-trim language pad. Requires explicit NFE.",
+    )
     ours, rest = parser.parse_known_args(argv)
     return ours, rest
 
@@ -249,6 +254,7 @@ def run_libero_eval(
     crop_scout_layer: int = 2,
     crop_budget: str = "role",
     crop_selector: str = "greedy",
+    prefix_trim_enabled: bool = False,
 ) -> None:
     from lerobot.envs import close_envs, make_env, make_env_pre_post_processors
     from lerobot.policies import make_policy, make_pre_post_processors
@@ -348,6 +354,7 @@ def run_libero_eval(
             "crop_scout_layer": int(crop_scout_layer) if crop else None,
             "crop_budget": crop_budget if crop else None,
             "crop_selector": crop_selector if crop else None,
+            "prefix_trim": bool(prefix_trim_enabled),
         },
     )
 
@@ -358,6 +365,7 @@ def run_libero_eval(
             skip_llm_layers(policy, drop_layers, keep_kv=keep_kv) if drop_layers else nullcontext()
         )
     crop_ctx = nullcontext()
+    trim_ctx = nullcontext()
     if crop:
         from crop_vla import crop_visual_tokens, resolve_budgets, resolve_selector
 
@@ -371,17 +379,24 @@ def run_libero_eval(
             budgets=budgets,
             budget_name=crop_budget,
             selector=selector,
+            prefix_trim=bool(prefix_trim_enabled),
         )
         logging.info(
-            "CROP-VLA enabled keep_all=%s scout_layer=%s drop=%s budget=%s selector=%s %s",
+            "CROP-VLA enabled keep_all=%s scout_layer=%s drop=%s budget=%s selector=%s trim=%s %s",
             crop_keep_all,
             crop_scout_layer,
             drop_layers,
             crop_budget,
             selector,
+            prefix_trim_enabled,
             budgets,
         )
-    with torch.no_grad(), amp, skip_ctx, crop_ctx:
+    elif prefix_trim_enabled:
+        from prefix_trim import prefix_trim as prefix_trim_cm
+
+        trim_ctx = prefix_trim_cm(policy)
+        logging.info("prefix_trim enabled (no visual prune)")
+    with torch.no_grad(), amp, skip_ctx, trim_ctx, crop_ctx:
         info = eval_policy_all(
             envs=envs,
             policy=policy,
@@ -438,11 +453,32 @@ def main() -> None:
     from lerobot.configs import parser
     from lerobot.configs.eval import EvalPipelineConfig
 
+    def _has_flag(names: tuple[str, ...]) -> bool:
+        return any(arg == n or arg.startswith(n + "=") for arg in original for n in names)
+
     @parser.wrap()
     def _wrapped(cfg: EvalPipelineConfig):
         apply_eval_protocol(cfg, original)
+        nfe = int(cfg.policy.num_inference_steps)
+        if ours.prefix_trim or ours.crop:
+            if not _has_flag(("--policy.num_inference_steps", "--policy.num_inference_steps=")):
+                raise SystemExit(
+                    "trim/crop eval requires explicit --policy.num_inference_steps "
+                    "(do not rely on checkpoint default)"
+                )
+        if ours.prefix_trim and ours.crop and not _has_flag(("--crop-selector", "--crop-selector=")):
+            raise SystemExit("trim+crop eval requires explicit --crop-selector")
         if cfg.output_dir is None:
-            if ours.crop:
+            if ours.prefix_trim and (ours.crop or ours.crop_keep_all):
+                from crop_vla import resolve_selector as _resolve_sel
+
+                selector = _resolve_sel(ours.crop_selector)
+                tag = f"eval_trim_{selector}_nfe{nfe}"
+                cfg.output_dir = FN_ROOT / "results" / "stage_nfe" / "crop_vla" / tag
+            elif ours.prefix_trim:
+                tag = f"eval_trim_nfe{nfe}"
+                cfg.output_dir = FN_ROOT / "results" / "stage_nfe" / "crop_vla" / tag
+            elif ours.crop:
                 selector = ours.crop_selector or "greedy"
                 if ours.crop_keep_all:
                     tag = "eval_crop_keepall"
@@ -477,6 +513,7 @@ def main() -> None:
             crop_scout_layer=ours.crop_scout_layer,
             crop_budget=ours.crop_budget,
             crop_selector=ours.crop_selector,
+            prefix_trim_enabled=bool(ours.prefix_trim),
         )
 
     _wrapped()

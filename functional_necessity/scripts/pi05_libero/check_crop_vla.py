@@ -12,6 +12,7 @@ import argparse
 import json
 import os
 import sys
+from contextlib import nullcontext
 from pathlib import Path
 
 import numpy as np
@@ -53,6 +54,8 @@ from crop_vla import (  # noqa: E402
     uniform_grid_local_indices,
 )
 from layer_skip import skip_llm_layers  # noqa: E402
+from prefix_trim import cpu_selftest as trim_cpu_selftest  # noqa: E402
+from prefix_trim import prefix_trim  # noqa: E402
 
 OUT = FN_ROOT / "results" / "stage_nfe" / "crop_vla"
 DROP = FISHER_DROP6
@@ -192,6 +195,36 @@ def _scout_calls_none(calls: list[int] | None) -> bool:
     return isinstance(calls, list) and len(calls) > 0 and all(c == 0 for c in calls)
 
 
+def _explicit_flag(argv: list[str], flag: str) -> bool:
+    return any(arg == flag or arg.startswith(flag + "=") for arg in argv)
+
+
+def _valid_positions(pad: torch.Tensor) -> torch.Tensor:
+    pos = torch.cumsum(pad, dim=1) - 1
+    return pos[0, pad[0].bool()]
+
+
+def _capture_embed_pad(policy, batch, noise, nfe: int, ctx):
+    model = policy.model
+    orig = model.embed_prefix
+    box: dict = {}
+
+    def wrapped(*args, **kwargs):
+        out = orig(*args, **kwargs)
+        box["pad"] = out[1].detach()
+        box["len"] = int(out[0].shape[1])
+        return out
+
+    model.embed_prefix = wrapped
+    try:
+        with ctx:
+            policy.reset()
+            actions = policy.predict_action_chunk(batch, noise=noise, num_steps=nfe)
+    finally:
+        model.embed_prefix = orig
+    return actions, box
+
+
 def _grid_keep_ok(cam: dict) -> bool:
     if cam["role"] == "empty":
         return cam["n_keep"] == cam["n_full"] == TOKENS_PER_VIEW
@@ -205,6 +238,204 @@ def _grid_keep_ok(cam: dict) -> bool:
         if (row + col) % 2 != 0:
             return False
     return True
+
+
+def run_trim_model_checks(
+    gpu: int,
+    calib,
+    n_frames: int,
+    *,
+    selector: str,
+    nfe: int,
+) -> dict:
+    selector = resolve_selector(selector)
+    if selector != "grid":
+        raise SystemExit("prefix_trim checks in this round only verify selector=grid")
+    nfe = int(nfe)
+    device = bind_cuda_device(gpu)
+    print(f"bound physical GPU{gpu} -> {device} (current={torch.cuda.current_device()})", flush=True)
+    policy = load_policy(DEFAULT_CHECKPOINT, device)
+    policy.config.n_action_steps = 10
+    policy.config.num_inference_steps = nfe
+    policy.config.compile_model = False
+    policy.eval()
+
+    frames = []
+    for batch in calib:
+        for i in range(int(batch["observation.images.image"].shape[0])):
+            frames.append(slice_batch(batch, i, i + 1))
+            if len(frames) >= n_frames:
+                break
+        if len(frames) >= n_frames:
+            break
+
+    crop_kw = dict(
+        drop_layers=DROP,
+        scout_layer=SCOUT_LAYER,
+        selector=selector,
+        prefix_trim=True,
+    )
+    viz_dir = OUT / f"viz_trim_{selector}_nfe{nfe}"
+    rows = []
+    official_velocity = None
+    with torch.no_grad(), skip_llm_layers(policy, DROP, keep_kv=True):
+        first = move_to_device(frames[0], device)
+        gen0 = torch.Generator(device="cpu")
+        gen0.manual_seed(1000)
+        noise0 = torch.randn(
+            1,
+            int(policy.config.chunk_size),
+            int(policy.config.max_action_dim),
+            generator=gen0,
+        ).to(device)
+        official_velocity = count_official_velocity(policy, first, noise0, nfe)
+        if official_velocity != nfe:
+            raise RuntimeError(f"official velocity {official_velocity} != num_steps={nfe}")
+        with prefix_trim(policy):
+            trim_velocity = count_official_velocity(policy, first, noise0, nfe)
+        if trim_velocity != nfe:
+            raise RuntimeError(f"trim-only velocity {trim_velocity} != num_steps={nfe}")
+        print(
+            f"official velocity={official_velocity} trim-only velocity={trim_velocity} num_steps={nfe}",
+            flush=True,
+        )
+
+        for fi, raw in enumerate(frames):
+            batch = move_to_device(raw, device)
+            gen = torch.Generator(device="cpu")
+            gen.manual_seed(1000 + fi)
+            noise = torch.randn(
+                1,
+                int(policy.config.chunk_size),
+                int(policy.config.max_action_dim),
+                generator=gen,
+            ).to(device)
+
+            raw_act, raw_box = _capture_embed_pad(policy, batch, noise, nfe, nullcontext())
+            trim_act, trim_box = _capture_embed_pad(policy, batch, noise, nfe, prefix_trim(policy))
+            with crop_visual_tokens(policy, keep_all=True, **crop_kw):
+                policy.reset()
+                keepall_act = policy.predict_action_chunk(batch, noise=noise, num_steps=nfe)
+                keepall_stats = getattr(policy.model, "_crop_stats", None)
+            with crop_visual_tokens(policy, keep_all=False, **crop_kw):
+                policy.reset()
+                grid_act = policy.predict_action_chunk(batch, noise=noise, num_steps=nfe)
+                grid_stats = policy.model._crop_stats
+
+            trim_info = getattr(policy.model, "_trim_stats", None)
+            keepall_view = None if keepall_stats is None else stats_dict(keepall_stats)
+            grid_view = stats_dict(grid_stats)
+            trim_vs_raw = _action_stats(trim_act, raw_act)
+            keepall_vs_trim = _action_stats(keepall_act, trim_act)
+            grid_finite = bool(torch.isfinite(grid_act[:, :10, :7].float()).all())
+
+            raw_pos = _valid_positions(raw_box["pad"])
+            trim_pos = _valid_positions(trim_box["pad"])
+            pos_ok = bool(raw_pos.shape == trim_pos.shape and torch.equal(raw_pos, trim_pos))
+            n_live = sum(1 for c in grid_view["cameras"] if c["role"] != "empty")
+            n_empty = sum(1 for c in grid_view["cameras"] if c["role"] == "empty")
+            n_lang = int(grid_view.get("n_lang_out") or 0)
+            valid_len = int(grid_view.get("valid_prefix_len") or 0)
+            expected_short = (TOKENS_PER_VIEW // 2) * n_live + n_lang
+            unique_ok = all(
+                c["role"] == "empty" or (len(c["keep"]) == len(set(c["keep"])))
+                for c in grid_view["cameras"]
+            )
+            cameras_ok = (
+                n_empty == 0
+                and n_live == 2
+                and all(_grid_keep_ok(c) for c in grid_view["cameras"])
+                and unique_ok
+            )
+            nfe_ok = (
+                int(grid_view.get("num_steps") or 0) == nfe
+                and int(grid_view.get("velocity_calls") or 0) == nfe
+                and (keepall_view is None or int(keepall_view.get("velocity_calls") or 0) == nfe)
+            )
+            offset_ok = (
+                valid_len == n_live * TOKENS_PER_VIEW + n_lang
+                and grid_view["orig_action_offset"] == valid_len
+                and keepall_view is not None
+                and keepall_view["orig_action_offset"] == valid_len
+                and keepall_view["short_len"] == keepall_view["full_len"] == valid_len
+                and grid_view["orig_action_offset"] > grid_view["short_pad_sum"]
+            )
+            length_ok = (
+                trim_box["len"] == valid_len
+                and raw_box["len"] == int(grid_view.get("untrimmed_physical") or 0)
+                and grid_view["short_len"] == expected_short
+                and grid_view["kv_len"] == grid_view["short_len"]
+                and pos_ok
+                and cameras_ok
+                and offset_ok
+                and nfe_ok
+                and trim_vs_raw["finite"]
+                and keepall_vs_trim["finite"]
+                and grid_finite
+            )
+            rows.append(
+                {
+                    "frame": fi,
+                    "trim_vs_raw": trim_vs_raw,
+                    "keepall_vs_trim": keepall_vs_trim,
+                    "stats": grid_view,
+                    "keepall": keepall_view,
+                    "raw_physical": raw_box["len"],
+                    "trim_physical": trim_box["len"],
+                    "valid_positions_raw": int(raw_pos.shape[0]),
+                    "valid_positions_trim": int(trim_pos.shape[0]),
+                    "pos_ok": pos_ok,
+                    "length_ok": length_ok,
+                    "offset_ok": offset_ok,
+                    "cameras_ok": cameras_ok,
+                    "nfe_ok": nfe_ok,
+                    "unique_ok": unique_ok,
+                    "grid_finite": grid_finite,
+                    "n_live": n_live,
+                    "n_empty": n_empty,
+                    "n_lang_out": n_lang,
+                    "valid_prefix_len": valid_len,
+                    "expected_short": expected_short,
+                    "orig_action_offset": grid_view["orig_action_offset"],
+                    "short_pad_sum": grid_view["short_pad_sum"],
+                    "scout_layer_calls": grid_view["scout_layer_calls"],
+                    "velocity_calls": grid_view["velocity_calls"],
+                    "trim_info": None if trim_info is None else trim_info.to_dict(),
+                }
+            )
+            if fi < 3:
+                for cam in grid_view["cameras"]:
+                    if cam["role"] == "empty":
+                        continue
+                    overlay_grid(raw[cam["key"]][0], cam, viz_dir / f"frame{fi:02d}_{cam['role']}.png")
+            print(
+                f"frame {fi}: trim_vs_raw max_abs={trim_vs_raw['max_abs']:.4g}  "
+                f"keepall_vs_trim max_abs={keepall_vs_trim['max_abs']:.4g}  "
+                f"raw={raw_box['len']} trim={trim_box['len']} grid={grid_view['short_len']} "
+                f"kv={grid_view['kv_len']} offset={grid_view['orig_action_offset']} "
+                f"nfe={grid_view['velocity_calls']} pos_ok={pos_ok} length_ok={length_ok}",
+                flush=True,
+            )
+
+    payload = {
+        "gpu": gpu,
+        "drop": DROP,
+        "nfe": nfe,
+        "selector": selector,
+        "prefix_trim": True,
+        "official_velocity_calls": official_velocity,
+        "trim_only_velocity_calls": trim_velocity,
+        "identity_max_abs_limit": IDENTITY_MAX_ABS,
+        "trim_vs_raw_max_abs_max": max(r["trim_vs_raw"]["max_abs"] for r in rows),
+        "keepall_vs_trim_max_abs_max": max(r["keepall_vs_trim"]["max_abs"] for r in rows),
+        "all_lengths_ok": all(r["length_ok"] for r in rows),
+        "frames": rows,
+    }
+    json_name = f"offline_check_trim_{selector}_nfe{nfe}.json"
+    payload_path = OUT / json_name
+    payload_path.write_text(json.dumps(payload, indent=2) + "\n")
+    payload["_path"] = str(payload_path)
+    return payload
 
 
 def run_model_checks(
@@ -478,14 +709,25 @@ def main() -> None:
     )
     parser.add_argument("--nfe", type=int, default=10)
     parser.add_argument(
+        "--prefix-trim",
+        action="store_true",
+        help="Check unified invalid-prefix cleanup. Requires explicit --nfe and --selector.",
+    )
+    parser.add_argument(
         "--allow-shared",
         action="store_true",
         help="Allow an occupied GPU for correctness checks. Requires --gpu. Not for 400-ep eval.",
     )
     args = parser.parse_args()
+    if args.prefix_trim:
+        if not _explicit_flag(sys.argv[1:], "--nfe"):
+            raise SystemExit("--prefix-trim requires explicit --nfe")
+        if not _explicit_flag(sys.argv[1:], "--selector"):
+            raise SystemExit("--prefix-trim requires explicit --selector")
     OUT.mkdir(parents=True, exist_ok=True)
     cpu_selftest()
     cpu_select_selftest()
+    trim_cpu_selftest()
     calib = load_calib_data(DEFAULT_CALIB_FILE)
     recs = save_camera_examples(calib, OUT / "cameras")
     print(f"wrote {len(recs)} camera examples under {OUT / 'cameras'}", flush=True)
@@ -514,6 +756,41 @@ def main() -> None:
         print(f"gpu{gpu}: {why}", flush=True)
         if not ok:
             raise SystemExit(f"GPU{gpu} is not exclusive ({why}). Will not load the policy.")
+
+    if args.prefix_trim:
+        payload = run_trim_model_checks(
+            gpu,
+            calib,
+            args.n_frames,
+            selector=args.selector,
+            nfe=args.nfe,
+        )
+        keepall = payload["keepall_vs_trim_max_abs_max"]
+        trim_raw = payload["trim_vs_raw_max_abs_max"]
+        ok_len = payload["all_lengths_ok"]
+        print(
+            f"prefix_trim selector={args.selector} nfe={args.nfe} "
+            f"trim_vs_raw max_abs={trim_raw:.6g} keepall_vs_trim max_abs={keepall:.6g} "
+            f"length_ok={ok_len} json={payload.get('_path')}",
+            flush=True,
+        )
+        if not all(r["trim_vs_raw"]["finite"] and r["keepall_vs_trim"]["finite"] for r in payload["frames"]):
+            raise SystemExit("trim or keep-all action is non-finite; inspect before eval")
+        if keepall > IDENTITY_MAX_ABS:
+            raise SystemExit(
+                f"trim+grid keep-all drifted from trim-only (max_abs={keepall} > {IDENTITY_MAX_ABS})"
+            )
+        if trim_raw > IDENTITY_MAX_ABS:
+            raise SystemExit(
+                f"trim-only drifted from original path (max_abs={trim_raw} > {IDENTITY_MAX_ABS}); "
+                "not raising the threshold — inspect positions/masks"
+            )
+        if not ok_len:
+            raise SystemExit(
+                f"trim prefix/KV/offset/camera/nfe check failed; inspect {payload.get('_path')}"
+            )
+        print("offline trim checks passed", flush=True)
+        return
 
     payload = run_model_checks(
         gpu,

@@ -54,12 +54,14 @@ from crop_vla import (  # noqa: E402
     stats_dict,
 )
 from layer_skip import skip_llm_layers  # noqa: E402
+from prefix_trim import prefix_trim  # noqa: E402
 
 OUT = FN_ROOT / "results" / "stage_nfe" / "crop_vla"
 DROP = FISHER_DROP6
 GROUPS_GREEDY = ("baseline", "role", "shared_mix")
 GROUPS_LITE = ("baseline", "role-lite", "shared-lite")
 GROUPS_GRID = ("baseline", "uniform-grid", "role-lite")
+GROUPS_TRIM_GRID = ("raw", "trim-only", "trim-grid")
 DIAGNOSTIC_NOTE = "共享 GPU，仅供诊断，不进入论文正式效率表"
 MIN_FREE_MIB_DIAGNOSTIC = 12000
 REPO_ROOT = FN_ROOT.parent
@@ -68,6 +70,7 @@ HASHED_FILES = (
     "functional_necessity/scripts/pi05_libero/check_crop_vla.py",
     "functional_necessity/scripts/pi05_libero/measure_crop_efficiency.py",
     "functional_necessity/scripts/pi05_libero/eval_drop.py",
+    "functional_necessity/scripts/pi05_libero/prefix_trim.py",
 )
 
 
@@ -167,10 +170,16 @@ def snapshot_all(gpus: tuple[int, ...] = (0, 1, 2, 3)) -> list[dict]:
 
 def parse_group(name: str) -> dict:
     key = name.strip().lower().replace("_", "-")
+    if key in ("raw", "original"):
+        return {"kind": "baseline", "budget": None, "selector": None, "prefix_trim": False}
     if key == "baseline":
-        return {"kind": "baseline", "budget": None, "selector": None}
+        return {"kind": "baseline", "budget": None, "selector": None, "prefix_trim": False}
+    if key in ("trim-only", "trim"):
+        return {"kind": "trim", "budget": None, "selector": None, "prefix_trim": True}
+    if key in ("trim-grid", "trim-uniform-grid"):
+        return {"kind": "crop", "budget": None, "selector": "grid", "prefix_trim": True}
     if key in ("uniform-grid", "grid", "uniform"):
-        return {"kind": "crop", "budget": None, "selector": "grid"}
+        return {"kind": "crop", "budget": None, "selector": "grid", "prefix_trim": False}
     selector = "lite" if key.endswith("-lite") else "greedy"
     core = key.replace("-lite", "")
     if core in ("shared", "shared-mix"):
@@ -179,7 +188,7 @@ def parse_group(name: str) -> dict:
         budget = "role"
     else:
         budget = core
-    return {"kind": "crop", "budget": budget, "selector": selector}
+    return {"kind": "crop", "budget": budget, "selector": selector, "prefix_trim": False}
 
 
 def group_order(frame_idx: int, groups: tuple[str, ...]) -> tuple[str, ...]:
@@ -197,6 +206,14 @@ def group_forward(policy, name: str, *, profile: bool):
         else:
             yield
         return
+    if spec["kind"] == "trim":
+        with prefix_trim(policy):
+            if profile:
+                with profile_official_actions(policy):
+                    yield
+            else:
+                yield
+        return
     with crop_visual_tokens(
         policy,
         keep_all=False,
@@ -206,6 +223,7 @@ def group_forward(policy, name: str, *, profile: bool):
         budgets=spec["budget"],
         budget_name=spec["budget"] or spec["selector"],
         selector=spec["selector"],
+        prefix_trim=bool(spec.get("prefix_trim")),
     ):
         yield
 
@@ -218,11 +236,29 @@ def capture_layout(policy, batch, noise, name: str, nfe: int) -> dict:
             "budget_name": "baseline",
             "selector": None,
             "budgets": None,
+            "prefix_trim": False,
             "visual_prune": False,
             "velocity_calls": n_vel,
             "num_steps": nfe,
             "expected_prefix": "official 3*256 visual + language; not shortened",
         }
+    if spec["kind"] == "trim":
+        with prefix_trim(policy):
+            n_vel = count_official_velocity(policy, batch, noise, nfe)
+            info = getattr(policy.model, "_trim_stats", None)
+        payload = {
+            "budget_name": "trim-only",
+            "selector": None,
+            "budgets": None,
+            "prefix_trim": True,
+            "visual_prune": False,
+            "velocity_calls": n_vel,
+            "num_steps": nfe,
+            "expected_prefix": "empty cameras and language pad removed; live visual kept",
+        }
+        if info is not None:
+            payload.update(info.to_dict())
+        return payload
     with group_forward(policy, name, profile=False):
         policy.reset()
         policy.predict_action_chunk(batch, noise=noise, num_steps=nfe)
@@ -230,6 +266,7 @@ def capture_layout(policy, batch, noise, name: str, nfe: int) -> dict:
     if stats is None:
         raise RuntimeError(f"{name} did not write _crop_stats")
     payload = stats_dict(stats)
+    payload["prefix_trim"] = bool(spec.get("prefix_trim"))
     if spec["selector"] == "grid":
         payload["budgets"] = None
         payload["keep_rule"] = "(row+col)%2==0; 128 unique tokens per live camera; no scout"
@@ -243,6 +280,8 @@ def _timer_keys_note(name: str) -> str:
     spec = parse_group(name)
     if spec["kind"] == "baseline":
         return "embed; prefix=official full prefix; expert=all velocity steps"
+    if spec["kind"] == "trim":
+        return "embed=trimmed cameras+language; prefix=official trimmed prefix; expert=all velocity steps"
     if spec["selector"] == "grid":
         return "embed; prefix=fixed-index pack + official compressed prefix; expert=all velocity steps"
     return (
@@ -329,7 +368,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--groups",
         default=None,
-        help="comma-separated group names. grid default: baseline,uniform-grid,role-lite",
+        help="comma-separated group names. trim default: raw,trim-only,trim-grid",
+    )
+    parser.add_argument(
+        "--prefix-trim",
+        action="store_true",
+        help="Default groups raw,trim-only,trim-grid. Requires explicit --nfe.",
     )
     parser.add_argument("--out", type=Path, default=None)
     return parser.parse_args()
@@ -375,8 +419,13 @@ def main() -> None:
     policy = load_policy(DEFAULT_CHECKPOINT, device)
     nfe = int(args.nfe)
     selector = resolve_selector(args.selector)
+    if args.prefix_trim and not any(a == "--nfe" or a.startswith("--nfe=") for a in sys.argv[1:]):
+        raise SystemExit("--prefix-trim requires explicit --nfe")
     if args.groups:
         groups = tuple(part.strip() for part in args.groups.split(",") if part.strip())
+    elif args.prefix_trim:
+        groups = GROUPS_TRIM_GRID
+        selector = "grid"
     else:
         if selector == "lite":
             groups = GROUPS_LITE
@@ -407,13 +456,17 @@ def main() -> None:
     if args.out is not None:
         out_path = args.out
     elif args.mode == "diagnostic":
-        if selector == "grid" or any(parse_group(g)["selector"] == "grid" for g in groups):
+        if any(parse_group(g).get("prefix_trim") for g in groups):
+            tag = "efficiency_diagnostic_trim_grid"
+        elif selector == "grid" or any(parse_group(g)["selector"] == "grid" for g in groups):
             tag = "efficiency_diagnostic_grid"
         elif selector == "lite":
             tag = "efficiency_diagnostic_lite"
         else:
             tag = "efficiency_diagnostic"
         out_path = OUT / f"{tag}_nfe{nfe}_{stamp}.json"
+    elif any(parse_group(g).get("prefix_trim") for g in groups):
+        out_path = OUT / f"efficiency_trim_grid_nfe{nfe}.json"
     elif selector == "grid":
         out_path = OUT / f"efficiency_grid_nfe{nfe}.json"
     elif selector == "lite":
@@ -432,6 +485,7 @@ def main() -> None:
         "checkpoint": DEFAULT_CHECKPOINT,
         "drop": DROP,
         "nfe": nfe,
+        "prefix_trim": bool(args.prefix_trim) or any(parse_group(g).get("prefix_trim") for g in groups),
         "selector": selector,
         "scout_layer": SCOUT_LAYER,
         "compile_model": False,
@@ -453,6 +507,7 @@ def main() -> None:
             ),
         },
         "flops": "unmeasured",
+        "prefix_trim_note": "empty cameras dropped before vision encode; language right-trimmed by attention mask",
         "note": (
             "full predict_action_chunk with profile=False (vision encode, select/pack, official "
             "prefix, expert; role-lite also includes scout). Segment breakdown is a separate "
@@ -524,15 +579,29 @@ def main() -> None:
                 "wall": _summarize([s["wall_ms"] for s in samples]),
                 "samples": samples,
             }
-        base = groups_out["baseline"]
+        anchor = "raw" if "raw" in groups_out else "baseline"
+        base = groups_out[anchor]
         for name in groups:
-            if name == "baseline":
+            if name == anchor:
                 groups_out[name]["vs_baseline"] = None
             else:
                 groups_out[name]["vs_baseline"] = compare_to_baseline(
                     groups_out[name], base, diagnostic=args.mode == "diagnostic"
                 )
         summary["groups"] = groups_out
+        if {"raw", "trim-only", "trim-grid"} <= set(groups_out):
+            diag = args.mode == "diagnostic"
+            summary["deltas"] = {
+                "A_raw_to_B_trim_only": compare_to_baseline(
+                    groups_out["trim-only"], groups_out["raw"], diagnostic=diag
+                ),
+                "B_trim_only_to_C_trim_grid": compare_to_baseline(
+                    groups_out["trim-grid"], groups_out["trim-only"], diagnostic=diag
+                ),
+                "A_raw_to_C_trim_grid": compare_to_baseline(
+                    groups_out["trim-grid"], groups_out["raw"], diagnostic=diag
+                ),
+            }
         summary["breakdown_profile_true"] = breakdown_interleaved(
             policy, frames, noises, groups, nfe
         )
@@ -554,8 +623,17 @@ def main() -> None:
     if args.mode == "diagnostic":
         extra = f"  [{DIAGNOSTIC_NOTE}]"
     for name in groups:
-        suffix = extra if parse_group(name)["kind"] == "crop" else ""
+        spec = parse_group(name)
+        suffix = extra if spec["kind"] in ("crop", "trim") else ""
         print(_line(name) + suffix, flush=True)
+    if "deltas" in summary:
+        for key, val in summary["deltas"].items():
+            d = val["cuda"]
+            print(
+                f"{key}: cuda median {d['delta_median_ms']:+.2f} ms ({d['delta_median_pct']:+.2f}%)"
+                + extra,
+                flush=True,
+            )
     print(f"wrote {out_path}", flush=True)
 
 

@@ -30,6 +30,8 @@ from lerobot.policies.common.vla_utils import (
     prepare_attention_masks_4d,
 )
 
+from prefix_trim import TrimInfo, trim_prefix_inputs
+
 TOKENS_PER_VIEW = 256
 GRID = 16
 SCOUT_LAYER = 2
@@ -102,6 +104,14 @@ class CropStats:
     num_steps: int | None = None
     velocity_calls: int | None = None
     deferred: dict[str, Any] = field(default_factory=dict)
+    prefix_trim: bool = False
+    n_views_in: int | None = None
+    n_views_out: int | None = None
+    n_lang_in: int | None = None
+    n_lang_out: int | None = None
+    valid_prefix_len: int | None = None
+    untrimmed_physical: int | None = None
+    trimmed_physical: int | None = None
 
 
 def uniform_grid_local_indices(
@@ -626,6 +636,7 @@ def sample_actions_crop(
     budgets: dict[str, dict[str, int]] | str | None = None,
     budget_name: str = "role",
     selector: str = "greedy",
+    trim_info: TrimInfo | None = None,
     **kwargs,
 ):
     """Scout + select + shortened official prefix + expert. Same noise/NFE as baseline."""
@@ -782,6 +793,14 @@ def sample_actions_crop(
         num_steps=num_steps,
         velocity_calls=n_vel[0],
         deferred=deferred,
+        prefix_trim=trim_info is not None,
+        n_views_in=None if trim_info is None else trim_info.n_views_in,
+        n_views_out=None if trim_info is None else trim_info.n_views_out,
+        n_lang_in=None if trim_info is None else trim_info.n_lang_in,
+        n_lang_out=None if trim_info is None else trim_info.n_lang_out,
+        valid_prefix_len=None if trim_info is None else trim_info.valid_prefix_len,
+        untrimmed_physical=None if trim_info is None else trim_info.untrimmed_physical,
+        trimmed_physical=None if trim_info is None else trim_info.trimmed_physical,
     )
     model._crop_stats = stats
     return actions
@@ -826,6 +845,7 @@ def sample_actions_grid(
     *,
     keep_all: bool = False,
     profile: bool = False,
+    trim_info: TrimInfo | None = None,
     **kwargs,
 ):
     """Encode once, pack fixed checkerboard indices, official short prefix, expert. No scout."""
@@ -931,6 +951,14 @@ def sample_actions_grid(
         num_steps=num_steps,
         velocity_calls=n_vel[0],
         deferred={"orig_offset": orig_offset, "short_pad": short_pad, "cameras": meta_b0},
+        prefix_trim=trim_info is not None,
+        n_views_in=None if trim_info is None else trim_info.n_views_in,
+        n_views_out=None if trim_info is None else trim_info.n_views_out,
+        n_lang_in=None if trim_info is None else trim_info.n_lang_in,
+        n_lang_out=None if trim_info is None else trim_info.n_lang_out,
+        valid_prefix_len=None if trim_info is None else trim_info.valid_prefix_len,
+        untrimmed_physical=None if trim_info is None else trim_info.untrimmed_physical,
+        trimmed_physical=None if trim_info is None else trim_info.trimmed_physical,
     )
     model._crop_stats = stats
     return actions
@@ -1072,8 +1100,9 @@ def crop_visual_tokens(
     budgets: dict[str, dict[str, int]] | str | None = None,
     budget_name: str = "role",
     selector: str = "greedy",
+    prefix_trim: bool = False,
 ):
-    """Replace PI05Pytorch.sample_actions with the CROP scout path."""
+    """Replace PI05Pytorch.sample_actions with the CROP scout / grid path."""
     if not enabled:
         yield
         return
@@ -1082,6 +1111,12 @@ def crop_visual_tokens(
     selector = resolve_selector(selector)
 
     def patched(images, img_masks, tokens, masks, states=None, state_masks=None, noise=None, num_steps=None, **kwargs):
+        trim_info = None
+        if prefix_trim:
+            images, img_masks, tokens, masks, trim_info = trim_prefix_inputs(
+                images, img_masks, tokens, masks
+            )
+            model._trim_stats = trim_info
         if selector == "grid":
             return sample_actions_grid(
                 model,
@@ -1095,6 +1130,7 @@ def crop_visual_tokens(
                 num_steps=num_steps,
                 keep_all=keep_all,
                 profile=profile,
+                trim_info=trim_info,
                 **kwargs,
             )
         return sample_actions_crop(
@@ -1114,6 +1150,7 @@ def crop_visual_tokens(
             budgets=resolve_budgets(budgets if budgets is not None else budget_name),
             budget_name=budget_name,
             selector=selector,
+            trim_info=trim_info,
             **kwargs,
         )
 
@@ -1355,6 +1392,12 @@ def cpu_selftest() -> None:
     full_pack = packed_grid_keep_idx("cpu", 3, 200, (False, False, True), keep_all=True)
     if int(full_pack.numel()) != 3 * TOKENS_PER_VIEW + 200:
         raise RuntimeError("grid keep-all pack length is not the full prefix")
+    trimmed_pack = packed_grid_keep_idx("cpu", 2, 48, (False, False), keep_all=False)
+    if int(trimmed_pack.numel()) != 128 + 128 + 48:
+        raise RuntimeError(f"trim+grid pack {int(trimmed_pack.numel())} != 304")
+    trimmed_all = packed_grid_keep_idx("cpu", 2, 48, (False, False), keep_all=True)
+    if int(trimmed_all.numel()) != 2 * TOKENS_PER_VIEW + 48:
+        raise RuntimeError("trim+grid keep-all pack is not 2*256+lang")
 
     class _Block(torch.nn.Module):
         def __init__(self, idx: int):
