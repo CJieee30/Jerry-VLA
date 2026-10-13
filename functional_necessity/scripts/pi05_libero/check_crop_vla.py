@@ -49,6 +49,7 @@ from crop_vla import (  # noqa: E402
     select_one_camera,
     select_one_camera_lite,
     stats_dict,
+    uniform_grid_local_indices,
 )
 from layer_skip import skip_llm_layers  # noqa: E402
 
@@ -186,6 +187,25 @@ def _scout_calls_ok(calls: list[int] | None) -> bool:
     return all(c == 0 for c in calls[SCOUT_LAYER + 1 :])
 
 
+def _scout_calls_none(calls: list[int] | None) -> bool:
+    return isinstance(calls, list) and len(calls) > 0 and all(c == 0 for c in calls)
+
+
+def _grid_keep_ok(cam: dict) -> bool:
+    if cam["role"] == "empty":
+        return cam["n_keep"] == cam["n_full"] == TOKENS_PER_VIEW
+    keep = [int(x) for x in cam["keep"]]
+    if cam["n_keep"] != TOKENS_PER_VIEW // 2 or len(keep) != TOKENS_PER_VIEW // 2:
+        return False
+    if len(set(keep)) != len(keep) or keep != sorted(keep):
+        return False
+    for idx in keep:
+        row, col = divmod(idx, GRID)
+        if (row + col) % 2 != 0:
+            return False
+    return True
+
+
 def run_model_checks(
     gpu: int,
     calib,
@@ -226,7 +246,9 @@ def run_model_checks(
     identity = []
     pruned = []
     viz_tag = f"viz_{selector}_{budget_name}_nfe{nfe}"
-    if selector == "greedy" and budget_name == "role" and nfe == 1:
+    if selector == "grid":
+        viz_tag = f"viz_grid_nfe{nfe}"
+    elif selector == "greedy" and budget_name == "role" and nfe == 1:
         viz_tag = "viz"
     viz_dir = OUT / viz_tag
     crop_kw = dict(
@@ -294,10 +316,16 @@ def run_model_checks(
                 and id_view["orig_action_offset"] == id_view["short_pad_sum"]
                 and crop_view["orig_action_offset"] > crop_view["short_pad_sum"]
             )
-            budgets_ok = all(_budget_ok(c, budgets) for c in crop_view["cameras"]) and unique_ok
-            scout_ok = _scout_calls_ok(crop_view.get("scout_layer_calls")) and _scout_calls_ok(
-                None if id_view is None else id_view.get("scout_layer_calls")
-            )
+            if selector == "grid":
+                budgets_ok = all(_grid_keep_ok(c) for c in crop_view["cameras"]) and unique_ok
+                scout_ok = _scout_calls_none(crop_view.get("scout_layer_calls")) and _scout_calls_none(
+                    None if id_view is None else id_view.get("scout_layer_calls")
+                )
+            else:
+                budgets_ok = all(_budget_ok(c, budgets) for c in crop_view["cameras"]) and unique_ok
+                scout_ok = _scout_calls_ok(crop_view.get("scout_layer_calls")) and _scout_calls_ok(
+                    None if id_view is None else id_view.get("scout_layer_calls")
+                )
             length_ok = (
                 crop_view["short_len"] == expected_short
                 and crop_view["kv_len"] == crop_view["short_len"]
@@ -364,6 +392,8 @@ def run_model_checks(
     }
     if selector == "greedy" and budget_name == "role" and nfe == 1:
         json_name = "offline_check.json"
+    elif selector == "grid":
+        json_name = f"offline_check_grid_nfe{nfe}.json"
     else:
         json_name = f"offline_check_{selector}_{budget_name}_nfe{nfe}.json"
     payload_path = OUT / json_name
@@ -406,6 +436,10 @@ def cpu_select_selftest() -> None:
         or set(lite_mrel.tolist()) & set(lite_mdiv.tolist())
     ):
         raise SystemExit("lite 64+64 failed")
+    grid = uniform_grid_local_indices("cpu")
+    expect = [i for i in range(n) if ((i // GRID) + (i % GRID)) % 2 == 0]
+    if grid.tolist() != expect or len(expect) != 128 or len(set(expect)) != 128:
+        raise SystemExit("uniform-grid checkerboard failed")
     print("cpu select selftest ok", flush=True)
 
 
@@ -416,7 +450,11 @@ def main() -> None:
     parser.add_argument("--gpu", type=int, default=None)
     parser.add_argument("--n-frames", type=int, default=4)
     parser.add_argument("--budget", default="role", help="role (default) or shared_mix")
-    parser.add_argument("--selector", default="lite", help="greedy (reference CROP) or lite")
+    parser.add_argument(
+        "--selector",
+        default="lite",
+        help="greedy (reference CROP), lite, or grid (uniform checkerboard, no scout)",
+    )
     parser.add_argument("--nfe", type=int, default=10)
     parser.add_argument(
         "--allow-shared",

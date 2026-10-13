@@ -10,6 +10,7 @@ compile_model stays false. Do not use CROP_ALLOW_OCCUPIED as a bypass.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import logging
 import os
@@ -41,8 +42,10 @@ from crop_vla import (  # noqa: E402
     FISHER_DROP6,
     SCOUT_LAYER,
     bind_cuda_device,
+    count_official_velocity,
     crop_visual_tokens,
     gpu_occupancy,
+    profile_official_actions,
     require_idle_gpu,
     resolve_budgets,
     resolve_selector,
@@ -54,9 +57,16 @@ OUT = FN_ROOT / "results" / "stage_nfe" / "crop_vla"
 DROP = FISHER_DROP6
 GROUPS_GREEDY = ("baseline", "role", "shared_mix")
 GROUPS_LITE = ("baseline", "role-lite", "shared-lite")
-DIAGNOSTIC_NOTE = "共享GPU诊断，仅供参考，待独占复核"
+GROUPS_GRID = ("baseline", "uniform-grid", "role-lite")
+DIAGNOSTIC_NOTE = "共享 GPU，仅供诊断，不进入论文正式效率表"
 MIN_FREE_MIB_DIAGNOSTIC = 12000
 REPO_ROOT = FN_ROOT.parent
+HASHED_FILES = (
+    "functional_necessity/scripts/pi05_libero/crop_vla.py",
+    "functional_necessity/scripts/pi05_libero/check_crop_vla.py",
+    "functional_necessity/scripts/pi05_libero/measure_crop_efficiency.py",
+    "functional_necessity/scripts/pi05_libero/eval_drop.py",
+)
 
 
 def _frames(calib, n: int) -> list[dict]:
@@ -121,16 +131,12 @@ def _git_version() -> dict:
         "root": str(REPO_ROOT),
         "head": _run(["git", "rev-parse", "HEAD"]),
         "head_short": _run(["git", "rev-parse", "--short", "HEAD"]),
-        "status": _run(
-            [
-                "git",
-                "status",
-                "--porcelain",
-                "--",
-                "functional_necessity/scripts/pi05_libero/crop_vla.py",
-                "functional_necessity/scripts/pi05_libero/measure_crop_efficiency.py",
-            ]
-        ),
+        "status": _run(["git", "status", "--porcelain", "--", *HASHED_FILES]),
+        "file_hashes": {
+            rel: hashlib.sha256((REPO_ROOT / rel).read_bytes()).hexdigest()
+            for rel in HASHED_FILES
+            if (REPO_ROOT / rel).is_file()
+        },
     }
 
 
@@ -166,11 +172,14 @@ def snapshot_all(gpus: tuple[int, ...] = (0, 1, 2, 3)) -> list[dict]:
 
 
 def parse_group(name: str) -> dict:
-    if name == "baseline":
+    key = name.strip().lower().replace("_", "-")
+    if key == "baseline":
         return {"kind": "baseline", "budget": None, "selector": None}
-    selector = "lite" if name.endswith("-lite") or name.endswith("_lite") else "greedy"
-    core = name.replace("-lite", "").replace("_lite", "")
-    if core in ("shared", "shared_mix"):
+    if key in ("uniform-grid", "grid", "uniform"):
+        return {"kind": "crop", "budget": None, "selector": "grid"}
+    selector = "lite" if key.endswith("-lite") else "greedy"
+    core = key.replace("-lite", "")
+    if core in ("shared", "shared-mix"):
         budget = "shared_mix"
     elif core in ("role", "crop", ""):
         budget = "role"
@@ -188,7 +197,11 @@ def group_order(frame_idx: int, groups: tuple[str, ...]) -> tuple[str, ...]:
 def group_forward(policy, name: str, *, profile: bool):
     spec = parse_group(name)
     if spec["kind"] == "baseline":
-        yield
+        if profile:
+            with profile_official_actions(policy):
+                yield
+        else:
+            yield
         return
     with crop_visual_tokens(
         policy,
@@ -197,30 +210,37 @@ def group_forward(policy, name: str, *, profile: bool):
         scout_layer=SCOUT_LAYER,
         profile=profile,
         budgets=spec["budget"],
-        budget_name=spec["budget"],
+        budget_name=spec["budget"] or spec["selector"],
         selector=spec["selector"],
     ):
         yield
 
 
 def capture_layout(policy, batch, noise, name: str, nfe: int) -> dict:
-    with group_forward(policy, name, profile=False):
-        policy.reset()
-        policy.predict_action_chunk(batch, noise=noise, num_steps=nfe)
-        stats = getattr(policy.model, "_crop_stats", None)
     spec = parse_group(name)
     if spec["kind"] == "baseline":
+        n_vel = count_official_velocity(policy, batch, noise, nfe)
         return {
             "budget_name": "baseline",
             "selector": None,
             "budgets": None,
             "visual_prune": False,
+            "velocity_calls": n_vel,
+            "num_steps": nfe,
             "expected_prefix": "official 3*256 visual + language; not shortened",
         }
+    with group_forward(policy, name, profile=False):
+        policy.reset()
+        policy.predict_action_chunk(batch, noise=noise, num_steps=nfe)
+        stats = getattr(policy.model, "_crop_stats", None)
     if stats is None:
         raise RuntimeError(f"{name} did not write _crop_stats")
     payload = stats_dict(stats)
-    payload["budgets"] = resolve_budgets(spec["budget"])
+    if spec["selector"] == "grid":
+        payload["budgets"] = None
+        payload["keep_rule"] = "(row+col)%2==0; 128 unique tokens per live camera; no scout"
+    else:
+        payload["budgets"] = resolve_budgets(spec["budget"])
     payload["visual_prune"] = True
     return payload
 
@@ -235,16 +255,31 @@ def breakdown_pass(policy, frames, noises, name: str, nfe: int) -> dict:
             if stats is not None:
                 parts.append(stats_dict(stats))
     timed = [p["timing_ms"] for p in parts if p.get("timing_ms")]
+    spec = parse_group(name)
+    if spec["kind"] == "baseline":
+        keys_note = "embed; prefix=official full prefix; expert=all velocity steps"
+    elif spec["selector"] == "grid":
+        keys_note = "embed; prefix=fixed-index pack + official compressed prefix; expert=all velocity steps"
+    else:
+        keys_note = (
+            "embed; scout; select=token choice; prefix=gather/pack + official compressed prefix; "
+            "expert=all velocity steps"
+        )
     out: dict = {
-        "note": "separate profile=True pass; not mixed into full-chunk median/P95",
-        "timer_keys": (
-            "embed=vision+embed_prefix; scout; select=token choice; "
-            "prefix=gather/pack + official prefix; expert"
+        "note": (
+            "separate profile=True pass; analyze with mean_ms; do not add segment medians; "
+            "do not subtract from a different full-chunk pass"
         ),
+        "analysis_stat": "mean",
+        "timer_keys": keys_note,
         "n_frames": len(timed),
+        "velocity_calls": [p.get("velocity_calls") for p in parts],
+        "num_steps": [p.get("num_steps") for p in parts],
+        "scout_layer_calls": [p.get("scout_layer_calls") for p in parts][:1],
     }
     if timed:
         keys = sorted({k for t in timed for k in t})
+        out["mean_ms"] = {k: float(np.mean([t[k] for t in timed if k in t])) for k in keys}
         out["median_ms"] = {k: _percentile([t[k] for t in timed if k in t], 50) for k in keys}
         out["p95_ms"] = {k: _percentile([t[k] for t in timed if k in t], 95) for k in keys}
         out["raw"] = timed
@@ -259,8 +294,10 @@ def compare_to_baseline(group: dict, baseline: dict, *, diagnostic: bool) -> dic
         b = baseline[clock]
         out[clock] = {
             "delta_median_ms": g["median_ms"] - b["median_ms"],
+            "delta_mean_ms": g["mean_ms"] - b["mean_ms"],
             "delta_p95_ms": g["p95_ms"] - b["p95_ms"],
             "delta_median_pct": 100.0 * (g["median_ms"] / b["median_ms"] - 1.0),
+            "delta_mean_pct": 100.0 * (g["mean_ms"] / b["mean_ms"] - 1.0),
             "relative_to_baseline": g["median_ms"] / b["median_ms"],
             "speedup_vs_baseline": b["median_ms"] / g["median_ms"],
             "note": note,
@@ -276,11 +313,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--warmup", type=int, default=5)
     parser.add_argument("--repeats", type=int, default=3)
     parser.add_argument("--nfe", type=int, default=1)
-    parser.add_argument("--selector", default="greedy", help="greedy (reference CROP) or lite")
+    parser.add_argument(
+        "--selector",
+        default="greedy",
+        help="greedy, lite, or grid. Default groups follow the selector unless --groups is set.",
+    )
     parser.add_argument(
         "--groups",
         default=None,
-        help="comma-separated group names. lite default: baseline,role-lite,shared-lite",
+        help="comma-separated group names. grid default: baseline,uniform-grid,role-lite",
     )
     parser.add_argument("--out", type=Path, default=None)
     return parser.parse_args()
@@ -329,7 +370,12 @@ def main() -> None:
     if args.groups:
         groups = tuple(part.strip() for part in args.groups.split(",") if part.strip())
     else:
-        groups = GROUPS_LITE if selector == "lite" else GROUPS_GREEDY
+        if selector == "lite":
+            groups = GROUPS_LITE
+        elif selector == "grid":
+            groups = GROUPS_GRID
+        else:
+            groups = GROUPS_GREEDY
     policy.config.n_action_steps = 10
     policy.config.num_inference_steps = nfe
     policy.config.compile_model = False
@@ -353,8 +399,15 @@ def main() -> None:
     if args.out is not None:
         out_path = args.out
     elif args.mode == "diagnostic":
-        tag = "efficiency_diagnostic_lite" if selector == "lite" else "efficiency_diagnostic"
+        if selector == "grid" or any(parse_group(g)["selector"] == "grid" for g in groups):
+            tag = "efficiency_diagnostic_grid"
+        elif selector == "lite":
+            tag = "efficiency_diagnostic_lite"
+        else:
+            tag = "efficiency_diagnostic"
         out_path = OUT / f"{tag}_nfe{nfe}_{stamp}.json"
+    elif selector == "grid":
+        out_path = OUT / f"efficiency_grid_nfe{nfe}.json"
     elif selector == "lite":
         out_path = OUT / f"efficiency_lite_nfe{nfe}.json"
     else:
@@ -403,6 +456,9 @@ def main() -> None:
                     policy.reset()
                     policy.predict_action_chunk(frames[0], noise=noises[0], num_steps=nfe)
             layouts[name] = capture_layout(policy, frames[0], noises[0], name, nfe)
+            vel = layouts[name].get("velocity_calls")
+            if vel is not None and int(vel) != nfe:
+                raise RuntimeError(f"{name} velocity_calls={vel} != num_steps={nfe}")
 
         collected: dict[str, list[dict]] = {name: [] for name in groups}
         for fi, (batch, noise) in enumerate(zip(frames, noises, strict=True)):
@@ -442,7 +498,6 @@ def main() -> None:
         summary["breakdown_profile_true"] = {
             name: breakdown_pass(policy, frames, noises, name, nfe)
             for name in groups
-            if parse_group(name)["kind"] == "crop"
         }
 
     occupancy_after = snapshot_all()

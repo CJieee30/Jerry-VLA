@@ -45,8 +45,10 @@ BUDGET_PRESETS = {
     },
 }
 BUDGETS = BUDGET_PRESETS["role"]
-SELECTORS = ("greedy", "lite")
+SELECTORS = ("greedy", "lite", "grid")
 LITE_N_ANCHORS = 4
+_UNIFORM_GRID_KEEP: dict[str, torch.Tensor] = {}
+_UNIFORM_GRID_PREFIX: dict[tuple, torch.Tensor] = {}
 
 
 def resolve_budgets(name: str | dict | None = None) -> dict[str, dict[str, int]]:
@@ -68,7 +70,9 @@ def resolve_selector(name: str | None = None) -> str:
         return "greedy"
     if key in ("lite", "crop-lite", "crop_lite"):
         return "lite"
-    raise ValueError(f"unknown CROP selector {name!r}; expected greedy or lite")
+    if key in ("grid", "uniform", "uniform-grid", "uniform_grid"):
+        return "grid"
+    raise ValueError(f"unknown CROP selector {name!r}; expected greedy, lite, or grid")
 
 
 @dataclass
@@ -98,6 +102,61 @@ class CropStats:
     num_steps: int | None = None
     velocity_calls: int | None = None
     deferred: dict[str, Any] = field(default_factory=dict)
+
+
+def uniform_grid_local_indices(
+    device: torch.device | str,
+    n_tokens: int = TOKENS_PER_VIEW,
+    grid: int = GRID,
+) -> torch.Tensor:
+    """Keep (row + col) % 2 == 0 on a grid x grid view. Cached per device."""
+    if n_tokens != grid * grid:
+        raise ValueError(f"uniform-grid expects {grid}x{grid}={grid * grid} tokens, got {n_tokens}")
+    device = torch.device(device)
+    cache_key = f"{device}:{n_tokens}:{grid}"
+    cached = _UNIFORM_GRID_KEEP.get(cache_key)
+    if cached is not None and cached.device == device:
+        return cached
+    rows = torch.arange(grid, device=device)
+    cols = torch.arange(grid, device=device)
+    rr, cc = torch.meshgrid(rows, cols, indexing="ij")
+    parity = (rr + cc) % 2
+    idx = (rr * grid + cc)[parity == 0].to(dtype=torch.long).reshape(-1)
+    if int(idx.numel()) != n_tokens // 2:
+        raise RuntimeError(f"uniform-grid keep {int(idx.numel())} != {n_tokens // 2}")
+    _UNIFORM_GRID_KEEP[cache_key] = idx
+    return idx
+
+
+def packed_grid_keep_idx(
+    device: torch.device | str,
+    n_views: int,
+    n_lang: int,
+    empty_flags: tuple[bool, ...],
+    *,
+    keep_all: bool = False,
+    n_tokens: int = TOKENS_PER_VIEW,
+    grid: int = GRID,
+) -> torch.Tensor:
+    """Packed prefix indices: live cameras use the cached checkerboard, empty/lang stay full."""
+    device = torch.device(device)
+    key = (str(device), n_views, n_lang, empty_flags, keep_all, n_tokens, grid)
+    cached = _UNIFORM_GRID_PREFIX.get(key)
+    if cached is not None and cached.device == device:
+        return cached
+    local = uniform_grid_local_indices(device, n_tokens, grid)
+    parts = []
+    for i, is_empty in enumerate(empty_flags):
+        start = i * n_tokens
+        if keep_all or is_empty:
+            parts.append(torch.arange(n_tokens, device=device, dtype=torch.long) + start)
+        else:
+            parts.append(local + start)
+    lang_start = n_tokens * n_views
+    parts.append(torch.arange(n_lang, device=device, dtype=torch.long) + lang_start)
+    idx = torch.cat(parts, dim=0)
+    _UNIFORM_GRID_PREFIX[key] = idx
+    return idx
 
 
 def role_for_image_key(key: str) -> str:
@@ -728,6 +787,291 @@ def sample_actions_crop(
     return actions
 
 
+def _camera_slots_from_masks(img_masks, n_tok: int) -> list[CameraSlot]:
+    slots = []
+    start = 0
+    live_i = 0
+    for i, mask in enumerate(img_masks):
+        is_empty = not bool(_camera_is_live(mask).any().item())
+        if is_empty:
+            role, key = "empty", f"observation.images.empty_camera_{max(i - 2, 0)}"
+        elif live_i == 0:
+            role, key, live_i = "global", "observation.images.image", 1
+        else:
+            role, key, live_i = "wrist", "observation.images.image2", live_i + 1
+        slots.append(
+            CameraSlot(
+                index=i,
+                key=key,
+                role=role,
+                start=start,
+                n_tokens=n_tok,
+                keep_all=role == "empty",
+            )
+        )
+        start += n_tok
+    return slots
+
+
+def sample_actions_grid(
+    model,
+    images,
+    img_masks,
+    tokens,
+    masks,
+    states=None,
+    state_masks=None,
+    noise=None,
+    num_steps=None,
+    *,
+    keep_all: bool = False,
+    profile: bool = False,
+    **kwargs,
+):
+    """Encode once, pack fixed checkerboard indices, official short prefix, expert. No scout."""
+    del kwargs
+    if num_steps is None:
+        num_steps = model.config.num_inference_steps
+    num_steps = int(num_steps)
+    if getattr(model, "proprio_history_proj", None) is not None:
+        raise RuntimeError("CROP assumes use_proprioceptive_memory=False (cameras then language)")
+
+    bsize = tokens.shape[0]
+    device = tokens.device
+    if noise is None:
+        noise = model.sample_noise(
+            (bsize, model.config.chunk_size, model.config.max_action_dim),
+            device,
+        )
+
+    timer = _CudaTimer(profile, device=device)
+    timer.mark("start")
+    prefix_embs, pad_masks, att_masks = model.embed_prefix(
+        images, img_masks, tokens, masks, states, state_masks
+    )
+    timer.mark("embed")
+    n_tok = TOKENS_PER_VIEW
+    n_views = len(images)
+    n_lang = int(tokens.shape[1])
+    if int(prefix_embs.shape[1]) != n_tok * n_views + n_lang:
+        raise RuntimeError(
+            f"prefix layout {prefix_embs.shape[1]} != {n_tok}*{n_views}+{n_lang}"
+        )
+    slots = _camera_slots_from_masks(img_masks, n_tok)
+    orig_pos = torch.cumsum(pad_masks, dim=1) - 1
+    orig_offset = pad_masks.sum(dim=-1)
+    att_len = int(prefix_embs.shape[1])
+    empty_flags = tuple(bool(slot.keep_all) for slot in slots)
+    row = packed_grid_keep_idx(
+        device, n_views, n_lang, empty_flags, keep_all=keep_all, n_tokens=n_tok, grid=GRID
+    )
+    keep_idx = row.unsqueeze(0).expand(bsize, -1).contiguous()
+    gather = keep_idx.unsqueeze(-1).expand(-1, -1, prefix_embs.shape[-1])
+    short_embs = torch.gather(prefix_embs, 1, gather)
+    short_pad = torch.gather(pad_masks, 1, keep_idx)
+    short_att = torch.gather(att_masks, 1, keep_idx)
+    short_pos = torch.gather(orig_pos, 1, keep_idx)
+    past, short_len = _prefix_vlm(model, short_embs, short_pad, short_att, short_pos)
+    timer.mark("prefix")
+    kv_len = _kv_seq_len(past)
+    if kv_len != short_len:
+        raise RuntimeError(f"KV length {kv_len} != packed prefix {short_len}; sequence was not shortened")
+
+    n_vel = [0]
+
+    def _body(input_x_t, current_timestep):
+        n_vel[0] += 1
+        return _denoise_with_offset(model, short_pad, past, input_x_t, current_timestep, orig_offset)
+
+    actions = euler_integrate(
+        _body,
+        noise,
+        num_steps,
+        rtc_processor=model.rtc_processor,
+        rtc_enabled=False,
+    )
+    timer.mark("expert")
+    timing_ms = timer.ms()
+    if n_vel[0] != num_steps:
+        raise RuntimeError(
+            f"grid velocity evaluations {n_vel[0]} != num_steps={num_steps} passed to euler_integrate"
+        )
+    local_grid = uniform_grid_local_indices(device, n_tok, GRID)
+    meta_b0 = []
+    for slot in slots:
+        if slot.keep_all or keep_all:
+            local = torch.arange(slot.n_tokens, device=device, dtype=torch.long)
+        else:
+            local = local_grid
+        meta_b0.append(
+            {
+                "key": slot.key,
+                "role": slot.role,
+                "n_keep": int(local.shape[0]),
+                "n_full": slot.n_tokens,
+                "relevance": local.new_empty(0),
+                "diversity": local.new_empty(0),
+                "keep": local,
+            }
+        )
+    n_layers = len(model._paligemma_language_model_core().layers)
+    stats = CropStats(
+        full_len=att_len,
+        short_len=short_len,
+        kv_len=kv_len,
+        orig_action_offset=0,
+        short_pad_sum=0,
+        cameras=[],
+        scout_layer=-1,
+        keep_all=keep_all,
+        timing_ms=timing_ms,
+        scout_layer_calls=[0] * n_layers,
+        budget_name="grid",
+        selector="grid",
+        num_steps=num_steps,
+        velocity_calls=n_vel[0],
+        deferred={"orig_offset": orig_offset, "short_pad": short_pad, "cameras": meta_b0},
+    )
+    model._crop_stats = stats
+    return actions
+
+
+def sample_actions_official_profiled(
+    model,
+    images,
+    img_masks,
+    tokens,
+    masks,
+    states=None,
+    state_masks=None,
+    noise=None,
+    num_steps=None,
+    **kwargs,
+):
+    """Official PI05 sample_actions with CUDA-event marks. Same operators, extra events only."""
+    if num_steps is None:
+        num_steps = model.config.num_inference_steps
+    num_steps = int(num_steps)
+    bsize = tokens.shape[0]
+    device = tokens.device
+    if noise is None:
+        noise = model.sample_noise(
+            (bsize, model.config.chunk_size, model.config.max_action_dim),
+            device,
+        )
+    timer = _CudaTimer(True, device=device)
+    timer.mark("start")
+    prefix_embs, prefix_pad_masks, prefix_att_masks = model.embed_prefix(
+        images, img_masks, tokens, masks, states, state_masks
+    )
+    timer.mark("embed")
+    prefix_att_2d_masks = make_att_2d_masks(prefix_pad_masks, prefix_att_masks)
+    prefix_position_ids = torch.cumsum(prefix_pad_masks, dim=1) - 1
+    prefix_att_2d_masks_4d = prepare_attention_masks_4d(prefix_att_2d_masks)
+    model._paligemma_language_model_core().config._attn_implementation = "eager"
+    _, past_key_values = model.paligemma_with_expert.forward(
+        attention_mask=prefix_att_2d_masks_4d,
+        position_ids=prefix_position_ids,
+        past_key_values=None,
+        inputs_embeds=[prefix_embs, None],
+        use_cache=True,
+    )
+    timer.mark("prefix")
+    rtc_mode = "guided"
+    trained_prefix = trained_prefix_mask = None
+    if model._rtc_enabled():
+        rtc_mode = model.rtc_processor.rtc_config.mode
+        if rtc_mode == "trained":
+            from lerobot.policies.pi05.modeling_pi05 import _prepare_trained_rtc_prefix
+
+            training_max_delay = int(getattr(model.config, "rtc_training_max_delay", 0))
+            if training_max_delay <= 0:
+                raise ValueError(
+                    "RTC mode='trained' requires a checkpoint trained with "
+                    "policy.rtc_training_max_delay > 0."
+                )
+            trained_prefix, trained_prefix_mask = _prepare_trained_rtc_prefix(
+                noise,
+                kwargs.get("prev_chunk_left_over"),
+                int(kwargs.get("inference_delay") or 0),
+                training_max_delay,
+            )
+    n_vel = [0]
+
+    def _body(input_x_t, current_timestep):
+        n_vel[0] += 1
+        return model.denoise_step(
+            prefix_pad_masks=prefix_pad_masks,
+            past_key_values=past_key_values,
+            x_t=input_x_t,
+            timestep=current_timestep,
+        )
+
+    actions = euler_integrate(
+        _body,
+        noise,
+        num_steps,
+        rtc_processor=model.rtc_processor,
+        rtc_enabled=model._rtc_enabled() and rtc_mode == "guided",
+        inference_delay=kwargs.get("inference_delay"),
+        prev_chunk_left_over=kwargs.get("prev_chunk_left_over"),
+        execution_horizon=kwargs.get("execution_horizon"),
+        hard_prefix=trained_prefix,
+        hard_prefix_mask=trained_prefix_mask,
+    )
+    timer.mark("expert")
+    timing_ms = timer.ms()
+    if n_vel[0] != num_steps:
+        raise RuntimeError(f"official velocity evaluations {n_vel[0]} != num_steps={num_steps}")
+    n_layers = len(model._paligemma_language_model_core().layers)
+    full_len = int(prefix_embs.shape[1])
+    kv_len = _kv_seq_len(past_key_values)
+    model._crop_stats = CropStats(
+        full_len=full_len,
+        short_len=full_len,
+        kv_len=kv_len,
+        orig_action_offset=int(prefix_pad_masks[0].sum().item()),
+        short_pad_sum=int(prefix_pad_masks[0].sum().item()),
+        cameras=[],
+        scout_layer=-1,
+        keep_all=True,
+        timing_ms=timing_ms,
+        scout_layer_calls=[0] * n_layers,
+        budget_name="baseline",
+        selector="baseline",
+        num_steps=num_steps,
+        velocity_calls=n_vel[0],
+    )
+    return actions
+
+
+@contextmanager
+def profile_official_actions(policy):
+    """Time official sample_actions stages. Does not change operators."""
+    model = policy.model
+    orig = model.sample_actions
+
+    def patched(images, img_masks, tokens, masks, states=None, state_masks=None, noise=None, num_steps=None, **kwargs):
+        return sample_actions_official_profiled(
+            model,
+            images,
+            img_masks,
+            tokens,
+            masks,
+            states=states,
+            state_masks=state_masks,
+            noise=noise,
+            num_steps=num_steps,
+            **kwargs,
+        )
+
+    model.sample_actions = patched
+    try:
+        yield
+    finally:
+        model.sample_actions = orig
+
+
 @contextmanager
 def crop_visual_tokens(
     policy,
@@ -750,6 +1094,21 @@ def crop_visual_tokens(
     selector = resolve_selector(selector)
 
     def patched(images, img_masks, tokens, masks, states=None, state_masks=None, noise=None, num_steps=None, **kwargs):
+        if selector == "grid":
+            return sample_actions_grid(
+                model,
+                images,
+                img_masks,
+                tokens,
+                masks,
+                states=states,
+                state_masks=state_masks,
+                noise=noise,
+                num_steps=num_steps,
+                keep_all=keep_all,
+                profile=profile,
+                **kwargs,
+            )
         return sample_actions_crop(
             model,
             images,
@@ -994,6 +1353,21 @@ def cpu_selftest() -> None:
     if keep_all.tolist() != list(range(n)):
         raise RuntimeError("lite keep_all did not return every token")
 
+    grid_idx = uniform_grid_local_indices("cpu")
+    expect = [i for i in range(TOKENS_PER_VIEW) if ((i // GRID) + (i % GRID)) % 2 == 0]
+    if grid_idx.tolist() != expect:
+        raise RuntimeError(f"uniform-grid indices {grid_idx[:8].tolist()}... != checkerboard")
+    if int(grid_idx.numel()) != TOKENS_PER_VIEW // 2 or len(set(expect)) != TOKENS_PER_VIEW // 2:
+        raise RuntimeError(f"uniform-grid keep {int(grid_idx.numel())} not 128 unique even-parity")
+    packed = packed_grid_keep_idx("cpu", 3, 200, (False, False, True), keep_all=False)
+    if int(packed.numel()) != 128 + 128 + 256 + 200:
+        raise RuntimeError(f"packed grid prefix {int(packed.numel())} != 712")
+    if packed_grid_keep_idx("cpu", 3, 200, (False, False, True), keep_all=False) is not packed:
+        raise RuntimeError("packed_grid_keep_idx did not reuse cache")
+    full_pack = packed_grid_keep_idx("cpu", 3, 200, (False, False, True), keep_all=True)
+    if int(full_pack.numel()) != 3 * TOKENS_PER_VIEW + 200:
+        raise RuntimeError("grid keep-all pack length is not the full prefix")
+
     class _Block(torch.nn.Module):
         def __init__(self, idx: int):
             super().__init__()
@@ -1023,4 +1397,4 @@ def cpu_selftest() -> None:
         raise RuntimeError("scout did not restore language layers")
     if float(x.item()) != 3.0:
         raise RuntimeError(f"scout ran {float(x.item())} layers worth of residual")
-    print("cpu selftest ok (timer pairs, diversity, scout range)", flush=True)
+    print("cpu selftest ok (timer pairs, diversity, scout range, uniform-grid)", flush=True)

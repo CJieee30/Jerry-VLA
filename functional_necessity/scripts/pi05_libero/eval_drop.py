@@ -127,7 +127,7 @@ def _parse_ours(argv: list[str]) -> tuple[argparse.Namespace, list[str]]:
     parser.add_argument(
         "--crop-selector",
         default="greedy",
-        help="greedy: original FPS CROP. lite: one-shot 4-anchor diversity.",
+        help="greedy: original FPS CROP. lite: one-shot 4-anchor diversity. grid: uniform checkerboard, no scout.",
     )
     ours, rest = parser.parse_known_args(argv)
     return ours, rest
@@ -361,8 +361,8 @@ def run_libero_eval(
     if crop:
         from crop_vla import crop_visual_tokens, resolve_budgets, resolve_selector
 
-        budgets = resolve_budgets(crop_budget)
         selector = resolve_selector(crop_selector)
+        budgets = None if selector == "grid" else resolve_budgets(crop_budget)
         crop_ctx = crop_visual_tokens(
             policy,
             keep_all=crop_keep_all,
@@ -451,6 +451,8 @@ def main() -> None:
                         tag = f"eval_crop_lite_{ours.crop_budget}"
                     else:
                         tag = "eval_crop_lite"
+                elif selector in ("grid", "uniform", "uniform-grid", "uniform_grid"):
+                    tag = "eval_crop_grid"
                 elif ours.crop_budget and ours.crop_budget not in ("role", "crop", ""):
                     tag = f"eval_crop_{ours.crop_budget}"
                 else:

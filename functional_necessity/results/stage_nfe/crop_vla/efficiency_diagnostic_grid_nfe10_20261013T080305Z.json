@@ -1,0 +1,4547 @@
+{
+  "measurement_mode": "diagnostic",
+  "disclaimer": "\u5171\u4eab GPU\uff0c\u4ec5\u4f9b\u8bca\u65ad\uff0c\u4e0d\u8fdb\u5165\u8bba\u6587\u6b63\u5f0f\u6548\u7387\u8868",
+  "not_for_paper_table": true,
+  "gpu": 1,
+  "device": "cuda:0",
+  "physical_gpu": 1,
+  "gpu_name": "NVIDIA GeForce RTX 3090",
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "drop": [
+    1,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "nfe": 10,
+  "selector": "grid",
+  "scout_layer": 2,
+  "compile_model": false,
+  "batch_size": 1,
+  "n_action_steps": 10,
+  "n_frames": 16,
+  "warmup": 5,
+  "repeats": 3,
+  "group_names": [
+    "baseline",
+    "uniform-grid",
+    "role-lite"
+  ],
+  "budgets": {
+    "role": {
+      "wrist": {
+        "relevance": 96,
+        "diversity": 32
+      },
+      "global": {
+        "relevance": 32,
+        "diversity": 96
+      }
+    },
+    "shared_mix": {
+      "wrist": {
+        "relevance": 64,
+        "diversity": 64
+      },
+      "global": {
+        "relevance": 64,
+        "diversity": 64
+      }
+    }
+  },
+  "interleave": "per-frame rotation of group order; not one group then the next",
+  "flops": "unmeasured",
+  "note": "full predict_action_chunk with profile=False (includes vision encode, scout, select, pack, official prefix, expert). Segment breakdown is a separate profile=True pass. Model load and crop/baseline switching are outside the timer.",
+  "gate": {
+    "mode": "diagnostic",
+    "env_bypass_popped": true,
+    "CROP_ALLOW_OCCUPIED": null,
+    "exclusive": false,
+    "gpu": 1,
+    "precheck": {
+      "index": 1,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 1722.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 22405.0,
+      "util_gpu_pct": 42.0,
+      "util_mem_pct": 9.0,
+      "temp_c": 56.0,
+      "power_w": 251.19,
+      "compute_apps": [
+        {
+          "pid": 1011148,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1712"
+        }
+      ]
+    }
+  },
+  "code_version": {
+    "root": "/home/guorj/Skill_Efficient_VLA",
+    "head": "03c0519857091f1e938c9a567ea3b3f24a1f9433",
+    "head_short": "03c0519",
+    "status": "M functional_necessity/scripts/pi05_libero/check_crop_vla.py\n M functional_necessity/scripts/pi05_libero/crop_vla.py\n M functional_necessity/scripts/pi05_libero/eval_drop.py\n M functional_necessity/scripts/pi05_libero/measure_crop_efficiency.py",
+    "file_hashes": {
+      "functional_necessity/scripts/pi05_libero/crop_vla.py": "65b27bacfa470a13167d0dbd5bda11dd408abfbcaf8e91ea2021709f3b38cc82",
+      "functional_necessity/scripts/pi05_libero/check_crop_vla.py": "5b474b647611308541f2bd4ba589538cde34665b694a706cc2ceb1cb06b948f2",
+      "functional_necessity/scripts/pi05_libero/measure_crop_efficiency.py": "753ae41068b1b550a23f82493c63bf3bf1caf726fcc3f85df66b6bb35fa52fb5",
+      "functional_necessity/scripts/pi05_libero/eval_drop.py": "d97cc10ab53ea0ec8b12be4caca9722bb64fc0e460b273a932042070527f9bf0"
+    }
+  },
+  "occupancy_before": [
+    {
+      "index": 0,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 11571.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 12556.0,
+      "util_gpu_pct": 88.0,
+      "util_mem_pct": 17.0,
+      "temp_c": 60.0,
+      "power_w": 256.48,
+      "compute_apps": [
+        {
+          "pid": 1966126,
+          "user": "guorj",
+          "name": "/home/guorj/.miniforge3/envs/lerobot/bin/python",
+          "mem_mib": "9832"
+        },
+        {
+          "pid": 911212,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1714"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 1722.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 22405.0,
+      "util_gpu_pct": 85.0,
+      "util_mem_pct": 17.0,
+      "temp_c": 58.0,
+      "power_w": 254.43,
+      "compute_apps": [
+        {
+          "pid": 1011148,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1712"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 9852.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 14276.0,
+      "util_gpu_pct": 0.0,
+      "util_mem_pct": 0.0,
+      "temp_c": 41.0,
+      "power_w": 107.24,
+      "compute_apps": [
+        {
+          "pid": 2057595,
+          "user": "guorj",
+          "name": "/home/guorj/.miniforge3/envs/lerobot/bin/python",
+          "mem_mib": "9832"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 3513.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 20614.0,
+      "util_gpu_pct": 38.0,
+      "util_mem_pct": 17.0,
+      "temp_c": 59.0,
+      "power_w": 293.26,
+      "compute_apps": [
+        {
+          "pid": 1997700,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1786"
+        },
+        {
+          "pid": 1009712,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1712"
+        }
+      ]
+    }
+  ],
+  "started_utc": "20261013T080305Z",
+  "groups": {
+    "baseline": {
+      "layout": {
+        "budget_name": "baseline",
+        "selector": null,
+        "budgets": null,
+        "visual_prune": false,
+        "velocity_calls": 10,
+        "num_steps": 10,
+        "expected_prefix": "official 3*256 visual + language; not shortened"
+      },
+      "cuda": {
+        "median_ms": 627.2698059082031,
+        "p95_ms": 669.0896545410156,
+        "mean_ms": 617.9308573404948,
+        "n": 48,
+        "raw_ms": [
+          671.51953125,
+          585.0828857421875,
+          577.9476928710938,
+          652.8184204101562,
+          644.7185668945312,
+          577.0946655273438,
+          630.2150268554688,
+          561.3322143554688,
+          577.0545043945312,
+          575.07666015625,
+          577.1100463867188,
+          644.3909301757812,
+          569.9965209960938,
+          564.5396728515625,
+          643.1856079101562,
+          585.3399047851562,
+          657.0025024414062,
+          673.9705810546875,
+          657.75,
+          672.4126586914062,
+          568.1793823242188,
+          657.9568481445312,
+          662.1143188476562,
+          604.5303344726562,
+          648.4510498046875,
+          597.6166381835938,
+          570.3936157226562,
+          577.7101440429688,
+          572.0618286132812,
+          650.1467895507812,
+          572.1549072265625,
+          624.3245849609375,
+          657.3373413085938,
+          616.57177734375,
+          656.2997436523438,
+          659.6370849609375,
+          643.9874267578125,
+          657.0076293945312,
+          640.8597412109375,
+          658.892822265625,
+          659.5266723632812,
+          588.2576904296875,
+          641.7925415039062,
+          564.2445068359375,
+          597.549072265625,
+          571.7590942382812,
+          578.1819458007812,
+          664.5770263671875
+        ]
+      },
+      "wall": {
+        "median_ms": 628.4267986193299,
+        "p95_ms": 669.1608624299988,
+        "mean_ms": 619.0732132527046,
+        "n": 48,
+        "raw_ms": [
+          671.5927449986339,
+          585.29934566468,
+          578.04822223261,
+          653.9149601012468,
+          646.1458508856595,
+          577.5333517231047,
+          632.4864402413368,
+          563.7038266286254,
+          577.1350408904254,
+          577.3472590371966,
+          577.1914827637374,
+          644.432608038187,
+          572.2961919382215,
+          564.620491117239,
+          643.2289658114314,
+          585.4191146790981,
+          657.0440740324557,
+          674.6547487564385,
+          659.9882952868938,
+          672.5415643304586,
+          570.5530298873782,
+          660.2067248895764,
+          664.4276212900877,
+          606.8960460834205,
+          650.6346086971462,
+          597.8087401017547,
+          570.4699018970132,
+          580.019370187074,
+          572.1676652319729,
+          650.1900372095406,
+          574.027696158737,
+          624.367156997323,
+          659.6294110640883,
+          616.6133722290397,
+          658.567694015801,
+          661.8434921838343,
+          644.0322319976985,
+          659.308762755245,
+          643.1341515854001,
+          661.1051680520177,
+          661.809862125665,
+          589.7155329585075,
+          644.0397617407143,
+          564.7544879466295,
+          597.6319089531898,
+          573.9637990482152,
+          578.3269125968218,
+          664.644509088248
+        ]
+      },
+      "samples": [
+        {
+          "frame": 0,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 671.51953125,
+          "wall_ms": 671.5927449986339
+        },
+        {
+          "frame": 0,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 585.0828857421875,
+          "wall_ms": 585.29934566468
+        },
+        {
+          "frame": 0,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 577.9476928710938,
+          "wall_ms": 578.04822223261
+        },
+        {
+          "frame": 1,
+          "repeat": 0,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 652.8184204101562,
+          "wall_ms": 653.9149601012468
+        },
+        {
+          "frame": 1,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 644.7185668945312,
+          "wall_ms": 646.1458508856595
+        },
+        {
+          "frame": 1,
+          "repeat": 2,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 577.0946655273438,
+          "wall_ms": 577.5333517231047
+        },
+        {
+          "frame": 2,
+          "repeat": 0,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 630.2150268554688,
+          "wall_ms": 632.4864402413368
+        },
+        {
+          "frame": 2,
+          "repeat": 1,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 561.3322143554688,
+          "wall_ms": 563.7038266286254
+        },
+        {
+          "frame": 2,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 577.0545043945312,
+          "wall_ms": 577.1350408904254
+        },
+        {
+          "frame": 3,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 575.07666015625,
+          "wall_ms": 577.3472590371966
+        },
+        {
+          "frame": 3,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 577.1100463867188,
+          "wall_ms": 577.1914827637374
+        },
+        {
+          "frame": 3,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 644.3909301757812,
+          "wall_ms": 644.432608038187
+        },
+        {
+          "frame": 4,
+          "repeat": 0,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 569.9965209960938,
+          "wall_ms": 572.2961919382215
+        },
+        {
+          "frame": 4,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 564.5396728515625,
+          "wall_ms": 564.620491117239
+        },
+        {
+          "frame": 4,
+          "repeat": 2,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 643.1856079101562,
+          "wall_ms": 643.2289658114314
+        },
+        {
+          "frame": 5,
+          "repeat": 0,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 585.3399047851562,
+          "wall_ms": 585.4191146790981
+        },
+        {
+          "frame": 5,
+          "repeat": 1,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 657.0025024414062,
+          "wall_ms": 657.0440740324557
+        },
+        {
+          "frame": 5,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 673.9705810546875,
+          "wall_ms": 674.6547487564385
+        },
+        {
+          "frame": 6,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 657.75,
+          "wall_ms": 659.9882952868938
+        },
+        {
+          "frame": 6,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 672.4126586914062,
+          "wall_ms": 672.5415643304586
+        },
+        {
+          "frame": 6,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 568.1793823242188,
+          "wall_ms": 570.5530298873782
+        },
+        {
+          "frame": 7,
+          "repeat": 0,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 657.9568481445312,
+          "wall_ms": 660.2067248895764
+        },
+        {
+          "frame": 7,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 662.1143188476562,
+          "wall_ms": 664.4276212900877
+        },
+        {
+          "frame": 7,
+          "repeat": 2,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 604.5303344726562,
+          "wall_ms": 606.8960460834205
+        },
+        {
+          "frame": 8,
+          "repeat": 0,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 648.4510498046875,
+          "wall_ms": 650.6346086971462
+        },
+        {
+          "frame": 8,
+          "repeat": 1,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 597.6166381835938,
+          "wall_ms": 597.8087401017547
+        },
+        {
+          "frame": 8,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 570.3936157226562,
+          "wall_ms": 570.4699018970132
+        },
+        {
+          "frame": 9,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 577.7101440429688,
+          "wall_ms": 580.019370187074
+        },
+        {
+          "frame": 9,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 572.0618286132812,
+          "wall_ms": 572.1676652319729
+        },
+        {
+          "frame": 9,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 650.1467895507812,
+          "wall_ms": 650.1900372095406
+        },
+        {
+          "frame": 10,
+          "repeat": 0,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 572.1549072265625,
+          "wall_ms": 574.027696158737
+        },
+        {
+          "frame": 10,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 624.3245849609375,
+          "wall_ms": 624.367156997323
+        },
+        {
+          "frame": 10,
+          "repeat": 2,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 657.3373413085938,
+          "wall_ms": 659.6294110640883
+        },
+        {
+          "frame": 11,
+          "repeat": 0,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 616.57177734375,
+          "wall_ms": 616.6133722290397
+        },
+        {
+          "frame": 11,
+          "repeat": 1,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 656.2997436523438,
+          "wall_ms": 658.567694015801
+        },
+        {
+          "frame": 11,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 659.6370849609375,
+          "wall_ms": 661.8434921838343
+        },
+        {
+          "frame": 12,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 643.9874267578125,
+          "wall_ms": 644.0322319976985
+        },
+        {
+          "frame": 12,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 657.0076293945312,
+          "wall_ms": 659.308762755245
+        },
+        {
+          "frame": 12,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 640.8597412109375,
+          "wall_ms": 643.1341515854001
+        },
+        {
+          "frame": 13,
+          "repeat": 0,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 658.892822265625,
+          "wall_ms": 661.1051680520177
+        },
+        {
+          "frame": 13,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 659.5266723632812,
+          "wall_ms": 661.809862125665
+        },
+        {
+          "frame": 13,
+          "repeat": 2,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 588.2576904296875,
+          "wall_ms": 589.7155329585075
+        },
+        {
+          "frame": 14,
+          "repeat": 0,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 641.7925415039062,
+          "wall_ms": 644.0397617407143
+        },
+        {
+          "frame": 14,
+          "repeat": 1,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 564.2445068359375,
+          "wall_ms": 564.7544879466295
+        },
+        {
+          "frame": 14,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 597.549072265625,
+          "wall_ms": 597.6319089531898
+        },
+        {
+          "frame": 15,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 571.7590942382812,
+          "wall_ms": 573.9637990482152
+        },
+        {
+          "frame": 15,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 578.1819458007812,
+          "wall_ms": 578.3269125968218
+        },
+        {
+          "frame": 15,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 664.5770263671875,
+          "wall_ms": 664.644509088248
+        }
+      ],
+      "vs_baseline": null
+    },
+    "uniform-grid": {
+      "layout": {
+        "full_len": 968,
+        "short_len": 712,
+        "kv_len": 712,
+        "orig_action_offset": 560,
+        "short_pad_sum": 304,
+        "cameras": [
+          {
+            "key": "observation.images.image",
+            "role": "global",
+            "n_keep": 128,
+            "n_full": 256,
+            "relevance": [],
+            "diversity": [],
+            "keep": [
+              0,
+              2,
+              4,
+              6,
+              8,
+              10,
+              12,
+              14,
+              17,
+              19,
+              21,
+              23,
+              25,
+              27,
+              29,
+              31,
+              32,
+              34,
+              36,
+              38,
+              40,
+              42,
+              44,
+              46,
+              49,
+              51,
+              53,
+              55,
+              57,
+              59,
+              61,
+              63,
+              64,
+              66,
+              68,
+              70,
+              72,
+              74,
+              76,
+              78,
+              81,
+              83,
+              85,
+              87,
+              89,
+              91,
+              93,
+              95,
+              96,
+              98,
+              100,
+              102,
+              104,
+              106,
+              108,
+              110,
+              113,
+              115,
+              117,
+              119,
+              121,
+              123,
+              125,
+              127,
+              128,
+              130,
+              132,
+              134,
+              136,
+              138,
+              140,
+              142,
+              145,
+              147,
+              149,
+              151,
+              153,
+              155,
+              157,
+              159,
+              160,
+              162,
+              164,
+              166,
+              168,
+              170,
+              172,
+              174,
+              177,
+              179,
+              181,
+              183,
+              185,
+              187,
+              189,
+              191,
+              192,
+              194,
+              196,
+              198,
+              200,
+              202,
+              204,
+              206,
+              209,
+              211,
+              213,
+              215,
+              217,
+              219,
+              221,
+              223,
+              224,
+              226,
+              228,
+              230,
+              232,
+              234,
+              236,
+              238,
+              241,
+              243,
+              245,
+              247,
+              249,
+              251,
+              253,
+              255
+            ]
+          },
+          {
+            "key": "observation.images.image2",
+            "role": "wrist",
+            "n_keep": 128,
+            "n_full": 256,
+            "relevance": [],
+            "diversity": [],
+            "keep": [
+              0,
+              2,
+              4,
+              6,
+              8,
+              10,
+              12,
+              14,
+              17,
+              19,
+              21,
+              23,
+              25,
+              27,
+              29,
+              31,
+              32,
+              34,
+              36,
+              38,
+              40,
+              42,
+              44,
+              46,
+              49,
+              51,
+              53,
+              55,
+              57,
+              59,
+              61,
+              63,
+              64,
+              66,
+              68,
+              70,
+              72,
+              74,
+              76,
+              78,
+              81,
+              83,
+              85,
+              87,
+              89,
+              91,
+              93,
+              95,
+              96,
+              98,
+              100,
+              102,
+              104,
+              106,
+              108,
+              110,
+              113,
+              115,
+              117,
+              119,
+              121,
+              123,
+              125,
+              127,
+              128,
+              130,
+              132,
+              134,
+              136,
+              138,
+              140,
+              142,
+              145,
+              147,
+              149,
+              151,
+              153,
+              155,
+              157,
+              159,
+              160,
+              162,
+              164,
+              166,
+              168,
+              170,
+              172,
+              174,
+              177,
+              179,
+              181,
+              183,
+              185,
+              187,
+              189,
+              191,
+              192,
+              194,
+              196,
+              198,
+              200,
+              202,
+              204,
+              206,
+              209,
+              211,
+              213,
+              215,
+              217,
+              219,
+              221,
+              223,
+              224,
+              226,
+              228,
+              230,
+              232,
+              234,
+              236,
+              238,
+              241,
+              243,
+              245,
+              247,
+              249,
+              251,
+              253,
+              255
+            ]
+          },
+          {
+            "key": "observation.images.empty_camera_0",
+            "role": "empty",
+            "n_keep": 256,
+            "n_full": 256,
+            "relevance": [],
+            "diversity": [],
+            "keep": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              121,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              131,
+              132,
+              133,
+              134,
+              135,
+              136,
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143,
+              144,
+              145,
+              146,
+              147,
+              148,
+              149,
+              150,
+              151,
+              152,
+              153,
+              154,
+              155,
+              156,
+              157,
+              158,
+              159,
+              160,
+              161,
+              162,
+              163,
+              164,
+              165,
+              166,
+              167,
+              168,
+              169,
+              170,
+              171,
+              172,
+              173,
+              174,
+              175,
+              176,
+              177,
+              178,
+              179,
+              180,
+              181,
+              182,
+              183,
+              184,
+              185,
+              186,
+              187,
+              188,
+              189,
+              190,
+              191,
+              192,
+              193,
+              194,
+              195,
+              196,
+              197,
+              198,
+              199,
+              200,
+              201,
+              202,
+              203,
+              204,
+              205,
+              206,
+              207,
+              208,
+              209,
+              210,
+              211,
+              212,
+              213,
+              214,
+              215,
+              216,
+              217,
+              218,
+              219,
+              220,
+              221,
+              222,
+              223,
+              224,
+              225,
+              226,
+              227,
+              228,
+              229,
+              230,
+              231,
+              232,
+              233,
+              234,
+              235,
+              236,
+              237,
+              238,
+              239,
+              240,
+              241,
+              242,
+              243,
+              244,
+              245,
+              246,
+              247,
+              248,
+              249,
+              250,
+              251,
+              252,
+              253,
+              254,
+              255
+            ]
+          }
+        ],
+        "scout_layer": -1,
+        "keep_all": false,
+        "timing_ms": null,
+        "scout_layer_calls": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "budget_name": "grid",
+        "selector": "grid",
+        "num_steps": 10,
+        "velocity_calls": 10,
+        "budgets": null,
+        "keep_rule": "(row+col)%2==0; 128 unique tokens per live camera; no scout",
+        "visual_prune": true
+      },
+      "cuda": {
+        "median_ms": 620.5297546386719,
+        "p95_ms": 640.0299774169922,
+        "mean_ms": 606.2939694722494,
+        "n": 48,
+        "raw_ms": [
+          639.6939086914062,
+          746.1586303710938,
+          593.1599731445312,
+          628.9182739257812,
+          627.6387939453125,
+          574.102294921875,
+          625.480712890625,
+          633.2373657226562,
+          637.1582641601562,
+          632.9456787109375,
+          636.8618774414062,
+          562.466796875,
+          590.7421875,
+          552.669189453125,
+          569.4835815429688,
+          604.564208984375,
+          554.33740234375,
+          602.3126220703125,
+          567.24169921875,
+          625.6373901367188,
+          635.02880859375,
+          620.5452270507812,
+          629.979736328125,
+          620.5142822265625,
+          622.6002197265625,
+          631.8510131835938,
+          640.67041015625,
+          623.6979370117188,
+          628.9319458007812,
+          559.8811645507812,
+          614.2105712890625,
+          550.5789184570312,
+          563.4562377929688,
+          572.8484497070312,
+          550.8956298828125,
+          560.8151245117188,
+          552.1860961914062,
+          546.4391479492188,
+          613.8511352539062,
+          574.1906127929688,
+          636.062744140625,
+          635.6971435546875,
+          637.9612426757812,
+          630.8482055664062,
+          630.1614379882812,
+          640.2109375,
+          620.0360717773438,
+          553.1492309570312
+        ]
+      },
+      "wall": {
+        "median_ms": 622.030703118071,
+        "p95_ms": 640.073987073265,
+        "mean_ms": 607.4526552887013,
+        "n": 48,
+        "raw_ms": [
+          639.7394970990717,
+          746.2942190468311,
+          594.5796659216285,
+          629.8046591691673,
+          627.7811313048005,
+          576.4357750304043,
+          625.5260929465294,
+          635.505978949368,
+          639.4914691336453,
+          635.2061219513416,
+          639.1499051824212,
+          564.8328349925578,
+          593.0010518059134,
+          552.7373943477869,
+          569.5565240457654,
+          606.8388759158552,
+          554.4108590111136,
+          602.3646877147257,
+          567.3148301430047,
+          625.6783930584788,
+          637.3606203123927,
+          620.5904902890325,
+          632.2479681111872,
+          622.8317702189088,
+          622.6563970558345,
+          634.1552841477096,
+          643.0033971555531,
+          625.9540948085487,
+          631.1437422409654,
+          562.2194590978324,
+          614.2559731379151,
+          552.8646381571889,
+          563.5390202514827,
+          575.096535962075,
+          550.967019982636,
+          560.8885963447392,
+          554.4081120751798,
+          546.5104482136667,
+          613.9168790541589,
+          574.2659708485007,
+          636.1037818714976,
+          637.947928160429,
+          638.0044999532402,
+          633.1681571900845,
+          632.4968258850276,
+          640.2540970593691,
+          621.4050091803074,
+          553.2207703217864
+        ]
+      },
+      "samples": [
+        {
+          "frame": 0,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 639.6939086914062,
+          "wall_ms": 639.7394970990717
+        },
+        {
+          "frame": 0,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 746.1586303710938,
+          "wall_ms": 746.2942190468311
+        },
+        {
+          "frame": 0,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 593.1599731445312,
+          "wall_ms": 594.5796659216285
+        },
+        {
+          "frame": 1,
+          "repeat": 0,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 628.9182739257812,
+          "wall_ms": 629.8046591691673
+        },
+        {
+          "frame": 1,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 627.6387939453125,
+          "wall_ms": 627.7811313048005
+        },
+        {
+          "frame": 1,
+          "repeat": 2,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 574.102294921875,
+          "wall_ms": 576.4357750304043
+        },
+        {
+          "frame": 2,
+          "repeat": 0,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 625.480712890625,
+          "wall_ms": 625.5260929465294
+        },
+        {
+          "frame": 2,
+          "repeat": 1,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 633.2373657226562,
+          "wall_ms": 635.505978949368
+        },
+        {
+          "frame": 2,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 637.1582641601562,
+          "wall_ms": 639.4914691336453
+        },
+        {
+          "frame": 3,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 632.9456787109375,
+          "wall_ms": 635.2061219513416
+        },
+        {
+          "frame": 3,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 636.8618774414062,
+          "wall_ms": 639.1499051824212
+        },
+        {
+          "frame": 3,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 562.466796875,
+          "wall_ms": 564.8328349925578
+        },
+        {
+          "frame": 4,
+          "repeat": 0,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 590.7421875,
+          "wall_ms": 593.0010518059134
+        },
+        {
+          "frame": 4,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 552.669189453125,
+          "wall_ms": 552.7373943477869
+        },
+        {
+          "frame": 4,
+          "repeat": 2,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 569.4835815429688,
+          "wall_ms": 569.5565240457654
+        },
+        {
+          "frame": 5,
+          "repeat": 0,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 604.564208984375,
+          "wall_ms": 606.8388759158552
+        },
+        {
+          "frame": 5,
+          "repeat": 1,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 554.33740234375,
+          "wall_ms": 554.4108590111136
+        },
+        {
+          "frame": 5,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 602.3126220703125,
+          "wall_ms": 602.3646877147257
+        },
+        {
+          "frame": 6,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 567.24169921875,
+          "wall_ms": 567.3148301430047
+        },
+        {
+          "frame": 6,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 625.6373901367188,
+          "wall_ms": 625.6783930584788
+        },
+        {
+          "frame": 6,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 635.02880859375,
+          "wall_ms": 637.3606203123927
+        },
+        {
+          "frame": 7,
+          "repeat": 0,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 620.5452270507812,
+          "wall_ms": 620.5904902890325
+        },
+        {
+          "frame": 7,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 629.979736328125,
+          "wall_ms": 632.2479681111872
+        },
+        {
+          "frame": 7,
+          "repeat": 2,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 620.5142822265625,
+          "wall_ms": 622.8317702189088
+        },
+        {
+          "frame": 8,
+          "repeat": 0,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 622.6002197265625,
+          "wall_ms": 622.6563970558345
+        },
+        {
+          "frame": 8,
+          "repeat": 1,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 631.8510131835938,
+          "wall_ms": 634.1552841477096
+        },
+        {
+          "frame": 8,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 640.67041015625,
+          "wall_ms": 643.0033971555531
+        },
+        {
+          "frame": 9,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 623.6979370117188,
+          "wall_ms": 625.9540948085487
+        },
+        {
+          "frame": 9,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 628.9319458007812,
+          "wall_ms": 631.1437422409654
+        },
+        {
+          "frame": 9,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 559.8811645507812,
+          "wall_ms": 562.2194590978324
+        },
+        {
+          "frame": 10,
+          "repeat": 0,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 614.2105712890625,
+          "wall_ms": 614.2559731379151
+        },
+        {
+          "frame": 10,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 550.5789184570312,
+          "wall_ms": 552.8646381571889
+        },
+        {
+          "frame": 10,
+          "repeat": 2,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 563.4562377929688,
+          "wall_ms": 563.5390202514827
+        },
+        {
+          "frame": 11,
+          "repeat": 0,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 572.8484497070312,
+          "wall_ms": 575.096535962075
+        },
+        {
+          "frame": 11,
+          "repeat": 1,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 550.8956298828125,
+          "wall_ms": 550.967019982636
+        },
+        {
+          "frame": 11,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 560.8151245117188,
+          "wall_ms": 560.8885963447392
+        },
+        {
+          "frame": 12,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 552.1860961914062,
+          "wall_ms": 554.4081120751798
+        },
+        {
+          "frame": 12,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 546.4391479492188,
+          "wall_ms": 546.5104482136667
+        },
+        {
+          "frame": 12,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 613.8511352539062,
+          "wall_ms": 613.9168790541589
+        },
+        {
+          "frame": 13,
+          "repeat": 0,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 574.1906127929688,
+          "wall_ms": 574.2659708485007
+        },
+        {
+          "frame": 13,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 636.062744140625,
+          "wall_ms": 636.1037818714976
+        },
+        {
+          "frame": 13,
+          "repeat": 2,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 635.6971435546875,
+          "wall_ms": 637.947928160429
+        },
+        {
+          "frame": 14,
+          "repeat": 0,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 637.9612426757812,
+          "wall_ms": 638.0044999532402
+        },
+        {
+          "frame": 14,
+          "repeat": 1,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 630.8482055664062,
+          "wall_ms": 633.1681571900845
+        },
+        {
+          "frame": 14,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 630.1614379882812,
+          "wall_ms": 632.4968258850276
+        },
+        {
+          "frame": 15,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 640.2109375,
+          "wall_ms": 640.2540970593691
+        },
+        {
+          "frame": 15,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 620.0360717773438,
+          "wall_ms": 621.4050091803074
+        },
+        {
+          "frame": 15,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 553.1492309570312,
+          "wall_ms": 553.2207703217864
+        }
+      ],
+      "vs_baseline": {
+        "cuda": {
+          "delta_median_ms": -6.74005126953125,
+          "delta_mean_ms": -11.636887868245367,
+          "delta_p95_ms": -29.059677124023438,
+          "delta_median_pct": -1.0745059312671001,
+          "delta_mean_pct": -1.883202259607042,
+          "relative_to_baseline": 0.989254940687329,
+          "speedup_vs_baseline": 1.0108617696720377,
+          "note": "\u5171\u4eab GPU\uff0c\u4ec5\u4f9b\u8bca\u65ad\uff0c\u4e0d\u8fdb\u5165\u8bba\u6587\u6b63\u5f0f\u6548\u7387\u8868"
+        },
+        "wall": {
+          "delta_median_ms": -6.396095501258969,
+          "delta_mean_ms": -11.620557964003297,
+          "delta_p95_ms": -29.0868753567338,
+          "delta_median_pct": -1.0177948355021393,
+          "delta_mean_pct": -1.8770894484268053,
+          "relative_to_baseline": 0.9898220516449786,
+          "speedup_vs_baseline": 1.0102826041692108,
+          "note": "\u5171\u4eab GPU\uff0c\u4ec5\u4f9b\u8bca\u65ad\uff0c\u4e0d\u8fdb\u5165\u8bba\u6587\u6b63\u5f0f\u6548\u7387\u8868"
+        }
+      }
+    },
+    "role-lite": {
+      "layout": {
+        "full_len": 968,
+        "short_len": 712,
+        "kv_len": 712,
+        "orig_action_offset": 560,
+        "short_pad_sum": 304,
+        "cameras": [
+          {
+            "key": "observation.images.image",
+            "role": "global",
+            "n_keep": 128,
+            "n_full": 256,
+            "relevance": [
+              193,
+              81,
+              82,
+              66,
+              24,
+              67,
+              49,
+              98,
+              65,
+              225,
+              80,
+              8,
+              114,
+              183,
+              167,
+              115,
+              99,
+              113,
+              47,
+              33,
+              182,
+              97,
+              253,
+              48,
+              105,
+              116,
+              137,
+              40,
+              100,
+              37,
+              135,
+              83
+            ],
+            "diversity": [
+              233,
+              230,
+              238,
+              226,
+              249,
+              228,
+              10,
+              221,
+              209,
+              232,
+              229,
+              237,
+              222,
+              213,
+              246,
+              205,
+              247,
+              63,
+              248,
+              245,
+              143,
+              5,
+              250,
+              191,
+              27,
+              242,
+              206,
+              29,
+              217,
+              244,
+              207,
+              189,
+              192,
+              111,
+              14,
+              159,
+              239,
+              227,
+              241,
+              30,
+              208,
+              231,
+              12,
+              235,
+              160,
+              26,
+              220,
+              127,
+              15,
+              210,
+              190,
+              201,
+              202,
+              200,
+              219,
+              204,
+              11,
+              216,
+              176,
+              252,
+              236,
+              234,
+              218,
+              212,
+              197,
+              195,
+              214,
+              251,
+              224,
+              142,
+              4,
+              45,
+              79,
+              41,
+              161,
+              194,
+              38,
+              254,
+              28,
+              57,
+              61,
+              255,
+              144,
+              203,
+              43,
+              211,
+              188,
+              162,
+              42,
+              163,
+              36,
+              94,
+              215,
+              44,
+              110,
+              46
+            ],
+            "keep": [
+              4,
+              5,
+              8,
+              10,
+              11,
+              12,
+              14,
+              15,
+              24,
+              26,
+              27,
+              28,
+              29,
+              30,
+              33,
+              36,
+              37,
+              38,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              57,
+              61,
+              63,
+              65,
+              66,
+              67,
+              79,
+              80,
+              81,
+              82,
+              83,
+              94,
+              97,
+              98,
+              99,
+              100,
+              105,
+              110,
+              111,
+              113,
+              114,
+              115,
+              116,
+              127,
+              135,
+              137,
+              142,
+              143,
+              144,
+              159,
+              160,
+              161,
+              162,
+              163,
+              167,
+              176,
+              182,
+              183,
+              188,
+              189,
+              190,
+              191,
+              192,
+              193,
+              194,
+              195,
+              197,
+              200,
+              201,
+              202,
+              203,
+              204,
+              205,
+              206,
+              207,
+              208,
+              209,
+              210,
+              211,
+              212,
+              213,
+              214,
+              215,
+              216,
+              217,
+              218,
+              219,
+              220,
+              221,
+              222,
+              224,
+              225,
+              226,
+              227,
+              228,
+              229,
+              230,
+              231,
+              232,
+              233,
+              234,
+              235,
+              236,
+              237,
+              238,
+              239,
+              241,
+              242,
+              244,
+              245,
+              246,
+              247,
+              248,
+              249,
+              250,
+              251,
+              252,
+              253,
+              254,
+              255
+            ]
+          },
+          {
+            "key": "observation.images.image2",
+            "role": "wrist",
+            "n_keep": 128,
+            "n_full": 256,
+            "relevance": [
+              220,
+              210,
+              194,
+              242,
+              193,
+              225,
+              254,
+              203,
+              224,
+              221,
+              253,
+              252,
+              237,
+              243,
+              251,
+              223,
+              209,
+              195,
+              236,
+              185,
+              47,
+              238,
+              239,
+              181,
+              97,
+              98,
+              255,
+              231,
+              240,
+              235,
+              48,
+              234,
+              82,
+              101,
+              226,
+              166,
+              165,
+              202,
+              241,
+              31,
+              227,
+              1,
+              81,
+              196,
+              136,
+              204,
+              141,
+              96,
+              245,
+              250,
+              91,
+              116,
+              140,
+              13,
+              246,
+              108,
+              107,
+              123,
+              156,
+              201,
+              104,
+              95,
+              180,
+              72,
+              163,
+              229,
+              167,
+              228,
+              211,
+              131,
+              87,
+              186,
+              184,
+              248,
+              115,
+              113,
+              197,
+              244,
+              232,
+              247,
+              124,
+              179,
+              162,
+              32,
+              168,
+              122,
+              132,
+              157,
+              146,
+              169,
+              112,
+              129,
+              147,
+              219,
+              125,
+              120
+            ],
+            "diversity": [
+              15,
+              216,
+              30,
+              158,
+              63,
+              143,
+              12,
+              5,
+              215,
+              217,
+              4,
+              6,
+              172,
+              2,
+              214,
+              206,
+              111,
+              213,
+              0,
+              57,
+              207,
+              192,
+              27,
+              230,
+              46,
+              14,
+              151,
+              75,
+              200,
+              35,
+              62,
+              21
+            ],
+            "keep": [
+              0,
+              1,
+              2,
+              4,
+              5,
+              6,
+              12,
+              13,
+              14,
+              15,
+              21,
+              27,
+              30,
+              31,
+              32,
+              35,
+              46,
+              47,
+              48,
+              57,
+              62,
+              63,
+              72,
+              75,
+              81,
+              82,
+              87,
+              91,
+              95,
+              96,
+              97,
+              98,
+              101,
+              104,
+              107,
+              108,
+              111,
+              112,
+              113,
+              115,
+              116,
+              120,
+              122,
+              123,
+              124,
+              125,
+              129,
+              131,
+              132,
+              136,
+              140,
+              141,
+              143,
+              146,
+              147,
+              151,
+              156,
+              157,
+              158,
+              162,
+              163,
+              165,
+              166,
+              167,
+              168,
+              169,
+              172,
+              179,
+              180,
+              181,
+              184,
+              185,
+              186,
+              192,
+              193,
+              194,
+              195,
+              196,
+              197,
+              200,
+              201,
+              202,
+              203,
+              204,
+              206,
+              207,
+              209,
+              210,
+              211,
+              213,
+              214,
+              215,
+              216,
+              217,
+              219,
+              220,
+              221,
+              223,
+              224,
+              225,
+              226,
+              227,
+              228,
+              229,
+              230,
+              231,
+              232,
+              234,
+              235,
+              236,
+              237,
+              238,
+              239,
+              240,
+              241,
+              242,
+              243,
+              244,
+              245,
+              246,
+              247,
+              248,
+              250,
+              251,
+              252,
+              253,
+              254,
+              255
+            ]
+          },
+          {
+            "key": "observation.images.empty_camera_0",
+            "role": "empty",
+            "n_keep": 256,
+            "n_full": 256,
+            "relevance": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              121,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              131,
+              132,
+              133,
+              134,
+              135,
+              136,
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143,
+              144,
+              145,
+              146,
+              147,
+              148,
+              149,
+              150,
+              151,
+              152,
+              153,
+              154,
+              155,
+              156,
+              157,
+              158,
+              159,
+              160,
+              161,
+              162,
+              163,
+              164,
+              165,
+              166,
+              167,
+              168,
+              169,
+              170,
+              171,
+              172,
+              173,
+              174,
+              175,
+              176,
+              177,
+              178,
+              179,
+              180,
+              181,
+              182,
+              183,
+              184,
+              185,
+              186,
+              187,
+              188,
+              189,
+              190,
+              191,
+              192,
+              193,
+              194,
+              195,
+              196,
+              197,
+              198,
+              199,
+              200,
+              201,
+              202,
+              203,
+              204,
+              205,
+              206,
+              207,
+              208,
+              209,
+              210,
+              211,
+              212,
+              213,
+              214,
+              215,
+              216,
+              217,
+              218,
+              219,
+              220,
+              221,
+              222,
+              223,
+              224,
+              225,
+              226,
+              227,
+              228,
+              229,
+              230,
+              231,
+              232,
+              233,
+              234,
+              235,
+              236,
+              237,
+              238,
+              239,
+              240,
+              241,
+              242,
+              243,
+              244,
+              245,
+              246,
+              247,
+              248,
+              249,
+              250,
+              251,
+              252,
+              253,
+              254,
+              255
+            ],
+            "diversity": [],
+            "keep": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39,
+              40,
+              41,
+              42,
+              43,
+              44,
+              45,
+              46,
+              47,
+              48,
+              49,
+              50,
+              51,
+              52,
+              53,
+              54,
+              55,
+              56,
+              57,
+              58,
+              59,
+              60,
+              61,
+              62,
+              63,
+              64,
+              65,
+              66,
+              67,
+              68,
+              69,
+              70,
+              71,
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112,
+              113,
+              114,
+              115,
+              116,
+              117,
+              118,
+              119,
+              120,
+              121,
+              122,
+              123,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129,
+              130,
+              131,
+              132,
+              133,
+              134,
+              135,
+              136,
+              137,
+              138,
+              139,
+              140,
+              141,
+              142,
+              143,
+              144,
+              145,
+              146,
+              147,
+              148,
+              149,
+              150,
+              151,
+              152,
+              153,
+              154,
+              155,
+              156,
+              157,
+              158,
+              159,
+              160,
+              161,
+              162,
+              163,
+              164,
+              165,
+              166,
+              167,
+              168,
+              169,
+              170,
+              171,
+              172,
+              173,
+              174,
+              175,
+              176,
+              177,
+              178,
+              179,
+              180,
+              181,
+              182,
+              183,
+              184,
+              185,
+              186,
+              187,
+              188,
+              189,
+              190,
+              191,
+              192,
+              193,
+              194,
+              195,
+              196,
+              197,
+              198,
+              199,
+              200,
+              201,
+              202,
+              203,
+              204,
+              205,
+              206,
+              207,
+              208,
+              209,
+              210,
+              211,
+              212,
+              213,
+              214,
+              215,
+              216,
+              217,
+              218,
+              219,
+              220,
+              221,
+              222,
+              223,
+              224,
+              225,
+              226,
+              227,
+              228,
+              229,
+              230,
+              231,
+              232,
+              233,
+              234,
+              235,
+              236,
+              237,
+              238,
+              239,
+              240,
+              241,
+              242,
+              243,
+              244,
+              245,
+              246,
+              247,
+              248,
+              249,
+              250,
+              251,
+              252,
+              253,
+              254,
+              255
+            ]
+          }
+        ],
+        "scout_layer": 2,
+        "keep_all": false,
+        "timing_ms": null,
+        "scout_layer_calls": [
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "budget_name": "role",
+        "selector": "lite",
+        "num_steps": 10,
+        "velocity_calls": 10,
+        "budgets": {
+          "wrist": {
+            "relevance": 96,
+            "diversity": 32
+          },
+          "global": {
+            "relevance": 32,
+            "diversity": 96
+          }
+        },
+        "visual_prune": true
+      },
+      "cuda": {
+        "median_ms": 629.9806823730469,
+        "p95_ms": 658.2428283691406,
+        "mean_ms": 613.8783086140951,
+        "n": 48,
+        "raw_ms": [
+          552.4345703125,
+          564.9613647460938,
+          631.2908935546875,
+          546.9549560546875,
+          554.1898193359375,
+          630.6836547851562,
+          565.9371337890625,
+          637.4420776367188,
+          650.590087890625,
+          557.0775146484375,
+          645.4230346679688,
+          655.9794921875,
+          652.7232055664062,
+          651.150146484375,
+          628.1707763671875,
+          648.2379760742188,
+          649.5938110351562,
+          574.4155883789062,
+          653.40283203125,
+          573.4998779296875,
+          554.8772583007812,
+          586.8675537109375,
+          563.504150390625,
+          618.3270874023438,
+          559.013916015625,
+          629.2777099609375,
+          655.256591796875,
+          579.2244873046875,
+          655.1355590820312,
+          652.9371948242188,
+          659.8502197265625,
+          645.1087646484375,
+          624.6748046875,
+          659.4615478515625,
+          600.859130859375,
+          555.5241088867188,
+          650.3618774414062,
+          648.1630249023438,
+          560.1163330078125,
+          637.0996704101562,
+          562.4330444335938,
+          605.4932250976562,
+          565.2664184570312,
+          644.6171875,
+          644.2311401367188,
+          584.8124389648438,
+          690.5333862304688,
+          648.97216796875
+        ]
+      },
+      "wall": {
+        "median_ms": 630.615831585601,
+        "p95_ms": 659.3339955667034,
+        "mean_ms": 614.8662309084708,
+        "n": 48,
+        "raw_ms": [
+          552.6474947109818,
+          565.0547971017659,
+          631.3332901336253,
+          548.3436491340399,
+          554.2797730304301,
+          630.7473094202578,
+          566.0188547335565,
+          637.4820158816874,
+          652.8612556867301,
+          557.1595206856728,
+          645.4672492109239,
+          658.2950479350984,
+          652.7668246999383,
+          653.4885512664914,
+          630.4843537509441,
+          650.4352516494691,
+          651.8544601276517,
+          576.7522342503071,
+          655.5927200242877,
+          575.8416717872024,
+          554.9619290977716,
+          589.1700969077647,
+          563.5914918966591,
+          618.3700272813439,
+          559.0987950563431,
+          629.324906039983,
+          655.3920088335872,
+          579.3039118871093,
+          655.1757259294391,
+          653.111713938415,
+          659.8934289067984,
+          647.4174647592008,
+          625.9702150709927,
+          661.6448853164911,
+          603.221420198679,
+          555.6056927889585,
+          650.4841390997171,
+          650.4875882528722,
+          562.499662861228,
+          639.3258501775563,
+          562.6538689248264,
+          605.5368161760271,
+          565.3488798998296,
+          644.6582400240004,
+          646.5719272382557,
+          584.8547681234777,
+          691.7990259826183,
+          651.1982777155936
+        ]
+      },
+      "samples": [
+        {
+          "frame": 0,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 552.4345703125,
+          "wall_ms": 552.6474947109818
+        },
+        {
+          "frame": 0,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 564.9613647460938,
+          "wall_ms": 565.0547971017659
+        },
+        {
+          "frame": 0,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 631.2908935546875,
+          "wall_ms": 631.3332901336253
+        },
+        {
+          "frame": 1,
+          "repeat": 0,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 546.9549560546875,
+          "wall_ms": 548.3436491340399
+        },
+        {
+          "frame": 1,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 554.1898193359375,
+          "wall_ms": 554.2797730304301
+        },
+        {
+          "frame": 1,
+          "repeat": 2,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 630.6836547851562,
+          "wall_ms": 630.7473094202578
+        },
+        {
+          "frame": 2,
+          "repeat": 0,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 565.9371337890625,
+          "wall_ms": 566.0188547335565
+        },
+        {
+          "frame": 2,
+          "repeat": 1,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 637.4420776367188,
+          "wall_ms": 637.4820158816874
+        },
+        {
+          "frame": 2,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 650.590087890625,
+          "wall_ms": 652.8612556867301
+        },
+        {
+          "frame": 3,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 557.0775146484375,
+          "wall_ms": 557.1595206856728
+        },
+        {
+          "frame": 3,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 645.4230346679688,
+          "wall_ms": 645.4672492109239
+        },
+        {
+          "frame": 3,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 655.9794921875,
+          "wall_ms": 658.2950479350984
+        },
+        {
+          "frame": 4,
+          "repeat": 0,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 652.7232055664062,
+          "wall_ms": 652.7668246999383
+        },
+        {
+          "frame": 4,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 651.150146484375,
+          "wall_ms": 653.4885512664914
+        },
+        {
+          "frame": 4,
+          "repeat": 2,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 628.1707763671875,
+          "wall_ms": 630.4843537509441
+        },
+        {
+          "frame": 5,
+          "repeat": 0,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 648.2379760742188,
+          "wall_ms": 650.4352516494691
+        },
+        {
+          "frame": 5,
+          "repeat": 1,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 649.5938110351562,
+          "wall_ms": 651.8544601276517
+        },
+        {
+          "frame": 5,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 574.4155883789062,
+          "wall_ms": 576.7522342503071
+        },
+        {
+          "frame": 6,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 653.40283203125,
+          "wall_ms": 655.5927200242877
+        },
+        {
+          "frame": 6,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 573.4998779296875,
+          "wall_ms": 575.8416717872024
+        },
+        {
+          "frame": 6,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 554.8772583007812,
+          "wall_ms": 554.9619290977716
+        },
+        {
+          "frame": 7,
+          "repeat": 0,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 586.8675537109375,
+          "wall_ms": 589.1700969077647
+        },
+        {
+          "frame": 7,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 563.504150390625,
+          "wall_ms": 563.5914918966591
+        },
+        {
+          "frame": 7,
+          "repeat": 2,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 618.3270874023438,
+          "wall_ms": 618.3700272813439
+        },
+        {
+          "frame": 8,
+          "repeat": 0,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 559.013916015625,
+          "wall_ms": 559.0987950563431
+        },
+        {
+          "frame": 8,
+          "repeat": 1,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 629.2777099609375,
+          "wall_ms": 629.324906039983
+        },
+        {
+          "frame": 8,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 655.256591796875,
+          "wall_ms": 655.3920088335872
+        },
+        {
+          "frame": 9,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 579.2244873046875,
+          "wall_ms": 579.3039118871093
+        },
+        {
+          "frame": 9,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 655.1355590820312,
+          "wall_ms": 655.1757259294391
+        },
+        {
+          "frame": 9,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 652.9371948242188,
+          "wall_ms": 653.111713938415
+        },
+        {
+          "frame": 10,
+          "repeat": 0,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 659.8502197265625,
+          "wall_ms": 659.8934289067984
+        },
+        {
+          "frame": 10,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 645.1087646484375,
+          "wall_ms": 647.4174647592008
+        },
+        {
+          "frame": 10,
+          "repeat": 2,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 624.6748046875,
+          "wall_ms": 625.9702150709927
+        },
+        {
+          "frame": 11,
+          "repeat": 0,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 659.4615478515625,
+          "wall_ms": 661.6448853164911
+        },
+        {
+          "frame": 11,
+          "repeat": 1,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 600.859130859375,
+          "wall_ms": 603.221420198679
+        },
+        {
+          "frame": 11,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 555.5241088867188,
+          "wall_ms": 555.6056927889585
+        },
+        {
+          "frame": 12,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 650.3618774414062,
+          "wall_ms": 650.4841390997171
+        },
+        {
+          "frame": 12,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 648.1630249023438,
+          "wall_ms": 650.4875882528722
+        },
+        {
+          "frame": 12,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 560.1163330078125,
+          "wall_ms": 562.499662861228
+        },
+        {
+          "frame": 13,
+          "repeat": 0,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 637.0996704101562,
+          "wall_ms": 639.3258501775563
+        },
+        {
+          "frame": 13,
+          "repeat": 1,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 562.4330444335938,
+          "wall_ms": 562.6538689248264
+        },
+        {
+          "frame": 13,
+          "repeat": 2,
+          "order": [
+            "uniform-grid",
+            "role-lite",
+            "baseline"
+          ],
+          "cuda_ms": 605.4932250976562,
+          "wall_ms": 605.5368161760271
+        },
+        {
+          "frame": 14,
+          "repeat": 0,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 565.2664184570312,
+          "wall_ms": 565.3488798998296
+        },
+        {
+          "frame": 14,
+          "repeat": 1,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 644.6171875,
+          "wall_ms": 644.6582400240004
+        },
+        {
+          "frame": 14,
+          "repeat": 2,
+          "order": [
+            "role-lite",
+            "baseline",
+            "uniform-grid"
+          ],
+          "cuda_ms": 644.2311401367188,
+          "wall_ms": 646.5719272382557
+        },
+        {
+          "frame": 15,
+          "repeat": 0,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 584.8124389648438,
+          "wall_ms": 584.8547681234777
+        },
+        {
+          "frame": 15,
+          "repeat": 1,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 690.5333862304688,
+          "wall_ms": 691.7990259826183
+        },
+        {
+          "frame": 15,
+          "repeat": 2,
+          "order": [
+            "baseline",
+            "uniform-grid",
+            "role-lite"
+          ],
+          "cuda_ms": 648.97216796875,
+          "wall_ms": 651.1982777155936
+        }
+      ],
+      "vs_baseline": {
+        "cuda": {
+          "delta_median_ms": 2.71087646484375,
+          "delta_mean_ms": -4.052548726399664,
+          "delta_p95_ms": -10.846826171875023,
+          "delta_median_pct": 0.4321707245128481,
+          "delta_mean_pct": -0.6558255957375803,
+          "relative_to_baseline": 1.0043217072451285,
+          "speedup_vs_baseline": 0.9956968895385295,
+          "note": "\u5171\u4eab GPU\uff0c\u4ec5\u4f9b\u8bca\u65ad\uff0c\u4e0d\u8fdb\u5165\u8bba\u6587\u6b63\u5f0f\u6548\u7387\u8868"
+        },
+        "wall": {
+          "delta_median_ms": 2.189032966271043,
+          "delta_mean_ms": -4.206982344233779,
+          "delta_p95_ms": -9.826866863295436,
+          "delta_median_pct": 0.3483353942066669,
+          "delta_mean_pct": -0.6795613594924643,
+          "relative_to_baseline": 1.0034833539420667,
+          "speedup_vs_baseline": 0.9965287376931736,
+          "note": "\u5171\u4eab GPU\uff0c\u4ec5\u4f9b\u8bca\u65ad\uff0c\u4e0d\u8fdb\u5165\u8bba\u6587\u6b63\u5f0f\u6548\u7387\u8868"
+        }
+      }
+    }
+  },
+  "breakdown_profile_true": {
+    "baseline": {
+      "note": "separate profile=True pass; analyze with mean_ms; do not add segment medians; do not subtract from a different full-chunk pass",
+      "analysis_stat": "mean",
+      "timer_keys": "embed; prefix=official full prefix; expert=all velocity steps",
+      "n_frames": 16,
+      "velocity_calls": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "num_steps": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "scout_layer_calls": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "mean_ms": {
+        "embed": 88.79647541046143,
+        "expert": 449.4563980102539,
+        "prefix": 93.78908634185791,
+        "total": 632.0419692993164
+      },
+      "median_ms": {
+        "embed": 95.74961471557617,
+        "expert": 444.7795104980469,
+        "prefix": 106.47447967529297,
+        "total": 641.4540100097656
+      },
+      "p95_ms": {
+        "embed": 107.32083129882812,
+        "expert": 479.9626235961914,
+        "prefix": 115.73964881896973,
+        "total": 674.1890411376953
+      },
+      "raw": [
+        {
+          "embed": 84.55987548828125,
+          "prefix": 59.15852737426758,
+          "expert": 445.4881286621094,
+          "total": 589.20654296875
+        },
+        {
+          "embed": 66.11023712158203,
+          "prefix": 59.870208740234375,
+          "expert": 477.41644287109375,
+          "total": 603.3969116210938
+        },
+        {
+          "embed": 106.09356689453125,
+          "prefix": 115.35359954833984,
+          "expert": 452.29364013671875,
+          "total": 673.7407836914062
+        },
+        {
+          "embed": 106.89740753173828,
+          "prefix": 112.07884979248047,
+          "expert": 456.55755615234375,
+          "total": 675.5338134765625
+        },
+        {
+          "embed": 67.73145294189453,
+          "prefix": 57.20985412597656,
+          "expert": 487.6011657714844,
+          "total": 612.54248046875
+        },
+        {
+          "embed": 90.34636688232422,
+          "prefix": 108.1374740600586,
+          "expert": 440.258544921875,
+          "total": 638.7423706054688
+        },
+        {
+          "embed": 106.37312316894531,
+          "prefix": 114.28352355957031,
+          "expert": 436.5137939453125,
+          "total": 657.17041015625
+        },
+        {
+          "embed": 101.88409423828125,
+          "prefix": 100.27603149414062,
+          "expert": 450.12200927734375,
+          "total": 652.2821655273438
+        },
+        {
+          "embed": 66.26089477539062,
+          "prefix": 57.02143859863281,
+          "expert": 449.6742248535156,
+          "total": 572.9566040039062
+        },
+        {
+          "embed": 77.24646759033203,
+          "prefix": 115.72940826416016,
+          "expert": 443.7391357421875,
+          "total": 636.7150268554688
+        },
+        {
+          "embed": 108.59110260009766,
+          "prefix": 109.56288146972656,
+          "expert": 440.0711669921875,
+          "total": 658.2251586914062
+        },
+        {
+          "embed": 101.15286254882812,
+          "prefix": 97.872802734375,
+          "expert": 445.13995361328125,
+          "total": 644.1656494140625
+        },
+        {
+          "embed": 65.30684661865234,
+          "prefix": 57.89468765258789,
+          "expert": 444.4190673828125,
+          "total": 567.62060546875
+        },
+        {
+          "embed": 66.4135971069336,
+          "prefix": 104.81148529052734,
+          "expert": 440.595458984375,
+          "total": 611.820556640625
+        },
+        {
+          "embed": 101.57465362548828,
+          "prefix": 115.59423828125,
+          "expert": 441.4330749511719,
+          "total": 658.6019897460938
+        },
+        {
+          "embed": 104.20105743408203,
+          "prefix": 115.77037048339844,
+          "expert": 439.97900390625,
+          "total": 659.950439453125
+        }
+      ]
+    },
+    "uniform-grid": {
+      "note": "separate profile=True pass; analyze with mean_ms; do not add segment medians; do not subtract from a different full-chunk pass",
+      "analysis_stat": "mean",
+      "timer_keys": "embed; prefix=fixed-index pack + official compressed prefix; expert=all velocity steps",
+      "n_frames": 16,
+      "velocity_calls": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "num_steps": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "scout_layer_calls": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "mean_ms": {
+        "embed": 85.86860609054565,
+        "expert": 439.1632843017578,
+        "prefix": 65.51740789413452,
+        "total": 590.5492935180664
+      },
+      "median_ms": {
+        "embed": 89.92827224731445,
+        "expert": 439.55967712402344,
+        "prefix": 76.65817642211914,
+        "total": 609.5564575195312
+      },
+      "p95_ms": {
+        "embed": 105.26156616210938,
+        "expert": 441.8396224975586,
+        "prefix": 86.76070594787598,
+        "total": 630.1114807128906
+      },
+      "raw": [
+        {
+          "embed": 85.30652618408203,
+          "prefix": 43.276126861572266,
+          "expert": 438.56109619140625,
+          "total": 567.1437377929688
+        },
+        {
+          "embed": 66.35711669921875,
+          "prefix": 41.4730224609375,
+          "expert": 440.9651184082031,
+          "total": 548.7952880859375
+        },
+        {
+          "embed": 80.0973129272461,
+          "prefix": 85.07593536376953,
+          "expert": 439.76397705078125,
+          "total": 604.9371948242188
+        },
+        {
+          "embed": 101.34630584716797,
+          "prefix": 86.2771224975586,
+          "expert": 438.4296875,
+          "total": 626.0531005859375
+        },
+        {
+          "embed": 108.70374298095703,
+          "prefix": 88.21145629882812,
+          "expert": 441.1903991699219,
+          "total": 638.1055908203125
+        },
+        {
+          "embed": 64.15872192382812,
+          "prefix": 42.48575973510742,
+          "expert": 441.7382507324219,
+          "total": 548.3826904296875
+        },
+        {
+          "embed": 66.02848052978516,
+          "prefix": 41.63481521606445,
+          "expert": 442.14373779296875,
+          "total": 549.8070678710938
+        },
+        {
+          "embed": 98.43574523925781,
+          "prefix": 84.89266967773438,
+          "expert": 438.18597412109375,
+          "total": 621.514404296875
+        },
+        {
+          "embed": 104.11417388916016,
+          "prefix": 85.80915069580078,
+          "expert": 437.5234680175781,
+          "total": 627.44677734375
+        },
+        {
+          "embed": 101.00736236572266,
+          "prefix": 75.69510650634766,
+          "expert": 440.1520690917969,
+          "total": 616.8545532226562
+        },
+        {
+          "embed": 63.662078857421875,
+          "prefix": 42.51136016845703,
+          "expert": 439.9411315917969,
+          "total": 546.1145629882812
+        },
+        {
+          "embed": 66.67295837402344,
+          "prefix": 41.614017486572266,
+          "expert": 439.9974365234375,
+          "total": 548.284423828125
+        },
+        {
+          "embed": 94.55001831054688,
+          "prefix": 84.45235443115234,
+          "expert": 435.5962829589844,
+          "total": 614.5986328125
+        },
+        {
+          "embed": 102.20646667480469,
+          "prefix": 84.51583862304688,
+          "expert": 439.3553771972656,
+          "total": 626.0776977539062
+        },
+        {
+          "embed": 100.18611145019531,
+          "prefix": 77.62124633789062,
+          "expert": 436.3683776855469,
+          "total": 614.1757202148438
+        },
+        {
+          "embed": 71.0645751953125,
+          "prefix": 42.7325439453125,
+          "expert": 436.7001647949219,
+          "total": 550.4972534179688
+        }
+      ]
+    },
+    "role-lite": {
+      "note": "separate profile=True pass; analyze with mean_ms; do not add segment medians; do not subtract from a different full-chunk pass",
+      "analysis_stat": "mean",
+      "timer_keys": "embed; scout; select=token choice; prefix=gather/pack + official compressed prefix; expert=all velocity steps",
+      "n_frames": 16,
+      "velocity_calls": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "num_steps": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "scout_layer_calls": [
+        [
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "mean_ms": {
+        "embed": 87.63831853866577,
+        "expert": 439.3655757904053,
+        "prefix": 64.27827596664429,
+        "scout": 18.665722131729126,
+        "select": 1.172734010964632,
+        "total": 611.1206207275391
+      },
+      "median_ms": {
+        "embed": 95.16312026977539,
+        "expert": 438.6145324707031,
+        "prefix": 78.7583999633789,
+        "scout": 19.4596004486084,
+        "select": 0.491007998585701,
+        "total": 625.0460205078125
+      },
+      "p95_ms": {
+        "embed": 105.2280330657959,
+        "expert": 443.1332244873047,
+        "prefix": 81.45919990539551,
+        "scout": 25.095111846923828,
+        "select": 2.864128053188324,
+        "total": 648.0069122314453
+      },
+      "raw": [
+        {
+          "embed": 66.03651428222656,
+          "scout": 11.769856452941895,
+          "select": 0.4853760004043579,
+          "prefix": 39.02668762207031,
+          "expert": 438.1798400878906,
+          "total": 555.498291015625
+        },
+        {
+          "embed": 94.94425964355469,
+          "scout": 18.295808792114258,
+          "select": 0.4915199875831604,
+          "prefix": 79.76140594482422,
+          "expert": 441.1084899902344,
+          "total": 634.6015014648438
+        },
+        {
+          "embed": 101.49478149414062,
+          "scout": 21.809152603149414,
+          "select": 2.8579840660095215,
+          "prefix": 80.06553649902344,
+          "expert": 439.9902648925781,
+          "total": 646.2177124023438
+        },
+        {
+          "embed": 103.43651580810547,
+          "scout": 26.634016036987305,
+          "select": 2.830336093902588,
+          "prefix": 47.817726135253906,
+          "expert": 436.3141174316406,
+          "total": 617.03271484375
+        },
+        {
+          "embed": 66.17190551757812,
+          "scout": 11.655167579650879,
+          "select": 0.4864000082015991,
+          "prefix": 39.26732635498047,
+          "expert": 441.4023742675781,
+          "total": 558.983154296875
+        },
+        {
+          "embed": 66.59584045410156,
+          "scout": 17.884159088134766,
+          "select": 0.4864000082015991,
+          "prefix": 78.51417541503906,
+          "expert": 439.0492248535156,
+          "total": 602.52978515625
+        },
+        {
+          "embed": 103.95033264160156,
+          "scout": 23.556095123291016,
+          "select": 0.4925439953804016,
+          "prefix": 81.84320068359375,
+          "expert": 437.6780700683594,
+          "total": 647.520263671875
+        },
+        {
+          "embed": 102.12761688232422,
+          "scout": 24.582143783569336,
+          "select": 0.48844799399375916,
+          "prefix": 80.60211181640625,
+          "expert": 441.66656494140625,
+          "total": 649.4668579101562
+        },
+        {
+          "embed": 95.3819808959961,
+          "scout": 12.032544136047363,
+          "select": 0.4915199875831604,
+          "prefix": 39.91449737548828,
+          "expert": 442.8380126953125,
+          "total": 590.6585693359375
+        },
+        {
+          "embed": 65.7564468383789,
+          "scout": 11.856608390808105,
+          "select": 0.48947200179100037,
+          "prefix": 39.11577606201172,
+          "expert": 444.01885986328125,
+          "total": 561.2371215820312
+        },
+        {
+          "embed": 92.15795135498047,
+          "scout": 22.04262351989746,
+          "select": 2.070528030395508,
+          "prefix": 79.00262451171875,
+          "expert": 437.7856140136719,
+          "total": 633.059326171875
+        },
+        {
+          "embed": 108.0811538696289,
+          "scout": 18.533376693725586,
+          "select": 0.4904960095882416,
+          "prefix": 81.3311996459961,
+          "expert": 436.3601989746094,
+          "total": 644.79638671875
+        },
+        {
+          "embed": 104.27699279785156,
+          "scout": 23.428096771240234,
+          "select": 2.8825600147247314,
+          "prefix": 63.12550354003906,
+          "expert": 441.5252380371094,
+          "total": 635.2384033203125
+        },
+        {
+          "embed": 64.97689819335938,
+          "scout": 11.615232467651367,
+          "select": 0.4864000082015991,
+          "prefix": 39.323646545410156,
+          "expert": 436.9827880859375,
+          "total": 553.3849487304688
+        },
+        {
+          "embed": 66.35603332519531,
+          "scout": 20.38582420349121,
+          "select": 0.4832960069179535,
+          "prefix": 79.83622741699219,
+          "expert": 437.587890625,
+          "total": 604.6492919921875
+        },
+        {
+          "embed": 100.4678726196289,
+          "scout": 22.57084846496582,
+          "select": 2.7504639625549316,
+          "prefix": 79.90476989746094,
+          "expert": 437.3616638183594,
+          "total": 643.0556030273438
+        }
+      ]
+    }
+  },
+  "occupancy_after": [
+    {
+      "index": 0,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 11571.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 12556.0,
+      "util_gpu_pct": 49.0,
+      "util_mem_pct": 10.0,
+      "temp_c": 58.0,
+      "power_w": 273.46,
+      "compute_apps": [
+        {
+          "pid": 1966126,
+          "user": "guorj",
+          "name": "/home/guorj/.miniforge3/envs/lerobot/bin/python",
+          "mem_mib": "9832"
+        },
+        {
+          "pid": 911212,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1714"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 11477.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 12650.0,
+      "util_gpu_pct": 89.0,
+      "util_mem_pct": 17.0,
+      "temp_c": 61.0,
+      "power_w": 285.72,
+      "compute_apps": [
+        {
+          "pid": 1011148,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1712"
+        },
+        {
+          "pid": 1080920,
+          "user": "guorj",
+          "name": "/home/guorj/.miniforge3/envs/lerobot/bin/python",
+          "mem_mib": "9750"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 9852.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 14275.0,
+      "util_gpu_pct": 0.0,
+      "util_mem_pct": 0.0,
+      "temp_c": 41.0,
+      "power_w": 107.02,
+      "compute_apps": [
+        {
+          "pid": 2057595,
+          "user": "guorj",
+          "name": "/home/guorj/.miniforge3/envs/lerobot/bin/python",
+          "mem_mib": "9832"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "name": "NVIDIA GeForce RTX 3090",
+      "driver": "595.91.07",
+      "memory_used_mib": 3513.0,
+      "memory_total_mib": 24576.0,
+      "memory_free_mib": 20614.0,
+      "util_gpu_pct": 97.0,
+      "util_mem_pct": 30.0,
+      "temp_c": 61.0,
+      "power_w": 302.38,
+      "compute_apps": [
+        {
+          "pid": 1997700,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1786"
+        },
+        {
+          "pid": 1009712,
+          "user": "sunxy",
+          "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+          "mem_mib": "1712"
+        }
+      ]
+    }
+  ],
+  "finished_utc": "20261013T080516Z"
+}
