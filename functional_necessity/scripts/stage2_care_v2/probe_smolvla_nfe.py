@@ -168,7 +168,9 @@ def _gpu_occupancy(gpu: int) -> list[dict[str, Any]]:
     return rows
 
 
-def require_shared_gpu(gpu: int, *, allow_shared: bool, min_free_mib: int) -> dict[str, Any]:
+def require_shared_gpu(
+    gpu: int, *, allow_shared: bool, min_free_mib: int, ignore_eval_drop: bool = False
+) -> dict[str, Any]:
     if not allow_shared:
         raise SystemExit("offline probe on a shared card requires --allow-shared and explicit --gpu")
     occ = _gpu_occupancy(gpu)
@@ -178,7 +180,7 @@ def require_shared_gpu(gpu: int, *, allow_shared: bool, min_free_mib: int) -> di
         for r in occ
         if r.get("user") == "guorj" and "eval_drop.py" in str(r.get("args") or "")
     ]
-    if evals:
+    if evals and not ignore_eval_drop:
         desc = ", ".join(f"pid={e['pid']}" for e in evals)
         raise SystemExit(f"GPU{gpu} already runs this project's eval_drop ({desc})")
     if int(mem["free_mib"]) < int(min_free_mib):
@@ -340,13 +342,17 @@ def load_processors():
     return preprocessor, postprocessor, cfg
 
 
-def load_shared() -> dict:
-    path = OUT_DIR / "shared.pt"
+def load_shared(path: Path | None = None) -> dict:
+    path = path or (OUT_DIR / "shared.pt")
     blob = torch.load(path, map_location="cpu", weights_only=False)
-    if int(blob["n"]) != N_FRAMES or len(blob["records"]) != N_FRAMES:
-        raise SystemExit(f"shared.pt n={blob.get('n')} records={len(blob['records'])}")
-    if abs(float(blob["alpha"].mean()) - 1.0) > 1e-4:
-        raise SystemExit(f"alpha mean {float(blob['alpha'].mean())}")
+    n = int(blob.get("n", len(blob["records"])))
+    if len(blob["records"]) != n:
+        raise SystemExit(f"{path} n={n} records={len(blob['records'])}")
+    if path.resolve() == (OUT_DIR / "shared.pt").resolve():
+        if n != N_FRAMES:
+            raise SystemExit(f"shared.pt n={n} expected {N_FRAMES}")
+        if abs(float(blob["alpha"].mean()) - 1.0) > 1e-4:
+            raise SystemExit(f"alpha mean {float(blob['alpha'].mean())}")
     return blob
 
 
@@ -371,10 +377,11 @@ def load_dataset(cfg):
 
 
 def preprocess_frames(shared: dict, preprocessor, cfg, dest: Path, limit: int | None) -> list[dict]:
-    n = N_FRAMES if limit is None else min(int(limit), N_FRAMES)
+    n_total = int(shared.get("n", len(shared["records"])))
+    n = n_total if limit is None else min(int(limit), n_total)
     if dest.is_file() and limit is None:
         blob = torch.load(dest, map_location="cpu", weights_only=False)
-        if int(blob.get("n", 0)) == N_FRAMES:
+        if int(blob.get("n", 0)) == n_total:
             print(f"[cache] {dest}", flush=True)
             return blob["samples"]
     dataset = load_dataset(cfg)
@@ -1158,6 +1165,18 @@ def parse_args():
     p.add_argument("--correctness-only", action="store_true")
     p.add_argument("--analyze-only", action="store_true")
     p.add_argument("--limit", type=int, default=None)
+    p.add_argument(
+        "--shared-path",
+        type=Path,
+        default=None,
+        help="CARE record blob (default shared.pt; holdout uses holdout_shared.pt)",
+    )
+    p.add_argument("--skip-analyze", action="store_true", help="Do not run 480-frame analyze after probe")
+    p.add_argument(
+        "--ignore-eval-drop",
+        action="store_true",
+        help="Allow probe while eval_drop is on the same GPU if free memory suffices",
+    )
     return p.parse_args()
 
 
@@ -1172,10 +1191,11 @@ def main() -> None:
         + "\n"
     )
 
-    shared = load_shared()
+    shared_path = args.shared_path or (OUT_DIR / "shared.pt")
+    shared = load_shared(shared_path)
     records = shared["records"]
-    alpha = np.asarray(shared["alpha"], dtype=np.float64)
-    d_w = np.asarray(shared["d_whitened"], dtype=np.float64)
+    alpha = np.asarray(shared["alpha"], dtype=np.float64).reshape(-1)
+    d_w = np.asarray(shared["d_whitened"], dtype=np.float64).reshape(-1)
 
     if args.analyze_only:
         import pandas as pd
@@ -1187,7 +1207,12 @@ def main() -> None:
         print(f"wrote {out_dir / 'REPORT.md'}", flush=True)
         return
 
-    snap = require_shared_gpu(args.gpu, allow_shared=args.allow_shared, min_free_mib=args.min_free_mib)
+    snap = require_shared_gpu(
+        args.gpu,
+        allow_shared=args.allow_shared,
+        min_free_mib=args.min_free_mib,
+        ignore_eval_drop=args.ignore_eval_drop,
+    )
     os.environ["CUDA_VISIBLE_DEVICES"] = str(int(args.gpu))
     torch.cuda.set_device(0)
     device = torch.device("cuda:0")
@@ -1248,7 +1273,7 @@ def main() -> None:
         "care_seed": CARE_SEED,
         "horizon": HORIZON,
         "frames": n_use,
-        "shared": str(OUT_DIR / "shared.pt"),
+        "shared": str(shared_path.resolve()),
         "gripper_mapping": "unnormalize MEAN_STD then closed iff g>0 (LIBERO dummy=-1 open)",
         "rmse_scale": "policy-normalized MEAN_STD, first 10 x 7, no padded dims",
         "gpu": int(args.gpu),
@@ -1321,7 +1346,7 @@ def main() -> None:
         shared_index=np.arange(n_use),
     )
     (out_dir / "DONE").write_text(time.strftime("%Y-%m-%dT%H:%M:%S") + "\n")
-    if n_use == N_FRAMES:
+    if n_use == N_FRAMES and not args.skip_analyze:
         analyze(out_dir, rows, shared, correctness)
     print(f"done {out_dir} in {time.time()-t0:.0f}s", flush=True)
 

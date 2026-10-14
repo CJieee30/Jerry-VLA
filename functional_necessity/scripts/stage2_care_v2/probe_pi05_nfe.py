@@ -340,23 +340,28 @@ def load_pi05_stack():
     return config, preprocessor, dataset, camera_keys
 
 
-def load_shared() -> dict:
-    path = OUT_DIR / "shared.pt"
+def load_shared(path: Path | None = None) -> dict:
+    path = path or (OUT_DIR / "shared.pt")
     blob = torch.load(path, map_location="cpu", weights_only=False)
-    if int(blob["n"]) != N_FRAMES or len(blob["records"]) != N_FRAMES:
-        raise SystemExit(f"shared.pt n={blob.get('n')} records={len(blob['records'])}")
-    if abs(float(blob["alpha"].mean()) - 1.0) > 1e-4:
-        raise SystemExit(f"alpha mean {float(blob['alpha'].mean())}")
+    n = int(blob.get("n", len(blob["records"])))
+    if len(blob["records"]) != n:
+        raise SystemExit(f"{path} n={n} records={len(blob['records'])}")
+    if path.resolve() == (OUT_DIR / "shared.pt").resolve():
+        if n != N_FRAMES:
+            raise SystemExit(f"shared.pt n={n} expected {N_FRAMES}")
+        if abs(float(blob["alpha"].mean()) - 1.0) > 1e-4:
+            raise SystemExit(f"alpha mean {float(blob['alpha'].mean())}")
     return blob
 
 
 def preprocess_frames(shared: dict, preprocessor, dataset, camera_keys, dest: Path, limit: int | None) -> list[dict]:
     from common import preprocess_raw_batch, tensor_to_cpu_store
 
-    n = N_FRAMES if limit is None else min(int(limit), N_FRAMES)
+    n_total = int(shared.get("n", len(shared["records"])))
+    n = n_total if limit is None else min(int(limit), n_total)
     if dest.is_file() and limit is None:
         blob = torch.load(dest, map_location="cpu", weights_only=False)
-        if int(blob.get("n", 0)) == N_FRAMES:
+        if int(blob.get("n", 0)) == n_total:
             print(f"[cache] {dest}", flush=True)
             return blob["samples"]
     samples = []
@@ -1202,6 +1207,8 @@ def parse_args():
     p.add_argument("--correctness-only", action="store_true")
     p.add_argument("--analyze-only", action="store_true")
     p.add_argument("--limit", type=int, default=None)
+    p.add_argument("--shared-path", type=Path, default=None)
+    p.add_argument("--skip-analyze", action="store_true")
     return p.parse_args()
 
 
@@ -1216,10 +1223,11 @@ def main() -> None:
         + "\n"
     )
 
-    shared = load_shared()
+    shared_path = args.shared_path or (OUT_DIR / "shared.pt")
+    shared = load_shared(shared_path)
     records = shared["records"]
-    alpha = np.asarray(shared["alpha"], dtype=np.float64)
-    d_w = np.asarray(shared["d_whitened"], dtype=np.float64)
+    alpha = np.asarray(shared["alpha"], dtype=np.float64).reshape(-1)
+    d_w = np.asarray(shared["d_whitened"], dtype=np.float64).reshape(-1)
 
     if args.analyze_only:
         import pandas as pd
@@ -1291,7 +1299,7 @@ def main() -> None:
         "care_seed": CARE_SEED,
         "horizon": HORIZON,
         "frames": n_use,
-        "shared": str(OUT_DIR / "shared.pt"),
+        "shared": str(shared_path.resolve()),
         "gripper_mapping": "unnormalize MEAN_STD then closed iff g>0 (LIBERO dummy=-1 open)",
         "rmse_scale": "policy-normalized MEAN_STD, first 10 x 7, no padded dims",
         "gpu": int(args.gpu),
@@ -1364,7 +1372,7 @@ def main() -> None:
         shared_index=np.arange(n_use),
     )
     (out_dir / "DONE").write_text(time.strftime("%Y-%m-%dT%H:%M:%S") + "\n")
-    if n_use == N_FRAMES:
+    if n_use == N_FRAMES and not args.skip_analyze:
         analyze(out_dir, rows, shared, correctness)
     print(f"done {out_dir} in {time.time()-t0:.0f}s", flush=True)
 

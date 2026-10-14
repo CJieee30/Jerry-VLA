@@ -1,0 +1,33 @@
+{
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "compile_model": false,
+  "gradient_checkpointing": false,
+  "n_action_steps": 10,
+  "num_inference_steps_default": 10,
+  "chunk_size": 50,
+  "max_action_dim": 32,
+  "preprocess": "pi05 preprocess_raw_batch + dataset stats (no SmolVLA cache)",
+  "exec_steps": 10,
+  "action_dim": 7,
+  "nfes": [
+    1,
+    2,
+    10
+  ],
+  "n_noise": 2,
+  "noise_seed_base": 1000,
+  "noise_seed_fn": "NOISE_SEED_BASE * 1000003 + shared_index * 2 + noise_id",
+  "group_seed": 42,
+  "care_seed": 42,
+  "horizon": 10,
+  "frames": 120,
+  "shared": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_probe_care_event_holdout/holdout_shared.pt",
+  "gripper_mapping": "unnormalize MEAN_STD then closed iff g>0 (LIBERO dummy=-1 open)",
+  "rmse_scale": "policy-normalized MEAN_STD, first 10 x 7, no padded dims",
+  "gpu": 2,
+  "allow_shared": true,
+  "closed_loop_sr_background_only": {
+    "full_nfe10": 97.25,
+    "full_nfe1": 97.0
+  }
+}

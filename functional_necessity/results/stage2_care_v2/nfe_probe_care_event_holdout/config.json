@@ -1,0 +1,23 @@
+{
+  "phase": "care_event_holdout_offline",
+  "formula": "alpha_event = (alpha + event_boost * G) / mean_cal(alpha + event_boost * G)",
+  "calibration_groups": {
+    "random": "seed 42, 3/task by shared_index",
+    "care_alpha": "top 3/task by alpha",
+    "care_event": "top 3/task by alpha_event"
+  },
+  "holdout_sampling": {
+    "seed": 4242,
+    "per_task_episodes": 3,
+    "exclude_episodes": "any episode appearing in calibration shared.pt",
+    "window": "H=10 in-episode"
+  },
+  "thresholds": "tail P5/P95 from calibration nfe_probe_* frames (480), not holdout",
+  "paths": {
+    "holdout_shared": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_probe_care_event_holdout/holdout_shared.pt",
+    "cal_smolvla": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_probe_smolvla",
+    "cal_pi05": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_probe_pi05",
+    "smolvla_holdout": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_probe_care_event_holdout/smolvla",
+    "pi05_holdout": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_probe_care_event_holdout/pi05"
+  }
+}
