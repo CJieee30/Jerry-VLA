@@ -650,136 +650,835 @@
   "holdout_grip_events": 16,
   "holdout_eval": {
     "smolvla": {
-      "0": {
-        "thresholds_from_calibration": {
+      "calibration_frames_csv": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_probe_smolvla/frames.csv",
+      "thresholds_from_cal_nfe1": {
+        "0": {
           "cosine_p5": 0.9849060475826262,
           "rmse_p95": 0.15937068015336978,
           "arm_rmse_p95": 0.22558836663198564
         },
-        "holdout_universe": {
-          "n": 120,
-          "n_grip_event_windows": 16,
-          "n_tail_bad": 10,
-          "n_grip_dev_nfe1": 1,
-          "n_grip_dev_nfe2": 1,
-          "n_arm_bad": 4
-        },
-        "full_holdout": {
-          "group": "all_holdout",
-          "noise_id": 0,
-          "n_selected": 120,
-          "n_grip_event_windows": 16,
-          "n_tail_bad_total": 10,
-          "n_tail_captured": 10,
-          "tail_recall": 1.0,
-          "n_grip_dev_nfe1_total": 1,
-          "n_grip_dev_nfe1_captured": 1,
-          "n_grip_dev_nfe2_total": 1,
-          "n_grip_dev_nfe2_captured": 1,
-          "n_arm_top5_total": 4,
-          "n_arm_top5_captured": 4,
-          "rmse_mean": 0.09362478597710527,
-          "rmse_p95": 0.14550035893917082
-        }
-      },
-      "1": {
-        "thresholds_from_calibration": {
+        "1": {
           "cosine_p5": 0.9839712828397752,
           "rmse_p95": 0.15727630779147134,
           "arm_rmse_p95": 0.2220001966490351
-        },
-        "holdout_universe": {
-          "n": 120,
-          "n_grip_event_windows": 16,
-          "n_tail_bad": 12,
-          "n_grip_dev_nfe1": 1,
-          "n_grip_dev_nfe2": 1,
-          "n_arm_bad": 6
-        },
-        "full_holdout": {
-          "group": "all_holdout",
-          "noise_id": 1,
-          "n_selected": 120,
-          "n_grip_event_windows": 16,
-          "n_tail_bad_total": 12,
-          "n_tail_captured": 12,
-          "tail_recall": 1.0,
-          "n_grip_dev_nfe1_total": 1,
-          "n_grip_dev_nfe1_captured": 1,
-          "n_grip_dev_nfe2_total": 1,
-          "n_grip_dev_nfe2_captured": 1,
-          "n_arm_top5_total": 6,
-          "n_arm_top5_captured": 6,
-          "rmse_mean": 0.09476929415638245,
-          "rmse_p95": 0.16228644475340842
         }
-      }
+      },
+      "by_noise": {
+        "0": {
+          "nfe1": {
+            "nfe": 1,
+            "noise_id": 0,
+            "n": 120,
+            "cosine_mean": 0.9933180178205172,
+            "rmse_mean": 0.09362478597710527,
+            "rmse_p95_empirical": 0.14550035893917082,
+            "n_tail_bad": 10,
+            "tail_bad_fraction": 0.08333333333333333,
+            "n_grip_disagree": 1,
+            "thresholds": {
+              "cosine_p5": 0.9849060475826262,
+              "rmse_p95": 0.15937068015336978,
+              "arm_rmse_p95": 0.22558836663198564
+            }
+          },
+          "nfe2": {
+            "nfe": 2,
+            "noise_id": 0,
+            "n": 120,
+            "cosine_mean": 0.9975197017192841,
+            "rmse_mean": 0.0559407501481473,
+            "rmse_p95_empirical": 0.08472976014018058,
+            "n_tail_bad": 1,
+            "tail_bad_fraction": 0.008333333333333333,
+            "n_grip_disagree": 1,
+            "thresholds": {
+              "cosine_p5": 0.9849060475826262,
+              "rmse_p95": 0.15937068015336978,
+              "arm_rmse_p95": 0.22558836663198564
+            }
+          },
+          "nfe3": {
+            "nfe": 3,
+            "noise_id": 0,
+            "n": 120,
+            "cosine_mean": 0.9983989705642065,
+            "rmse_mean": 0.04189550116037324,
+            "rmse_p95_empirical": 0.05857152324169868,
+            "n_tail_bad": 1,
+            "tail_bad_fraction": 0.008333333333333333,
+            "n_grip_disagree": 1,
+            "thresholds": {
+              "cosine_p5": 0.9849060475826262,
+              "rmse_p95": 0.15937068015336978,
+              "arm_rmse_p95": 0.22558836663198564
+            }
+          }
+        },
+        "1": {
+          "nfe1": {
+            "nfe": 1,
+            "noise_id": 1,
+            "n": 120,
+            "cosine_mean": 0.9935171047846476,
+            "rmse_mean": 0.09476929415638245,
+            "rmse_p95_empirical": 0.16228644475340842,
+            "n_tail_bad": 12,
+            "tail_bad_fraction": 0.1,
+            "n_grip_disagree": 1,
+            "thresholds": {
+              "cosine_p5": 0.9839712828397752,
+              "rmse_p95": 0.15727630779147134,
+              "arm_rmse_p95": 0.2220001966490351
+            }
+          },
+          "nfe2": {
+            "nfe": 2,
+            "noise_id": 1,
+            "n": 120,
+            "cosine_mean": 0.9974273477991422,
+            "rmse_mean": 0.05763567968582109,
+            "rmse_p95_empirical": 0.08651194311678406,
+            "n_tail_bad": 1,
+            "tail_bad_fraction": 0.008333333333333333,
+            "n_grip_disagree": 1,
+            "thresholds": {
+              "cosine_p5": 0.9839712828397752,
+              "rmse_p95": 0.15727630779147134,
+              "arm_rmse_p95": 0.2220001966490351
+            }
+          },
+          "nfe3": {
+            "nfe": 3,
+            "noise_id": 1,
+            "n": 120,
+            "cosine_mean": 0.9985823472340901,
+            "rmse_mean": 0.042106426491712486,
+            "rmse_p95_empirical": 0.061572100594639766,
+            "n_tail_bad": 1,
+            "tail_bad_fraction": 0.008333333333333333,
+            "n_grip_disagree": 1,
+            "thresholds": {
+              "cosine_p5": 0.9839712828397752,
+              "rmse_p95": 0.15727630779147134,
+              "arm_rmse_p95": 0.2220001966490351
+            }
+          }
+        }
+      },
+      "merged_two_noises": {
+        "nfe1": {
+          "n_comparisons": 240,
+          "note": "120 holdout timestamps × 2 noise_ids = 240 action comparisons (not 240 episodes)",
+          "cosine_mean": 0.9934175613025824,
+          "rmse_mean": 0.09419704006674386,
+          "rmse_p95_merged": 0.14591534957289684,
+          "n_tail_bad_total": 22,
+          "n_grip_disagree_total": 2
+        },
+        "nfe2": {
+          "n_comparisons": 240,
+          "note": "120 holdout timestamps × 2 noise_ids = 240 action comparisons (not 240 episodes)",
+          "cosine_mean": 0.9974735247592131,
+          "rmse_mean": 0.056788214916984193,
+          "rmse_p95_merged": 0.08642370849847793,
+          "n_tail_bad_total": 2,
+          "n_grip_disagree_total": 2
+        },
+        "nfe3": {
+          "n_comparisons": 240,
+          "note": "120 holdout timestamps × 2 noise_ids = 240 action comparisons (not 240 episodes)",
+          "cosine_mean": 0.9984906588991483,
+          "rmse_mean": 0.04200096382604287,
+          "rmse_p95_merged": 0.05924810674041502,
+          "n_tail_bad_total": 2,
+          "n_grip_disagree_total": 2
+        }
+      },
+      "anomalies": [
+        {
+          "holdout_index": 7,
+          "global_index": 90998,
+          "episode_index": 339,
+          "frame_in_episode": 195,
+          "task": "put the yellow and white mug in the microwave and close it",
+          "nfe": 1,
+          "noise_id": 0,
+          "cosine": 0.9859418272972108,
+          "rmse": 0.2613592743873596,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 48,
+          "global_index": 106748,
+          "episode_index": 418,
+          "frame_in_episode": 48,
+          "task": "turn on the stove",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.9428449869155884,
+          "rmse": 0.247768685221672,
+          "gripper_disagree_n": 1
+        },
+        {
+          "holdout_index": 16,
+          "global_index": 65123,
+          "episode_index": 241,
+          "frame_in_episode": 248,
+          "task": "put both the alphabet soup and the tomato sauce in the basket",
+          "nfe": 1,
+          "noise_id": 0,
+          "cosine": 0.9147658944129944,
+          "rmse": 0.2303454875946045,
+          "gripper_disagree_n": 1
+        },
+        {
+          "holdout_index": 48,
+          "global_index": 106748,
+          "episode_index": 418,
+          "frame_in_episode": 48,
+          "task": "turn on the stove",
+          "nfe": 2,
+          "noise_id": 1,
+          "cosine": 0.9670502543449402,
+          "rmse": 0.1844184547662735,
+          "gripper_disagree_n": 1
+        },
+        {
+          "holdout_index": 110,
+          "global_index": 255675,
+          "episode_index": 1546,
+          "frame_in_episode": 107,
+          "task": "pick up the black bowl next to the plate and place it on the plate",
+          "nfe": 1,
+          "noise_id": 0,
+          "cosine": 0.9763378500938416,
+          "rmse": 0.1834502220153808,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 7,
+          "global_index": 90998,
+          "episode_index": 339,
+          "frame_in_episode": 195,
+          "task": "put the yellow and white mug in the microwave and close it",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.9934523105621338,
+          "rmse": 0.1788249909877777,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 110,
+          "global_index": 255675,
+          "episode_index": 1546,
+          "frame_in_episode": 107,
+          "task": "pick up the black bowl next to the plate and place it on the plate",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.97859525680542,
+          "rmse": 0.1781216412782669,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 16,
+          "global_index": 65123,
+          "episode_index": 241,
+          "frame_in_episode": 248,
+          "task": "put both the alphabet soup and the tomato sauce in the basket",
+          "nfe": 3,
+          "noise_id": 0,
+          "cosine": 0.9470310807228088,
+          "rmse": 0.1734553277492523,
+          "gripper_disagree_n": 1
+        },
+        {
+          "holdout_index": 33,
+          "global_index": 136938,
+          "episode_index": 671,
+          "frame_in_episode": 124,
+          "task": "put the wine bottle on the rack",
+          "nfe": 1,
+          "noise_id": 0,
+          "cosine": 0.9630730152130128,
+          "rmse": 0.1680942475795745,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 33,
+          "global_index": 136938,
+          "episode_index": 671,
+          "frame_in_episode": 124,
+          "task": "put the wine bottle on the rack",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.9672192335128784,
+          "rmse": 0.1673002690076828,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 36,
+          "global_index": 151621,
+          "episode_index": 790,
+          "frame_in_episode": 63,
+          "task": "open the top drawer and put the bowl inside",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.989582359790802,
+          "rmse": 0.1667076498270034,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 48,
+          "global_index": 106748,
+          "episode_index": 418,
+          "frame_in_episode": 48,
+          "task": "turn on the stove",
+          "nfe": 3,
+          "noise_id": 1,
+          "cosine": 0.9735101461410522,
+          "rmse": 0.1654215455055236,
+          "gripper_disagree_n": 1
+        },
+        {
+          "holdout_index": 9,
+          "global_index": 97166,
+          "episode_index": 361,
+          "frame_in_episode": 191,
+          "task": "turn on the stove and put the moka pot on it",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.9921848177909852,
+          "rmse": 0.1625953167676925,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 61,
+          "global_index": 162342,
+          "episode_index": 866,
+          "frame_in_episode": 205,
+          "task": "pick up the orange juice and place it in the basket",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.9734065532684326,
+          "rmse": 0.162270188331604,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 16,
+          "global_index": 65123,
+          "episode_index": 241,
+          "frame_in_episode": 248,
+          "task": "put both the alphabet soup and the tomato sauce in the basket",
+          "nfe": 2,
+          "noise_id": 0,
+          "cosine": 0.9588906168937684,
+          "rmse": 0.1533545702695846,
+          "gripper_disagree_n": 1
+        },
+        {
+          "holdout_index": 61,
+          "global_index": 162342,
+          "episode_index": 866,
+          "frame_in_episode": 205,
+          "task": "pick up the orange juice and place it in the basket",
+          "nfe": 1,
+          "noise_id": 0,
+          "cosine": 0.975515365600586,
+          "rmse": 0.1457188725471496,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 21,
+          "global_index": 73329,
+          "episode_index": 273,
+          "frame_in_episode": 44,
+          "task": "put both the cream cheese box and the butter in the basket",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.9733858704566956,
+          "rmse": 0.1438957899808883,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 17,
+          "global_index": 82922,
+          "episode_index": 308,
+          "frame_in_episode": 297,
+          "task": "put both the alphabet soup and the tomato sauce in the basket",
+          "nfe": 1,
+          "noise_id": 0,
+          "cosine": 0.978163242340088,
+          "rmse": 0.1288432329893112,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 115,
+          "global_index": 225091,
+          "episode_index": 1299,
+          "frame_in_episode": 43,
+          "task": "pick up the black bowl from table center and place it on the plate",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.9771811366081238,
+          "rmse": 0.1217511892318725,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 2,
+          "global_index": 86725,
+          "episode_index": 323,
+          "frame_in_episode": 45,
+          "task": "put the white mug on the left plate and put the yellow and white mug on the right plate",
+          "nfe": 1,
+          "noise_id": 0,
+          "cosine": 0.9799658060073853,
+          "rmse": 0.1215317100286483,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 17,
+          "global_index": 82922,
+          "episode_index": 308,
+          "frame_in_episode": 297,
+          "task": "put both the alphabet soup and the tomato sauce in the basket",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.982941746711731,
+          "rmse": 0.11686472594738,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 115,
+          "global_index": 225091,
+          "episode_index": 1299,
+          "frame_in_episode": 43,
+          "task": "pick up the black bowl from table center and place it on the plate",
+          "nfe": 1,
+          "noise_id": 0,
+          "cosine": 0.9798119068145752,
+          "rmse": 0.1125978752970695,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 42,
+          "global_index": 136552,
+          "episode_index": 668,
+          "frame_in_episode": 28,
+          "task": "put the wine bottle on top of the cabinet",
+          "nfe": 1,
+          "noise_id": 0,
+          "cosine": 0.983160138130188,
+          "rmse": 0.1108123585581779,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 21,
+          "global_index": 73329,
+          "episode_index": 273,
+          "frame_in_episode": 44,
+          "task": "put both the cream cheese box and the butter in the basket",
+          "nfe": 1,
+          "noise_id": 0,
+          "cosine": 0.9826855063438416,
+          "rmse": 0.1088805794715881,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 67,
+          "global_index": 190062,
+          "episode_index": 1055,
+          "frame_in_episode": 119,
+          "task": "pick up the cream cheese and place it in the basket",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.9836305379867554,
+          "rmse": 0.1059386134147644,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 16,
+          "global_index": 65123,
+          "episode_index": 241,
+          "frame_in_episode": 248,
+          "task": "put both the alphabet soup and the tomato sauce in the basket",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.98343825340271,
+          "rmse": 0.102245382964611,
+          "gripper_disagree_n": 0
+        }
+      ],
+      "note_group_flags": "holdout has 3 candidates/task; in_top_alpha/in_random/in_low_alpha are all 1 — not used for holdout group comparison"
     },
     "pi05": {
-      "0": {
-        "thresholds_from_calibration": {
-          "cosine_p5": 0.9849060475826262,
-          "rmse_p95": 0.15937068015336978,
-          "arm_rmse_p95": 0.22558836663198564
+      "calibration_frames_csv": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_probe_pi05/frames.csv",
+      "thresholds_from_cal_nfe1": {
+        "0": {
+          "cosine_p5": 0.9933132946491241,
+          "rmse_p95": 0.11657243929803332,
+          "arm_rmse_p95": 0.16544259577371642
         },
-        "holdout_universe": {
-          "n": 120,
-          "n_grip_event_windows": 16,
-          "n_tail_bad": 1,
-          "n_grip_dev_nfe1": 0,
-          "n_grip_dev_nfe2": 0,
-          "n_arm_bad": 1
-        },
-        "full_holdout": {
-          "group": "all_holdout",
-          "noise_id": 0,
-          "n_selected": 120,
-          "n_grip_event_windows": 16,
-          "n_tail_bad_total": 1,
-          "n_tail_captured": 1,
-          "tail_recall": 1.0,
-          "n_grip_dev_nfe1_total": 0,
-          "n_grip_dev_nfe1_captured": 0,
-          "n_grip_dev_nfe2_total": 0,
-          "n_grip_dev_nfe2_captured": 0,
-          "n_arm_top5_total": 1,
-          "n_arm_top5_captured": 1,
-          "rmse_mean": 0.05500212282252804,
-          "rmse_p95": 0.10301766730844966
+        "1": {
+          "cosine_p5": 0.9932846307754517,
+          "rmse_p95": 0.12079811431467515,
+          "arm_rmse_p95": 0.17563929974966397
         }
       },
-      "1": {
-        "thresholds_from_calibration": {
-          "cosine_p5": 0.9839712828397752,
-          "rmse_p95": 0.15727630779147134,
-          "arm_rmse_p95": 0.2220001966490351
+      "by_noise": {
+        "0": {
+          "nfe1": {
+            "nfe": 1,
+            "noise_id": 0,
+            "n": 120,
+            "cosine_mean": 0.9978560164570809,
+            "rmse_mean": 0.05500212282252804,
+            "rmse_p95_empirical": 0.10301766730844966,
+            "n_tail_bad": 7,
+            "tail_bad_fraction": 0.058333333333333334,
+            "n_grip_disagree": 0,
+            "thresholds": {
+              "cosine_p5": 0.9933132946491241,
+              "rmse_p95": 0.11657243929803332,
+              "arm_rmse_p95": 0.16544259577371642
+            }
+          },
+          "nfe2": {
+            "nfe": 2,
+            "noise_id": 0,
+            "n": 120,
+            "cosine_mean": 0.9989451110363007,
+            "rmse_mean": 0.03848447573060786,
+            "rmse_p95_empirical": 0.061933516338467574,
+            "n_tail_bad": 2,
+            "tail_bad_fraction": 0.016666666666666666,
+            "n_grip_disagree": 0,
+            "thresholds": {
+              "cosine_p5": 0.9933132946491241,
+              "rmse_p95": 0.11657243929803332,
+              "arm_rmse_p95": 0.16544259577371642
+            }
+          }
         },
-        "holdout_universe": {
-          "n": 120,
-          "n_grip_event_windows": 16,
-          "n_tail_bad": 1,
-          "n_grip_dev_nfe1": 0,
-          "n_grip_dev_nfe2": 0,
-          "n_arm_bad": 1
-        },
-        "full_holdout": {
-          "group": "all_holdout",
-          "noise_id": 1,
-          "n_selected": 120,
-          "n_grip_event_windows": 16,
-          "n_tail_bad_total": 1,
-          "n_tail_captured": 1,
-          "tail_recall": 1.0,
-          "n_grip_dev_nfe1_total": 0,
-          "n_grip_dev_nfe1_captured": 0,
-          "n_grip_dev_nfe2_total": 0,
-          "n_grip_dev_nfe2_captured": 0,
-          "n_arm_top5_total": 1,
-          "n_arm_top5_captured": 1,
-          "rmse_mean": 0.057041930578028116,
-          "rmse_p95": 0.09836944155395026
+        "1": {
+          "nfe1": {
+            "nfe": 1,
+            "noise_id": 1,
+            "n": 120,
+            "cosine_mean": 0.9977890526254972,
+            "rmse_mean": 0.057041930578028116,
+            "rmse_p95_empirical": 0.09836944155395026,
+            "n_tail_bad": 6,
+            "tail_bad_fraction": 0.05,
+            "n_grip_disagree": 0,
+            "thresholds": {
+              "cosine_p5": 0.9932846307754517,
+              "rmse_p95": 0.12079811431467515,
+              "arm_rmse_p95": 0.17563929974966397
+            }
+          },
+          "nfe2": {
+            "nfe": 2,
+            "noise_id": 1,
+            "n": 120,
+            "cosine_mean": 0.9988590061664582,
+            "rmse_mean": 0.040601998125202904,
+            "rmse_p95_empirical": 0.06733639203011982,
+            "n_tail_bad": 1,
+            "tail_bad_fraction": 0.008333333333333333,
+            "n_grip_disagree": 0,
+            "thresholds": {
+              "cosine_p5": 0.9932846307754517,
+              "rmse_p95": 0.12079811431467515,
+              "arm_rmse_p95": 0.17563929974966397
+            }
+          }
         }
-      }
+      },
+      "merged_two_noises": {
+        "nfe1": {
+          "n_comparisons": 240,
+          "note": "120 holdout timestamps × 2 noise_ids = 240 action comparisons (not 240 episodes)",
+          "cosine_mean": 0.997822534541289,
+          "rmse_mean": 0.05602202670027808,
+          "rmse_p95_merged": 0.10238095335662363,
+          "n_tail_bad_total": 13,
+          "n_grip_disagree_total": 0
+        },
+        "nfe2": {
+          "n_comparisons": 240,
+          "note": "120 holdout timestamps × 2 noise_ids = 240 action comparisons (not 240 episodes)",
+          "cosine_mean": 0.9989020586013794,
+          "rmse_mean": 0.03954323692790539,
+          "rmse_p95_merged": 0.06617321036756028,
+          "n_tail_bad_total": 3,
+          "n_grip_disagree_total": 0
+        }
+      },
+      "anomalies": [
+        {
+          "holdout_index": 7,
+          "global_index": 90998,
+          "episode_index": 339,
+          "frame_in_episode": 195,
+          "task": "put the yellow and white mug in the microwave and close it",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.9898167848587036,
+          "rmse": 0.2197904586791992,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 7,
+          "global_index": 90998,
+          "episode_index": 339,
+          "frame_in_episode": 195,
+          "task": "put the yellow and white mug in the microwave and close it",
+          "nfe": 1,
+          "noise_id": 0,
+          "cosine": 0.9929777979850768,
+          "rmse": 0.1817134618759155,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 7,
+          "global_index": 90998,
+          "episode_index": 339,
+          "frame_in_episode": 195,
+          "task": "put the yellow and white mug in the microwave and close it",
+          "nfe": 2,
+          "noise_id": 1,
+          "cosine": 0.9959205985069276,
+          "rmse": 0.1393201947212219,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 7,
+          "global_index": 90998,
+          "episode_index": 339,
+          "frame_in_episode": 195,
+          "task": "put the yellow and white mug in the microwave and close it",
+          "nfe": 2,
+          "noise_id": 0,
+          "cosine": 0.996267020702362,
+          "rmse": 0.1329367756843567,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 34,
+          "global_index": 152612,
+          "episode_index": 798,
+          "frame_in_episode": 75,
+          "task": "put the wine bottle on the rack",
+          "nfe": 1,
+          "noise_id": 0,
+          "cosine": 0.9960650205612184,
+          "rmse": 0.1183877661824226,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 110,
+          "global_index": 255675,
+          "episode_index": 1546,
+          "frame_in_episode": 107,
+          "task": "pick up the black bowl next to the plate and place it on the plate",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.9927953481674194,
+          "rmse": 0.1182237043976783,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 43,
+          "global_index": 102403,
+          "episode_index": 385,
+          "frame_in_episode": 10,
+          "task": "put the wine bottle on top of the cabinet",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.9922890663146972,
+          "rmse": 0.1159568205475807,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 33,
+          "global_index": 136938,
+          "episode_index": 671,
+          "frame_in_episode": 124,
+          "task": "put the wine bottle on the rack",
+          "nfe": 1,
+          "noise_id": 0,
+          "cosine": 0.9864099621772766,
+          "rmse": 0.111679695546627,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 110,
+          "global_index": 255675,
+          "episode_index": 1546,
+          "frame_in_episode": 107,
+          "task": "pick up the black bowl next to the plate and place it on the plate",
+          "nfe": 1,
+          "noise_id": 0,
+          "cosine": 0.992839217185974,
+          "rmse": 0.102966584265232,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 47,
+          "global_index": 106944,
+          "episode_index": 420,
+          "frame_in_episode": 48,
+          "task": "push the plate to the front of the stove",
+          "nfe": 1,
+          "noise_id": 0,
+          "cosine": 0.98740816116333,
+          "rmse": 0.1022847220301628,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 33,
+          "global_index": 136938,
+          "episode_index": 671,
+          "frame_in_episode": 124,
+          "task": "put the wine bottle on the rack",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.9880387187004088,
+          "rmse": 0.0967516377568245,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 61,
+          "global_index": 162342,
+          "episode_index": 866,
+          "frame_in_episode": 205,
+          "task": "pick up the orange juice and place it in the basket",
+          "nfe": 1,
+          "noise_id": 0,
+          "cosine": 0.9914727210998536,
+          "rmse": 0.0891135111451149,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 17,
+          "global_index": 82922,
+          "episode_index": 308,
+          "frame_in_episode": 297,
+          "task": "put both the alphabet soup and the tomato sauce in the basket",
+          "nfe": 1,
+          "noise_id": 0,
+          "cosine": 0.991965651512146,
+          "rmse": 0.0802309215068817,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 17,
+          "global_index": 82922,
+          "episode_index": 308,
+          "frame_in_episode": 297,
+          "task": "put both the alphabet soup and the tomato sauce in the basket",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.9923940300941468,
+          "rmse": 0.0783953219652175,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 21,
+          "global_index": 73329,
+          "episode_index": 273,
+          "frame_in_episode": 44,
+          "task": "put both the cream cheese box and the butter in the basket",
+          "nfe": 1,
+          "noise_id": 1,
+          "cosine": 0.9923182129859924,
+          "rmse": 0.0756099596619606,
+          "gripper_disagree_n": 0
+        },
+        {
+          "holdout_index": 17,
+          "global_index": 82922,
+          "episode_index": 308,
+          "frame_in_episode": 297,
+          "task": "put both the alphabet soup and the tomato sauce in the basket",
+          "nfe": 2,
+          "noise_id": 0,
+          "cosine": 0.9928924441337584,
+          "rmse": 0.0754584595561027,
+          "gripper_disagree_n": 0
+        }
+      ],
+      "note_group_flags": "holdout has 3 candidates/task; in_top_alpha/in_random/in_low_alpha are all 1 — not used for holdout group comparison"
+    }
+  },
+  "verification": {
+    "smolvla": {
+      "expected": {
+        "nfe1_tail_by_noise": [
+          10,
+          12
+        ],
+        "nfe2_tail_by_noise": [
+          1,
+          1
+        ],
+        "nfe3_tail_by_noise": [
+          1,
+          1
+        ],
+        "grip_holdout_noise": [
+          [
+            16,
+            0
+          ],
+          [
+            48,
+            1
+          ]
+        ]
+      },
+      "got": {
+        "nfe1_noise0": 10,
+        "nfe1_noise1": 12,
+        "nfe2_noise0": 1,
+        "nfe2_noise1": 1,
+        "nfe3_noise0": 1,
+        "nfe3_noise1": 1,
+        "grip_pairs": [
+          [
+            16,
+            0
+          ],
+          [
+            48,
+            1
+          ]
+        ]
+      },
+      "ok": true,
+      "mismatches": []
+    },
+    "pi05": {
+      "expected": {
+        "nfe1_tail_by_noise": [
+          7,
+          6
+        ],
+        "nfe2_tail_by_noise": [
+          2,
+          1
+        ],
+        "grip_disagree_total": 0
+      },
+      "got": {
+        "nfe1_noise0": 7,
+        "nfe1_noise1": 6,
+        "nfe2_noise0": 2,
+        "nfe2_noise1": 1,
+        "grip_disagree_total": 0
+      },
+      "ok": true,
+      "mismatches": []
     }
   },
   "care_event_vs_alpha": {
@@ -1974,18 +2673,35 @@
   },
   "curve_files": {
     "smolvla": [
-      "curves/smolvla/holdout_016_noise0.png",
-      "curves/smolvla/holdout_007_noise0.png",
-      "curves/smolvla/holdout_110_noise0.png",
-      "curves/smolvla/holdout_033_noise0.png",
-      "curves/smolvla/holdout_061_noise0.png"
+      "curves/smolvla/holdout_016_noise0_grip.png",
+      "curves/smolvla/holdout_048_noise1_grip.png",
+      "curves/smolvla/holdout_016_noise0_tail_nfe1.png",
+      "curves/smolvla/holdout_007_noise0_tail_nfe1.png",
+      "curves/smolvla/holdout_110_noise0_tail_nfe1.png",
+      "curves/smolvla/holdout_033_noise0_tail_nfe1.png",
+      "curves/smolvla/holdout_061_noise0_tail_nfe1.png",
+      "curves/smolvla/holdout_048_noise1_tail_nfe1.png",
+      "curves/smolvla/holdout_033_noise1_tail_nfe1.png",
+      "curves/smolvla/holdout_110_noise1_tail_nfe1.png",
+      "curves/smolvla/holdout_061_noise1_tail_nfe1.png",
+      "curves/smolvla/holdout_007_noise1_tail_nfe1.png"
     ],
     "pi05": [
-      "curves/pi05/holdout_007_noise0.png",
-      "curves/pi05/holdout_033_noise0.png",
-      "curves/pi05/holdout_034_noise0.png",
-      "curves/pi05/holdout_047_noise0.png",
-      "curves/pi05/holdout_093_noise0.png"
+      "curves/pi05/holdout_007_noise0_tail_nfe1.png",
+      "curves/pi05/holdout_033_noise0_tail_nfe1.png",
+      "curves/pi05/holdout_034_noise0_tail_nfe1.png",
+      "curves/pi05/holdout_047_noise0_tail_nfe1.png",
+      "curves/pi05/holdout_093_noise0_tail_nfe1.png",
+      "curves/pi05/holdout_007_noise1_tail_nfe1.png",
+      "curves/pi05/holdout_110_noise1_tail_nfe1.png",
+      "curves/pi05/holdout_043_noise1_tail_nfe1.png",
+      "curves/pi05/holdout_096_noise1_tail_nfe1.png",
+      "curves/pi05/holdout_033_noise1_tail_nfe1.png"
     ]
+  },
+  "before_fix_reference": {
+    "pi05_nfe1_noise0_tail": 1,
+    "pi05_nfe1_noise1_tail": 1,
+    "note": "π0.5 used SmolVLA calibration thresholds in summary.json.bak"
   }
 }
