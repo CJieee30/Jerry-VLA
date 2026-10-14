@@ -2,23 +2,23 @@
 
 π0.5-LIBERO-finetuned (`lerobot/pi05_libero_finetuned_v044`) vs Stage-1 Fisher Drop-6 `[1, 13, 14, 15, 16, 17]`, skip keep-KV. Official Plus recipe on this machine: 1 trial per variant, `seed=1000`, `n_action_steps=10`, `num_inference_steps=10`, `compile_model=false`. In-distribution LIBERO 400-ep anchors: full **97.25**, Drop-6 **97.75** (`eval_pi05_libero_v044.md`). Do not mix those with this table.
 
-Avg. is the unweighted mean of four suite rates (Spatial / Object / Goal / Long). **2026-10-13–14 four-GPU batch:** GPU1 = Fisher Drop-6 **NFE=1** Language Instructions (eight suites, all `EXIT:0`); GPU3 = Fisher Drop-6 **NFE=1** Robot Initial States (eight suites, all `EXIT:0`); GPU0 = full Sensor Noise **Spatial+Object**; GPU2 = Fisher Drop-6 Sensor Noise **Spatial+Object**. Sensor Noise **Goal / Long** are not in `results/eval_libero_plus/` yet (see § Sensor Noise).
+Avg. is the unweighted mean of four suite rates (Spatial / Object / Goal / Long). **NFE=1 batch (Fisher Drop-6, `num_inference_steps=1`):** GPU1 = Language + Camera (**done**, 16×`EXIT:0`) + **Light Conditions** (**running** 2026-10-14); GPU3 = Init + Layout (**done**, 16×`EXIT:0`) + **Background Textures** (**running** 2026-10-14). Launcher: `launch_plus_fisher6_nfe1_light_background_g1_g3.sh` → `plus_fisher6_nfe1_{light,background}_*`. **Sensor Noise (NFE=10):** GPU0 = full Spatial+Object; GPU2 = Fisher Drop-6 Spatial+Object. Sensor Noise **Goal / Long** not finished (see § Sensor Noise).
 
 ## Core: seven Plus dimensions (Avg. %)
 
-Drop-6 = Fisher `[1,13,14,15,16,17]` keep-KV, **`num_inference_steps=10`** (official Plus). **Drop-6 NFE=1** = same skip, **`num_inference_steps=1`** (`plus_fisher6_nfe1_{lang,init}_*` only; other dims not run at NFE=1).
+Drop-6 = Fisher `[1,13,14,15,16,17]` keep-KV, **`num_inference_steps=10`** (official Plus). **Drop-6 NFE=1** = same skip, **`num_inference_steps=1`** (`plus_fisher6_nfe1_{lang,init,camera,layout,light,background}_*`; Sensor Noise not run at NFE=1).
 
 | Dimension | Full (NFE=10) | Drop-6 (NFE=10) | Δ (D6−Full) | Drop-6 (NFE=1) | Δ (NFE1−D6) |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Language Instructions | 89.20 | 85.24 | −3.96 | **84.67** | −0.57 |
 | Robot Initial States | 77.69 | 74.18 | −3.51 | **74.47** | +0.29 |
-| Camera Viewpoints | 66.85 | 60.68 | −6.18 | — | — |
+| Camera Viewpoints | 66.85 | 60.68 | −6.18 | **61.24** | +0.56 |
 | Sensor Noise | 97.75† | 93.36† | −4.40 | — | — |
-| Objects Layout | 86.52 | 82.41 | −4.11 | — | — |
-| Light Conditions | 98.47 | 95.01 | −3.46 | — | — |
-| Background Textures | 96.62 | 92.36 | −4.26 | — | — |
+| Objects Layout | 86.52 | 82.41 | −4.11 | **80.98** | −1.43 |
+| Light Conditions | 98.47 | 95.01 | −3.46 | *pending* | — |
+| Background Textures | 96.62 | 92.36 | −4.26 | *pending* | — |
 
-Finished six full dims (excl. Sensor Noise†): full **85.89**, Drop-6 NFE=10 **81.65**, **−4.24**. On the two NFE=1 slices, cutting steps costs **−0.57** (Language) / **+0.29** (Init) vs Drop-6 NFE=10—far smaller than the OOD gap vs full (−3.96 / −3.51). Camera remains the largest NFE=10 dim gap (−6.18). Largest single-suite holes at NFE=10: Background Goal (−14.59), Light Long (−13.50), Layout Long (−12.82).
+Finished six full dims (excl. Sensor Noise†): full **85.89**, Drop-6 NFE=10 **81.65**, **−4.24**. On the four NFE=1 slices (Language / Init / Camera / Layout), macro Δ vs Drop-6 NFE=10 is **−0.57 / +0.29 / +0.56 / −1.43**—all smaller in magnitude than the OOD gaps vs full NFE=10 on those dims (−3.96 / −3.51 / −6.18 / −4.11). Camera remains the largest full-vs-Drop-6 NFE=10 dim gap (−6.18). Largest single-suite holes at NFE=10: Background Goal (−14.59), Light Long (−13.50), Layout Long (−12.82); Layout **Goal** at NFE=1 is **−4.47** pp vs Drop-6 NFE=10.
 
 ## Core: finished dims by suite (%)
 
@@ -43,14 +43,16 @@ Counts: Language 1367/1537 vs 1306/1537; Init 1200/1550 vs 1143/1550; Camera 106
 
 † Sensor Noise macro Avg. is the mean of **Spatial and Object suite rates only** (773 variants). Goal (379) and Long (449) noise tasks are not evaluated yet; do not treat † as a seven-dimension overall score.
 
-## Drop-6 NFE=1 micro counts (Language + Init)
+## Drop-6 NFE=1 micro counts (Language + Init + Camera + Layout)
 
 | Dimension | Drop-6 NFE=10 micro | Drop-6 NFE=1 micro |
 | --- | --- | --- |
 | Language Instructions | 1306/1537 | **1297/1537** |
 | Robot Initial States | 1143/1550 | **1148/1550** |
+| Camera Viewpoints | 965/1599 | **974/1599** |
+| Objects Layout | 1254/1525 | **1229/1525** |
 
-NFE=1 does not collapse either slice vs Drop-6 NFE=10 (see core table). In-distribution Fisher Drop-6 NFE=1 is **76.00** (`eval_nfe_libero.md`); not comparable to Plus variant counts.
+NFE=1 does not collapse these slices vs Drop-6 NFE=10 (see core table). In-distribution Fisher Drop-6 NFE=1 is **76.00** (`eval_nfe_libero.md`); not comparable to Plus variant counts.
 
 Per-dimension protocol, disagreement, and jobs are in the sections below. Language **89.20 / 85.24** (full / Drop-6 NFE=10) and Init **77.69 / 74.18** are not overwritten.
 
@@ -630,3 +632,124 @@ Counts: **1148/1550** (micro 74.06%). vs Drop-6 NFE=10 **1143/1550** (+5 variant
 ## Reading
 
 Init OOD at Drop-6 NFE=10 is **74.18** Avg. NFE=1 is **74.47** (+0.29)—no extra collapse from a single denoising step on this slice. Long gains **+2.03** pp at 1-trial resolution (39 variants flip). Spatial/Object are flat to slightly down. Compare to in-distribution Drop-6 NFE=1 **76.00** only qualitatively; Plus Init is a different task distribution.
+
+---
+
+# LIBERO-plus Camera Viewpoints — Fisher Drop-6 **NFE=1**
+
+Fisher Drop-6 only (`plus_fisher6_nfe1_camera_*`). Same Camera task ids and `seed=1000` as § Camera Viewpoints; **`num_inference_steps=1`**. GPU1, all eight jobs `EXIT:0` (2026-10-14 UTC).
+
+Source: `results/eval_libero_plus/plus_fisher6_nfe1_camera_{spatial,object,goal,10}/`. Launcher: `run_eval_plus_fisher6_nfe1_camera_layout_pair.sh camera` → `run_eval_plus_dim.sh` with NFE=1.
+
+| Setting | Spatial | Object | Goal | Long | Avg. |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Drop-6 NFE=1 | 72.07 | 62.37 | 63.73 | 46.78 | **61.24** |
+| Drop-6 NFE=10 (anchor) | 70.48 | 63.13 | 64.95 | 44.15 | 60.68 |
+| Full NFE=10 (reference) | 74.73 | 73.99 | 66.67 | 52.03 | 66.85 |
+
+Counts: **974/1599** successes (micro 60.91%). vs Drop-6 NFE=10 **965/1599** (+9 variants, +0.56 pp macro).
+
+Δ vs Drop-6 NFE=10 macro (**+0.56**): Spatial **+1.60**, Object **−0.76**, Goal **−1.23**, Long **+2.63**.
+
+## NFE=10 vs NFE=1 disagreement (same Drop-6, same variants)
+
+| Suite | n | both success | both fail | NFE10✓ NFE1✗ | NFE10✗ NFE1✓ |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Spatial | 376 | 240 | 80 | 25 | 31 |
+| Object | 396 | 222 | 121 | 28 | 25 |
+| Goal | 408 | 240 | 123 | 25 | 20 |
+| Long | 419 | 164 | 202 | 21 | 32 |
+
+Net variants that fail under NFE=1 but succeed under NFE=10: 99 (Spatial 25, Object 28, Goal 25, Long 21). Net the other way: 108.
+
+## Jobs
+
+| Job | GPU | Start (UTC) | End (UTC) |
+| --- | ---: | --- | --- |
+| plus_fisher6_nfe1_camera_spatial | 1 | 2026-10-14T01:21:29Z | 2026-10-14T02:55:34Z |
+| plus_fisher6_nfe1_camera_object | 1 | 2026-10-14T02:55:34Z | 2026-10-14T04:27:28Z |
+| plus_fisher6_nfe1_camera_goal | 1 | 2026-10-14T04:27:29Z | 2026-10-14T06:20:26Z |
+| plus_fisher6_nfe1_camera_10 | 1 | 2026-10-14T06:20:26Z | 2026-10-14T09:43:22Z |
+
+`eval_s`: Spatial 5458 / Object 5327 / Goal 6578 / Long 11947. MuJoCo-dominated; do not use as efficiency.
+
+## Reading
+
+Camera OOD at Drop-6 NFE=10 is already the weakest finished dim (**60.68** Avg.). One Euler step is **61.24** (+0.56)—no extra collapse; Long and Spatial tick up, Object/Goal tick down slightly. The gap vs full NFE=10 (−5.61 at NFE=1 vs −6.18 at NFE=10) is still dominated by OOD camera shift, not NFE. Not a collapse.
+
+---
+
+# LIBERO-plus Objects Layout — Fisher Drop-6 **NFE=1**
+
+Fisher Drop-6 only (`plus_fisher6_nfe1_layout_*`). Same Layout task ids and `seed=1000` as § Objects Layout; **`num_inference_steps=1`**. GPU3, all eight jobs `EXIT:0` (2026-10-14 UTC).
+
+Source: `results/eval_libero_plus/plus_fisher6_nfe1_layout_{spatial,object,goal,10}/`. Launcher: `run_eval_plus_fisher6_nfe1_camera_layout_pair.sh layout`.
+
+| Setting | Spatial | Object | Goal | Long | Avg. |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Drop-6 NFE=1 | 95.32 | 86.35 | 62.12 | 80.13 | **80.98** |
+| Drop-6 NFE=10 (anchor) | 96.36 | 87.84 | 66.59 | 78.85 | 82.41 |
+| Full NFE=10 (reference) | 96.88 | 88.83 | 68.71 | 91.67 | 86.52 |
+
+Counts: **1229/1525** (micro 80.59%). vs Drop-6 NFE=10 **1254/1525** (−25 variants, −1.43 pp macro).
+
+Δ vs Drop-6 NFE=10 macro (**−1.43**): Spatial **−1.04**, Object **−1.49**, Goal **−4.47**, Long **+1.28**.
+
+## NFE=10 vs NFE=1 disagreement (same Drop-6)
+
+| Suite | n | both success | both fail | NFE10✓ NFE1✗ | NFE10✗ NFE1✓ |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Spatial | 385 | 360 | 7 | 11 | 7 |
+| Object | 403 | 336 | 37 | 18 | 12 |
+| Goal | 425 | 254 | 132 | 29 | 10 |
+| Long | 312 | 230 | 46 | 16 | 20 |
+
+## Jobs
+
+| Job | GPU | Start (UTC) | End (UTC) |
+| --- | ---: | --- | --- |
+| plus_fisher6_nfe1_layout_spatial | 3 | 2026-10-14T01:21:29Z | 2026-10-14T03:00:55Z |
+| plus_fisher6_nfe1_layout_object | 3 | 2026-10-14T03:00:55Z | 2026-10-14T04:46:21Z |
+| plus_fisher6_nfe1_layout_goal | 3 | 2026-10-14T04:46:21Z | 2026-10-14T07:16:27Z |
+| plus_fisher6_nfe1_layout_10 | 3 | 2026-10-14T07:16:27Z | 2026-10-14T09:52:20Z |
+
+`eval_s`: Spatial 5775 / Object 6132 / Goal 8779 / Long 9156. MuJoCo-dominated.
+
+## Reading
+
+Layout Drop-6 NFE=10 **82.41** → NFE=1 **80.98** (−1.43). Most of the cost is **Goal (−4.47)**; Long is **+1.28** at 1-trial resolution (same pattern as Init Long flipping up under NFE=1). Spatial/Object stay within ~1.5 pp. Still not a collapse vs the **−4.11** full-vs-Drop-6 OOD gap at NFE=10.
+
+---
+
+# LIBERO-plus Light / Background — Fisher Drop-6 **NFE=1**（进行中）
+
+**Status (2026-10-14).** Eight-suite queues launched on GPU1 (Light) and GPU3 (Background). Tags: `plus_fisher6_nfe1_light_*`, `plus_fisher6_nfe1_background_*`. Logs: `results/logs/plus_fisher6_nfe1_{light_gpu1,background_gpu3}.log`, per-suite `eval_plus_fisher6_nfe1_{light,background}_*.log`. tmux: `plus_fisher6_nfe1_light_gpu1`, `plus_fisher6_nfe1_background_gpu3`.
+
+**Protocol.** Same Plus recipe as § Light / § Background: 1 trial per variant, `seed=1000`, `n_action_steps=10`, Fisher Drop-6 `[1,13,14,15,16,17]`, **`num_inference_steps=1`**, `compile_model=false`. Does not overwrite NFE=10 `eval_info.json`.
+
+**Launch (this machine):**
+
+```bash
+cd /home/guorj/Skill_Efficient_VLA/functional_necessity
+bash scripts/pi05_libero/launch_plus_fisher6_nfe1_light_background_g1_g3.sh
+# or single dim:
+bash scripts/pi05_libero/run_eval_plus_fisher6_nfe1_light_background_pair.sh light
+bash scripts/pi05_libero/run_eval_plus_fisher6_nfe1_light_background_pair.sh background
+```
+
+**NFE=10 anchors (fill NFE=1 table when jobs finish):**
+
+| Dimension | Drop-6 NFE=10 Avg. | Full NFE=10 Avg. | Drop-6 NFE=10 micro |
+| --- | ---: | ---: | --- |
+| Light Conditions | 95.01 | 98.47 | 1087/1142 |
+| Background Textures | 92.36 | 96.62 | 990/1076 |
+
+At NFE=10, Light Drop-6 cost is almost entirely **Long (−13.50)**; Background Drop-6 cost is concentrated on **Goal (−14.59)**. After `EXIT:0` on all eight jobs, aggregate with the same macro/micro rules as § Camera NFE=1 and update the core table `*pending*` cells.
+
+**Check progress:**
+
+```bash
+ls results/eval_libero_plus/plus_fisher6_nfe1_light_*/eval_info.json 2>/dev/null | wc -l
+ls results/eval_libero_plus/plus_fisher6_nfe1_background_*/eval_info.json 2>/dev/null | wc -l
+rg '==== EXIT' results/logs/eval_plus_fisher6_nfe1_light_*.log results/logs/eval_plus_fisher6_nfe1_background_*.log
+```
