@@ -1,0 +1,9 @@
+suite,suite_slug,kind,shared_index,episode_index,frame_in_episode,alpha,alpha_event,G,pool_rank_event,video,plot
+libero_spatial,spatial,high_event,92,1275,106,3.0992016792297363,3.670926877279342,1,1,videos/spatial_high_event.mp4,videos/spatial_high_event_actions.png
+libero_spatial,spatial,low_event,151,1597,26,0.8673811554908752,0.7767592437987524,0,12,videos/spatial_low_event.mp4,videos/spatial_low_event_actions.png
+libero_object,object,high_event,225,813,47,1.2566994428634644,2.0209248744027284,1,1,videos/object_high_event.mp4,videos/object_high_event_actions.png
+libero_object,object,low_event,315,945,100,0.21433238685131073,0.19193945093029774,0,12,videos/object_low_event.mp4,videos/object_low_event_actions.png
+libero_goal,goal,high_event,85,497,88,1.516980767250061,1.3584902394605973,0,1,videos/goal_high_event.mp4,videos/goal_high_event_actions.png
+libero_goal,goal,low_event,165,780,97,0.1694236844778061,0.15172270253220127,0,12,videos/goal_low_event.mp4,videos/goal_low_event_actions.png
+libero_10,long,high_event,451,13,262,1.3117705583572388,2.0702422912676237,1,1,videos/long_high_event.mp4,videos/long_high_event_actions.png
+libero_10,long,low_event,464,317,1,0.29001864790916443,0.2597181921827319,0,12,videos/long_low_event.mp4,videos/long_low_event_actions.png

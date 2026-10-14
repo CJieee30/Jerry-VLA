@@ -1,0 +1,14 @@
+{
+  "formula": "alpha_event = (alpha + event_boost * G) / mean(alpha + event_boost * G)",
+  "event_boost": 1.0,
+  "G_definition": "any grip open/close in demo actions [t, t+H) with H=10",
+  "groups": "random (seed 42), care_alpha top-3/task by alpha, care_event top-3/task by alpha_event",
+  "tie_break": "global_index ascending",
+  "tail_bad_nfe1": "cosine < P5 OR rmse > P95 OR gripper_disagree_n>0 (per model, per noise)",
+  "arm_top5": "hypot(rmse_trans, rmse_rot) at NFE=1 >= P95 over 480 frames",
+  "data": {
+    "shared_pt": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/shared.pt",
+    "smolvla_probe": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_probe_smolvla",
+    "pi05_probe": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_probe_pi05"
+  }
+}

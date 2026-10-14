@@ -1,0 +1,481 @@
+shared_index,global_index,task_index,task,episode_index,frame_in_episode,alpha,alpha_event,G,in_random,in_care_alpha,in_care_event,event_vs_alpha
+0,108573,13,put the cream cheese in the bowl,434,9,0.5576915144920349,0.49942523690713403,0,0,0,0,unchanged
+1,108746,16,turn on the stove,435,76,0.8894379138946533,0.7965115647592816,0,0,0,0,unchanged
+2,108838,14,put the wine bottle on top of the cabinet,436,68,0.5904124975204468,0.5287276097712496,0,0,0,0,unchanged
+3,108936,19,open the middle drawer of the cabinet,437,61,1.4923906326293945,1.3364692233802458,0,0,1,1,unchanged
+4,109052,18,put the bowl on top of the cabinet,438,36,1.1253769397735596,1.0078002446713983,0,0,0,0,unchanged
+5,109183,13,put the cream cheese in the bowl,439,81,0.7744452953338623,0.6935331003664637,0,0,0,0,unchanged
+6,109205,16,turn on the stove,440,7,0.5169400572776794,0.4629313946220707,0,1,0,0,unchanged
+7,109335,16,turn on the stove,441,52,0.9273073673248291,0.830424508132888,0,0,0,0,unchanged
+8,109388,15,push the plate to the front of the stove,442,28,0.6681190729141235,0.5983155877425073,0,0,0,0,unchanged
+9,109516,19,open the middle drawer of the cabinet,443,13,1.182579755783081,1.0590266470729692,0,0,0,0,unchanged
+10,109696,18,put the bowl on top of the cabinet,444,50,0.8030311465263367,0.7191323700935585,0,0,0,0,unchanged
+11,109837,17,put the bowl on the stove,445,95,0.7847111225128174,0.7027263784380642,0,0,0,0,unchanged
+12,109913,18,put the bowl on top of the cabinet,446,72,2.3875555992126465,2.138109492040264,0,0,1,1,unchanged
+13,110008,10,put the bowl on the plate,447,67,1.7643760442733765,2.4755606369036034,1,0,1,1,unchanged
+14,110096,10,put the bowl on the plate,448,65,1.5743318796157837,1.409849444569227,0,0,1,0,removed
+15,110317,12,open the top drawer and put the bowl inside,449,194,0.6428751945495605,0.5757091295033856,0,0,0,0,unchanged
+16,113564,16,turn on the stove,477,47,0.9788751602172852,0.8766046211754018,0,0,0,0,unchanged
+17,113628,15,push the plate to the front of the stove,478,17,1.2026687860488892,1.0770168234321598,0,0,1,1,unchanged
+18,113819,14,put the wine bottle on top of the cabinet,479,72,2.0214836597442627,2.7058062627208304,1,0,1,1,unchanged
+19,113882,14,put the wine bottle on top of the cabinet,480,48,0.8971025347709656,0.8033754043506769,0,1,0,0,unchanged
+20,113988,10,put the bowl on the plate,481,45,1.6940932273864746,1.51709841273252,0,1,1,1,unchanged
+21,114067,14,put the wine bottle on top of the cabinet,482,33,1.1888344287872314,1.0646278467787236,0,0,0,0,unchanged
+22,114142,10,put the bowl on the plate,483,16,1.1761714220046997,1.0532878407037112,0,0,0,0,unchanged
+23,114366,11,put the wine bottle on the rack,484,151,1.1085032224655151,0.9926894530507837,0,1,0,0,unchanged
+24,124704,19,open the middle drawer of the cabinet,566,98,0.4117061495780945,0.36869207428491446,0,1,0,0,unchanged
+25,124787,16,turn on the stove,567,54,3.22664213180542,2.889530267569594,0,1,1,1,unchanged
+26,124860,10,put the bowl on the plate,568,41,1.1673316955566406,1.9408940559112184,1,1,0,1,added
+27,124985,16,turn on the stove,569,62,0.24617543816566467,0.2204556162892103,0,0,0,0,unchanged
+28,125052,18,put the bowl on top of the cabinet,570,52,1.0255101919174194,0.9183673361348096,0,0,0,0,unchanged
+29,125166,11,put the wine bottle on the rack,571,68,1.9028408527374268,2.599558972853624,1,1,1,1,unchanged
+30,125295,16,turn on the stove,572,42,0.6639530062675476,0.5945847817899867,0,0,0,0,unchanged
+31,125368,18,put the bowl on top of the cabinet,573,20,1.3651026487350464,2.118002372207621,1,1,0,1,added
+32,129469,10,put the bowl on the plate,607,9,0.46008315682411194,0.41201476734526493,0,0,0,0,unchanged
+33,129620,18,put the bowl on top of the cabinet,608,57,0.7751606702804565,0.6941737346470581,0,0,0,0,unchanged
+34,129746,16,turn on the stove,609,79,0.6579247713088989,0.5891863624235074,0,0,0,0,unchanged
+35,129762,13,put the cream cheese in the bowl,610,5,0.45757052302360535,0.4097646475236968,0,0,0,0,unchanged
+36,129959,19,open the middle drawer of the cabinet,611,107,0.2364393174648285,0.2117367022279116,0,0,0,0,unchanged
+37,130065,17,put the bowl on the stove,612,87,2.0897035598754883,2.766898710605484,1,1,1,1,unchanged
+38,130109,16,turn on the stove,613,24,0.5734046697616577,0.5134967192395087,0,0,0,0,unchanged
+39,130285,12,open the top drawer and put the bowl inside,614,110,0.7956933975219727,0.7125612515815483,0,0,0,0,unchanged
+40,130363,10,put the bowl on the plate,615,12,1.2334202527999878,1.1045554503761217,0,0,0,0,unchanged
+41,130502,17,put the bowl on the stove,616,72,1.5651843547821045,1.401657631284538,0,0,0,0,unchanged
+42,130592,16,turn on the stove,617,66,1.905186414718628,1.7061370879737379,0,1,1,1,unchanged
+43,130654,17,put the bowl on the stove,618,32,2.010237455368042,2.69573503492025,1,1,1,1,unchanged
+44,130722,14,put the wine bottle on top of the cabinet,619,6,1.6414852142333984,1.469986759158017,0,0,1,0,removed
+45,130900,10,put the bowl on the plate,620,80,0.9236242175102234,0.8271261650150098,0,1,0,0,unchanged
+46,130944,10,put the bowl on the plate,621,40,1.1859643459320068,1.0620576233260335,0,0,0,0,unchanged
+47,131071,16,turn on the stove,622,75,1.3872895240783691,1.2423488276537515,0,0,1,1,unchanged
+48,133359,17,put the bowl on the stove,641,79,1.392706274986267,1.2471996493627888,0,0,0,0,unchanged
+49,133468,10,put the bowl on the plate,642,69,1.1222795248031616,1.0050264402200257,0,0,0,0,unchanged
+50,133558,17,put the bowl on the stove,643,69,1.3518664836883545,1.2106267019282637,0,0,0,0,unchanged
+51,133602,13,put the cream cheese in the bowl,644,20,1.3589966297149658,1.2170119073258503,0,1,1,0,removed
+52,133718,14,put the wine bottle on top of the cabinet,645,32,1.4513863325119019,1.2997489546147392,0,1,0,0,unchanged
+53,133825,10,put the bowl on the plate,646,49,1.1194254159927368,1.0024705218820833,0,0,0,0,unchanged
+54,133948,15,push the plate to the front of the stove,647,66,0.4012671411037445,0.3593437084860795,0,1,0,0,unchanged
+55,134021,14,put the wine bottle on top of the cabinet,648,5,0.674085795879364,0.6036589217417501,0,0,0,0,unchanged
+56,134977,10,put the bowl on the plate,655,47,1.359677791595459,1.2176219030397841,0,0,0,0,unchanged
+57,135033,14,put the wine bottle on top of the cabinet,656,16,1.50459885597229,1.3474019607033054,0,1,0,0,unchanged
+58,135192,13,put the cream cheese in the bowl,657,70,1.8450641632080078,2.5478186538670204,1,1,1,1,unchanged
+59,135276,16,turn on the stove,658,58,0.7309587001800537,0.6545898808219502,0,0,0,0,unchanged
+60,135428,19,open the middle drawer of the cabinet,659,124,1.4444258213043213,1.2935156609954037,0,0,1,1,unchanged
+61,135506,18,put the bowl on top of the cabinet,660,66,1.536704659461975,1.3761534265177613,0,0,1,0,removed
+62,135568,18,put the bowl on top of the cabinet,661,38,0.96295166015625,0.8623447703730873,0,0,0,0,unchanged
+63,135728,18,put the bowl on top of the cabinet,662,93,1.4847100973129272,1.329591132051397,0,1,0,0,unchanged
+64,220539,30,pick up the black bowl next to the cookie box and place it on the plate,1261,44,1.3495949506759644,2.104114881407092,1,0,1,1,unchanged
+65,220649,31,pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate,1262,44,2.0750954151153564,2.753816789923496,1,0,1,1,unchanged
+66,220857,31,pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate,1263,114,1.6574463844299316,2.3798027325568727,1,1,0,1,added
+67,220906,32,pick up the black bowl on the ramekin and place it on the plate,1264,36,1.0751851797103882,0.962852399834334,0,0,0,0,unchanged
+68,220978,32,pick up the black bowl on the ramekin and place it on the plate,1265,8,1.2148866653442383,1.0879582078768206,0,0,0,0,unchanged
+69,221135,32,pick up the black bowl on the ramekin and place it on the plate,1266,49,1.0748735666275024,0.9625733433421704,0,0,0,0,unchanged
+70,221290,33,pick up the black bowl on the stove and place it on the plate,1267,97,0.7922428250312805,0.7094711866642098,0,0,0,0,unchanged
+71,221341,31,pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate,1268,24,1.2454379796981812,1.1153175938680884,0,0,0,0,unchanged
+72,103343,17,put the bowl on the stove,392,47,1.0412607192993164,0.9324722860304182,0,0,0,0,unchanged
+73,103410,13,put the cream cheese in the bowl,393,11,1.2557051181793213,1.1245120462401532,0,0,0,0,unchanged
+74,103566,17,put the bowl on the stove,394,75,0.5984072685241699,0.5358871061931908,0,1,0,0,unchanged
+75,103650,17,put the bowl on the stove,395,48,1.6722029447555542,1.4974951745536689,0,0,0,0,unchanged
+76,103742,14,put the wine bottle on top of the cabinet,396,36,0.9722815155982971,1.7662222529464522,1,0,0,1,added
+77,103841,14,put the wine bottle on top of the cabinet,397,22,1.1671289205551147,1.9407124663575954,1,0,0,1,added
+78,103975,18,put the bowl on top of the cabinet,398,55,1.220822811126709,1.0932741593243265,0,0,0,0,unchanged
+79,115229,13,put the cream cheese in the bowl,491,63,1.4890403747558594,1.3334689924484298,0,0,1,1,unchanged
+80,115341,13,put the cream cheese in the bowl,492,79,1.0903013944625854,0.9763893085689622,0,0,0,0,unchanged
+81,115389,18,put the bowl on top of the cabinet,493,41,0.6273930072784424,0.5618444841846172,0,1,0,0,unchanged
+82,115476,12,open the top drawer and put the bowl inside,494,31,1.1638123989105225,1.0422200588272517,0,0,1,1,unchanged
+83,115719,17,put the bowl on the stove,495,75,1.7955399751663208,2.5034686347208956,1,0,1,1,unchanged
+84,115815,19,open the middle drawer of the cabinet,496,79,1.293821096420288,1.1586457581010567,0,0,0,0,unchanged
+85,115952,19,open the middle drawer of the cabinet,497,88,1.516980767250061,1.3584902394605973,0,0,1,1,unchanged
+86,221459,33,pick up the black bowl on the stove and place it on the plate,1269,13,0.9843991994857788,0.8815515220133402,0,0,0,0,unchanged
+87,221630,33,pick up the black bowl on the stove and place it on the plate,1270,45,0.5045202970504761,0.45180922128319445,0,1,0,0,unchanged
+88,221809,32,pick up the black bowl on the ramekin and place it on the plate,1271,76,1.5321083068847656,1.3720372898810538,0,0,0,0,unchanged
+89,221903,34,pick up the black bowl between the plate and the ramekin and place it on the plate,1272,69,2.278801202774048,2.93623988336694,1,1,1,1,unchanged
+90,221954,34,pick up the black bowl between the plate and the ramekin and place it on the plate,1273,36,1.9009846448898315,1.7023743090222108,0,1,0,0,unchanged
+91,222093,30,pick up the black bowl next to the cookie box and place it on the plate,1274,90,1.3423141241073608,1.2020723500638548,0,0,0,0,unchanged
+92,222222,34,pick up the black bowl between the plate and the ramekin and place it on the plate,1275,106,3.0992016792297363,3.670926877279342,1,0,1,1,unchanged
+93,222297,31,pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate,1276,53,1.6671059131622314,2.3884530567955946,1,0,1,1,unchanged
+94,222482,30,pick up the black bowl next to the cookie box and place it on the plate,1277,98,1.7862681150436401,1.5996430882544315,0,0,1,1,unchanged
+95,222523,35,pick up the black bowl on the cookie box and place it on the plate,1278,28,0.9247098565101624,0.8280983790449005,0,0,0,0,unchanged
+96,222618,35,pick up the black bowl on the cookie box and place it on the plate,1279,22,1.4994361400604248,1.3427786330205882,0,1,0,0,unchanged
+97,222764,36,pick up the black bowl next to the plate and place it on the plate,1280,72,1.4944320917129517,1.338297395694057,0,0,1,1,unchanged
+98,222869,37,pick up the black bowl next to the ramekin and place it on the plate,1281,70,1.2977184057235718,1.1621358858356803,0,0,0,0,unchanged
+99,222922,34,pick up the black bowl between the plate and the ramekin and place it on the plate,1282,11,1.7939382791519165,1.6065118919341532,0,0,0,0,unchanged
+100,223106,38,pick up the black bowl from table center and place it on the plate,1283,111,1.3408141136169434,1.2007290570872309,0,0,1,1,unchanged
+101,223159,31,pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate,1284,29,1.4080976247787476,1.2609829476857541,0,0,0,0,unchanged
+102,223378,36,pick up the black bowl next to the plate and place it on the plate,1285,99,1.1632237434387207,1.0416929046733479,0,1,0,0,unchanged
+103,223404,37,pick up the black bowl next to the ramekin and place it on the plate,1286,0,0.860316276550293,0.7704324865379139,0,1,0,0,unchanged
+104,223614,38,pick up the black bowl from table center and place it on the plate,1287,78,0.6138622760772705,0.5497274114659708,0,0,0,0,unchanged
+105,223702,32,pick up the black bowl on the ramekin and place it on the plate,1288,66,1.4694734811782837,1.3159464011832243,0,1,0,0,unchanged
+106,223814,38,pick up the black bowl from table center and place it on the plate,1289,92,1.1994729042053223,1.0741548396913736,0,0,0,0,unchanged
+107,227056,30,pick up the black bowl next to the cookie box and place it on the plate,1314,77,0.4970456659793854,0.44511552181589475,0,1,0,0,unchanged
+108,227145,38,pick up the black bowl from table center and place it on the plate,1315,49,1.2595970630645752,1.1279973700183317,0,0,0,0,unchanged
+109,227273,38,pick up the black bowl from table center and place it on the plate,1316,71,1.339040994644165,1.19914118935026,0,0,1,0,removed
+110,227336,38,pick up the black bowl from table center and place it on the plate,1317,31,0.7644826769828796,0.6846113525885961,0,0,0,0,unchanged
+111,227523,37,pick up the black bowl next to the ramekin and place it on the plate,1318,104,1.2297731637954712,1.101289400521013,0,0,0,0,unchanged
+112,227610,35,pick up the black bowl on the cookie box and place it on the plate,1319,56,1.4444470405578613,1.2935346633120086,0,0,0,0,unchanged
+113,227711,38,pick up the black bowl from table center and place it on the plate,1320,55,1.074660062789917,0.9623821458756573,0,1,0,0,unchanged
+114,234707,37,pick up the black bowl next to the ramekin and place it on the plate,1375,62,1.356838583946228,1.2150793290253001,0,0,0,0,unchanged
+115,234841,37,pick up the black bowl next to the ramekin and place it on the plate,1376,71,0.9737746119499207,0.8720369660101533,0,1,0,0,unchanged
+116,234900,38,pick up the black bowl from table center and place it on the plate,1377,4,1.0646096467971802,0.9533817733439724,0,1,0,0,unchanged
+117,235045,35,pick up the black bowl on the cookie box and place it on the plate,1378,15,1.048493504524231,0.9389494071279868,0,0,0,0,unchanged
+118,235163,34,pick up the black bowl between the plate and the ramekin and place it on the plate,1379,18,1.3225867748260498,1.1844060671236485,0,0,0,0,unchanged
+119,235232,38,pick up the black bowl from table center and place it on the plate,1380,12,1.1778331995010376,1.0547759996558004,0,0,0,0,unchanged
+120,235385,33,pick up the black bowl on the stove and place it on the plate,1381,55,0.2349420040845871,0.2103958245738336,0,1,0,0,unchanged
+121,235538,34,pick up the black bowl between the plate and the ramekin and place it on the plate,1382,80,1.155185580253601,1.0344945495814957,0,0,0,0,unchanged
+122,235652,38,pick up the black bowl from table center and place it on the plate,1383,73,1.351544976234436,1.2103387848053235,0,0,1,1,unchanged
+123,235751,33,pick up the black bowl on the stove and place it on the plate,1384,58,0.7587555646896362,0.6794825953105657,0,0,0,0,unchanged
+124,235910,38,pick up the black bowl from table center and place it on the plate,1385,91,1.125629186630249,1.9035485255257414,1,1,0,1,added
+125,235981,35,pick up the black bowl on the cookie box and place it on the plate,1386,54,1.8058116436004639,1.6171447556204541,0,1,1,0,removed
+126,236034,36,pick up the black bowl next to the plate and place it on the plate,1387,10,0.07204810529947281,0.06452069131923875,0,0,0,0,unchanged
+127,236242,32,pick up the black bowl on the ramekin and place it on the plate,1388,80,1.0992753505706787,0.9844256871740068,0,0,0,0,unchanged
+128,237793,34,pick up the black bowl between the plate and the ramekin and place it on the plate,1401,50,1.2610489130020142,1.1292975341415379,0,0,0,0,unchanged
+129,237941,39,pick up the black bowl on the wooden cabinet and place it on the plate,1402,109,0.27389153838157654,0.24527600454468076,0,1,0,0,unchanged
+130,238081,36,pick up the black bowl next to the plate and place it on the plate,1403,76,1.8384974002838135,1.6464155825039137,0,0,1,1,unchanged
+131,238191,32,pick up the black bowl on the ramekin and place it on the plate,1404,49,1.9032644033432007,1.7044158837567698,0,0,1,1,unchanged
+132,238241,35,pick up the black bowl on the cookie box and place it on the plate,1405,8,0.7944042682647705,0.7114068074705087,0,0,0,0,unchanged
+133,238394,37,pick up the black bowl next to the ramekin and place it on the plate,1406,69,1.7921698093414307,1.6049281876261012,0,0,1,1,unchanged
+134,238553,33,pick up the black bowl on the stove and place it on the plate,1407,102,1.1024730205535889,0.987289272233608,0,0,1,1,unchanged
+135,243236,39,pick up the black bowl on the wooden cabinet and place it on the plate,1444,41,1.753649115562439,1.5704320439400656,0,1,0,0,unchanged
+136,243396,38,pick up the black bowl from table center and place it on the plate,1445,65,1.2343906164169312,1.1054244327197376,0,0,0,0,unchanged
+137,243443,30,pick up the black bowl next to the cookie box and place it on the plate,1446,3,0.7366378307342529,0.6596756693784444,0,0,0,0,unchanged
+138,243591,39,pick up the black bowl on the wooden cabinet and place it on the plate,1447,45,1.8147273063659668,1.625128931232129,0,0,0,0,unchanged
+139,243728,30,pick up the black bowl next to the cookie box and place it on the plate,1448,51,1.1349401473999023,1.016364311203285,0,0,0,0,unchanged
+140,243886,34,pick up the black bowl between the plate and the ramekin and place it on the plate,1449,90,2.074860095977783,1.858083668220602,0,0,0,0,unchanged
+141,243908,34,pick up the black bowl between the plate and the ramekin and place it on the plate,1450,19,1.5504941940307617,1.3885022634462345,0,0,0,0,unchanged
+142,248555,36,pick up the black bowl next to the plate and place it on the plate,1488,36,0.7028887271881104,0.6294525915729879,0,0,0,0,unchanged
+143,248686,35,pick up the black bowl on the cookie box and place it on the plate,1489,34,1.9650431871414185,2.655262555907395,1,0,1,1,unchanged
+144,248863,37,pick up the black bowl next to the ramekin and place it on the plate,1490,125,0.24229967594146729,0.21698478444630773,0,0,0,0,unchanged
+145,248949,34,pick up the black bowl between the plate and the ramekin and place it on the plate,1491,84,2.322418212890625,2.0797775042835243,0,1,1,1,unchanged
+146,248969,33,pick up the black bowl on the stove and place it on the plate,1492,4,0.9563624262809753,0.8564439639170434,0,0,0,0,unchanged
+147,249121,34,pick up the black bowl between the plate and the ramekin and place it on the plate,1493,19,1.24265718460083,1.1128273296015614,0,0,0,0,unchanged
+148,249301,31,pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate,1494,115,1.1747143268585205,1.0519829793786475,0,0,0,0,unchanged
+149,261513,31,pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate,1595,8,0.4055214524269104,0.36315353952212115,0,1,0,0,unchanged
+150,261763,37,pick up the black bowl next to the ramekin and place it on the plate,1596,119,1.376037836074829,2.127795077288976,1,0,1,1,unchanged
+151,261811,34,pick up the black bowl between the plate and the ramekin and place it on the plate,1597,26,0.8673811554908752,0.7767592437987524,0,0,0,0,unchanged
+152,261998,32,pick up the black bowl on the ramekin and place it on the plate,1598,117,1.7465275526046753,2.459576913019629,1,1,1,1,unchanged
+153,262043,36,pick up the black bowl next to the plate and place it on the plate,1599,33,0.8620797395706177,0.7720117071532837,0,1,0,0,unchanged
+154,262167,35,pick up the black bowl on the cookie box and place it on the plate,1600,41,1.64707350730896,2.3705135888655464,1,1,0,1,added
+155,262311,37,pick up the black bowl next to the ramekin and place it on the plate,1601,88,0.9364263415336609,0.8385907536938305,0,0,0,0,unchanged
+156,104037,19,open the middle drawer of the cabinet,399,17,0.6660231947898865,0.5964386819594258,0,0,0,0,unchanged
+157,104232,15,push the plate to the front of the stove,400,76,0.2694620192050934,0.24130927095341437,0,1,0,0,unchanged
+158,104346,17,put the bowl on the stove,401,52,1.0815343856811523,0.9685382559281089,0,0,0,0,unchanged
+159,104483,18,put the bowl on top of the cabinet,402,85,1.5908581018447876,1.4246490465667898,0,0,1,1,unchanged
+160,104683,11,put the wine bottle on the rack,403,175,1.1680079698562622,1.04597728654022,0,0,0,0,unchanged
+161,104761,14,put the wine bottle on top of the cabinet,404,76,0.7785181403160095,0.697180424231428,0,0,0,0,unchanged
+162,149965,13,put the cream cheese in the bowl,777,38,1.1538965702056885,1.9288626003718816,1,0,0,1,added
+163,150084,15,push the plate to the front of the stove,778,62,0.18518619239330292,0.16583838126387043,0,1,0,0,unchanged
+164,150228,19,open the middle drawer of the cabinet,779,52,1.0914393663406372,0.977408387862839,0,1,0,0,unchanged
+165,150399,19,open the middle drawer of the cabinet,780,97,0.1694236844778061,0.15172270253220127,0,0,0,0,unchanged
+166,150462,15,push the plate to the front of the stove,781,39,1.5015957355499268,1.3447125991307782,0,0,1,1,unchanged
+167,150583,12,open the top drawer and put the bowl inside,782,35,0.7978689074516296,0.7145094694291918,0,0,0,0,unchanged
+168,153558,20,pick up the orange juice and place it in the basket,807,47,1.3170135021209717,2.0749374647878414,1,0,1,1,unchanged
+169,153657,21,pick up the ketchup and place it in the basket,808,3,0.7206647992134094,0.6453714620449539,0,0,0,0,unchanged
+170,153816,21,pick up the ketchup and place it in the basket,809,14,0.9028027653694153,0.8084800884691883,0,0,1,1,unchanged
+171,153954,22,pick up the cream cheese and place it in the basket,810,11,0.6994169354438782,0.6263435243390446,0,0,0,0,unchanged
+172,154174,23,pick up the bbq sauce and place it in the basket,811,101,0.8717581629753113,0.7806789519941512,0,1,0,0,unchanged
+173,154299,23,pick up the bbq sauce and place it in the basket,812,94,1.1105010509490967,0.9944785531855085,0,1,1,0,removed
+174,223955,39,pick up the black bowl on the wooden cabinet and place it on the plate,1290,113,2.276524543762207,2.0386786961048227,0,1,1,1,unchanged
+175,224063,30,pick up the black bowl next to the cookie box and place it on the plate,1291,57,1.3544938564300537,1.212979573040462,0,0,1,1,unchanged
+176,224242,30,pick up the black bowl next to the cookie box and place it on the plate,1292,111,0.814069926738739,0.729017844911597,0,0,0,0,unchanged
+177,224307,36,pick up the black bowl next to the plate and place it on the plate,1293,19,0.7189429402351379,0.6438294987806802,0,0,0,0,unchanged
+178,224516,37,pick up the black bowl next to the ramekin and place it on the plate,1294,107,2.5729875564575195,3.199690349377773,1,0,1,1,unchanged
+179,224597,39,pick up the black bowl on the wooden cabinet and place it on the plate,1295,68,0.938385546207428,0.8403452653421509,0,0,0,0,unchanged
+180,225557,31,pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate,1302,145,0.4938196837902069,0.4422265825417225,0,0,0,0,unchanged
+181,225585,35,pick up the black bowl on the cookie box and place it on the plate,1303,17,1.5704588890075684,1.4063810947704876,0,0,0,0,unchanged
+182,225742,30,pick up the black bowl next to the cookie box and place it on the plate,1304,55,1.106564998626709,0.990953730209893,0,1,0,0,unchanged
+183,225898,37,pick up the black bowl next to the ramekin and place it on the plate,1305,98,1.2826406955718994,1.1486334588328688,0,0,0,0,unchanged
+184,226007,39,pick up the black bowl on the wooden cabinet and place it on the plate,1306,64,0.643482506275177,0.5762529907502592,0,0,0,0,unchanged
+185,226136,36,pick up the black bowl next to the plate and place it on the plate,1307,61,1.3228940963745117,1.184681280450656,0,0,1,1,unchanged
+186,233864,33,pick up the black bowl on the stove and place it on the plate,1369,21,1.2350338697433472,2.001522868621631,1,0,1,1,unchanged
+187,234033,37,pick up the black bowl next to the ramekin and place it on the plate,1370,57,1.0896769762039185,0.9758301280387582,0,1,0,0,unchanged
+188,234156,30,pick up the black bowl next to the cookie box and place it on the plate,1371,28,0.9504525065422058,0.8511514984788243,0,0,0,0,unchanged
+189,234284,36,pick up the black bowl next to the plate and place it on the plate,1372,34,0.8721673488616943,0.7810453871163209,0,0,0,0,unchanged
+190,234470,31,pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate,1373,105,1.1596930027008057,1.038531047295803,0,0,0,0,unchanged
+191,234598,30,pick up the black bowl next to the cookie box and place it on the plate,1374,77,0.9333985447883606,0.835879293921656,0,0,0,0,unchanged
+192,236349,33,pick up the black bowl on the stove and place it on the plate,1389,81,0.6169211268424988,0.5524666808082329,0,1,0,0,unchanged
+193,236450,39,pick up the black bowl on the wooden cabinet and place it on the plate,1390,46,1.9789159297943115,1.7721635193912222,0,0,0,0,unchanged
+194,236625,35,pick up the black bowl on the cookie box and place it on the plate,1391,91,0.9278875589370728,0.8309440827110673,0,0,0,0,unchanged
+195,236640,36,pick up the black bowl next to the plate and place it on the plate,1392,10,0.9567800760269165,0.8568179786149375,0,1,0,0,unchanged
+196,236788,36,pick up the black bowl next to the plate and place it on the plate,1393,36,1.2103345394134521,1.0838816771921378,0,0,0,0,unchanged
+197,236880,31,pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate,1394,19,1.7319952249526978,1.5510405001085599,0,0,1,0,removed
+198,252522,32,pick up the black bowl on the ramekin and place it on the plate,1521,43,1.126715898513794,1.008999312200083,0,0,0,0,unchanged
+199,252699,35,pick up the black bowl on the cookie box and place it on the plate,1522,92,2.2392807006835938,2.0053260008072966,0,0,1,1,unchanged
+200,252751,39,pick up the black bowl on the wooden cabinet and place it on the plate,1523,47,2.4961042404174805,3.1308396185889493,1,0,1,1,unchanged
+201,252944,32,pick up the black bowl on the ramekin and place it on the plate,1524,110,1.5400811433792114,1.3791771434588642,0,1,1,1,unchanged
+202,253015,32,pick up the black bowl on the ramekin and place it on the plate,1525,58,1.3595523834228516,1.2175095972135577,0,0,0,0,unchanged
+203,253166,30,pick up the black bowl next to the cookie box and place it on the plate,1526,90,1.1360406875610352,1.017349869556634,0,1,0,0,unchanged
+204,266288,33,pick up the black bowl on the stove and place it on the plate,1634,56,0.48230770230293274,0.4319173453879365,0,0,0,0,unchanged
+205,266385,32,pick up the black bowl on the ramekin and place it on the plate,1635,28,1.413875937461853,1.266157556059188,0,0,0,0,unchanged
+206,266572,33,pick up the black bowl on the stove and place it on the plate,1636,106,1.3457529544830322,1.205151899654308,0,0,1,1,unchanged
+207,266741,33,pick up the black bowl on the stove and place it on the plate,1637,135,0.24288567900657654,0.21750956331063573,0,0,0,0,unchanged
+208,266772,35,pick up the black bowl on the cookie box and place it on the plate,1638,25,1.2550196647644043,1.1238982073610633,0,0,0,0,unchanged
+209,266935,36,pick up the black bowl next to the plate and place it on the plate,1639,89,1.0850633382797241,0.9716985119868389,0,0,0,0,unchanged
+210,101621,11,put the wine bottle on the rack,380,40,1.4592742919921875,1.30681279892613,0,0,0,0,unchanged
+211,101842,11,put the wine bottle on the rack,381,106,1.1588860750198364,1.0378084254918796,0,0,0,0,unchanged
+212,102024,12,open the top drawer and put the bowl inside,382,138,1.3943955898284912,1.2487124686246291,0,1,1,1,unchanged
+213,102160,12,open the top drawer and put the bowl inside,383,97,0.6917228698730469,0.6194533163644954,0,0,0,0,unchanged
+214,102362,13,put the cream cheese in the bowl,384,81,1.0012983083724976,0.896685052361128,0,1,0,0,unchanged
+215,111912,13,put the cream cheese in the bowl,464,24,0.5998253226280212,0.5371570053907931,0,0,0,0,unchanged
+216,111995,12,open the top drawer and put the bowl inside,465,17,1.267696738243103,1.1352508104774206,0,0,1,1,unchanged
+217,112314,11,put the wine bottle on the rack,467,16,0.6482359766960144,0.5805098299335129,0,0,0,0,unchanged
+218,112505,14,put the wine bottle on top of the cabinet,468,40,1.5936826467514038,1.4271784897669908,0,0,1,0,removed
+219,112682,19,open the middle drawer of the cabinet,469,125,0.8184970021247864,0.7329823900338163,0,1,0,0,unchanged
+220,126284,13,put the cream cheese in the bowl,581,11,0.4594109356403351,0.4114127782254062,0,0,0,0,unchanged
+221,126520,11,put the wine bottle on the rack,583,72,0.6237403154373169,0.5585734168638881,0,1,0,0,unchanged
+222,126716,15,push the plate to the front of the stove,584,108,0.264512836933136,0.23687716742585707,0,0,0,0,unchanged
+223,126789,19,open the middle drawer of the cabinet,585,26,0.5187728404998779,0.46457269303016935,0,0,0,0,unchanged
+224,127002,11,put the wine bottle on the rack,586,109,1.5872746706008911,1.4214400036614956,0,0,1,1,unchanged
+225,154384,24,pick up the alphabet soup and place it in the basket,813,47,1.2566994428634644,2.0209248744027284,1,0,0,1,added
+226,154632,25,pick up the milk and place it in the basket,814,140,0.8958073258399963,0.8022155157556662,0,1,0,0,unchanged
+227,154754,21,pick up the ketchup and place it in the basket,815,87,0.38637492060661316,0.34600739162167915,0,0,0,0,unchanged
+228,154886,26,pick up the salad dressing and place it in the basket,816,67,1.2732694149017334,1.1402412671871274,0,0,1,1,unchanged
+229,154968,25,pick up the milk and place it in the basket,817,25,0.8183205723762512,0.7328243932440679,0,0,0,0,unchanged
+230,155161,24,pick up the alphabet soup and place it in the basket,818,75,1.453811526298523,1.301920769946253,0,0,1,1,unchanged
+231,155379,27,pick up the butter and place it in the basket,819,129,1.8317358493804932,2.535882850438234,1,1,1,1,unchanged
+232,155404,21,pick up the ketchup and place it in the basket,820,2,0.7957382798194885,0.7126014446838052,0,0,0,0,unchanged
+233,155652,28,pick up the tomato sauce and place it in the basket,821,99,1.5932965278625488,1.4268327116575348,0,0,1,1,unchanged
+234,155741,26,pick up the salad dressing and place it in the basket,822,56,0.747201144695282,0.66913535352357,0,1,0,0,unchanged
+235,155915,29,pick up the chocolate pudding and place it in the basket,823,115,0.20155960321426392,0.1805011372243667,0,1,0,0,unchanged
+236,156068,23,pick up the bbq sauce and place it in the basket,824,106,0.4451099634170532,0.3986059374271912,0,0,0,0,unchanged
+237,156188,24,pick up the alphabet soup and place it in the basket,825,65,1.1326977014541626,1.014356150654666,0,0,0,0,unchanged
+238,156325,29,pick up the chocolate pudding and place it in the basket,826,49,1.806099534034729,1.6174025679496717,0,0,1,1,unchanged
+239,156534,27,pick up the butter and place it in the basket,827,97,0.3432333171367645,0.3073731198538764,0,0,0,0,unchanged
+240,156616,27,pick up the butter and place it in the basket,828,23,0.9082762598991394,0.8133817253619554,0,0,0,0,unchanged
+241,156838,20,pick up the orange juice and place it in the basket,829,78,0.5111903548240662,0.45778240734967723,0,0,0,0,unchanged
+242,156908,28,pick up the tomato sauce and place it in the basket,830,12,0.3262869417667389,0.2921972613120783,0,0,0,0,unchanged
+243,157107,26,pick up the salad dressing and place it in the basket,831,81,0.17975826561450958,0.16097755131223926,0,0,0,0,unchanged
+244,157236,20,pick up the orange juice and place it in the basket,832,84,0.2957530915737152,0.2648535148679039,0,1,0,0,unchanged
+245,157299,21,pick up the ketchup and place it in the basket,833,11,0.8492555618286133,0.7605273688757445,0,0,0,0,unchanged
+246,157544,29,pick up the chocolate pudding and place it in the basket,834,119,0.8255168199539185,0.7392687940605164,0,1,0,0,unchanged
+247,157637,20,pick up the orange juice and place it in the basket,835,53,1.0189785957336426,0.912518145521903,0,0,0,0,unchanged
+248,157819,21,pick up the ketchup and place it in the basket,836,106,0.7711176872253418,0.6905531528063046,0,0,0,0,unchanged
+249,157854,20,pick up the orange juice and place it in the basket,837,5,0.3193886876106262,0.2860197202761524,0,0,0,0,unchanged
+250,159263,23,pick up the bbq sauce and place it in the basket,846,23,0.9277787208557129,0.8308466157725266,0,0,0,0,unchanged
+251,159453,29,pick up the chocolate pudding and place it in the basket,847,80,1.0183485746383667,0.9119539475260786,0,0,0,0,unchanged
+252,159559,20,pick up the orange juice and place it in the basket,848,23,1.4953954219818115,1.3391600795170004,0,0,1,1,unchanged
+253,159715,23,pick up the bbq sauce and place it in the basket,849,52,0.7900527715682983,1.6030323329037088,1,0,0,1,added
+254,159922,24,pick up the alphabet soup and place it in the basket,850,99,0.6356320381164551,0.5692227207566898,0,0,0,0,unchanged
+255,159994,25,pick up the milk and place it in the basket,851,19,0.8939628601074219,0.8005637553979761,0,0,0,0,unchanged
+256,160225,24,pick up the alphabet soup and place it in the basket,852,113,0.9301039576530457,0.8329289173822809,0,1,0,0,unchanged
+257,160293,23,pick up the bbq sauce and place it in the basket,853,12,0.9128544926643372,0.8174816353013374,0,1,0,0,unchanged
+258,160428,20,pick up the orange juice and place it in the basket,854,22,1.0520424842834473,0.9421275979574449,0,0,0,0,unchanged
+259,160626,27,pick up the butter and place it in the basket,855,88,0.0693855732679367,0.06213633427584008,0,1,0,0,unchanged
+260,160809,22,pick up the cream cheese and place it in the basket,856,120,0.9003445506095886,0.8062787021168905,0,0,0,0,unchanged
+261,160868,24,pick up the alphabet soup and place it in the basket,857,26,1.1437244415283203,1.02423084325935,0,0,0,0,unchanged
+262,161035,23,pick up the bbq sauce and place it in the basket,858,39,1.1090669631958008,1.8887166836427027,1,0,1,1,unchanged
+263,161257,25,pick up the milk and place it in the basket,859,129,0.6329067349433899,0.5667821507507224,0,0,0,0,unchanged
+264,161419,24,pick up the alphabet soup and place it in the basket,860,150,0.834612250328064,0.7474139555903945,0,0,0,0,unchanged
+265,161507,27,pick up the butter and place it in the basket,861,85,0.10980544239282608,0.09833323200314366,0,0,0,0,unchanged
+266,161645,22,pick up the cream cheese and place it in the basket,862,74,0.9319892525672913,0.8346172411862472,0,1,0,0,unchanged
+267,161786,21,pick up the ketchup and place it in the basket,863,48,0.9301806688308716,0.8329976139594452,0,0,1,1,unchanged
+268,161959,28,pick up the tomato sauce and place it in the basket,864,80,0.12247494608163834,0.10967905620318398,0,1,0,0,unchanged
+269,162085,26,pick up the salad dressing and place it in the basket,865,73,0.20341436564922333,0.1821621185095666,0,0,0,0,unchanged
+270,162856,20,pick up the orange juice and place it in the basket,870,39,0.9524379372596741,1.7484518842832697,1,0,0,1,added
+271,162954,23,pick up the bbq sauce and place it in the basket,871,2,0.5619800686836243,0.5032657331984832,0,0,0,0,unchanged
+272,163103,27,pick up the butter and place it in the basket,872,22,0.6525532603263855,0.58437605408049,0,0,0,0,unchanged
+273,163382,27,pick up the butter and place it in the basket,873,150,0.0973009541630745,0.08713518284108249,0,1,0,0,unchanged
+274,163456,28,pick up the tomato sauce and place it in the basket,874,66,1.4909197092056274,2.2306743666698505,1,1,0,1,added
+275,164242,25,pick up the milk and place it in the basket,879,62,0.8457737565040588,0.7574093342564371,0,0,0,0,unchanged
+276,164369,20,pick up the orange juice and place it in the basket,880,59,1.0537729263305664,0.9436772475520309,0,1,1,0,removed
+277,164556,27,pick up the butter and place it in the basket,881,118,1.2597852945327759,1.128165935512259,0,0,1,1,unchanged
+278,164599,26,pick up the salad dressing and place it in the basket,882,8,0.5393703579902649,0.48301823108305697,0,0,0,0,unchanged
+279,164730,28,pick up the tomato sauce and place it in the basket,883,11,0.19842560589313507,0.1776945724589036,0,0,0,0,unchanged
+280,165522,26,pick up the salad dressing and place it in the basket,888,33,0.7823466658592224,1.5961313427158053,1,1,0,1,added
+281,165675,23,pick up the bbq sauce and place it in the basket,889,65,0.7842113375663757,0.7022788098292669,0,0,0,0,unchanged
+282,165851,21,pick up the ketchup and place it in the basket,890,106,0.1491183489561081,0.13353881997368747,0,1,0,0,unchanged
+283,165963,26,pick up the salad dressing and place it in the basket,891,59,0.9347387552261353,0.8370794823735113,0,1,0,0,unchanged
+284,166100,22,pick up the cream cheese and place it in the basket,892,74,1.0067189931869507,0.9015393969715584,0,0,1,0,removed
+285,166314,23,pick up the bbq sauce and place it in the basket,893,117,0.490000456571579,0.4388063790620214,0,0,0,0,unchanged
+286,166346,22,pick up the cream cheese and place it in the basket,894,23,0.7407540082931519,0.663361798536026,0,0,0,0,unchanged
+287,166551,25,pick up the milk and place it in the basket,895,78,0.1835947483778,0.16441320751850524,0,1,0,0,unchanged
+288,166701,23,pick up the bbq sauce and place it in the basket,896,89,1.3308357000350952,1.1917931643264974,0,0,1,1,unchanged
+289,166837,26,pick up the salad dressing and place it in the basket,897,59,1.2350642681121826,1.1060277028946484,0,0,1,0,removed
+290,167000,20,pick up the orange juice and place it in the basket,898,96,0.5553966760635376,0.497370157717235,0,1,0,0,unchanged
+291,167060,28,pick up the tomato sauce and place it in the basket,899,35,1.1873819828033447,1.063327148882579,0,0,0,0,unchanged
+292,167290,22,pick up the cream cheese and place it in the basket,900,132,0.28608494997024536,0.2561954776102228,0,0,0,0,unchanged
+293,167343,25,pick up the milk and place it in the basket,901,45,1.6102322340011597,1.4419990156637366,0,0,1,1,unchanged
+294,167504,26,pick up the salad dressing and place it in the basket,902,67,0.7287212610244751,0.6525862039660132,0,0,0,0,unchanged
+295,167629,22,pick up the cream cheese and place it in the basket,903,68,1.0138462781906128,0.907922040259041,0,1,1,1,unchanged
+296,167812,28,pick up the tomato sauce and place it in the basket,904,118,1.5922218561172485,2.3213927071965474,1,0,1,1,unchanged
+297,167901,24,pick up the alphabet soup and place it in the basket,905,67,1.4914014339447021,1.3355833738117784,0,1,1,1,unchanged
+298,168025,26,pick up the salad dressing and place it in the basket,906,37,1.294922113418579,2.0551541316195947,1,0,1,1,unchanged
+299,168124,27,pick up the butter and place it in the basket,907,3,0.6855303049087524,0.613907735798916,0,0,0,0,unchanged
+300,168946,25,pick up the milk and place it in the basket,912,49,0.846923828125,0.7584392491409622,0,0,0,0,unchanged
+301,169139,22,pick up the cream cheese and place it in the basket,913,104,1.6037074327468872,2.331678298209165,1,0,1,1,unchanged
+302,169163,27,pick up the butter and place it in the basket,914,1,0.8185552358627319,0.733034539649892,0,0,0,0,unchanged
+303,169458,21,pick up the ketchup and place it in the basket,915,142,0.8821288347244263,0.7899661207256056,0,1,1,1,unchanged
+304,169547,26,pick up the salad dressing and place it in the basket,916,71,0.5877867937088013,0.5263762332232785,0,0,0,0,unchanged
+305,169628,27,pick up the butter and place it in the basket,917,20,0.8468599319458008,0.7583820286819722,0,0,0,0,unchanged
+306,169806,29,pick up the chocolate pudding and place it in the basket,918,48,1.3601354360580444,2.113554122048679,1,0,1,1,unchanged
+307,170009,22,pick up the cream cheese and place it in the basket,919,89,0.9161360263824463,0.8204203222133629,0,1,0,0,unchanged
+308,170130,29,pick up the chocolate pudding and place it in the basket,920,47,2.177953004837036,2.8459280643100824,1,0,1,1,unchanged
+309,170252,27,pick up the butter and place it in the basket,921,17,1.1047592163085938,0.989336611715901,0,0,1,1,unchanged
+310,171850,22,pick up the cream cheese and place it in the basket,931,83,0.7413493394851685,0.663894930946839,0,0,0,0,unchanged
+311,171978,23,pick up the bbq sauce and place it in the basket,932,84,0.5357097387313843,0.4797400645822479,0,0,0,0,unchanged
+312,172038,26,pick up the salad dressing and place it in the basket,933,17,0.586222767829895,0.5249756130330769,0,0,0,0,unchanged
+313,172214,24,pick up the alphabet soup and place it in the basket,934,44,0.7963838577270508,0.7131795741533202,0,0,0,0,unchanged
+314,172363,22,pick up the cream cheese and place it in the basket,935,33,0.40062978863716125,0.3587729450831136,0,0,0,0,unchanged
+315,173949,24,pick up the alphabet soup and place it in the basket,945,100,0.21433238685131073,0.19193945093029774,0,0,0,0,unchanged
+316,174104,25,pick up the milk and place it in the basket,946,101,0.48360881209373474,0.43308251833503675,0,0,0,0,unchanged
+317,174242,25,pick up the milk and place it in the basket,947,99,1.3760075569152832,1.2322455734768705,0,1,1,1,unchanged
+318,174428,29,pick up the chocolate pudding and place it in the basket,948,147,0.5620273351669312,0.5033080613924935,0,0,0,0,unchanged
+319,174565,29,pick up the chocolate pudding and place it in the basket,949,126,1.2432916164398193,1.1133954775171295,0,0,0,0,unchanged
+320,193615,22,pick up the cream cheese and place it in the basket,1079,38,0.9818608164787292,1.774800731347674,1,0,0,1,added
+321,193712,25,pick up the milk and place it in the basket,1080,15,1.0530673265457153,0.9430453671476251,0,0,1,1,unchanged
+322,193940,29,pick up the chocolate pudding and place it in the basket,1081,100,0.19123917818069458,0.1712589655516143,0,1,0,0,unchanged
+323,194141,21,pick up the ketchup and place it in the basket,1082,136,0.2903469204902649,0.2600121676285221,0,0,0,0,unchanged
+324,194282,25,pick up the milk and place it in the basket,1083,127,0.8047211170196533,0.720645776505631,0,0,0,0,unchanged
+325,195696,20,pick up the orange juice and place it in the basket,1093,30,0.7426088452339172,0.6650228465428432,0,0,0,0,unchanged
+326,195833,20,pick up the orange juice and place it in the basket,1094,34,0.8993527293205261,0.8053905039474943,0,0,0,0,unchanged
+327,195952,21,pick up the ketchup and place it in the basket,1095,5,0.739247739315033,0.6620129009435495,0,0,0,0,unchanged
+328,196117,29,pick up the chocolate pudding and place it in the basket,1096,20,1.016672134399414,0.9104526577597063,0,0,0,0,unchanged
+329,196333,21,pick up the ketchup and place it in the basket,1097,87,0.5852975845336914,0.5241470906781871,0,1,0,0,unchanged
+330,116,0,put the white mug on the left plate and put the yellow and white mug on the right plate,0,116,0.3917539417743683,0.3508244255037196,0,1,0,0,unchanged
+331,318,1,put the white mug on the plate and put the chocolate pudding to the right of the plate,1,104,0.6185358166694641,0.5539126716981932,0,1,0,0,unchanged
+332,604,2,put the yellow and white mug in the microwave and close it,2,106,0.5159669518470764,0.46205995692293844,0,0,0,0,unchanged
+333,1078,2,put the yellow and white mug in the microwave and close it,3,235,1.1140331029891968,0.9976415848635178,0,0,0,0,unchanged
+334,61490,9,pick up the book and place it in the back compartment of the caddy,228,76,0.7218639850616455,0.6464453598195982,0,0,0,0,unchanged
+335,61754,9,pick up the book and place it in the back compartment of the caddy,229,173,0.47350749373435974,0.42403656159441777,0,0,0,0,unchanged
+336,62063,2,put the yellow and white mug in the microwave and close it,230,266,1.324715256690979,1.186312170286457,0,0,0,0,unchanged
+337,62159,0,put the white mug on the left plate and put the yellow and white mug on the right plate,231,84,1.2634718418121338,1.1314673211358859,0,0,1,1,unchanged
+338,80121,9,pick up the book and place it in the back compartment of the caddy,299,38,0.41716012358665466,0.3735762301139511,0,0,0,0,unchanged
+339,80496,8,put the black bowl in the bottom drawer of the cabinet and close it,300,224,0.6935222148895264,0.6210646701107533,0,0,0,0,unchanged
+340,80658,0,put the white mug on the left plate and put the yellow and white mug on the right plate,301,149,0.4294653832912445,0.38459586567137244,0,0,0,0,unchanged
+341,80818,1,put the white mug on the plate and put the chocolate pudding to the right of the plate,302,73,0.5064578652381897,0.4535443569738531,0,0,0,0,unchanged
+342,98571,0,put the white mug on the left plate and put the yellow and white mug on the right plate,367,139,0.35889390110969543,0.3213975234130896,0,0,0,0,unchanged
+343,98743,9,pick up the book and place it in the back compartment of the caddy,368,86,0.6495380997657776,0.5816759102946083,0,0,0,0,unchanged
+344,99012,1,put the white mug on the plate and put the chocolate pudding to the right of the plate,369,186,0.6170735359191895,0.5526031665485661,0,0,0,0,unchanged
+345,99095,7,put both the cream cheese box and the butter in the basket,370,62,1.8226934671401978,1.63226280655303,0,1,1,0,removed
+346,116179,12,open the top drawer and put the bowl inside,498,187,0.5396929979324341,0.4833071623745799,0,0,0,0,unchanged
+347,116360,17,put the bowl on the stove,500,85,0.5638511180877686,0.5049412998292233,0,0,0,0,unchanged
+348,116493,11,put the wine bottle on the rack,502,30,0.22013649344444275,0.19713715832763812,0,0,0,0,unchanged
+349,116666,11,put the wine bottle on the rack,503,33,1.485791563987732,1.330559609670719,0,0,1,1,unchanged
+350,131159,11,put the wine bottle on the rack,623,78,1.2564830780029297,1.1252087266792734,0,0,0,0,unchanged
+351,131238,12,open the top drawer and put the bowl inside,624,8,0.29468217492103577,0.26389448502959023,0,1,0,0,unchanged
+352,131467,11,put the wine bottle on the rack,625,54,1.406952977180481,1.259957890134968,0,0,0,0,unchanged
+353,131764,12,open the top drawer and put the bowl inside,627,79,0.5794796943664551,0.5189370397816476,0,1,0,0,unchanged
+354,163698,29,pick up the chocolate pudding and place it in the basket,875,147,1.0254238843917847,0.9182900458133382,0,0,0,0,unchanged
+355,163861,24,pick up the alphabet soup and place it in the basket,876,157,1.2740424871444702,1.1409335706881532,0,0,1,0,removed
+356,163887,24,pick up the alphabet soup and place it in the basket,877,23,0.9262598752975464,0.829486455571051,0,1,0,0,unchanged
+357,164161,29,pick up the chocolate pudding and place it in the basket,878,144,0.6328893899917603,0.5667666179582167,0,0,0,0,unchanged
+358,1153,1,put the white mug on the plate and put the chocolate pudding to the right of the plate,4,25,0.4871929883956909,0.43629222845650384,0,0,0,0,unchanged
+359,1584,1,put the white mug on the plate and put the chocolate pudding to the right of the plate,5,178,0.22873491048812866,0.2048372332928822,0,0,0,0,unchanged
+360,1881,3,turn on the stove and put the moka pot on it,6,235,0.4995679259300232,0.44737426207041703,0,0,0,0,unchanged
+361,4394,8,put the black bowl in the bottom drawer of the cabinet and close it,15,214,1.1878783702850342,1.0637716749856276,0,1,1,0,removed
+362,4477,8,put the black bowl in the bottom drawer of the cabinet and close it,16,55,0.5213575959205627,0.4668873993772765,0,0,0,0,unchanged
+363,4891,7,put both the cream cheese box and the butter in the basket,17,221,1.7088501453399658,2.4258359512867553,1,0,1,1,unchanged
+364,4950,0,put the white mug on the left plate and put the yellow and white mug on the right plate,18,31,0.8716725707054138,0.7806023022002057,0,0,0,0,unchanged
+365,5323,1,put the white mug on the plate and put the chocolate pudding to the right of the plate,19,128,0.5066391229629517,0.453706677324402,0,0,0,0,unchanged
+366,5612,6,put both moka pots on the stove,20,168,0.7516046166419983,0.6730787612374309,0,0,0,0,unchanged
+367,7650,9,pick up the book and place it in the back compartment of the caddy,27,73,1.2338606119155884,1.1049498018229666,0,1,1,1,unchanged
+368,7815,9,pick up the book and place it in the back compartment of the caddy,28,4,0.765950083732605,0.685925448185493,0,0,0,0,unchanged
+369,8227,4,put both the alphabet soup and the cream cheese box in the basket,29,221,0.6269463300704956,0.561444474744626,0,0,0,0,unchanged
+370,8895,8,put the black bowl in the bottom drawer of the cabinet and close it,32,76,0.8588474988937378,1.664639551410097,1,0,0,1,added
+371,9218,0,put the white mug on the left plate and put the yellow and white mug on the right plate,33,170,0.8071855306625366,0.7228527140964875,0,0,0,0,unchanged
+372,9490,2,put the yellow and white mug in the microwave and close it,34,183,0.9103453755378723,0.8152346647401055,0,0,0,0,unchanged
+373,10440,1,put the white mug on the plate and put the chocolate pudding to the right of the plate,37,91,0.9655890464782715,0.8647066088706499,0,0,1,1,unchanged
+374,10825,3,turn on the stove and put the moka pot on it,38,230,0.46222618222236633,0.413933894567769,0,1,0,0,unchanged
+375,10883,5,put both the alphabet soup and the tomato sauce in the basket,39,27,0.3448874354362488,0.3088544198237079,0,0,0,0,unchanged
+376,11311,3,turn on the stove and put the moka pot on it,40,167,1.0149871110916138,1.80446606980986,1,0,1,1,unchanged
+377,11547,4,put both the alphabet soup and the cream cheese box in the basket,41,175,0.9360076189041138,0.8382157782046474,0,0,0,0,unchanged
+378,11700,7,put both the cream cheese box and the butter in the basket,42,92,0.3224441111087799,0.288755920424019,0,0,0,0,unchanged
+379,11923,7,put both the cream cheese box and the butter in the basket,43,71,1.1567556858062744,1.0359006142556684,0,0,0,0,unchanged
+380,12125,2,put the yellow and white mug in the microwave and close it,44,1,1.4895411729812622,1.3339174684712223,0,0,1,1,unchanged
+381,12640,3,turn on the stove and put the moka pot on it,45,249,1.0063772201538086,1.7967557197155528,1,0,0,1,added
+382,13044,6,put both moka pots on the stove,46,386,1.0068711042404175,1.7971980039722606,1,1,1,1,unchanged
+383,13110,9,pick up the book and place it in the back compartment of the caddy,47,43,0.5230529308319092,0.4684056097457942,0,0,0,0,unchanged
+384,13257,3,turn on the stove and put the moka pot on it,48,8,0.7023122906684875,0.6289363797643203,0,0,0,0,unchanged
+385,16545,2,put the yellow and white mug in the microwave and close it,59,27,0.5408445596694946,0.48433841169145087,0,1,0,0,unchanged
+386,16758,7,put both the cream cheese box and the butter in the basket,60,16,1.3506683111190796,1.2095537115676145,0,0,0,0,unchanged
+387,17140,9,pick up the book and place it in the back compartment of the caddy,61,148,1.1113427877426147,0.9952323473290309,0,0,1,1,unchanged
+388,17394,1,put the white mug on the plate and put the chocolate pudding to the right of the plate,62,222,0.5587950348854065,0.5004134641251748,0,0,0,0,unchanged
+389,17460,4,put both the alphabet soup and the cream cheese box in the basket,63,37,0.5184550285339355,0.464288085299447,0,1,0,0,unchanged
+390,17811,9,pick up the book and place it in the back compartment of the caddy,64,140,0.5910053253173828,0.5292585003357215,0,0,0,0,unchanged
+391,17905,7,put both the cream cheese box and the butter in the basket,65,45,1.0234520435333252,1.812046606325563,1,0,0,0,unchanged
+392,18205,3,turn on the stove and put the moka pot on it,66,90,2.0021979808807373,1.793013117381095,0,1,1,1,unchanged
+393,18594,6,put both moka pots on the stove,67,231,0.4656616449356079,0.4170104283411205,0,1,0,0,unchanged
+394,22579,2,put the yellow and white mug in the microwave and close it,80,171,0.6582726836204529,0.5894979256876159,0,0,0,0,unchanged
+395,22798,9,pick up the book and place it in the back compartment of the caddy,81,151,1.2769482135772705,1.143535713762556,0,1,1,1,unchanged
+396,22833,4,put both the alphabet soup and the cream cheese box in the basket,82,12,0.8893753886222839,0.7964555719780498,0,0,0,0,unchanged
+397,23168,4,put both the alphabet soup and the cream cheese box in the basket,83,57,1.4324487447738647,2.17831230896467,1,1,1,1,unchanged
+398,23472,2,put the yellow and white mug in the microwave and close it,84,69,0.8342666625976562,0.7471044740407454,0,0,0,0,unchanged
+399,23740,0,put the white mug on the left plate and put the yellow and white mug on the right plate,85,90,0.40879565477371216,0.36608566102700507,0,0,0,0,unchanged
+400,24893,0,put the white mug on the left plate and put the yellow and white mug on the right plate,88,267,0.28937458992004395,0.2591414238342097,0,1,0,0,unchanged
+401,25072,8,put the black bowl in the bottom drawer of the cabinet and close it,89,177,0.7102118730545044,0.6360106326480087,0,0,0,0,unchanged
+402,25195,8,put the black bowl in the bottom drawer of the cabinet and close it,90,71,0.8234612345695496,1.6329503594749046,1,0,0,1,added
+403,25596,7,put both the cream cheese box and the butter in the basket,91,249,0.5769855380058289,0.516703466921168,0,0,0,0,unchanged
+404,25744,5,put both the alphabet soup and the tomato sauce in the basket,92,139,1.0196635723114014,0.9131315573826422,0,0,0,0,unchanged
+405,26002,3,turn on the stove and put the moka pot on it,93,117,0.8677261471748352,0.777068191575463,0,0,0,0,unchanged
+406,26231,7,put both the cream cheese box and the butter in the basket,94,111,1.0972506999969482,0.9826125672570568,0,0,0,0,unchanged
+407,26411,3,turn on the stove and put the moka pot on it,95,34,0.5434448719024658,0.48666704951224865,0,1,0,0,unchanged
+408,26879,4,put both the alphabet soup and the cream cheese box in the basket,96,260,0.8834250569343567,1.6866493048814495,1,1,0,1,added
+409,28710,9,pick up the book and place it in the back compartment of the caddy,103,2,0.6167816519737244,0.5523417779406615,0,1,0,0,unchanged
+410,28924,9,pick up the book and place it in the back compartment of the caddy,104,32,0.5465335249900818,0.4894330075014276,0,0,0,0,unchanged
+411,29135,0,put the white mug on the left plate and put the yellow and white mug on the right plate,105,54,1.085960865020752,0.9725022672773898,0,1,0,0,unchanged
+412,33097,8,put the black bowl in the bottom drawer of the cabinet and close it,120,65,0.597174882888794,0.534783477265881,0,0,0,0,unchanged
+413,33306,0,put the white mug on the left plate and put the yellow and white mug on the right plate,121,38,1.0162358283996582,1.8055843241156802,1,0,0,1,added
+414,33564,7,put both the cream cheese box and the butter in the basket,122,4,0.8631071448326111,0.7729317715670987,0,0,0,0,unchanged
+415,34050,2,put the yellow and white mug in the microwave and close it,123,214,0.7369461059570312,0.6599517367421533,0,1,0,0,unchanged
+416,34364,4,put both the alphabet soup and the cream cheese box in the basket,124,211,0.46490389108657837,0.4163318428046101,0,0,0,0,unchanged
+417,34401,0,put the white mug on the left plate and put the yellow and white mug on the right plate,125,29,1.1639916896820068,1.042380617727104,0,0,1,1,unchanged
+418,35424,0,put the white mug on the left plate and put the yellow and white mug on the right plate,129,73,1.0911504030227661,0.9771496147423323,0,0,1,0,removed
+419,35715,1,put the white mug on the plate and put the chocolate pudding to the right of the plate,130,114,0.8175151348114014,0.7321031058724904,0,1,0,0,unchanged
+420,36047,7,put both the cream cheese box and the butter in the basket,131,218,1.4309186935424805,2.1769421138319536,1,1,0,1,added
+421,37712,1,put the white mug on the plate and put the chocolate pudding to the right of the plate,138,152,0.20487692952156067,0.18347187720133942,0,0,0,0,unchanged
+422,37998,2,put the yellow and white mug in the microwave and close it,139,218,1.8242548704147339,1.6336610781423029,0,0,1,1,unchanged
+423,38246,2,put the yellow and white mug in the microwave and close it,140,180,2.161283254623413,1.9354775416421295,0,1,1,1,unchanged
+424,41336,8,put the black bowl in the bottom drawer of the cabinet and close it,151,90,1.3631560802459717,1.2207367883987552,0,0,1,1,unchanged
+425,41507,1,put the white mug on the plate and put the chocolate pudding to the right of the plate,152,44,1.013736605644226,1.8033462141852248,1,0,1,1,unchanged
+426,41908,3,turn on the stove and put the moka pot on it,153,219,0.31900662183761597,0.2856775718226771,0,0,0,0,unchanged
+427,43516,4,put both the alphabet soup and the cream cheese box in the basket,160,206,1.4859131574630737,1.3306684993501403,0,0,1,1,unchanged
+428,43576,4,put both the alphabet soup and the cream cheese box in the basket,161,8,1.0917255878448486,0.9776647056278295,0,0,0,0,unchanged
+429,44084,3,turn on the stove and put the moka pot on it,162,193,0.4788955748081207,0.428861708825121,0,0,0,0,unchanged
+430,44183,4,put both the alphabet soup and the cream cheese box in the basket,163,20,1.2199403047561646,1.0924838551118219,0,0,0,0,unchanged
+431,44632,2,put the yellow and white mug in the microwave and close it,164,228,1.2529420852661133,1.122037688407189,0,0,0,0,unchanged
+432,44924,7,put both the cream cheese box and the butter in the basket,165,210,0.7928192615509033,0.7099873984728775,0,0,0,0,unchanged
+433,55120,3,turn on the stove and put the moka pot on it,203,31,0.49245840311050415,0.4410075252164969,0,0,0,0,unchanged
+434,55504,6,put both moka pots on the stove,204,172,1.0165088176727295,0.9103064039746015,0,0,1,1,unchanged
+435,55759,4,put both the alphabet soup and the cream cheese box in the basket,205,29,0.8891764283180237,0.7962773985712323,0,0,0,0,unchanged
+436,67309,4,put both the alphabet soup and the cream cheese box in the basket,250,147,1.295474648475647,1.1601265509865968,0,0,1,0,removed
+437,67639,7,put both the cream cheese box and the butter in the basket,251,216,1.4353814125061035,2.1809385785758852,1,1,1,1,unchanged
+438,67675,1,put the white mug on the plate and put the chocolate pudding to the right of the plate,252,18,0.9128852486610413,0.8175091779849557,0,1,1,1,unchanged
+439,67997,3,turn on the stove and put the moka pot on it,253,108,1.1298831701278687,1.011835674839829,0,0,1,0,removed
+440,68383,8,put the black bowl in the bottom drawer of the cabinet and close it,254,219,0.9111820459365845,0.815983921813652,0,1,0,0,unchanged
+441,68478,8,put the black bowl in the bottom drawer of the cabinet and close it,255,87,0.9749704003334045,0.8731078212790492,0,0,1,0,removed
+442,141885,12,open the top drawer and put the bowl inside,711,33,0.9242656230926514,0.8277005580739564,0,0,0,0,unchanged
+443,142257,15,push the plate to the front of the stove,713,67,0.12445270270109177,0.11145018153421013,0,0,0,0,unchanged
+444,142513,15,push the plate to the front of the stove,715,71,0.436227023601532,0.390651065949831,0,0,0,0,unchanged
+445,210111,28,pick up the tomato sauce and place it in the basket,1189,84,0.6611202955245972,0.5920480259005305,0,0,0,0,unchanged
+446,210198,28,pick up the tomato sauce and place it in the basket,1190,42,0.8670840263366699,0.7764931579889904,0,0,0,0,unchanged
+447,210566,28,pick up the tomato sauce and place it in the basket,1192,149,1.4981868267059326,1.3416598449418298,0,1,1,0,removed
+448,231669,39,pick up the black bowl on the wooden cabinet and place it on the plate,1351,64,0.15324069559574127,0.13723047368118085,0,0,0,0,unchanged
+449,232110,39,pick up the black bowl on the wooden cabinet and place it on the plate,1355,39,2.331183433532715,2.9831493437524004,1,0,1,1,unchanged
+450,232339,39,pick up the black bowl on the wooden cabinet and place it on the plate,1356,130,0.7874974608421326,0.7052216067929176,0,0,0,0,unchanged
+451,3900,5,put both the alphabet soup and the tomato sauce in the basket,13,262,1.3117705583572388,2.0702422912676237,1,0,1,1,unchanged
+452,4050,8,put the black bowl in the bottom drawer of the cabinet and close it,14,127,0.5384750366210938,0.4822164507523779,0,0,0,0,unchanged
+453,19342,6,put both moka pots on the stove,70,10,0.8051182627677917,0.7210014294144463,0,1,0,0,unchanged
+454,19933,5,put both the alphabet soup and the tomato sauce in the basket,71,185,1.0371320247650146,0.9287749476411314,0,0,0,0,unchanged
+455,28266,5,put both the alphabet soup and the tomato sauce in the basket,101,153,0.6293425559997559,0.5635903487113365,0,1,0,0,unchanged
+456,28437,5,put both the alphabet soup and the tomato sauce in the basket,102,46,0.36945587396621704,0.33085600656910386,0,0,0,0,unchanged
+457,42356,8,put the black bowl in the bottom drawer of the cabinet and close it,155,168,0.9104262590408325,0.815307097727838,0,1,0,0,unchanged
+458,42668,5,put both the alphabet soup and the tomato sauce in the basket,156,213,1.8039095401763916,1.6154413794196267,0,1,1,1,unchanged
+459,48426,6,put both moka pots on the stove,179,43,0.43198302388191223,0.3868504691856226,0,0,0,0,unchanged
+460,49180,5,put both the alphabet soup and the tomato sauce in the basket,181,188,1.149787425994873,1.0296603815881344,0,0,1,1,unchanged
+461,54055,5,put both the alphabet soup and the tomato sauce in the basket,199,34,0.6288313269615173,0.5631325316621231,0,0,0,0,unchanged
+462,54527,5,put both the alphabet soup and the tomato sauce in the basket,200,256,0.6390787959098816,0.5723093695272229,0,1,0,0,unchanged
+463,84898,6,put both moka pots on the stove,316,165,0.9161170721054077,1.7159257363807616,1,0,0,1,added
+464,85130,5,put both the alphabet soup and the tomato sauce in the basket,317,1,0.29001864790916443,0.2597181921827319,0,0,0,0,unchanged
+465,91447,5,put both the alphabet soup and the tomato sauce in the basket,340,271,0.7340838313102722,0.6573885057149556,0,0,0,0,unchanged
+466,91522,6,put both moka pots on the stove,341,64,0.9265248775482178,0.8297237710194366,0,0,0,0,unchanged
+467,102555,15,push the plate to the front of the stove,386,72,0.3527781367301941,0.3159207194906152,0,0,0,0,unchanged
+468,102654,12,open the top drawer and put the bowl inside,387,48,0.26503923535346985,0.23734856899635118,0,0,0,0,unchanged
+469,112960,15,push the plate to the front of the stove,471,156,1.416367530822754,1.2683888336960327,0,0,1,1,unchanged
+470,113064,15,push the plate to the front of the stove,472,91,1.1631755828857422,1.0416497758199301,0,0,0,0,unchanged
+471,176883,28,pick up the tomato sauce and place it in the basket,965,129,1.3144136667251587,1.177086865838556,0,0,0,0,unchanged
+472,177129,28,pick up the tomato sauce and place it in the basket,967,62,0.9665079712867737,0.8655295266096871,0,0,0,0,unchanged
+473,224728,39,pick up the black bowl on the wooden cabinet and place it on the plate,1296,62,0.38631150126457214,0.3459505981810399,0,0,0,0,unchanged
+474,224999,31,pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate,1298,82,0.6369680762290955,0.5704191727979767,0,0,0,0,unchanged
+475,3057,6,put both moka pots on the stove,10,299,0.5713815093040466,0.5116849337549045,0,0,0,0,unchanged
+476,6714,6,put both moka pots on the stove,23,384,0.572888970375061,0.5130348988932578,0,0,0,0,unchanged
+477,14132,6,put both moka pots on the stove,51,7,0.9787242412567139,0.8764694698674145,0,0,1,0,removed
+478,15273,6,put both moka pots on the stove,54,265,0.5410588979721069,0.4845303564400776,0,0,0,0,unchanged
+479,229458,31,pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate,1334,15,0.31799396872520447,0.284770718289086,0,1,0,0,unchanged
