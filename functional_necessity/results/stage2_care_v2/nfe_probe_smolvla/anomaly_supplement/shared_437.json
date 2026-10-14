@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "shared_index": 437,
+    "global_index": 67639,
+    "episode_index": 251,
+    "task": "put both the cream cheese box and the butter in the basket",
+    "task_index": 7,
+    "frame_in_episode": 216,
+    "alpha": 1.4353814125061035,
+    "in_top_alpha": 1,
+    "in_grip_switch": 1
+  },
+  "metrics_vs_nfe10": {
+    "0": {
+      "1": {
+        "cosine": 0.9934924840927124,
+        "rmse": 0.07767004519701004,
+        "max_abs": 0.2781689763069153,
+        "rmse_trans": 0.07358336448669434,
+        "rmse_rot": 0.07397186011075974,
+        "rmse_grip": 0.09782332926988602,
+        "rmse_tail3": 0.054783571511507034,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      },
+      "2": {
+        "cosine": 0.9969366788864136,
+        "rmse": 0.05373404920101166,
+        "max_abs": 0.16814684867858887,
+        "rmse_trans": 0.04907556250691414,
+        "rmse_rot": 0.06015069782733917,
+        "rmse_grip": 0.046172335743904114,
+        "rmse_tail3": 0.035957515239715576,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      },
+      "3": {
+        "cosine": 0.9981964826583862,
+        "rmse": 0.04124509543180466,
+        "max_abs": 0.151808500289917,
+        "rmse_trans": 0.04034820944070816,
+        "rmse_rot": 0.046550072729587555,
+        "rmse_grip": 0.02287890389561653,
+        "rmse_tail3": 0.021002372726798058,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      }
+    },
+    "1": {
+      "1": {
+        "cosine": 0.9289434552192688,
+        "rmse": 0.2580088675022125,
+        "max_abs": 2.0519471168518066,
+        "rmse_trans": 0.06341511756181717,
+        "rmse_rot": 0.09740648418664932,
+        "rmse_grip": 0.6522665023803711,
+        "rmse_tail3": 0.07561825960874557,
+        "gripper_disagree": 0.10000000149011612,
+        "gripper_disagree_n": 1
+      },
+      "2": {
+        "cosine": 0.974716067314148,
+        "rmse": 0.15312571823596954,
+        "max_abs": 1.2132916450500488,
+        "rmse_trans": 0.04369698837399483,
+        "rmse_rot": 0.05890418589115143,
+        "rmse_grip": 0.3847011625766754,
+        "rmse_tail3": 0.03954392671585083,
+        "gripper_disagree": 0.10000000149011612,
+        "gripper_disagree_n": 1
+      },
+      "3": {
+        "cosine": 0.99465411901474,
+        "rmse": 0.07065634429454803,
+        "max_abs": 0.4840143918991089,
+        "rmse_trans": 0.03916044533252716,
+        "rmse_rot": 0.046140991151332855,
+        "rmse_grip": 0.15478578209877014,
+        "rmse_tail3": 0.03049575537443161,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      }
+    }
+  },
+  "interpretation": "noise1: NFE=2 仍保留开合偏差（1 步），NFE=3 已缓解；低步数下夹爪阈值附近敏感。 noise1: 余弦在 NFE=2 仍偏低（0.929→0.975），以手臂方向偏差为主。",
+  "bucket": "nfe2_remaining"
+}

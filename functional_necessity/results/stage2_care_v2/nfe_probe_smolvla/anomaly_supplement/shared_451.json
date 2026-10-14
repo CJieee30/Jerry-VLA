@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "shared_index": 451,
+    "global_index": 3900,
+    "episode_index": 13,
+    "task": "put both the alphabet soup and the tomato sauce in the basket",
+    "task_index": 5,
+    "frame_in_episode": 262,
+    "alpha": 1.3117705583572388,
+    "in_top_alpha": 1,
+    "in_grip_switch": 1
+  },
+  "metrics_vs_nfe10": {
+    "0": {
+      "1": {
+        "cosine": 0.9756156206130981,
+        "rmse": 0.10034142434597015,
+        "max_abs": 0.3235052824020386,
+        "rmse_trans": 0.09321841597557068,
+        "rmse_rot": 0.1051221713423729,
+        "rmse_grip": 0.1061026006937027,
+        "rmse_tail3": 0.0730288177728653,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      },
+      "2": {
+        "cosine": 0.9881867170333862,
+        "rmse": 0.06866313517093658,
+        "max_abs": 0.26068800687789917,
+        "rmse_trans": 0.06238744035363197,
+        "rmse_rot": 0.06883576512336731,
+        "rmse_grip": 0.08432507514953613,
+        "rmse_tail3": 0.05617405101656914,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      },
+      "3": {
+        "cosine": 0.9949946403503418,
+        "rmse": 0.04477183520793915,
+        "max_abs": 0.11539188027381897,
+        "rmse_trans": 0.04493529722094536,
+        "rmse_rot": 0.05096118897199631,
+        "rmse_grip": 0.013525874353945255,
+        "rmse_tail3": 0.0447804220020771,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      }
+    },
+    "1": {
+      "1": {
+        "cosine": 0.835181474685669,
+        "rmse": 0.2728656828403473,
+        "max_abs": 2.029324531555176,
+        "rmse_trans": 0.1303594708442688,
+        "rmse_rot": 0.12098608911037445,
+        "rmse_grip": 0.6529135704040527,
+        "rmse_tail3": 0.09987546503543854,
+        "gripper_disagree": 0.10000000149011612,
+        "gripper_disagree_n": 1
+      },
+      "2": {
+        "cosine": 0.9803286790847778,
+        "rmse": 0.09638766944408417,
+        "max_abs": 0.5380251407623291,
+        "rmse_trans": 0.06300921738147736,
+        "rmse_rot": 0.08925528079271317,
+        "rmse_grip": 0.1709505319595337,
+        "rmse_tail3": 0.0800221636891365,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      },
+      "3": {
+        "cosine": 0.9940171837806702,
+        "rmse": 0.05341027304530144,
+        "max_abs": 0.22546270489692688,
+        "rmse_trans": 0.04349899664521217,
+        "rmse_rot": 0.06712240725755692,
+        "rmse_grip": 0.027854230254888535,
+        "rmse_tail3": 0.06209946796298027,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      }
+    }
+  },
+  "interpretation": "noise1: 开合偏差在 NFE=2 已缓解（NFE=1 有 1 步不一致）。 noise1: NFE=1 手臂归一化 RMSE 偏大（trans=0.130, rot=0.121），NFE=2 降至 trans=0.063, rot=0.089。",
+  "bucket": "nfe2_remaining"
+}

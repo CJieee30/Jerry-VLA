@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "shared_index": 89,
+    "global_index": 221903,
+    "episode_index": 1272,
+    "task": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+    "task_index": 34,
+    "frame_in_episode": 69,
+    "alpha": 2.278801202774048,
+    "in_top_alpha": 1,
+    "in_grip_switch": 1
+  },
+  "metrics_vs_nfe10": {
+    "0": {
+      "1": {
+        "cosine": 0.9642957448959351,
+        "rmse": 0.2772311866283417,
+        "max_abs": 2.02020525932312,
+        "rmse_trans": 0.1264929622411728,
+        "rmse_rot": 0.15588180720806122,
+        "rmse_grip": 0.6458336114883423,
+        "rmse_tail3": 0.10583050549030304,
+        "gripper_disagree": 0.10000000149011612,
+        "gripper_disagree_n": 1
+      },
+      "2": {
+        "cosine": 0.9790385961532593,
+        "rmse": 0.20606207847595215,
+        "max_abs": 1.5705689191818237,
+        "rmse_trans": 0.08760365098714828,
+        "rmse_rot": 0.09324651211500168,
+        "rmse_grip": 0.498119592666626,
+        "rmse_tail3": 0.06617728620767593,
+        "gripper_disagree": 0.10000000149011612,
+        "gripper_disagree_n": 1
+      },
+      "3": {
+        "cosine": 0.97831791639328,
+        "rmse": 0.20914384722709656,
+        "max_abs": 1.6741347312927246,
+        "rmse_trans": 0.06714462488889694,
+        "rmse_rot": 0.06161797419190407,
+        "rmse_grip": 0.5303512811660767,
+        "rmse_tail3": 0.04842936620116234,
+        "gripper_disagree": 0.10000000149011612,
+        "gripper_disagree_n": 1
+      }
+    },
+    "1": {
+      "1": {
+        "cosine": 0.9930638074874878,
+        "rmse": 0.1204506978392601,
+        "max_abs": 0.2652413547039032,
+        "rmse_trans": 0.09534541517496109,
+        "rmse_rot": 0.14866630733013153,
+        "rmse_grip": 0.08933831751346588,
+        "rmse_tail3": 0.12823469936847687,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      },
+      "2": {
+        "cosine": 0.9973482489585876,
+        "rmse": 0.07382278144359589,
+        "max_abs": 0.17667138576507568,
+        "rmse_trans": 0.06048135459423065,
+        "rmse_rot": 0.09120430052280426,
+        "rmse_grip": 0.04711649939417839,
+        "rmse_tail3": 0.07784067839384079,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      },
+      "3": {
+        "cosine": 0.998618483543396,
+        "rmse": 0.053428977727890015,
+        "max_abs": 0.1306898146867752,
+        "rmse_trans": 0.04364714398980141,
+        "rmse_rot": 0.06593911349773407,
+        "rmse_grip": 0.03497808426618576,
+        "rmse_tail3": 0.0565468966960907,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      }
+    }
+  },
+  "interpretation": "noise0: 开合执行态在 NFE=1–3 均与参照不一致（1→1→1 步），更像切换时机偏移而非单步积分噪声。 noise0: NFE=1 手臂归一化 RMSE 偏大（trans=0.126, rot=0.156），NFE=2 降至 trans=0.088, rot=0.093。 noise1: NFE=1 手臂归一化 RMSE 偏大（trans=0.095, rot=0.149），NFE=2 降至 trans=0.060, rot=0.091。",
+  "bucket": "nfe2_remaining"
+}

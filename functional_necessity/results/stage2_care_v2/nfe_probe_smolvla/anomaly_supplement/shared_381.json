@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "shared_index": 381,
+    "global_index": 12640,
+    "episode_index": 45,
+    "task": "turn on the stove and put the moka pot on it",
+    "task_index": 3,
+    "frame_in_episode": 249,
+    "alpha": 1.0063772201538086,
+    "in_top_alpha": 0,
+    "in_grip_switch": 1
+  },
+  "metrics_vs_nfe10": {
+    "0": {
+      "1": {
+        "cosine": 0.938205361366272,
+        "rmse": 0.2597213685512543,
+        "max_abs": 1.7092622518539429,
+        "rmse_trans": 0.09044644236564636,
+        "rmse_rot": 0.17500564455986023,
+        "rmse_grip": 0.5964593291282654,
+        "rmse_tail3": 0.24341586232185364,
+        "gripper_disagree": 0.10000000149011612,
+        "gripper_disagree_n": 1
+      },
+      "2": {
+        "cosine": 0.9697850942611694,
+        "rmse": 0.1701727956533432,
+        "max_abs": 1.317946195602417,
+        "rmse_trans": 0.053799182176589966,
+        "rmse_rot": 0.07293778657913208,
+        "rmse_grip": 0.4219818115234375,
+        "rmse_tail3": 0.09307102859020233,
+        "gripper_disagree": 0.10000000149011612,
+        "gripper_disagree_n": 1
+      },
+      "3": {
+        "cosine": 0.9666523933410645,
+        "rmse": 0.17704670131206512,
+        "max_abs": 1.4337866306304932,
+        "rmse_trans": 0.0420226976275444,
+        "rmse_rot": 0.0516757033765316,
+        "rmse_grip": 0.4539933204650879,
+        "rmse_tail3": 0.05684346705675125,
+        "gripper_disagree": 0.10000000149011612,
+        "gripper_disagree_n": 1
+      }
+    },
+    "1": {
+      "1": {
+        "cosine": 0.9930985569953918,
+        "rmse": 0.10284993052482605,
+        "max_abs": 0.26871389150619507,
+        "rmse_trans": 0.09181219339370728,
+        "rmse_rot": 0.11723309755325317,
+        "rmse_grip": 0.08676131069660187,
+        "rmse_tail3": 0.11082746833562851,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      },
+      "2": {
+        "cosine": 0.9976052641868591,
+        "rmse": 0.052268970757722855,
+        "max_abs": 0.1537168025970459,
+        "rmse_trans": 0.05385550111532211,
+        "rmse_rot": 0.05244293436408043,
+        "rmse_grip": 0.0466078519821167,
+        "rmse_tail3": 0.058592788875103,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      },
+      "3": {
+        "cosine": 0.9987035989761353,
+        "rmse": 0.037126630544662476,
+        "max_abs": 0.12136721611022949,
+        "rmse_trans": 0.041637156158685684,
+        "rmse_rot": 0.03686242178082466,
+        "rmse_grip": 0.01926741562783718,
+        "rmse_tail3": 0.038815297186374664,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      }
+    }
+  },
+  "interpretation": "noise0: 开合执行态在 NFE=1–3 均与参照不一致（1→1→1 步），更像切换时机偏移而非单步积分噪声。 noise0: NFE=1 手臂归一化 RMSE 偏大（trans=0.090, rot=0.175），NFE=2 降至 trans=0.054, rot=0.073。 noise0: 余弦在 NFE=2 仍偏低（0.938→0.970），以手臂方向偏差为主。",
+  "bucket": "nfe2_remaining"
+}

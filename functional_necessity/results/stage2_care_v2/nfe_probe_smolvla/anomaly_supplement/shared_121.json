@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "shared_index": 121,
+    "global_index": 235538,
+    "episode_index": 1382,
+    "task": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+    "task_index": 34,
+    "frame_in_episode": 80,
+    "alpha": 1.155185580253601,
+    "in_top_alpha": 0,
+    "in_grip_switch": 0
+  },
+  "metrics_vs_nfe10": {
+    "0": {
+      "1": {
+        "cosine": 0.9738296270370483,
+        "rmse": 0.18318939208984375,
+        "max_abs": 0.6852515935897827,
+        "rmse_trans": 0.1560429334640503,
+        "rmse_rot": 0.2288351058959961,
+        "rmse_grip": 0.06902012228965759,
+        "rmse_tail3": 0.14422525465488434,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      },
+      "2": {
+        "cosine": 0.992216944694519,
+        "rmse": 0.09232249855995178,
+        "max_abs": 0.367494136095047,
+        "rmse_trans": 0.07511229813098907,
+        "rmse_rot": 0.11874757707118988,
+        "rmse_grip": 0.020870372653007507,
+        "rmse_tail3": 0.07319054007530212,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      },
+      "3": {
+        "cosine": 0.9970439076423645,
+        "rmse": 0.05663081258535385,
+        "max_abs": 0.23464974761009216,
+        "rmse_trans": 0.04739629849791527,
+        "rmse_rot": 0.07203467935323715,
+        "rmse_grip": 0.011963756754994392,
+        "rmse_tail3": 0.04678744450211525,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      }
+    },
+    "1": {
+      "1": {
+        "cosine": 0.9807780981063843,
+        "rmse": 0.14799772202968597,
+        "max_abs": 0.6058839559555054,
+        "rmse_trans": 0.12268508970737457,
+        "rmse_rot": 0.18277741968631744,
+        "rmse_grip": 0.08913835883140564,
+        "rmse_tail3": 0.11041734367609024,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      },
+      "2": {
+        "cosine": 0.9943162798881531,
+        "rmse": 0.08091074228286743,
+        "max_abs": 0.2907119393348694,
+        "rmse_trans": 0.07165568321943283,
+        "rmse_rot": 0.09919685125350952,
+        "rmse_grip": 0.030036302283406258,
+        "rmse_tail3": 0.07600654661655426,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      },
+      "3": {
+        "cosine": 0.9976119995117188,
+        "rmse": 0.05326995626091957,
+        "max_abs": 0.17960229516029358,
+        "rmse_trans": 0.0488210991024971,
+        "rmse_rot": 0.06425803154706955,
+        "rmse_grip": 0.018056420609354973,
+        "rmse_tail3": 0.05419900640845299,
+        "gripper_disagree": 0.0,
+        "gripper_disagree_n": 0
+      }
+    }
+  },
+  "interpretation": "noise0: NFE=1 手臂归一化 RMSE 偏大（trans=0.156, rot=0.229），NFE=2 降至 trans=0.075, rot=0.119。 noise1: NFE=1 手臂归一化 RMSE 偏大（trans=0.123, rot=0.183），NFE=2 降至 trans=0.072, rot=0.099。",
+  "bucket": "care_miss_examples"
+}

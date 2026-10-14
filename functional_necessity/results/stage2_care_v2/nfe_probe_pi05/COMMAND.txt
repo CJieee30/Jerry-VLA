@@ -1,0 +1,1 @@
+python /home/guorj/Skill_Efficient_VLA/functional_necessity/scripts/stage2_care_v2/probe_pi05_nfe.py --gpu 0 --allow-shared --min-free-mib 8000 --out-dir /home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_probe_pi05

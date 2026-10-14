@@ -2,30 +2,34 @@
 
 π0.5-LIBERO-finetuned (`lerobot/pi05_libero_finetuned_v044`) vs Stage-1 Fisher Drop-6 `[1, 13, 14, 15, 16, 17]`, skip keep-KV. Official Plus recipe on this machine: 1 trial per variant, `seed=1000`, `n_action_steps=10`, `num_inference_steps=10`, `compile_model=false`. In-distribution LIBERO 400-ep anchors: full **97.25**, Drop-6 **97.75** (`eval_pi05_libero_v044.md`). Do not mix those with this table.
 
-Avg. is the unweighted mean of four suite rates (Spatial / Object / Goal / Long). Sensor Noise is still running on GPU0/2 (Spatial json exists; Object is in progress). Background Textures finished on GPU1/3.
+Avg. is the unweighted mean of four suite rates (Spatial / Object / Goal / Long). **2026-10-13–14 four-GPU batch:** GPU1 = Fisher Drop-6 **NFE=1** Language Instructions (eight suites, all `EXIT:0`); GPU3 = Fisher Drop-6 **NFE=1** Robot Initial States (eight suites, all `EXIT:0`); GPU0 = full Sensor Noise **Spatial+Object**; GPU2 = Fisher Drop-6 Sensor Noise **Spatial+Object**. Sensor Noise **Goal / Long** are not in `results/eval_libero_plus/` yet (see § Sensor Noise).
 
 ## Core: seven Plus dimensions (Avg. %)
 
-| Dimension | Full | Drop-6 | Δ |
-| --- | ---: | ---: | ---: |
-| Language Instructions | 89.20 | 85.24 | −3.96 |
-| Robot Initial States | 77.69 | 74.18 | −3.51 |
-| Camera Viewpoints | 66.85 | 60.68 | −6.18 |
-| Sensor Noise |  |  |  |
-| Objects Layout | 86.52 | 82.41 | −4.11 |
-| Light Conditions | 98.47 | 95.01 | −3.46 |
-| Background Textures | 96.62 | 92.36 | −4.26 |
+Drop-6 = Fisher `[1,13,14,15,16,17]` keep-KV, **`num_inference_steps=10`** (official Plus). **Drop-6 NFE=1** = same skip, **`num_inference_steps=1`** (`plus_fisher6_nfe1_{lang,init}_*` only; other dims not run at NFE=1).
 
-Finished six-dim mean (not a Plus overall): full **85.89**, Drop-6 **81.65**, **−4.24**. Drop-6 does not collapse on any finished slice. Camera is the largest dim gap (−6.18). Largest single-suite holes: Background Goal (−14.59), Light Long (−13.50), Layout Long (−12.82).
+| Dimension | Full (NFE=10) | Drop-6 (NFE=10) | Δ (D6−Full) | Drop-6 (NFE=1) | Δ (NFE1−D6) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Language Instructions | 89.20 | 85.24 | −3.96 | **84.67** | −0.57 |
+| Robot Initial States | 77.69 | 74.18 | −3.51 | **74.47** | +0.29 |
+| Camera Viewpoints | 66.85 | 60.68 | −6.18 | — | — |
+| Sensor Noise | 97.75† | 93.36† | −4.40 | — | — |
+| Objects Layout | 86.52 | 82.41 | −4.11 | — | — |
+| Light Conditions | 98.47 | 95.01 | −3.46 | — | — |
+| Background Textures | 96.62 | 92.36 | −4.26 | — | — |
+
+Finished six full dims (excl. Sensor Noise†): full **85.89**, Drop-6 NFE=10 **81.65**, **−4.24**. On the two NFE=1 slices, cutting steps costs **−0.57** (Language) / **+0.29** (Init) vs Drop-6 NFE=10—far smaller than the OOD gap vs full (−3.96 / −3.51). Camera remains the largest NFE=10 dim gap (−6.18). Largest single-suite holes at NFE=10: Background Goal (−14.59), Light Long (−13.50), Layout Long (−12.82).
 
 ## Core: finished dims by suite (%)
 
 | Dimension | Setting | Spatial | Object | Goal | Long | Avg. |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
 | Language | Full | 99.74 | 91.24 | 73.90 | 91.91 | 89.20 |
-| Language | Drop-6 | 95.64 | 89.27 | 71.71 | 84.33 | 85.24 |
+| Language | Drop-6 (NFE=10) | 95.64 | 89.27 | 71.71 | 84.33 | 85.24 |
+| Language | Drop-6 (NFE=1) | 96.92 | 88.98 | 69.76 | 83.03 | 84.67 |
 | Init | Full | 86.57 | 72.61 | 77.26 | 74.30 | 77.69 |
-| Init | Drop-6 | 88.00 | 68.84 | 70.42 | 69.47 | 74.18 |
+| Init | Drop-6 (NFE=10) | 88.00 | 68.84 | 70.42 | 69.47 | 74.18 |
+| Init | Drop-6 (NFE=1) | 87.14 | 68.59 | 70.66 | 71.50 | 74.47 |
 | Camera | Full | 74.73 | 73.99 | 66.67 | 52.03 | 66.85 |
 | Camera | Drop-6 | 70.48 | 63.13 | 64.95 | 44.15 | 60.68 |
 | Layout | Full | 96.88 | 88.83 | 68.71 | 91.67 | 86.52 |
@@ -35,9 +39,20 @@ Finished six-dim mean (not a Plus overall): full **85.89**, Drop-6 **81.65**, **
 | Background | Full | 99.61 | 98.79 | 93.95 | 94.12 | 96.62 |
 | Background | Drop-6 | 99.61 | 98.79 | 79.36 | 91.70 | 92.36 |
 
-Counts: Language 1367/1537 vs 1306/1537; Init 1200/1550 vs 1143/1550; Camera 1064/1599 vs 965/1599; Layout 1309/1525 vs 1254/1525; Light 1125/1142 vs 1087/1142; Background 1038/1076 vs 990/1076.
+Counts: Language 1367/1537 vs 1306/1537; Init 1200/1550 vs 1143/1550; Camera 1064/1599 vs 965/1599; Layout 1309/1525 vs 1254/1525; Light 1125/1142 vs 1087/1142; Background 1038/1076 vs 990/1076; Sensor Noise† 755/773 vs 723/773 (Spatial+Object only).
 
-Per-dimension protocol, disagreement, and jobs are in the sections below. Language 89.20 / 85.24 and Init 77.69 / 74.18 are not overwritten.
+† Sensor Noise macro Avg. is the mean of **Spatial and Object suite rates only** (773 variants). Goal (379) and Long (449) noise tasks are not evaluated yet; do not treat † as a seven-dimension overall score.
+
+## Drop-6 NFE=1 micro counts (Language + Init)
+
+| Dimension | Drop-6 NFE=10 micro | Drop-6 NFE=1 micro |
+| --- | --- | --- |
+| Language Instructions | 1306/1537 | **1297/1537** |
+| Robot Initial States | 1143/1550 | **1148/1550** |
+
+NFE=1 does not collapse either slice vs Drop-6 NFE=10 (see core table). In-distribution Fisher Drop-6 NFE=1 is **76.00** (`eval_nfe_libero.md`); not comparable to Plus variant counts.
+
+Per-dimension protocol, disagreement, and jobs are in the sections below. Language **89.20 / 85.24** (full / Drop-6 NFE=10) and Init **77.69 / 74.18** are not overwritten.
 
 ---
 
@@ -117,7 +132,7 @@ All `EXIT:0`. Times are UTC from `results/logs/eval_plus_*.log`.
 
 Plus language is a paraphrased-instruction OOD slice, 1 trial per variant. Fisher Drop-6 keeps the same keep-KV operator that is in-distribution neutral (97.75 vs 97.25). Here the cost is **−3.96** Avg., **−7.57** on Long, and Spatial/Object/Goal stay within about 2–4 points. That is a measured language-OOD gap, not a closed-loop collapse, and it is not a new selector. Do not put Plus rates into the in-distribution operating-point table.
 
-Per-dimension sections follow. Sensor Noise is empty in the core table until all four suite json files exist.
+Per-dimension sections follow. Sensor Noise has a partial core row (Spatial+Object); Goal/Long jobs are documented in § Sensor Noise.
 
 ---
 
@@ -328,7 +343,7 @@ Spatial/Object/Goal `EXIT:0`. Long end times are `eval_info.json` mtime (UTC).
 
 ## Reading
 
-Layout Avg. **86.52 → 82.41 (−4.11)**. Spatial/Object/Goal stay within about 0.5–2 points; Long is **−12.82**. Sensor Noise is still running on GPU0/2 and is empty in the core table.
+Layout Avg. **86.52 → 82.41 (−4.11)**. Spatial/Object/Goal stay within about 0.5–2 points; Long is **−12.82**. Sensor Noise Spatial+Object are in the core table; Goal/Long are pending.
 
 ---
 
@@ -467,3 +482,151 @@ All `EXIT:0`. Times are UTC from `results/logs/eval_plus_*.log`.
 ## Reading
 
 Background Avg. **96.62 → 92.36 (−4.26)**. Spatial/Object are identical to full (net 0 extra failures). Goal is **−14.59** (48 vs 7 one-sided failures), larger than Light Long (−13.50) and Layout Long (−12.82). Long is only **−2.42**. The Drop-6 OOD hole is not always long-horizon: here it is Goal. Not a collapse. Do not put these rates into the in-distribution operating-point table.
+
+---
+
+# LIBERO-plus Sensor Noise（π0.5 Fisher Drop-6 vs full）
+
+Official **Sensor Noise** category. Requires ImageMagick+wand (`MAGICK_HOME`); preflight in `run_eval_plus_lang.sh`. Same Plus recipe otherwise: 1 trial per variant, `seed=1000`, `n_action_steps=10`, `num_inference_steps=10`, `compile_model=false`. GPU0 = full; GPU2 = Fisher Drop-6 `[1, 13, 14, 15, 16, 17]`.
+
+**Status (2026-10-14).** **Spatial** and **Object** finished (`eval_info.json` present). **Goal** and **Long** never started.
+
+**Why the queue stopped.** GPU0/2 ran `run_eval_plus_dim.sh` (`plus_full_noise` / `plus_fisher6_noise`, category Sensor Noise). Spatial exited 0 after several ImageMagick preflight failures. Object **did** finish inference and wrote complete json (422 noise variants each). Immediately after, tmux `plus-full-noise-g0-r5` / `plus-d6-noise-g2-r5` recorded:
+
+`run_eval_plus_lang.sh: line 122: unexpected EOF while looking for matching '"'`
+
+then `==== QUEUE plus_*_noise stop at plus_*_noise_object exit=2 ====` (timestamps align with object `eval_info.json` mtime). `run_eval_plus_dim.sh` **stops on first non-zero suite exit**, so **goal** / **10** were never launched. Object per-suite logs also lack `==== EXIT ... ====` (wrapper died with exit 2 before the normal tail). The repo script is now 120 lines and parses clean; the line-122 error was from the **on-disk script at job end** (truncated edit or stray quote)—not from eval itself. **Resume:** same prefix; spatial/object are skipped when json exists:
+
+`bash scripts/pi05_libero/run_eval_plus_dim.sh 0 plus_full_noise '' "Sensor Noise"`
+
+`bash scripts/pi05_libero/run_eval_plus_dim.sh 2 plus_fisher6_noise '1,13,14,15,16,17' "Sensor Noise"`
+
+Do not extrapolate a four-suite Avg. from the † core-table row until Goal/Long complete.
+
+Source (partial): `results/eval_libero_plus/plus_{full,fisher6}_noise_{spatial,object}/{eval_info.json,drop_meta.json}`. Script: `run_eval_plus_dim.sh`, category `Sensor Noise`.
+
+Table: success rate (%) for finished suites only.
+
+| Setting | Metric | Spatial | Object | Goal | Long | Avg. (S+O) |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Full | — | 98.58 | 96.92 | — | — | 97.75 |
+| Drop-6 (6/18) | Fisher | 91.45 | 95.26 | — | — | 93.36 |
+
+Counts (successes / noise variants):
+
+| Setting | Spatial | Object | Goal | Long | All (finished) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Full | 346/351 | 409/422 | — | — | 755/773 |
+| Fisher Drop-6 | 321/351 | 402/422 | — | — | 723/773 |
+
+Δ vs this-machine Plus-noise full (**Spatial+Object macro 97.75 → 93.36**, **−4.40**):
+
+- Spatial **−7.13** (346/351 → 321/351)
+- Object **−1.66** (409/422 → 402/422)
+- Micro (773 variants): 97.67 → 93.53, **−4.14**
+
+## Same-variant disagreement (full vs Fisher Drop-6, finished suites)
+
+| Suite | n | both success | both fail | full✓ drop✗ | full✗ drop✓ |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Spatial | 351 | 319 | 3 | 27 | 2 |
+| Object | 422 | 392 | 3 | 17 | 10 |
+
+Net extra failures under Drop-6: Spatial 25, Object 7 (773 variants: 32 more failures).
+
+## Jobs (finished suites)
+
+Spatial `EXIT:0` after several ImageMagick preflight failures. Object: `eval_info.json` written; log may be truncated before `EXIT`.
+
+| Job | GPU | Start (UTC) | End (UTC) |
+| --- | ---: | --- | --- |
+| plus_full_noise_spatial | 0 | 2026-10-12T01:49:24Z | 2026-10-12T19:30:34Z |
+| plus_full_noise_object | 0 | 2026-10-12T19:30:50Z | ~2026-10-13T13:07:56Z (json mtime) |
+| plus_fisher6_noise_spatial | 2 | 2026-10-12T01:49:22Z | 2026-10-12T21:54:37Z |
+| plus_fisher6_noise_object | 2 | 2026-10-12T21:54:55Z | ~2026-10-13T16:20:00Z (json mtime) |
+
+## Reading
+
+On the finished half of Sensor Noise, Drop-6 costs about **4 points** macro (similar to Language/Layout), with Spatial taking the hit (−7.13 pp). Object is nearly flat (−1.66 pp). Resume Goal/Long on GPU0/2 with the same prefix (`plus_full_noise` / `plus_fisher6_noise`) before adding Sensor Noise to any seven-dimension overall average.
+
+---
+
+# LIBERO-plus Language Instructions — Fisher Drop-6 **NFE=1**
+
+Fisher Drop-6 only (`plus_fisher6_nfe1_lang_*`). Same Plus language task ids and `seed=1000` as § Language Instructions; **`num_inference_steps=1`** (NFE=10 rows **85.24** Avg. are unchanged). GPU1, all eight jobs `EXIT:0` (2026-10-13 UTC).
+
+Source: `results/eval_libero_plus/plus_fisher6_nfe1_lang_{spatial,object,goal,10}/`. Launcher: `scripts/pi05_libero/run_eval_plus_fisher6_nfe1_pair.sh lang` → `run_eval_plus_dim.sh` with NFE=1.
+
+| Setting | Spatial | Object | Goal | Long | Avg. |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Drop-6 NFE=1 | 96.92 | 88.98 | 69.76 | 83.03 | **84.67** |
+| Drop-6 NFE=10 (anchor) | 95.64 | 89.27 | 71.71 | 84.33 | 85.24 |
+| Full NFE=10 (reference) | 99.74 | 91.24 | 73.90 | 91.91 | 89.20 |
+
+Counts: **1297/1537** successes (micro 84.39%). vs Drop-6 NFE=10 **1306/1537** (−9 variants, −0.59 pp micro).
+
+Δ vs Drop-6 NFE=10 macro (**−0.57**): Spatial **+1.28**, Object **−0.29**, Goal **−1.95**, Long **−1.30**.
+
+## NFE=10 vs NFE=1 disagreement (same Drop-6, same variants)
+
+| Suite | n | both success | both fail | NFE10✓ NFE1✗ | NFE10✗ NFE1✓ |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Spatial | 390 | 371 | 10 | 2 | 7 |
+| Object | 354 | 309 | 32 | 7 | 6 |
+| Goal | 410 | 278 | 108 | 16 | 8 |
+| Long | 383 | 310 | 52 | 13 | 8 |
+
+Net variants that fail under NFE=1 but succeed under NFE=10: 38 (Spatial 2, Object 7, Goal 16, Long 13). Net the other way: 29.
+
+## Jobs
+
+| Job | GPU | Start (UTC) | End (UTC) |
+| --- | ---: | --- | --- |
+| plus_fisher6_nfe1_lang_spatial | 1 | 2026-10-13T16:16:49Z | 2026-10-13T17:37:00Z |
+| plus_fisher6_nfe1_lang_object | 1 | 2026-10-13T17:37:00Z | 2026-10-13T18:47:40Z |
+| plus_fisher6_nfe1_lang_goal | 1 | 2026-10-13T18:47:40Z | 2026-10-13T20:15:29Z |
+| plus_fisher6_nfe1_lang_10 | 1 | 2026-10-13T20:15:29Z | 2026-10-13T22:22:02Z |
+
+## Reading
+
+Plus language under Drop-6 is already −3.96 vs full at NFE=10. Cutting inference to **one Euler step** costs only **−0.57** more Avg. vs Drop-6 NFE=10—much smaller than the OOD gap vs full (−4.53 NFE=1 vs full NFE=10). Long remains the softest suite (−1.30 pp vs NFE=10). Not a collapse.
+
+---
+
+# LIBERO-plus Robot Initial States — Fisher Drop-6 **NFE=1**
+
+Fisher Drop-6 only (`plus_fisher6_nfe1_init_*`). Same Init task ids and `seed=1000` as § Robot Initial States; **`num_inference_steps=1`**. GPU3, all eight jobs `EXIT:0` (2026-10-13 UTC).
+
+Source: `results/eval_libero_plus/plus_fisher6_nfe1_init_{spatial,object,goal,10}/`. Launcher: `run_eval_plus_fisher6_nfe1_pair.sh init`.
+
+| Setting | Spatial | Object | Goal | Long | Avg. |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Drop-6 NFE=1 | 87.14 | 68.59 | 70.66 | 71.50 | **74.47** |
+| Drop-6 NFE=10 (anchor) | 88.00 | 68.84 | 70.42 | 69.47 | 74.18 |
+| Full NFE=10 (reference) | 86.57 | 72.61 | 77.26 | 74.30 | 77.69 |
+
+Counts: **1148/1550** (micro 74.06%). vs Drop-6 NFE=10 **1143/1550** (+5 variants, +0.32 pp micro).
+
+Δ vs Drop-6 NFE=10 macro (**+0.29**): Spatial **−0.86**, Object **−0.25**, Goal **+0.24**, Long **+2.03**.
+
+## NFE=10 vs NFE=1 disagreement (same Drop-6)
+
+| Suite | n | both success | both fail | NFE10✓ NFE1✗ | NFE10✗ NFE1✓ |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Spatial | 350 | 296 | 33 | 12 | 9 |
+| Object | 398 | 248 | 99 | 26 | 25 |
+| Goal | 409 | 263 | 95 | 25 | 26 |
+| Long | 393 | 253 | 92 | 20 | 28 |
+
+## Jobs
+
+| Job | GPU | Start (UTC) | End (UTC) |
+| --- | ---: | --- | --- |
+| plus_fisher6_nfe1_init_spatial | 3 | 2026-10-13T16:16:49Z | 2026-10-13T17:39:14Z |
+| plus_fisher6_nfe1_init_object | 3 | 2026-10-13T17:39:14Z | 2026-10-13T19:09:20Z |
+| plus_fisher6_nfe1_init_goal | 3 | 2026-10-13T19:09:20Z | 2026-10-13T20:35:25Z |
+| plus_fisher6_nfe1_init_10 | 3 | 2026-10-13T20:35:25Z | 2026-10-13T22:50:11Z |
+
+## Reading
+
+Init OOD at Drop-6 NFE=10 is **74.18** Avg. NFE=1 is **74.47** (+0.29)—no extra collapse from a single denoising step on this slice. Long gains **+2.03** pp at 1-trial resolution (39 variants flip). Spatial/Object are flat to slightly down. Compare to in-distribution Drop-6 NFE=1 **76.00** only qualitatively; Plus Init is a different task distribution.

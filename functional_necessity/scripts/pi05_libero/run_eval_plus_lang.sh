@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 # Isolated LIBERO-plus one-category eval (official 1 trial per variant).
-# Usage: bash run_eval_plus_lang.sh GPU TAG DROP_CSV SUITE [CATEGORY]
+# Usage: bash run_eval_plus_lang.sh GPU TAG DROP_CSV SUITE [CATEGORY] [NFE]
 #   DROP_CSV empty  → full model
 #   DROP_CSV 1,13,14,15,16,17 → Fisher Drop-6
 # SUITE: libero_spatial | libero_object | libero_goal | libero_10
 # CATEGORY defaults to "Language Instructions".
+# NFE defaults to 10 (official Plus recipe); use 1 for Drop-6 NFE=1 cells.
 set -u
 set -o pipefail
 
@@ -13,6 +14,7 @@ TAG="${2:?tag}"
 DROP="${3-}"
 SUITE="${4:?suite}"
 CATEGORY="${5:-Language Instructions}"
+NFE="${6:-10}"
 
 ROOT=/home/guorj/Skill_Efficient_VLA/functional_necessity
 OUT="$ROOT/results/eval_libero_plus/$TAG"
@@ -95,12 +97,13 @@ else
 fi
 
 cd "$ROOT/scripts/pi05_libero"
-echo "==== START $TAG $(date -Iseconds) gpu=$GPU suite=$SUITE category=$CATEGORY method=$METHOD k=$K drop=$DROP_ARG MAGICK_HOME=${MAGICK_HOME:-} ====" | tee -a "$LOG"
+echo "==== START $TAG $(date -Iseconds) gpu=$GPU suite=$SUITE category=$CATEGORY method=$METHOD k=$K drop=$DROP_ARG nfe=$NFE MAGICK_HOME=${MAGICK_HOME:-} ====" | tee -a "$LOG"
 "$PY" eval_drop.py \
   --method "$METHOD" --k "$K" --drop-layers "$DROP_ARG" \
   --output_dir "$OUT" --job_name "$TAG" \
   --policy.path=lerobot/pi05_libero_finetuned_v044 \
   --policy.n_action_steps=10 \
+  --policy.num_inference_steps="$NFE" \
   --policy.compile_model=false \
   --policy.gradient_checkpointing=false \
   --env.type=libero_plus \
