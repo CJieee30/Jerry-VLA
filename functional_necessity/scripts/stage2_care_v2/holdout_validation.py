@@ -414,44 +414,64 @@ def verify_holdout_counts(model: str, block: dict) -> dict:
     return {"expected": exp, "got": got, "ok": len(mismatches) == 0, "mismatches": mismatches}
 
 
+def _nfe_action_series(
+    acts, holdout_index: int, noise_id: int, model: str
+) -> list[tuple[str, np.ndarray]]:
+    """Ordered (legend, chunk) for overlay plots; reference NFE10 first."""
+    order: list[tuple[str, str]] = [("NFE10 (ref)", "nfe10"), ("NFE1", "nfe1"), ("NFE2", "nfe2")]
+    if model == "smolvla" and "nfe3" in acts.files:
+        order.append(("NFE3", "nfe3"))
+    out: list[tuple[str, np.ndarray]] = []
+    for label, key in order:
+        if key not in acts.files:
+            continue
+        out.append((label, acts[key][holdout_index, noise_id]))
+    return out
+
+
 def plot_holdout_clip(
     df: pd.DataFrame,
     holdout_dir: Path,
     model: str,
     holdout_index: int,
     noise_id: int,
-    nfe_plot: int = 1,
+    *,
+    nfe_metrics: int = 1,
     tag: str = "",
 ) -> str | None:
     npz_path = holdout_dir / "actions.npz"
     if not npz_path.is_file():
         return None
     row = df[
-        (df.shared_index == holdout_index) & (df.nfe == nfe_plot) & (df.noise_id == noise_id)
+        (df.shared_index == holdout_index) & (df.nfe == nfe_metrics) & (df.noise_id == noise_id)
     ]
     if row.empty:
         return None
     row = row.iloc[0]
     acts = np.load(npz_path)
+    series = _nfe_action_series(acts, holdout_index, noise_id, model)
+    if not series:
+        return None
     curves_dir = PHASE2_DIR / "curves" / model
     curves_dir.mkdir(parents=True, exist_ok=True)
-    steps = np.arange(acts["nfe1"].shape[2])
-    ref = acts["nfe10"][holdout_index, noise_id]
-    pred1 = acts["nfe1"][holdout_index, noise_id]
-    pred2 = acts["nfe2"][holdout_index, noise_id]
-    fig, axes = plt.subplots(2, 1, figsize=(8, 4), sharex=True)
-    axes[0].plot(steps, np.linalg.norm(ref[:, :6], axis=1), "k--", label="NFE10 |arm|")
-    axes[0].plot(steps, np.linalg.norm(pred1[:, :6], axis=1), label="NFE1")
-    axes[0].plot(steps, np.linalg.norm(pred2[:, :6], axis=1), label="NFE2")
-    axes[1].plot(steps, ref[:, 6], "k--", label="NFE10 grip")
-    axes[1].plot(steps, pred1[:, 6], label="NFE1 grip")
-    axes[1].plot(steps, pred2[:, 6], label="NFE2 grip")
-    axes[0].legend(fontsize=7)
-    axes[1].legend(fontsize=7)
-    axes[1].set_xlabel("exec step")
+    steps = np.arange(series[0][1].shape[0])
+    fig, axes = plt.subplots(2, 1, figsize=(9, 4.5), sharex=True)
+    styles = {"NFE10 (ref)": ("k", "--")}
+    for label, chunk in series:
+        color, ls = styles.get(label, (None, "-"))
+        arm_norm = np.linalg.norm(chunk[:, :6], axis=1)
+        axes[0].plot(steps, arm_norm, ls=ls, color=color, label=f"{label} ‖arm‖₂")
+        axes[1].plot(steps, chunk[:, 6], ls=ls, color=color, label=f"{label} grip")
+    axes[0].set_ylabel("L2 norm (dims 0–5)")
+    axes[1].set_ylabel("grip (dim 6)")
+    axes[1].set_xlabel("exec step in chunk")
+    axes[0].legend(fontsize=6, ncol=2)
+    axes[1].legend(fontsize=6, ncol=2)
     fig.suptitle(
         f"{model} holdout#{holdout_index} gidx={int(row.global_index)} ep={int(row.episode_index)} "
-        f"f={int(row.frame_in_episode)} noise={noise_id} cos={float(row.cosine):.3f} rmse={float(row.rmse):.3f} {tag}",
+        f"f={int(row.frame_in_episode)} noise={noise_id} "
+        f"NFE{nfe_metrics} cos={float(row.cosine):.3f} rmse={float(row.rmse):.3f}"
+        + (f" [{tag}]" if tag else ""),
         fontsize=8,
     )
     suffix = f"_{tag}" if tag else ""
@@ -461,32 +481,150 @@ def plot_holdout_clip(
     return str(out.relative_to(PHASE2_DIR))
 
 
+def _nfe1_tail_anomaly_keys(anomaly_rows: list[dict]) -> set[tuple[int, int]]:
+    return {
+        (int(a["holdout_index"]), int(a["noise_id"]))
+        for a in anomaly_rows
+        if int(a["nfe"]) == 1
+    }
+
+
+def _select_tail_nfe1_plots(
+    anomaly_rows: list[dict], noise_id: int, k: int
+) -> list[dict]:
+    rows = [a for a in anomaly_rows if int(a["nfe"]) == 1 and int(a["noise_id"]) == noise_id]
+    rows.sort(key=lambda a: (-float(a["rmse"]), float(a["cosine"]), int(a["holdout_index"])))
+    if k > 0 and len(rows) > k:
+        return rows[:k]
+    return rows
+
+
+def archive_stale_tail_curves(model: str) -> list[str]:
+    """Move previous tail_nfe1 PNGs aside so reports do not reference false tails."""
+    curves_dir = PHASE2_DIR / "curves" / model
+    backup = PHASE2_DIR / "curves" / "_backup_pre_plotfix" / model
+    backup.mkdir(parents=True, exist_ok=True)
+    moved: list[str] = []
+    if not curves_dir.is_dir():
+        return moved
+    for p in sorted(curves_dir.glob("holdout_*_tail_nfe1.png")):
+        dest = backup / p.name
+        if dest.is_file():
+            dest.unlink()
+        p.rename(dest)
+        moved.append(str(dest.relative_to(PHASE2_DIR)))
+    return moved
+
+
+def verify_tail_nfe1_curves(
+    model: str, anomaly_rows: list[dict], curve_paths: list[str]
+) -> dict:
+    allowed = _nfe1_tail_anomaly_keys(anomaly_rows)
+    bad: list[str] = []
+    ok_paths: list[str] = []
+    for rel in curve_paths:
+        if not rel.endswith("_tail_nfe1.png"):
+            continue
+        name = Path(rel).name
+        # holdout_XXX_noiseY_tail_nfe1.png
+        stem = name.replace("_tail_nfe1.png", "")
+        parts = stem.split("_")
+        try:
+            hi = int(parts[1])
+            nid = int(parts[2].replace("noise", ""))
+        except (IndexError, ValueError):
+            bad.append(f"{rel}: unparseable name")
+            continue
+        if (hi, nid) not in allowed:
+            bad.append(f"{rel}: holdout#{hi} noise{nid} not in NFE=1 tail set")
+        else:
+            ok_paths.append(rel)
+    return {
+        "model": model,
+        "n_allowed_pairs": len(allowed),
+        "n_tail_nfe1_plots": len(ok_paths) + len([b for b in bad if "not in" in b]),
+        "invalid_plots": bad,
+        "ok": len(bad) == 0,
+    }
+
+
 def plot_holdout_anomalies(
     df: pd.DataFrame,
     holdout_dir: Path,
     model: str,
     anomaly_rows: list[dict],
     k: int = 5,
-) -> list[str]:
+) -> dict:
+    archive_stale_tail_curves(model)
     written: list[str] = []
-    # Always plot known grip cases for SmolVLA
+    index_rows: list[dict] = []
+
     if model == "smolvla":
         for hi, nid in [(16, 0), (48, 1)]:
-            p = plot_holdout_clip(df, holdout_dir, model, hi, nid, tag="grip")
+            p = plot_holdout_clip(
+                df, holdout_dir, model, hi, nid, nfe_metrics=1, tag="grip"
+            )
             if p:
                 written.append(p)
-    # Top RMSE tails at NFE=1 per noise
+                index_rows.append(
+                    {
+                        "path": p,
+                        "kind": "grip",
+                        "holdout_index": hi,
+                        "noise_id": nid,
+                        "nfes_shown": "1,2,3,10",
+                    }
+                )
+
     for noise_id in HOLDOUT_NOISES:
-        sub = df[(df.nfe == 1) & (df.noise_id == noise_id)].copy()
-        sub["score"] = -sub.cosine + sub.rmse
-        worst = sub.nlargest(k, "score")
-        for _, row in worst.iterrows():
+        picks = _select_tail_nfe1_plots(anomaly_rows, noise_id, k)
+        for a in picks:
+            hi = int(a["holdout_index"])
             p = plot_holdout_clip(
-                df, holdout_dir, model, int(row.shared_index), noise_id, tag="tail_nfe1"
+                df, holdout_dir, model, hi, noise_id, nfe_metrics=1, tag="tail_nfe1"
             )
             if p and p not in written:
                 written.append(p)
-    return written
+                nfes = "1,2,3,10" if model == "smolvla" else "1,2,10"
+                index_rows.append(
+                    {
+                        "path": p,
+                        "kind": "tail_nfe1",
+                        "holdout_index": hi,
+                        "noise_id": noise_id,
+                        "cosine": a["cosine"],
+                        "rmse": a["rmse"],
+                        "nfes_shown": nfes,
+                    }
+                )
+    verify = verify_tail_nfe1_curves(model, anomaly_rows, written)
+    return {"files": written, "index": index_rows, "tail_nfe1_verify": verify}
+
+
+def _curve_report_lines(model: str, curve_bundle: dict) -> list[str]:
+    if not curve_bundle.get("files"):
+        return []
+    lines = [f"- 曲线：`curves/{model}/`（{len(curve_bundle['files'])} 张）"]
+    kinds = {r["kind"] for r in curve_bundle.get("index", [])}
+    if model == "smolvla":
+        if "grip" in kinds:
+            lines.append(
+                "  - 夹爪不一致：`holdout_016_noise0_grip.png`、`holdout_048_noise1_grip.png`"
+                "（叠加 NFE 1/2/3/10）"
+            )
+        if "tail_nfe1" in kinds:
+            n = sum(1 for r in curve_bundle["index"] if r["kind"] == "tail_nfe1")
+            lines.append(
+                f"  - NFE=1 尾部异常：{n} 张 `*_tail_nfe1.png`（均来自 `anomaly_rows` 筛选，叠加 NFE 1/2/3/10）"
+            )
+    else:
+        n = sum(1 for r in curve_bundle.get("index", []) if r["kind"] == "tail_nfe1")
+        lines.append(
+            f"  - NFE=1 尾部异常：{n} 张 `*_tail_nfe1.png`（π0.5 无夹爪不一致；叠加 NFE 1/2/10）"
+        )
+    v = curve_bundle.get("tail_nfe1_verify", {})
+    lines.append(f"  - `tail_nfe1` 核对：ok={v.get('ok', False)}")
+    return lines
 
 
 def _md_holdout_table(block: dict, nfes: tuple[int, ...]) -> list[str]:
@@ -569,6 +707,19 @@ def write_fixes_md(before: dict, after_verify: dict) -> None:
         lines.append("差异：" + "; ".join(mism))
     else:
         lines.append("与预期尾部/夹爪计数一致。")
+    lines.extend(
+        [
+            "",
+            "## 绘图修复（第二轮）",
+            "",
+            "- `plot_holdout_anomalies()` 现仅对 `anomaly_rows` 中 **NFE=1** 的真实尾部绘图；",
+            "  不再按 RMSE 排序全 holdout（误含 π0.5 #93/noise0、#96/noise1 等）。",
+            "- 旧 `*_tail_nfe1.png` 移至 `curves/_backup_pre_plotfix/{model}/`。",
+            "- SmolVLA 异常图叠加 **NFE 1/2/3/10**；π0.5 为 **1/2/10**。",
+            "- 报告夹爪说明仅列 SmolVLA（#16/noise0、#48/noise1）。",
+            "",
+        ]
+    )
     (PHASE2_DIR / "FIXES.md").write_text("\n".join(lines) + "\n")
 
 
@@ -650,8 +801,7 @@ def write_report(
         if not shown:
             lines.append("| — | — | — | — | — | — | — | — | — |")
         lines.append("")
-        if curves.get(model):
-            lines.append(f"- 曲线：`curves/{model}/`（含 holdout#16 noise0、#48 noise1 夹爪例）")
+        lines.extend(_curve_report_lines(model, curves.get(model, {})))
         lines.append("")
     lines.extend(
         [
@@ -703,7 +853,7 @@ def run_analysis() -> None:
         "pi05": load_probe_frames(CAL_PI05),
     }
     holdout_eval = {}
-    curves = {}
+    curves: dict = {}
     for model, subdir, nfes in (
         ("smolvla", "smolvla", SMOL_HOLDOUT_NFES),
         ("pi05", "pi05", PI05_HOLDOUT_NFES),
@@ -719,6 +869,17 @@ def run_analysis() -> None:
         curves[model] = plot_holdout_anomalies(
             hdf, hdir, model, holdout_eval[model]["anomalies"]
         )
+
+    curve_index_path = PHASE2_DIR / "curves" / "curve_index.json"
+    curve_index_path.parent.mkdir(parents=True, exist_ok=True)
+    curve_index_path.write_text(
+        json.dumps(
+            {m: curves[m].get("index", []) for m in curves},
+            indent=2,
+            ensure_ascii=False,
+        )
+        + "\n"
+    )
 
     verify = {
         "smolvla": verify_holdout_counts("smolvla", holdout_eval["smolvla"]),
@@ -751,7 +912,9 @@ def run_analysis() -> None:
         "holdout_eval": holdout_eval,
         "verification": verify,
         "care_event_vs_alpha": changes,
-        "curve_files": curves,
+        "curve_files": {m: curves[m]["files"] for m in curves},
+        "curve_index": {m: curves[m].get("index", []) for m in curves},
+        "curve_tail_nfe1_verify": {m: curves[m].get("tail_nfe1_verify", {}) for m in curves},
         "before_fix_reference": before_wrong,
     }
     (PHASE2_DIR / "summary.json").write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")

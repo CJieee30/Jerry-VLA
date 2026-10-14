@@ -106,7 +106,10 @@
 | 21 | 73329 | 273 | 44 | 1 | 0 | 0.9827 | 0.1089 | 0 |
 | 67 | 190062 | 1055 | 119 | 1 | 1 | 0.9836 | 0.1059 | 0 |
 
-- 曲线：`curves/smolvla/`（含 holdout#16 noise0、#48 noise1 夹爪例）
+- 曲线：`curves/smolvla/`（12 张）
+  - 夹爪不一致：`holdout_016_noise0_grip.png`、`holdout_048_noise1_grip.png`（叠加 NFE 1/2/3/10）
+  - NFE=1 尾部异常：10 张 `*_tail_nfe1.png`（均来自 `anomaly_rows` 筛选，叠加 NFE 1/2/3/10）
+  - `tail_nfe1` 核对：ok=True
 
 ### pi05
 - 校准阈值来源：`/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_probe_pi05/frames.csv`
@@ -147,7 +150,9 @@
 | 21 | 73329 | 273 | 44 | 1 | 1 | 0.9923 | 0.0756 | 0 |
 | 17 | 82922 | 308 | 297 | 2 | 0 | 0.9929 | 0.0755 | 0 |
 
-- 曲线：`curves/pi05/`（含 holdout#16 noise0、#48 noise1 夹爪例）
+- 曲线：`curves/pi05/`（10 张）
+  - NFE=1 尾部异常：10 张 `*_tail_nfe1.png`（π0.5 无夹爪不一致；叠加 NFE 1/2/10）
+  - `tail_nfe1` 核对：ok=True
 
 ## 3. 问题摘要
 

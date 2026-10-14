@@ -26,3 +26,12 @@
 
 核对：`ok=True`
 与预期尾部/夹爪计数一致。
+
+## 绘图修复（第二轮）
+
+- `plot_holdout_anomalies()` 现仅对 `anomaly_rows` 中 **NFE=1** 的真实尾部绘图；
+  不再按 RMSE 排序全 holdout（误含 π0.5 #93/noise0、#96/noise1 等）。
+- 旧 `*_tail_nfe1.png` 移至 `curves/_backup_pre_plotfix/{model}/`。
+- SmolVLA 异常图叠加 **NFE 1/2/3/10**；π0.5 为 **1/2/10**。
+- 报告夹爪说明仅列 SmolVLA（#16/noise0、#48/noise1）。
+

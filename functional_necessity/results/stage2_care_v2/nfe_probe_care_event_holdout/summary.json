@@ -2675,29 +2675,245 @@
     "smolvla": [
       "curves/smolvla/holdout_016_noise0_grip.png",
       "curves/smolvla/holdout_048_noise1_grip.png",
-      "curves/smolvla/holdout_016_noise0_tail_nfe1.png",
       "curves/smolvla/holdout_007_noise0_tail_nfe1.png",
+      "curves/smolvla/holdout_016_noise0_tail_nfe1.png",
       "curves/smolvla/holdout_110_noise0_tail_nfe1.png",
       "curves/smolvla/holdout_033_noise0_tail_nfe1.png",
       "curves/smolvla/holdout_061_noise0_tail_nfe1.png",
       "curves/smolvla/holdout_048_noise1_tail_nfe1.png",
-      "curves/smolvla/holdout_033_noise1_tail_nfe1.png",
+      "curves/smolvla/holdout_007_noise1_tail_nfe1.png",
       "curves/smolvla/holdout_110_noise1_tail_nfe1.png",
-      "curves/smolvla/holdout_061_noise1_tail_nfe1.png",
-      "curves/smolvla/holdout_007_noise1_tail_nfe1.png"
+      "curves/smolvla/holdout_033_noise1_tail_nfe1.png",
+      "curves/smolvla/holdout_036_noise1_tail_nfe1.png"
     ],
     "pi05": [
       "curves/pi05/holdout_007_noise0_tail_nfe1.png",
-      "curves/pi05/holdout_033_noise0_tail_nfe1.png",
       "curves/pi05/holdout_034_noise0_tail_nfe1.png",
+      "curves/pi05/holdout_033_noise0_tail_nfe1.png",
+      "curves/pi05/holdout_110_noise0_tail_nfe1.png",
       "curves/pi05/holdout_047_noise0_tail_nfe1.png",
-      "curves/pi05/holdout_093_noise0_tail_nfe1.png",
       "curves/pi05/holdout_007_noise1_tail_nfe1.png",
       "curves/pi05/holdout_110_noise1_tail_nfe1.png",
       "curves/pi05/holdout_043_noise1_tail_nfe1.png",
-      "curves/pi05/holdout_096_noise1_tail_nfe1.png",
-      "curves/pi05/holdout_033_noise1_tail_nfe1.png"
+      "curves/pi05/holdout_033_noise1_tail_nfe1.png",
+      "curves/pi05/holdout_017_noise1_tail_nfe1.png"
     ]
+  },
+  "curve_index": {
+    "smolvla": [
+      {
+        "path": "curves/smolvla/holdout_016_noise0_grip.png",
+        "kind": "grip",
+        "holdout_index": 16,
+        "noise_id": 0,
+        "nfes_shown": "1,2,3,10"
+      },
+      {
+        "path": "curves/smolvla/holdout_048_noise1_grip.png",
+        "kind": "grip",
+        "holdout_index": 48,
+        "noise_id": 1,
+        "nfes_shown": "1,2,3,10"
+      },
+      {
+        "path": "curves/smolvla/holdout_007_noise0_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 7,
+        "noise_id": 0,
+        "cosine": 0.9859418272972108,
+        "rmse": 0.2613592743873596,
+        "nfes_shown": "1,2,3,10"
+      },
+      {
+        "path": "curves/smolvla/holdout_016_noise0_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 16,
+        "noise_id": 0,
+        "cosine": 0.9147658944129944,
+        "rmse": 0.2303454875946045,
+        "nfes_shown": "1,2,3,10"
+      },
+      {
+        "path": "curves/smolvla/holdout_110_noise0_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 110,
+        "noise_id": 0,
+        "cosine": 0.9763378500938416,
+        "rmse": 0.1834502220153808,
+        "nfes_shown": "1,2,3,10"
+      },
+      {
+        "path": "curves/smolvla/holdout_033_noise0_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 33,
+        "noise_id": 0,
+        "cosine": 0.9630730152130128,
+        "rmse": 0.1680942475795745,
+        "nfes_shown": "1,2,3,10"
+      },
+      {
+        "path": "curves/smolvla/holdout_061_noise0_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 61,
+        "noise_id": 0,
+        "cosine": 0.975515365600586,
+        "rmse": 0.1457188725471496,
+        "nfes_shown": "1,2,3,10"
+      },
+      {
+        "path": "curves/smolvla/holdout_048_noise1_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 48,
+        "noise_id": 1,
+        "cosine": 0.9428449869155884,
+        "rmse": 0.247768685221672,
+        "nfes_shown": "1,2,3,10"
+      },
+      {
+        "path": "curves/smolvla/holdout_007_noise1_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 7,
+        "noise_id": 1,
+        "cosine": 0.9934523105621338,
+        "rmse": 0.1788249909877777,
+        "nfes_shown": "1,2,3,10"
+      },
+      {
+        "path": "curves/smolvla/holdout_110_noise1_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 110,
+        "noise_id": 1,
+        "cosine": 0.97859525680542,
+        "rmse": 0.1781216412782669,
+        "nfes_shown": "1,2,3,10"
+      },
+      {
+        "path": "curves/smolvla/holdout_033_noise1_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 33,
+        "noise_id": 1,
+        "cosine": 0.9672192335128784,
+        "rmse": 0.1673002690076828,
+        "nfes_shown": "1,2,3,10"
+      },
+      {
+        "path": "curves/smolvla/holdout_036_noise1_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 36,
+        "noise_id": 1,
+        "cosine": 0.989582359790802,
+        "rmse": 0.1667076498270034,
+        "nfes_shown": "1,2,3,10"
+      }
+    ],
+    "pi05": [
+      {
+        "path": "curves/pi05/holdout_007_noise0_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 7,
+        "noise_id": 0,
+        "cosine": 0.9929777979850768,
+        "rmse": 0.1817134618759155,
+        "nfes_shown": "1,2,10"
+      },
+      {
+        "path": "curves/pi05/holdout_034_noise0_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 34,
+        "noise_id": 0,
+        "cosine": 0.9960650205612184,
+        "rmse": 0.1183877661824226,
+        "nfes_shown": "1,2,10"
+      },
+      {
+        "path": "curves/pi05/holdout_033_noise0_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 33,
+        "noise_id": 0,
+        "cosine": 0.9864099621772766,
+        "rmse": 0.111679695546627,
+        "nfes_shown": "1,2,10"
+      },
+      {
+        "path": "curves/pi05/holdout_110_noise0_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 110,
+        "noise_id": 0,
+        "cosine": 0.992839217185974,
+        "rmse": 0.102966584265232,
+        "nfes_shown": "1,2,10"
+      },
+      {
+        "path": "curves/pi05/holdout_047_noise0_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 47,
+        "noise_id": 0,
+        "cosine": 0.98740816116333,
+        "rmse": 0.1022847220301628,
+        "nfes_shown": "1,2,10"
+      },
+      {
+        "path": "curves/pi05/holdout_007_noise1_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 7,
+        "noise_id": 1,
+        "cosine": 0.9898167848587036,
+        "rmse": 0.2197904586791992,
+        "nfes_shown": "1,2,10"
+      },
+      {
+        "path": "curves/pi05/holdout_110_noise1_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 110,
+        "noise_id": 1,
+        "cosine": 0.9927953481674194,
+        "rmse": 0.1182237043976783,
+        "nfes_shown": "1,2,10"
+      },
+      {
+        "path": "curves/pi05/holdout_043_noise1_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 43,
+        "noise_id": 1,
+        "cosine": 0.9922890663146972,
+        "rmse": 0.1159568205475807,
+        "nfes_shown": "1,2,10"
+      },
+      {
+        "path": "curves/pi05/holdout_033_noise1_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 33,
+        "noise_id": 1,
+        "cosine": 0.9880387187004088,
+        "rmse": 0.0967516377568245,
+        "nfes_shown": "1,2,10"
+      },
+      {
+        "path": "curves/pi05/holdout_017_noise1_tail_nfe1.png",
+        "kind": "tail_nfe1",
+        "holdout_index": 17,
+        "noise_id": 1,
+        "cosine": 0.9923940300941468,
+        "rmse": 0.0783953219652175,
+        "nfes_shown": "1,2,10"
+      }
+    ]
+  },
+  "curve_tail_nfe1_verify": {
+    "smolvla": {
+      "model": "smolvla",
+      "n_allowed_pairs": 22,
+      "n_tail_nfe1_plots": 10,
+      "invalid_plots": [],
+      "ok": true
+    },
+    "pi05": {
+      "model": "pi05",
+      "n_allowed_pairs": 13,
+      "n_tail_nfe1_plots": 10,
+      "invalid_plots": [],
+      "ok": true
+    }
   },
   "before_fix_reference": {
     "pi05_nfe1_noise0_tail": 1,
