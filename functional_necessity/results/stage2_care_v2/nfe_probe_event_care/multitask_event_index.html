@@ -1,0 +1,40 @@
+<!doctype html><meta charset='utf-8'><title>Event CARE multitask previews</title>
+<style>body{font-family:sans-serif;max-width:1100px;margin:20px auto;padding:0 12px}
+video{max-width:100%} .pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row{margin:1.5em 0;padding-bottom:1em;border-bottom:1px solid #eee}
+h2{margin-top:2em}</style>
+<h1>Event CARE α_event — high vs low per task (12-frame pool)</h1>
+<p>Sorted by <b>α_event = (α + 1.0·G) / mean(α+G)</b> within each <code>task_index</code> pool (global mean over 480 frames).</p>
+<p><a href='index.html'>Suite task-0 α_event high/low</a></p>
+<div class='row'><h2>long · task_index=3</h2><p>turn on the stove and put the moka pot on it</p><div class='pair'>
+<div><h3>α_event rank 12/12 (low)</h3><p>α=0.319 α_event=0.286 G=0 · ep=153 frame=219</p><video controls src='videos_multitask_event/long_t03_event_low.mp4'></video><p><img src='videos_multitask_event/long_t03_event_low_actions.png' style='max-width:100%'></p></div>
+<div><h3>α_event rank 1/12 (high)</h3><p>α=1.015 α_event=1.804 G=1 · ep=40 frame=167</p><video controls src='videos_multitask_event/long_t03_event_high.mp4'></video><p><img src='videos_multitask_event/long_t03_event_high_actions.png' style='max-width:100%'></p></div>
+</div></div>
+<div class='row'><h2>long · task_index=5</h2><p>put both the alphabet soup and the tomato sauce in the basket</p><div class='pair'>
+<div><h3>α_event rank 12/12 (low)</h3><p>α=0.290 α_event=0.260 G=0 · ep=317 frame=1</p><video controls src='videos_multitask_event/long_t05_event_low.mp4'></video><p><img src='videos_multitask_event/long_t05_event_low_actions.png' style='max-width:100%'></p></div>
+<div><h3>α_event rank 1/12 (high)</h3><p>α=1.312 α_event=2.070 G=1 · ep=13 frame=262</p><video controls src='videos_multitask_event/long_t05_event_high.mp4'></video><p><img src='videos_multitask_event/long_t05_event_high_actions.png' style='max-width:100%'></p></div>
+</div></div>
+<div class='row'><h2>goal · task_index=10</h2><p>put the bowl on the plate</p><div class='pair'>
+<div><h3>α_event rank 12/12 (low)</h3><p>α=0.460 α_event=0.412 G=0 · ep=607 frame=9</p><video controls src='videos_multitask_event/goal_t10_event_low.mp4'></video><p><img src='videos_multitask_event/goal_t10_event_low_actions.png' style='max-width:100%'></p></div>
+<div><h3>α_event rank 1/12 (high)</h3><p>α=1.764 α_event=2.476 G=1 · ep=447 frame=67</p><video controls src='videos_multitask_event/goal_t10_event_high.mp4'></video><p><img src='videos_multitask_event/goal_t10_event_high_actions.png' style='max-width:100%'></p></div>
+</div></div>
+<div class='row'><h2>goal · task_index=16</h2><p>turn on the stove</p><div class='pair'>
+<div><h3>α_event rank 12/12 (low)</h3><p>α=0.246 α_event=0.220 G=0 · ep=569 frame=62</p><video controls src='videos_multitask_event/goal_t16_event_low.mp4'></video><p><img src='videos_multitask_event/goal_t16_event_low_actions.png' style='max-width:100%'></p></div>
+<div><h3>α_event rank 1/12 (high)</h3><p>α=3.227 α_event=2.890 G=0 · ep=567 frame=54</p><video controls src='videos_multitask_event/goal_t16_event_high.mp4'></video><p><img src='videos_multitask_event/goal_t16_event_high_actions.png' style='max-width:100%'></p></div>
+</div></div>
+<div class='row'><h2>object · task_index=24</h2><p>pick up the alphabet soup and place it in the basket</p><div class='pair'>
+<div><h3>α_event rank 12/12 (low)</h3><p>α=0.214 α_event=0.192 G=0 · ep=945 frame=100</p><video controls src='videos_multitask_event/object_t24_event_low.mp4'></video><p><img src='videos_multitask_event/object_t24_event_low_actions.png' style='max-width:100%'></p></div>
+<div><h3>α_event rank 1/12 (high)</h3><p>α=1.257 α_event=2.021 G=1 · ep=813 frame=47</p><video controls src='videos_multitask_event/object_t24_event_high.mp4'></video><p><img src='videos_multitask_event/object_t24_event_high_actions.png' style='max-width:100%'></p></div>
+</div></div>
+<div class='row'><h2>object · task_index=28</h2><p>pick up the tomato sauce and place it in the basket</p><div class='pair'>
+<div><h3>α_event rank 12/12 (low)</h3><p>α=0.122 α_event=0.110 G=0 · ep=864 frame=80</p><video controls src='videos_multitask_event/object_t28_event_low.mp4'></video><p><img src='videos_multitask_event/object_t28_event_low_actions.png' style='max-width:100%'></p></div>
+<div><h3>α_event rank 1/12 (high)</h3><p>α=1.592 α_event=2.321 G=1 · ep=904 frame=118</p><video controls src='videos_multitask_event/object_t28_event_high.mp4'></video><p><img src='videos_multitask_event/object_t28_event_high_actions.png' style='max-width:100%'></p></div>
+</div></div>
+<div class='row'><h2>spatial · task_index=34</h2><p>pick up the black bowl between the plate and the ramekin and place it on</p><div class='pair'>
+<div><h3>α_event rank 12/12 (low)</h3><p>α=0.867 α_event=0.777 G=0 · ep=1597 frame=26</p><video controls src='videos_multitask_event/spatial_t34_event_low.mp4'></video><p><img src='videos_multitask_event/spatial_t34_event_low_actions.png' style='max-width:100%'></p></div>
+<div><h3>α_event rank 1/12 (high)</h3><p>α=3.099 α_event=3.671 G=1 · ep=1275 frame=106</p><video controls src='videos_multitask_event/spatial_t34_event_high.mp4'></video><p><img src='videos_multitask_event/spatial_t34_event_high_actions.png' style='max-width:100%'></p></div>
+</div></div>
+<div class='row'><h2>spatial · task_index=37</h2><p>pick up the black bowl next to the ramekin and place it on the plate</p><div class='pair'>
+<div><h3>α_event rank 12/12 (low)</h3><p>α=0.242 α_event=0.217 G=0 · ep=1490 frame=125</p><video controls src='videos_multitask_event/spatial_t37_event_low.mp4'></video><p><img src='videos_multitask_event/spatial_t37_event_low_actions.png' style='max-width:100%'></p></div>
+<div><h3>α_event rank 1/12 (high)</h3><p>α=2.573 α_event=3.200 G=1 · ep=1294 frame=107</p><video controls src='videos_multitask_event/spatial_t37_event_high.mp4'></video><p><img src='videos_multitask_event/spatial_t37_event_high_actions.png' style='max-width:100%'></p></div>
+</div></div>

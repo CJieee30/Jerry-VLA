@@ -6,6 +6,7 @@ CPU only. Does not run policy inference or modify shared.pt / probe outputs.
 
 from __future__ import annotations
 
+import argparse
 import json
 import subprocess
 import sys
@@ -56,6 +57,15 @@ CONTEXT_POST_SEC = 3.0
 CONTEXT_PRE = int(round(CONTEXT_PRE_SEC * FPS))
 CONTEXT_POST = int(round(CONTEXT_POST_SEC * FPS))
 CURVE_FOCUS = (124, 381, 361, 447)
+
+# Pool ranks are 1..12 within each suite task-0 candidate set.
+DEFAULT_PREVIEW_SPECS: tuple[dict, ...] = (
+    {"score": "alpha_event", "ranks": (1, 12), "tag": "event"},
+)
+EXTENDED_PREVIEW_SPECS: tuple[dict, ...] = (
+    {"score": "alpha_event", "ranks": (1, 2, 3, 10, 11, 12), "tag": "event"},
+    {"score": "alpha", "ranks": (1, 2, 3, 10, 11, 12), "tag": "alpha"},
+)
 
 
 @dataclass
@@ -424,102 +434,170 @@ def _clip_range_event(frame0: int, length: int, window_len: int) -> dict:
     }
 
 
+def _pool_ordered(pool: list[FrameMeta], score: str) -> list[FrameMeta]:
+    if score == "alpha_event":
+        return sorted(pool, key=lambda m: (-m.alpha_event, m.global_index))
+    if score == "alpha":
+        return sorted(pool, key=lambda m: (-m.alpha, m.global_index))
+    raise ValueError(score)
+
+
+def _legacy_kind(score: str, rank: int, pool_n: int) -> str:
+    if score == "alpha_event" and rank == 1:
+        return "high_event"
+    if score == "alpha_event" and rank == pool_n:
+        return "low_event"
+    return ""
+
+
+def _clip_basename(slug: str, score: str, tag: str, rank: int, legacy_kind: str) -> str:
+    if legacy_kind:
+        return f"{slug}_{legacy_kind}"
+    return f"{slug}_{tag}_r{rank:02d}"
+
+
+def _render_one_preview(
+    rec: FrameMeta,
+    *,
+    suite: str,
+    slug: str,
+    score: str,
+    tag: str,
+    rank: int,
+    pool_n: int,
+    video_dir: Path,
+    basename: str,
+    eps_by_id: dict,
+    root: Path,
+    actions_all: np.ndarray,
+    episode_all: np.ndarray,
+) -> dict:
+    ep = rec.episode_index
+    eprow = eps_by_id[ep]
+    gidx = rec.global_index
+    frame0 = rec.frame_in_episode
+    length = rec.length
+    _, win_len = _window_steps(actions_all, episode_all, gidx)
+    clip = _clip_range_event(frame0, length, win_len)
+    clip0, clip1 = clip["clip0"], clip["clip1"]
+    n_clip = clip1 - clip0 + 1
+    ep_start = int(eprow["dataset_from_index"])
+    act = actions_all[ep_start + clip0 : ep_start + clip1 + 1, :ACTION_DIM]
+    switch_local = []
+    for t in range(gidx + 1, min(clip["win_end"] + 1, len(actions_all))):
+        if int(episode_all[t]) != ep:
+            break
+        if (actions_all[t - 1, 6] > 0) != (actions_all[t, 6] > 0):
+            switch_local.append(t - ep_start)
+
+    cam_clips = []
+    for key_cam, _ in CAMS:
+        vchunk = int(eprow[f"videos/{key_cam}/chunk_index"])
+        vfile = int(eprow[f"videos/{key_cam}/file_index"])
+        from_ts = float(eprow[f"videos/{key_cam}/from_timestamp"])
+        vpath = root / "videos" / key_cam / f"chunk-{vchunk:03d}" / f"file-{vfile:03d}.mp4"
+        decoded = _decode_episode_frames(vpath, from_ts, length)
+        cam_clips.append(decoded[clip0 : clip1 + 1])
+
+    score_label = "α_event" if score == "alpha_event" else "α"
+    tier = "high" if rank <= pool_n // 2 else "low"
+    header_kind = f"{tag} {score_label} rank {rank}/{pool_n} ({tier})"
+
+    annotated = []
+    for i in range(n_clip):
+        local = clip0 + i
+        role = None
+        if local == frame0:
+            role = "timestamp"
+        elif frame0 <= local <= clip["win_end"]:
+            role = "window"
+        if local in switch_local:
+            role = "grip_switch"
+        lines = [
+            f"{suite} task0 | {header_kind}",
+            f"ep={ep} frame={local}/{length-1} t={local/FPS:.2f}s",
+            f"timestamp={frame0} H={HORIZON} window [{frame0},{clip['win_end']}]",
+            f"α={rec.alpha:.3f} α_event={rec.alpha_event:.3f} G={rec.G}",
+            "demo playback only — not low-NFE closed-loop",
+        ]
+        if switch_local:
+            lines.append(f"grip switches in window @ frames {switch_local}")
+        pair = _hstack(cam_clips[0][i], cam_clips[1][i])
+        annotated.append(_annotate(pair, lines, highlight=role))
+
+    out_mp4 = video_dir / f"{basename}.mp4"
+    _write_video(annotated, out_mp4)
+    plot_path = video_dir / f"{basename}_actions.png"
+    _plot_demo_actions(plot_path, clip0, clip1, frame0, clip["win_end"], act, rec, switch_local)
+
+    legacy = _legacy_kind(score, rank, pool_n)
+    return {
+        "suite": suite,
+        "suite_slug": slug,
+        "score": score,
+        "tag": tag,
+        "kind": legacy or f"{tag}_r{rank:02d}",
+        "tier": tier,
+        "shared_index": rec.shared_index,
+        "episode_index": ep,
+        "frame_in_episode": frame0,
+        "alpha": rec.alpha,
+        "alpha_event": rec.alpha_event,
+        "G": rec.G,
+        "pool_rank": rank,
+        "pool_rank_event": rank if score == "alpha_event" else None,
+        "video": str(out_mp4.relative_to(EVENT_DIR)),
+        "plot": str(plot_path.relative_to(EVENT_DIR)),
+    }
+
+
 def write_event_videos(
     metas: list[FrameMeta],
     actions_all: np.ndarray,
     episode_all: np.ndarray,
+    *,
+    specs: tuple[dict, ...] = DEFAULT_PREVIEW_SPECS,
+    video_subdir: str = "videos",
 ) -> list[dict]:
     root = hub_snapshot(LIBERO_REPO)
     eps = _episodes_table(root)
     eps_by_id = {int(r["episode_index"]): r for _, r in eps.iterrows()}
     catalog = []
-    video_dir = EVENT_DIR / "videos"
+    video_dir = EVENT_DIR / video_subdir
     video_dir.mkdir(parents=True, exist_ok=True)
 
     for slug, suite, lang in SUITES:
         pool = [m for m in metas if m.task == lang]
         if len(pool) != 12:
             raise RuntimeError(f"{suite} pool size {len(pool)} != 12")
-        for kind, key in (("high_event", "alpha_event"), ("low_event", "alpha_event")):
-            ordered = sorted(pool, key=lambda m: (-m.alpha_event, m.global_index))
-            rec = ordered[0] if kind == "high_event" else ordered[-1]
-            rank = 1 if kind == "high_event" else 12
-            if kind == "low_event":
-                rank = len(ordered)
-            si = rec.shared_index
-            ep = rec.episode_index
-            eprow = eps_by_id[ep]
-            gidx = rec.global_index
-            frame0 = rec.frame_in_episode
-            length = rec.length
-            seq, win_len = _window_steps(actions_all, episode_all, gidx)
-            clip = _clip_range_event(frame0, length, win_len)
-            clip0, clip1 = clip["clip0"], clip["clip1"]
-            n_clip = clip1 - clip0 + 1
-            ep_start = int(eprow["dataset_from_index"])
-            act = actions_all[ep_start + clip0 : ep_start + clip1 + 1, :ACTION_DIM]
-            switch_local = []
-            for t in range(gidx + 1, min(clip["win_end"] + 1, len(actions_all))):
-                if int(episode_all[t]) != ep:
-                    break
-                if (actions_all[t - 1, 6] > 0) != (actions_all[t, 6] > 0):
-                    switch_local.append(t - ep_start)
-
-            cam_clips = []
-            for key_cam, _ in CAMS:
-                vchunk = int(eprow[f"videos/{key_cam}/chunk_index"])
-                vfile = int(eprow[f"videos/{key_cam}/file_index"])
-                from_ts = float(eprow[f"videos/{key_cam}/from_timestamp"])
-                vpath = root / "videos" / key_cam / f"chunk-{vchunk:03d}" / f"file-{vfile:03d}.mp4"
-                decoded = _decode_episode_frames(vpath, from_ts, length)
-                cam_clips.append(decoded[clip0 : clip1 + 1])
-
-            annotated = []
-            for i in range(n_clip):
-                local = clip0 + i
-                role = None
-                if local == frame0:
-                    role = "timestamp"
-                elif frame0 <= local <= clip["win_end"]:
-                    role = "window"
-                if local in switch_local:
-                    role = "grip_switch"
-                lines = [
-                    f"{suite} task0 | candidate-pool {kind}",
-                    f"ep={ep} frame={local}/{length-1} t={local/FPS:.2f}s",
-                    f"timestamp={frame0} H={HORIZON} window [{frame0},{clip['win_end']}]",
-                    f"α={rec.alpha:.3f} α_event={rec.alpha_event:.3f} G={rec.G} rank {rank}/12",
-                    "demo playback only — not low-NFE closed-loop",
-                ]
-                if switch_local:
-                    lines.append(f"grip switches in window @ frames {switch_local}")
-                pair = _hstack(cam_clips[0][i], cam_clips[1][i])
-                fr = _annotate(pair, lines, highlight=role)
-                annotated.append(fr)
-
-            tag = f"{slug}_{kind}"
-            out_mp4 = video_dir / f"{tag}.mp4"
-            _write_video(annotated, out_mp4)
-
-            plot_path = video_dir / f"{tag}_actions.png"
-            _plot_demo_actions(plot_path, clip0, clip1, frame0, clip["win_end"], act, rec, switch_local)
-
-            catalog.append(
-                {
-                    "suite": suite,
-                    "suite_slug": slug,
-                    "kind": kind,
-                    "shared_index": si,
-                    "episode_index": ep,
-                    "frame_in_episode": frame0,
-                    "alpha": rec.alpha,
-                    "alpha_event": rec.alpha_event,
-                    "G": rec.G,
-                    "pool_rank_event": rank,
-                    "video": str(out_mp4.relative_to(EVENT_DIR)),
-                    "plot": str(plot_path.relative_to(EVENT_DIR)),
-                }
-            )
+        pool_n = len(pool)
+        for spec in specs:
+            score = spec["score"]
+            tag = spec["tag"]
+            ordered = _pool_ordered(pool, score)
+            for rank in spec["ranks"]:
+                if rank < 1 or rank > pool_n:
+                    raise ValueError(f"rank {rank} out of 1..{pool_n}")
+                rec = ordered[rank - 1]
+                legacy = _legacy_kind(score, rank, pool_n)
+                basename = _clip_basename(slug, score, tag, rank, legacy)
+                catalog.append(
+                    _render_one_preview(
+                        rec,
+                        suite=suite,
+                        slug=slug,
+                        score=score,
+                        tag=tag,
+                        rank=rank,
+                        pool_n=pool_n,
+                        video_dir=video_dir,
+                        basename=basename,
+                        eps_by_id=eps_by_id,
+                        root=root,
+                        actions_all=actions_all,
+                        episode_all=episode_all,
+                    )
+                )
     return catalog
 
 
@@ -584,6 +662,15 @@ def _plot_demo_actions(
     plt.close(fig)
 
 
+def _catalog_item_blurb(it: dict) -> str:
+    rank = it.get("pool_rank", it.get("pool_rank_event"))
+    score = it.get("score", "alpha_event")
+    score_label = "α_event" if score == "alpha_event" else "α"
+    return (
+        f"{score_label} rank {rank}/12 · α={it['alpha']:.3f} · α_event={it['alpha_event']:.3f} · G={it['G']}"
+    )
+
+
 def write_html(catalog: list[dict]) -> None:
     lines = [
         "<!doctype html><meta charset='utf-8'><title>Event CARE preview</title>",
@@ -592,6 +679,7 @@ def write_html(catalog: list[dict]) -> None:
         "h2{margin-top:2em}</style>",
         "<h1>Event CARE — candidate-pool high/low α_event</h1>",
         "<p>Demonstration trajectories only. High/low within each suite task-0 pool of 12 timestamps.</p>",
+        "<p>Multitask α_event high/low: <a href='multitask_event_index.html'>multitask_event_index.html</a></p>",
     ]
     if PREVIEW_REF.is_dir():
         lines.append(
@@ -606,12 +694,50 @@ def write_html(catalog: list[dict]) -> None:
         for it in items:
             lines.append(
                 f"<div><h3>{it['kind']}</h3>"
-                f"<p>α={it['alpha']:.3f} α_event={it['alpha_event']:.3f} G={it['G']} rank {it['pool_rank_event']}/12</p>"
+                f"<p>{_catalog_item_blurb(it)}</p>"
                 f"<video controls src='{it['video']}'></video>"
                 f"<p><img src='{it['plot']}' style='max-width:100%'></p></div>"
             )
         lines.append("</div>")
     (EVENT_DIR / "index.html").write_text("\n".join(lines) + "\n")
+
+
+def write_gallery_html(catalog: list[dict], *, rel_prefix: str = "") -> None:
+    """Side-by-side high vs low pairs for multiple pool ranks."""
+    lines = [
+        "<!doctype html><meta charset='utf-8'><title>Event CARE gallery</title>",
+        "<style>body{font-family:sans-serif;max-width:1100px;margin:20px auto;padding:0 12px}",
+        "video{max-width:100%} .pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}",
+        ".row{margin:1.5em 0;padding-bottom:1em;border-bottom:1px solid #ddd}",
+        "h2{margin-top:2.5em}</style>",
+        "<h1>Event CARE — extended high / low comparisons</h1>",
+        "<p>Each row: same suite, matched ranks (1↔12, 2↔11, 3↔10) under the given sort key.</p>",
+        "<p><a href='index.html'>Back to minimal α_event high/low</a></p>",
+    ]
+    by_key: dict[tuple[str, str], list[dict]] = defaultdict(list)
+    for c in catalog:
+        by_key[(c["suite_slug"], c["score"])].append(c)
+    pair_ranks = ((1, 12), (2, 11), (3, 10))
+    for slug in sorted({k[0] for k in by_key}):
+        for score in ("alpha_event", "alpha"):
+            items = by_key.get((slug, score))
+            if not items:
+                continue
+            score_label = "α_event (event CARE)" if score == "alpha_event" else "α (original CARE)"
+            lines.append(f"<h2>{slug} — sorted by {score_label}</h2>")
+            by_rank = {int(it["pool_rank"]): it for it in items}
+            for hi, lo in pair_ranks:
+                if hi not in by_rank or lo not in by_rank:
+                    continue
+                lines.append(f"<div class='row'><h3>rank {hi} vs {lo}</h3><div class='pair'>")
+                for it in (by_rank[hi], by_rank[lo]):
+                    lines.append(
+                        f"<div><h4>{it['kind']}</h4><p>{_catalog_item_blurb(it)} · ep={it['episode_index']} f={it['frame_in_episode']}</p>"
+                        f"<video controls src='{rel_prefix}{it['video']}'></video>"
+                        f"<p><img src='{rel_prefix}{it['plot']}' style='max-width:100%'></p></div>"
+                    )
+                lines.append("</div></div>")
+    (EVENT_DIR / "gallery_index.html").write_text("\n".join(lines) + "\n")
 
 
 def write_report(payload: dict, curves: list[str]) -> None:
@@ -739,6 +865,44 @@ def build_answers(payload: dict) -> dict:
     return {"q1": q1, "q2": q2, "q3": q3, "q4": q4, "q5": q5}
 
 
+def load_metas_and_actions() -> tuple[list[FrameMeta], np.ndarray, np.ndarray]:
+    blob = torch.load(OUT_DIR / "shared.pt", map_location="cpu", weights_only=False)
+    alpha = np.asarray(blob["alpha"], dtype=np.float64).reshape(-1)
+    frames_df = _load_actions(LIBERO_REPO)
+    actions = np.stack(frames_df["action"].to_numpy()).astype(np.float64)
+    episode = frames_df["episode_index"].to_numpy()
+    G = demo_gripper_switch(blob, actions, episode)
+    probe_g_vec = np.zeros(N_FRAMES, dtype=np.int32)
+    smol_path = MODELS["smolvla"] / "frames.csv"
+    if smol_path.is_file():
+        smol_df = load_probe_frames(MODELS["smolvla"])
+        probe_g = smol_df[(smol_df.nfe == 1) & (smol_df.noise_id == 0)].drop_duplicates("shared_index")
+        for r in probe_g.itertuples():
+            probe_g_vec[int(r.shared_index)] = int(r.in_grip_switch)
+    return build_metas(blob, alpha, G, probe_g_vec), actions, episode
+
+
+def run_preview_videos(*, extended: bool) -> None:
+    EVENT_DIR.mkdir(parents=True, exist_ok=True)
+    metas, actions, episode = load_metas_and_actions()
+    print("rendering default previews (α_event rank 1 & 12)...", flush=True)
+    catalog = write_event_videos(metas, actions, episode, specs=DEFAULT_PREVIEW_SPECS, video_subdir="videos")
+    write_html(catalog)
+    pd.DataFrame(catalog).to_csv(EVENT_DIR / "preview_selection.csv", index=False)
+    if extended:
+        print("rendering extended gallery (α_event & α ranks 1–3, 10–12)...", flush=True)
+        ext = write_event_videos(
+            metas,
+            actions,
+            episode,
+            specs=EXTENDED_PREVIEW_SPECS,
+            video_subdir="videos_extended",
+        )
+        pd.DataFrame(ext).to_csv(EVENT_DIR / "preview_selection_extended.csv", index=False)
+        write_gallery_html(ext, rel_prefix="")
+    print(f"previews -> {EVENT_DIR}", flush=True)
+
+
 def main() -> None:
     EVENT_DIR.mkdir(parents=True, exist_ok=True)
     blob = torch.load(OUT_DIR / "shared.pt", map_location="cpu", weights_only=False)
@@ -848,4 +1012,32 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="CARE alpha_event offline diagnostic and demo previews")
+    parser.add_argument(
+        "--videos-only",
+        action="store_true",
+        help="Only render preview MP4s/HTML (no probe stats or selection tables)",
+    )
+    parser.add_argument(
+        "--extended-previews",
+        action="store_true",
+        help="Also render ranks 1–3 vs 10–12 for α_event and α under videos_extended/",
+    )
+    args = parser.parse_args()
+    if args.videos_only:
+        run_preview_videos(extended=args.extended_previews)
+    else:
+        if args.extended_previews:
+            print("note: full run always writes default videos/; use --videos-only for extended only", flush=True)
+        main()
+        if args.extended_previews:
+            metas, actions, episode = load_metas_and_actions()
+            ext = write_event_videos(
+                metas,
+                actions,
+                episode,
+                specs=EXTENDED_PREVIEW_SPECS,
+                video_subdir="videos_extended",
+            )
+            pd.DataFrame(ext).to_csv(EVENT_DIR / "preview_selection_extended.csv", index=False)
+            write_gallery_html(ext)
