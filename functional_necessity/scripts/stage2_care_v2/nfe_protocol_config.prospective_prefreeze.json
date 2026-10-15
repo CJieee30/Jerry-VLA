@@ -1,7 +1,7 @@
 {
   "protocol_version": "care_event_nfe_prospective_prefreeze_v1",
   "mode": "prospective",
-  "run_name": "prospective_prefreeze_v1",
+  "run_name": "prospective_v1_20261015",
   "note": "Advisor-reviewed config template; run freeze only after sign-off. Uses nfe_protocol_v1 + nfe_en_metrics.",
   "constants": {
     "horizon": 10,
@@ -41,7 +41,7 @@
       "adapter": "npz_probe",
       "probe_script": "probe_pi05_nfe.py",
       "python": "/home/guorj/.miniforge3/envs/lerobot/bin/python",
-      "probe_nfes": [1, 2, 10],
+      "probe_nfes": [1, 2, 3, 10],
       "gripper_unnormalize": {"mean": -0.0496407225728035, "std": 0.9987671375274658}
     },
     "smolvla": {

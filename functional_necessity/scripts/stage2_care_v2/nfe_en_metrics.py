@@ -135,6 +135,38 @@ def pick_lowest_abs_tau(E: dict[int, float], candidates: list[int], tau: float, 
     return {"recommended_nfe": fallback, "fallback": True, "tau": tau}
 
 
+def holdout_status_for_screening_nfe(
+    model: str,
+    actions: dict[str, np.ndarray],
+    n_star: int,
+    candidates: list[int],
+    idx: np.ndarray,
+    fallback: int,
+    rule: str,
+) -> dict[str, Any]:
+    """Evaluate whether calibration-chosen n_star passes rule on holdout (no re-pick)."""
+    E = E_table(model, actions, candidates, idx)
+    if n_star == fallback:
+        return {"status": "reference", "nfe": n_star, "E": E, "detail": "fallback NFE10"}
+    if n_star not in candidates:
+        return {"status": "NA", "nfe": n_star, "E": E, "detail": "nfe not in candidates"}
+    if rule == "abs":
+        ok, detail = passes_abs(E, n_star)
+    elif rule == "abs_improve":
+        ok, detail = passes_abs_improve(E, n_star, candidates)
+    elif rule == "rel_improve":
+        ok, detail = passes_rel_improve(E, n_star, candidates)
+    else:
+        raise ValueError(rule)
+    return {
+        "status": "pass" if ok else "fail",
+        "nfe": n_star,
+        "E_n": float(E[n_star]),
+        "E": {str(k): float(v) for k, v in E.items()},
+        "detail": detail,
+    }
+
+
 def validate_action_arrays(actions: dict[str, np.ndarray], nfes: list[int], n_expected: int, n_noise: int = 2) -> None:
     for nfe in nfes:
         key = f"nfe{nfe}"

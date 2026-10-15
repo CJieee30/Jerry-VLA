@@ -199,6 +199,11 @@ def stage_freeze(run: Run) -> None:
     copy = run.dir / "config.frozen.json"
     copy.write_text(run.config_path.read_text())
     code = {name: sha256_file(SCRIPT_DIR / name) for name in CODE_FILES}
+    from dev_metrics_common import libero_mean_std, molmo_quantile_stats, write_conversion_manifest
+
+    mean, std = libero_mean_std()
+    q01, q99, mask = molmo_quantile_stats()
+    conv = write_conversion_manifest()
     run.append(
         "freeze",
         {"config.frozen.json": sha256_file(copy)},
@@ -206,6 +211,12 @@ def stage_freeze(run: Run) -> None:
         config_sha256=sha256_file(run.config_path),
         code_sha256=code,
         mode=run.mode,
+        libero_action_mean=mean.tolist(),
+        libero_action_std=std.tolist(),
+        molmo_quantile_q01=q01.tolist(),
+        molmo_quantile_q99=q99.tolist(),
+        molmo_grip_mask=mask.tolist(),
+        conversion_manifest_sha256=sha256_file(OUT_DIR / "dev_three_model_screening" / "conversion_manifest.json"),
     )
     print(f"frozen {run.dir}")
 
@@ -601,7 +612,17 @@ def stage_probe_import(run: Run, model: str, probe_dir: Path) -> None:
     _import(run, model, probe_dir, req, f"03_probe/{model}/sealed_union.npz", "probe-import")
 
 
+def _import_already_sealed(run: Run, model: str, stage: str, rel: str) -> None:
+    dest = run.dir / rel
+    for e in run.entries():
+        if e.get("stage") == stage and e.get("model") == model and rel in e.get("files", {}):
+            raise SystemExit(f"refusing duplicate {stage} for {model}: ledger already has {rel}")
+    if dest.is_file():
+        raise SystemExit(f"refusing overwrite {dest}; use a new run_name")
+
+
 def _import(run: Run, model: str, probe_dir: Path, req: dict, rel: str, stage: str) -> None:
+    _import_already_sealed(run, model, stage, rel)
     mc = run.cfg["models"][model]
     done = probe_dir / "DONE"
     if not done.is_file():
@@ -630,10 +651,31 @@ def _import(run: Run, model: str, probe_dir: Path, req: dict, rel: str, stage: s
     validate_action_arrays(acts, nfes, n, n_noise=len(run.cfg["rule"]["noise_ids"]))
     pool_index = np.asarray([r.get("pool_index", r.get("validation_index", -1)) for r in req["records"]])
     ep = np.asarray([r["episode_index"] for r in req["records"]])
+    req_digest = req.get("request_sha256")
+    noise_meta = {}
+    fcsv = probe_dir / "frames.csv"
+    if fcsv.is_file():
+        df = pd.read_csv(fcsv, nrows=4)
+        if "noise_sha256" in df.columns:
+            noise_meta["noise_sha256_sample"] = df["noise_sha256"].head(2).tolist()
     digest = _seal(model, acts, g, pool_index, ep, mc, run.dir / rel)
-    run.append(stage, {rel: digest}, model=model, probe_dir=str(probe_dir),
-               probe_done_sha256=sha256_file(probe_dir / "DONE") if (probe_dir / "DONE").is_file() else None)
+    run.append(
+        stage,
+        {rel: digest},
+        model=model,
+        probe_dir=str(probe_dir),
+        probe_done_sha256=sha256_file(done),
+        request_sha256=req_digest,
+        n_observations=n,
+        nfes=nfes,
+        probe_meta=mc.get("probe_nfes") or rule_nfes(run),
+        noise_meta=noise_meta,
+    )
     print(f"sealed {rel}")
+
+
+def rule_nfes(run: Run) -> list[int]:
+    return sorted(set(run.cfg["rule"]["candidates"]) | {run.cfg["rule"]["reference_nfe"]})
 
 
 # ---------------------------------------------------------------------- metrics
@@ -886,6 +928,14 @@ def dev_validation_sealed(run: Run, model: str, mc: dict) -> dict:
     return out
 
 
+SCREENING_RULES = (
+    ("abs_0.085", "abs", "recommended_nfe_abs_0.085"),
+    ("abs_improve", "abs_improve", "recommended_nfe_abs_improve"),
+    ("rel_improve", "rel_improve", "recommended_nfe_rel_improve"),
+)
+LIBERO_CLOSED_LOOP_SUITES = ("spatial", "object", "goal", "long")
+
+
 def stage_validate(run: Run) -> None:
     guard_restage(run, "validate")
     run.check_frozen()
@@ -895,6 +945,9 @@ def stage_validate(run: Run) -> None:
     vq = run.cfg["validation"]
     out = {"mode": run.mode, "label": rec["label"], "recommend_sha256": rec_entry["files"]["04_recommend/recommendations.json"],
            "recommend_utc": rec_entry["utc"], "models": {}}
+    from nfe_en_metrics import holdout_status_for_screening_nfe, recommend_three_rules
+
+    fallback = int(rule["fallback_nfe"])
     for model, mc in run.cfg["models"].items():
         if rec["models"].get(model, {}).get("status") != "evaluated":
             out["models"][model] = {"status": "not_evaluated"}
@@ -917,23 +970,32 @@ def stage_validate(run: Run) -> None:
         idx = np.arange(len(z["global_index"]))
         acts = {k: z[k] for k in z if k.startswith("nfe")}
         avail = sorted(n for n in rule["candidates"] if f"nfe{n}" in acts)
-        from nfe_en_metrics import recommend_three_rules
-
-        val_rules = recommend_three_rules(model, acts, avail, idx, fallback=int(rule["fallback_nfe"]))
+        holdout_diagnostic_repick = recommend_three_rules(model, acts, avail, idx, fallback=fallback)
         fl = floor_obs(z, rule, model, mc)
         diag = {
             "floor_nfe10_two_noise_disagree_frac": float(fl["h"][idx].mean()),
             "floor_obs_with_disagreement": int((fl["dis_steps"][idx] > 0).sum()),
+            "holdout_diagnostic_repick_only": holdout_diagnostic_repick,
         }
         verdict = {}
         for strat, r in rec["models"][model]["strategies"].items():
-            n_star = r["recommended_nfe"]
+            holdout_by_rule = {}
+            cl_cache: dict[int, dict] = {}
+            closed_loop_by_rule = {}
+            for label, kind, key in SCREENING_RULES:
+                n_scr = int(r.get(key, r["recommended_nfe"]))
+                holdout_by_rule[label] = holdout_status_for_screening_nfe(
+                    model, acts, n_scr, avail, idx, fallback, kind
+                )
+                if n_scr not in cl_cache:
+                    cl_cache[n_scr] = closed_loop_check(run, vq, rule, model, n_scr)
+                closed_loop_by_rule[label] = {"screening_nfe": n_scr, **cl_cache[n_scr]}
             verdict[strat] = {
-                "screening_primary_nfe": n_star,
+                "screening_primary_nfe": r["recommended_nfe"],
                 "screening_abs_improve": r.get("recommended_nfe_abs_improve"),
                 "screening_rel_improve": r.get("recommended_nfe_rel_improve"),
-                "validation_three_rules_on_holdout": val_rules,
-                "closed_loop_quality": closed_loop_check(run, vq, rule, model, n_star),
+                "holdout_rule_status": holdout_by_rule,
+                "closed_loop_by_rule": closed_loop_by_rule,
             }
         out["models"][model] = {
             "status": "evaluated",
@@ -980,6 +1042,43 @@ def stage_verify_ledger(run: Run) -> None:
     raise SystemExit(0 if ok else 1)
 
 
+def _success_to_percent(value: float, unit: str) -> float:
+    if unit == "fraction":
+        return float(value) * 100.0
+    if unit in ("percent", "percentage", "pp"):
+        return float(value)
+    raise SystemExit(f"closed_loop: unknown success_rate_unit '{unit}' (use fraction or percent)")
+
+
+def _normalize_closed_loop_entry(entry: dict, unit: str) -> dict[str, float]:
+    suites = entry.get("suites", entry)
+    if not isinstance(suites, dict):
+        raise SystemExit("closed_loop entry must be a suite dict or {suites: {...}}")
+    missing = [s for s in LIBERO_CLOSED_LOOP_SUITES if s not in suites]
+    if missing:
+        raise SystemExit(f"closed_loop missing suites {missing}; need {list(LIBERO_CLOSED_LOOP_SUITES)}")
+    return {s: _success_to_percent(suites[s], unit) for s in LIBERO_CLOSED_LOOP_SUITES}
+
+
+def _closed_loop_comparable(ref_meta: dict, cand_meta: dict) -> None:
+    for key in ("n_episodes", "seed", "eval_protocol"):
+        if key in ref_meta or key in cand_meta:
+            if ref_meta.get(key) != cand_meta.get(key):
+                raise SystemExit(f"closed_loop incomparable: {key} ref={ref_meta.get(key)} cand={cand_meta.get(key)}")
+
+
+def load_closed_loop_config(run: Run, vq: dict) -> dict:
+    imp = run.dir / "closed_loop_import.json"
+    if imp.is_file():
+        e = run.last("closed-loop-import")
+        if e is None:
+            raise SystemExit("closed_loop_import.json present but ledger has no closed-loop-import entry")
+        if sha256_file(imp) != e["files"]["closed_loop_import.json"]:
+            raise SystemExit("closed_loop_import.json hash mismatch vs ledger")
+        return json.loads(imp.read_text())
+    return vq.get("closed_loop", {})
+
+
 def stage_import_closed_loop(run: Run, source: Path) -> None:
     """Import closed-loop success rates from an external JSON (not from probe errors)."""
     run.check_frozen()
@@ -987,68 +1086,88 @@ def stage_import_closed_loop(run: Run, source: Path) -> None:
     if not src.is_file():
         raise SystemExit(f"missing closed-loop source {src}")
     payload = json.loads(src.read_text())
+    unit = payload.get("success_rate_unit")
+    if not unit:
+        raise SystemExit("closed-loop JSON must set success_rate_unit (fraction or percent)")
+    results = payload.get("results", payload)
+    for model, per_nfe in results.items():
+        if not isinstance(per_nfe, dict):
+            raise SystemExit(f"closed_loop results[{model}] must be dict nfe -> entry")
+        for nfe, entry in per_nfe.items():
+            _normalize_closed_loop_entry(entry, unit)
     frozen = run.dir / "config.frozen.json"
     cfg = json.loads(frozen.read_text()) if frozen.is_file() else run.cfg
-    cfg.setdefault("validation", {}).setdefault("closed_loop", {})["results"] = payload.get(
-        "results", payload
-    )
-    cfg["validation"]["closed_loop"]["import_source"] = str(src)
-    cfg["validation"]["closed_loop"]["import_utc"] = utc_now()
-    digest = write_json(run.dir / "closed_loop_import.json", cfg["validation"]["closed_loop"])
+    cl = cfg.setdefault("validation", {}).setdefault("closed_loop", {})
+    cl["results"] = results
+    cl["success_rate_unit"] = unit
+    cl["import_source"] = str(src)
+    cl["import_utc"] = utc_now()
+    cl["import_source_sha256"] = sha256_file(src)
+    digest = write_json(run.dir / "closed_loop_import.json", cl)
     run.append(
         "closed-loop-import",
         {"closed_loop_import.json": digest},
         source=str(src),
+        source_sha256=sha256_file(src),
+        success_rate_unit=unit,
         force=True,
     )
     print(f"imported closed-loop results from {src}")
 
 
 def closed_loop_check(run: Run, vq: dict, rule: dict, model: str, n_star: int) -> dict:
-    imp = run.dir / "closed_loop_import.json"
-    cl = json.loads(imp.read_text()) if imp.is_file() else vq.get("closed_loop", {})
+    cl = load_closed_loop_config(run, vq)
     if n_star == rule["fallback_nfe"]:
-        return {"status": "reference", "note": "fallback NFE needs no closed-loop comparison"}
+        return {"status": "reference", "note": "fallback NFE10 — no closed-loop comparison"}
+    if not cl.get("success_rate_unit"):
+        return {"status": "pending", "reason": "missing success_rate_unit on closed_loop import"}
     res = cl.get("results", {}).get(model, {})
-    ref, cand = res.get(str(rule["reference_nfe"])), res.get(str(n_star))
-    if ref is None or cand is None:
-        return {"status": "pending", "rule": f"Avg ≥ ref − {cl['avg_margin_pp']} pp and every suite ≥ ref − {cl['suite_drop_pp']} pp, same protocol and n"}
+    ref_raw, cand_raw = res.get(str(rule["reference_nfe"])), res.get(str(n_star))
+    if ref_raw is None or cand_raw is None:
+        return {
+            "status": "pending",
+            "rule": f"Avg ≥ ref − {cl.get('avg_margin_pp')} pp; each suite ≥ ref − {cl.get('suite_drop_pp')} pp",
+        }
+    unit = cl["success_rate_unit"]
+    ref_m = ref_raw.get("meta", {}) if isinstance(ref_raw, dict) else {}
+    cand_m = cand_raw.get("meta", {}) if isinstance(cand_raw, dict) else {}
+    _closed_loop_comparable(ref_m, cand_m)
+    ref = _normalize_closed_loop_entry(ref_raw, unit)
+    cand = _normalize_closed_loop_entry(cand_raw, unit)
     avg_d = float(np.mean(list(cand.values())) - np.mean(list(ref.values())))
-    suite_d = {k: float(cand[k] - ref[k]) for k in ref}
+    suite_d = {k: float(cand[k] - ref[k]) for k in LIBERO_CLOSED_LOOP_SUITES}
     ok = avg_d >= -float(cl["avg_margin_pp"]) and min(suite_d.values()) >= -float(cl["suite_drop_pp"])
-    return {"status": "pass" if ok else "fail", "avg_delta_pp": avg_d, "suite_delta_pp": suite_d}
+    return {
+        "status": "pass" if ok else "fail",
+        "success_rate_unit": unit,
+        "avg_delta_pp": avg_d,
+        "suite_delta_pp": suite_d,
+        "ref_percent": ref,
+        "cand_percent": cand,
+    }
 
 
 def render_validate(out: dict) -> str:
     lines = [
         f"# Validation (holdout) — {out['label']}",
         "",
-        "Holdout three-rule EN metrics (independent of screening selection). Closed-loop column uses import if present.",
+        "Per-rule holdout pass/fail/NA/reference for **calibration-chosen** NFE (not holdout re-pick).",
+        "Diagnostic holdout re-pick is in validation.json only.",
         "",
-        "| model | status | n_obs | holdout abs | holdout abs_imp | holdout rel |",
+        "| model | strat | rule | screening NFE | holdout | closed loop |",
         "|---|---|---|---|---|---|",
     ]
     for model, m in out["models"].items():
         if m["status"] != "evaluated":
-            lines.append(f"| {model} | {m.get('reason', m['status'])} | — | — | — | — |")
-            continue
-        vr = m.get("strategies", {}).get("random", {}).get("validation_three_rules_on_holdout", {})
-        if not vr:
-            vr = next(iter(m["strategies"].values())).get("validation_three_rules_on_holdout", {})
-        lines.append(
-            f"| {model} | evaluated | {m['n_observations']} | "
-            f"{vr.get('abs_0.085', {}).get('recommended_nfe', '—')} | "
-            f"{vr.get('abs_improve', {}).get('recommended_nfe', '—')} | "
-            f"{vr.get('rel_improve', {}).get('recommended_nfe', '—')} |"
-        )
-    lines += ["", "| model | strategy | screening primary | closed loop |", "|---|---|---|---|"]
-    for model, m in out["models"].items():
-        if m["status"] != "evaluated":
+            lines.append(f"| {model} | — | — | — | {m.get('reason', m['status'])} | — |")
             continue
         for strat, v in m["strategies"].items():
-            lines.append(
-                f"| {model} | {strat} | {v['screening_primary_nfe']} | {v['closed_loop_quality']['status']} |"
-            )
+            for label in ("abs_0.085", "abs_improve", "rel_improve"):
+                hs = v["holdout_rule_status"][label]
+                cl = v["closed_loop_by_rule"][label]
+                lines.append(
+                    f"| {model} | {strat} | {label} | {hs['nfe']} | {hs['status']} | {cl['status']} |"
+                )
     return "\n".join(lines) + "\n"
 
 

@@ -67,10 +67,11 @@ def native_to_physical(model: str, x: np.ndarray) -> np.ndarray:
     else:
         q01, q99, mask = molmo_quantile_stats()
         span = np.maximum(q99 - q01, 1e-8)
-        phys = flat.copy()
+        norm = np.clip(flat, -1.0, 1.0)
+        phys = norm.copy()
         m = mask > 0.5
-        phys[:, :, m] = (flat[:, :, m] + 1.0) * 0.5 * span[m] + q01[m]
-        phys[:, :, ~m] = flat[:, :, ~m]
+        phys[:, :, m] = (norm[:, :, m] + 1.0) * 0.5 * span[m] + q01[m]
+        phys[:, :, ~m] = norm[:, :, ~m]
     out = phys.reshape(lead + (x.shape[-2], x.shape[-1]))
     return out[0] if was_2d else out
 

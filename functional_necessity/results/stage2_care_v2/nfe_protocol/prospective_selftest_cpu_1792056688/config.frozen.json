@@ -1,0 +1,90 @@
+{
+  "protocol_version": "care_event_nfe_prospective_prefreeze_v1",
+  "mode": "prospective",
+  "run_name": "prospective_selftest_cpu_1792056688",
+  "note": "Advisor-reviewed config template; run freeze only after sign-off. Uses nfe_protocol_v1 + nfe_en_metrics.",
+  "constants": {
+    "horizon": 10,
+    "lambda": 1.0,
+    "d_mean_cal": 2.0472331711711984,
+    "event_mean_cal": 1.1166666665580123,
+    "whitening_std": [
+      0.05375851375258111,
+      0.045300022456052406,
+      0.06353572610428114,
+      0.007690927155167576,
+      0.012292487402144343,
+      0.008634497491330419,
+      0.2400744514055428
+    ]
+  },
+  "split": {
+    "seed": 20261016,
+    "exclude_shared": [
+      "results/stage2_care_v2/shared.pt",
+      "results/stage2_care_v2/nfe_probe_care_event_holdout/holdout_shared.pt"
+    ],
+    "calibration_episodes_per_task": 10,
+    "calibration_frame_rule": "uniform [start, stop-H], H=10",
+    "validation_episodes_per_task": 4,
+    "validation_frames_per_episode": 3,
+    "validation_frame_rule": "uniform full H=10 windows, starts >= H apart"
+  },
+  "selection": {
+    "strategies": [
+      "random",
+      "alpha",
+      "g_only",
+      "alpha_event"
+    ],
+    "top_k_per_task": 3,
+    "random_seed": 42,
+    "g_only_seed": 42
+  },
+  "rule": {
+    "candidates": [
+      1,
+      2,
+      3
+    ],
+    "reference_nfe": 10,
+    "fallback_nfe": 10,
+    "noise_ids": [
+      0,
+      1
+    ],
+    "exec_steps": 10,
+    "primary_rule": "abs_0.085",
+    "abs_tau": 0.085,
+    "abs_improve_max": 0.03,
+    "rel_improve_max": 0.375
+  },
+  "bootstrap": {
+    "B": 2000,
+    "seed": 20261015
+  },
+  "validation": {
+    "closed_loop": {
+      "avg_margin_pp": 2.0,
+      "suite_drop_pp": 5.0,
+      "results": {}
+    }
+  },
+  "models": {
+    "pi05": {
+      "adapter": "npz_probe",
+      "probe_script": "probe_pi05_nfe.py",
+      "python": "/home/guorj/.miniforge3/envs/lerobot/bin/python",
+      "probe_nfes": [
+        1,
+        2,
+        3,
+        10
+      ],
+      "gripper_unnormalize": {
+        "mean": -0.0496407225728035,
+        "std": 0.9987671375274658
+      }
+    }
+  }
+}

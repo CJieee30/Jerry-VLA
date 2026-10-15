@@ -1,0 +1,51 @@
+{
+  "avg_margin_pp": 2.0,
+  "suite_drop_pp": 5.0,
+  "results": {
+    "pi05": {
+      "10": {
+        "suites": {
+          "spatial": 0.97,
+          "object": 0.97,
+          "goal": 0.97,
+          "long": 0.97
+        },
+        "meta": {
+          "n_episodes": 10,
+          "seed": 1000,
+          "eval_protocol": "libero"
+        }
+      },
+      "1": {
+        "suites": {
+          "spatial": 0.5,
+          "object": 0.97,
+          "goal": 0.97,
+          "long": 0.97
+        },
+        "meta": {
+          "n_episodes": 10,
+          "seed": 1000,
+          "eval_protocol": "libero"
+        }
+      },
+      "2": {
+        "suites": {
+          "spatial": 0.96,
+          "object": 0.96,
+          "goal": 0.96,
+          "long": 0.96
+        },
+        "meta": {
+          "n_episodes": 10,
+          "seed": 1000,
+          "eval_protocol": "libero"
+        }
+      }
+    }
+  },
+  "success_rate_unit": "fraction",
+  "import_source": "/tmp/nfe_prospective_selftest_mc8w1kyt/closed_loop.json",
+  "import_utc": "2026-10-15T09:35:16Z",
+  "import_source_sha256": "592d716c99b52b507159a87c868ade592edf374356193e5bcf43884c7d76502f"
+}
