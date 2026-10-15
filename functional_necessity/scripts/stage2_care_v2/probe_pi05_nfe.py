@@ -1209,11 +1209,17 @@ def parse_args():
     p.add_argument("--limit", type=int, default=None)
     p.add_argument("--shared-path", type=Path, default=None)
     p.add_argument("--skip-analyze", action="store_true")
+    p.add_argument("--nfes", default=None, help="comma list, must include 10 (default 1,2,10)")
     return p.parse_args()
 
 
 def main() -> None:
+    global NFES
     args = parse_args()
+    if args.nfes:
+        NFES = tuple(sorted({int(x) for x in args.nfes.split(",")}))
+        if 10 not in NFES:
+            raise SystemExit("--nfes must include the reference NFE 10")
     out_dir: Path = args.out_dir
     out_dir.mkdir(parents=True, exist_ok=True)
     shutil.copy2(Path(__file__), out_dir / "probe_pi05_nfe.py")

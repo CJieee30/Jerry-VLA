@@ -1,0 +1,73 @@
+{
+  "protocol_version": "care_event_nfe_v0-draft",
+  "mode": "dev",
+  "run_name": "dev_rehearsal_v1",
+  "note": "DEV REHEARSAL on revealed data: 480 CARE pool + 120 holdout. Not a prospective result.",
+  "constants": {
+    "horizon": 10,
+    "lambda": 1.0,
+    "d_mean_cal": 2.0472331711711984,
+    "event_mean_cal": 1.1166666665580123,
+    "whitening_std": [0.05375851375258111, 0.045300022456052406, 0.06353572610428114, 0.007690927155167576, 0.012292487402144343, 0.008634497491330419, 0.2400744514055428]
+  },
+  "selection": {
+    "strategies": ["random", "alpha", "g_only", "alpha_event"],
+    "top_k_per_task": 3,
+    "random_seed": 42,
+    "g_only_seed": 42
+  },
+  "rule": {
+    "candidates": [1, 2, 3],
+    "reference_nfe": 10,
+    "fallback_nfe": 10,
+    "noise_ids": [0, 1],
+    "exec_steps": 10,
+    "arm_dims": [0, 1, 2, 3, 4, 5],
+    "grip_dim": 6,
+    "arm_quantile": 0.95,
+    "arm_ratio_median": 1.0,
+    "arm_ratio_tail": 1.0,
+    "grip_rate_margin": 0.0,
+    "grip_severe_steps": 3,
+    "grip_severe_margin": 0.0,
+    "floor_degenerate_median": 0.001
+  },
+  "bootstrap": {"B": 2000, "seed": 20261015},
+  "validation": {
+    "closed_loop": {
+      "avg_margin_pp": 2.0,
+      "suite_drop_pp": 5.0,
+      "results": {}
+    }
+  },
+  "dev": {
+    "pool_shared": "results/stage2_care_v2/shared.pt",
+    "validation_shared": "results/stage2_care_v2/nfe_probe_care_event_holdout/holdout_shared.pt"
+  },
+  "models": {
+    "pi05": {
+      "adapter": "npz_probe",
+      "probe_script": "probe_pi05_nfe.py",
+      "python": "/home/guorj/.miniforge3/envs/lerobot/bin/python",
+      "probe_nfes": [1, 2, 10],
+      "dev_pool_probe": "results/stage2_care_v2/nfe_probe_pi05",
+      "dev_validation_probe": "results/stage2_care_v2/nfe_probe_care_event_holdout/pi05",
+      "gripper_unnormalize": {"mean": -0.0496407225728035, "std": 0.9987671375274658, "source": "nfe_probe_pi05/correctness.json action_mean/std[6]"},
+      "historical_seconds_per_observation": 2.39
+    },
+    "smolvla": {
+      "adapter": "npz_probe",
+      "probe_script": "probe_smolvla_nfe.py",
+      "python": "/home/guorj/.miniforge3/envs/lerobot/bin/python",
+      "probe_extra_args": ["--allow-shared"],
+      "probe_nfes": [1, 2, 3, 10],
+      "dev_pool_probe": "results/stage2_care_v2/nfe_probe_smolvla",
+      "dev_validation_probe": "results/stage2_care_v2/nfe_probe_care_event_holdout/smolvla",
+      "gripper_unnormalize": {"mean": -0.0496407225728035, "std": 0.9987671375274658, "source": "lerobot/libero meta/stats.json action[6] (same as Pi to 1e-9)"}
+    },
+    "molmoact2": {
+      "adapter": "unavailable",
+      "reason": "no fixed-noise probe yet; no Molmo dev outputs; thresholds not borrowed from Pi/Smol"
+    }
+  }
+}

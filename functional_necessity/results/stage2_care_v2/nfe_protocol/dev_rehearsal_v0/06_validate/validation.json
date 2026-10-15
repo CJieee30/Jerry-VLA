@@ -1,0 +1,355 @@
+{
+  "mode": "dev",
+  "label": "DEV REHEARSAL",
+  "recommend_sha256": "48c128ccff2d41fe81a397cc4288a385d054e22f6a14b0904e544461b6f78c8b",
+  "recommend_utc": "2026-10-15T02:27:00Z",
+  "models": {
+    "pi05": {
+      "status": "evaluated",
+      "source": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_probe_care_event_holdout/pi05",
+      "n_observations": 120,
+      "n_episodes": 120,
+      "per_nfe": {
+        "1": {
+          "status": "fail",
+          "checks": {
+            "arm_median": false,
+            "arm_tail": false,
+            "grip_rate": true,
+            "grip_severe": true
+          },
+          "stats": {
+            "arm_median": 0.053255605068417554,
+            "floor_median": 0.050699122679739674,
+            "arm_q": 0.10317318016637972,
+            "floor_q": 0.10251325722635246,
+            "ratio_median": 1.0504245883075112,
+            "ratio_q": 1.006437439974911,
+            "grip_rate": 0.0,
+            "floor_grip_rate": 0.0,
+            "grip_diff": 0.0,
+            "severe_rate": 0.0,
+            "floor_severe_rate": 0.0,
+            "severe_diff": 0.0,
+            "grip_comparisons_with_disagreement": 0,
+            "grip_comparisons": 240,
+            "floor_obs_with_disagreement": 0
+          },
+          "ci95": {
+            "ratio_median": [
+              0.9794318379133883,
+              1.1546274016600022
+            ],
+            "ratio_q": [
+              0.827466341181495,
+              1.2213568638137384
+            ],
+            "grip_diff": [
+              0.0,
+              0.0
+            ],
+            "severe_diff": [
+              0.0,
+              0.0
+            ],
+            "clusters": 120
+          }
+        },
+        "2": {
+          "status": "pass",
+          "checks": {
+            "arm_median": true,
+            "arm_tail": true,
+            "grip_rate": true,
+            "grip_severe": true
+          },
+          "stats": {
+            "arm_median": 0.03970546288668025,
+            "floor_median": 0.050699122679739674,
+            "arm_q": 0.06860373920000239,
+            "floor_q": 0.10251325722635246,
+            "ratio_median": 0.7831587764840613,
+            "ratio_q": 0.6692182168060781,
+            "grip_rate": 0.0,
+            "floor_grip_rate": 0.0,
+            "grip_diff": 0.0,
+            "severe_rate": 0.0,
+            "floor_severe_rate": 0.0,
+            "severe_diff": 0.0,
+            "grip_comparisons_with_disagreement": 0,
+            "grip_comparisons": 240,
+            "floor_obs_with_disagreement": 0
+          },
+          "ci95": {
+            "ratio_median": [
+              0.7303641138933218,
+              0.8655898785747476
+            ],
+            "ratio_q": [
+              0.5326788182753515,
+              0.8000411529645263
+            ],
+            "grip_diff": [
+              0.0,
+              0.0
+            ],
+            "severe_diff": [
+              0.0,
+              0.0
+            ],
+            "clusters": 120
+          }
+        },
+        "3": {
+          "status": "not_evaluable"
+        }
+      },
+      "strategies": {
+        "random": {
+          "recommended_nfe": 2,
+          "offline_quality": {
+            "status": "pass",
+            "failed": []
+          },
+          "closed_loop_quality": {
+            "status": "pending",
+            "rule": "Avg ≥ ref − 2.0 pp and every suite ≥ ref − 5.0 pp, same protocol and n"
+          },
+          "rejected_in_screening_but_pass_validation": []
+        },
+        "alpha": {
+          "recommended_nfe": 2,
+          "offline_quality": {
+            "status": "pass",
+            "failed": []
+          },
+          "closed_loop_quality": {
+            "status": "pending",
+            "rule": "Avg ≥ ref − 2.0 pp and every suite ≥ ref − 5.0 pp, same protocol and n"
+          },
+          "rejected_in_screening_but_pass_validation": []
+        },
+        "g_only": {
+          "recommended_nfe": 2,
+          "offline_quality": {
+            "status": "pass",
+            "failed": []
+          },
+          "closed_loop_quality": {
+            "status": "pending",
+            "rule": "Avg ≥ ref − 2.0 pp and every suite ≥ ref − 5.0 pp, same protocol and n"
+          },
+          "rejected_in_screening_but_pass_validation": []
+        },
+        "alpha_event": {
+          "recommended_nfe": 2,
+          "offline_quality": {
+            "status": "pass",
+            "failed": []
+          },
+          "closed_loop_quality": {
+            "status": "pending",
+            "rule": "Avg ≥ ref − 2.0 pp and every suite ≥ ref − 5.0 pp, same protocol and n"
+          },
+          "rejected_in_screening_but_pass_validation": []
+        }
+      }
+    },
+    "smolvla": {
+      "status": "evaluated",
+      "source": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_probe_care_event_holdout/smolvla",
+      "n_observations": 120,
+      "n_episodes": 120,
+      "per_nfe": {
+        "1": {
+          "status": "fail",
+          "checks": {
+            "arm_median": false,
+            "arm_tail": false,
+            "grip_rate": true,
+            "grip_severe": true
+          },
+          "stats": {
+            "arm_median": 0.09353349493028112,
+            "floor_median": 0.08118297931632297,
+            "arm_q": 0.15732498609299184,
+            "floor_q": 0.14376536534381334,
+            "ratio_median": 1.152131834997523,
+            "ratio_q": 1.0943177149569425,
+            "grip_rate": 0.008333333333333333,
+            "floor_grip_rate": 0.016666666666666666,
+            "grip_diff": -0.008333333333333333,
+            "severe_rate": 0.0,
+            "floor_severe_rate": 0.0,
+            "severe_diff": 0.0,
+            "grip_comparisons_with_disagreement": 2,
+            "grip_comparisons": 240,
+            "floor_obs_with_disagreement": 2
+          },
+          "ci95": {
+            "ratio_median": [
+              1.0789113524901244,
+              1.2244147181882423
+            ],
+            "ratio_q": [
+              0.8414252212548043,
+              1.2107735023520632
+            ],
+            "grip_diff": [
+              -0.020833333333333332,
+              0.0
+            ],
+            "severe_diff": [
+              0.0,
+              0.0
+            ],
+            "clusters": 120
+          }
+        },
+        "2": {
+          "status": "pass",
+          "checks": {
+            "arm_median": true,
+            "arm_tail": true,
+            "grip_rate": true,
+            "grip_severe": true
+          },
+          "stats": {
+            "arm_median": 0.055919721081786736,
+            "floor_median": 0.08118297931632297,
+            "arm_q": 0.08720548804317464,
+            "floor_q": 0.14376536534381334,
+            "ratio_median": 0.6888109004216268,
+            "ratio_q": 0.6065820361853055,
+            "grip_rate": 0.008333333333333333,
+            "floor_grip_rate": 0.016666666666666666,
+            "grip_diff": -0.008333333333333333,
+            "severe_rate": 0.0,
+            "floor_severe_rate": 0.0,
+            "severe_diff": 0.0,
+            "grip_comparisons_with_disagreement": 2,
+            "grip_comparisons": 240,
+            "floor_obs_with_disagreement": 2
+          },
+          "ci95": {
+            "ratio_median": [
+              0.6502320725594144,
+              0.7461666030409198
+            ],
+            "ratio_q": [
+              0.48208061569279465,
+              0.685905313521189
+            ],
+            "grip_diff": [
+              -0.020833333333333332,
+              0.0
+            ],
+            "severe_diff": [
+              0.0,
+              0.0
+            ],
+            "clusters": 120
+          }
+        },
+        "3": {
+          "status": "pass",
+          "checks": {
+            "arm_median": true,
+            "arm_tail": true,
+            "grip_rate": true,
+            "grip_severe": true
+          },
+          "stats": {
+            "arm_median": 0.04187766701933546,
+            "floor_median": 0.08118297931632297,
+            "arm_q": 0.060920587529879576,
+            "floor_q": 0.14376536534381334,
+            "ratio_median": 0.5158429435825764,
+            "ratio_q": 0.42375009714049444,
+            "grip_rate": 0.008333333333333333,
+            "floor_grip_rate": 0.016666666666666666,
+            "grip_diff": -0.008333333333333333,
+            "severe_rate": 0.0,
+            "floor_severe_rate": 0.0,
+            "severe_diff": 0.0,
+            "grip_comparisons_with_disagreement": 2,
+            "grip_comparisons": 240,
+            "floor_obs_with_disagreement": 2
+          },
+          "ci95": {
+            "ratio_median": [
+              0.4850750593392686,
+              0.5587228325829968
+            ],
+            "ratio_q": [
+              0.3361601682478462,
+              0.47696425484851995
+            ],
+            "grip_diff": [
+              -0.020833333333333332,
+              0.0
+            ],
+            "severe_diff": [
+              0.0,
+              0.0
+            ],
+            "clusters": 120
+          }
+        }
+      },
+      "strategies": {
+        "random": {
+          "recommended_nfe": 2,
+          "offline_quality": {
+            "status": "pass",
+            "failed": []
+          },
+          "closed_loop_quality": {
+            "status": "pending",
+            "rule": "Avg ≥ ref − 2.0 pp and every suite ≥ ref − 5.0 pp, same protocol and n"
+          },
+          "rejected_in_screening_but_pass_validation": []
+        },
+        "alpha": {
+          "recommended_nfe": 2,
+          "offline_quality": {
+            "status": "pass",
+            "failed": []
+          },
+          "closed_loop_quality": {
+            "status": "pending",
+            "rule": "Avg ≥ ref − 2.0 pp and every suite ≥ ref − 5.0 pp, same protocol and n"
+          },
+          "rejected_in_screening_but_pass_validation": []
+        },
+        "g_only": {
+          "recommended_nfe": 2,
+          "offline_quality": {
+            "status": "pass",
+            "failed": []
+          },
+          "closed_loop_quality": {
+            "status": "pending",
+            "rule": "Avg ≥ ref − 2.0 pp and every suite ≥ ref − 5.0 pp, same protocol and n"
+          },
+          "rejected_in_screening_but_pass_validation": []
+        },
+        "alpha_event": {
+          "recommended_nfe": 2,
+          "offline_quality": {
+            "status": "pass",
+            "failed": []
+          },
+          "closed_loop_quality": {
+            "status": "pending",
+            "rule": "Avg ≥ ref − 2.0 pp and every suite ≥ ref − 5.0 pp, same protocol and n"
+          },
+          "rejected_in_screening_but_pass_validation": []
+        }
+      }
+    },
+    "molmoact2": {
+      "status": "not_evaluated"
+    }
+  }
+}

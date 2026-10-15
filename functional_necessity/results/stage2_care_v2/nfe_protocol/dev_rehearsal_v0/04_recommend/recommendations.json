@@ -1,0 +1,1119 @@
+{
+  "mode": "dev",
+  "label": "DEV REHEARSAL",
+  "select_sha256": "305b823ebd9014f199ac7ee7e340ffd5b68b20b4e33d73df16b3a95b3aaf514c",
+  "models": {
+    "pi05": {
+      "status": "evaluated",
+      "available_candidates": [
+        1,
+        2
+      ],
+      "strategies": {
+        "random": {
+          "recommended_nfe": 2,
+          "why": "lowest passing candidate",
+          "fallback": false,
+          "floor_degenerate": false,
+          "floor_median": 0.044380354223764254,
+          "n_observations": 120,
+          "skipped_unevaluable_below": [],
+          "non_monotone_larger_rejected": [],
+          "candidates": [
+            {
+              "nfe": 1,
+              "status": "reject",
+              "checks": {
+                "arm_median": false,
+                "arm_tail": true,
+                "grip_rate": false,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.0540611996133266,
+                "floor_median": 0.044380354223764254,
+                "arm_q": 0.11961506042396859,
+                "floor_q": 0.12765896083637773,
+                "ratio_median": 1.2181335764187877,
+                "ratio_q": 0.9369891438900312,
+                "grip_rate": 0.020833333333333332,
+                "floor_grip_rate": 0.016666666666666666,
+                "grip_diff": 0.004166666666666666,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 5,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 2
+              },
+              "ci95": {
+                "ratio_median": [
+                  1.134845685863115,
+                  1.3479937231093178
+                ],
+                "ratio_q": [
+                  0.6540616483865012,
+                  1.1083650722203624
+                ],
+                "grip_diff": [
+                  -0.016666666666666666,
+                  0.029166666666666667
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": [
+                "arm median > floor median",
+                "gripper deviation rate > floor rate"
+              ]
+            },
+            {
+              "nfe": 2,
+              "status": "pass",
+              "checks": {
+                "arm_median": true,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.03969051670678386,
+                "floor_median": 0.044380354223764254,
+                "arm_q": 0.07634785924310937,
+                "floor_q": 0.12765896083637773,
+                "ratio_median": 0.8943262711844437,
+                "ratio_q": 0.5980611054868721,
+                "grip_rate": 0.008333333333333333,
+                "floor_grip_rate": 0.016666666666666666,
+                "grip_diff": -0.008333333333333333,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 2,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 2
+              },
+              "ci95": {
+                "ratio_median": [
+                  0.8309487410762806,
+                  1.0016808512349744
+                ],
+                "ratio_q": [
+                  0.4081110392668332,
+                  0.7026231864844802
+                ],
+                "grip_diff": [
+                  -0.02916666666666667,
+                  0.008333333333333333
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": []
+            },
+            {
+              "nfe": 3,
+              "status": "not_evaluable",
+              "reasons": [
+                "no probe output for this NFE"
+              ]
+            }
+          ],
+          "G1": 19
+        },
+        "alpha": {
+          "recommended_nfe": 2,
+          "why": "lowest passing candidate",
+          "fallback": false,
+          "floor_degenerate": false,
+          "floor_median": 0.05824893800333898,
+          "n_observations": 120,
+          "skipped_unevaluable_below": [],
+          "non_monotone_larger_rejected": [],
+          "candidates": [
+            {
+              "nfe": 1,
+              "status": "reject",
+              "checks": {
+                "arm_median": false,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.0682317280674106,
+                "floor_median": 0.05824893800333898,
+                "arm_q": 0.14650618619080477,
+                "floor_q": 0.1747838275558396,
+                "ratio_median": 1.1713814947750527,
+                "ratio_q": 0.8382136278827014,
+                "grip_rate": 0.029166666666666667,
+                "floor_grip_rate": 0.058333333333333334,
+                "grip_diff": -0.029166666666666667,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 7,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 7
+              },
+              "ci95": {
+                "ratio_median": [
+                  1.0664847271632647,
+                  1.254312739903611
+                ],
+                "ratio_q": [
+                  0.5715963572337734,
+                  1.0451306141500132
+                ],
+                "grip_diff": [
+                  -0.058333333333333334,
+                  -0.004166666666666666
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": [
+                "arm median > floor median"
+              ]
+            },
+            {
+              "nfe": 2,
+              "status": "pass",
+              "checks": {
+                "arm_median": true,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.04804045327001984,
+                "floor_median": 0.05824893800333898,
+                "arm_q": 0.07972929283128109,
+                "floor_q": 0.1747838275558396,
+                "ratio_median": 0.8247438479868257,
+                "ratio_q": 0.45615943961296607,
+                "grip_rate": 0.016666666666666666,
+                "floor_grip_rate": 0.058333333333333334,
+                "grip_diff": -0.04166666666666667,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 4,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 7
+              },
+              "ci95": {
+                "ratio_median": [
+                  0.7544210044600687,
+                  0.8825095011877989
+                ],
+                "ratio_q": [
+                  0.3029969290119956,
+                  0.5602604490316916
+                ],
+                "grip_diff": [
+                  -0.07916666666666666,
+                  -0.0125
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": []
+            },
+            {
+              "nfe": 3,
+              "status": "not_evaluable",
+              "reasons": [
+                "no probe output for this NFE"
+              ]
+            }
+          ],
+          "G1": 34
+        },
+        "g_only": {
+          "recommended_nfe": 2,
+          "why": "lowest passing candidate",
+          "fallback": false,
+          "floor_degenerate": false,
+          "floor_median": 0.044764147990725825,
+          "n_observations": 120,
+          "skipped_unevaluable_below": [],
+          "non_monotone_larger_rejected": [],
+          "candidates": [
+            {
+              "nfe": 1,
+              "status": "reject",
+              "checks": {
+                "arm_median": false,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.05364290773174347,
+                "floor_median": 0.044764147990725825,
+                "arm_q": 0.12389327665494328,
+                "floor_q": 0.14002614941353203,
+                "ratio_median": 1.1983453307959113,
+                "ratio_q": 0.8847867142947395,
+                "grip_rate": 0.041666666666666664,
+                "floor_grip_rate": 0.06666666666666667,
+                "grip_diff": -0.025,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 10,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 8
+              },
+              "ci95": {
+                "ratio_median": [
+                  1.0906658710905854,
+                  1.2981449575404904
+                ],
+                "ratio_q": [
+                  0.6323854092086978,
+                  1.1763778291668536
+                ],
+                "grip_diff": [
+                  -0.058333333333333334,
+                  0.008333333333333331
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": [
+                "arm median > floor median"
+              ]
+            },
+            {
+              "nfe": 2,
+              "status": "pass",
+              "checks": {
+                "arm_median": true,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.0394895684987943,
+                "floor_median": 0.044764147990725825,
+                "arm_q": 0.07359558855628949,
+                "floor_q": 0.14002614941353203,
+                "ratio_median": 0.8821695546841569,
+                "ratio_q": 0.5255846059077396,
+                "grip_rate": 0.025,
+                "floor_grip_rate": 0.06666666666666667,
+                "grip_diff": -0.041666666666666664,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 6,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 8
+              },
+              "ci95": {
+                "ratio_median": [
+                  0.7974600362320821,
+                  0.9443440577462286
+                ],
+                "ratio_q": [
+                  0.34728153981630383,
+                  0.7449688924027494
+                ],
+                "grip_diff": [
+                  -0.07916666666666666,
+                  -0.012499999999999997
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": []
+            },
+            {
+              "nfe": 3,
+              "status": "not_evaluable",
+              "reasons": [
+                "no probe output for this NFE"
+              ]
+            }
+          ],
+          "G1": 55
+        },
+        "alpha_event": {
+          "recommended_nfe": 2,
+          "why": "lowest passing candidate",
+          "fallback": false,
+          "floor_degenerate": false,
+          "floor_median": 0.053388520110241526,
+          "n_observations": 120,
+          "skipped_unevaluable_below": [],
+          "non_monotone_larger_rejected": [],
+          "candidates": [
+            {
+              "nfe": 1,
+              "status": "reject",
+              "checks": {
+                "arm_median": false,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.06188748932765149,
+                "floor_median": 0.053388520110241526,
+                "arm_q": 0.14650618619080477,
+                "floor_q": 0.16346685771287714,
+                "ratio_median": 1.1591909496622217,
+                "ratio_q": 0.8962439741035269,
+                "grip_rate": 0.041666666666666664,
+                "floor_grip_rate": 0.06666666666666667,
+                "grip_diff": -0.025,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 10,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 8
+              },
+              "ci95": {
+                "ratio_median": [
+                  1.0739161752885376,
+                  1.2655534688201857
+                ],
+                "ratio_q": [
+                  0.6514209746242071,
+                  1.114466198819635
+                ],
+                "grip_diff": [
+                  -0.058333333333333334,
+                  0.008333333333333331
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": [
+                "arm median > floor median"
+              ]
+            },
+            {
+              "nfe": 2,
+              "status": "pass",
+              "checks": {
+                "arm_median": true,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.04511885704416275,
+                "floor_median": 0.053388520110241526,
+                "arm_q": 0.07958974535121986,
+                "floor_q": 0.16346685771287714,
+                "ratio_median": 0.845104096367481,
+                "ratio_q": 0.4868861276517348,
+                "grip_rate": 0.025,
+                "floor_grip_rate": 0.06666666666666667,
+                "grip_diff": -0.041666666666666664,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 6,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 8
+              },
+              "ci95": {
+                "ratio_median": [
+                  0.7862614120601997,
+                  0.9041600885463605
+                ],
+                "ratio_q": [
+                  0.3054624671211379,
+                  0.5907179286008242
+                ],
+                "grip_diff": [
+                  -0.07500000000000001,
+                  -0.012499999999999997
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": []
+            },
+            {
+              "nfe": 3,
+              "status": "not_evaluable",
+              "reasons": [
+                "no probe output for this NFE"
+              ]
+            }
+          ],
+          "G1": 55
+        }
+      }
+    },
+    "smolvla": {
+      "status": "evaluated",
+      "available_candidates": [
+        1,
+        2,
+        3
+      ],
+      "strategies": {
+        "random": {
+          "recommended_nfe": 2,
+          "why": "lowest passing candidate",
+          "fallback": false,
+          "floor_degenerate": false,
+          "floor_median": 0.07722644406429152,
+          "n_observations": 120,
+          "skipped_unevaluable_below": [],
+          "non_monotone_larger_rejected": [],
+          "candidates": [
+            {
+              "nfe": 1,
+              "status": "reject",
+              "checks": {
+                "arm_median": false,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.09085617218477066,
+                "floor_median": 0.07722644406429152,
+                "arm_q": 0.1689395744325671,
+                "floor_q": 0.18386440376470567,
+                "ratio_median": 1.1764904274128212,
+                "ratio_q": 0.9188269777806578,
+                "grip_rate": 0.03333333333333333,
+                "floor_grip_rate": 0.03333333333333333,
+                "grip_diff": 0.0,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 8,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 4
+              },
+              "ci95": {
+                "ratio_median": [
+                  1.1043659705680056,
+                  1.284794721638647
+                ],
+                "ratio_q": [
+                  0.8249569693427022,
+                  1.199737897436429
+                ],
+                "grip_diff": [
+                  -0.020833333333333336,
+                  0.024999999999999998
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": [
+                "arm median > floor median"
+              ]
+            },
+            {
+              "nfe": 2,
+              "status": "pass",
+              "checks": {
+                "arm_median": true,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.055380290723232035,
+                "floor_median": 0.07722644406429152,
+                "arm_q": 0.0986219097463345,
+                "floor_q": 0.18386440376470567,
+                "ratio_median": 0.7171156382278534,
+                "ratio_q": 0.5363839205795516,
+                "grip_rate": 0.008333333333333333,
+                "floor_grip_rate": 0.03333333333333333,
+                "grip_diff": -0.025,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 2,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 4
+              },
+              "ci95": {
+                "ratio_median": [
+                  0.6767240816118324,
+                  0.7746915695118984
+                ],
+                "ratio_q": [
+                  0.4765902687535745,
+                  0.7063136062775194
+                ],
+                "grip_diff": [
+                  -0.05416666666666667,
+                  -0.004166666666666667
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": []
+            },
+            {
+              "nfe": 3,
+              "status": "pass",
+              "checks": {
+                "arm_median": true,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.04131330478595855,
+                "floor_median": 0.07722644406429152,
+                "arm_q": 0.06764002422594087,
+                "floor_q": 0.18386440376470567,
+                "ratio_median": 0.534963188924832,
+                "ratio_q": 0.36787993130253166,
+                "grip_rate": 0.004166666666666667,
+                "floor_grip_rate": 0.03333333333333333,
+                "grip_diff": -0.029166666666666667,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 1,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 4
+              },
+              "ci95": {
+                "ratio_median": [
+                  0.5083171576725999,
+                  0.580165504703066
+                ],
+                "ratio_q": [
+                  0.3266774330545477,
+                  0.49549918013405797
+                ],
+                "grip_diff": [
+                  -0.0625,
+                  -0.004166666666666667
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": []
+            }
+          ],
+          "G1": 19
+        },
+        "alpha": {
+          "recommended_nfe": 2,
+          "why": "lowest passing candidate",
+          "fallback": false,
+          "floor_degenerate": false,
+          "floor_median": 0.09309403704000296,
+          "n_observations": 120,
+          "skipped_unevaluable_below": [],
+          "non_monotone_larger_rejected": [],
+          "candidates": [
+            {
+              "nfe": 1,
+              "status": "reject",
+              "checks": {
+                "arm_median": false,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.10553153879635721,
+                "floor_median": 0.09309403704000296,
+                "arm_q": 0.18242736781319915,
+                "floor_q": 0.18386440376470567,
+                "ratio_median": 1.1336014867526885,
+                "ratio_q": 0.9921842623037272,
+                "grip_rate": 0.04583333333333333,
+                "floor_grip_rate": 0.058333333333333334,
+                "grip_diff": -0.012500000000000004,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 11,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 7
+              },
+              "ci95": {
+                "ratio_median": [
+                  1.068397648225643,
+                  1.2434713931315569
+                ],
+                "ratio_q": [
+                  0.8666294685831439,
+                  1.069241426152392
+                ],
+                "grip_diff": [
+                  -0.03333333333333334,
+                  0.008333333333333335
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": [
+                "arm median > floor median"
+              ]
+            },
+            {
+              "nfe": 2,
+              "status": "pass",
+              "checks": {
+                "arm_median": true,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.06457250301534637,
+                "floor_median": 0.09309403704000296,
+                "arm_q": 0.1002974822653082,
+                "floor_q": 0.18386440376470567,
+                "ratio_median": 0.6936266281759728,
+                "ratio_q": 0.5454970087285658,
+                "grip_rate": 0.008333333333333333,
+                "floor_grip_rate": 0.058333333333333334,
+                "grip_diff": -0.05,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 2,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 7
+              },
+              "ci95": {
+                "ratio_median": [
+                  0.6525705952219755,
+                  0.7513358496950683
+                ],
+                "ratio_q": [
+                  0.48942097408187996,
+                  0.6176080503808464
+                ],
+                "grip_diff": [
+                  -0.09166666666666667,
+                  -0.016666666666666666
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": []
+            },
+            {
+              "nfe": 3,
+              "status": "pass",
+              "checks": {
+                "arm_median": true,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.04682149902980859,
+                "floor_median": 0.09309403704000296,
+                "arm_q": 0.07100223854214574,
+                "floor_q": 0.18386440376470567,
+                "ratio_median": 0.5029484220314687,
+                "ratio_q": 0.38616631108764526,
+                "grip_rate": 0.004166666666666667,
+                "floor_grip_rate": 0.058333333333333334,
+                "grip_diff": -0.05416666666666667,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 1,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 7
+              },
+              "ci95": {
+                "ratio_median": [
+                  0.47146159382778424,
+                  0.5477941278497407
+                ],
+                "ratio_q": [
+                  0.3283810228343125,
+                  0.42300199889082757
+                ],
+                "grip_diff": [
+                  -0.09583333333333334,
+                  -0.016666666666666666
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": []
+            }
+          ],
+          "G1": 34
+        },
+        "g_only": {
+          "recommended_nfe": 2,
+          "why": "lowest passing candidate",
+          "fallback": false,
+          "floor_degenerate": false,
+          "floor_median": 0.07566197071190339,
+          "n_observations": 120,
+          "skipped_unevaluable_below": [],
+          "non_monotone_larger_rejected": [],
+          "candidates": [
+            {
+              "nfe": 1,
+              "status": "reject",
+              "checks": {
+                "arm_median": false,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.0934512515362031,
+                "floor_median": 0.07566197071190339,
+                "arm_q": 0.1659910464934986,
+                "floor_q": 0.16776453633442517,
+                "ratio_median": 1.2351152191374395,
+                "ratio_q": 0.9894286964356325,
+                "grip_rate": 0.05416666666666667,
+                "floor_grip_rate": 0.06666666666666667,
+                "grip_diff": -0.012499999999999997,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 13,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 8
+              },
+              "ci95": {
+                "ratio_median": [
+                  1.1577440971536137,
+                  1.3045421442096536
+                ],
+                "ratio_q": [
+                  0.7972242102516266,
+                  1.1909730611776408
+                ],
+                "grip_diff": [
+                  -0.037500000000000006,
+                  0.012500000000000004
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": [
+                "arm median > floor median"
+              ]
+            },
+            {
+              "nfe": 2,
+              "status": "pass",
+              "checks": {
+                "arm_median": true,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.0568191548192801,
+                "floor_median": 0.07566197071190339,
+                "arm_q": 0.09525409309479344,
+                "floor_q": 0.16776453633442517,
+                "ratio_median": 0.7509605457625375,
+                "ratio_q": 0.5677844386903799,
+                "grip_rate": 0.0125,
+                "floor_grip_rate": 0.06666666666666667,
+                "grip_diff": -0.05416666666666667,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 3,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 8
+              },
+              "ci95": {
+                "ratio_median": [
+                  0.7173868509479453,
+                  0.7938982218098428
+                ],
+                "ratio_q": [
+                  0.4696559073805721,
+                  0.7420596493492834
+                ],
+                "grip_diff": [
+                  -0.09583333333333334,
+                  -0.020833333333333332
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": []
+            },
+            {
+              "nfe": 3,
+              "status": "pass",
+              "checks": {
+                "arm_median": true,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.04219999391537039,
+                "floor_median": 0.07566197071190339,
+                "arm_q": 0.06769462473345253,
+                "floor_q": 0.16776453633442517,
+                "ratio_median": 0.5577437848672285,
+                "ratio_q": 0.40350974176394894,
+                "grip_rate": 0.008333333333333333,
+                "floor_grip_rate": 0.06666666666666667,
+                "grip_diff": -0.058333333333333334,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 2,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 8
+              },
+              "ci95": {
+                "ratio_median": [
+                  0.5297343394279725,
+                  0.585860431236897
+                ],
+                "ratio_q": [
+                  0.3248210957388342,
+                  0.504063707879663
+                ],
+                "grip_diff": [
+                  -0.1,
+                  -0.020833333333333336
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": []
+            }
+          ],
+          "G1": 55
+        },
+        "alpha_event": {
+          "recommended_nfe": 2,
+          "why": "lowest passing candidate",
+          "fallback": false,
+          "floor_degenerate": false,
+          "floor_median": 0.08921205438269042,
+          "n_observations": 120,
+          "skipped_unevaluable_below": [],
+          "non_monotone_larger_rejected": [],
+          "candidates": [
+            {
+              "nfe": 1,
+              "status": "reject",
+              "checks": {
+                "arm_median": false,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.10334238428610584,
+                "floor_median": 0.08921205438269042,
+                "arm_q": 0.1776380285805292,
+                "floor_q": 0.1807939780287666,
+                "ratio_median": 1.1583903655306595,
+                "ratio_q": 0.9825439459729393,
+                "grip_rate": 0.058333333333333334,
+                "floor_grip_rate": 0.06666666666666667,
+                "grip_diff": -0.008333333333333331,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 14,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 8
+              },
+              "ci95": {
+                "ratio_median": [
+                  1.068360986721326,
+                  1.2417769022981702
+                ],
+                "ratio_q": [
+                  0.8667608465389176,
+                  1.0901796187867199
+                ],
+                "grip_diff": [
+                  -0.037500000000000006,
+                  0.020833333333333336
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": [
+                "arm median > floor median"
+              ]
+            },
+            {
+              "nfe": 2,
+              "status": "pass",
+              "checks": {
+                "arm_median": true,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.06431780366814076,
+                "floor_median": 0.08921205438269042,
+                "arm_q": 0.09950025652758947,
+                "floor_q": 0.1807939780287666,
+                "ratio_median": 0.7209541817324203,
+                "ratio_q": 0.5503516080151615,
+                "grip_rate": 0.0125,
+                "floor_grip_rate": 0.06666666666666667,
+                "grip_diff": -0.05416666666666667,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 3,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 8
+              },
+              "ci95": {
+                "ratio_median": [
+                  0.6663750492503039,
+                  0.7610460356259958
+                ],
+                "ratio_q": [
+                  0.4972255846383388,
+                  0.6254859366123805
+                ],
+                "grip_diff": [
+                  -0.09583333333333334,
+                  -0.01666666666666667
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": []
+            },
+            {
+              "nfe": 3,
+              "status": "pass",
+              "checks": {
+                "arm_median": true,
+                "arm_tail": true,
+                "grip_rate": true,
+                "grip_severe": true
+              },
+              "stats": {
+                "arm_median": 0.046428543080311746,
+                "floor_median": 0.08921205438269042,
+                "arm_q": 0.07015143765784639,
+                "floor_q": 0.1807939780287666,
+                "ratio_median": 0.520429031721975,
+                "ratio_q": 0.3880186631364702,
+                "grip_rate": 0.008333333333333333,
+                "floor_grip_rate": 0.06666666666666667,
+                "grip_diff": -0.058333333333333334,
+                "severe_rate": 0.0,
+                "floor_severe_rate": 0.0,
+                "severe_diff": 0.0,
+                "grip_comparisons_with_disagreement": 2,
+                "grip_comparisons": 240,
+                "floor_obs_with_disagreement": 8
+              },
+              "ci95": {
+                "ratio_median": [
+                  0.4820921901085021,
+                  0.5523987433307793
+                ],
+                "ratio_q": [
+                  0.3443777159417139,
+                  0.428135929498947
+                ],
+                "grip_diff": [
+                  -0.10416666666666666,
+                  -0.020833333333333336
+                ],
+                "severe_diff": [
+                  0.0,
+                  0.0
+                ],
+                "clusters": 120
+              },
+              "reasons": []
+            }
+          ],
+          "G1": 55
+        }
+      }
+    },
+    "molmoact2": {
+      "status": "not_evaluated",
+      "reason": "no fixed-noise probe yet; no Molmo dev outputs; thresholds not borrowed from Pi/Smol"
+    }
+  }
+}

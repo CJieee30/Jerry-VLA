@@ -1,0 +1,141 @@
+{
+  "label": "CPU interface check on existing dev data; no model loaded",
+  "episode_ranges_equal": true,
+  "local_molmo_files": 13,
+  "rows": [
+    {
+      "set": "dev_pool_480",
+      "records": 480,
+      "records_with_local_shard": 20,
+      "index_episode_frame_mismatch": 0,
+      "max_abs_action_diff_vs_libero": 0.0,
+      "G_equal": true,
+      "G1_local": 2,
+      "molmo_gripper_values_local": [
+        -1.0,
+        1.0
+      ]
+    },
+    {
+      "set": "dev_holdout_120",
+      "records": 120,
+      "records_with_local_shard": 3,
+      "index_episode_frame_mismatch": 0,
+      "max_abs_action_diff_vs_libero": 0.0,
+      "G_equal": true,
+      "G1_local": 0,
+      "molmo_gripper_values_local": [
+        -1.0,
+        1.0
+      ]
+    },
+    {
+      "set": "draft_calibration_400",
+      "records": 400,
+      "records_with_local_shard": 6,
+      "index_episode_frame_mismatch": 0,
+      "max_abs_action_diff_vs_libero": 0.0,
+      "G_equal": true,
+      "G1_local": 1,
+      "molmo_gripper_values_local": [
+        -1.0,
+        1.0
+      ]
+    },
+    {
+      "set": "draft_validation_480",
+      "records": 480,
+      "records_with_local_shard": 3,
+      "index_episode_frame_mismatch": 0,
+      "max_abs_action_diff_vs_libero": 0.0,
+      "G_equal": true,
+      "G1_local": 0,
+      "molmo_gripper_values_local": [
+        -1.0,
+        1.0
+      ]
+    }
+  ],
+  "coverage": [
+    {
+      "set": "dev_pool_480",
+      "episodes": 480,
+      "molmo_files": 109,
+      "missing_local": 101
+    },
+    {
+      "set": "dev_holdout_120",
+      "episodes": 120,
+      "molmo_files": 99,
+      "missing_local": 96
+    },
+    {
+      "set": "draft_calibration_400",
+      "episodes": 400,
+      "molmo_files": 218,
+      "missing_local": 213
+    },
+    {
+      "set": "draft_validation_480",
+      "episodes": 160,
+      "molmo_files": 122,
+      "missing_local": 120
+    }
+  ],
+  "checkpoint": {
+    "n_action_steps": 10,
+    "chunk_size": 10,
+    "action_mode": "both",
+    "inference_action_mode": null,
+    "normalization_mapping": {
+      "VISUAL": "IDENTITY",
+      "STATE": "QUANTILES",
+      "ACTION": "QUANTILES"
+    },
+    "action_norm_mask": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.0
+    ],
+    "action_q01": [
+      -0.6792032122612,
+      -0.7736573219299316,
+      -0.8728073835372925,
+      -0.1027744710445404,
+      -0.1550981104373932,
+      -0.20289961993694305,
+      -1.0
+    ],
+    "action_q99": [
+      0.8536542654037476,
+      0.8637810945510864,
+      0.9363295435905457,
+      0.13045695424079895,
+      0.18015313148498535,
+      0.24129727482795715,
+      0.9999914169311523
+    ],
+    "model_dtype": "bfloat16",
+    "enable_inference_cuda_graph_ckpt": true,
+    "per_episode_seed": false,
+    "rtc_config": null,
+    "hf_flow_matching_num_steps": 10,
+    "hf_max_action_dim": 32,
+    "hf_max_action_horizon": 10
+  },
+  "source": {
+    "lerobot_molmoact2_dir": "/home/guorj/lerobot/src/lerobot/policies/molmoact2",
+    "predict_action_chunk_reads_num_steps": true,
+    "predict_action_chunk_reads_generator": true,
+    "outer_noise_randn_with_generator": true,
+    "inner_noise_randn_with_generator": true,
+    "inner_noise_dtype": "action_expert.action_embed.weight.dtype",
+    "inner_uses_action_cuda_graph_when_enabled": true,
+    "velocity_hook_target": "action_expert.forward_with_context (eager only; CUDA-graph replay bypasses hooks)",
+    "rollout_generator_when_per_episode_seed": true
+  }
+}

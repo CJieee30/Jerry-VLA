@@ -10,7 +10,13 @@
 | 推断 | 由日志时间、文件修改时间、提交历史等间接支持，**无**运行当时源码哈希 |
 | 待核实 | 缺闭环、算子与源码对应不明、或仅单帧效率检查 |
 
-**可比性**：仅当检查点、skip 算子、NFE、`n_episodes`、seed、运行时（eager/compile/graph）、`num_steps_wait` 一致时可横向比较 SR。不同会话的毫秒/FLOPs **不可**相减拼接。
+**可比性**：
+
+- **单一变量**：一次 SR 对比只允许被比较的那个因素（NFE 或层集合）不同。检查点、skip 算子版本、环境协议（seed、`num_steps_wait`、每块执行步数）、运行时（eager/compile/graph）应一致；不一致时在行内标出，并降为参考。
+- **不同回合数可以并列**：400 与 2000 回合可以放在同一张表里，但每行写明 n。400 回合在 97% 附近的二项标准误约 0.8 pp，单套件 100 回合约 2 pp。不同 n 的点估计差不当作同精度的 Δ。
+- **同 seed 复跑不是独立样本**：同配置、同 seed 的复跑（如 `_r2`）只反映运行时的非确定性，不合并成更大的 n，也不当作独立重复。
+- **算子版本未核实**：§3 里算子版本只能推断的行，和其他算子版本的行比较时须注明“算子版本待核实”。
+- **效率数字**：不同会话的毫秒/FLOPs **不可**相减拼接。
 
 ---
 
@@ -120,7 +126,9 @@
 | Pi 夹爪 NFE1 | 5/10 | 7/10 | 10/10 | 10/10 |
 | Pi 尾部 NFE1 | 23/71 | 38/71 | 32/71 | 38/71 |
 
-选样索引：`budget_compare/selections/*.json`。前瞻接受规则：**未制定**（本轮未做）。
+选样索引：`budget_compare/selections/*.json`。
+
+前瞻 NFE 推荐规则：**v0 草案，未冻结**，待顾问审阅。文档见 `main_results/care_event_nfe_protocol.md`，开发演练结果见 `results/stage2_care_v2/nfe_protocol/dev_rehearsal_v1/`；演练所用数据均已揭晓，结果只作开发证据。
 
 ---
 
@@ -137,8 +145,8 @@
 
 ## 7. 明确缺口（本轮不补 GPU）
 
-- 冻结前瞻 NFE 推荐协议与 holdout 外新 episode 验证  
-- Molmo CARE 探针  
+- 冻结前瞻 NFE 推荐协议（v0 草案待审）；在 holdout 外新 episode 上验证（身份清单已有草稿，尚未生成任何模型输出）  
+- Molmo CARE 探针：CPU 接口检查已通过，固定噪声探针与开发输出未做，见协议 §6  
 - K/V-only / materialized 与历史 SR 的闭环对齐（除代表帧外）  
 - 正式效率：多输入、独占 3090、与最终实现配对  
 - π0.5 Full NFE=1 @ 2000 ep  
@@ -155,4 +163,5 @@
 | `eval_nfe_libero.md` | NFE 闭环 |
 | `efficiency_analysis.md` | 效率分节 |
 | `care_event_action_expert_nfe.md` | CARE 方法与 holdout |
+| `care_event_nfe_protocol.md` | 前瞻 NFE 推荐协议 v0 草案与开发演练 |
 | `eval_libero_plus.md` | OOD 旁支 |
