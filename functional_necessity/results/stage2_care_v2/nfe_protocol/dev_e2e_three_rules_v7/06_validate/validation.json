@@ -1,0 +1,624 @@
+{
+  "mode": "dev",
+  "label": "DEV REHEARSAL",
+  "recommend_sha256": "206bc467c3a3208b1d4f3781e3450dc6aeaba22eb260f7af8246893bf1ab957d",
+  "recommend_utc": "2026-10-15T09:09:37Z",
+  "models": {
+    "pi05": {
+      "status": "evaluated",
+      "source": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_probe_care_event_holdout/pi05",
+      "n_observations": 120,
+      "n_episodes": 120,
+      "diagnostics": {
+        "floor_nfe10_two_noise_disagree_frac": 0.0,
+        "floor_obs_with_disagreement": 0
+      },
+      "strategies": {
+        "random": {
+          "screening_primary_nfe": 1,
+          "screening_abs_improve": 1,
+          "screening_rel_improve": 1,
+          "validation_three_rules_on_holdout": {
+            "E_on_selection": {
+              "1": 0.05602202669520598,
+              "2": 0.039543237006742275
+            },
+            "abs_0.085": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.05602202669520598,
+                "2": 0.039543237006742275
+              },
+              "notes": []
+            },
+            "abs_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.05602202669520598,
+                "2": 0.039543237006742275
+              },
+              "notes": []
+            },
+            "rel_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.05602202669520598,
+                "2": 0.039543237006742275
+              },
+              "notes": []
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.05602202669520598,
+                "2": 0.039543237006742275
+              },
+              "notes": []
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "closed_loop_quality": {
+            "status": "pending",
+            "rule": "Avg ≥ ref − 2.0 pp and every suite ≥ ref − 5.0 pp, same protocol and n"
+          }
+        },
+        "alpha": {
+          "screening_primary_nfe": 1,
+          "screening_abs_improve": 1,
+          "screening_rel_improve": 1,
+          "validation_three_rules_on_holdout": {
+            "E_on_selection": {
+              "1": 0.05602202669520598,
+              "2": 0.039543237006742275
+            },
+            "abs_0.085": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.05602202669520598,
+                "2": 0.039543237006742275
+              },
+              "notes": []
+            },
+            "abs_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.05602202669520598,
+                "2": 0.039543237006742275
+              },
+              "notes": []
+            },
+            "rel_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.05602202669520598,
+                "2": 0.039543237006742275
+              },
+              "notes": []
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.05602202669520598,
+                "2": 0.039543237006742275
+              },
+              "notes": []
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "closed_loop_quality": {
+            "status": "pending",
+            "rule": "Avg ≥ ref − 2.0 pp and every suite ≥ ref − 5.0 pp, same protocol and n"
+          }
+        },
+        "g_only": {
+          "screening_primary_nfe": 1,
+          "screening_abs_improve": 1,
+          "screening_rel_improve": 1,
+          "validation_three_rules_on_holdout": {
+            "E_on_selection": {
+              "1": 0.05602202669520598,
+              "2": 0.039543237006742275
+            },
+            "abs_0.085": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.05602202669520598,
+                "2": 0.039543237006742275
+              },
+              "notes": []
+            },
+            "abs_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.05602202669520598,
+                "2": 0.039543237006742275
+              },
+              "notes": []
+            },
+            "rel_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.05602202669520598,
+                "2": 0.039543237006742275
+              },
+              "notes": []
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.05602202669520598,
+                "2": 0.039543237006742275
+              },
+              "notes": []
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "closed_loop_quality": {
+            "status": "pending",
+            "rule": "Avg ≥ ref − 2.0 pp and every suite ≥ ref − 5.0 pp, same protocol and n"
+          }
+        },
+        "alpha_event": {
+          "screening_primary_nfe": 1,
+          "screening_abs_improve": 1,
+          "screening_rel_improve": 1,
+          "validation_three_rules_on_holdout": {
+            "E_on_selection": {
+              "1": 0.05602202669520598,
+              "2": 0.039543237006742275
+            },
+            "abs_0.085": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.05602202669520598,
+                "2": 0.039543237006742275
+              },
+              "notes": []
+            },
+            "abs_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.05602202669520598,
+                "2": 0.039543237006742275
+              },
+              "notes": []
+            },
+            "rel_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.05602202669520598,
+                "2": 0.039543237006742275
+              },
+              "notes": []
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.05602202669520598,
+                "2": 0.039543237006742275
+              },
+              "notes": []
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "closed_loop_quality": {
+            "status": "pending",
+            "rule": "Avg ≥ ref − 2.0 pp and every suite ≥ ref − 5.0 pp, same protocol and n"
+          }
+        }
+      }
+    },
+    "smolvla": {
+      "status": "evaluated",
+      "source": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_probe_care_event_holdout/smolvla",
+      "n_observations": 120,
+      "n_episodes": 120,
+      "diagnostics": {
+        "floor_nfe10_two_noise_disagree_frac": 0.016666666666666666,
+        "floor_obs_with_disagreement": 2
+      },
+      "strategies": {
+        "random": {
+          "screening_primary_nfe": 2,
+          "screening_abs_improve": 2,
+          "screening_rel_improve": 2,
+          "validation_three_rules_on_holdout": {
+            "E_on_selection": {
+              "1": 0.09419704027815778,
+              "2": 0.05678821501949409,
+              "3": 0.042000963873939146
+            },
+            "abs_0.085": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.09419704027815778,
+                "2": 0.05678821501949409,
+                "3": 0.042000963873939146
+              },
+              "notes": [
+                "n=1:E_1=0.0942"
+              ]
+            },
+            "abs_improve": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.09419704027815778,
+                "2": 0.05678821501949409,
+                "3": 0.042000963873939146
+              },
+              "notes": [
+                "n=1:delta=0.0374>0.03"
+              ]
+            },
+            "rel_improve": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.09419704027815778,
+                "2": 0.05678821501949409,
+                "3": 0.042000963873939146
+              },
+              "notes": [
+                "n=1:rel=0.3971>0.375"
+              ]
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.09419704027815778,
+                "2": 0.05678821501949409,
+                "3": 0.042000963873939146
+              },
+              "notes": [
+                "n=1:E_1=0.0942;delta=0.0374>0.03;rel=0.3971>0.375"
+              ]
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 2,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 2,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "closed_loop_quality": {
+            "status": "pending",
+            "rule": "Avg ≥ ref − 2.0 pp and every suite ≥ ref − 5.0 pp, same protocol and n"
+          }
+        },
+        "alpha": {
+          "screening_primary_nfe": 2,
+          "screening_abs_improve": 2,
+          "screening_rel_improve": 2,
+          "validation_three_rules_on_holdout": {
+            "E_on_selection": {
+              "1": 0.09419704027815778,
+              "2": 0.05678821501949409,
+              "3": 0.042000963873939146
+            },
+            "abs_0.085": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.09419704027815778,
+                "2": 0.05678821501949409,
+                "3": 0.042000963873939146
+              },
+              "notes": [
+                "n=1:E_1=0.0942"
+              ]
+            },
+            "abs_improve": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.09419704027815778,
+                "2": 0.05678821501949409,
+                "3": 0.042000963873939146
+              },
+              "notes": [
+                "n=1:delta=0.0374>0.03"
+              ]
+            },
+            "rel_improve": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.09419704027815778,
+                "2": 0.05678821501949409,
+                "3": 0.042000963873939146
+              },
+              "notes": [
+                "n=1:rel=0.3971>0.375"
+              ]
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.09419704027815778,
+                "2": 0.05678821501949409,
+                "3": 0.042000963873939146
+              },
+              "notes": [
+                "n=1:E_1=0.0942;delta=0.0374>0.03;rel=0.3971>0.375"
+              ]
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 2,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 2,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "closed_loop_quality": {
+            "status": "pending",
+            "rule": "Avg ≥ ref − 2.0 pp and every suite ≥ ref − 5.0 pp, same protocol and n"
+          }
+        },
+        "g_only": {
+          "screening_primary_nfe": 2,
+          "screening_abs_improve": 2,
+          "screening_rel_improve": 2,
+          "validation_three_rules_on_holdout": {
+            "E_on_selection": {
+              "1": 0.09419704027815778,
+              "2": 0.05678821501949409,
+              "3": 0.042000963873939146
+            },
+            "abs_0.085": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.09419704027815778,
+                "2": 0.05678821501949409,
+                "3": 0.042000963873939146
+              },
+              "notes": [
+                "n=1:E_1=0.0942"
+              ]
+            },
+            "abs_improve": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.09419704027815778,
+                "2": 0.05678821501949409,
+                "3": 0.042000963873939146
+              },
+              "notes": [
+                "n=1:delta=0.0374>0.03"
+              ]
+            },
+            "rel_improve": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.09419704027815778,
+                "2": 0.05678821501949409,
+                "3": 0.042000963873939146
+              },
+              "notes": [
+                "n=1:rel=0.3971>0.375"
+              ]
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.09419704027815778,
+                "2": 0.05678821501949409,
+                "3": 0.042000963873939146
+              },
+              "notes": [
+                "n=1:E_1=0.0942;delta=0.0374>0.03;rel=0.3971>0.375"
+              ]
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 2,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 2,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "closed_loop_quality": {
+            "status": "pending",
+            "rule": "Avg ≥ ref − 2.0 pp and every suite ≥ ref − 5.0 pp, same protocol and n"
+          }
+        },
+        "alpha_event": {
+          "screening_primary_nfe": 2,
+          "screening_abs_improve": 2,
+          "screening_rel_improve": 2,
+          "validation_three_rules_on_holdout": {
+            "E_on_selection": {
+              "1": 0.09419704027815778,
+              "2": 0.05678821501949409,
+              "3": 0.042000963873939146
+            },
+            "abs_0.085": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.09419704027815778,
+                "2": 0.05678821501949409,
+                "3": 0.042000963873939146
+              },
+              "notes": [
+                "n=1:E_1=0.0942"
+              ]
+            },
+            "abs_improve": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.09419704027815778,
+                "2": 0.05678821501949409,
+                "3": 0.042000963873939146
+              },
+              "notes": [
+                "n=1:delta=0.0374>0.03"
+              ]
+            },
+            "rel_improve": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.09419704027815778,
+                "2": 0.05678821501949409,
+                "3": 0.042000963873939146
+              },
+              "notes": [
+                "n=1:rel=0.3971>0.375"
+              ]
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.09419704027815778,
+                "2": 0.05678821501949409,
+                "3": 0.042000963873939146
+              },
+              "notes": [
+                "n=1:E_1=0.0942;delta=0.0374>0.03;rel=0.3971>0.375"
+              ]
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 2,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 2,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "closed_loop_quality": {
+            "status": "pending",
+            "rule": "Avg ≥ ref − 2.0 pp and every suite ≥ ref − 5.0 pp, same protocol and n"
+          }
+        }
+      }
+    },
+    "molmoact2": {
+      "status": "not_evaluated",
+      "reason": "dev_validation_probe pending"
+    }
+  }
+}

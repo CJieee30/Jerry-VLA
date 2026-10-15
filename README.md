@@ -179,7 +179,7 @@ RMSE 在策略归一化空间中计算；尾部界限来自各模型自身的原
 |---|---|---|
 | 1. 第一贡献结果规范化 | 对齐 checkpoint、算子版本、NFE、回合数、种子、层集合与效率范围；复用可比结果 | **完成（CPU）**：[结果清单](functional_necessity/results/registry/core_results_registry.md)；Molmo 历史算子版本仅为推断 |
 | 2. CARE_event 最小对照 | 同为每任务 3 个观测，比较随机、α、G-only、α_event；重复随机选样 | **完成（CPU）**：四组＋20 种子，见 `nfe_probe_event_care/budget_compare/` |
-| 3. 冻结规则的前瞻验证 | 在新验证结果揭晓前保存 NFE 推荐，再验证；补 MolmoAct2 探针 | **进行中**：[v0 协议草案](functional_necessity/results/registry/care_event_nfe_protocol.md)、分阶段入口和开发演练已完成，待审阅后冻结；新验证、新闭环和 Molmo 探针均未启动 |
+| 3. 冻结规则的前瞻验证 | 在新验证结果揭晓前保存 NFE 推荐，再验证；补 MolmoAct2 探针 | **收口（CPU，未正式 freeze）**：统一 EN 规则见 `nfe_en_metrics.py` + [冻结前报告](functional_necessity/results/stage2_care_v2/dev_nfe_rules_cpu_v2/PRE_FREEZE_REPORT.md)；入口 `nfe_protocol_v1.py`，待冻配置 `nfe_protocol_config.prospective_prefreeze.json`；E2E 演练 `nfe_protocol/dev_e2e_three_rules_v8/` |
 | 4. 联合配置验证 | 检查剪枝后低 NFE 风险，补最终实现对应的闭环缺口 | 历史四格已有大量结果，先核查再补跑 |
 | 5. 正式效率测量 | 独占 3090，多输入配对，报告 median/P95、FLOPs、实际参数与显存；纳入可用 Graph 基线 | 现有诊断不足以替代最终测量 |
 

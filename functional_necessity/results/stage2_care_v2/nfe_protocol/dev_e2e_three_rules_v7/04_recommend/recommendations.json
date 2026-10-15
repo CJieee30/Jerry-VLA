@@ -1,0 +1,1048 @@
+{
+  "mode": "dev",
+  "label": "DEV REHEARSAL",
+  "select_sha256": "d17b82cc65756a84303041378af975eb198e9a3d5242d22ec270f933e55ff4fc",
+  "models": {
+    "pi05": {
+      "status": "evaluated",
+      "available_candidates": [
+        1,
+        2
+      ],
+      "strategies": {
+        "random": {
+          "recommended_nfe": 1,
+          "recommended_nfe_abs_0.085": 1,
+          "recommended_nfe_abs_improve": 1,
+          "recommended_nfe_rel_improve": 1,
+          "recommended_nfe_joint_supplementary": 1,
+          "three_rules": {
+            "E_on_selection": {
+              "1": 0.060868970915047206,
+              "2": 0.0417262977073691
+            },
+            "abs_0.085": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.060868970915047206,
+                "2": 0.0417262977073691
+              },
+              "notes": []
+            },
+            "abs_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.060868970915047206,
+                "2": 0.0417262977073691
+              },
+              "notes": []
+            },
+            "rel_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.060868970915047206,
+                "2": 0.0417262977073691
+              },
+              "notes": []
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.060868970915047206,
+                "2": 0.0417262977073691
+              },
+              "notes": []
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "why": [],
+          "fallback": false,
+          "n_observations": 120,
+          "missing_candidates": [
+            3
+          ],
+          "diagnostics": {
+            "grip_rate_vs_ref_at_lowest_probed_nfe": 0.020833333333333332,
+            "floor_nfe10_two_noise_disagree_frac": 0.016666666666666666,
+            "floor_obs_with_disagreement": 2,
+            "n_comparisons": 120
+          },
+          "legacy_note": "primary recommended_nfe follows abs_0.085; old four-check gates removed",
+          "G1": 19
+        },
+        "alpha": {
+          "recommended_nfe": 1,
+          "recommended_nfe_abs_0.085": 1,
+          "recommended_nfe_abs_improve": 1,
+          "recommended_nfe_rel_improve": 1,
+          "recommended_nfe_joint_supplementary": 1,
+          "three_rules": {
+            "E_on_selection": {
+              "1": 0.07728455296962836,
+              "2": 0.050666948132937116
+            },
+            "abs_0.085": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.07728455296962836,
+                "2": 0.050666948132937116
+              },
+              "notes": []
+            },
+            "abs_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.07728455296962836,
+                "2": 0.050666948132937116
+              },
+              "notes": []
+            },
+            "rel_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.07728455296962836,
+                "2": 0.050666948132937116
+              },
+              "notes": []
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.07728455296962836,
+                "2": 0.050666948132937116
+              },
+              "notes": []
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "why": [],
+          "fallback": false,
+          "n_observations": 120,
+          "missing_candidates": [
+            3
+          ],
+          "diagnostics": {
+            "grip_rate_vs_ref_at_lowest_probed_nfe": 0.029166666666666667,
+            "floor_nfe10_two_noise_disagree_frac": 0.058333333333333334,
+            "floor_obs_with_disagreement": 7,
+            "n_comparisons": 120
+          },
+          "legacy_note": "primary recommended_nfe follows abs_0.085; old four-check gates removed",
+          "G1": 34
+        },
+        "g_only": {
+          "recommended_nfe": 1,
+          "recommended_nfe_abs_0.085": 1,
+          "recommended_nfe_abs_improve": 1,
+          "recommended_nfe_rel_improve": 1,
+          "recommended_nfe_joint_supplementary": 1,
+          "three_rules": {
+            "E_on_selection": {
+              "1": 0.06639558001093347,
+              "2": 0.04472049178597293
+            },
+            "abs_0.085": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.06639558001093347,
+                "2": 0.04472049178597293
+              },
+              "notes": []
+            },
+            "abs_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.06639558001093347,
+                "2": 0.04472049178597293
+              },
+              "notes": []
+            },
+            "rel_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.06639558001093347,
+                "2": 0.04472049178597293
+              },
+              "notes": []
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.06639558001093347,
+                "2": 0.04472049178597293
+              },
+              "notes": []
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "why": [],
+          "fallback": false,
+          "n_observations": 120,
+          "missing_candidates": [
+            3
+          ],
+          "diagnostics": {
+            "grip_rate_vs_ref_at_lowest_probed_nfe": 0.041666666666666664,
+            "floor_nfe10_two_noise_disagree_frac": 0.06666666666666667,
+            "floor_obs_with_disagreement": 8,
+            "n_comparisons": 120
+          },
+          "legacy_note": "primary recommended_nfe follows abs_0.085; old four-check gates removed",
+          "G1": 55
+        },
+        "alpha_event": {
+          "recommended_nfe": 1,
+          "recommended_nfe_abs_0.085": 1,
+          "recommended_nfe_abs_improve": 1,
+          "recommended_nfe_rel_improve": 1,
+          "recommended_nfe_joint_supplementary": 1,
+          "three_rules": {
+            "E_on_selection": {
+              "1": 0.07690370876626537,
+              "2": 0.050413378310981354
+            },
+            "abs_0.085": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.07690370876626537,
+                "2": 0.050413378310981354
+              },
+              "notes": []
+            },
+            "abs_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.07690370876626537,
+                "2": 0.050413378310981354
+              },
+              "notes": []
+            },
+            "rel_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.07690370876626537,
+                "2": 0.050413378310981354
+              },
+              "notes": []
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.07690370876626537,
+                "2": 0.050413378310981354
+              },
+              "notes": []
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "why": [],
+          "fallback": false,
+          "n_observations": 120,
+          "missing_candidates": [
+            3
+          ],
+          "diagnostics": {
+            "grip_rate_vs_ref_at_lowest_probed_nfe": 0.041666666666666664,
+            "floor_nfe10_two_noise_disagree_frac": 0.06666666666666667,
+            "floor_obs_with_disagreement": 8,
+            "n_comparisons": 120
+          },
+          "legacy_note": "primary recommended_nfe follows abs_0.085; old four-check gates removed",
+          "G1": 55
+        }
+      }
+    },
+    "smolvla": {
+      "status": "evaluated",
+      "available_candidates": [
+        1,
+        2,
+        3
+      ],
+      "strategies": {
+        "random": {
+          "recommended_nfe": 2,
+          "recommended_nfe_abs_0.085": 2,
+          "recommended_nfe_abs_improve": 2,
+          "recommended_nfe_rel_improve": 2,
+          "recommended_nfe_joint_supplementary": 2,
+          "three_rules": {
+            "E_on_selection": {
+              "1": 0.09805897601553289,
+              "2": 0.05697707062752502,
+              "3": 0.04104241777746339
+            },
+            "abs_0.085": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.09805897601553289,
+                "2": 0.05697707062752502,
+                "3": 0.04104241777746339
+              },
+              "notes": [
+                "n=1:E_1=0.0981"
+              ]
+            },
+            "abs_improve": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.09805897601553289,
+                "2": 0.05697707062752502,
+                "3": 0.04104241777746339
+              },
+              "notes": [
+                "n=1:delta=0.0411>0.03"
+              ]
+            },
+            "rel_improve": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.09805897601553289,
+                "2": 0.05697707062752502,
+                "3": 0.04104241777746339
+              },
+              "notes": [
+                "n=1:rel=0.4190>0.375"
+              ]
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.09805897601553289,
+                "2": 0.05697707062752502,
+                "3": 0.04104241777746339
+              },
+              "notes": [
+                "n=1:E_1=0.0981;delta=0.0411>0.03;rel=0.4190>0.375"
+              ]
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 2,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 2,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "why": [
+            "n=1:E_1=0.0981"
+          ],
+          "fallback": false,
+          "n_observations": 120,
+          "missing_candidates": [],
+          "diagnostics": {
+            "grip_rate_vs_ref_at_lowest_probed_nfe": 0.03333333333333333,
+            "floor_nfe10_two_noise_disagree_frac": 0.03333333333333333,
+            "floor_obs_with_disagreement": 4,
+            "n_comparisons": 120
+          },
+          "legacy_note": "primary recommended_nfe follows abs_0.085; old four-check gates removed",
+          "G1": 19
+        },
+        "alpha": {
+          "recommended_nfe": 2,
+          "recommended_nfe_abs_0.085": 2,
+          "recommended_nfe_abs_improve": 2,
+          "recommended_nfe_rel_improve": 2,
+          "recommended_nfe_joint_supplementary": 2,
+          "three_rules": {
+            "E_on_selection": {
+              "1": 0.11425569829029254,
+              "2": 0.06574364237663924,
+              "3": 0.04660746597079334
+            },
+            "abs_0.085": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.11425569829029254,
+                "2": 0.06574364237663924,
+                "3": 0.04660746597079334
+              },
+              "notes": [
+                "n=1:E_1=0.1143"
+              ]
+            },
+            "abs_improve": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.11425569829029254,
+                "2": 0.06574364237663924,
+                "3": 0.04660746597079334
+              },
+              "notes": [
+                "n=1:delta=0.0485>0.03"
+              ]
+            },
+            "rel_improve": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.11425569829029254,
+                "2": 0.06574364237663924,
+                "3": 0.04660746597079334
+              },
+              "notes": [
+                "n=1:rel=0.4246>0.375"
+              ]
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.11425569829029254,
+                "2": 0.06574364237663924,
+                "3": 0.04660746597079334
+              },
+              "notes": [
+                "n=1:E_1=0.1143;delta=0.0485>0.03;rel=0.4246>0.375"
+              ]
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 2,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 2,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "why": [
+            "n=1:E_1=0.1143"
+          ],
+          "fallback": false,
+          "n_observations": 120,
+          "missing_candidates": [],
+          "diagnostics": {
+            "grip_rate_vs_ref_at_lowest_probed_nfe": 0.04583333333333333,
+            "floor_nfe10_two_noise_disagree_frac": 0.058333333333333334,
+            "floor_obs_with_disagreement": 7,
+            "n_comparisons": 120
+          },
+          "legacy_note": "primary recommended_nfe follows abs_0.085; old four-check gates removed",
+          "G1": 34
+        },
+        "g_only": {
+          "recommended_nfe": 2,
+          "recommended_nfe_abs_0.085": 2,
+          "recommended_nfe_abs_improve": 2,
+          "recommended_nfe_rel_improve": 2,
+          "recommended_nfe_joint_supplementary": 2,
+          "three_rules": {
+            "E_on_selection": {
+              "1": 0.10390451862448691,
+              "2": 0.05943156673903099,
+              "3": 0.04259097635906038
+            },
+            "abs_0.085": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.10390451862448691,
+                "2": 0.05943156673903099,
+                "3": 0.04259097635906038
+              },
+              "notes": [
+                "n=1:E_1=0.1039"
+              ]
+            },
+            "abs_improve": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.10390451862448691,
+                "2": 0.05943156673903099,
+                "3": 0.04259097635906038
+              },
+              "notes": [
+                "n=1:delta=0.0445>0.03"
+              ]
+            },
+            "rel_improve": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.10390451862448691,
+                "2": 0.05943156673903099,
+                "3": 0.04259097635906038
+              },
+              "notes": [
+                "n=1:rel=0.4280>0.375"
+              ]
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.10390451862448691,
+                "2": 0.05943156673903099,
+                "3": 0.04259097635906038
+              },
+              "notes": [
+                "n=1:E_1=0.1039;delta=0.0445>0.03;rel=0.4280>0.375"
+              ]
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 2,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 2,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "why": [
+            "n=1:E_1=0.1039"
+          ],
+          "fallback": false,
+          "n_observations": 120,
+          "missing_candidates": [],
+          "diagnostics": {
+            "grip_rate_vs_ref_at_lowest_probed_nfe": 0.05416666666666667,
+            "floor_nfe10_two_noise_disagree_frac": 0.06666666666666667,
+            "floor_obs_with_disagreement": 8,
+            "n_comparisons": 120
+          },
+          "legacy_note": "primary recommended_nfe follows abs_0.085; old four-check gates removed",
+          "G1": 55
+        },
+        "alpha_event": {
+          "recommended_nfe": 2,
+          "recommended_nfe_abs_0.085": 2,
+          "recommended_nfe_abs_improve": 2,
+          "recommended_nfe_rel_improve": 2,
+          "recommended_nfe_joint_supplementary": 2,
+          "three_rules": {
+            "E_on_selection": {
+              "1": 0.1135588072084823,
+              "2": 0.06549821198558198,
+              "3": 0.04657673523788335
+            },
+            "abs_0.085": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.1135588072084823,
+                "2": 0.06549821198558198,
+                "3": 0.04657673523788335
+              },
+              "notes": [
+                "n=1:E_1=0.1136"
+              ]
+            },
+            "abs_improve": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.1135588072084823,
+                "2": 0.06549821198558198,
+                "3": 0.04657673523788335
+              },
+              "notes": [
+                "n=1:delta=0.0481>0.03"
+              ]
+            },
+            "rel_improve": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.1135588072084823,
+                "2": 0.06549821198558198,
+                "3": 0.04657673523788335
+              },
+              "notes": [
+                "n=1:rel=0.4232>0.375"
+              ]
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 2,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.1135588072084823,
+                "2": 0.06549821198558198,
+                "3": 0.04657673523788335
+              },
+              "notes": [
+                "n=1:E_1=0.1136;delta=0.0481>0.03;rel=0.4232>0.375"
+              ]
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 2,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 2,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "why": [
+            "n=1:E_1=0.1136"
+          ],
+          "fallback": false,
+          "n_observations": 120,
+          "missing_candidates": [],
+          "diagnostics": {
+            "grip_rate_vs_ref_at_lowest_probed_nfe": 0.058333333333333334,
+            "floor_nfe10_two_noise_disagree_frac": 0.06666666666666667,
+            "floor_obs_with_disagreement": 8,
+            "n_comparisons": 120
+          },
+          "legacy_note": "primary recommended_nfe follows abs_0.085; old four-check gates removed",
+          "G1": 55
+        }
+      }
+    },
+    "molmoact2": {
+      "status": "evaluated",
+      "available_candidates": [
+        1,
+        2,
+        3
+      ],
+      "strategies": {
+        "random": {
+          "recommended_nfe": 1,
+          "recommended_nfe_abs_0.085": 1,
+          "recommended_nfe_abs_improve": 1,
+          "recommended_nfe_rel_improve": 1,
+          "recommended_nfe_joint_supplementary": 1,
+          "three_rules": {
+            "E_on_selection": {
+              "1": 0.037696563113902765,
+              "2": 0.026024341647918496,
+              "3": 0.019894867395018636
+            },
+            "abs_0.085": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.037696563113902765,
+                "2": 0.026024341647918496,
+                "3": 0.019894867395018636
+              },
+              "notes": []
+            },
+            "abs_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.037696563113902765,
+                "2": 0.026024341647918496,
+                "3": 0.019894867395018636
+              },
+              "notes": []
+            },
+            "rel_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.037696563113902765,
+                "2": 0.026024341647918496,
+                "3": 0.019894867395018636
+              },
+              "notes": []
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.037696563113902765,
+                "2": 0.026024341647918496,
+                "3": 0.019894867395018636
+              },
+              "notes": []
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "why": [],
+          "fallback": false,
+          "n_observations": 120,
+          "missing_candidates": [],
+          "diagnostics": {
+            "grip_rate_vs_ref_at_lowest_probed_nfe": 0.0,
+            "floor_nfe10_two_noise_disagree_frac": 0.0,
+            "floor_obs_with_disagreement": 0,
+            "n_comparisons": 120
+          },
+          "legacy_note": "primary recommended_nfe follows abs_0.085; old four-check gates removed",
+          "G1": 19
+        },
+        "alpha": {
+          "recommended_nfe": 1,
+          "recommended_nfe_abs_0.085": 1,
+          "recommended_nfe_abs_improve": 1,
+          "recommended_nfe_rel_improve": 1,
+          "recommended_nfe_joint_supplementary": 1,
+          "three_rules": {
+            "E_on_selection": {
+              "1": 0.04404857514557111,
+              "2": 0.031624595102163866,
+              "3": 0.02451785210345559
+            },
+            "abs_0.085": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.04404857514557111,
+                "2": 0.031624595102163866,
+                "3": 0.02451785210345559
+              },
+              "notes": []
+            },
+            "abs_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.04404857514557111,
+                "2": 0.031624595102163866,
+                "3": 0.02451785210345559
+              },
+              "notes": []
+            },
+            "rel_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.04404857514557111,
+                "2": 0.031624595102163866,
+                "3": 0.02451785210345559
+              },
+              "notes": []
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.04404857514557111,
+                "2": 0.031624595102163866,
+                "3": 0.02451785210345559
+              },
+              "notes": []
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "why": [],
+          "fallback": false,
+          "n_observations": 120,
+          "missing_candidates": [],
+          "diagnostics": {
+            "grip_rate_vs_ref_at_lowest_probed_nfe": 0.004166666666666667,
+            "floor_nfe10_two_noise_disagree_frac": 0.008333333333333333,
+            "floor_obs_with_disagreement": 1,
+            "n_comparisons": 120
+          },
+          "legacy_note": "primary recommended_nfe follows abs_0.085; old four-check gates removed",
+          "G1": 34
+        },
+        "g_only": {
+          "recommended_nfe": 1,
+          "recommended_nfe_abs_0.085": 1,
+          "recommended_nfe_abs_improve": 1,
+          "recommended_nfe_rel_improve": 1,
+          "recommended_nfe_joint_supplementary": 1,
+          "three_rules": {
+            "E_on_selection": {
+              "1": 0.037160759034350045,
+              "2": 0.02727218430614729,
+              "3": 0.020775810418688503
+            },
+            "abs_0.085": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.037160759034350045,
+                "2": 0.02727218430614729,
+                "3": 0.020775810418688503
+              },
+              "notes": []
+            },
+            "abs_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.037160759034350045,
+                "2": 0.02727218430614729,
+                "3": 0.020775810418688503
+              },
+              "notes": []
+            },
+            "rel_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.037160759034350045,
+                "2": 0.02727218430614729,
+                "3": 0.020775810418688503
+              },
+              "notes": []
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.037160759034350045,
+                "2": 0.02727218430614729,
+                "3": 0.020775810418688503
+              },
+              "notes": []
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "why": [],
+          "fallback": false,
+          "n_observations": 120,
+          "missing_candidates": [],
+          "diagnostics": {
+            "grip_rate_vs_ref_at_lowest_probed_nfe": 0.004166666666666667,
+            "floor_nfe10_two_noise_disagree_frac": 0.008333333333333333,
+            "floor_obs_with_disagreement": 1,
+            "n_comparisons": 120
+          },
+          "legacy_note": "primary recommended_nfe follows abs_0.085; old four-check gates removed",
+          "G1": 55
+        },
+        "alpha_event": {
+          "recommended_nfe": 1,
+          "recommended_nfe_abs_0.085": 1,
+          "recommended_nfe_abs_improve": 1,
+          "recommended_nfe_rel_improve": 1,
+          "recommended_nfe_joint_supplementary": 1,
+          "three_rules": {
+            "E_on_selection": {
+              "1": 0.042772665228517456,
+              "2": 0.030811822182780817,
+              "3": 0.023698747833738487
+            },
+            "abs_0.085": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs",
+              "E": {
+                "1": 0.042772665228517456,
+                "2": 0.030811822182780817,
+                "3": 0.023698747833738487
+              },
+              "notes": []
+            },
+            "abs_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "abs_improve",
+              "E": {
+                "1": 0.042772665228517456,
+                "2": 0.030811822182780817,
+                "3": 0.023698747833738487
+              },
+              "notes": []
+            },
+            "rel_improve": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "rel_improve",
+              "E": {
+                "1": 0.042772665228517456,
+                "2": 0.030811822182780817,
+                "3": 0.023698747833738487
+              },
+              "notes": []
+            },
+            "joint_supplementary": {
+              "recommended_nfe": 1,
+              "fallback": false,
+              "rule": "joint",
+              "E": {
+                "1": 0.042772665228517456,
+                "2": 0.030811822182780817,
+                "3": 0.023698747833738487
+              },
+              "notes": []
+            },
+            "sensitivity_abs": {
+              "0.08": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.08
+              },
+              "0.09": {
+                "recommended_nfe": 1,
+                "fallback": false,
+                "tau": 0.09
+              }
+            }
+          },
+          "why": [],
+          "fallback": false,
+          "n_observations": 120,
+          "missing_candidates": [],
+          "diagnostics": {
+            "grip_rate_vs_ref_at_lowest_probed_nfe": 0.004166666666666667,
+            "floor_nfe10_two_noise_disagree_frac": 0.008333333333333333,
+            "floor_obs_with_disagreement": 1,
+            "n_comparisons": 120
+          },
+          "legacy_note": "primary recommended_nfe follows abs_0.085; old four-check gates removed",
+          "G1": 55
+        }
+      }
+    }
+  }
+}

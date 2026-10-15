@@ -38,6 +38,7 @@ import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "pi05_libero"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "molmoact2_libero"))
 
 from dump_shared import _episodes, _load_actions, _window_d, _whitening_std  # noqa: E402
 from event_care_nfe_diagnostic import (  # noqa: E402
@@ -52,6 +53,8 @@ from protocol import ACTION_DIM, FN_ROOT, HORIZON, LIBERO_REPO, MOLMO_REPO, N_TA
 SCRIPT_DIR = Path(__file__).resolve().parent
 CODE_FILES = (
     "nfe_protocol_v1.py",
+    "nfe_en_metrics.py",
+    "dev_metrics_common.py",
     "event_care_nfe_diagnostic.py",
     "dump_shared.py",
     "protocol.py",
@@ -466,7 +469,8 @@ def budget(cfg: dict, sizes: dict[str, int], n_union: int, n_pool: int) -> dict:
     for model, mc in cfg["models"].items():
         if mc.get("adapter") == "unavailable":
             continue
-        cands = [n for n in rule["candidates"] if n in mc["probe_nfes"]]
+        pn = mc.get("probe_nfes", rule["candidates"])
+        cands = [n for n in rule["candidates"] if n in pn]
         nfes = cands + [rule["reference_nfe"]]
         per_obs_chunks = n_noise * len(nfes)
         per_obs_vel = n_noise * sum(nfes)
@@ -621,6 +625,9 @@ def _import(run: Run, model: str, probe_dir: Path, req: dict, rel: str, stage: s
         if not np.isfinite(arr).all():
             raise SystemExit(f"nfe{n_} contains non-finite values")
     acts = {f"nfe{n_}": z[f"nfe{n_}"] for n_ in nfes}
+    from nfe_en_metrics import validate_action_arrays
+
+    validate_action_arrays(acts, nfes, n, n_noise=len(run.cfg["rule"]["noise_ids"]))
     pool_index = np.asarray([r.get("pool_index", r.get("validation_index", -1)) for r in req["records"]])
     ep = np.asarray([r["episode_index"] for r in req["records"]])
     digest = _seal(model, acts, g, pool_index, ep, mc, run.dir / rel)
@@ -635,8 +642,8 @@ def _import(run: Run, model: str, probe_dir: Path, req: dict, rel: str, stage: s
 def per_obs(z: dict, nfe: int, rule: dict, model: str, mc: dict) -> dict[str, np.ndarray]:
     """Observation-level quantities; both noises of one observation stay together."""
     a, ref = z[f"nfe{nfe}"].astype(np.float64), z[f"nfe{rule['reference_nfe']}"].astype(np.float64)
-    arm = rule["arm_dims"]
-    sev = int(rule["grip_severe_steps"])
+    arm = rule.get("arm_dims", [0, 1, 2, 3, 4, 5])
+    sev = int(rule.get("grip_severe_steps", 3))
 
     def closed(x):
         return grip_closed(model, mc, x)
@@ -648,8 +655,8 @@ def per_obs(z: dict, nfe: int, rule: dict, model: str, mc: dict) -> dict[str, np
 
 def floor_obs(z: dict, rule: dict, model: str, mc: dict) -> dict[str, np.ndarray]:
     ref = z[f"nfe{rule['reference_nfe']}"].astype(np.float64)
-    arm = rule["arm_dims"]
-    sev = int(rule["grip_severe_steps"])
+    arm = rule.get("arm_dims", [0, 1, 2, 3, 4, 5])
+    sev = int(rule.get("grip_severe_steps", 3))
     f = np.sqrt(((ref[:, 0] - ref[:, 1])[..., arm] ** 2).mean(axis=(1, 2)))
     c0, c1 = grip_closed(model, mc, ref[:, 0]), grip_closed(model, mc, ref[:, 1])
     dis = (c0 != c1).sum(axis=1)
@@ -720,44 +727,34 @@ REASON = {
 
 
 def recommend_one(z: dict, idx: np.ndarray, rule: dict, avail: list[int], boot: dict, model: str, mc: dict) -> dict:
+    from nfe_en_metrics import REF_NFE, recommend_three_rules
+
+    acts = {k: z[k] for k in z if k.startswith("nfe")}
+    cands = sorted(n for n in rule["candidates"] if n in avail)
+    missing = [n for n in rule["candidates"] if n not in avail]
+    tr = recommend_three_rules(model, acts, cands, idx, fallback=int(rule.get("fallback_nfe", REF_NFE)))
     fl = floor_obs(z, rule, model, mc)
-    floor_med = float(np.median(fl["f"][idx]))
-    rows = []
-    for n in rule["candidates"]:
-        if n not in avail:
-            rows.append({"nfe": n, "status": "not_evaluable", "reasons": ["no probe output for this NFE"]})
-            continue
-        o = per_obs(z, n, rule, model, mc)
-        s = stats(o, fl, idx, rule)
-        c = checks(s, rule)
-        ci = cluster_ci(o, fl, idx, z["episode_index"], rule, int(boot["B"]), int(boot["seed"]))
-        rows.append({"nfe": n, "status": "pass" if all(c.values()) else "reject", "checks": c, "stats": s, "ci95": ci,
-                     "reasons": [REASON[k] for k, ok in c.items() if not ok]})
-    degenerate = floor_med < float(rule["floor_degenerate_median"])
-    passing = [r["nfe"] for r in rows if r["status"] == "pass"]
-    unevaluable_below = []
-    rec, why = rule["fallback_nfe"], "no candidate passed"
-    if degenerate:
-        why = f"floor median {floor_med:.2e} < {rule['floor_degenerate_median']}; stochastic floor unusable"
-    else:
-        for r in rows:
-            if r["status"] == "not_evaluable":
-                unevaluable_below.append(r["nfe"])
-                continue
-            if r["status"] == "pass":
-                rec, why = r["nfe"], "lowest passing candidate"
-                break
-    larger_fail = [r["nfe"] for r in rows if r["status"] == "reject" and r["nfe"] > rec] if rec != rule["fallback_nfe"] else []
+    grip_vs_ref = float(per_obs(z, cands[0], rule, model, mc)["k"][idx].mean()) if cands else float("nan")
+    diag = {
+        "grip_rate_vs_ref_at_lowest_probed_nfe": grip_vs_ref,
+        "floor_nfe10_two_noise_disagree_frac": float(fl["h"][idx].mean()),
+        "floor_obs_with_disagreement": int((fl["dis_steps"][idx] > 0).sum()),
+        "n_comparisons": int(idx.size),
+    }
+    primary = tr["abs_0.085"]
     return {
-        "recommended_nfe": rec,
-        "why": why,
-        "fallback": rec == rule["fallback_nfe"],
-        "floor_degenerate": degenerate,
-        "floor_median": floor_med,
+        "recommended_nfe": primary["recommended_nfe"],
+        "recommended_nfe_abs_0.085": primary["recommended_nfe"],
+        "recommended_nfe_abs_improve": tr["abs_improve"]["recommended_nfe"],
+        "recommended_nfe_rel_improve": tr["rel_improve"]["recommended_nfe"],
+        "recommended_nfe_joint_supplementary": tr["joint_supplementary"]["recommended_nfe"],
+        "three_rules": tr,
+        "why": primary.get("notes", []),
+        "fallback": primary["fallback"],
         "n_observations": int(idx.size),
-        "skipped_unevaluable_below": unevaluable_below,
-        "non_monotone_larger_rejected": larger_fail,
-        "candidates": rows,
+        "missing_candidates": missing,
+        "diagnostics": diag,
+        "legacy_note": "primary recommended_nfe follows abs_0.085; old four-check gates removed",
     }
 
 
@@ -805,29 +802,30 @@ def _fmt_ci(ci: list[float]) -> str:
 
 
 def render_recommend(out: dict, rule: dict) -> str:
-    lines = [f"# NFE recommendation — {out['label']}", "",
-             "Screening metrics on selected observations. Event-enriched rates are stress-test rates, not deployment rates.", "",
-             "| model | strategy | G=1 | rec. NFE | NFE | status | arm med ratio | arm P95 ratio | grip dev / floor (comparisons) | severe dev / floor | reasons |",
-             "|---|---|---|---|---|---|---|---|---|---|---|"]
+    lines = [
+        f"# NFE recommendation — {out['label']}",
+        "",
+        "Development evidence. Primary `recommended_nfe` = abs E_N≤0.085. Three rules reported independently.",
+        "",
+        "| model | strategy | G=1 | abs≤0.085 | abs improve | rel improve | joint (supp.) | primary |",
+        "|---|---|---|---|---|---|---|---|",
+    ]
     for model, m in out["models"].items():
         if m["status"] != "evaluated":
-            lines.append(f"| {model} | — | — | — | — | not evaluated | | | | | {m['reason']} |")
+            lines.append(f"| {model} | — | — | — | — | — | — | not evaluated: {m.get('reason', '')} |")
             continue
         for strat, r in m["strategies"].items():
-            for c in r["candidates"]:
-                if c["status"] == "not_evaluable":
-                    lines.append(f"| {model} | {strat} | {r['G1']} | {r['recommended_nfe']} | {c['nfe']} | not evaluable | | | | | {'; '.join(c['reasons'])} |")
-                    continue
-                s = c["stats"]
-                lines.append(
-                    f"| {model} | {strat} | {r['G1']} | {r['recommended_nfe']} | {c['nfe']} | {c['status']} | "
-                    f"{s['ratio_median']:.2f} {_fmt_ci(c['ci95']['ratio_median'])} | {s['ratio_q']:.2f} {_fmt_ci(c['ci95']['ratio_q'])} | "
-                    f"{s['grip_comparisons_with_disagreement']}/{s['grip_comparisons']} vs {s['floor_obs_with_disagreement']}/{r['n_observations']} | "
-                    f"{s['severe_rate']:.3f} vs {s['floor_severe_rate']:.3f} | {'; '.join(c['reasons']) or '—'} |"
-                )
-    lines += ["", f"Rule: candidates {rule['candidates']}, reference NFE {rule['reference_nfe']}, fallback {rule['fallback_nfe']}; "
-              f"arm ratio ≤ {rule['arm_ratio_median']} (median) and ≤ {rule['arm_ratio_tail']} (P{int(rule['arm_quantile']*100)}); "
-              f"gripper rate diff ≤ {rule['grip_rate_margin']}; severe (≥{rule['grip_severe_steps']} steps) diff ≤ {rule['grip_severe_margin']}.", ""]
+            lines.append(
+                f"| {model} | {strat} | {r['G1']} | {r.get('recommended_nfe_abs_0.085', r['recommended_nfe'])} | "
+                f"{r.get('recommended_nfe_abs_improve')} | {r.get('recommended_nfe_rel_improve')} | "
+                f"{r.get('recommended_nfe_joint_supplementary')} | {r['recommended_nfe']} |"
+            )
+    lines += [
+        "",
+        f"Candidates {rule['candidates']}, reference NFE {rule['reference_nfe']}, fallback {rule['fallback_nfe']}. "
+        "Metrics: `nfe_en_metrics` (LIBERO norm, H=10, 7-d, mean over obs×noise).",
+        "",
+    ]
     return "\n".join(lines)
 
 
@@ -901,6 +899,9 @@ def stage_validate(run: Run) -> None:
         if rec["models"].get(model, {}).get("status") != "evaluated":
             out["models"][model] = {"status": "not_evaluated"}
             continue
+        if run.mode == "dev" and str(mc.get("dev_validation_probe", "")).lower() == "pending":
+            out["models"][model] = {"status": "not_evaluated", "reason": "dev_validation_probe pending"}
+            continue
         if run.mode == "dev":
             z = dev_validation_sealed(run, model, mc)
             source = str(resolve(mc["dev_validation_probe"]))
@@ -914,31 +915,34 @@ def stage_validate(run: Run) -> None:
             z = load_sealed(run.dir / rel)
             source = rel
         idx = np.arange(len(z["global_index"]))
+        acts = {k: z[k] for k in z if k.startswith("nfe")}
+        avail = sorted(n for n in rule["candidates"] if f"nfe{n}" in acts)
+        from nfe_en_metrics import recommend_three_rules
+
+        val_rules = recommend_three_rules(model, acts, avail, idx, fallback=int(rule["fallback_nfe"]))
         fl = floor_obs(z, rule, model, mc)
-        per_nfe = {}
-        for n in rule["candidates"]:
-            if f"nfe{n}" not in z:
-                per_nfe[n] = {"status": "not_evaluable"}
-                continue
-            o = per_obs(z, n, rule, model, mc)
-            s = stats(o, fl, idx, rule)
-            c = checks(s, rule)
-            ci = cluster_ci(o, fl, idx, z["episode_index"], rule, int(run.cfg["bootstrap"]["B"]), int(run.cfg["bootstrap"]["seed"]))
-            per_nfe[n] = {"status": "pass" if all(c.values()) else "fail", "checks": c, "stats": s, "ci95": ci}
+        diag = {
+            "floor_nfe10_two_noise_disagree_frac": float(fl["h"][idx].mean()),
+            "floor_obs_with_disagreement": int((fl["dis_steps"][idx] > 0).sum()),
+        }
         verdict = {}
         for strat, r in rec["models"][model]["strategies"].items():
             n_star = r["recommended_nfe"]
-            if n_star == rule["fallback_nfe"]:
-                offline = {"status": "reference", "note": "fallback NFE is the reference itself"}
-            else:
-                offline = {"status": per_nfe[n_star]["status"], "failed": [k for k, ok in per_nfe[n_star]["checks"].items() if not ok]}
-            rejected_but_pass = [c["nfe"] for c in r["candidates"] if c["status"] == "reject" and per_nfe.get(c["nfe"], {}).get("status") == "pass"]
-            verdict[strat] = {"recommended_nfe": n_star, "offline_quality": offline,
-                              "closed_loop_quality": closed_loop_check(run, vq, rule, model, n_star),
-                              "rejected_in_screening_but_pass_validation": rejected_but_pass}
-        out["models"][model] = {"status": "evaluated", "source": source, "n_observations": int(idx.size),
-                                "n_episodes": int(np.unique(z["episode_index"]).size), "per_nfe": {str(k): v for k, v in per_nfe.items()},
-                                "strategies": verdict}
+            verdict[strat] = {
+                "screening_primary_nfe": n_star,
+                "screening_abs_improve": r.get("recommended_nfe_abs_improve"),
+                "screening_rel_improve": r.get("recommended_nfe_rel_improve"),
+                "validation_three_rules_on_holdout": val_rules,
+                "closed_loop_quality": closed_loop_check(run, vq, rule, model, n_star),
+            }
+        out["models"][model] = {
+            "status": "evaluated",
+            "source": source,
+            "n_observations": int(idx.size),
+            "n_episodes": int(np.unique(z["episode_index"]).size),
+            "diagnostics": diag,
+            "strategies": verdict,
+        }
     d = run.dir / "06_validate"
     digest = write_json(d / "validation.json", out)
     (d / "VALIDATE.md").write_text(render_validate(out))
@@ -1016,28 +1020,35 @@ def closed_loop_check(run: Run, vq: dict, rule: dict, model: str, n_star: int) -
 
 
 def render_validate(out: dict) -> str:
-    lines = [f"# Independent-set quality conditions — {out['label']}", "",
-             "Uniform (non-enriched) observations; observation = episode cluster for CIs.", "",
-             "| model | NFE | status | arm med ratio | arm P95 ratio | grip rate vs floor | severe vs floor |", "|---|---|---|---|---|---|---|"]
+    lines = [
+        f"# Validation (holdout) — {out['label']}",
+        "",
+        "Holdout three-rule EN metrics (independent of screening selection). Closed-loop column uses import if present.",
+        "",
+        "| model | status | n_obs | holdout abs | holdout abs_imp | holdout rel |",
+        "|---|---|---|---|---|---|",
+    ]
     for model, m in out["models"].items():
         if m["status"] != "evaluated":
+            lines.append(f"| {model} | {m.get('reason', m['status'])} | — | — | — | — |")
             continue
-        for n, r in m["per_nfe"].items():
-            if r["status"] == "not_evaluable":
-                lines.append(f"| {model} | {n} | not evaluable | | | | |")
-                continue
-            s, ci = r["stats"], r["ci95"]
-            lines.append(f"| {model} | {n} | {r['status']} | {s['ratio_median']:.2f} {_fmt_ci(ci['ratio_median'])} | "
-                         f"{s['ratio_q']:.2f} {_fmt_ci(ci['ratio_q'])} | {s['grip_rate']:.3f} vs {s['floor_grip_rate']:.3f} | "
-                         f"{s['severe_rate']:.3f} vs {s['floor_severe_rate']:.3f} |")
-    lines += ["", "| model | strategy | rec. NFE | offline quality | closed loop | rejected but pass on validation |", "|---|---|---|---|---|---|"]
+        vr = m.get("strategies", {}).get("random", {}).get("validation_three_rules_on_holdout", {})
+        if not vr:
+            vr = next(iter(m["strategies"].values())).get("validation_three_rules_on_holdout", {})
+        lines.append(
+            f"| {model} | evaluated | {m['n_observations']} | "
+            f"{vr.get('abs_0.085', {}).get('recommended_nfe', '—')} | "
+            f"{vr.get('abs_improve', {}).get('recommended_nfe', '—')} | "
+            f"{vr.get('rel_improve', {}).get('recommended_nfe', '—')} |"
+        )
+    lines += ["", "| model | strategy | screening primary | closed loop |", "|---|---|---|---|"]
     for model, m in out["models"].items():
         if m["status"] != "evaluated":
             continue
         for strat, v in m["strategies"].items():
-            off = v["offline_quality"]
-            lines.append(f"| {model} | {strat} | {v['recommended_nfe']} | {off['status']}{' ' + ','.join(off.get('failed', [])) if off.get('failed') else ''} | "
-                         f"{v['closed_loop_quality']['status']} | {v['rejected_in_screening_but_pass_validation'] or '—'} |")
+            lines.append(
+                f"| {model} | {strat} | {v['screening_primary_nfe']} | {v['closed_loop_quality']['status']} |"
+            )
     return "\n".join(lines) + "\n"
 
 
@@ -1074,6 +1085,8 @@ def main() -> None:
     if a.draft and a.stage not in ("split", "select", "probe-plan"):
         raise SystemExit("--draft only allowed for split, select, probe-plan")
     run = Run(a.config, draft=a.draft)
+    if a.force_restage and "DRAFT" not in run.cfg["run_name"]:
+        raise SystemExit("--force-restage is only allowed when run_name contains DRAFT")
     if a.force_restage:
         _orig_append = run.append
         _orig_guard = guard_restage

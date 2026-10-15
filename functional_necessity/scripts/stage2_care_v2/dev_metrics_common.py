@@ -52,17 +52,27 @@ def molmo_quantile_stats() -> tuple[np.ndarray, np.ndarray, np.ndarray]:
 
 
 def native_to_physical(model: str, x: np.ndarray) -> np.ndarray:
-    """x: (10, 7) policy output before env postprocessor."""
+    """Policy output before env postprocessor; supports (10,7) or batch (..., 10, 7)."""
+    x = np.asarray(x, dtype=np.float64)
+    was_2d = x.ndim == 2
+    if was_2d:
+        x = x[np.newaxis, ...]
+    if x.shape[-1] != ACTION_DIM:
+        raise ValueError(f"expected last dim {ACTION_DIM}, got {x.shape}")
+    lead = x.shape[:-2]
+    flat = x.reshape(-1, x.shape[-2], x.shape[-1])
     mean, std = libero_mean_std()
     if model in ("pi05", "smolvla"):
-        return x.astype(np.float64) * std + mean
-    q01, q99, mask = molmo_quantile_stats()
-    span = np.maximum(q99 - q01, 1e-8)
-    out = x.astype(np.float64).copy()
-    m = mask > 0.5
-    out[:, m] = (x[:, m] + 1.0) * 0.5 * span[m] + q01[m]
-    out[:, ~m] = x[:, ~m]
-    return out
+        phys = flat * std + mean
+    else:
+        q01, q99, mask = molmo_quantile_stats()
+        span = np.maximum(q99 - q01, 1e-8)
+        phys = flat.copy()
+        m = mask > 0.5
+        phys[:, :, m] = (flat[:, :, m] + 1.0) * 0.5 * span[m] + q01[m]
+        phys[:, :, ~m] = flat[:, :, ~m]
+    out = phys.reshape(lead + (x.shape[-2], x.shape[-1]))
+    return out[0] if was_2d else out
 
 
 def to_libero_normalized(phys: np.ndarray, mean: np.ndarray, std: np.ndarray) -> np.ndarray:

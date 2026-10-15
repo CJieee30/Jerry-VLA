@@ -18,7 +18,8 @@
 - 按 NFE 表：`REPORT.md`、`strategy_nfe_table.csv`
 - 阈值候选（开发）：`THRESHOLD_CANDIDATES.md` — **非已验证通用规则**
 - 待决：`FREEZE_REMAINING.md`
-- 本轮 CPU 三规则对照：`results/stage2_care_v2/dev_nfe_rules_cpu_v2/REPORT.md`（开发结果）
+- 冻结前收口：`results/stage2_care_v2/dev_nfe_rules_cpu_v2/PRE_FREEZE_REPORT.md`（`nfe_en_metrics` 统一口径）
+- E2E 演练：`nfe_protocol/dev_e2e_three_rules_v8/`（开发证据）
 
 ```bash
 $PY scripts/stage2_care_v2/nfe_protocol_v1.py --config $C verify-ledger

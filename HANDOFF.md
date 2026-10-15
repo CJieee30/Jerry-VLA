@@ -17,8 +17,9 @@
 **进度（2026-10-15）：**
 
 - **已完成（CPU）**：结果规范化（`results/registry/core_results_registry.md`）；G-only 和 20 种子随机对照。
-- **已有草案，未冻结**：NFE 推荐协议 v0（`results/registry/care_event_nfe_protocol.md`）、分阶段入口 `scripts/stage2_care_v2/nfe_protocol.py`、开发演练 `results/stage2_care_v2/nfe_protocol/dev_rehearsal_v1/`。
-- **下一步**：顾问审阅 §8 待决项，然后冻结并执行前瞻划分、探针和验证；Molmo 先满足 M1–M4 冻结前提。
+- **已有草案，未冻结**：NFE 协议 v0 文档（`results/registry/care_event_nfe_protocol.md`）；实现以 **`nfe_protocol_v1.py` + `nfe_en_metrics.py`** 为准（主规则 E_N≤0.085，两改善规则独立对照）。
+- **冻结前收口（2026-10-15 CPU）**：`dev_nfe_rules_cpu_v2/`（`three_rule_budget_table.csv`、`PRE_FREEZE_REPORT.md`、`FREEZE_BLOCKERS.md`）；E2E `nfe_protocol/dev_e2e_three_rules_v8/`；前瞻模板 `nfe_protocol_config.prospective_prefreeze.json`。
+- **下一步**：顾问审阅后执行 `prospective_prefreeze_v1` 的 `freeze`（本轮未做）；再 split / 前瞻探针 / 闭环导入。
 
 不要先重跑整套层剪枝，不要开始训练。
 

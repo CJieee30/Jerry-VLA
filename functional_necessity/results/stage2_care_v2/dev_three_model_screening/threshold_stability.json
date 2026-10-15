@@ -1,58 +1,63 @@
 {
   "status": "dev_candidate_only",
   "units": {
-    "rmse7": "LIBERO-normalized 7-d vs NFE10 (median over comparison rows in selection)",
-    "rmse6": "LIBERO-normalized 6-d arm vs NFE10 (median over comparison rows)",
-    "rmse6_obs_p95": "merged per-obs arm scalar (2-noise RMS of rmse6 rows), P95 over selection"
+    "rmse7": "LIBERO-normalized 7-d vs NFE10 (per comparison row median)",
+    "rmse6": "LIBERO-normalized 6-d arm vs NFE10",
+    "rmse6_obs_p95": "per-obs pooled 2\u00d710\u00d76 arm RMSE, then P95 over selection"
   },
-  "cosine": "auxiliary only",
+  "cosine": "auxiliary only (not used in pass/fail here)",
   "models": {
     "pi05": {
       "floor_pool_medians": {
         "1": {
-          "rmse7_median": 0.0507272903007218,
-          "rmse6_median": 0.05393654848313725
+          "rmse7_median": 0.050727290300721824,
+          "rmse6_median": 0.05393654848313727,
+          "cos_median": 0.9985843691335219
         },
         "2": {
           "rmse7_median": 0.0368207111674638,
-          "rmse6_median": 0.03929887777569205
+          "rmse6_median": 0.039298877775692145,
+          "cos_median": 0.9992394216624525
         }
-      },
-      "pool_arm_obs_p95_nfe1": 0.12376530323918145
+      }
     },
     "smolvla": {
       "floor_pool_medians": {
         "1": {
-          "rmse7_median": 0.08769881726064735,
-          "rmse6_median": 0.09098689067835965
+          "rmse7_median": 0.08769881726064743,
+          "rmse6_median": 0.09098689067835973,
+          "cos_median": 0.9959945057833368
         },
         "2": {
-          "rmse7_median": 0.05201325449126955,
-          "rmse6_median": 0.05522844021374965
+          "rmse7_median": 0.0520132544912696,
+          "rmse6_median": 0.05522844021374971,
+          "cos_median": 0.9985293158801813
         },
         "3": {
-          "rmse7_median": 0.0384611179551881,
-          "rmse6_median": 0.041200447742233595
+          "rmse7_median": 0.03846111795518814,
+          "rmse6_median": 0.04120044774223364,
+          "cos_median": 0.9991900358105338
         }
-      },
-      "pool_arm_obs_p95_nfe1": 0.1554728388432827
+      }
     },
     "molmoact2": {
       "floor_pool_medians": {
         "1": {
-          "rmse7_median": 0.03188305475994595,
-          "rmse6_median": 0.03415277840233365
+          "rmse7_median": 0.03188305475994602,
+          "rmse6_median": 0.03415277840233369,
+          "cos_median": 0.9994371092624503
         },
         "2": {
-          "rmse7_median": 0.02215805506768455,
-          "rmse6_median": 0.023808376537116302
+          "rmse7_median": 0.022158055067684614,
+          "rmse6_median": 0.02380837653711636,
+          "cos_median": 0.9997291451832954
         },
         "3": {
-          "rmse7_median": 0.017326268406006,
-          "rmse6_median": 0.0186318699068012
+          "rmse7_median": 0.017326268406006033,
+          "rmse6_median": 0.018631869906801234,
+          "cos_median": 0.9998319744775552
         }
-      },
-      "pool_arm_obs_p95_nfe1": 0.06055010219415111
+      }
     }
   },
   "stability": {
@@ -77,6 +82,21 @@
           "1": 2,
           "2": 2,
           "10": 16
+        }
+      },
+      "episode_bootstrap_example": {
+        "ratio_rmse6_median_le_1": {
+          "B": 200,
+          "n_episodes": 120,
+          "recommendation_hist": {
+            "1": 3,
+            "2": 7,
+            "10": 190
+          },
+          "ci90_recommendation": [
+            9,
+            10
+          ]
         }
       }
     },
@@ -123,6 +143,21 @@
           "2": 6,
           "3": 2,
           "10": 12
+        }
+      },
+      "episode_bootstrap_example": {
+        "ratio_rmse6_median_le_1": {
+          "B": 200,
+          "n_episodes": 120,
+          "recommendation_hist": {
+            "2": 16,
+            "3": 34,
+            "10": 150
+          },
+          "ci90_recommendation": [
+            2,
+            10
+          ]
         }
       }
     },
@@ -171,6 +206,22 @@
           "1": 7,
           "2": 5,
           "3": 8
+        }
+      },
+      "episode_bootstrap_example": {
+        "ratio_rmse6_median_le_1": {
+          "B": 200,
+          "n_episodes": 120,
+          "recommendation_hist": {
+            "1": 66,
+            "2": 25,
+            "3": 45,
+            "10": 64
+          },
+          "ci90_recommendation": [
+            1,
+            10
+          ]
         }
       }
     },
