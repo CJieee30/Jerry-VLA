@@ -501,8 +501,11 @@ def _select_tail_nfe1_plots(
 
 def archive_stale_tail_curves(model: str) -> list[str]:
     """Move previous tail_nfe1 PNGs aside so reports do not reference false tails."""
+    from datetime import datetime, timezone
+
     curves_dir = PHASE2_DIR / "curves" / model
-    backup = PHASE2_DIR / "curves" / "_backup_pre_plotfix" / model
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    backup = PHASE2_DIR / "curves" / "_backup_pre_plotfix" / stamp / model
     backup.mkdir(parents=True, exist_ok=True)
     moved: list[str] = []
     if not curves_dir.is_dir():
@@ -510,7 +513,10 @@ def archive_stale_tail_curves(model: str) -> list[str]:
     for p in sorted(curves_dir.glob("holdout_*_tail_nfe1.png")):
         dest = backup / p.name
         if dest.is_file():
-            dest.unlink()
+            n = 1
+            while dest.is_file():
+                dest = backup / f"{p.stem}_{n}{p.suffix}"
+                n += 1
         p.rename(dest)
         moved.append(str(dest.relative_to(PHASE2_DIR)))
     return moved

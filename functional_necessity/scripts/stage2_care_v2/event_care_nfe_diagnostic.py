@@ -200,16 +200,37 @@ def select_per_task(
     return chosen
 
 
-def random_group(metas: list[FrameMeta]) -> set[int]:
+def random_group(metas: list[FrameMeta], seed: int = GROUP_SEED) -> set[int]:
     by_task: dict[int, list[int]] = defaultdict(list)
     for m in metas:
         by_task[m.task_index].append(m.shared_index)
-    rng = np.random.default_rng(GROUP_SEED)
+    rng = np.random.default_rng(seed)
     out = set()
     for ti in sorted(by_task):
         idxs = np.asarray(sorted(by_task[ti]), dtype=np.int64)
         pick = rng.choice(idxs, size=min(TOP_K, idxs.size), replace=False)
         out.update(int(x) for x in pick)
+    return out
+
+
+def g_only_group(metas: list[FrameMeta], seed: int) -> set[int]:
+    """Per task: prefer G=1 windows; ties and fill use RNG(seed), never alpha."""
+    by_task: dict[int, list[int]] = defaultdict(list)
+    for m in metas:
+        by_task[m.task_index].append(m.shared_index)
+    rng = np.random.default_rng(seed)
+    out: set[int] = set()
+    for ti in sorted(by_task):
+        idxs = by_task[ti]
+        g1 = [j for j in idxs if metas[j].G == 1]
+        g0 = [j for j in idxs if metas[j].G == 0]
+        rng.shuffle(g1)
+        rng.shuffle(g0)
+        picked: list[int] = []
+        picked.extend(g1[:TOP_K])
+        if len(picked) < TOP_K:
+            picked.extend(g0[: TOP_K - len(picked)])
+        out.update(picked[:TOP_K])
     return out
 
 

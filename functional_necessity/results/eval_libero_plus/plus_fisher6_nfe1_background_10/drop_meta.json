@@ -1,0 +1,97 @@
+{
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "method": "fisher",
+  "k": 6,
+  "drop_layers": [
+    1,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "keep_layers": [
+    0,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "recovery": false,
+  "skip": "dtr_appendix_b_prefix_kv",
+  "n_action_steps": 10,
+  "compile_model": false,
+  "job_name": "plus_fisher6_nfe1_background_10",
+  "seed": 1000,
+  "num_inference_steps": 1,
+  "n_episodes_per_task": 1,
+  "task_extra_map": null,
+  "task_extra_kind": null,
+  "universal_drop": [
+    1,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "per_task_union": false,
+  "predicate_log": null,
+  "skip_mode": "keep_kv",
+  "keep_kv": true,
+  "crop": false,
+  "crop_keep_all": false,
+  "crop_scout_layer": null,
+  "crop_budget": null,
+  "crop_selector": null,
+  "prefix_trim": false,
+  "actual_nfe": 1,
+  "code_version": {
+    "head": "9c36e96b9074ecb965212b721cf01fbec2c1c495",
+    "head_short": "9c36e96",
+    "file_hashes": {
+      "functional_necessity/scripts/pi05_libero/crop_vla.py": "21ce2053ae326760149656ab6023412c7df1a558fce410a9edfab05f9847500b",
+      "functional_necessity/scripts/pi05_libero/prefix_trim.py": "b9792881fef5ba3957a6718a92ecef000d6f43077afea1c5722016e3a3505f2a",
+      "functional_necessity/scripts/pi05_libero/check_crop_vla.py": "222e6ebe14fbfc8f7d9e24379a6b330e6fbba6d52d0ba5021daca8d3c61d1155",
+      "functional_necessity/scripts/pi05_libero/eval_drop.py": "9fe8bf01a5e37c168b52a883f7aa1f95e5c2233c9f7588ac8c2fc8426680726a",
+      "functional_necessity/scripts/pi05_libero/measure_crop_efficiency.py": "447fdac4eba685371fb13eb02dbe5d1ba3ba91ee9e977853efc78174ffef0889"
+    }
+  },
+  "runtime_gpu": {
+    "cuda_visible_devices": "3",
+    "shared_eval": false,
+    "gpu_snapshot": {
+      "gpu": 3,
+      "memory": {
+        "total_mib": 24576,
+        "used_mib": 9204,
+        "free_mib": 14923,
+        "util": 0
+      },
+      "occupancy": [
+        {
+          "pid": 3287087,
+          "user": "guorj",
+          "name": "/home/guorj/.miniforge3/envs/lerobot/bin/python",
+          "mem_mib": "9194",
+          "args": "/home/guorj/.miniforge3/envs/lerobot/bin/python eval_drop.py --method fisher --k 6 --drop-layers 1,13,14,15,16,17 --output_dir /home/guorj/Skill_Efficient_VLA/functional_necessity/results/eval_libero_plus/plus_fisher6_nfe1_background_10 --job_name plus_fisher6_nfe1_background_10 --policy.path=lerobot/pi05_libero_finetuned_v044 --policy.n_action_steps=10 --policy.num_inference_steps=1 --policy.compile_model=false --policy.gradient_checkpointing=false --env.type=libero_plus --env.task=libero_10 --env.task_ids=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288] --env.control_mode=relative --env.max_parallel_tasks=1 --eval.batch_size=1 --eval.n_episodes=1 --seed=1000"
+        }
+      ],
+      "project_eval_drop": [
+        {
+          "pid": 3287087,
+          "user": "guorj",
+          "mem_mib": "9194",
+          "args": "/home/guorj/.miniforge3/envs/lerobot/bin/python eval_drop.py --method fisher --k 6 --drop-layers 1,13,14,15,16,17 --output_dir /home/guorj/Skill_Efficient_VLA/functional_necessity/results/eval_libero_plus/plus_fisher6_nfe1_background_10 --job_name plus_fisher6_nfe1_background_10 --policy.path=lerobot/pi05_libero_finetuned_v044 --policy.n_action_steps=10 --policy.num_inference_steps=1 --policy.compile_model=false --policy.gradient_checkpointing=false --env.type=libero_plus --env.task=libero_10 --env.task_ids=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288] --env.control_mode=relative --env.max_parallel_tasks=1 --eval.batch_size=1 --eval.n_episodes=1 --seed=1000"
+        }
+      ]
+    }
+  }
+}

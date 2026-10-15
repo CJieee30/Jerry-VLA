@@ -1,0 +1,1243 @@
+{
+  "protocol": {
+    "pool_n": 480,
+    "per_task_k": 3,
+    "total_budget": 120,
+    "budget_seeds": [
+      42,
+      0,
+      1,
+      7,
+      13,
+      17,
+      23,
+      29,
+      31,
+      37,
+      43,
+      47,
+      53,
+      59,
+      61,
+      67,
+      71,
+      73,
+      79,
+      83
+    ],
+    "legacy_random_seed": 42,
+    "g_only_rule": "per task: shuffle G=1 then G=0 with same seed; no alpha tie-break"
+  },
+  "reproduce_legacy_ok": true,
+  "reproduce_mismatches": [],
+  "four_group": {
+    "smolvla": {
+      "model": "smolvla",
+      "by_noise": {
+        "0": {
+          "groups": {
+            "random": {
+              "group": "random",
+              "noise_id": 0,
+              "n_selected": 120,
+              "n_grip_event_windows": 19,
+              "n_tail_bad_total": 36,
+              "n_tail_captured": 12,
+              "tail_recall": 0.3333333333333333,
+              "n_grip_dev_nfe1_total": 6,
+              "n_grip_dev_nfe1_captured": 3,
+              "n_grip_dev_nfe2_total": 2,
+              "n_grip_dev_nfe2_captured": 1,
+              "n_arm_top5_total": 24,
+              "n_arm_top5_captured": 8,
+              "rmse_mean": 0.09638487476234632,
+              "rmse_p95": 0.17401174902915947
+            },
+            "care_alpha": {
+              "group": "care_alpha",
+              "noise_id": 0,
+              "n_selected": 120,
+              "n_grip_event_windows": 34,
+              "n_tail_bad_total": 36,
+              "n_tail_captured": 19,
+              "tail_recall": 0.5277777777777778,
+              "n_grip_dev_nfe1_total": 6,
+              "n_grip_dev_nfe1_captured": 4,
+              "n_grip_dev_nfe2_total": 2,
+              "n_grip_dev_nfe2_captured": 1,
+              "n_arm_top5_total": 24,
+              "n_arm_top5_captured": 15,
+              "rmse_mean": 0.11293881672124065,
+              "rmse_p95": 0.18551964014768596
+            },
+            "care_event": {
+              "group": "care_event",
+              "noise_id": 0,
+              "n_selected": 120,
+              "n_grip_event_windows": 55,
+              "n_tail_bad_total": 36,
+              "n_tail_captured": 22,
+              "tail_recall": 0.6111111111111112,
+              "n_grip_dev_nfe1_total": 6,
+              "n_grip_dev_nfe1_captured": 6,
+              "n_grip_dev_nfe2_total": 2,
+              "n_grip_dev_nfe2_captured": 2,
+              "n_arm_top5_total": 24,
+              "n_arm_top5_captured": 14,
+              "rmse_mean": 0.11244288201754289,
+              "rmse_p95": 0.18551964014768596
+            },
+            "g_only": {
+              "group": "g_only",
+              "noise_id": 0,
+              "n_selected": 120,
+              "n_grip_event_windows": 55,
+              "n_tail_bad_total": 36,
+              "n_tail_captured": 19,
+              "tail_recall": 0.5277777777777778,
+              "n_grip_dev_nfe1_total": 6,
+              "n_grip_dev_nfe1_captured": 6,
+              "n_grip_dev_nfe2_total": 2,
+              "n_grip_dev_nfe2_captured": 2,
+              "n_arm_top5_total": 24,
+              "n_arm_top5_captured": 8,
+              "rmse_mean": 0.1011294031826158,
+              "rmse_p95": 0.197967479377985
+            }
+          }
+        },
+        "1": {
+          "groups": {
+            "random": {
+              "group": "random",
+              "noise_id": 1,
+              "n_selected": 120,
+              "n_grip_event_windows": 19,
+              "n_tail_bad_total": 37,
+              "n_tail_captured": 14,
+              "tail_recall": 0.3783783783783784,
+              "n_grip_dev_nfe1_total": 9,
+              "n_grip_dev_nfe1_captured": 5,
+              "n_grip_dev_nfe2_total": 1,
+              "n_grip_dev_nfe2_captured": 1,
+              "n_arm_top5_total": 24,
+              "n_arm_top5_captured": 8,
+              "rmse_mean": 0.09973307692756253,
+              "rmse_p95": 0.21217166855931283
+            },
+            "care_alpha": {
+              "group": "care_alpha",
+              "noise_id": 1,
+              "n_selected": 120,
+              "n_grip_event_windows": 34,
+              "n_tail_bad_total": 37,
+              "n_tail_captured": 17,
+              "tail_recall": 0.4594594594594595,
+              "n_grip_dev_nfe1_total": 9,
+              "n_grip_dev_nfe1_captured": 7,
+              "n_grip_dev_nfe2_total": 1,
+              "n_grip_dev_nfe2_captured": 1,
+              "n_arm_top5_total": 24,
+              "n_arm_top5_captured": 15,
+              "rmse_mean": 0.11557257957756516,
+              "rmse_p95": 0.21493863016366954
+            },
+            "care_event": {
+              "group": "care_event",
+              "noise_id": 1,
+              "n_selected": 120,
+              "n_grip_event_windows": 55,
+              "n_tail_bad_total": 37,
+              "n_tail_captured": 22,
+              "tail_recall": 0.5945945945945946,
+              "n_grip_dev_nfe1_total": 9,
+              "n_grip_dev_nfe1_captured": 8,
+              "n_grip_dev_nfe2_total": 1,
+              "n_grip_dev_nfe2_captured": 1,
+              "n_arm_top5_total": 24,
+              "n_arm_top5_captured": 13,
+              "rmse_mean": 0.1146747315612932,
+              "rmse_p95": 0.21217875629663466
+            },
+            "g_only": {
+              "group": "g_only",
+              "noise_id": 1,
+              "n_selected": 120,
+              "n_grip_event_windows": 55,
+              "n_tail_bad_total": 37,
+              "n_tail_captured": 19,
+              "tail_recall": 0.5135135135135135,
+              "n_grip_dev_nfe1_total": 9,
+              "n_grip_dev_nfe1_captured": 7,
+              "n_grip_dev_nfe2_total": 1,
+              "n_grip_dev_nfe2_captured": 1,
+              "n_arm_top5_total": 24,
+              "n_arm_top5_captured": 9,
+              "rmse_mean": 0.10667963273202377,
+              "rmse_p95": 0.21426706016063687
+            }
+          }
+        }
+      },
+      "merged_two_noises": {
+        "random": {
+          "n_grip_dev_nfe1_captured": 8,
+          "n_grip_dev_nfe1_total": 15,
+          "n_tail_captured": 26,
+          "n_tail_bad_total": 73,
+          "n_arm_top5_captured": 16,
+          "n_arm_top5_total": 48,
+          "n_grip_dev_nfe2_captured": 2,
+          "n_grip_dev_nfe2_total": 3
+        },
+        "care_alpha": {
+          "n_grip_dev_nfe1_captured": 11,
+          "n_grip_dev_nfe1_total": 15,
+          "n_tail_captured": 36,
+          "n_tail_bad_total": 73,
+          "n_arm_top5_captured": 30,
+          "n_arm_top5_total": 48,
+          "n_grip_dev_nfe2_captured": 2,
+          "n_grip_dev_nfe2_total": 3
+        },
+        "care_event": {
+          "n_grip_dev_nfe1_captured": 14,
+          "n_grip_dev_nfe1_total": 15,
+          "n_tail_captured": 44,
+          "n_tail_bad_total": 73,
+          "n_arm_top5_captured": 27,
+          "n_arm_top5_total": 48,
+          "n_grip_dev_nfe2_captured": 3,
+          "n_grip_dev_nfe2_total": 3
+        },
+        "g_only": {
+          "n_grip_dev_nfe1_captured": 13,
+          "n_grip_dev_nfe1_total": 15,
+          "n_tail_captured": 38,
+          "n_tail_bad_total": 73,
+          "n_arm_top5_captured": 17,
+          "n_arm_top5_total": 48,
+          "n_grip_dev_nfe2_captured": 3,
+          "n_grip_dev_nfe2_total": 3
+        }
+      }
+    },
+    "pi05": {
+      "model": "pi05",
+      "by_noise": {
+        "0": {
+          "groups": {
+            "random": {
+              "group": "random",
+              "noise_id": 0,
+              "n_selected": 120,
+              "n_grip_event_windows": 19,
+              "n_tail_bad_total": 36,
+              "n_tail_captured": 11,
+              "tail_recall": 0.3055555555555556,
+              "n_grip_dev_nfe1_total": 7,
+              "n_grip_dev_nfe1_captured": 3,
+              "n_grip_dev_nfe2_total": 4,
+              "n_grip_dev_nfe2_captured": 1,
+              "n_arm_top5_total": 24,
+              "n_arm_top5_captured": 6,
+              "rmse_mean": 0.06044978278999523,
+              "rmse_p95": 0.13506907820701597
+            },
+            "care_alpha": {
+              "group": "care_alpha",
+              "noise_id": 0,
+              "n_selected": 120,
+              "n_grip_event_windows": 34,
+              "n_tail_bad_total": 36,
+              "n_tail_captured": 20,
+              "tail_recall": 0.5555555555555556,
+              "n_grip_dev_nfe1_total": 7,
+              "n_grip_dev_nfe1_captured": 5,
+              "n_grip_dev_nfe2_total": 4,
+              "n_grip_dev_nfe2_captured": 3,
+              "n_arm_top5_total": 24,
+              "n_arm_top5_captured": 14,
+              "rmse_mean": 0.0772826690226793,
+              "rmse_p95": 0.16611289381980887
+            },
+            "care_event": {
+              "group": "care_event",
+              "noise_id": 0,
+              "n_selected": 120,
+              "n_grip_event_windows": 55,
+              "n_tail_bad_total": 36,
+              "n_tail_captured": 21,
+              "tail_recall": 0.5833333333333334,
+              "n_grip_dev_nfe1_total": 7,
+              "n_grip_dev_nfe1_captured": 7,
+              "n_grip_dev_nfe2_total": 4,
+              "n_grip_dev_nfe2_captured": 4,
+              "n_arm_top5_total": 24,
+              "n_arm_top5_captured": 13,
+              "rmse_mean": 0.07800793762629228,
+              "rmse_p95": 0.19346170127391804
+            },
+            "g_only": {
+              "group": "g_only",
+              "noise_id": 0,
+              "n_selected": 120,
+              "n_grip_event_windows": 55,
+              "n_tail_bad_total": 36,
+              "n_tail_captured": 15,
+              "tail_recall": 0.4166666666666667,
+              "n_grip_dev_nfe1_total": 7,
+              "n_grip_dev_nfe1_captured": 7,
+              "n_grip_dev_nfe2_total": 4,
+              "n_grip_dev_nfe2_captured": 4,
+              "n_arm_top5_total": 24,
+              "n_arm_top5_captured": 5,
+              "rmse_mean": 0.06765230384965734,
+              "rmse_p95": 0.19346170127391804
+            }
+          }
+        },
+        "1": {
+          "groups": {
+            "random": {
+              "group": "random",
+              "noise_id": 1,
+              "n_selected": 120,
+              "n_grip_event_windows": 19,
+              "n_tail_bad_total": 35,
+              "n_tail_captured": 12,
+              "tail_recall": 0.34285714285714286,
+              "n_grip_dev_nfe1_total": 3,
+              "n_grip_dev_nfe1_captured": 2,
+              "n_grip_dev_nfe2_total": 2,
+              "n_grip_dev_nfe2_captured": 1,
+              "n_arm_top5_total": 24,
+              "n_arm_top5_captured": 7,
+              "rmse_mean": 0.06128815865765011,
+              "rmse_p95": 0.14097431823611256
+            },
+            "care_alpha": {
+              "group": "care_alpha",
+              "noise_id": 1,
+              "n_selected": 120,
+              "n_grip_event_windows": 34,
+              "n_tail_bad_total": 35,
+              "n_tail_captured": 18,
+              "tail_recall": 0.5142857142857142,
+              "n_grip_dev_nfe1_total": 3,
+              "n_grip_dev_nfe1_captured": 2,
+              "n_grip_dev_nfe2_total": 2,
+              "n_grip_dev_nfe2_captured": 1,
+              "n_arm_top5_total": 24,
+              "n_arm_top5_captured": 13,
+              "rmse_mean": 0.07728643712277211,
+              "rmse_p95": 0.1594585850834846
+            },
+            "care_event": {
+              "group": "care_event",
+              "noise_id": 1,
+              "n_selected": 120,
+              "n_grip_event_windows": 55,
+              "n_tail_bad_total": 35,
+              "n_tail_captured": 17,
+              "tail_recall": 0.4857142857142857,
+              "n_grip_dev_nfe1_total": 3,
+              "n_grip_dev_nfe1_captured": 3,
+              "n_grip_dev_nfe2_total": 2,
+              "n_grip_dev_nfe2_captured": 2,
+              "n_arm_top5_total": 24,
+              "n_arm_top5_captured": 12,
+              "rmse_mean": 0.07579947964598732,
+              "rmse_p95": 0.17195397764444342
+            },
+            "g_only": {
+              "group": "g_only",
+              "noise_id": 1,
+              "n_selected": 120,
+              "n_grip_event_windows": 55,
+              "n_tail_bad_total": 35,
+              "n_tail_captured": 17,
+              "tail_recall": 0.4857142857142857,
+              "n_grip_dev_nfe1_total": 3,
+              "n_grip_dev_nfe1_captured": 3,
+              "n_grip_dev_nfe2_total": 2,
+              "n_grip_dev_nfe2_captured": 2,
+              "n_arm_top5_total": 24,
+              "n_arm_top5_captured": 7,
+              "rmse_mean": 0.06513885583262888,
+              "rmse_p95": 0.15504865273833265
+            }
+          }
+        }
+      },
+      "merged_two_noises": {
+        "random": {
+          "n_grip_dev_nfe1_captured": 5,
+          "n_grip_dev_nfe1_total": 10,
+          "n_tail_captured": 23,
+          "n_tail_bad_total": 71,
+          "n_arm_top5_captured": 13,
+          "n_arm_top5_total": 48,
+          "n_grip_dev_nfe2_captured": 2,
+          "n_grip_dev_nfe2_total": 6
+        },
+        "care_alpha": {
+          "n_grip_dev_nfe1_captured": 7,
+          "n_grip_dev_nfe1_total": 10,
+          "n_tail_captured": 38,
+          "n_tail_bad_total": 71,
+          "n_arm_top5_captured": 27,
+          "n_arm_top5_total": 48,
+          "n_grip_dev_nfe2_captured": 4,
+          "n_grip_dev_nfe2_total": 6
+        },
+        "care_event": {
+          "n_grip_dev_nfe1_captured": 10,
+          "n_grip_dev_nfe1_total": 10,
+          "n_tail_captured": 38,
+          "n_tail_bad_total": 71,
+          "n_arm_top5_captured": 25,
+          "n_arm_top5_total": 48,
+          "n_grip_dev_nfe2_captured": 6,
+          "n_grip_dev_nfe2_total": 6
+        },
+        "g_only": {
+          "n_grip_dev_nfe1_captured": 10,
+          "n_grip_dev_nfe1_total": 10,
+          "n_tail_captured": 32,
+          "n_tail_bad_total": 71,
+          "n_arm_top5_captured": 12,
+          "n_arm_top5_total": 48,
+          "n_grip_dev_nfe2_captured": 6,
+          "n_grip_dev_nfe2_total": 6
+        }
+      }
+    }
+  },
+  "multi_seed_aggregate": {
+    "random": {
+      "smolvla": {
+        "grip_nfe1_captured": {
+          "mean": 4.65,
+          "std": 2.4550967394381833,
+          "min": 1.0,
+          "max": 11.0,
+          "n": 20
+        },
+        "tail_captured": {
+          "mean": 19.3,
+          "std": 4.550824101193101,
+          "min": 12.0,
+          "max": 28.0,
+          "n": 20
+        },
+        "arm_top5_captured": {
+          "mean": 12.45,
+          "std": 2.9236107812087435,
+          "min": 5.0,
+          "max": 18.0,
+          "n": 20
+        },
+        "per_seed": [
+          {
+            "seed": 42,
+            "grip_nfe1": "8/15",
+            "tail": "26/73",
+            "arm_top5": "16/48",
+            "grip_nfe1_num": 8,
+            "tail_num": 26,
+            "arm_num": 16
+          },
+          {
+            "seed": 0,
+            "grip_nfe1": "4/15",
+            "tail": "20/73",
+            "arm_top5": "15/48",
+            "grip_nfe1_num": 4,
+            "tail_num": 20,
+            "arm_num": 15
+          },
+          {
+            "seed": 1,
+            "grip_nfe1": "8/15",
+            "tail": "16/73",
+            "arm_top5": "11/48",
+            "grip_nfe1_num": 8,
+            "tail_num": 16,
+            "arm_num": 11
+          },
+          {
+            "seed": 7,
+            "grip_nfe1": "5/15",
+            "tail": "22/73",
+            "arm_top5": "14/48",
+            "grip_nfe1_num": 5,
+            "tail_num": 22,
+            "arm_num": 14
+          },
+          {
+            "seed": 13,
+            "grip_nfe1": "2/15",
+            "tail": "21/73",
+            "arm_top5": "12/48",
+            "grip_nfe1_num": 2,
+            "tail_num": 21,
+            "arm_num": 12
+          },
+          {
+            "seed": 17,
+            "grip_nfe1": "1/15",
+            "tail": "19/73",
+            "arm_top5": "12/48",
+            "grip_nfe1_num": 1,
+            "tail_num": 19,
+            "arm_num": 12
+          },
+          {
+            "seed": 23,
+            "grip_nfe1": "6/15",
+            "tail": "18/73",
+            "arm_top5": "12/48",
+            "grip_nfe1_num": 6,
+            "tail_num": 18,
+            "arm_num": 12
+          },
+          {
+            "seed": 29,
+            "grip_nfe1": "2/15",
+            "tail": "12/73",
+            "arm_top5": "5/48",
+            "grip_nfe1_num": 2,
+            "tail_num": 12,
+            "arm_num": 5
+          },
+          {
+            "seed": 31,
+            "grip_nfe1": "6/15",
+            "tail": "19/73",
+            "arm_top5": "11/48",
+            "grip_nfe1_num": 6,
+            "tail_num": 19,
+            "arm_num": 11
+          },
+          {
+            "seed": 37,
+            "grip_nfe1": "5/15",
+            "tail": "26/73",
+            "arm_top5": "18/48",
+            "grip_nfe1_num": 5,
+            "tail_num": 26,
+            "arm_num": 18
+          },
+          {
+            "seed": 43,
+            "grip_nfe1": "11/15",
+            "tail": "28/73",
+            "arm_top5": "16/48",
+            "grip_nfe1_num": 11,
+            "tail_num": 28,
+            "arm_num": 16
+          },
+          {
+            "seed": 47,
+            "grip_nfe1": "4/15",
+            "tail": "22/73",
+            "arm_top5": "15/48",
+            "grip_nfe1_num": 4,
+            "tail_num": 22,
+            "arm_num": 15
+          },
+          {
+            "seed": 53,
+            "grip_nfe1": "3/15",
+            "tail": "15/73",
+            "arm_top5": "10/48",
+            "grip_nfe1_num": 3,
+            "tail_num": 15,
+            "arm_num": 10
+          },
+          {
+            "seed": 59,
+            "grip_nfe1": "6/15",
+            "tail": "23/73",
+            "arm_top5": "13/48",
+            "grip_nfe1_num": 6,
+            "tail_num": 23,
+            "arm_num": 13
+          },
+          {
+            "seed": 61,
+            "grip_nfe1": "6/15",
+            "tail": "21/73",
+            "arm_top5": "14/48",
+            "grip_nfe1_num": 6,
+            "tail_num": 21,
+            "arm_num": 14
+          },
+          {
+            "seed": 67,
+            "grip_nfe1": "4/15",
+            "tail": "15/73",
+            "arm_top5": "8/48",
+            "grip_nfe1_num": 4,
+            "tail_num": 15,
+            "arm_num": 8
+          },
+          {
+            "seed": 71,
+            "grip_nfe1": "5/15",
+            "tail": "16/73",
+            "arm_top5": "11/48",
+            "grip_nfe1_num": 5,
+            "tail_num": 16,
+            "arm_num": 11
+          },
+          {
+            "seed": 73,
+            "grip_nfe1": "3/15",
+            "tail": "13/73",
+            "arm_top5": "12/48",
+            "grip_nfe1_num": 3,
+            "tail_num": 13,
+            "arm_num": 12
+          },
+          {
+            "seed": 79,
+            "grip_nfe1": "3/15",
+            "tail": "22/73",
+            "arm_top5": "14/48",
+            "grip_nfe1_num": 3,
+            "tail_num": 22,
+            "arm_num": 14
+          },
+          {
+            "seed": 83,
+            "grip_nfe1": "1/15",
+            "tail": "12/73",
+            "arm_top5": "10/48",
+            "grip_nfe1_num": 1,
+            "tail_num": 12,
+            "arm_num": 10
+          }
+        ]
+      },
+      "pi05": {
+        "grip_nfe1_captured": {
+          "mean": 2.45,
+          "std": 1.5644487847162014,
+          "min": 0.0,
+          "max": 6.0,
+          "n": 20
+        },
+        "tail_captured": {
+          "mean": 19.55,
+          "std": 4.409931972264425,
+          "min": 13.0,
+          "max": 29.0,
+          "n": 20
+        },
+        "arm_top5_captured": {
+          "mean": 13.65,
+          "std": 3.5110539728121526,
+          "min": 8.0,
+          "max": 21.0,
+          "n": 20
+        },
+        "per_seed": [
+          {
+            "seed": 42,
+            "grip_nfe1": "5/10",
+            "tail": "23/71",
+            "arm_top5": "13/48",
+            "grip_nfe1_num": 5,
+            "tail_num": 23,
+            "arm_num": 13
+          },
+          {
+            "seed": 0,
+            "grip_nfe1": "3/10",
+            "tail": "20/71",
+            "arm_top5": "14/48",
+            "grip_nfe1_num": 3,
+            "tail_num": 20,
+            "arm_num": 14
+          },
+          {
+            "seed": 1,
+            "grip_nfe1": "2/10",
+            "tail": "25/71",
+            "arm_top5": "19/48",
+            "grip_nfe1_num": 2,
+            "tail_num": 25,
+            "arm_num": 19
+          },
+          {
+            "seed": 7,
+            "grip_nfe1": "1/10",
+            "tail": "19/71",
+            "arm_top5": "15/48",
+            "grip_nfe1_num": 1,
+            "tail_num": 19,
+            "arm_num": 15
+          },
+          {
+            "seed": 13,
+            "grip_nfe1": "0/10",
+            "tail": "19/71",
+            "arm_top5": "19/48",
+            "grip_nfe1_num": 0,
+            "tail_num": 19,
+            "arm_num": 19
+          },
+          {
+            "seed": 17,
+            "grip_nfe1": "2/10",
+            "tail": "19/71",
+            "arm_top5": "16/48",
+            "grip_nfe1_num": 2,
+            "tail_num": 19,
+            "arm_num": 16
+          },
+          {
+            "seed": 23,
+            "grip_nfe1": "4/10",
+            "tail": "25/71",
+            "arm_top5": "21/48",
+            "grip_nfe1_num": 4,
+            "tail_num": 25,
+            "arm_num": 21
+          },
+          {
+            "seed": 29,
+            "grip_nfe1": "0/10",
+            "tail": "13/71",
+            "arm_top5": "9/48",
+            "grip_nfe1_num": 0,
+            "tail_num": 13,
+            "arm_num": 9
+          },
+          {
+            "seed": 31,
+            "grip_nfe1": "4/10",
+            "tail": "23/71",
+            "arm_top5": "12/48",
+            "grip_nfe1_num": 4,
+            "tail_num": 23,
+            "arm_num": 12
+          },
+          {
+            "seed": 37,
+            "grip_nfe1": "3/10",
+            "tail": "14/71",
+            "arm_top5": "13/48",
+            "grip_nfe1_num": 3,
+            "tail_num": 14,
+            "arm_num": 13
+          },
+          {
+            "seed": 43,
+            "grip_nfe1": "6/10",
+            "tail": "29/71",
+            "arm_top5": "17/48",
+            "grip_nfe1_num": 6,
+            "tail_num": 29,
+            "arm_num": 17
+          },
+          {
+            "seed": 47,
+            "grip_nfe1": "3/10",
+            "tail": "25/71",
+            "arm_top5": "15/48",
+            "grip_nfe1_num": 3,
+            "tail_num": 25,
+            "arm_num": 15
+          },
+          {
+            "seed": 53,
+            "grip_nfe1": "2/10",
+            "tail": "15/71",
+            "arm_top5": "8/48",
+            "grip_nfe1_num": 2,
+            "tail_num": 15,
+            "arm_num": 8
+          },
+          {
+            "seed": 59,
+            "grip_nfe1": "3/10",
+            "tail": "21/71",
+            "arm_top5": "9/48",
+            "grip_nfe1_num": 3,
+            "tail_num": 21,
+            "arm_num": 9
+          },
+          {
+            "seed": 61,
+            "grip_nfe1": "3/10",
+            "tail": "21/71",
+            "arm_top5": "14/48",
+            "grip_nfe1_num": 3,
+            "tail_num": 21,
+            "arm_num": 14
+          },
+          {
+            "seed": 67,
+            "grip_nfe1": "3/10",
+            "tail": "14/71",
+            "arm_top5": "11/48",
+            "grip_nfe1_num": 3,
+            "tail_num": 14,
+            "arm_num": 11
+          },
+          {
+            "seed": 71,
+            "grip_nfe1": "2/10",
+            "tail": "20/71",
+            "arm_top5": "14/48",
+            "grip_nfe1_num": 2,
+            "tail_num": 20,
+            "arm_num": 14
+          },
+          {
+            "seed": 73,
+            "grip_nfe1": "0/10",
+            "tail": "16/71",
+            "arm_top5": "9/48",
+            "grip_nfe1_num": 0,
+            "tail_num": 16,
+            "arm_num": 9
+          },
+          {
+            "seed": 79,
+            "grip_nfe1": "1/10",
+            "tail": "16/71",
+            "arm_top5": "14/48",
+            "grip_nfe1_num": 1,
+            "tail_num": 16,
+            "arm_num": 14
+          },
+          {
+            "seed": 83,
+            "grip_nfe1": "2/10",
+            "tail": "14/71",
+            "arm_top5": "11/48",
+            "grip_nfe1_num": 2,
+            "tail_num": 14,
+            "arm_num": 11
+          }
+        ]
+      }
+    },
+    "g_only": {
+      "smolvla": {
+        "grip_nfe1_captured": {
+          "mean": 11.75,
+          "std": 1.3369741957120937,
+          "min": 10.0,
+          "max": 14.0,
+          "n": 20
+        },
+        "tail_captured": {
+          "mean": 35.7,
+          "std": 2.215851980616034,
+          "min": 31.0,
+          "max": 40.0,
+          "n": 20
+        },
+        "arm_top5_captured": {
+          "mean": 14.8,
+          "std": 1.9131126469708992,
+          "min": 10.0,
+          "max": 19.0,
+          "n": 20
+        },
+        "per_seed": [
+          {
+            "seed": 42,
+            "grip_nfe1": "13/15",
+            "tail": "38/73",
+            "arm_top5": "17/48",
+            "grip_nfe1_num": 13,
+            "tail_num": 38,
+            "arm_num": 17
+          },
+          {
+            "seed": 0,
+            "grip_nfe1": "10/15",
+            "tail": "33/73",
+            "arm_top5": "16/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 33,
+            "arm_num": 16
+          },
+          {
+            "seed": 1,
+            "grip_nfe1": "14/15",
+            "tail": "40/73",
+            "arm_top5": "19/48",
+            "grip_nfe1_num": 14,
+            "tail_num": 40,
+            "arm_num": 19
+          },
+          {
+            "seed": 7,
+            "grip_nfe1": "14/15",
+            "tail": "35/73",
+            "arm_top5": "13/48",
+            "grip_nfe1_num": 14,
+            "tail_num": 35,
+            "arm_num": 13
+          },
+          {
+            "seed": 13,
+            "grip_nfe1": "10/15",
+            "tail": "33/73",
+            "arm_top5": "14/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 33,
+            "arm_num": 14
+          },
+          {
+            "seed": 17,
+            "grip_nfe1": "11/15",
+            "tail": "37/73",
+            "arm_top5": "16/48",
+            "grip_nfe1_num": 11,
+            "tail_num": 37,
+            "arm_num": 16
+          },
+          {
+            "seed": 23,
+            "grip_nfe1": "10/15",
+            "tail": "35/73",
+            "arm_top5": "17/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 35,
+            "arm_num": 17
+          },
+          {
+            "seed": 29,
+            "grip_nfe1": "11/15",
+            "tail": "35/73",
+            "arm_top5": "14/48",
+            "grip_nfe1_num": 11,
+            "tail_num": 35,
+            "arm_num": 14
+          },
+          {
+            "seed": 31,
+            "grip_nfe1": "14/15",
+            "tail": "37/73",
+            "arm_top5": "14/48",
+            "grip_nfe1_num": 14,
+            "tail_num": 37,
+            "arm_num": 14
+          },
+          {
+            "seed": 37,
+            "grip_nfe1": "13/15",
+            "tail": "37/73",
+            "arm_top5": "15/48",
+            "grip_nfe1_num": 13,
+            "tail_num": 37,
+            "arm_num": 15
+          },
+          {
+            "seed": 43,
+            "grip_nfe1": "12/15",
+            "tail": "36/73",
+            "arm_top5": "15/48",
+            "grip_nfe1_num": 12,
+            "tail_num": 36,
+            "arm_num": 15
+          },
+          {
+            "seed": 47,
+            "grip_nfe1": "11/15",
+            "tail": "37/73",
+            "arm_top5": "14/48",
+            "grip_nfe1_num": 11,
+            "tail_num": 37,
+            "arm_num": 14
+          },
+          {
+            "seed": 53,
+            "grip_nfe1": "11/15",
+            "tail": "36/73",
+            "arm_top5": "15/48",
+            "grip_nfe1_num": 11,
+            "tail_num": 36,
+            "arm_num": 15
+          },
+          {
+            "seed": 59,
+            "grip_nfe1": "10/15",
+            "tail": "34/73",
+            "arm_top5": "13/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 34,
+            "arm_num": 13
+          },
+          {
+            "seed": 61,
+            "grip_nfe1": "13/15",
+            "tail": "38/73",
+            "arm_top5": "16/48",
+            "grip_nfe1_num": 13,
+            "tail_num": 38,
+            "arm_num": 16
+          },
+          {
+            "seed": 67,
+            "grip_nfe1": "11/15",
+            "tail": "34/73",
+            "arm_top5": "16/48",
+            "grip_nfe1_num": 11,
+            "tail_num": 34,
+            "arm_num": 16
+          },
+          {
+            "seed": 71,
+            "grip_nfe1": "12/15",
+            "tail": "39/73",
+            "arm_top5": "16/48",
+            "grip_nfe1_num": 12,
+            "tail_num": 39,
+            "arm_num": 16
+          },
+          {
+            "seed": 73,
+            "grip_nfe1": "12/15",
+            "tail": "36/73",
+            "arm_top5": "13/48",
+            "grip_nfe1_num": 12,
+            "tail_num": 36,
+            "arm_num": 13
+          },
+          {
+            "seed": 79,
+            "grip_nfe1": "12/15",
+            "tail": "33/73",
+            "arm_top5": "10/48",
+            "grip_nfe1_num": 12,
+            "tail_num": 33,
+            "arm_num": 10
+          },
+          {
+            "seed": 83,
+            "grip_nfe1": "11/15",
+            "tail": "31/73",
+            "arm_top5": "13/48",
+            "grip_nfe1_num": 11,
+            "tail_num": 31,
+            "arm_num": 13
+          }
+        ]
+      },
+      "pi05": {
+        "grip_nfe1_captured": {
+          "mean": 10.0,
+          "std": 0.0,
+          "min": 10.0,
+          "max": 10.0,
+          "n": 20
+        },
+        "tail_captured": {
+          "mean": 27.15,
+          "std": 3.2291639784935047,
+          "min": 21.0,
+          "max": 33.0,
+          "n": 20
+        },
+        "arm_top5_captured": {
+          "mean": 8.3,
+          "std": 2.7037011669191546,
+          "min": 3.0,
+          "max": 14.0,
+          "n": 20
+        },
+        "per_seed": [
+          {
+            "seed": 42,
+            "grip_nfe1": "10/10",
+            "tail": "32/71",
+            "arm_top5": "12/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 32,
+            "arm_num": 12
+          },
+          {
+            "seed": 0,
+            "grip_nfe1": "10/10",
+            "tail": "21/71",
+            "arm_top5": "6/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 21,
+            "arm_num": 6
+          },
+          {
+            "seed": 1,
+            "grip_nfe1": "10/10",
+            "tail": "33/71",
+            "arm_top5": "14/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 33,
+            "arm_num": 14
+          },
+          {
+            "seed": 7,
+            "grip_nfe1": "10/10",
+            "tail": "27/71",
+            "arm_top5": "5/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 27,
+            "arm_num": 5
+          },
+          {
+            "seed": 13,
+            "grip_nfe1": "10/10",
+            "tail": "24/71",
+            "arm_top5": "6/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 24,
+            "arm_num": 6
+          },
+          {
+            "seed": 17,
+            "grip_nfe1": "10/10",
+            "tail": "30/71",
+            "arm_top5": "12/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 30,
+            "arm_num": 12
+          },
+          {
+            "seed": 23,
+            "grip_nfe1": "10/10",
+            "tail": "25/71",
+            "arm_top5": "8/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 25,
+            "arm_num": 8
+          },
+          {
+            "seed": 29,
+            "grip_nfe1": "10/10",
+            "tail": "28/71",
+            "arm_top5": "7/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 28,
+            "arm_num": 7
+          },
+          {
+            "seed": 31,
+            "grip_nfe1": "10/10",
+            "tail": "23/71",
+            "arm_top5": "3/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 23,
+            "arm_num": 3
+          },
+          {
+            "seed": 37,
+            "grip_nfe1": "10/10",
+            "tail": "29/71",
+            "arm_top5": "10/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 29,
+            "arm_num": 10
+          },
+          {
+            "seed": 43,
+            "grip_nfe1": "10/10",
+            "tail": "26/71",
+            "arm_top5": "6/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 26,
+            "arm_num": 6
+          },
+          {
+            "seed": 47,
+            "grip_nfe1": "10/10",
+            "tail": "33/71",
+            "arm_top5": "11/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 33,
+            "arm_num": 11
+          },
+          {
+            "seed": 53,
+            "grip_nfe1": "10/10",
+            "tail": "24/71",
+            "arm_top5": "6/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 24,
+            "arm_num": 6
+          },
+          {
+            "seed": 59,
+            "grip_nfe1": "10/10",
+            "tail": "28/71",
+            "arm_top5": "8/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 28,
+            "arm_num": 8
+          },
+          {
+            "seed": 61,
+            "grip_nfe1": "10/10",
+            "tail": "29/71",
+            "arm_top5": "9/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 29,
+            "arm_num": 9
+          },
+          {
+            "seed": 67,
+            "grip_nfe1": "10/10",
+            "tail": "27/71",
+            "arm_top5": "8/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 27,
+            "arm_num": 8
+          },
+          {
+            "seed": 71,
+            "grip_nfe1": "10/10",
+            "tail": "24/71",
+            "arm_top5": "7/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 24,
+            "arm_num": 7
+          },
+          {
+            "seed": 73,
+            "grip_nfe1": "10/10",
+            "tail": "26/71",
+            "arm_top5": "7/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 26,
+            "arm_num": 7
+          },
+          {
+            "seed": 79,
+            "grip_nfe1": "10/10",
+            "tail": "25/71",
+            "arm_top5": "10/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 25,
+            "arm_num": 10
+          },
+          {
+            "seed": 83,
+            "grip_nfe1": "10/10",
+            "tail": "29/71",
+            "arm_top5": "11/48",
+            "grip_nfe1_num": 10,
+            "tail_num": 29,
+            "arm_num": 11
+          }
+        ]
+      }
+    }
+  }
+}
