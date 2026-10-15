@@ -17,7 +17,7 @@
       "results/stage2_care_v2/nfe_probe_care_event_holdout/holdout_shared.pt"
     ],
     "calibration_episodes_per_task": 10,
-    "calibration_frame_rule": "dev rule: one frame per episode, uniform in [start, stop-2]",
+    "calibration_frame_rule": "v1: one frame per episode, uniform in [start, stop-H] with H=10 (full window fits)",
     "validation_episodes_per_task": 4,
     "validation_frames_per_episode": 3,
     "validation_frame_rule": "uniform full H=10 windows, starts >= H apart"

@@ -9,25 +9,31 @@
 - 初始噪声：`noise_sha256_fp32` 记录在 `correctness.json`；形状 `[1,10,32]`，dtype float32（与 action expert 权重一致）
 - 归一化：手臂 QUANTILES（q01/q99）；夹爪 mask=0，开合判定为反量化后 LIBERO 物理 g>0
 - CUDA graph：关闭（`load_policy`）
+- 模块精度：**bf16** 推理（与 Pi/Smol 探针一致类别）
 
 ## 数据
 
 - `fetch_molmo.py`：169 个 parquet 分片就绪（13 硬链 + 156 下载），`molmo_root/READY`
-- 全池 480 观测探针：**进行中**（见 `run.log`、`DONE`）
+- 全池 480 观测探针：**已完成**（`DONE` 2026-10-15，墙钟见 `run.log`）
 
-## 开发成本（估算）
+## Holdout / 前瞻验证
+
+- `dev_validation_probe`：**pending**（无输出路径，不伪造）
+
+## 开发成本（全池实测）
 
 | 项 | 数量 |
 |---|---|
 | 观测 | 480 |
 | 噪声 | 2 |
-| NFE | 1,2,3,10（参考 10） |
-| 逻辑速度场求值 / 观测 | 32（(1+2+3+10)×2） |
-| 合计速度场求值 | 15 360 |
-| 分片下载 | ~21 GB（一次性） |
+| NFE | 1,2,3,10 |
+| 墙钟（GPU3） | ~2939 s |
 
-## 完成后 CPU
+## CPU 后处理（本轮）
 
 ```bash
-python dev_three_model_screening.py   # 三模型四策略表 + observation_level.csv
+cd functional_necessity/scripts/stage2_care_v2
+python export_pool_observation_metrics.py
+python dev_three_model_screening.py
+python rmse_threshold_stability.py
 ```

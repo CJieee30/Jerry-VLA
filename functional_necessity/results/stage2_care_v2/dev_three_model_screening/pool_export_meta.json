@@ -1,0 +1,31 @@
+{
+  "n_observations_pool": 480,
+  "n_rows": 7680,
+  "models": {
+    "pi05": {
+      "n_rows": 1920,
+      "nfes": [
+        1,
+        2
+      ]
+    },
+    "smolvla": {
+      "n_rows": 2880,
+      "nfes": [
+        1,
+        2,
+        3
+      ]
+    },
+    "molmoact2": {
+      "n_rows": 2880,
+      "nfes": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  "manifest": "conversion_manifest.json",
+  "check": "conversion_check.json"
+}

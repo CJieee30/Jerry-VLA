@@ -1,0 +1,26 @@
+{
+  "libero_meta_grip_mean_std": {
+    "mean6": -0.04964072167678376,
+    "std6": 0.9987671387144731
+  },
+  "pi05": {
+    "manual_physical_grip_sample": -1.0038708728052759,
+    "manual_vs_libero_norm_roundtrip_max_abs": 1.1102230246251565e-16,
+    "frames_native_rmse_nfe1": 0.0490937083959579,
+    "npz_native_rmse_recompute_delta": 4.85722573273506e-17
+  },
+  "smolvla": {
+    "manual_physical_grip_sample": -1.0028672965012904,
+    "manual_vs_libero_norm_roundtrip_max_abs": 0.0,
+    "frames_native_rmse_nfe1": 0.0897466912865638,
+    "npz_native_rmse_recompute_delta": 7.450580666312767e-09
+  },
+  "molmoact2": {
+    "manual_physical_grip_sample": -0.999343991279602,
+    "manual_vs_libero_norm_roundtrip_max_abs": 1.1102230246251565e-16,
+    "molmo_grip_mask": 0.0,
+    "note": "grip uses mask=0 pass-through; closed rule uses physical>0 after quantile on arm only",
+    "frames_native_rmse_nfe1": 0.0108326813206076,
+    "npz_native_rmse_recompute_delta": 1.862645211681002e-09
+  }
+}

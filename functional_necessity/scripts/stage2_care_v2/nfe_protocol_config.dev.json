@@ -1,5 +1,5 @@
 {
-  "protocol_version": "care_event_nfe_v0-draft",
+  "protocol_version": "care_event_nfe_v0-draft-dev-metrics",
   "mode": "dev",
   "run_name": "dev_rehearsal_v1",
   "note": "DEV REHEARSAL on revealed data: 480 CARE pool + 120 holdout. Not a prospective result.",
@@ -72,12 +72,25 @@
       "probe_extra_args": ["--allow-shared"],
       "probe_nfes": [1, 2, 3, 10],
       "dev_pool_probe": "results/stage2_care_v2/nfe_probe_molmoact2",
-      "gripper_unnormalize": {
-        "mean": -0.0496407225728035,
-        "std": 0.9987671375274658,
-        "note": "grip via Molmo inverse quantile + libero g>0; arm uses q01/q99 in probe"
+      "dev_validation_probe": "pending",
+      "module_precision": "bf16",
+      "gripper_mapping": {
+        "method": "molmo_postprocessor_quantile",
+        "arm_dims": "mask=1 → (norm+1)/2*(q99-q01)+q01 from policy_postprocessor safetensors",
+        "grip_dim": 6,
+        "grip_mask": 0,
+        "grip_channel": "pass-through in policy norm space",
+        "closed_rule": "physical gripper > 0 after arm quantile unnormalize",
+        "do_not_use": "lerobot/libero mean/std on grip channel"
       },
-      "status": "probe_running_or_pending_DONE"
+      "closed_loop_comparability": {
+        "episodes": 2000,
+        "note": "Pi/Smol closed-loop labels use 400 ep; not directly comparable as absolute success rate"
+      },
+      "status": {
+        "dev_pool_probe": "done",
+        "dev_validation_probe": "pending"
+      }
     }
   }
 }
