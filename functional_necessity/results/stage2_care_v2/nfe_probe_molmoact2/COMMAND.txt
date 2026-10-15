@@ -1,0 +1,1 @@
+python probe_molmoact2_nfe.py --gpu 3 --allow-shared --skip-analyze

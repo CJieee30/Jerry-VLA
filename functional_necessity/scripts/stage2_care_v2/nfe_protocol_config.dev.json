@@ -66,8 +66,18 @@
       "gripper_unnormalize": {"mean": -0.0496407225728035, "std": 0.9987671375274658, "source": "lerobot/libero meta/stats.json action[6] (same as Pi to 1e-9)"}
     },
     "molmoact2": {
-      "adapter": "unavailable",
-      "reason": "no fixed-noise probe yet; no Molmo dev outputs; thresholds not borrowed from Pi/Smol"
+      "adapter": "npz_probe",
+      "probe_script": "probe_molmoact2_nfe.py",
+      "python": "/home/guorj/.miniforge3/envs/lerobot/bin/python",
+      "probe_extra_args": ["--allow-shared"],
+      "probe_nfes": [1, 2, 3, 10],
+      "dev_pool_probe": "results/stage2_care_v2/nfe_probe_molmoact2",
+      "gripper_unnormalize": {
+        "mean": -0.0496407225728035,
+        "std": 0.9987671375274658,
+        "note": "grip via Molmo inverse quantile + libero g>0; arm uses q01/q99 in probe"
+      },
+      "status": "probe_running_or_pending_DONE"
     }
   }
 }

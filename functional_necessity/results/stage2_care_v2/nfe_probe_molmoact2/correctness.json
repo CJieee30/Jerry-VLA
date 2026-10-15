@@ -1,0 +1,108 @@
+{
+  "velocity_calls": {
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "10": 10
+  },
+  "calls_ok": true,
+  "nfe10_vs_official_max_abs": 0.0,
+  "nfe10_vs_official_match": true,
+  "repeat_nfe10_match_after_reset": true,
+  "repeat_nfe1_same_seed": true,
+  "noise_seed": 1000003000,
+  "noise_sha256_fp32": "2a94dcf40a7462b558a639de827701ac3b70b97660557c2262bbeef5bcf0270b",
+  "noise_reference_shape": [
+    1,
+    10,
+    32
+  ],
+  "noise_reference_dtype": "torch.float32",
+  "action_exec_shape": [
+    10,
+    7
+  ],
+  "nfe10_velocity": {
+    "v_adj_cos_mean": 0.9999251630571153,
+    "v_adj_cos_min": 0.9995337128639221,
+    "v_first_last_cos": 0.9993157386779785,
+    "v_adj_norm_rel_mean": 0.0015464008176019834,
+    "v_first_last_norm_rel": 0.004318217021797688
+  },
+  "nfe1_vs_nfe10": {
+    "cosine": 0.9998273849487305,
+    "rmse": 0.010832681320607662,
+    "max_abs": 0.0322265625,
+    "rmse_trans": 0.011449688114225864,
+    "rmse_rot": 0.010921886190772057,
+    "rmse_grip": 0.008383327163755894,
+    "max_abs_trans": 0.02783203125,
+    "max_abs_rot": 0.0322265625,
+    "max_abs_grip": 0.013671875,
+    "rmse_tail3": 0.012960435822606087,
+    "gripper_disagree": 0.0,
+    "gripper_disagree_n": 0
+  },
+  "nfe2_vs_nfe10": {
+    "cosine": 0.9999334812164307,
+    "rmse": 0.006707788445055485,
+    "max_abs": 0.0166015625,
+    "rmse_trans": 0.007130254525691271,
+    "rmse_rot": 0.007224085740745068,
+    "rmse_grip": 0.0024242850486189127,
+    "max_abs_trans": 0.013671875,
+    "max_abs_rot": 0.0166015625,
+    "max_abs_grip": 0.003906309604644775,
+    "rmse_tail3": 0.0072915866039693356,
+    "gripper_disagree": 0.0,
+    "gripper_disagree_n": 0
+  },
+  "model_dtype": "torch.float32",
+  "enable_inference_cuda_graph": false,
+  "normalization": "QUANTILES q01/q99 on arm; grip mask=0",
+  "gripper_rule": "libero physical g>0 after Molmo inverse quantile on arm",
+  "gpu": {
+    "gpu": 3,
+    "memory": {
+      "total_mib": 24576,
+      "used_mib": 4651,
+      "free_mib": 19476,
+      "util": 96
+    },
+    "occupancy": [
+      {
+        "pid": 3701523,
+        "user": "sunxy",
+        "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+        "mem_mib": "1890",
+        "args": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python -m ts2audio.run /home/sunxy/ts2audio/runs/261015-fa-wavlm-moment-h2/impute-ecl-fa_wavlm-h0-s13/v1/a1"
+      },
+      {
+        "pid": 3727059,
+        "user": "sunxy",
+        "name": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python",
+        "mem_mib": "2746",
+        "args": "/home/sunxy/ts2audio/.venvs/70d711491813/bin/python -m ts2audio.run /home/sunxy/ts2audio/runs/261015-fa-wavlm-moment-h2/forecast-traffic-fa_wavlm-h720-s13/v1/a1"
+      }
+    ]
+  },
+  "load_s": 184.41413974761963,
+  "libero_action_mean": [
+    0.06278156489133835,
+    0.08684080839157104,
+    -0.09037306159734726,
+    0.0005407430580817163,
+    0.005643379874527454,
+    -0.0052290987223386765,
+    -0.0496407225728035
+  ],
+  "libero_action_std": [
+    0.33552372455596924,
+    0.3784469962120056,
+    0.4447286128997803,
+    0.03924354165792465,
+    0.06339296698570251,
+    0.07797027379274368,
+    0.9987671375274658
+  ]
+}

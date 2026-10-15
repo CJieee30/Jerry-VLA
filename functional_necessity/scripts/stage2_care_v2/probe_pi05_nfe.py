@@ -340,6 +340,12 @@ def load_pi05_stack():
     return config, preprocessor, dataset, camera_keys
 
 
+def shared_fingerprint(path: Path) -> str:
+    import hashlib
+
+    return hashlib.sha256(path.read_bytes()).hexdigest()[:16]
+
+
 def load_shared(path: Path | None = None) -> dict:
     path = path or (OUT_DIR / "shared.pt")
     blob = torch.load(path, map_location="cpu", weights_only=False)
@@ -354,16 +360,29 @@ def load_shared(path: Path | None = None) -> dict:
     return blob
 
 
-def preprocess_frames(shared: dict, preprocessor, dataset, camera_keys, dest: Path, limit: int | None) -> list[dict]:
+def preprocess_frames(
+    shared: dict,
+    preprocessor,
+    dataset,
+    camera_keys,
+    dest: Path,
+    limit: int | None,
+    *,
+    shared_path: Path | None = None,
+) -> list[dict]:
     from common import preprocess_raw_batch, tensor_to_cpu_store
 
     n_total = int(shared.get("n", len(shared["records"])))
     n = n_total if limit is None else min(int(limit), n_total)
+    sp = shared_path or (OUT_DIR / "shared.pt")
+    meta = {"checkpoint": PI05_CKPT, "shared_sha256": shared_fingerprint(sp)}
     if dest.is_file() and limit is None:
         blob = torch.load(dest, map_location="cpu", weights_only=False)
-        if int(blob.get("n", 0)) == n_total:
+        if int(blob.get("n", 0)) == n_total and blob.get("meta") == meta:
             print(f"[cache] {dest}", flush=True)
             return blob["samples"]
+        if int(blob.get("n", 0)) == n_total:
+            print(f"[cache stale] {dest}", flush=True)
     samples = []
     for i, rec in enumerate(shared["records"][:n]):
         gidx = int(rec["global_index"])
@@ -380,7 +399,7 @@ def preprocess_frames(shared: dict, preprocessor, dataset, camera_keys, dest: Pa
             print(f"preprocess {i+1}/{n}", flush=True)
     if limit is None:
         dest.parent.mkdir(parents=True, exist_ok=True)
-        torch.save({"n": len(samples), "checkpoint": PI05_CKPT, "samples": samples}, dest)
+        torch.save({"n": len(samples), "checkpoint": PI05_CKPT, "meta": meta, "samples": samples}, dest)
         print(f"wrote {dest}", flush=True)
     return samples
 
@@ -1264,7 +1283,13 @@ def main() -> None:
     )
 
     samples = preprocess_frames(
-        shared, preprocessor, dataset, camera_keys, out_dir / "preprocessed_obs.pt", args.limit
+        shared,
+        preprocessor,
+        dataset,
+        camera_keys,
+        out_dir / "preprocessed_obs.pt",
+        args.limit,
+        shared_path=shared_path,
     )
     n_use = len(samples)
     correctness = run_correctness(policy, samples[0], device, mean, std, noise_shape)
