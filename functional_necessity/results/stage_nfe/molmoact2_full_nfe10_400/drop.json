@@ -1,0 +1,12 @@
+{
+  "methods": [
+    "full"
+  ],
+  "k": 0,
+  "drop": [],
+  "operator": "full",
+  "materialized": false,
+  "num_inference_steps": 10,
+  "n_episodes_per_task": 10,
+  "tag": "molmoact2_full_nfe10_400"
+}

@@ -1,0 +1,29 @@
+{
+  "methods": [
+    "taylor"
+  ],
+  "k": 16,
+  "drop": [
+    1,
+    2,
+    3,
+    4,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35
+  ],
+  "operator": "keep_kv_identity_residual_then_materialize",
+  "materialized": true,
+  "num_inference_steps": 10,
+  "n_episodes_per_task": 10,
+  "tag": "molmoact2_drop16_materialized_nfe10_400"
+}

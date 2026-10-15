@@ -1,0 +1,38 @@
+{
+  "status": "pass",
+  "nfe": 10,
+  "drop": [
+    1,
+    2,
+    3,
+    4,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35
+  ],
+  "action_max_abs_vs_kvonly": 0.0,
+  "params_before": 5442196208,
+  "params_after": 3911232240,
+  "params_freed": 1530963968,
+  "materialize": {
+    "params_before": 5442196208,
+    "params_after": 3911232240,
+    "freed": 1530963968
+  },
+  "code_sha256": {
+    "layer_skip.py": "2b4dc0f201d6887cbaecce6fd792eda5fbf0e50af4c31a3e324b5c56c1c74044",
+    "materialize.py": "ad3fdea7241065bcca9265e32ff75e0aea0966bffe5a5ee33780e768e5459266"
+  },
+  "device": "cuda:0",
+  "compile_model": false,
+  "enable_inference_cuda_graph": false
+}

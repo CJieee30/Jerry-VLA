@@ -1,0 +1,46 @@
+{
+  "variant": "drop16_materialized",
+  "checkpoint": "MolmoAct2-LIBERO-LeRobot",
+  "inference_action_mode": "continuous",
+  "dtype": "bfloat16",
+  "num_inference_steps": 10,
+  "n_action_steps": 10,
+  "num_steps_wait": 50,
+  "seed": 1000,
+  "per_episode_seed": true,
+  "compile_model": false,
+  "enable_inference_cuda_graph": false,
+  "n_episodes_per_task": 10,
+  "suites": [
+    "libero_spatial",
+    "libero_object",
+    "libero_goal",
+    "libero_10"
+  ],
+  "drop": [
+    1,
+    2,
+    3,
+    4,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35
+  ],
+  "pruning": "materialized_kv_only",
+  "operator": "keep_kv_identity_residual_then_materialize",
+  "started_utc": "2026-10-15T13:30:40Z",
+  "code_sha256": {
+    "run_molmo_nfe10_closed_loop.py": "5a67f81a4d84339118c02215c461ddc14c349f8c136dfadbb4593b022f749efb",
+    "layer_skip.py": "2b4dc0f201d6887cbaecce6fd792eda5fbf0e50af4c31a3e324b5c56c1c74044",
+    "materialize.py": "ad3fdea7241065bcca9265e32ff75e0aea0966bffe5a5ee33780e768e5459266"
+  }
+}
