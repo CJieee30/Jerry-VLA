@@ -252,7 +252,7 @@ Source: `results/stage_nfe/{pi05_full_nfe10_2000,pi05_k6_fisher_nfe10_2000,pi05_
 - Full：`results/stage_nfe/molmoact2_full_nfe1_2000/` → **1956/2000**（97.4 / 99.4 / 97.4 / 97.0%），`eval_s` ≈ 13.9 h。
 - Taylor Drop-16 `[1–4, 24–35]`：`results/stage_nfe/molmoact2_drop16_taylor_nfe1_2000/` → **1952/2000**（97.8 / 98.6 / 96.8 / 97.2%），`eval_s` ≈ 14.0 h。
 
-`drop.json` 写明 `operator=keep_kv_identity_residual`、`num_inference_steps=1`；**不能**仅凭该字符串区分历史 keep-KV 与后续 K/V-only 源码。启动日志时间为 2026-10-09 01:31 UTC；当时导入的 `layer_skip.py` 版本无提交哈希记录，算子与源码对应见 `main_results/core_results_registry.md`（推断项）。
+`drop.json` 写明 `operator=keep_kv_identity_residual`、`num_inference_steps=1`；**不能**仅凭该字符串区分历史 keep-KV 与后续 K/V-only 源码。启动日志时间为 2026-10-09 01:31 UTC；当时导入的 `layer_skip.py` 版本无提交哈希记录，算子与源码对应见 `results/registry/core_results_registry.md`（推断项）。
 
 相对同协议 NFE=10 锚点（`eval_molmoact2_libero.md`）：Full 97.50→97.80（**+0.30**）；Drop-16 98.10→97.60（**−0.50**）。均在 2000 集尺度上，无套件塌掉。
 
@@ -260,4 +260,4 @@ Source: `results/stage_nfe/{pi05_full_nfe10_2000,pi05_k6_fisher_nfe10_2000,pi05_
 
 ## Scope
 
-π0.5 与 MolmoAct2 的 NFE=1 结论是 **LIBERO、本机单进程协议**。SmolVLA 在同一协议下不成立。另一台机器上的 RoboTwin NFE=1 掉了约 15 分（`another_server_results`），那不是本机数字，也不写入上表。MolmoAct2 2000 集 NFE=1（Full / Taylor Drop-16）见 §7.2；`drop.json` 仅记录 `operator=keep_kv_identity_residual`，与当时磁盘上的 skip 实现需对照 `core_results_registry.md`。π0.5 的 2000 集闭环在 §7。
+π0.5 与 MolmoAct2 的 NFE=1 结论是 **LIBERO、本机单进程协议**。SmolVLA 在同一协议下不成立。另一台机器上的 RoboTwin NFE=1 掉了约 15 分（`another_server_results`），那不是本机数字，也不写入上表。MolmoAct2 2000 集 NFE=1（Full / Taylor Drop-16）见 §7.2；`drop.json` 仅记录 `operator=keep_kv_identity_residual`，与当时磁盘上的 skip 实现需对照 `results/registry/core_results_registry.md`。π0.5 的 2000 集闭环在 §7。

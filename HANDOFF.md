@@ -16,8 +16,8 @@
 
 **进度（2026-10-15）：**
 
-- **已完成（CPU）**：结果规范化（`core_results_registry.md`）；G-only 和 20 种子随机对照。
-- **已有草案，未冻结**：NFE 推荐协议 v0（`main_results/care_event_nfe_protocol.md`）、分阶段入口 `scripts/stage2_care_v2/nfe_protocol.py`、开发演练 `results/stage2_care_v2/nfe_protocol/dev_rehearsal_v1/`。
+- **已完成（CPU）**：结果规范化（`results/registry/core_results_registry.md`）；G-only 和 20 种子随机对照。
+- **已有草案，未冻结**：NFE 推荐协议 v0（`results/registry/care_event_nfe_protocol.md`）、分阶段入口 `scripts/stage2_care_v2/nfe_protocol.py`、开发演练 `results/stage2_care_v2/nfe_protocol/dev_rehearsal_v1/`。
 - **下一步**：顾问审阅 §8 待决项，然后冻结并执行前瞻划分、探针和验证；Molmo 先满足 M1–M4 冻结前提。
 
 不要先重跑整套层剪枝，不要开始训练。
@@ -236,7 +236,7 @@ G 同时含开与合，仅检查窗口内部，不含窗口前一帧到窗口起
 
 ### 4.3 前瞻实验必须避免事后解释
 
-1. **开发阶段：**已有 480 候选、当前 holdout 和已有闭环都已经看过，只能用于方法开发与背景解释。先写清 NFE 候选、误差指标、接受标准和回退规则；现有 P5/P95 不能直接充当成功保证。v0 草案（`care_event_nfe_protocol.md`）的做法：
+1. **开发阶段：**已有 480 候选、当前 holdout 和已有闭环都已经看过，只能用于方法开发与背景解释。先写清 NFE 候选、误差指标、接受标准和回退规则；现有 P5/P95 不能直接充当成功保证。v0 草案（`results/registry/care_event_nfe_protocol.md`）的做法：
    - 以 NFE=10 两次噪声之间的随机基准为参照，比值取 1.0，检查手臂中位、手臂 P95、夹爪比例和严重夹爪四项；
    - 推荐通过的最低候选 NFE，没有通过者则回退 10；
    - 开发演练中，四种策略对 Pi 和 Smol 都推荐 2。
@@ -357,7 +357,7 @@ GitHub 不一定包含服务器上所有权重、校准 `.pt`、视频和日志�
 1. 阅读本文件和 README，核对仓库版本、未提交改动、上述关键文件及当前进程；不假定服务器与此快照完全相同。
 2. 建立“已有可复用 / 仅需规范化 / 真正缺失”的清单。优先补写 Molmo NFE1 2000 结果、修正 Plus 错别数字，追溯 Molmo skip 版本，保护旧原始结果。
 3. CPU 完成 G-only 和随机重复选样，修复重绘归档覆盖风险；若统计变化，说明原因和来源，不为了预设结论调规则。
-4. 制定并冻结前瞻推荐协议，新增输出目录。v0 草案已有具体数值（`care_event_nfe_protocol.md`），审阅通过后用不含 DRAFT 的 `run_name` 执行 `nfe_protocol.py freeze`，必须在看到新验证结果之前完成。
+4. 制定并冻结前瞻推荐协议，新增输出目录。v0 草案已有具体数值（`results/registry/care_event_nfe_protocol.md`），审阅通过后用不含 DRAFT 的 `run_name` 执行 `nfe_protocol.py freeze`，必须在看到新验证结果之前完成。
 5. 再依次开展新校准/验证、剪枝后离线复查、必要的至少 400 回合闭环，以及独占卡正式测速。已完成的同配置结果优先复用。
 6. 每阶段用简体中文交付：做了什么、配置和代码版本、实际结果、可以/不可以支持的结论、下一步；同步 README/HANDOFF 和对应结果文档，状态明确为未启动/进行中/完成/提前停止。
 

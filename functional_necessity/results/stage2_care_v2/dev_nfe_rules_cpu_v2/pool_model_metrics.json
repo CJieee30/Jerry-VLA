@@ -1,0 +1,119 @@
+[
+  {
+    "model": "pi05",
+    "candidates": [
+      1,
+      2
+    ],
+    "E_1": 0.05971764363633873,
+    "cos_1": 0.9971629693426962,
+    "E_2": 0.040663252480849794,
+    "cos_2": 0.9987344477210539,
+    "adjacent": [
+      {
+        "pair": "1-2",
+        "E_delta": 0.019054391155488938,
+        "non_monotonic_E": false,
+        "mean_rmse_outputs": 0.028942832707799255
+      }
+    ],
+    "grip_nfe10_baseline": {
+      "comparisons_with_grip_disagree": 8,
+      "comparisons_total": 480,
+      "unique_obs_with_disagree": 8,
+      "rate_per_obs": 0.016666666666666666
+    },
+    "recommendations_dev": {
+      "abs_0.085": 1,
+      "abs_0.08": 1,
+      "abs_0.09": 1,
+      "abs_improve_only": 1,
+      "rel_improve_only": 1,
+      "all_three_abs085": 1
+    }
+  },
+  {
+    "model": "smolvla",
+    "candidates": [
+      1,
+      2,
+      3
+    ],
+    "E_1": 0.09364955542827663,
+    "cos_1": 0.9939423670312862,
+    "E_2": 0.0546437704772897,
+    "cos_2": 0.9979575469283499,
+    "E_3": 0.03980565622102921,
+    "cos_3": 0.998911193952629,
+    "adjacent": [
+      {
+        "pair": "1-2",
+        "E_delta": 0.03900578495098693,
+        "non_monotonic_E": false,
+        "mean_rmse_outputs": 0.06082284353528742
+      },
+      {
+        "pair": "2-3",
+        "E_delta": 0.014838114256260491,
+        "non_monotonic_E": false,
+        "mean_rmse_outputs": 0.021409169722001836
+      }
+    ],
+    "grip_nfe10_baseline": {
+      "comparisons_with_grip_disagree": 8,
+      "comparisons_total": 480,
+      "unique_obs_with_disagree": 8,
+      "rate_per_obs": 0.016666666666666666
+    },
+    "recommendations_dev": {
+      "abs_0.085": 2,
+      "abs_0.08": 2,
+      "abs_0.09": 2,
+      "abs_improve_only": 2,
+      "rel_improve_only": 2,
+      "all_three_abs085": 2
+    }
+  },
+  {
+    "model": "molmoact2",
+    "candidates": [
+      1,
+      2,
+      3
+    ],
+    "E_1": 0.03462223949691503,
+    "cos_1": 0.9990276173004119,
+    "E_2": 0.02439955382102806,
+    "cos_2": 0.9995126822771498,
+    "E_3": 0.019023783006111024,
+    "cos_3": 0.999725913988451,
+    "adjacent": [
+      {
+        "pair": "1-2",
+        "E_delta": 0.01022268567588697,
+        "non_monotonic_E": false,
+        "mean_rmse_outputs": 0.023355209596971148
+      },
+      {
+        "pair": "2-3",
+        "E_delta": 0.005375770814917035,
+        "non_monotonic_E": false,
+        "mean_rmse_outputs": 0.011768135075227958
+      }
+    ],
+    "grip_nfe10_baseline": {
+      "comparisons_with_grip_disagree": 1,
+      "comparisons_total": 480,
+      "unique_obs_with_disagree": 1,
+      "rate_per_obs": 0.0020833333333333333
+    },
+    "recommendations_dev": {
+      "abs_0.085": 1,
+      "abs_0.08": 1,
+      "abs_0.09": 1,
+      "abs_improve_only": 1,
+      "rel_improve_only": 1,
+      "all_three_abs085": 1
+    }
+  }
+]

@@ -158,6 +158,28 @@ class Run:
                 raise SystemExit(f"code {name} changed after freeze")
 
 
+def guard_restage(run: Run, stage: str, *, force: bool = False) -> None:
+    if run.draft or force:
+        return
+    if stage in NON_REPEATABLE_STAGES and run.last(stage) is not None:
+        raise SystemExit(
+            f"stage '{stage}' already exists ({run.last(stage)['utc']}); use a new run_name or --force-restage"
+        )
+
+
+def grip_closed(model: str, mc: dict, x: np.ndarray) -> np.ndarray:
+    """x: (..., 7) policy-normalized chunk; returns closed mask per step."""
+    if mc.get("gripper_mapping"):
+        from dev_metrics_common import native_to_physical
+
+        phys = native_to_physical(model, np.asarray(x, dtype=np.float64))
+        return phys[..., 6] > 0.0
+    gd = 6
+    mean = float(mc["gripper_unnormalize"]["mean"])
+    std = float(mc["gripper_unnormalize"]["std"])
+    return (x[..., gd] * std + mean) > 0.0
+
+
 # ----------------------------------------------------------------------- freeze
 
 
@@ -241,6 +263,7 @@ def dev_excluded_episodes(cfg: dict) -> set[int]:
 
 
 def stage_split(run: Run) -> None:
+    guard_restage(run, "split")
     run.check_frozen()
     if run.mode != "prospective":
         raise SystemExit("split is prospective-only; dev uses existing pool and holdout")
@@ -389,6 +412,7 @@ def load_pool(run: Run) -> list[dict]:
 
 
 def stage_select(run: Run) -> None:
+    guard_restage(run, "select")
     run.check_frozen()
     sel = run.cfg["selection"]
     records = load_pool(run)
@@ -477,6 +501,7 @@ def _probe_request(records: list[dict], index: list[int], scores: dict[int, dict
 
 
 def stage_probe_plan(run: Run) -> None:
+    guard_restage(run, "probe-plan")
     run.check_frozen()
     run.require("select")
     sel = json.loads((run.dir / "02_select" / "selections.json").read_text())
@@ -512,15 +537,18 @@ def probe_commands(run: Run, shared: Path, out_root: Path) -> list[str]:
 def _seal(model: str, actions: dict[str, np.ndarray], gidx: np.ndarray, pool_index: np.ndarray, episode: np.ndarray,
           mc: dict, dest: Path) -> str:
     dest.parent.mkdir(parents=True, exist_ok=True)
-    np.savez_compressed(
-        dest,
-        pool_index=pool_index.astype(np.int64),
-        global_index=gidx.astype(np.int64),
-        episode_index=episode.astype(np.int64),
-        grip_mean=np.float64(mc["gripper_unnormalize"]["mean"]),
-        grip_std=np.float64(mc["gripper_unnormalize"]["std"]),
-        **actions,
-    )
+    meta = {
+        "pool_index": pool_index.astype(np.int64),
+        "global_index": gidx.astype(np.int64),
+        "episode_index": episode.astype(np.int64),
+        "model": np.array(model),
+    }
+    if mc.get("gripper_mapping"):
+        meta["gripper_mode"] = np.array("molmo_physical")
+    else:
+        meta["grip_mean"] = np.float64(mc["gripper_unnormalize"]["mean"])
+        meta["grip_std"] = np.float64(mc["gripper_unnormalize"]["std"])
+    np.savez_compressed(dest, **meta, **actions)
     return sha256_file(dest)
 
 
@@ -534,6 +562,7 @@ def _probe_gidx(probe_dir: Path, n: int) -> np.ndarray:
 
 def stage_seal_dev(run: Run) -> None:
     """Dev only: the existing pool probes play the role of the union probe run."""
+    guard_restage(run, "seal-dev")
     run.check_frozen()
     if run.mode != "dev":
         raise SystemExit("seal-dev is dev-only")
@@ -570,6 +599,9 @@ def stage_probe_import(run: Run, model: str, probe_dir: Path) -> None:
 
 def _import(run: Run, model: str, probe_dir: Path, req: dict, rel: str, stage: str) -> None:
     mc = run.cfg["models"][model]
+    done = probe_dir / "DONE"
+    if not done.is_file():
+        raise SystemExit(f"{probe_dir}: missing DONE — probe not marked complete")
     z = np.load(probe_dir / "actions.npz")
     n = int(req["n"])
     if not np.array_equal(z["shared_index"], np.arange(n)):
@@ -582,6 +614,12 @@ def _import(run: Run, model: str, probe_dir: Path, req: dict, rel: str, stage: s
     missing = [n_ for n_ in nfes if f"nfe{n_}" not in z.files]
     if missing:
         raise SystemExit(f"probe output lacks NFE {missing}")
+    for n_ in nfes:
+        arr = z[f"nfe{n_}"]
+        if arr.shape[0] != n:
+            raise SystemExit(f"nfe{n_} shape[0]={arr.shape[0]} != n={n}")
+        if not np.isfinite(arr).all():
+            raise SystemExit(f"nfe{n_} contains non-finite values")
     acts = {f"nfe{n_}": z[f"nfe{n_}"] for n_ in nfes}
     pool_index = np.asarray([r.get("pool_index", r.get("validation_index", -1)) for r in req["records"]])
     ep = np.asarray([r["episode_index"] for r in req["records"]])
@@ -594,30 +632,27 @@ def _import(run: Run, model: str, probe_dir: Path, req: dict, rel: str, stage: s
 # ---------------------------------------------------------------------- metrics
 
 
-def per_obs(z: dict, nfe: int, rule: dict) -> dict[str, np.ndarray]:
+def per_obs(z: dict, nfe: int, rule: dict, model: str, mc: dict) -> dict[str, np.ndarray]:
     """Observation-level quantities; both noises of one observation stay together."""
     a, ref = z[f"nfe{nfe}"].astype(np.float64), z[f"nfe{rule['reference_nfe']}"].astype(np.float64)
     arm = rule["arm_dims"]
-    gd = rule["grip_dim"]
-    mean, std = float(z["grip_mean"]), float(z["grip_std"])
     sev = int(rule["grip_severe_steps"])
 
     def closed(x):
-        return (x[..., gd] * std + mean) > 0.0
+        return grip_closed(model, mc, x)
 
     e = np.sqrt(((a - ref)[..., arm] ** 2).mean(axis=(2, 3))).mean(axis=1)
     dis = (closed(a) != closed(ref)).sum(axis=2)
     return {"e": e, "k": (dis > 0).mean(axis=1), "s": (dis >= sev).mean(axis=1), "dis_steps": dis}
 
 
-def floor_obs(z: dict, rule: dict) -> dict[str, np.ndarray]:
+def floor_obs(z: dict, rule: dict, model: str, mc: dict) -> dict[str, np.ndarray]:
     ref = z[f"nfe{rule['reference_nfe']}"].astype(np.float64)
-    arm, gd = rule["arm_dims"], rule["grip_dim"]
-    mean, std = float(z["grip_mean"]), float(z["grip_std"])
+    arm = rule["arm_dims"]
     sev = int(rule["grip_severe_steps"])
     f = np.sqrt(((ref[:, 0] - ref[:, 1])[..., arm] ** 2).mean(axis=(1, 2)))
-    c = (ref[..., gd] * std + mean) > 0.0
-    dis = (c[:, 0] != c[:, 1]).sum(axis=1)
+    c0, c1 = grip_closed(model, mc, ref[:, 0]), grip_closed(model, mc, ref[:, 1])
+    dis = (c0 != c1).sum(axis=1)
     return {"f": f, "h": (dis > 0).astype(np.float64), "hs": (dis >= sev).astype(np.float64), "dis_steps": dis}
 
 
@@ -684,15 +719,15 @@ REASON = {
 }
 
 
-def recommend_one(z: dict, idx: np.ndarray, rule: dict, avail: list[int], boot: dict) -> dict:
-    fl = floor_obs(z, rule)
+def recommend_one(z: dict, idx: np.ndarray, rule: dict, avail: list[int], boot: dict, model: str, mc: dict) -> dict:
+    fl = floor_obs(z, rule, model, mc)
     floor_med = float(np.median(fl["f"][idx]))
     rows = []
     for n in rule["candidates"]:
         if n not in avail:
             rows.append({"nfe": n, "status": "not_evaluable", "reasons": ["no probe output for this NFE"]})
             continue
-        o = per_obs(z, n, rule)
+        o = per_obs(z, n, rule, model, mc)
         s = stats(o, fl, idx, rule)
         c = checks(s, rule)
         ci = cluster_ci(o, fl, idx, z["episode_index"], rule, int(boot["B"]), int(boot["seed"]))
@@ -727,6 +762,7 @@ def recommend_one(z: dict, idx: np.ndarray, rule: dict, avail: list[int], boot: 
 
 
 def stage_recommend(run: Run) -> None:
+    guard_restage(run, "recommend")
     run.check_frozen()
     sel_entry = run.require("select")
     seal_stage = "seal-dev" if run.mode == "dev" else "probe-import"
@@ -753,7 +789,7 @@ def stage_recommend(run: Run) -> None:
         for strat in STRATEGIES:
             pick = sel["strategies"][strat]["pool_index"]
             idx = np.asarray([pos[p] for p in pick], dtype=np.int64)
-            res[strat] = recommend_one(z, idx, rule, avail, run.cfg["bootstrap"])
+            res[strat] = recommend_one(z, idx, rule, avail, run.cfg["bootstrap"], model, mc)
             res[strat]["G1"] = sel["strategies"][strat]["G1"]
         out["models"][model] = {"status": "evaluated", "available_candidates": avail, "strategies": res}
     d = run.dir / "04_recommend"
@@ -799,6 +835,7 @@ def render_recommend(out: dict, rule: dict) -> str:
 
 
 def stage_validation_plan(run: Run) -> None:
+    guard_restage(run, "validation-plan")
     run.check_frozen()
     if run.mode != "prospective":
         raise SystemExit("validation-plan is prospective-only")
@@ -837,12 +874,22 @@ def dev_validation_sealed(run: Run, model: str, mc: dict) -> dict:
     if not np.array_equal(g, [r["global_index"] for r in blob["records"]]):
         raise SystemExit(f"{src}: global_index differs from validation records")
     out = {k: z[k] for k in z.files if k.startswith("nfe")}
-    out.update(pool_index=np.arange(n), global_index=g, episode_index=np.asarray([r["episode_index"] for r in blob["records"]]),
-               grip_mean=np.float64(mc["gripper_unnormalize"]["mean"]), grip_std=np.float64(mc["gripper_unnormalize"]["std"]))
+    out.update(
+        pool_index=np.arange(n),
+        global_index=g,
+        episode_index=np.asarray([r["episode_index"] for r in blob["records"]]),
+        model=np.array(model),
+    )
+    if not mc.get("gripper_mapping"):
+        out["grip_mean"] = np.float64(mc["gripper_unnormalize"]["mean"])
+        out["grip_std"] = np.float64(mc["gripper_unnormalize"]["std"])
+    else:
+        out["gripper_mode"] = np.array("molmo_physical")
     return out
 
 
 def stage_validate(run: Run) -> None:
+    guard_restage(run, "validate")
     run.check_frozen()
     rec_entry = run.require("recommend")
     rec = json.loads((run.dir / "04_recommend" / "recommendations.json").read_text())
@@ -862,16 +909,18 @@ def stage_validate(run: Run) -> None:
             e = next((x for x in reversed(run.entries()) if x["stage"] == "validation-import" and rel in x["files"]), None)
             if e is None or e["utc"] < rec_entry["utc"]:
                 raise SystemExit(f"{rel}: no validation import after recommendation")
+            if sha256_file(run.dir / rel) != e["files"][rel]:
+                raise SystemExit(f"{rel}: sealed hash mismatch vs validation-import ledger")
             z = load_sealed(run.dir / rel)
             source = rel
         idx = np.arange(len(z["global_index"]))
-        fl = floor_obs(z, rule)
+        fl = floor_obs(z, rule, model, mc)
         per_nfe = {}
         for n in rule["candidates"]:
             if f"nfe{n}" not in z:
                 per_nfe[n] = {"status": "not_evaluable"}
                 continue
-            o = per_obs(z, n, rule)
+            o = per_obs(z, n, rule, model, mc)
             s = stats(o, fl, idx, rule)
             c = checks(s, rule)
             ci = cluster_ci(o, fl, idx, z["episode_index"], rule, int(run.cfg["bootstrap"]["B"]), int(run.cfg["bootstrap"]["seed"]))
@@ -885,7 +934,7 @@ def stage_validate(run: Run) -> None:
                 offline = {"status": per_nfe[n_star]["status"], "failed": [k for k, ok in per_nfe[n_star]["checks"].items() if not ok]}
             rejected_but_pass = [c["nfe"] for c in r["candidates"] if c["status"] == "reject" and per_nfe.get(c["nfe"], {}).get("status") == "pass"]
             verdict[strat] = {"recommended_nfe": n_star, "offline_quality": offline,
-                              "closed_loop_quality": closed_loop_check(vq, rule, model, n_star),
+                              "closed_loop_quality": closed_loop_check(run, vq, rule, model, n_star),
                               "rejected_in_screening_but_pass_validation": rejected_but_pass}
         out["models"][model] = {"status": "evaluated", "source": source, "n_observations": int(idx.size),
                                 "n_episodes": int(np.unique(z["episode_index"]).size), "per_nfe": {str(k): v for k, v in per_nfe.items()},
@@ -951,8 +1000,9 @@ def stage_import_closed_loop(run: Run, source: Path) -> None:
     print(f"imported closed-loop results from {src}")
 
 
-def closed_loop_check(vq: dict, rule: dict, model: str, n_star: int) -> dict:
-    cl = vq["closed_loop"]
+def closed_loop_check(run: Run, vq: dict, rule: dict, model: str, n_star: int) -> dict:
+    imp = run.dir / "closed_loop_import.json"
+    cl = json.loads(imp.read_text()) if imp.is_file() else vq.get("closed_loop", {})
     if n_star == rule["fallback_nfe"]:
         return {"status": "reference", "note": "fallback NFE needs no closed-loop comparison"}
     res = cl.get("results", {}).get(model, {})
@@ -1026,11 +1076,16 @@ def main() -> None:
     run = Run(a.config, draft=a.draft)
     if a.force_restage:
         _orig_append = run.append
+        _orig_guard = guard_restage
 
         def _append(stage, files, **extra):
             return _orig_append(stage, files, force=True, **extra)
 
+        def _guard(r, stage, *, force=False):
+            return _orig_guard(r, stage, force=True)
+
         run.append = _append  # type: ignore[method-assign]
+        globals()["guard_restage"] = _guard
     if a.stage == "verify-ledger":
         stage_verify_ledger(run)
         return

@@ -21,16 +21,25 @@ SCREENING_DIR = OUT_DIR / "dev_three_model_screening"
 POOL_CSV = SCREENING_DIR / "pool_observation_level.csv"
 CONVERSION_MANIFEST_PATH = SCREENING_DIR / "conversion_manifest.json"
 CONVERSION_CHECK_PATH = SCREENING_DIR / "conversion_check.json"
+_LIBERO_MS: tuple[np.ndarray, np.ndarray] | None = None
+_MOLMO_Q: tuple[np.ndarray, np.ndarray, np.ndarray] | None = None
 
 
 def libero_mean_std() -> tuple[np.ndarray, np.ndarray]:
+    global _LIBERO_MS
+    if _LIBERO_MS is not None:
+        return _LIBERO_MS
     stats = json.load(open(hub_snapshot(LIBERO_REPO) / "meta" / "stats.json"))
     m = np.asarray(stats["action"]["mean"], dtype=np.float64)[:ACTION_DIM]
     s = np.asarray(stats["action"]["std"], dtype=np.float64)[:ACTION_DIM]
-    return m, np.maximum(s, 1e-8)
+    _LIBERO_MS = (m, np.maximum(s, 1e-8))
+    return _LIBERO_MS
 
 
 def molmo_quantile_stats() -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    global _MOLMO_Q
+    if _MOLMO_Q is not None:
+        return _MOLMO_Q
     from safetensors.torch import load_file
     from load_policy import LEROBOT_CKPT
 
@@ -38,7 +47,8 @@ def molmo_quantile_stats() -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     q01 = d["action.q01"].float().numpy()[:ACTION_DIM]
     q99 = d["action.q99"].float().numpy()[:ACTION_DIM]
     mask = d["action.mask"].float().numpy()[:ACTION_DIM]
-    return q01, q99, mask
+    _MOLMO_Q = (q01, q99, mask)
+    return _MOLMO_Q
 
 
 def native_to_physical(model: str, x: np.ndarray) -> np.ndarray:

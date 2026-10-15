@@ -128,7 +128,7 @@
 
 选样索引：`budget_compare/selections/*.json`。
 
-前瞻 NFE 推荐规则：**v0 草案，未冻结**，待顾问审阅。文档见 `main_results/care_event_nfe_protocol.md`，开发演练结果见 `results/stage2_care_v2/nfe_protocol/dev_rehearsal_v1/`；演练所用数据均已揭晓，结果只作开发证据。
+前瞻 NFE 推荐规则：**v0 草案，未冻结**，待顾问审阅。文档见 `results/registry/care_event_nfe_protocol.md`（v1 增补见同目录 `care_event_nfe_protocol_v1_addendum.md`），开发演练结果见 `results/stage2_care_v2/nfe_protocol/dev_rehearsal_v1/`；演练所用数据均已揭晓，结果只作开发证据。
 
 ---
 
@@ -163,5 +163,7 @@
 | `eval_nfe_libero.md` | NFE 闭环 |
 | `efficiency_analysis.md` | 效率分节 |
 | `care_event_action_expert_nfe.md` | CARE 方法与 holdout |
-| `care_event_nfe_protocol.md` | 前瞻 NFE 推荐协议 v0 草案与开发演练 |
+| `results/registry/care_event_nfe_protocol.md` | 前瞻 NFE 推荐协议 v0 草案与开发演练 |
+| `results/registry/care_event_nfe_protocol_v1_addendum.md` | 协议 v1 实现增补（ledger / 闭环导入 / H=10） |
+| `results/registry/core_results_registry.md` | 本文件：核心结果可追溯索引 |
 | `eval_libero_plus.md` | OOD 旁支 |

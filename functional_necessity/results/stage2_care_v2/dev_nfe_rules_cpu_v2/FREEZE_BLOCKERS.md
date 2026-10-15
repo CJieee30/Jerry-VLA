@@ -1,0 +1,5 @@
+- 正式协议未冻结；本报告阈值均为开发结果
+- Molmo dev_validation_probe=pending；闭环导入未接真实 JSON
+- holdout 前瞻 split/freeze 未完成
+- 夹爪仅诊断，未设未经校准的硬门槛
+- Pi 无 NFE3 探针，差分规则在 2→3 段为 NA

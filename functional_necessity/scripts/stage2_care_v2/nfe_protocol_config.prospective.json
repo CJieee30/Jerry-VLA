@@ -72,7 +72,7 @@
     },
     "molmoact2": {
       "adapter": "unavailable",
-      "reason": "freeze preconditions M1-M4 open (see care_event_nfe_protocol.md §6)"
+      "reason": "freeze preconditions M1-M4 open (see results/registry/care_event_nfe_protocol.md §6)"
     }
   }
 }

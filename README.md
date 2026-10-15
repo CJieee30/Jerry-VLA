@@ -79,7 +79,7 @@ Last-k 对照说明不能简单把尾层都当成冗余；它没有否定所有�
 
 我们提出用动作事件引导离线校准：优先选择运动命令变化较大、夹爪开合决策附近的观测，在相同输入与噪声下比较少步和默认 NFE 输出，检查手臂误差、夹爪命令时机及误差尾部，为固定 NFE 配置提供依据。部署时不逐块计算 CARE 分数，不进行额外在线路由，也不改变已选 NFE 内的 Euler 更新公式。
 
-**当前已完成选样分析、离线探针、独立回合验证和等预算四组对照；推荐规则已有 v0 草案和开发演练（[协议](functional_necessity/main_results/care_event_nfe_protocol.md)），尚未冻结，也尚未完成“先冻结推荐规则，再预测未知验证结果”的完整证据链。** 已有 π0.5/MolmoAct2 一步、SmolVLA 两步闭环结果早于 CARE_event，不能倒过来宣称它们是由 CARE_event 自动发现的。
+**当前已完成选样分析、离线探针、独立回合验证和等预算四组对照；推荐规则已有 v0 草案和开发演练（[协议](functional_necessity/results/registry/care_event_nfe_protocol.md)），尚未冻结，也尚未完成“先冻结推荐规则，再预测未知验证结果”的完整证据链。** 已有 π0.5/MolmoAct2 一步、SmolVLA 两步闭环结果早于 CARE_event，不能倒过来宣称它们是由 CARE_event 自动发现的。
 
 ### 3.1 方法与公式
 
@@ -177,9 +177,9 @@ RMSE 在策略归一化空间中计算；尾部界限来自各模型自身的原
 
 | 优先事项 | 具体目标 | 当前状态 |
 |---|---|---|
-| 1. 第一贡献结果规范化 | 对齐 checkpoint、算子版本、NFE、回合数、种子、层集合与效率范围；复用可比结果 | **完成（CPU）**：[结果清单](functional_necessity/main_results/core_results_registry.md)；Molmo 历史算子版本仅为推断 |
+| 1. 第一贡献结果规范化 | 对齐 checkpoint、算子版本、NFE、回合数、种子、层集合与效率范围；复用可比结果 | **完成（CPU）**：[结果清单](functional_necessity/results/registry/core_results_registry.md)；Molmo 历史算子版本仅为推断 |
 | 2. CARE_event 最小对照 | 同为每任务 3 个观测，比较随机、α、G-only、α_event；重复随机选样 | **完成（CPU）**：四组＋20 种子，见 `nfe_probe_event_care/budget_compare/` |
-| 3. 冻结规则的前瞻验证 | 在新验证结果揭晓前保存 NFE 推荐，再验证；补 MolmoAct2 探针 | **进行中**：[v0 协议草案](functional_necessity/main_results/care_event_nfe_protocol.md)、分阶段入口和开发演练已完成，待审阅后冻结；新验证、新闭环和 Molmo 探针均未启动 |
+| 3. 冻结规则的前瞻验证 | 在新验证结果揭晓前保存 NFE 推荐，再验证；补 MolmoAct2 探针 | **进行中**：[v0 协议草案](functional_necessity/results/registry/care_event_nfe_protocol.md)、分阶段入口和开发演练已完成，待审阅后冻结；新验证、新闭环和 Molmo 探针均未启动 |
 | 4. 联合配置验证 | 检查剪枝后低 NFE 风险，补最终实现对应的闭环缺口 | 历史四格已有大量结果，先核查再补跑 |
 | 5. 正式效率测量 | 独占 3090，多输入配对，报告 median/P95、FLOPs、实际参数与显存；纳入可用 Graph 基线 | 现有诊断不足以替代最终测量 |
 
