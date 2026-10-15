@@ -1,0 +1,124 @@
+{
+  "avg_margin_pp": 2.0,
+  "suite_drop_pp": 5.0,
+  "results": {
+    "pi05": {
+      "10": {
+        "suites": {
+          "spatial": 97.0,
+          "object": 100.0,
+          "goal": 95.0,
+          "long": 97.0
+        },
+        "meta": {
+          "n_episodes": 400,
+          "n_success": 389,
+          "seed": 1000,
+          "eval_protocol": "libero_four_suite",
+          "setting": "full",
+          "nfe": 10,
+          "source_eval_info": "results/eval_drop/baseline/eval_info.json",
+          "notes": "NFE=10 anchor; eval_drop baseline"
+        }
+      },
+      "1": {
+        "suites": {
+          "spatial": 97.0,
+          "object": 99.0,
+          "goal": 97.0,
+          "long": 95.0
+        },
+        "meta": {
+          "n_episodes": 400,
+          "n_success": 388,
+          "seed": 1000,
+          "eval_protocol": "libero_four_suite",
+          "setting": "full",
+          "nfe": 1,
+          "source_eval_info": "results/stage_nfe/pi05_full_nfe1/eval_info.json",
+          "notes": "NFE=1; stage_nfe pi05_full_nfe1"
+        }
+      }
+    },
+    "smolvla": {
+      "10": {
+        "suites": {
+          "spatial": 78.0,
+          "object": 89.0,
+          "goal": 89.0,
+          "long": 76.0
+        },
+        "meta": {
+          "n_episodes": 400,
+          "n_success": 332,
+          "seed": 1000,
+          "eval_protocol": "libero_four_suite",
+          "setting": "full",
+          "nfe": 10,
+          "source_eval_info": "results/smolvla_libero/lerobot_official_nas10/eval_info.json",
+          "notes": "NFE=10 anchor; eval_smolvla_libero seed-1000"
+        }
+      },
+      "2": {
+        "suites": {
+          "spatial": 77.0,
+          "object": 89.0,
+          "goal": 88.0,
+          "long": 74.0
+        },
+        "meta": {
+          "n_episodes": 400,
+          "n_success": 328,
+          "seed": 1000,
+          "eval_protocol": "libero_four_suite",
+          "setting": "full",
+          "nfe": 2,
+          "source_eval_info": "results/stage_nfe/smolvla_full_nfe2/eval_info.json",
+          "notes": "NFE=2 recommended; stage_nfe smolvla_full_nfe2"
+        }
+      }
+    },
+    "molmoact2": {
+      "10": {
+        "suites": {
+          "spatial": 97.39999999999999,
+          "object": 99.6,
+          "goal": 96.8,
+          "long": 96.2
+        },
+        "meta": {
+          "n_episodes": 2000,
+          "n_success": 1950,
+          "seed": 1000,
+          "eval_protocol": "libero_four_suite",
+          "setting": "full",
+          "nfe": 10,
+          "source_eval_info": "results/molmoact2_libero/baseline_eval/eval_info.json",
+          "notes": "NFE=10 anchor; 50 ep/task × 2000"
+        }
+      },
+      "1": {
+        "suites": {
+          "spatial": 97.39999999999999,
+          "object": 99.4,
+          "goal": 97.39999999999999,
+          "long": 97.0
+        },
+        "meta": {
+          "n_episodes": 2000,
+          "n_success": 1956,
+          "seed": 1000,
+          "eval_protocol": "libero_four_suite",
+          "setting": "full",
+          "nfe": 1,
+          "source_eval_info": "results/stage_nfe/molmoact2_full_nfe1_2000/eval_info.json",
+          "notes": "NFE=1 recommended; 50 ep/task × 2000"
+        }
+      }
+    }
+  },
+  "success_rate_unit": "percent",
+  "import_source": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/nfe_protocol/prospective_v1_20261015/05_validation/historical_closed_loop_import.json",
+  "import_utc": "2026-10-15T16:05:23Z",
+  "import_source_sha256": "9630442151a1da0ac08639580d638f2da12c886f09122d37cfb21e8d114cb9d6"
+}

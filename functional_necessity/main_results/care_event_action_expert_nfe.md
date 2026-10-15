@@ -2,11 +2,12 @@
 
 **面向少步流匹配的事件感知校准**
 
-> 更新日期：2026-10-14  
-> 结果快照：Jerry-VLA `87342bba134aca3f548e37c0f48defeede7ba0c7`  
+> 更新日期：2026-10-16  
+> 开发证据快照：Jerry-VLA `87342bba134aca3f548e37c0f48defeede7ba0c7`  
+> 正式前瞻运行：`prospective_v1_20261015`（ledger 已 `validate`；闭环列为历史 `eval_info.json` 复用）  
 > 建议存放位置：`Skill_Efficient_VLA/functional_necessity/main_results/care_event_action_expert_nfe.md`
 
-本文记录将 CARE 应用于 action expert NFE 优化的研究思路、已经完成的关键实验，以及目前可以成立的结论。数字以修正后的原始 CSV 汇总为准。本文中的独立验证仅指与校准候选回合隔离，不表示模型训练时未见过这些示范。
+本文记录将 CARE 应用于 action expert NFE 校准的研究思路、开发阶段探针证据，以及 **2026-10-15 冻结的正式前瞻校准与独立开环验证**（π0.5→NFE **1**、SmolVLA→NFE **2**、MolmoAct2→NFE **1**）。开发段数字以修正后的 CSV 为准；正式段以 `results/stage2_care_v2/nfe_protocol/prospective_v1_20261015/` 封存为准。文中的「独立验证」指与校准 episode 隔离的 holdout 观测集，不表示策略在 LIBERO 闭环中从未见过相关任务分布。
 
 ## 1. 核心 Idea
 
@@ -33,7 +34,7 @@ CARE_event 的作用是提高有限校准预算的诊断价值。它本身不直
   → 使用闭环评估确认质量与效率
 ```
 
-当前已经实现前三步及离线比较，尚未实现一条自动、可靠地输出最终 NFE 的接受规则。
+正式前瞻路径已实现：**冻结划分 → 校准探针 → 三规则推荐 → holdout 开环检验**；闭环成功率来自本机既有 Full 模型评测的 **历史复用导入**（早于校准 freeze，非本轮新跑闭环）。
 
 ### 1.1 与早期 Layer-Pruning CARE 的关系
 
@@ -128,57 +129,61 @@ Holdout 沿用原校准差分标准差及上述两个均值，不根据 holdout 
 
 同时，低 α 只能称为“命令变化较平滑”，不能直接称为“不重要”。平滑运输、慢速对齐等动作也可能要求较高精度。
 
-## 3. 离线 NFE 探针协议
+## 3. 离线 NFE 探针与推荐协议
 
-### 3.1 模型与配置
+### 3.1 模型与执行窗口
 
-| 项目 | π0.5 | SmolVLA |
-|---|---|---|
-| 检查点 | `lerobot/pi05_libero_finetuned_v044` | `lerobot/smolvla_libero` |
-| NFE 列表 | 1、2、10 | 1、2、3、10 |
-| 初始噪声数量 | 2 | 2 |
-| 执行动作窗口 | 前 10 步 | 前 10 步 |
-| 有效动作维度 | 7 | 7 |
-| 模型动作块长度 | 50 | 50 |
-| 编译 | 关闭 | 关闭 |
+| 项目 | π0.5 | SmolVLA | MolmoAct2 |
+|---|---|---|---|
+| 检查点 | `lerobot/pi05_libero_finetuned_v044` | `lerobot/smolvla_libero` | `allenai/MolmoAct2-LIBERO-LeRobot` |
+| 候选 NFE | 1、2、3、10 | 1、2、3、10 | 1、2、3、10 |
+| 初始噪声 | 2 | 2 | 2 |
+| 执行窗口 H | 10 | 10 | 10 |
+| 有效动作维 | 7 | 7 | 7（Molmo 手臂经分位数后处理映射到物理夹爪） |
 
-本报告分析完整模型的 NFE 行为，没有施加 VLM Drop-6、visual token pruning 或组件联合压缩。
+分析对象为 **Full 模型**（无 VLM Drop / token pruning 联合压缩）。**H=10** 是执行的前 10 步示范对齐窗口；**NFE=10** 是生成该块时的速度场求值次数。降 NFE 不缩短执行窗口。
 
-**H=10 表示执行动作窗口长度；NFE=10 表示生成动作时速度场求值次数。降低 NFE 不会把执行动作窗口缩成一两步。**
+选样分数 **α、G、α_event 仅来自示范命令**（§2），**不读取**任何低 NFE 探针误差。正式前瞻的 episode 划分、校准池与验证集在 freeze 时一次性固定（`prospective_v1_20261015`）。
 
-### 3.2 比较方式
+### 3.2 统一误差空间与 $E_N$
 
-对每个观测及每组噪声：
+三模型探针输出先经各栈后处理，再映射到 **LIBERO 归一化 7 维动作空间**（`nfe_en_metrics` / `dev_metrics_common`），与开发阶段固定的 LIBERO mean/std 一致。
 
-1. 使用同一图像、状态、语言及初始噪声；
-2. 运行各候选 NFE；
-3. 将 NFE=10 的输出作为模型参考；
-4. 比较各输出的前 10×7 个有效动作，不纳入 padding 维度。
+对每个观测 $\times$ 每组噪声、候选 NFE $n$：
 
-噪声种子规则固定为：
+1. 固定图像、状态、语言及初始噪声；
+2. 生成动作块，取前 $10\times 7$ 维；
+3. 以 **同噪声 NFE=10** 输出为参考；
+4. 计算 LIBERO 归一化 RMSE，记为一次比较。
+
+$$
+E_n = \mathrm{mean}_{\text{obs},\text{noise}}\ \mathrm{RMSE}_{7\text{-d, LIBERO}}(a_n, a_{10}).
+$$
+
+正式推荐在 **校准并集**（238 观测）上统计 $E_1,E_2,E_3$；独立验证在 **holdout 480 观测**上复算，**不**用验证集重新选步替代校准推荐。
+
+噪声种子（与探针脚本一致）：
 
 ```text
-noise_seed = 1000 * 1000003 + sample_index * 2 + noise_id
+noise_seed = 1000 * 1000003 + pool_index * 2 + noise_id
 ```
 
-CARE 评分使用示范命令；探针误差使用模型预测与 NFE=10 模型预测。两者的数据来源不同。NFE=10 是参考策略输出，不是任务成功的真值。
+### 3.3 三规则独立推荐（无旧四门槛）
 
-### 3.3 指标和异常定义
+候选集合 $\{1,2,3\}$，参考 NFE=10，若无规则通过则回退 10。
 
-- **动作余弦：**将前 10×7 个动作展平后计算。
-- **RMSE：**在 policy-normalized MEAN_STD 动作空间计算，不能直接解释为米或弧度。
-- **夹爪开合不一致：**先用对应均值和标准差反标准化，再以原始夹爪命令是否大于零判定；动作块任意一步不同即计为一次块级不一致。
-- **手臂误差：**分别记录平移和旋转 RMSE。已有手臂尾部排序使用 `hypot(rmse_trans, rmse_rot)` 代理，它与直接六维 RMSE 相差固定比例，需沿用同一口径。
+| 规则 | 含义 | 冻结阈值 |
+|---|---|---|
+| **主规则 abs** | 取最小 $n$ 使 $E_n \le \tau$ | $\tau=0.085$ |
+| **abs improve** | 相对 $n{+}1$ 的绝对改善 | $\Delta E \le 0.03$，且单调不增 |
+| **rel improve** | 相对改善幅度 | $\Delta E / E_n \le 0.375$，且单调 |
 
-尾部偏差采用以下固定规则：
+三条规则 **独立报告**，主推荐字段对齐 abs 规则。缺少相邻候选（如 $n{=}3$ 的 improve 规则）记为 **NA**。部署时 **固定** 推荐 NFE；**不在线** 计算 CARE 分数、不做 per-step 路由、**不改变** Euler 更新公式，也 **不做** recovery 训练。
 
-$$
-B = (\mathrm{cosine}<c_{P5})
-\lor (\mathrm{RMSE}>r_{P95})
-\lor (\mathrm{gripper\_disagree\_n}>0).
-$$
+### 3.4 诊断指标（非接受门槛）
 
-$c_{P5}$ 与 $r_{P95}$ 分别来自**对应模型、对应噪声的原 480 候选 NFE=1** 结果。该规则用于检查各低 NFE，holdout 上不重算判定阈值。
+- **余弦、手臂分维 RMSE、尾部 3 步 RMSE、夹爪符号不一致率**：用于解释与审阅，**不**恢复历史「四门槛」自动否决。
+- 开发段 480 候选池上，尾部标记 $B$ 仍使用各模型 NFE=1 的 P5/P95 阈值（见旧表）；正式前瞻报告中的夹爪/手臂比率为 **相对 NFE=10 的诊断**，与 `OPEN_LOOP_VALIDATE.md` 一致。
 
 | 模型 | noise | cosine P5 | RMSE P95 |
 |---|---:|---:|---:|
@@ -187,7 +192,11 @@ $c_{P5}$ 与 $r_{P95}$ 分别来自**对应模型、对应噪声的原 480 候�
 | SmolVLA | 0 | 0.984906 | 0.159371 |
 | SmolVLA | 1 | 0.983971 | 0.157276 |
 
-这些界限是描述性统计阈值，不是闭环失败阈值，也不是已经确定的 NFE 接受标准。不同模型使用自身基准，尾部比例不宜直接作为跨模型能力排名。
+不确定性：正式汇总中 episode 为聚簇单位（bootstrap $B{=}2000$，seed 20261015）；**同一 episode 的多个窗口与两组噪声不视为独立 episode**。
+
+---
+
+**以下 §4–§8 为开发阶段证据**（原 480 候选池、120 观测 holdout、π0.5/SmolVLA 两栈）。与 §9 正式前瞻运行分开表述，不混为同一批实验。
 
 ## 4. 已完成实验一：探针路径正确性检查
 
@@ -408,71 +417,118 @@ alpha_event = 1.7165
 
 该关联不能证明动作命令不连续导致速度场弯曲，也不能证明某个高分观测必然需要更多 NFE。机制因果解释仍未完成。
 
-## 9. 已有闭环背景与本轮证据的关系
+## 9. 正式前瞻校准与独立开环验证（`prospective_v1_20261015`）
 
-以下数值来自本轮配置记录中的 `closed_loop_sr_background_only`，属于此前已有闭环结果，不是 CARE_event holdout 阶段新增的实验。
+运行目录：`results/stage2_care_v2/nfe_protocol/prospective_v1_20261015/`。`recommend` 与 `validate` 已写入 ledger；闭环列为 **`closed-loop-import` 历史复用**（见 §9.5），**不是** freeze 之后新跑的前瞻闭环。
 
-| 完整模型 | NFE | 已有 LIBERO 平均成功率 |
-|---|---:|---:|
-| π0.5 | 10 | 97.25% |
-| π0.5 | 1 | 97.00% |
-| SmolVLA | 10 | 83.00% |
-| SmolVLA | 1 | 79.25% |
-| SmolVLA | 2 | 82.00% |
+### 9.1 数据划分与探针预算
 
-SmolVLA 配置还记录了另一轮 NFE=1 paired 结果为 78.25%，不能与 79.25% 当作同一轮统计混用。
+| 角色 | Episode | 观测 | 说明 |
+|---|---:|---:|---|
+| 校准池 | 400 | 400（每 episode 1 窗） | 排除开发 `shared.pt` 与旧 holdout episode |
+| 每策略选样 | — | 120（40 任务 × top-3） | random / α / g_only / α_event |
+| 四策略并集探针 | — | **238**（去重） | 联合速度场 **7616** 次/模型（含 NFE10 参考） |
+| 独立验证 | 160 | **480**（每 episode 3 窗） | episode 与校准无交；双噪声 |
 
-这些背景与本轮离线现象方向相符：π0.5 一步值得验证，SmolVLA 两步比一步更适合作为候选。但此前配置并非由本轮 CARE_event 自动选出，不能将这些成功率归因为 CARE_event，也不能据此宣称已经证明成功率不下降。
+每策略仅跑所选 120 窗时，速度场求值为 $120\times 2\times(1+2+3+10)=3840$；并集实际 **7616**。验证阶段 **15360** 次/模型。统计口径均含 NFE=10 参考成本。
+
+### 9.2 正式校准推荐（并集 238 obs，`04_recommend/recommendations.json`）
+
+四策略 **推荐 NFE 完全一致**（主规则与两对照规则相同）。
+
+| 模型 | $E_1$ | $E_2$ | $E_3$ | abs≤0.085 | abs improve | rel improve | 主推荐 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| π0.5 | 0.0805 | 0.0533 | 0.0390 | 1 | 1 | 1 | **1** |
+| SmolVLA | 0.1202 | 0.0686 | 0.0496 | 2 | 2 | 2 | **2** |
+| MolmoAct2 | 0.0428 | 0.0311 | 0.0239 | 1 | 1 | 1 | **1** |
+
+（表中 $E_n$ 取 `alpha_event` 策略的 `E_on_selection`；另三策略数值相同至四位小数。）
+
+### 9.3 独立开环 holdout（480 obs，`05_validation/open_loop_validation.json`）
+
+对 **校准已冻结的 screening NFE** 检验三规则（阈值未调）；**不用**验证集 `holdout_diagnostic_repick` 替代推荐。
+
+| 模型 | 原推荐 | 验证 $E_1$ | $E_2$ | $E_3$ | abs | abs imp. | rel imp. |
+|---|---:|---:|---:|---:|---|---|---|
+| π0.5 | 1 | 0.0629 | 0.0428 | 0.0321 | pass | pass | pass |
+| SmolVLA | 2 | 0.0971 | 0.0566 | 0.0413 | pass | pass | pass |
+| MolmoAct2 | 1 | 0.0358 | 0.0249 | 0.0193 | pass | pass | pass |
+
+### 9.4 推荐 NFE 的夹爪 / 手臂诊断（验证集，相对 NFE=10）
+
+比较次数：480 obs × 2 noise；episode 聚簇 160。下表为 **诊断**，非新接受门槛。
+
+| 模型 | $N^\*$ | 夹爪不一致率 | 手臂 median ratio | 手臂 P95 ratio |
+|---|---:|---:|---:|---:|
+| π0.5 | 1 | 0.0156 | 1.154 | 0.884 |
+| SmolVLA | 2 | 0.0052 | 0.697 | 0.531 |
+| MolmoAct2 | 1 | 0.0042 | 1.852 | 1.016 |
+
+工程注记：Molmo 验证探针在 GPU 上与历史 `eval_drop` 共卡时，冻结脚本会拒绝运行；实际使用运行目录副本 `probe_molmoact2_nfe_validation.py`（`--ignore-eval-drop`），见 `05_validation/OPERATIONAL_NOTES.md`。**不等于** freeze 字节与运行时探针一致。Molmo 数据分片在校准阶段已补全 `molmo_root`，验证 480 `global_index` 全覆盖。
+
+### 9.5 历史闭环复用（`closed-loop-import`，非新前瞻闭环）
+
+自 `eval_info.json` 整理导入（`success_rate_unit=percent`，seed=1000，四套件）。**早于** `prospective_v1_20261015` freeze；仅用于 `validate` 的闭环列，**不能**写成 CARE 前瞻新闭环。
+
+| 模型 | 配置 | NFE | Spatial | Object | Goal | Long | Avg. | 成功/回合 | 来源 |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---|
+| π0.5 | full | 10 | 97.0 | 100.0 | 95.0 | 97.0 | **97.25** | 389/400 | `results/eval_drop/baseline/eval_info.json` |
+| π0.5 | full | 1 | 97.0 | 99.0 | 97.0 | 95.0 | **97.00** | 388/400 | `results/stage_nfe/pi05_full_nfe1/eval_info.json` |
+| SmolVLA | full | 10 | 78.0 | 89.0 | 89.0 | 76.0 | **83.00** | 332/400 | `results/smolvla_libero/lerobot_official_nas10/eval_info.json` |
+| SmolVLA | full | 2 | 77.0 | 89.0 | 88.0 | 74.0 | **82.00** | 328/400 | `results/stage_nfe/smolvla_full_nfe2/eval_info.json` |
+| MolmoAct2 | full | 10 | 97.4 | 99.6 | 96.8 | 96.2 | **97.50** | 1950/2000 | `results/molmoact2_libero/baseline_eval/eval_info.json` |
+| MolmoAct2 | full | 1 | 97.4 | 99.4 | 97.4 | 97.0 | **97.80** | 1956/2000 | `results/stage_nfe/molmoact2_full_nfe1_2000/eval_info.json` |
+
+相对 NFE=10：π0.5 **−0.25 pp**；SmolVLA **−1.00 pp**；Molmo **+0.30 pp**（同为 2000 集协议）。`06_validate/VALIDATE.md` 中 holdout 与闭环列均为 **pass**（闭环规则：Avg. ≥ ref−2 pp 且各套件 ≥ ref−5 pp）。
 
 ## 10. 当前能够成立的结论
 
-### 10.1 CARE_event 有选样价值，特别是夹爪相关偏差
+### 10.1 正式前瞻：冻结规则在新 episode 上通过开环验证
 
-在当前 480 个候选、每任务选三个观测的设置下，CARE_event 比随机组覆盖更多夹爪事件和夹爪偏差，说明动作变化与事件增强能够提高有限选样预算的诊断价值。
+在独立 480 观测上，校准选定的 π0.5 **NFE=1**、SmolVLA **NFE=2**、MolmoAct2 **NFE=1** 均满足三条开环规则（§9.3）。这支持 **固定部署 NFE**，但不等于任务成功保证或通用阈值。
 
-这种价值仍限定在现有候选池与实验配置。相比原始 CARE，事件版本不是所有指标上更优，存在手臂尾部覆盖的取舍。
+### 10.2 闭环：有可复用 Full 模型证据，但非本轮新实验
 
-### 10.2 保留“最高＋较高”，不统一后移动作时间戳
+§9.5 历史闭环表明推荐 NFE 与 NFE=10 锚点在同协议下 **未出现套件塌缩**（见 `eval_nfe_libero.md`）。该证据 **不**归因于 CARE 选样，也 **不**构成「前瞻闭环」。
 
-每任务取前三名能够同时保留开合事件和较强运动变化。应优先检查发出决定之前的观测，以及从该观测生成的动作块，不需要以“物体实际掉落必须发生在计分窗口内”为修改目标。
+### 10.3 开发段：CARE_event 提高夹爪相关诊断覆盖（§4–§8）
 
-低分不能直接解释为不重要，实际物理运动明显也不必然表示求解更困难。
+在开发 480 候选、120 预算回放中，α_event 相对 random 提高夹爪事件与夹爪偏差捕获；相对纯 α 有手臂尾部取舍。**四策略正式推荐相同**，不能宣称 α_event **提高推荐准确率**或必然节省探针预算；相对 g_only 的优势应只看 §6 的捕获率与 §9 的误差表，不作夸大。
 
-### 10.3 π0.5 优先验证 NFE=1，SmolVLA 优先验证 NFE=2
+### 10.4 定位
 
-这是当前模型与 LIBERO 配置下的候选建议。π0.5 一步仍有少量手臂偏差；SmolVLA 两步保留少量夹爪时机差异，不能称为完全复现默认策略。
-
-NFE=10→1 或 2 对应速度场求值次数分别减少 90% 或 80%。这不等于端到端延迟减少同样比例，因为视觉编码、VLM prefix 等计算仍然存在。本轮没有新增正式延迟测量。
-
-### 10.4 目前适合将 CARE_event 定位为离线诊断校准
-
-当前最稳妥的研究表述为：
-
-> 我们构建了强调动作命令变化与夹爪切换的离线校准集。在有限选样预算下，该校准集提高了夹爪相关动作偏差的发现能力，并为 flow-matching action expert 的低 NFE 配置提供诊断依据。
+> 用示范命令变化与夹爪事件选择离线压力样本，在冻结阈值下为 Full 模型的固定 NFE 提供校准、开环检验与（历史）闭环对照。
 
 ## 11. 目前尚未证明的内容
 
-- **自动 NFE 选择：**尚未定义并验证一条由校准结果自动决定 NFE 的接受规则。
-- **仅用 120 个样本完成选择：**现有异常阈值及选择效果评估使用完整 480 个候选的探针信息，不能直接宣传只需 120 个样本。
-- **闭环质量保证：**相对 NFE=10 的输出接近不等于保持任务成功率，参考策略也可能失败。
-- **只检查高分即可保证所有状态：**已有低分或无事件样本出现偏差，选样存在漏检。
-- **联合压缩保证：**本轮完整模型结果不能直接外推到 VLM layer pruning、visual token pruning 与 NFE 联合配置。
-- **跨模型、跨任务、跨 benchmark 泛化：**本轮 action expert 探针涉及 π0.5 与 SmolVLA；没有完成 MolmoAct2 或其他 benchmark 的对应验证。
-- **参数最优性：**当前 H=10、λ=1 值得固定使用，但未证明为最优。
+- **通用阈值 / 跨 benchmark：**0.085 与 improve 阈值仅在本次 LIBERO 前瞻协议下冻结验证。
+- **联合压缩：**Full 模型结论不直接外推到 Drop-6 / Drop-16 × 低 NFE。
+- **在线 CARE：**部署不计算 α_event，不做 per-chunk 路由。
+- **因果机制：**速度场冗余与夹爪时机偏差的相关性仍属诊断层面。
+- **效率终局：**未在本章给出新的独占 GPU 端到端效率表；后续重点为已确认联合配置下的部署测量，**不**重复安排三组 Full 闭环筛查。
 
 ## 12. 后续推进原则
 
-1. 固定当前公式、窗口及每任务前三名的选样规则，避免根据闭环结果反复回调分数。
-2. 明确固定 NFE 的接受规则，区分整体误差预算、夹爪切换偏差和尾部误差；不得用 holdout 或闭环成功率反向搜索阈值。
-3. 使用与探针相同的模型和任务配置进行闭环评估。已有严格可比结果可复用；常规筛查保持每任务 10 回合，共 400 回合。
-4. 若加入 Drop-6 或视觉 token 压缩，应在对应配置上重新检查校准行为。关键决策状态的 NFE 需求可能随其他组件改变。
-5. 正式效率测量在独占 GPU 上进行，同时报告 NFE、实际调用数、端到端延迟及任务成功率。
-
-这些是后续计划，不是本报告已经完成的实验。
+1. 保持 `prospective_v1_20261015` 冻结清单与推荐不变；新数据用新 `run_name`。
+2. 闭环仅复用或补充 **与探针同权重同协议** 的评测；剪枝栈需单独校准。
+3. 报告效率时区分速度场次数、chunk 墙钟与闭环 SR（见 `efficiency_analysis.md` / `eval_nfe_libero.md`）。
+4. Molmo 探针若需与 `eval_drop` 共卡，在运行目录维护补丁脚本并文档化，勿声称与 freeze 哈希一致。
 
 ## 13. 数据来源、版本与工程记录
 
 ### 13.1 主要结果与代码
+
+**正式前瞻（`prospective_v1_20261015`）**
+
+- [ledger](../results/stage2_care_v2/nfe_protocol/prospective_v1_20261015/ledger.jsonl)
+- [校准推荐](../results/stage2_care_v2/nfe_protocol/prospective_v1_20261015/04_recommend/recommendations.json)
+- [开环验证汇总](../results/stage2_care_v2/nfe_protocol/prospective_v1_20261015/05_validation/open_loop_validation.json)
+- [正式 validate](../results/stage2_care_v2/nfe_protocol/prospective_v1_20261015/06_validate/validation.json)
+- [历史闭环导入](../results/stage2_care_v2/nfe_protocol/prospective_v1_20261015/05_validation/historical_closed_loop_import.json)
+- [闭环导入脚本](../results/stage2_care_v2/nfe_protocol/prospective_v1_20261015/05_validation/build_historical_closed_loop_import.py)
+- [NFE 闭环背景文档](eval_nfe_libero.md)
+
+**开发阶段（§4–§8）**
 
 以下相对链接按本文件放入 `functional_necessity/main_results/` 后的位置组织：
 
@@ -496,6 +552,8 @@ NFE=10→1 或 2 对应速度场求值次数分别减少 90% 或 80%。这不等
 - [独立验证分析代码](../scripts/stage2_care_v2/holdout_validation.py)
 - [π0.5 探针代码](../scripts/stage2_care_v2/probe_pi05_nfe.py)
 - [SmolVLA 探针代码](../scripts/stage2_care_v2/probe_smolvla_nfe.py)
+- [Molmo 探针代码（freeze）](../scripts/stage2_care_v2/probe_molmoact2_nfe.py)
+- [前瞻协议 CLI](../scripts/stage2_care_v2/nfe_protocol_v1.py)
 
 ### 13.2 采用修正后的数字
 
