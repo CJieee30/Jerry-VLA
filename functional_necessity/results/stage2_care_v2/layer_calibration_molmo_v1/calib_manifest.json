@@ -1,0 +1,11 @@
+{
+  "path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/layer_calibration_molmo_v1/calib_molmoact2.pt",
+  "n": 400,
+  "episodes": 400,
+  "overlap_check": {
+    "cal_episodes": 400,
+    "dev_episodes": 480,
+    "overlap": 0,
+    "ok": true
+  }
+}

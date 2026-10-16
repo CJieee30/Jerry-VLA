@@ -1,0 +1,30 @@
+{
+  "protocol": "layer_calibration_molmo_v1",
+  "status": "scores_pending_gpu",
+  "run_name": "prospective_v1_20261015",
+  "n_obs": 400,
+  "n_tasks": 40,
+  "obs_per_task": 10,
+  "overlap_with_care_v2_dev_episodes": 0,
+  "calib_path": "layer_calibration_molmo_v1/calib_molmoact2.pt",
+  "calib_draw_seed_base": 20261015,
+  "scores_present": {
+    "igia": false,
+    "fisher": false,
+    "taylor": false,
+    "gateprobe": false
+  },
+  "primary_budget_frames": 80,
+  "budgets": [
+    {"frames": 40, "k_per_task": 1},
+    {"frames": 80, "k_per_task": 2},
+    {"frames": 120, "k_per_task": 3}
+  ],
+  "gpu_blocker": "Shared GPU with LIBERO-plus eval (~9.8GiB resident); single-sample backward OOM on GPU2 with eval PID 3565007.",
+  "run_command": "CUDA_VISIBLE_DEVICES=<id> bash scripts/stage2_care_v2/RUN_LAYER_CALIB_MOLMO_V1.sh <id>",
+  "notes": [
+    "Subset selection + equal-weight aggregation; not legacy alpha-weighted IGIA.",
+    "Does not overwrite stage2_care_v2/scores/ (480-frame CARE v2).",
+    "analyze_layer_calibration_molmo_v1.py pending until four .pt score files exist."
+  ]
+}
