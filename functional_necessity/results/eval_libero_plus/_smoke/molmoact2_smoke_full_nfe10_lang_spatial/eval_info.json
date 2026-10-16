@@ -1,0 +1,68 @@
+{
+  "per_task": [
+    {
+      "task_group": "libero_spatial",
+      "task_id": 984,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [
+          "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/eval_libero_plus/_smoke/molmoact2_smoke_full_nfe10_lang_spatial/videos/libero_spatial_984/eval_episode_0.mp4"
+        ],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_spatial",
+      "task_id": 985,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [
+          "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/eval_libero_plus/_smoke/molmoact2_smoke_full_nfe10_lang_spatial/videos/libero_spatial_985/eval_episode_0.mp4"
+        ],
+        "predicted_video_paths": []
+      }
+    }
+  ],
+  "per_group": {
+    "libero_spatial": {
+      "avg_sum_reward": 1.0,
+      "avg_max_reward": 1.0,
+      "pc_success": 100.0,
+      "n_episodes": 2,
+      "video_paths": [
+        "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/eval_libero_plus/_smoke/molmoact2_smoke_full_nfe10_lang_spatial/videos/libero_spatial_984/eval_episode_0.mp4",
+        "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/eval_libero_plus/_smoke/molmoact2_smoke_full_nfe10_lang_spatial/videos/libero_spatial_985/eval_episode_0.mp4"
+      ],
+      "predicted_video_paths": []
+    }
+  },
+  "overall": {
+    "avg_sum_reward": 1.0,
+    "avg_max_reward": 1.0,
+    "pc_success": 100.0,
+    "n_episodes": 2,
+    "eval_s": 48.91900181770325,
+    "eval_ep_s": 24.45950138568878,
+    "video_paths": [
+      "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/eval_libero_plus/_smoke/molmoact2_smoke_full_nfe10_lang_spatial/videos/libero_spatial_984/eval_episode_0.mp4",
+      "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/eval_libero_plus/_smoke/molmoact2_smoke_full_nfe10_lang_spatial/videos/libero_spatial_985/eval_episode_0.mp4"
+    ],
+    "predicted_video_paths": []
+  }
+}

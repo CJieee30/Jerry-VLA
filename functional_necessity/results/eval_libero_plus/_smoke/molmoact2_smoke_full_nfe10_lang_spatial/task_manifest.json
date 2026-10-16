@@ -1,0 +1,10 @@
+{
+  "suite": "libero_spatial",
+  "category": "Language Instructions",
+  "task_ids": [
+    984,
+    985
+  ],
+  "n_variants": 2,
+  "classification_json": "/home/guorj/LIBERO-plus/libero/libero/benchmark/task_classification.json"
+}

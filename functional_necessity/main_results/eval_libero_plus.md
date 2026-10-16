@@ -1,6 +1,10 @@
-# LIBERO-plus：π0.5 full vs Fisher Drop-6
+# LIBERO-plus：π0.5 与 MolmoAct2
 
-π0.5-LIBERO-finetuned (`lerobot/pi05_libero_finetuned_v044`) vs Stage-1 Fisher Drop-6 `[1, 13, 14, 15, 16, 17]`, skip keep-KV. Official Plus recipe on this machine: 1 trial per variant, `seed=1000`, `n_action_steps=10`, `num_inference_steps=10`, `compile_model=false`. In-distribution LIBERO 400-ep anchors: full **97.25**, Drop-6 **97.75** (`eval_pi05_libero_v044.md`). Do not mix those with this table.
+**π0.5** — `lerobot/pi05_libero_finetuned_v044` vs Stage-1 Fisher Drop-6 `[1, 13, 14, 15, 16, 17]`, skip keep-KV. In-distribution LIBERO 400-ep anchors: full **97.25**, Drop-6 **97.75** (`eval_pi05_libero_v044.md`). Do not mix those with Plus tables.
+
+**MolmoAct2** — `allenai/MolmoAct2-LIBERO-LeRobot`（本机 `checkpoints/MolmoAct2-LIBERO-LeRobot` + `MolmoAct2-LIBERO` 结构）。截至本文更新，Plus 仅启动 **Language Instructions × Full × NFE=10**（见下文 Molmo 专节）；无剪枝、无 NFE=1、不写入上方七维核心表直至四轮 `EXIT:0`。
+
+两栈共用 Plus 环境配方：每语言/变体 **1** 次试验（`n_episodes=1`），`seed=1000`，`n_action_steps=10`，`num_inference_steps=10`，`compile_model=false`，`batch_size=1`，`control_mode=relative`，无视频、无 recovery。任务 id 来自 `LIBERO-plus/.../task_classification.json`（JSON 内 **1-based id 减 1**）。
 
 Avg. is the unweighted mean of four suite rates (Spatial / Object / Goal / Long). **NFE=1 batch (Fisher Drop-6, `num_inference_steps=1`, 2026-10-13–14):** GPU1 = Language + Camera + **Light** (24 suites, all `EXIT:0`); GPU3 = Init + Layout + **Background** (24 suites, all `EXIT:0`). Tags: `plus_fisher6_nfe1_{lang,init,camera,layout,light,background,noise}_*`. **Sensor Noise:** NFE=10 full/Drop-6 four suites on GPU0/2 (see § Sensor Noise); **Drop-6 NFE=1** queue **`plus_fisher6_nfe1_noise_*`** on **GPU1** (2026-10-15, running).
 
@@ -139,6 +143,45 @@ All `EXIT:0`. Times are UTC from `results/logs/eval_plus_*.log`.
 Plus language is a paraphrased-instruction OOD slice, 1 trial per variant. Fisher Drop-6 keeps the same keep-KV operator that is in-distribution neutral (97.75 vs 97.25). Here the cost is **−3.96** Avg., **−7.57** on Long, and Spatial/Object/Goal stay within about 2–4 points. That is a measured language-OOD gap, not a closed-loop collapse, and it is not a new selector. Do not put Plus rates into the in-distribution operating-point table.
 
 Per-dimension sections follow. Sensor Noise has a partial core row (Spatial+Object); Goal/Long jobs are documented in § Sensor Noise.
+
+---
+
+# LIBERO-plus Language Instructions — MolmoAct2 Full NFE=10
+
+MolmoAct2 on the official **Language Instructions** slice only (not the other six Plus dimensions). **Full** model: no VLM skip, no materialize. In-distribution Molmo anchor: **97.50** Avg. on standard LIBERO 2000-ep (`eval_molmoact2_libero.md`); do not mix with Plus variant counts.
+
+**Protocol (aligned with π0.5 Plus Language except Molmo env/camera/postprocess).** `inference_action_mode=continuous`, `dtype=bfloat16`, `num_inference_steps=10`, `n_action_steps=10`, `eval_seed=1000`, `per_episode_seed=true`, `num_steps_wait=50`, `enable_inference_cuda_graph=false`. Dual-camera mapping `agentview_image→image`, `robot0_eye_in_hand_image→wrist_image`. Category **Language Instructions** from installed `task_classification.json`: Spatial **390**, Object **354**, Goal **410**, Long **383** → **1537** variants total.
+
+**Entry.** `scripts/molmoact2_libero/eval_plus_molmo.py`; shell `run_eval_plus_lang.sh` (per suite) / `run_eval_plus_lang_serial.sh` (Spatial→Object→Goal→Long). **GPU3 only** (`CUDA_VISIBLE_DEVICES=3`). Serial one process at a time. **Run in tmux** (e.g. `tmux attach -t molmo_plus_lang_nfe10_g3`); do not rely on IDE background shells. Aggregator: `scripts/molmoact2_libero/summarize_plus_lang.py`.
+
+**Smoke (not in table).** `run_eval_plus_lang_smoke.sh` → `results/eval_libero_plus/_smoke/molmoact2_smoke_full_nfe10_lang_spatial/` — 2 Spatial language variants, **2/2** success (`EXIT:0`, 2026-10-16). Log: `results/logs/eval_molmoact2_smoke_full_nfe10_lang_spatial.log`.
+
+**Formal outputs (reuse if present; do not overwrite `eval_info.json`).**
+
+| Suite | Tag | Directory |
+| --- | --- | --- |
+| Spatial | `molmoact2_full_nfe10_lang_spatial` | `results/eval_libero_plus/molmoact2_full_nfe10_lang_spatial/` |
+| Object | `molmoact2_full_nfe10_lang_object` | `results/eval_libero_plus/molmoact2_full_nfe10_lang_object/` |
+| Goal | `molmoact2_full_nfe10_lang_goal` | `results/eval_libero_plus/molmoact2_full_nfe10_lang_goal/` |
+| Long | `molmoact2_full_nfe10_lang_10` | `results/eval_libero_plus/molmoact2_full_nfe10_lang_10/` |
+
+Each dir: `eval_info.json`, `run_config.json`, `task_manifest.json`, `plus_meta.json`. Shared eval ckpt symlinks: `results/eval_libero_plus/_molmo_shared/eval_ckpt/`. Per-suite logs: `results/logs/eval_molmoact2_full_nfe10_lang_*.log`; serial master: `results/logs/eval_molmoact2_full_nfe10_lang_serial.log`.
+
+**Code pins (`run_config.json` → `code_sha256`).** `eval_plus_molmo.py`, `load_policy.py`, `layer_skip.py` at job start — same trio intended for later Drop-16 materialized / keep-KV Plus runs.
+
+### Results — MolmoAct2 Full NFE=10 Language
+
+*Status: **in progress** — tmux session **`molmo_plus_lang_nfe10_g3`** (restarted 2026-10-16 UTC after moving off Cursor background). Fill this table when all four suites have `eval_info.json` and `==== EXIT … exit=0` in logs. Unfinished suites are **pending**, not scored as 0%.*
+
+| Setting | Spatial | Object | Goal | Long | Avg. | All variants |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Full NFE=10 | *pending* | *pending* | *pending* | *pending* | *pending* | *pending* |
+
+Expected variant denominators: 390 / 354 / 410 / 383 → **1537**. Macro **Avg.** = unweighted mean of four suite **pc_success** (%). **Micro** = total successes / 1537 across finished suites only until complete.
+
+**Run record (informal wall-clock, not inference efficiency).** Record `overall.eval_s` from each `eval_info.json` after completion; π0.5 Language full reference (same 1537 variants): ~8.2 h total on dedicated GPU0 (2026-10-10 UTC jobs table above).
+
+**Reading.** Molmo Plus Language is for OOD paraphrase stress at the **same variant ids** as π0.5. Compare qualitatively to π0.5 Full **89.20** macro / **1367/1537** micro only after this row is complete. Drop-16 / materialized Plus Language is **not run** in this batch.
 
 ---
 
