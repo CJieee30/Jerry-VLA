@@ -256,8 +256,31 @@ Source: `results/stage_nfe/{pi05_full_nfe10_2000,pi05_k6_fisher_nfe10_2000,pi05_
 
 相对同协议 NFE=10 锚点（`eval_molmoact2_libero.md`）：Full 97.50→97.80（**+0.30**）；Drop-16 98.10→97.60（**−0.50**）。均在 2000 集尺度上，无套件塌掉。
 
+### 7.3 MolmoAct2 NFE=10 × 400 集闭环，GPU3 实体化 Drop-16（2026-10-15，`EXIT:0`）
+
+`scripts/stage_nfe/run_molmo_nfe10_gpu3.sh` → `run_molmo_nfe10_closed_loop.py`。`CUDA_VISIBLE_DEVICES=3`，`seed=1000`，`per_episode_seed=true`，`batch_size=1`，`compile_model=false`，`enable_inference_cuda_graph=false`，`num_steps_wait=50`，`num_inference_steps=10`，四套件 × 10 任务 × 10 回合（400）。顺序：**Full** → **Taylor Drop-16 materialized**（`operator=keep_kv_identity_residual_then_materialize`；层 `[1, 2, 3, 4, 24–35]`，与 `eval_molmoact2_libero.md` Taylor Drop-16 no-L0 相同）。Drop-16 跑前 `preflight_molmo_nfe10_materialized.py`：`action_max_abs_vs_kvonly=0`，释放 **1531M** 参数（`preflight_materialized.json`）。不覆盖 §1 的 NFE=1 目录，也不覆盖 `molmoact2_libero/` 的 2000 集 keep-KV 锚点。
+
+Source：`results/stage_nfe/{molmoact2_full_nfe10_400,molmoact2_drop16_materialized_nfe10_400}/{eval_info.json,run_config.json,drop.json}`；日志 `results/stage_nfe/logs_nfe10_400_gpu3/run.log`（`ALL DONE 2026-10-15T17:16:52+00:00`）。
+
+| Setting | NFE | Spatial | Object | Goal | Long | Avg. | bits | eval_s |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Full | 10 | 97.0 | 99.0 | 100.0 | 98.0 | **98.50** | 394/400 | 3.58 h |
+| Taylor Drop-16 materialized | 10 | 99.0 | 100.0 | 99.0 | 96.0 | **98.50** | 394/400 | 3.66 h |
+
+`overall.eval_ep_s` ≈ **32.2 s**（Full）/ **33.0 s**（Drop-16）。闭环墙钟含 LIBERO 仿真与 GPU3 叠卡，**不是** `efficiency_analysis.md` 的 chunk 测速。
+
+Δ **同协议、同轮次**：Drop-16 materialized vs Full Avg. **0.00**（同为 394/400）；套件互有 ±2.0 pp 以内的置换（Long 98.0→96.0，Spatial 97.0→99.0），无塌缩。
+
+对照（协议或算子不同，仅作边界参考，不写入 §1 主表）：
+
+- vs §1 同机 Full **NFE=1** 400 集（98.25）：本格 Full NFE=10 **+0.25**。
+- vs §1 同机 keep-KV Taylor Drop-16 **NFE=1** 400 集（99.25）：不同 NFE，不比 Δ。
+- vs `eval_molmoact2_libero.md` keep-KV Taylor Drop-16 **NFE=10** 2000 集（98.10）：本格 materialized 400 集 **+0.40** pp Avg.，但 400 vs 2000 且 hook vs materialize，不能当成同精度复现。
+
+结论：在 NFE=10、400 集协议下，**实体化 Taylor Drop-16 与 Full 同成功率**；支撑 `efficiency_analysis.md` §6 的部署侧参数释放，**不**替换 `eval_molmoact2_libero.md` 的 keep-KV 2000 集主数字。
+
 ---
 
 ## Scope
 
-π0.5 与 MolmoAct2 的 NFE=1 结论是 **LIBERO、本机单进程协议**。SmolVLA 在同一协议下不成立。另一台机器上的 RoboTwin NFE=1 掉了约 15 分（`another_server_results`），那不是本机数字，也不写入上表。MolmoAct2 2000 集 NFE=1（Full / Taylor Drop-16）见 §7.2；`drop.json` 仅记录 `operator=keep_kv_identity_residual`，与当时磁盘上的 skip 实现需对照 `results/registry/core_results_registry.md`。π0.5 的 2000 集闭环在 §7。
+π0.5 与 MolmoAct2 的 NFE=1 结论是 **LIBERO、本机单进程协议**。SmolVLA 在同一协议下不成立。另一台机器上的 RoboTwin NFE=1 掉了约 15 分（`another_server_results`），那不是本机数字，也不写入上表。MolmoAct2 2000 集 NFE=1（Full / Taylor Drop-16）见 §7.2；`drop.json` 仅记录 `operator=keep_kv_identity_residual`，与当时磁盘上的 skip 实现需对照 `results/registry/core_results_registry.md`。MolmoAct2 **NFE=10**、400 集、GPU3 **Full / materialized Drop-16** 闭环见 §7.3。π0.5 的 2000 集闭环在 §7。

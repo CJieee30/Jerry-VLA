@@ -283,7 +283,9 @@ Same NFE=2: 164.9 vs 173.2 ms (**−4.8%**), 496.7 vs 510.3 G (**−2.7%**). §4
 
 Dropped layers are real modules. Q, the attention output projection, and the MLP weights are freed. The forward matches the §5 K/V-only skip: action max abs is **0** on one calibration frame for all three operating points (π0.5 at NFE=1 and NFE=10, Molmo at NFE=1, SmolVLA at NFE=2). TF32 is off. `compile_model` stays false. JSON: `results/stage_nfe/deployment_{pi05,molmoact2,smolvla}.json`. §4 and §5 are unchanged.
 
-`torch.compile(mode="reduce-overhead")` is a latency column, not an action-equivalent protocol. It moves actions (π0.5 pruned 0.040, SmolVLA 0.022–0.026, Molmo 0.0078–0.016). Molmo's own expert CUDA graph does not: action max abs is 0. No closed-loop was run.
+**MolmoAct2 LIBERO closed-loop (materialized Drop-16, GPU3, 2026-10-15).** After materialize, Taylor Drop-16 `[1–4, 24–35]` at **NFE=10** matches Full on **98.50%** Avg. (**394/400** each; Spatial 99.0 / Object 100.0 / Goal 99.0 / Long 96.0 vs Full 97.0 / 99.0 / 100.0 / 98.0). Full same protocol **98.50%**. Preflight `action_max_abs_vs_kvonly=0`. Protocol, paths, and caveats vs keep-KV 2000-ep anchors: `eval_nfe_libero.md` §7.3. This does not replace `eval_molmoact2_libero.md` keep-KV rows.
+
+`torch.compile(mode="reduce-overhead")` is a latency column, not an action-equivalent protocol. It moves actions (π0.5 pruned 0.040, SmolVLA 0.022–0.026, Molmo 0.0078–0.016). Molmo's own expert CUDA graph does not: action max abs is 0. π0.5 / SmolVLA materialized closed-loop on LIBERO is still not in this section.
 
 Allocated memory is after load, with the caching allocator emptied. Peak is one inference. Freed params assume bf16 (2 bytes).
 
