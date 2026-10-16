@@ -1,0 +1,167 @@
+{
+  "protocol": "layer_calibration_screening_v1",
+  "status": "development_diagnostic",
+  "pool": {
+    "n_frames": 480,
+    "n_tasks": 40,
+    "frames_per_task": 12,
+    "horizon": 10,
+    "event_boost": 1.0,
+    "score_dir": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage2_care_v2/scores",
+    "estimator": "care_v2 per-frame Fisher/Taylor/GateProbe (score_frame.py)",
+    "aggregation_after_selection": "equal mean over selected frames only (no \u03b1 weights)"
+  },
+  "alignment": {
+    "n_records": 480,
+    "n_frames_expected": 480,
+    "alignment_ok": true,
+    "sample_mismatches": []
+  },
+  "budgets": [
+    {
+      "frames": 40,
+      "k_per_task": 1
+    },
+    {
+      "frames": 80,
+      "k_per_task": 2
+    },
+    {
+      "frames": 120,
+      "k_per_task": 3
+    }
+  ],
+  "strategies": [
+    "random",
+    "alpha",
+    "g_only",
+    "care_event"
+  ],
+  "stochastic_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "full_pool_drops": {
+    "pi05/fisher": [
+      2,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "pi05/taylor": [
+      1,
+      2,
+      14,
+      15,
+      16,
+      17
+    ],
+    "pi05/gateprobe": [
+      2,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "smolvla/fisher": [
+      10,
+      12,
+      13,
+      14
+    ],
+    "smolvla/taylor": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "smolvla/gateprobe": [
+      11,
+      13,
+      14,
+      15
+    ],
+    "molmoact2/fisher": [
+      1,
+      2,
+      3,
+      4,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "molmoact2/taylor": [
+      1,
+      2,
+      3,
+      4,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "molmoact2/gateprobe": [
+      1,
+      2,
+      3,
+      21,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ]
+  },
+  "summaries": [],
+  "notes": [
+    "Full-480 equal-weight drop is a reference, not ground truth.",
+    "Historical SR labels apply only when drop set exactly matches a KNOWN row.",
+    "Smol/Molmo legacy 32-frame calibrations are not comparable to budget=40 on this 480 pool.",
+    "CPU screening does not prove closed-loop benefit."
+  ]
+}

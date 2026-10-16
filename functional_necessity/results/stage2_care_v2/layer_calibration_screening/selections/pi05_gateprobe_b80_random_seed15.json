@@ -1,0 +1,894 @@
+{
+  "protocol": "layer_calibration_screening_v1",
+  "stack": "pi05",
+  "method": "gateprobe",
+  "strategy": "random",
+  "budget_frames": 80,
+  "k_per_task": 2,
+  "seed": 15,
+  "n_selected": 80,
+  "shared_indices": [
+    3,
+    19,
+    24,
+    25,
+    42,
+    53,
+    56,
+    62,
+    65,
+    75,
+    81,
+    82,
+    83,
+    90,
+    113,
+    115,
+    124,
+    127,
+    129,
+    133,
+    137,
+    143,
+    147,
+    153,
+    154,
+    161,
+    166,
+    168,
+    174,
+    175,
+    196,
+    202,
+    206,
+    207,
+    211,
+    215,
+    216,
+    217,
+    220,
+    235,
+    237,
+    239,
+    247,
+    250,
+    254,
+    255,
+    266,
+    271,
+    272,
+    278,
+    282,
+    289,
+    316,
+    320,
+    323,
+    328,
+    332,
+    336,
+    344,
+    361,
+    363,
+    393,
+    405,
+    409,
+    410,
+    411,
+    412,
+    414,
+    417,
+    419,
+    428,
+    435,
+    439,
+    443,
+    447,
+    454,
+    461,
+    471,
+    474,
+    478
+  ],
+  "per_task": {
+    "0": [
+      {
+        "shared_index": 411,
+        "global_index": 29135,
+        "episode_index": 105,
+        "frame_in_episode": 54,
+        "alpha": 1.085960865020752,
+        "G": 0,
+        "alpha_event": 0.9725022672773898
+      },
+      {
+        "shared_index": 417,
+        "global_index": 34401,
+        "episode_index": 125,
+        "frame_in_episode": 29,
+        "alpha": 1.1639916896820068,
+        "G": 0,
+        "alpha_event": 1.042380617727104
+      }
+    ],
+    "1": [
+      {
+        "shared_index": 344,
+        "global_index": 99012,
+        "episode_index": 369,
+        "frame_in_episode": 186,
+        "alpha": 0.6170735359191895,
+        "G": 0,
+        "alpha_event": 0.5526031665485661
+      },
+      {
+        "shared_index": 419,
+        "global_index": 35715,
+        "episode_index": 130,
+        "frame_in_episode": 114,
+        "alpha": 0.8175151348114014,
+        "G": 0,
+        "alpha_event": 0.7321031058724904
+      }
+    ],
+    "2": [
+      {
+        "shared_index": 332,
+        "global_index": 604,
+        "episode_index": 2,
+        "frame_in_episode": 106,
+        "alpha": 0.5159669518470764,
+        "G": 0,
+        "alpha_event": 0.46205995692293844
+      },
+      {
+        "shared_index": 336,
+        "global_index": 62063,
+        "episode_index": 230,
+        "frame_in_episode": 266,
+        "alpha": 1.324715256690979,
+        "G": 0,
+        "alpha_event": 1.186312170286457
+      }
+    ],
+    "3": [
+      {
+        "shared_index": 405,
+        "global_index": 26002,
+        "episode_index": 93,
+        "frame_in_episode": 117,
+        "alpha": 0.8677261471748352,
+        "G": 0,
+        "alpha_event": 0.777068191575463
+      },
+      {
+        "shared_index": 439,
+        "global_index": 67997,
+        "episode_index": 253,
+        "frame_in_episode": 108,
+        "alpha": 1.1298831701278687,
+        "G": 0,
+        "alpha_event": 1.011835674839829
+      }
+    ],
+    "4": [
+      {
+        "shared_index": 428,
+        "global_index": 43576,
+        "episode_index": 161,
+        "frame_in_episode": 8,
+        "alpha": 1.0917255878448486,
+        "G": 0,
+        "alpha_event": 0.9776647056278295
+      },
+      {
+        "shared_index": 435,
+        "global_index": 55759,
+        "episode_index": 205,
+        "frame_in_episode": 29,
+        "alpha": 0.8891764283180237,
+        "G": 0,
+        "alpha_event": 0.7962773985712323
+      }
+    ],
+    "5": [
+      {
+        "shared_index": 454,
+        "global_index": 19933,
+        "episode_index": 71,
+        "frame_in_episode": 185,
+        "alpha": 1.0371320247650146,
+        "G": 0,
+        "alpha_event": 0.9287749476411314
+      },
+      {
+        "shared_index": 461,
+        "global_index": 54055,
+        "episode_index": 199,
+        "frame_in_episode": 34,
+        "alpha": 0.6288313269615173,
+        "G": 0,
+        "alpha_event": 0.5631325316621231
+      }
+    ],
+    "6": [
+      {
+        "shared_index": 393,
+        "global_index": 18594,
+        "episode_index": 67,
+        "frame_in_episode": 231,
+        "alpha": 0.4656616449356079,
+        "G": 0,
+        "alpha_event": 0.4170104283411205
+      },
+      {
+        "shared_index": 478,
+        "global_index": 15273,
+        "episode_index": 54,
+        "frame_in_episode": 265,
+        "alpha": 0.5410588979721069,
+        "G": 0,
+        "alpha_event": 0.4845303564400776
+      }
+    ],
+    "7": [
+      {
+        "shared_index": 363,
+        "global_index": 4891,
+        "episode_index": 17,
+        "frame_in_episode": 221,
+        "alpha": 1.7088501453399658,
+        "G": 1,
+        "alpha_event": 2.4258359512867553
+      },
+      {
+        "shared_index": 414,
+        "global_index": 33564,
+        "episode_index": 122,
+        "frame_in_episode": 4,
+        "alpha": 0.8631071448326111,
+        "G": 0,
+        "alpha_event": 0.7729317715670987
+      }
+    ],
+    "8": [
+      {
+        "shared_index": 361,
+        "global_index": 4394,
+        "episode_index": 15,
+        "frame_in_episode": 214,
+        "alpha": 1.1878783702850342,
+        "G": 0,
+        "alpha_event": 1.0637716749856276
+      },
+      {
+        "shared_index": 412,
+        "global_index": 33097,
+        "episode_index": 120,
+        "frame_in_episode": 65,
+        "alpha": 0.597174882888794,
+        "G": 0,
+        "alpha_event": 0.534783477265881
+      }
+    ],
+    "9": [
+      {
+        "shared_index": 409,
+        "global_index": 28710,
+        "episode_index": 103,
+        "frame_in_episode": 2,
+        "alpha": 0.6167816519737244,
+        "G": 0,
+        "alpha_event": 0.5523417779406615
+      },
+      {
+        "shared_index": 410,
+        "global_index": 28924,
+        "episode_index": 104,
+        "frame_in_episode": 32,
+        "alpha": 0.5465335249900818,
+        "G": 0,
+        "alpha_event": 0.4894330075014276
+      }
+    ],
+    "10": [
+      {
+        "shared_index": 53,
+        "global_index": 133825,
+        "episode_index": 646,
+        "frame_in_episode": 49,
+        "alpha": 1.1194254159927368,
+        "G": 0,
+        "alpha_event": 1.0024705218820833
+      },
+      {
+        "shared_index": 56,
+        "global_index": 134977,
+        "episode_index": 655,
+        "frame_in_episode": 47,
+        "alpha": 1.359677791595459,
+        "G": 0,
+        "alpha_event": 1.2176219030397841
+      }
+    ],
+    "11": [
+      {
+        "shared_index": 211,
+        "global_index": 101842,
+        "episode_index": 381,
+        "frame_in_episode": 106,
+        "alpha": 1.1588860750198364,
+        "G": 0,
+        "alpha_event": 1.0378084254918796
+      },
+      {
+        "shared_index": 217,
+        "global_index": 112314,
+        "episode_index": 467,
+        "frame_in_episode": 16,
+        "alpha": 0.6482359766960144,
+        "G": 0,
+        "alpha_event": 0.5805098299335129
+      }
+    ],
+    "12": [
+      {
+        "shared_index": 82,
+        "global_index": 115476,
+        "episode_index": 494,
+        "frame_in_episode": 31,
+        "alpha": 1.1638123989105225,
+        "G": 0,
+        "alpha_event": 1.0422200588272517
+      },
+      {
+        "shared_index": 216,
+        "global_index": 111995,
+        "episode_index": 465,
+        "frame_in_episode": 17,
+        "alpha": 1.267696738243103,
+        "G": 0,
+        "alpha_event": 1.1352508104774206
+      }
+    ],
+    "13": [
+      {
+        "shared_index": 215,
+        "global_index": 111912,
+        "episode_index": 464,
+        "frame_in_episode": 24,
+        "alpha": 0.5998253226280212,
+        "G": 0,
+        "alpha_event": 0.5371570053907931
+      },
+      {
+        "shared_index": 220,
+        "global_index": 126284,
+        "episode_index": 581,
+        "frame_in_episode": 11,
+        "alpha": 0.4594109356403351,
+        "G": 0,
+        "alpha_event": 0.4114127782254062
+      }
+    ],
+    "14": [
+      {
+        "shared_index": 19,
+        "global_index": 113882,
+        "episode_index": 480,
+        "frame_in_episode": 48,
+        "alpha": 0.8971025347709656,
+        "G": 0,
+        "alpha_event": 0.8033754043506769
+      },
+      {
+        "shared_index": 161,
+        "global_index": 104761,
+        "episode_index": 404,
+        "frame_in_episode": 76,
+        "alpha": 0.7785181403160095,
+        "G": 0,
+        "alpha_event": 0.697180424231428
+      }
+    ],
+    "15": [
+      {
+        "shared_index": 166,
+        "global_index": 150462,
+        "episode_index": 781,
+        "frame_in_episode": 39,
+        "alpha": 1.5015957355499268,
+        "G": 0,
+        "alpha_event": 1.3447125991307782
+      },
+      {
+        "shared_index": 443,
+        "global_index": 142257,
+        "episode_index": 713,
+        "frame_in_episode": 67,
+        "alpha": 0.12445270270109177,
+        "G": 0,
+        "alpha_event": 0.11145018153421013
+      }
+    ],
+    "16": [
+      {
+        "shared_index": 25,
+        "global_index": 124787,
+        "episode_index": 567,
+        "frame_in_episode": 54,
+        "alpha": 3.22664213180542,
+        "G": 0,
+        "alpha_event": 2.889530267569594
+      },
+      {
+        "shared_index": 42,
+        "global_index": 130592,
+        "episode_index": 617,
+        "frame_in_episode": 66,
+        "alpha": 1.905186414718628,
+        "G": 0,
+        "alpha_event": 1.7061370879737379
+      }
+    ],
+    "17": [
+      {
+        "shared_index": 75,
+        "global_index": 103650,
+        "episode_index": 395,
+        "frame_in_episode": 48,
+        "alpha": 1.6722029447555542,
+        "G": 0,
+        "alpha_event": 1.4974951745536689
+      },
+      {
+        "shared_index": 83,
+        "global_index": 115719,
+        "episode_index": 495,
+        "frame_in_episode": 75,
+        "alpha": 1.7955399751663208,
+        "G": 1,
+        "alpha_event": 2.5034686347208956
+      }
+    ],
+    "18": [
+      {
+        "shared_index": 62,
+        "global_index": 135568,
+        "episode_index": 661,
+        "frame_in_episode": 38,
+        "alpha": 0.96295166015625,
+        "G": 0,
+        "alpha_event": 0.8623447703730873
+      },
+      {
+        "shared_index": 81,
+        "global_index": 115389,
+        "episode_index": 493,
+        "frame_in_episode": 41,
+        "alpha": 0.6273930072784424,
+        "G": 0,
+        "alpha_event": 0.5618444841846172
+      }
+    ],
+    "19": [
+      {
+        "shared_index": 3,
+        "global_index": 108936,
+        "episode_index": 437,
+        "frame_in_episode": 61,
+        "alpha": 1.4923906326293945,
+        "G": 0,
+        "alpha_event": 1.3364692233802458
+      },
+      {
+        "shared_index": 24,
+        "global_index": 124704,
+        "episode_index": 566,
+        "frame_in_episode": 98,
+        "alpha": 0.4117061495780945,
+        "G": 0,
+        "alpha_event": 0.36869207428491446
+      }
+    ],
+    "20": [
+      {
+        "shared_index": 168,
+        "global_index": 153558,
+        "episode_index": 807,
+        "frame_in_episode": 47,
+        "alpha": 1.3170135021209717,
+        "G": 1,
+        "alpha_event": 2.0749374647878414
+      },
+      {
+        "shared_index": 247,
+        "global_index": 157637,
+        "episode_index": 835,
+        "frame_in_episode": 53,
+        "alpha": 1.0189785957336426,
+        "G": 0,
+        "alpha_event": 0.912518145521903
+      }
+    ],
+    "21": [
+      {
+        "shared_index": 282,
+        "global_index": 165851,
+        "episode_index": 890,
+        "frame_in_episode": 106,
+        "alpha": 0.1491183489561081,
+        "G": 0,
+        "alpha_event": 0.13353881997368747
+      },
+      {
+        "shared_index": 323,
+        "global_index": 194141,
+        "episode_index": 1082,
+        "frame_in_episode": 136,
+        "alpha": 0.2903469204902649,
+        "G": 0,
+        "alpha_event": 0.2600121676285221
+      }
+    ],
+    "22": [
+      {
+        "shared_index": 266,
+        "global_index": 161645,
+        "episode_index": 862,
+        "frame_in_episode": 74,
+        "alpha": 0.9319892525672913,
+        "G": 0,
+        "alpha_event": 0.8346172411862472
+      },
+      {
+        "shared_index": 320,
+        "global_index": 193615,
+        "episode_index": 1079,
+        "frame_in_episode": 38,
+        "alpha": 0.9818608164787292,
+        "G": 1,
+        "alpha_event": 1.774800731347674
+      }
+    ],
+    "23": [
+      {
+        "shared_index": 250,
+        "global_index": 159263,
+        "episode_index": 846,
+        "frame_in_episode": 23,
+        "alpha": 0.9277787208557129,
+        "G": 0,
+        "alpha_event": 0.8308466157725266
+      },
+      {
+        "shared_index": 271,
+        "global_index": 162954,
+        "episode_index": 871,
+        "frame_in_episode": 2,
+        "alpha": 0.5619800686836243,
+        "G": 0,
+        "alpha_event": 0.5032657331984832
+      }
+    ],
+    "24": [
+      {
+        "shared_index": 237,
+        "global_index": 156188,
+        "episode_index": 825,
+        "frame_in_episode": 65,
+        "alpha": 1.1326977014541626,
+        "G": 0,
+        "alpha_event": 1.014356150654666
+      },
+      {
+        "shared_index": 254,
+        "global_index": 159922,
+        "episode_index": 850,
+        "frame_in_episode": 99,
+        "alpha": 0.6356320381164551,
+        "G": 0,
+        "alpha_event": 0.5692227207566898
+      }
+    ],
+    "25": [
+      {
+        "shared_index": 255,
+        "global_index": 159994,
+        "episode_index": 851,
+        "frame_in_episode": 19,
+        "alpha": 0.8939628601074219,
+        "G": 0,
+        "alpha_event": 0.8005637553979761
+      },
+      {
+        "shared_index": 316,
+        "global_index": 174104,
+        "episode_index": 946,
+        "frame_in_episode": 101,
+        "alpha": 0.48360881209373474,
+        "G": 0,
+        "alpha_event": 0.43308251833503675
+      }
+    ],
+    "26": [
+      {
+        "shared_index": 278,
+        "global_index": 164599,
+        "episode_index": 882,
+        "frame_in_episode": 8,
+        "alpha": 0.5393703579902649,
+        "G": 0,
+        "alpha_event": 0.48301823108305697
+      },
+      {
+        "shared_index": 289,
+        "global_index": 166837,
+        "episode_index": 897,
+        "frame_in_episode": 59,
+        "alpha": 1.2350642681121826,
+        "G": 0,
+        "alpha_event": 1.1060277028946484
+      }
+    ],
+    "27": [
+      {
+        "shared_index": 239,
+        "global_index": 156534,
+        "episode_index": 827,
+        "frame_in_episode": 97,
+        "alpha": 0.3432333171367645,
+        "G": 0,
+        "alpha_event": 0.3073731198538764
+      },
+      {
+        "shared_index": 272,
+        "global_index": 163103,
+        "episode_index": 872,
+        "frame_in_episode": 22,
+        "alpha": 0.6525532603263855,
+        "G": 0,
+        "alpha_event": 0.58437605408049
+      }
+    ],
+    "28": [
+      {
+        "shared_index": 447,
+        "global_index": 210566,
+        "episode_index": 1192,
+        "frame_in_episode": 149,
+        "alpha": 1.4981868267059326,
+        "G": 0,
+        "alpha_event": 1.3416598449418298
+      },
+      {
+        "shared_index": 471,
+        "global_index": 176883,
+        "episode_index": 965,
+        "frame_in_episode": 129,
+        "alpha": 1.3144136667251587,
+        "G": 0,
+        "alpha_event": 1.177086865838556
+      }
+    ],
+    "29": [
+      {
+        "shared_index": 235,
+        "global_index": 155915,
+        "episode_index": 823,
+        "frame_in_episode": 115,
+        "alpha": 0.20155960321426392,
+        "G": 0,
+        "alpha_event": 0.1805011372243667
+      },
+      {
+        "shared_index": 328,
+        "global_index": 196117,
+        "episode_index": 1096,
+        "frame_in_episode": 20,
+        "alpha": 1.016672134399414,
+        "G": 0,
+        "alpha_event": 0.9104526577597063
+      }
+    ],
+    "30": [
+      {
+        "shared_index": 137,
+        "global_index": 243443,
+        "episode_index": 1446,
+        "frame_in_episode": 3,
+        "alpha": 0.7366378307342529,
+        "G": 0,
+        "alpha_event": 0.6596756693784444
+      },
+      {
+        "shared_index": 175,
+        "global_index": 224063,
+        "episode_index": 1291,
+        "frame_in_episode": 57,
+        "alpha": 1.3544938564300537,
+        "G": 0,
+        "alpha_event": 1.212979573040462
+      }
+    ],
+    "31": [
+      {
+        "shared_index": 65,
+        "global_index": 220649,
+        "episode_index": 1262,
+        "frame_in_episode": 44,
+        "alpha": 2.0750954151153564,
+        "G": 1,
+        "alpha_event": 2.753816789923496
+      },
+      {
+        "shared_index": 474,
+        "global_index": 224999,
+        "episode_index": 1298,
+        "frame_in_episode": 82,
+        "alpha": 0.6369680762290955,
+        "G": 0,
+        "alpha_event": 0.5704191727979767
+      }
+    ],
+    "32": [
+      {
+        "shared_index": 127,
+        "global_index": 236242,
+        "episode_index": 1388,
+        "frame_in_episode": 80,
+        "alpha": 1.0992753505706787,
+        "G": 0,
+        "alpha_event": 0.9844256871740068
+      },
+      {
+        "shared_index": 202,
+        "global_index": 253015,
+        "episode_index": 1525,
+        "frame_in_episode": 58,
+        "alpha": 1.3595523834228516,
+        "G": 0,
+        "alpha_event": 1.2175095972135577
+      }
+    ],
+    "33": [
+      {
+        "shared_index": 206,
+        "global_index": 266572,
+        "episode_index": 1636,
+        "frame_in_episode": 106,
+        "alpha": 1.3457529544830322,
+        "G": 0,
+        "alpha_event": 1.205151899654308
+      },
+      {
+        "shared_index": 207,
+        "global_index": 266741,
+        "episode_index": 1637,
+        "frame_in_episode": 135,
+        "alpha": 0.24288567900657654,
+        "G": 0,
+        "alpha_event": 0.21750956331063573
+      }
+    ],
+    "34": [
+      {
+        "shared_index": 90,
+        "global_index": 221954,
+        "episode_index": 1273,
+        "frame_in_episode": 36,
+        "alpha": 1.9009846448898315,
+        "G": 0,
+        "alpha_event": 1.7023743090222108
+      },
+      {
+        "shared_index": 147,
+        "global_index": 249121,
+        "episode_index": 1493,
+        "frame_in_episode": 19,
+        "alpha": 1.24265718460083,
+        "G": 0,
+        "alpha_event": 1.1128273296015614
+      }
+    ],
+    "35": [
+      {
+        "shared_index": 143,
+        "global_index": 248686,
+        "episode_index": 1489,
+        "frame_in_episode": 34,
+        "alpha": 1.9650431871414185,
+        "G": 1,
+        "alpha_event": 2.655262555907395
+      },
+      {
+        "shared_index": 154,
+        "global_index": 262167,
+        "episode_index": 1600,
+        "frame_in_episode": 41,
+        "alpha": 1.64707350730896,
+        "G": 1,
+        "alpha_event": 2.3705135888655464
+      }
+    ],
+    "36": [
+      {
+        "shared_index": 153,
+        "global_index": 262043,
+        "episode_index": 1599,
+        "frame_in_episode": 33,
+        "alpha": 0.8620797395706177,
+        "G": 0,
+        "alpha_event": 0.7720117071532837
+      },
+      {
+        "shared_index": 196,
+        "global_index": 236788,
+        "episode_index": 1393,
+        "frame_in_episode": 36,
+        "alpha": 1.2103345394134521,
+        "G": 0,
+        "alpha_event": 1.0838816771921378
+      }
+    ],
+    "37": [
+      {
+        "shared_index": 115,
+        "global_index": 234841,
+        "episode_index": 1376,
+        "frame_in_episode": 71,
+        "alpha": 0.9737746119499207,
+        "G": 0,
+        "alpha_event": 0.8720369660101533
+      },
+      {
+        "shared_index": 133,
+        "global_index": 238394,
+        "episode_index": 1406,
+        "frame_in_episode": 69,
+        "alpha": 1.7921698093414307,
+        "G": 0,
+        "alpha_event": 1.6049281876261012
+      }
+    ],
+    "38": [
+      {
+        "shared_index": 113,
+        "global_index": 227711,
+        "episode_index": 1320,
+        "frame_in_episode": 55,
+        "alpha": 1.074660062789917,
+        "G": 0,
+        "alpha_event": 0.9623821458756573
+      },
+      {
+        "shared_index": 124,
+        "global_index": 235910,
+        "episode_index": 1385,
+        "frame_in_episode": 91,
+        "alpha": 1.125629186630249,
+        "G": 1,
+        "alpha_event": 1.9035485255257414
+      }
+    ],
+    "39": [
+      {
+        "shared_index": 129,
+        "global_index": 237941,
+        "episode_index": 1402,
+        "frame_in_episode": 109,
+        "alpha": 0.27389153838157654,
+        "G": 0,
+        "alpha_event": 0.24527600454468076
+      },
+      {
+        "shared_index": 174,
+        "global_index": 223955,
+        "episode_index": 1290,
+        "frame_in_episode": 113,
+        "alpha": 2.276524543762207,
+        "G": 0,
+        "alpha_event": 2.0386786961048227
+      }
+    ]
+  }
+}
