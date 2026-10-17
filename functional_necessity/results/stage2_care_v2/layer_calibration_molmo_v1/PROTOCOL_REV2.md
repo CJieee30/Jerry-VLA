@@ -23,11 +23,11 @@
 - 选样：Random/G-only 种子 0–19（逐帧指标）；主预算 80，补充 40/120
 - 汇总：选样后等权平均；Drop-16、排除 L0
 
-## 本轮交付状态
+## 本轮交付状态（2026-10-17）
 
-- CPU：`selftest_layer_calibration_molmo_v1.py` 通过（合成分数 + 闭环去重）
-- `analyze_layer_calibration_molmo_v1.py` 在缺 GPU 分数时 **exit 1**
-- GPU：与 LIBERO-plus 评测共享卡时单样本反传 **OOM**（见 `score_smoke_verify.json` / `score_smoke.log`）→ **正式打分 pending**
+- CPU：`selftest_layer_calibration_molmo_v1.py` 通过
+- GPU0 整卡冒烟 `--with-gate` 通过后：**400 帧三指标**（GPU0）+ **Taylor 四组**（GPU2）+ **analyze** 已完成
+- 见 `REPORT.md`、`summary.json`、`details.csv`
 
 ## 运行
 

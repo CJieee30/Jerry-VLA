@@ -166,7 +166,6 @@ def append_taylor_rows(
         ("alpha", None),
         ("care_event", None),
     ]
-    ref_drop = HISTORICAL_DROP16["S1_Taylor-16"][2]
     for strat, seed in scenarios:
         blob = load_taylor_group(strat, seed)
         scores = blob["layer_scores"]
@@ -175,7 +174,6 @@ def append_taylor_rows(
         freq[("taylor", TAYLOR_BUDGET, strat)][djson] += 1
         hist = map_historical(drop)
         j_taylor = jaccard(drop, taylor_stage1)
-        j_full = jaccard(drop, ref_drop)
         idx = blob["pool_indices"]
         sel_path = selection_path("taylor", TAYLOR_BUDGET, strat, seed)
         write_selection(
@@ -199,10 +197,10 @@ def append_taylor_rows(
                 "seed": seed if seed is not None else "NA",
                 "drop_layers": drop,
                 "drop_json": djson,
-                "jaccard_vs_full400_equal": j_full,
-                "full400_equal_drop": ref_drop,
+                "jaccard_vs_full400_equal": None,
+                "full400_equal_drop": None,
                 "jaccard_vs_taylor_stage1": j_taylor,
-                "note": "Molmo orig Taylor on selected group (not Taylor_absmean)",
+                "note": "Molmo orig Taylor on selected group; no full-400 Taylor matrix (not Taylor_absmean)",
                 **hist,
             }
         )
@@ -339,9 +337,14 @@ def write_report(details: pd.DataFrame, summary: dict, overlap: dict) -> None:
         diff_frac = float(rnd["drop_json"].ne(ce_drop).mean()) if method != "taylor" else float(
             ce_drop != rnd.iloc[0]["drop_json"]
         )
-        j_ce = float(ce.iloc[0]["jaccard_vs_full400_equal"])
+        j_ref = ce.iloc[0]["jaccard_vs_full400_equal"]
+        if method == "taylor" or j_ref is None or (isinstance(j_ref, float) and pd.isna(j_ref)):
+            j_s1 = float(ce.iloc[0]["jaccard_vs_taylor_stage1"])
+            ref_txt = f"J(S1 Taylor-16)={j_s1:.2f}"
+        else:
+            ref_txt = f"J(full400)={float(j_ref):.2f}"
         lines.append(
-            f"- **{method}**：CARE_event J(ref)={j_ce:.2f}；"
+            f"- **{method}**：CARE_event {ref_txt}；"
             f"random 与 CARE drop 不同比例≈{diff_frac*100:.0f}%"
             + (f"（{r_uniq} 种 random drop）" if method != "taylor" else "（Taylor 仅 seed=0）")
         )

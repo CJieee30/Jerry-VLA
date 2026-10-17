@@ -1,58 +1,65 @@
 {
   "protocol": "layer_calibration_molmo_v1_rev2",
-  "protocol_note": "Rev2: per-frame IGIA/Fisher/GateProbe; Taylor = Molmo orig grouped at b=80 only (not Taylor_absmean).",
-  "status": "scores_pending_gpu",
+  "protocol_note": "Rev2: per-frame IGIA/Fisher/GateProbe; Taylor grouped b=80 only (not Taylor_absmean).",
+  "status": "development_diagnostic_complete",
   "run_name": "prospective_v1_20261015",
   "n_obs": 400,
-  "cpu_selftest": {
-    "script": "selftest_layer_calibration_molmo_v1.py",
-    "passed": true,
-    "date": "2026-10-16"
+  "overlap_with_care_v2_dev": {
+    "cal_episodes": 400,
+    "dev_episodes": 480,
+    "overlap": 0,
+    "ok": true
   },
+  "rev2_gpu_run": {
+    "date": "2026-10-17",
+    "smoke": "verify_molmo_score_smoke.py --with-gate n=2 on GPU0 (dedicated)",
+    "frame_gpu": 0,
+    "taylor_gpu": 2,
+    "frame_finished_utc": "2026-10-17T02:42:55+00:00",
+    "taylor_finished_utc": "2026-10-17T02:33:34+00:00"
+  },
+  "full400_drops": {
+    "igia": [1, 2, 3, 4, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35],
+    "fisher": [1, 2, 3, 4, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35],
+    "gateprobe": [1, 2, 3, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
+  },
+  "primary_budget": 80,
   "scores_present": {
-    "igia": false,
-    "fisher": false,
-    "gateprobe": false,
-    "taylor": false
+    "igia": true,
+    "fisher": true,
+    "gateprobe": true,
+    "taylor": true
   },
-  "gpu_attempts": [
+  "taylor_reference_drop_s1": [1, 2, 3, 4, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35],
+  "closed_loop_recommendations": [
     {
-      "when": "2026-10-16T08:00+08:00",
-      "gpu": 1,
-      "free_before": "~14.3 GiB sharing plus_fisher6_nfe1_noise_object",
-      "mode": "original measure_grad IGIA n=1",
-      "result": "OOM"
+      "method": "fisher",
+      "strategy": "g_only",
+      "budget_frames": 80,
+      "drop_layers": [1, 2, 4, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35],
+      "comparability": "尚未评测",
+      "why": "Primary budget; fisher + g_only drop not in verified historical sets."
     },
     {
-      "when": "2026-10-16T18:55+08:00",
-      "gpu": 2,
-      "free_before_bytes": 14880669696,
-      "occupant": "plus_fisher6_noise_10 PID 3565007 ~9.43 GiB",
-      "mode": "freeze non-VLM + checkpointing + GateProbe retain_grad n=1",
-      "checkpoint_effective": true,
-      "peak_allocated_bytes": 14753626112,
-      "result": "OOM need +96 MiB",
-      "log": "score_smoke_verify_gate_oom.json"
-    },
-    {
-      "when": "2026-10-16T18:58+08:00",
-      "gpu": 2,
-      "mode": "same freeze+checkpoint, IGIA/Fisher only (no GateProbe) n=1",
-      "checkpoint_effective": true,
-      "vlm_trainable_tensors": 288,
-      "frozen_tensors": 1006,
-      "lm_head_cpu": true,
-      "peak_allocated_bytes": 14750084096,
-      "result": "OOM need +48 MiB; stopped per no-repeat-OOM",
-      "log": "score_smoke_verify_igia_oom.json"
+      "method": "igia",
+      "strategy": "g_only",
+      "budget_frames": 80,
+      "drop_layers": [1, 2, 3, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35],
+      "comparability": "尚未评测",
+      "why": "Primary budget; igia + g_only drop not in verified historical sets."
     }
   ],
-  "gpu_blocker": "GPU2 had ~14.1 GiB free but Molmo single-sample backward peaks at ~14.7 GiB allocated (~14.1 GiB process) while LIBERO-plus eval holds ~9.43 GiB. Need a card with eval gone or roughly >=16 GiB free. Do not retry OOM on shared 14 GiB.",
-  "run_command": "CUDA_VISIBLE_DEVICES=<id> bash scripts/stage2_care_v2/RUN_LAYER_CALIB_MOLMO_V1.sh <id> gpu",
+  "headline_b80": {
+    "fisher_care_vs_random_seed_diff_frac": 0.3,
+    "igia_care_vs_random_seed_diff_frac": 0.75,
+    "fisher_care_same_as_alpha": true,
+    "igia_care_same_as_alpha": true,
+    "fisher_care_historical": "S1 Taylor-16 (98.10%)",
+    "taylor_care_jaccard_s1": 1.0
+  },
   "notes": [
-    "gradient checkpointing was effective (policy_config, transformer, vision_backbone, training=True).",
-    "hf_model.gradient_checkpointing stayed false; paired-layer checkpoint uses policy.config (intended).",
-    "Subset selection + equal-weight aggregation; not legacy alpha-weighted IGIA.",
-    "Does not overwrite stage2_care_v2/scores/ (480-frame CARE v2)."
+    "Taylor rows: jaccard_vs_full400_equal is NA (no full-400 Taylor matrix).",
+    "Does not overwrite stage2_care_v2/scores/ (480-frame CARE v2).",
+    "Closed-loop not started this round."
   ]
 }

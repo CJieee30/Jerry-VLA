@@ -6,7 +6,9 @@
 
 两栈共用 Plus 环境配方：每语言/变体 **1** 次试验（`n_episodes=1`），`seed=1000`，`n_action_steps=10`，`num_inference_steps=10`，`compile_model=false`，`batch_size=1`，`control_mode=relative`，无视频、无 recovery。任务 id 来自 `LIBERO-plus/.../task_classification.json`（JSON 内 **1-based id 减 1**）。
 
-Avg. is the unweighted mean of four suite rates (Spatial / Object / Goal / Long). **NFE=1 batch (Fisher Drop-6, `num_inference_steps=1`, 2026-10-13–14):** GPU1 = Language + Camera + **Light** (24 suites, all `EXIT:0`); GPU3 = Init + Layout + **Background** (24 suites, all `EXIT:0`). Tags: `plus_fisher6_nfe1_{lang,init,camera,layout,light,background,noise}_*`. **Sensor Noise NFE=10:** π0.5 full/Drop-6 **四轮完成**（GPU0/2 resume，Goal+Long 于 **2026-10-16–17 UTC** `EXIT:0`）；见 § Sensor Noise。**Drop-6 NFE=1 Sensor Noise** 仍在 GPU1 队列 `plus_fisher6_nfe1_noise_*`（进行中）。
+**Macro Avg.**（本文 π0.5 主表统一口径）：每个 Plus 维度内，对四个套件分别从 `eval_info.json` 的 `per_task` 重算成功率（**非**对表中四舍五入后的百分数再平均）；维度 **Avg.** = 四套件率的**算术平均**；七维总分行 = 七个维度 Avg. 的**算术平均**。**Micro**（成功数/变体总数）仅作补充，可与 Macro 因套件规模不同而略有偏差。
+
+**NFE=1 batch (Fisher Drop-6, `num_inference_steps=1`, 2026-10-13–14):** GPU1 = Language + Camera + **Light** (24 suites, all `EXIT:0`); GPU3 = Init + Layout + **Background** (24 suites, all `EXIT:0`). Tags: `plus_fisher6_nfe1_{lang,init,camera,layout,light,background,noise}_*`. **Sensor Noise NFE=10:** π0.5 full/Drop-6 **四轮完成**（**2026-10-16–17 UTC** `EXIT:0`）；见 § Sensor Noise。**Drop-6 NFE=1 Sensor Noise**（GPU1）：**Spatial / Object 已完成**；**Goal 进行中**；**Long 未开始**（截至 **2026-10-17 UTC**）。
 
 ## Core: seven Plus dimensions (Avg. %)
 
@@ -22,7 +24,7 @@ Drop-6 = Fisher `[1,13,14,15,16,17]` keep-KV, **`num_inference_steps=10`** (offi
 | Light Conditions | 98.47 | 95.01 | −3.46 | **95.90** | +0.89 |
 | Background Textures | 96.62 | 92.36 | −4.26 | **90.96** | −1.40 |
 
-All **seven** Plus dimensions (NFE=10 full vs Drop-6): macro **87.03** vs **82.71**, **−4.32**. (Previously six dims without Sensor Noise: **85.89** / **81.65**, **−4.24**.) On all six NFE=1 slices (excl. Sensor Noise), macro Δ vs Drop-6 NFE=10 is **−0.57 / +0.29 / +0.56 / −1.43 / +0.89 / −1.40**—none approach the corresponding full-vs-Drop-6 OOD gaps at NFE=10. **Only Background Goal** at NFE=1 shows a multi-point drop vs Drop-6 NFE=10 (**−3.91** pp); Light **Long** is **+2.19** at NFE=1 (vs **−13.50** at NFE=10). Camera remains the largest full-vs-Drop-6 NFE=10 dim gap (−6.18); Sensor Noise **Long** is the largest within-dim suite gap (**−7.57** pp).
+All **seven** Plus dimensions (NFE=10 full vs Drop-6): macro **87.03** vs **82.71**, **−4.32**（自 `eval_info` 重算，见上）。On six finished NFE=1 slices (excl. Sensor Noise), macro Δ vs Drop-6 NFE=10 is **−0.57 / +0.29 / +0.56 / −1.43 / +0.89 / −1.40**—none match full-vs-Drop-6 NFE=10 gaps. **Background Goal** at NFE=1 vs NFE=10 Drop-6 is **−4.51 pp** (75.44 vs 79.36); **Layout Goal** is **−4.47 pp** (62.12 vs 66.59)—both matter, but **Background Goal** is still the largest Goal-suite NFE=1 regression among finished dims. Light **Long** is **+2.19** at NFE=1 (vs **−13.50** at NFE=10). Camera remains the largest **dimension-level** Drop-6 NFE=10 gap (−6.18); Sensor Noise **Long** is the largest **within-dimension suite** gap under NFE=10 (**−7.57** pp).
 
 ## Core: finished dims by suite (%)
 
@@ -183,9 +185,11 @@ Variant denominators: **390 / 354 / 410 / 383** → **1537**. Macro **Avg.** = u
 
 **Long suite only (`molmoact2_full_nfe10_lang_10`, GPU3).** **87.99%** (**337/383**); `==== EXIT` **2026-10-16T19:00:29Z**; `overall.eval_s` ≈ **21 542 s** (wall-clock aggregate in json, not per-step efficiency).
 
-**Run record (`overall.eval_s`, seconds).** Spatial **11 939** / Object **11 298** / Goal **14 005** / Long **21 542** → **≈58.8 h** summed suite times on GPU3 (2026-10-16 UTC batch). π0.5 Language full reference (same 1537 variant ids): macro **89.20**, micro **1367/1537**.
+**Run record.** Wall-clock for the four-suite serial on GPU3: **≈16.46 h** (`eval_molmoact2_full_nfe10_lang_spatial` `START` → `lang_10` `EXIT`, 2026-10-16 UTC). Do **not** sum `overall.eval_s` across suites (~58.8k s)—those aggregates are not additive wall time. π0.5 Language full reference (same 1537 variant ids): macro **89.20**, micro **1367/1537**.
 
-**Reading.** Molmo macro **87.71** is **−1.49 pp** vs π0.5 Full **89.20** on the same Language variant set. Spatial/Object are near parity; **Goal** Molmo **76.83** vs π0.5 **73.90** (+2.93 pp); **Long** **87.99** vs π0.5 **91.91** (−3.92 pp). Drop-16 / materialized Plus Language is **not run** in this batch.
+**Video / logging.** π0.5 Plus jobs: `max_episodes_rendered=0` (no eval videos). Molmo Plus writes **per-success** rollout mp4 under each job’s `videos/` (see `eval_info.json` `video_paths`); inference flags match π0.5 (`compile_model=false`, `enable_inference_cuda_graph=false`).
+
+**Reading.** Molmo macro **87.71** is **−1.49 pp** vs π0.5 Full **89.20**. **Spatial** Molmo **92.82** vs π0.5 **99.74** (**−6.92 pp**); Object **93.22** vs **91.24** (+1.98); Goal **76.83** vs **73.90** (+2.93); Long **87.99** vs **91.91** (−3.92). Drop-16 / materialized Plus Language is **not run** in this batch.
 
 ---
 
