@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # MolmoAct2 LIBERO-plus one-category eval (1 trial per variant).
-# Usage: bash run_eval_plus_lang.sh TAG SUITE [CATEGORY] [NFE] [GPU]
+# Usage: bash run_eval_plus_lang.sh TAG SUITE [CATEGORY] [NFE] [GPU] [VARIANT]
+#   VARIANT: full (default) | drop16_materialized
 #   TAG e.g. molmoact2_full_nfe10_lang_spatial
 #   SUITE: libero_spatial | libero_object | libero_goal | libero_10
 # GPU defaults to 3; override only for debugging.
@@ -12,6 +13,7 @@ SUITE="${2:?suite}"
 CATEGORY="${3:-Language Instructions}"
 NFE="${4:-10}"
 GPU="${5:-3}"
+VARIANT="${6:-full}"
 
 ROOT=/home/guorj/Skill_Efficient_VLA/functional_necessity
 OUT="$ROOT/results/eval_libero_plus/$TAG"
@@ -55,6 +57,7 @@ echo "==== START $TAG $(date -Iseconds) gpu=$GPU suite=$SUITE category=$CATEGORY
   --task_ids "$IDS" \
   --category "$CATEGORY" \
   --num_inference_steps "$NFE" \
+  --variant "$VARIANT" \
   --classification_json "$CLASS" >>"$LOG" 2>&1
 RC=$?
 echo "==== EXIT $TAG exit=$RC $(date -Iseconds) ====" | tee -a "$LOG"

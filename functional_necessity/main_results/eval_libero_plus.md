@@ -189,7 +189,22 @@ Variant denominators: **390 / 354 / 410 / 383** → **1537**. Macro **Avg.** = u
 
 **Video / logging.** π0.5 Plus jobs: `max_episodes_rendered=0` (no eval videos). Molmo Plus writes **per-success** rollout mp4 under each job’s `videos/` (see `eval_info.json` `video_paths`); inference flags match π0.5 (`compile_model=false`, `enable_inference_cuda_graph=false`).
 
-**Reading.** Molmo macro **87.71** is **−1.49 pp** vs π0.5 Full **89.20**. **Spatial** Molmo **92.82** vs π0.5 **99.74** (**−6.92 pp**); Object **93.22** vs **91.24** (+1.98); Goal **76.83** vs **73.90** (+2.93); Long **87.99** vs **91.91** (−3.92). Drop-16 / materialized Plus Language is **not run** in this batch.
+**Reading.** Molmo macro **87.71** is **−1.49 pp** vs π0.5 Full **89.20**. **Spatial** Molmo **92.82** vs π0.5 **99.74** (**−6.92 pp**); Object **93.22** vs **91.24** (+1.98); Goal **76.83** vs **73.90** (+2.93); Long **87.99** vs **91.91** (−3.92).
+
+---
+
+# LIBERO-plus Language Instructions — MolmoAct2 Taylor Drop-16 materialized
+
+Same **Language Instructions** slice and seeds as Full NFE=10 above. **Taylor Drop-16** `[1–4,24–35]`, operator `keep_kv_identity_residual_then_materialize` (`eval_plus_molmo.py --variant drop16_materialized`). Closed-loop SR anchor (in-distribution, keep-KV / materialized 400-ep NFE=10): **98.10%** Avg. (`eval_molmoact2_libero.md` / `eval_nfe_libero.md` §7.3) — **not** remeasured in this Plus batch.
+
+**Launch (2026-10-17 UTC).** `run_eval_plus_lang_drop16_serial.sh` on **GPU0** (after formal efficiency); master log `results/logs/eval_molmoact2_drop16_nfe10_lang_serial.log`. Tags: `molmoact2_drop16_materialized_nfe10_lang_{spatial,object,goal,10}`.
+
+| Batch | NFE | Status |
+| --- | ---: | --- |
+| Drop-16 materialized Language | 10 | **进行中** — Spatial suite started 2026-10-17T05:52:35Z |
+| Drop-16 materialized Language | 1 | **未开始** — queue after NFE=10 serial completes |
+
+Results table (four suites + Macro/Micro) will be filled when all four `eval_info.json` exist; use `summarize_plus_lang.py` with the four drop-16 dirs.
 
 ---
 

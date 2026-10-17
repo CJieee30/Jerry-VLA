@@ -19,6 +19,25 @@ Source:
 
 Closed-loop Avg. is from the corresponding `eval_*.md` (this-machine anchors). §1–§2 and the π0.5 row of §3 are the original NFE=10 reference. §3 Molmo / SmolVLA language tables are K/V-only from the §5 session; do not mix those milliseconds with Table 1. §4 is a separate paired run for the operating point.
 
+## Formal four-config wall clock (2026-10-17)
+
+**Protocol** (`scripts/stage_nfe/measure_formal_efficiency.py`): RTX 3090, `compile_model=false`, `enable_inference_cuda_graph=false`, batch=1, **32** fixed calib observations × **3** rounds, warmup **10**; **primary** metric = `torch.cuda.synchronize()` + `perf_counter` around full `predict_action_chunk` (vision + VLM prefix + action expert; inputs preloaded on GPU; no sim/video). CUDA events logged as auxiliary only. Pruned path = **runtime** keep-KV skip (π0.5 Fisher Drop-6; Molmo Taylor Drop-16), not weight materialize. Closed-loop SR **not** remeasured here.
+
+| Stack | Config | Median (ms) | P95 (ms) | Speedup vs Full NFE10 | Active params (M) | Peak alloc (GiB) |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| π0.5 | Full NFE10 | 564.5 | 688.4 | 1.00 | 4143.4 | 8.89 |
+| π0.5 | Fisher Drop-6 NFE10 | 537.6 | 665.1 | 1.05 | 3489.1 | 8.88 |
+| π0.5 | Full NFE1 | 211.7 | 219.9 | 2.67 | 4143.4 | 8.89 |
+| π0.5 | Drop-6 NFE1 | 185.9 | 195.3 | 3.04 | 3489.1 | 8.88 |
+| MolmoAct2 | Full NFE10 | 1179.6 | 1222.2 | 1.00 | 5442.2 | 12.66 |
+| MolmoAct2 | Taylor Drop-16 NFE10 | 1178.7 | 1223.6 | 1.00 | 3911.2 | 12.31 |
+| MolmoAct2 | Full NFE1 | 261.8 | 281.7 | 4.51 | 5442.2 | 12.66 |
+| MolmoAct2 | Drop-16 NFE1 | 244.1 | 260.9 | 4.83 | 3911.2 | 12.30 |
+
+**Stability:** end-of-run Full NFE10 recheck vs start — π0.5 median drift **1.36%**; Molmo **2.26%** (practical target ≤3%). Raw: `results/stage_nfe/formal_efficiency_{pi05,molmoact2}_20261017.json`.
+
+**Reading:** Molmo NFE=10 chunk time is **action-expert dominated**; runtime Drop-16 barely moves median wall clock at NFE10 (~0.08%) despite lower active params. NFE=1 is where both stacks show larger gaps; π0.5 pruning adds ~7% on top of NFE1 alone at median.
+
 ---
 
 

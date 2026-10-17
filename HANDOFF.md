@@ -1,9 +1,9 @@
 # HANDOFF：Flow-Matching VLA 的无恢复压缩与离线少步校准
 
-> 写给完全没有前文的新对话。更新：2026-10-14。  
+> 写给完全没有前文的新对话。更新：2026-10-17。  
 > 数据核查快照：Jerry-VLA `eab85156dd53d89cc47e41e9f42676c9311eca61`。  
 > 服务器项目根目录：`/home/guorj/Skill_Efficient_VLA`。本文路径未特别说明时均相对此目录。  
-> 本次更新只整理文档、核查已有代码与结果，没有启动新 GPU 实验。
+> **Molmo 前瞻池 CARE_event rev2**（`layer_calibration_molmo_v1`）已完成 400 帧打分与 IGIA 复核文档；**正式四配置效率测量**见 `scripts/stage_nfe/measure_formal_efficiency.py` 与 `results/stage_nfe/formal_efficiency_*.json`。
 
 ## 0. 接手先读这一页
 

@@ -2,7 +2,7 @@
 
 **研究主线：系统性分析 VLM 层冗余，结合事件感知的离线 NFE 校准，在不做恢复训练的条件下压缩并加速 Flow-Matching VLA。**
 
-更新：2026-10-14。本文依据 Jerry-VLA 提交 `eab85156dd53d89cc47e41e9f42676c9311eca61` 中的结果，以及最新确定的研究计划整理。服务器项目目录名是 `Skill_Efficient_VLA`，对应 GitHub 仓库是 [CJieee30/Jerry-VLA](https://github.com/CJieee30/Jerry-VLA)。本文介绍研究；新对话接手实验前，请读 [HANDOFF.md](HANDOFF.md)。
+更新：2026-10-17。本文依据 Jerry-VLA 提交 `eab85156dd53d89cc47e41e9f42676c9311eca61` 中的结果，以及最新确定的研究计划整理。服务器项目目录名是 `Skill_Efficient_VLA`，对应 GitHub 仓库是 [CJieee30/Jerry-VLA](https://github.com/CJieee30/Jerry-VLA)。本文介绍研究；新对话接手实验前，请读 [HANDOFF.md](HANDOFF.md)。效率主协议见 `functional_necessity/scripts/stage_nfe/measure_formal_efficiency.py`。
 
 当前论文保留两项主贡献：**VLM backbone 的 no-recovery 层冗余分析与剪枝；CARE_event 支持的 action expert 少步推理诊断。** 面向相机角色的视觉 Token 剪枝 CROP 暂不列为主贡献。目标是形成有竞争力的顶会工作，近期优先补齐两条主线的核心证据。
 

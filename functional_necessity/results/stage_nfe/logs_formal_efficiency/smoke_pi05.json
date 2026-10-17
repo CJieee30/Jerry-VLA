@@ -1,0 +1,335 @@
+{
+  "protocol": "formal_efficiency_v1",
+  "utc_start": "2026-10-17T05:32:45Z",
+  "utc_end": "2026-10-17T05:35:55Z",
+  "stack": "pi05",
+  "checkpoint": "lerobot/pi05_libero_finetuned_v044",
+  "device": "cuda:0",
+  "gpu_name": "NVIDIA GeForce RTX 3090",
+  "compile_model": false,
+  "enable_inference_cuda_graph": false,
+  "batch_size": 1,
+  "n_action_steps": 10,
+  "skip_operator": "dtr_appendix_b_prefix_kv (runtime skip_llm_layers)",
+  "pruned_layers": [
+    1,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "params": {
+    "full_stored_m": 4143.404816,
+    "full_active_m": 4143.404816,
+    "pruned_active_m": 3489.081104
+  },
+  "closed_loop_sr_note": "SR cited from eval_*.md historical runs; not remeasured in this script",
+  "n_obs": 4,
+  "warmup": 3,
+  "rounds": 1,
+  "environment_start": {
+    "utc": "2026-10-17T05:32:45Z",
+    "hostname": "miaa-hpc2",
+    "loadavg": "6.00 6.00 5.60 4/5565 1723581",
+    "mem_free_kb": "MemAvailable:   208471108 kB",
+    "nvidia_smi": "266 MiB, 23861 MiB, 0 %, 30, 1695 MHz, 27.63 W",
+    "cpu_count": 48
+  },
+  "environment_end": {
+    "utc": "2026-10-17T05:35:55Z",
+    "hostname": "miaa-hpc2",
+    "loadavg": "8.40 6.42 5.78 5/5573 1725701",
+    "mem_free_kb": "MemAvailable:   204182332 kB",
+    "nvidia_smi": "9464 MiB, 14663 MiB, 16 %, 40, 1965 MHz, 201.46 W",
+    "cpu_count": 48
+  },
+  "configs": [
+    {
+      "config": "full_nfe10",
+      "num_inference_steps": 10,
+      "drop_layers": [],
+      "timing_boundary": "torch.cuda.synchronize(); perf_counter around predict_action_chunk; batch already on GPU (no disk/video); output left on GPU",
+      "warmup_chunks": 3,
+      "rounds": 1,
+      "n_obs_per_round": 4,
+      "per_round": [
+        {
+          "round": 0,
+          "samples_ms": [
+            561.1398126929998,
+            559.0651831589639,
+            552.4033359251916,
+            559.1087928041816
+          ],
+          "n": 4,
+          "median_ms": 559.0869879815727,
+          "mean_ms": 557.9292811453342,
+          "p95_ms": 561.1398126929998,
+          "min_ms": 552.4033359251916,
+          "max_ms": 561.1398126929998,
+          "stdev_ms": 3.2986779371627684
+        }
+      ],
+      "all_samples": {
+        "n": 4,
+        "median_ms": 559.0869879815727,
+        "mean_ms": 557.9292811453342,
+        "p95_ms": 561.1398126929998,
+        "min_ms": 552.4033359251916,
+        "max_ms": 561.1398126929998,
+        "stdev_ms": 3.2986779371627684
+      },
+      "cuda_event_aux_ms_first_obs": {
+        "n": 1,
+        "median_ms": 563.6270141601562,
+        "mean_ms": 563.6270141601562,
+        "p95_ms": 563.6270141601562,
+        "min_ms": 563.6270141601562,
+        "max_ms": 563.6270141601562,
+        "stdev_ms": 0.0
+      },
+      "peak_allocated_bytes": 9521989632,
+      "peak_allocated_gib": 8.868043899536133
+    },
+    {
+      "config": "pruned_nfe10",
+      "num_inference_steps": 10,
+      "drop_layers": [
+        1,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "timing_boundary": "torch.cuda.synchronize(); perf_counter around predict_action_chunk; batch already on GPU (no disk/video); output left on GPU",
+      "warmup_chunks": 3,
+      "rounds": 1,
+      "n_obs_per_round": 4,
+      "per_round": [
+        {
+          "round": 0,
+          "samples_ms": [
+            535.338319838047,
+            526.6359872184694,
+            533.8363419286907,
+            522.5772149860859
+          ],
+          "n": 4,
+          "median_ms": 530.23616457358,
+          "mean_ms": 529.5969659928232,
+          "p95_ms": 535.338319838047,
+          "min_ms": 522.5772149860859,
+          "max_ms": 535.338319838047,
+          "stdev_ms": 5.219668375491922
+        }
+      ],
+      "all_samples": {
+        "n": 4,
+        "median_ms": 530.23616457358,
+        "mean_ms": 529.5969659928232,
+        "p95_ms": 535.338319838047,
+        "min_ms": 522.5772149860859,
+        "max_ms": 535.338319838047,
+        "stdev_ms": 5.219668375491922
+      },
+      "cuda_event_aux_ms_first_obs": {
+        "n": 1,
+        "median_ms": 521.3460693359375,
+        "mean_ms": 521.3460693359375,
+        "p95_ms": 521.3460693359375,
+        "min_ms": 521.3460693359375,
+        "max_ms": 521.3460693359375,
+        "stdev_ms": 0.0
+      },
+      "peak_allocated_bytes": 9517033472,
+      "peak_allocated_gib": 8.863428115844727
+    },
+    {
+      "config": "full_nfe1",
+      "num_inference_steps": 1,
+      "drop_layers": [],
+      "timing_boundary": "torch.cuda.synchronize(); perf_counter around predict_action_chunk; batch already on GPU (no disk/video); output left on GPU",
+      "warmup_chunks": 3,
+      "rounds": 1,
+      "n_obs_per_round": 4,
+      "per_round": [
+        {
+          "round": 0,
+          "samples_ms": [
+            189.88505890592933,
+            189.415595959872,
+            187.38425988703966,
+            185.91120094060898
+          ],
+          "n": 4,
+          "median_ms": 188.39992792345583,
+          "mean_ms": 188.1490289233625,
+          "p95_ms": 189.88505890592933,
+          "min_ms": 185.91120094060898,
+          "max_ms": 189.88505890592933,
+          "stdev_ms": 1.5977122642747905
+        }
+      ],
+      "all_samples": {
+        "n": 4,
+        "median_ms": 188.39992792345583,
+        "mean_ms": 188.1490289233625,
+        "p95_ms": 189.88505890592933,
+        "min_ms": 185.91120094060898,
+        "max_ms": 189.88505890592933,
+        "stdev_ms": 1.5977122642747905
+      },
+      "cuda_event_aux_ms_first_obs": {
+        "n": 1,
+        "median_ms": 190.0367431640625,
+        "mean_ms": 190.0367431640625,
+        "p95_ms": 190.0367431640625,
+        "min_ms": 190.0367431640625,
+        "max_ms": 190.0367431640625,
+        "stdev_ms": 0.0
+      },
+      "peak_allocated_bytes": 9521989632,
+      "peak_allocated_gib": 8.868043899536133
+    },
+    {
+      "config": "pruned_nfe1",
+      "num_inference_steps": 1,
+      "drop_layers": [
+        1,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "timing_boundary": "torch.cuda.synchronize(); perf_counter around predict_action_chunk; batch already on GPU (no disk/video); output left on GPU",
+      "warmup_chunks": 3,
+      "rounds": 1,
+      "n_obs_per_round": 4,
+      "per_round": [
+        {
+          "round": 0,
+          "samples_ms": [
+            160.30567791312933,
+            163.36214309558272,
+            164.08576630055904,
+            165.63539393246174
+          ],
+          "n": 4,
+          "median_ms": 163.72395469807088,
+          "mean_ms": 163.3472453104332,
+          "p95_ms": 165.63539393246174,
+          "min_ms": 160.30567791312933,
+          "max_ms": 165.63539393246174,
+          "stdev_ms": 1.9385814108318844
+        }
+      ],
+      "all_samples": {
+        "n": 4,
+        "median_ms": 163.72395469807088,
+        "mean_ms": 163.3472453104332,
+        "p95_ms": 165.63539393246174,
+        "min_ms": 160.30567791312933,
+        "max_ms": 165.63539393246174,
+        "stdev_ms": 1.9385814108318844
+      },
+      "cuda_event_aux_ms_first_obs": {
+        "n": 1,
+        "median_ms": 161.04039001464844,
+        "mean_ms": 161.04039001464844,
+        "p95_ms": 161.04039001464844,
+        "min_ms": 161.04039001464844,
+        "max_ms": 161.04039001464844,
+        "stdev_ms": 0.0
+      },
+      "peak_allocated_bytes": 9517033472,
+      "peak_allocated_gib": 8.863428115844727
+    }
+  ],
+  "summary_table": [
+    {
+      "config": "full_nfe10",
+      "median_ms": 559.0869879815727,
+      "p95_ms": 561.1398126929998,
+      "speedup_vs_full_nfe10": 1.0,
+      "peak_gib": 8.868043899536133
+    },
+    {
+      "config": "pruned_nfe10",
+      "median_ms": 530.23616457358,
+      "p95_ms": 535.338319838047,
+      "speedup_vs_full_nfe10": 1.0544112705537443,
+      "peak_gib": 8.863428115844727
+    },
+    {
+      "config": "full_nfe1",
+      "median_ms": 188.39992792345583,
+      "p95_ms": 189.88505890592933,
+      "speedup_vs_full_nfe10": 2.967554150066988,
+      "peak_gib": 8.868043899536133
+    },
+    {
+      "config": "pruned_nfe1",
+      "median_ms": 163.72395469807088,
+      "p95_ms": 165.63539393246174,
+      "speedup_vs_full_nfe10": 3.4148148266550535,
+      "peak_gib": 8.863428115844727
+    }
+  ],
+  "stability": {
+    "full_nfe10_median_first_ms": 559.0869879815727,
+    "full_nfe10_median_recheck_ms": 556.4862235914916,
+    "recheck_round_median_drift_pct": 0.4651806330657953,
+    "drift_target_practical_pct": 3.0,
+    "drift_investigate_pct": 5.0
+  },
+  "full_nfe10_recheck": {
+    "config": "full_nfe10_recheck",
+    "num_inference_steps": 10,
+    "drop_layers": [],
+    "timing_boundary": "torch.cuda.synchronize(); perf_counter around predict_action_chunk; batch already on GPU (no disk/video); output left on GPU",
+    "warmup_chunks": 3,
+    "rounds": 1,
+    "n_obs_per_round": 4,
+    "per_round": [
+      {
+        "round": 0,
+        "samples_ms": [
+          573.8693601451814,
+          559.288112912327,
+          553.6843342706561,
+          551.5828761272132
+        ],
+        "n": 4,
+        "median_ms": 556.4862235914916,
+        "mean_ms": 559.6061708638445,
+        "p95_ms": 573.8693601451814,
+        "min_ms": 551.5828761272132,
+        "max_ms": 573.8693601451814,
+        "stdev_ms": 8.703176667215365
+      }
+    ],
+    "all_samples": {
+      "n": 4,
+      "median_ms": 556.4862235914916,
+      "mean_ms": 559.6061708638445,
+      "p95_ms": 573.8693601451814,
+      "min_ms": 551.5828761272132,
+      "max_ms": 573.8693601451814,
+      "stdev_ms": 8.703176667215365
+    },
+    "cuda_event_aux_ms_first_obs": {
+      "n": 1,
+      "median_ms": 548.5752563476562,
+      "mean_ms": 548.5752563476562,
+      "p95_ms": 548.5752563476562,
+      "min_ms": 548.5752563476562,
+      "max_ms": 548.5752563476562,
+      "stdev_ms": 0.0
+    },
+    "peak_allocated_bytes": 9521989632,
+    "peak_allocated_gib": 8.868043899536133
+  }
+}

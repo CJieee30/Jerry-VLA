@@ -1,0 +1,13 @@
+Formal efficiency precheck (2026-10-17 UTC+8)
+
+GPU0: idle ~24GiB free, util 0%, temp ~25C, SM clock idle (~210 MHz) before load
+GPU2: idle ~24GiB free (same)
+GPU1/GPU3: occupied by other jobs (not stopped)
+
+Host: loadavg ~4.8–5.3 / 48 CPUs; MemAvailable ~199GiB / 247GiB; swap 0
+CPU pinning: OMP/MKL=4; taskset cores 8–15 (pi05), 16–23 (molmo planned)
+
+Short smoke pi05 (4 obs, 1 round): full_nfe10 median ~559 ms; drift recheck ~0.47%
+Formal pi05: started GPU0 background pid 1725790
+
+Timing boundary: cuda synchronize + perf_counter around predict_action_chunk; 32 calib obs batch=1 on GPU; compile=false; cuda_graph=false.

@@ -1,0 +1,30 @@
+{
+  "model": "MolmoAct2-LIBERO-LeRobot",
+  "checkpoint_path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/checkpoints/MolmoAct2-LIBERO",
+  "lerobot_weights": "/home/guorj/Skill_Efficient_VLA/functional_necessity/checkpoints/MolmoAct2-LIBERO-LeRobot",
+  "variant": "drop16_materialized",
+  "inference_action_mode": "continuous",
+  "dtype": "bfloat16",
+  "num_inference_steps": 10,
+  "n_action_steps": 10,
+  "num_steps_wait": 50,
+  "seed": 1000,
+  "eval_seed": 1000,
+  "per_episode_seed": true,
+  "compile_model": false,
+  "enable_inference_cuda_graph": false,
+  "n_episodes_per_task": 1,
+  "env_type": "libero_plus",
+  "env_task": "libero_spatial",
+  "env_control_mode": "relative",
+  "env_max_parallel_tasks": 1,
+  "eval_batch_size": 1,
+  "category": "Language Instructions",
+  "task_ids_n": 390,
+  "started_utc": "2026-10-17T05:52:42Z",
+  "code_sha256": {
+    "eval_plus_molmo.py": "465d33574f2a55fa24bf2c93b452f1c8ef2d05659106e91241adb55a24cfea09",
+    "load_policy.py": "c85f9f7a71c30529b329f1c14fee8ea3e783d1b45817e497645cffaff1b3ea88",
+    "layer_skip.py": "2b4dc0f201d6887cbaecce6fd792eda5fbf0e50af4c31a3e324b5c56c1c74044"
+  }
+}

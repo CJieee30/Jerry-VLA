@@ -8,15 +8,15 @@
 ## 2. IGIA 新旧路径（2 固定样本 × 2 次重复）
 
 - 同一权重、固定 calib 中 `noise`/`timesteps`；`score_frame_three`（rev2 逐帧）vs `score.py::measure_grad(..., "igia")`（原实现）。
-- **重复性**：同一样本两次逐帧 IGIA **逐层完全一致**（`repeatability_ours.identical=true`）。
+- **重复性**：同一样本两次逐帧 IGIA **存在小幅数值波动**（两样本 `repeatability_ours.identical` 均为 **false**；逐层相对误差仍约 10⁻³ 量级）。
 - **数值**：4 次逐样本比较聚合后 `max_rel≈1.46e-3`（略超 1e-3）、`max_abs≈0.023`（主要在中间层）；**不能宣称 400 帧全量逐层数值等价**，但与冒烟量级一致（~0.3–0.5% 相对误差级）。
-- **选层**：与 Drop-16 **无关的层** 上存在微小差异；**未观察到**因该误差 alone 翻转 L5/L24 边界（见下）。
+- **选层**：与 Drop-16 模态相关的层集差异已由 b=80 子集原实现复算核实（见下）；**未**用 2 帧结果推断全池选层翻转。
 
 ## 3. 选层影响（b=80，现有分数 + 原实现核实）
 
 | 指标 | 结论 |
 |------|------|
-| **full-400 等权** Fisher/IGIA | Drop-16 = S1 **Taylor-16**（98.10%）；L5/L24 在 full-400 排名均远离 top-16 边界（约第 18–21 名），边界模态为 **L5（悬崖）vs L24（Taylor）** |
+| **full-400 等权** Fisher/IGIA | Drop-16 = S1 **Taylor-16**（98.10%）；Random b=80 另一模态为悬崖层集（72.75%，含 L5、不含 L24） |
 | **CARE_event / α-only** b=40/80/120 | Fisher/IGIA 均 **100%** 选中 Taylor-16 层集 |
 | **Random 20 种子** b=80 | Fisher：**14/20** Taylor-16，**6/20** 悬崖 72.75%；IGIA：**5/20** Taylor-16，**15/20** 悬崖 |
 | **原 `measure_grad` IGIA，b=80 子集** | CARE_event 与 Random seed=0 的 Drop-16 与 rev2 `details.csv` **完全一致**（`drop_match=true`） |

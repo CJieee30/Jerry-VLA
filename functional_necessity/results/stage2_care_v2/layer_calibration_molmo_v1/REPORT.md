@@ -43,10 +43,11 @@
 - 仅 **Random / G-only 各 1 个种子**（seed=0）；**不能**据此证明 Taylor 在任意种子下普遍稳定。
 - CARE / α / Random(seed=0) 与 S1 Taylor-16 对齐（J=1.00）；G-only(seed=0) J=0.88（含 L23）。
 
-### Drop-16 边界（L5 vs L24）
+### Drop-16 模态与 IGIA 复核
 
-- full-400 等权 Fisher/IGIA 的 Taylor-16 与悬崖模态差别在 **L5（悬崖含）vs L24（Taylor 含）**；两层在 full-400 排名均**不在** top-16 临界区。
-- 原 `measure_grad` IGIA 在 **b=80** 上对 **CARE_event** 与 **Random seed=0** 重算，Drop-16 与 rev2 分析 **一致**（见 `diagnostics_rev2_igia_20261017/igia_b80_ref_selection.json`）。
+- full-400 等权 Fisher/IGIA → **Taylor-16**；Random b=80 常见另一模态为 **悬崖**（72.75% 历史层集，与 Taylor-16 差 **L5 vs L24** 等）。
+- 原 `measure_grad` IGIA 在 **b=80** 上对 **CARE_event** 与 **Random seed=0** 重算，Drop-16 与 rev2 分析 **一致**（`diagnostics_rev2_igia_20261017/igia_b80_ref_selection.json`）。
+- 逐帧 IGIA 两次重复：**非逐层 bitwise 相同**（`igia_path_diagnostic.json`）；冒烟 `passed=false` 记录**保留**。
 
 ## 问题 2：α-only / G-only 能否替代 CARE？
 
@@ -60,7 +61,7 @@ G-only 在 Fisher/IGIA b=80 下可产生与 CARE **不同** 的 drop（见 `summ
 
 ## 问题 3：IGIA 实现与是否重算
 
-- 冒烟与原实现 IGIA 在 2 帧上为 **小幅数值偏差**（相对误差 ~10⁻³ 量级），**逐帧 rev2 路径可重复**。
+- 冒烟与原实现 IGIA 在 2 帧上为 **小幅数值偏差**（相对误差 ~10⁻³ 量级）；同帧两次逐帧 IGIA **非 bitwise 相同**（见诊断 JSON）。
 - **选层结论**基于已落盘的 400 帧逐帧分数 + b=80 原实现子集核实；**不需要**重跑 Fisher、Taylor 或全 400 帧 IGIA。
 
 ## 问题 4：历史复用 vs 闭环候选（未启动）
