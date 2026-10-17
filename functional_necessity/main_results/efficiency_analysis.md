@@ -44,28 +44,46 @@ Closed-loop Avg. is from the corresponding `eval_*.md` (this-machine anchors). �
 
 ## Formal deployment wall clock (2026-10-17)
 
-**Protocol** (`measure_formal_deployment_efficiency.py`, `formal_deployment_20261017/`): π0.5 **Full = eager**; **Pruned = materialized Fisher Drop-6** (`materialize.py`). Molmo target stack is **materialized Taylor Drop-16 + native action-expert CUDA Graph** on Full/Pruned; **headline Molmo milliseconds below are pass-1** (see ‡). No `torch.compile`. Each config: **separate process**, fresh load; 32 obs with fingerprints; warmup 10; 3 rounds; `nvidia-smi` keyed by **physical GPU index/UUID** (not confused with `cuda:0` under `CUDA_VISIBLE_DEVICES`). Stored **params_stored_m** = actual `numel` after materialize.
+### π0.5 (eager, complete)
 
-**Results (physical GPU 2, UUID in per-config JSON):**
+**Protocol** (`measure_formal_deployment_efficiency.py`, `formal_deployment_20261017/`): **Full = eager**; **Pruned = materialized Fisher Drop-6** (`materialize.py`). No `torch.compile`. Separate process per config; 32 obs × 3 rounds; `taskset -c 24-31` on physical GPU 2; stored **params_stored_m** = post-materialize `numel`.
 
-| Stack | Config | Median (ms) | P95 | vs anchor NFE10 | Stored params (M) | Peak alloc (GiB) |
-| --- | --- | ---: | ---: | ---: | ---: | ---: |
-| π0.5 | Full NFE10 eager | 547.7 | 559.1 | 1.00 | 4143.4 | 8.89 |
-| π0.5 | Drop-6 NFE10 materialized | 524.2 | 543.4 | 1.04 | 3489.1 | **7.67** |
-| π0.5 | Full NFE1 eager | 186.2 | 192.9 | 2.94 | 4143.4 | 8.89 |
-| π0.5 | Drop-6 NFE1 materialized | 161.5 | 167.3 | 3.39 | 3489.1 | **7.67** |
-| Molmo | Full NFE10 ‡ | 1178.1 | 1199.4 | 1.00 | 5442.2 | 12.31 |
-| Molmo | Drop-16 NFE10 materialized ‡ | 1171.6 | 1198.1 | 1.01 | 3911.2 | **9.45** |
-| Molmo | Full NFE1 ‡ | 264.2 | 281.1 | 4.46 | 5442.2 | 12.30 |
-| Molmo | Drop-16 NFE1 materialized ‡ | 243.3 | 250.6 | 4.84 | 3911.2 | **9.45** |
+| Config | Median (ms) | P95 | vs Full NFE10 | Stored params (M) | Peak alloc (GiB) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Full NFE10 eager | 547.7 | 559.1 | 1.00 | 4143.4 | 8.89 |
+| Drop-6 NFE10 materialized | 524.2 | 543.4 | 1.04 | 3489.1 | **7.67** |
+| Full NFE1 eager | 186.2 | 192.9 | 2.94 | 4143.4 | 8.89 |
+| Drop-6 NFE1 materialized | 161.5 | 167.3 | 3.39 | 3489.1 | **7.67** |
 
-‡**Molmo pass-1 (`summary_molmoact2_pass1_eager_fallback.json`, 2026-10-17):** `action_cuda_graph_manager` was nulled in the disable path → timed path is **eager expert** (config flag true but `graph_fallback` in that run’s configs; per-config JSON since overwritten by graph reruns). **Pass-3** re-enabled the manager (`manager_present=true`, `max_abs_vs_eager=0` on 3 fixed obs) but each timed `predict_action_chunk` calls `policy.reset()`, so **~22%** of samples still hit **>500 ms** graph recapture (P95 ≈2.6 s) while the pooled median collapses to **~242 ms** — **not** interchangeable with pass-1 wall clock. **Use pass-1 for deployment headline latency** until graph timing matches eval (`reset` + capture policy) or Plus enables graph.
+**Stability:** Full NFE10 round medians **547.3 / 548.1 / 548.0 ms** (~0.15% spread); anchor recheck drift **2.0%**. Raw: `formal_deployment_20261017/summary_pi05.json`.
 
-**Stability (deployment):** π0.5 Full NFE10 round medians **547.3 / 548.1 / 548.0 ms** (~0.15% spread); anchor recheck drift **2.0%** (≤3% practical target). Molmo pass-1 Full NFE10 round medians **1180.4 / 1177.9 / 1175.7 ms** (~0.4% spread); anchor recheck drift **7.7%** (>5% — keep raw JSON, no slow-round deletion). **Pruned vs Full NFE1 (pass-1 medians):** π0.5 **−13.3%**; Molmo **−7.9%**.
+### MolmoAct2 (expert Graph + materialized, steady protocol — headline)
 
-Archives: `summary_molmoact2_pass2_graph_capture_in_timed.json`, `summary_molmoact2_pass1_eager_fallback.json`; latest graph attempt configs `configs/molmo_*_graph.json`. **Do not** mix deployment ms with § diagnostic eager JSON for speedups.
+**Graph path (2026-10-17):** Short diagnostic (`molmo_graph_diagnostic_20261017/diagnostic.json`) on installed `MolmoAct2Policy.reset` (queue only; **does not** clear `ActionCudaGraphManager`) and `ActionCudaGraphManager` (`inference.py`, lerobot `fbb811fc…`). Fixed noise; NFE pattern **10→10→11→11→10** and prefix-length switches **recapture** the single-slot graph — capture cost is **not** attributed to `reset()` alone.
 
-Raw: `summary_pi05.json`, `summary_molmoact2.json` (Molmo = pass-1). **Closed-loop SR not remeasured.**
+**Steady action-chunk protocol** (`measure_molmo_formal_deployment_steady.py`, `formal_deployment_molmo_steady_20261017/`, physical GPU 2, `OMP/MKL=4`, `taskset -c 24-31`): materialized Taylor Drop-16 + **native expert CUDA Graph**; no `torch.compile`; batch=1; same 32 calib obs; **per-obs** two warmup `predict_action_chunk` then **one timed** call (96 timed samples/config); materialize / graph parity check / `reset`+generator **outside** sync window; timed region = full `predict_action_chunk` (vision + VLM prefix + expert). **Timed-region graph recapture: 0/96** on all four configs; `max_abs_vs_eager=0` on 3 fixed obs (`manager_present=true`).
+
+| Config | Median (ms) | Mean | P95 | vs session Full NFE10 | Stored params (M) | Peak alloc (GiB) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Full NFE10 Graph | 244.3 | 248.3 | 263.1 | 1.00 | 5442.2 | 12.62 |
+| Drop-16 NFE10 materialized Graph | 228.5 | 231.5 | 232.5 | 1.07 | 3911.2 | **9.77** |
+| Full NFE1 Graph | 160.7 | 162.3 | 178.4 | 1.52 | 5442.2 | 12.61 |
+| Drop-16 NFE1 materialized Graph | 144.4 | 145.3 | 150.5 | 1.69 | 3911.2 | **9.76** |
+
+**Stability (steady):** Full NFE10 round medians **242.3 / 244.0 / 246.4 ms** (~1.7% spread); end-of-run Full10 recheck median **243.6 ms** (**0.27%** drift vs first pass). **Session-only speedups** — do not mix with pass-1 eager ms below.
+
+**Capture / switch cost (not in table):** diagnostic first-hit captures ~2.7–3.1 s on NFE/step or prefix change; steady protocol moves capture to pre-timed warmup. Archives of flawed timed capture: `formal_deployment_20261017/summary_molmoact2_pass2_graph_capture_in_timed.json` (P95≈2.6 s with recapture in timed loop).
+
+### MolmoAct2 archives (do not use as headline latency)
+
+| Archive | What it measured | Why kept |
+| --- | --- | --- |
+| pass-1 eager (`summary_molmoact2_pass1_eager_fallback.json`) | Expert **eager** despite graph flag; medians **1178 / 1171 / 264 / 243 ms** | Upper-bound wall clock without working graph timing |
+| pass-3 graph in timed loop (`summary_molmoact2.json`) | Graph on but pool precapture + `reset` per sample | **22%** timed recaptures; median ~242 ms but P95 useless |
+
+**FLOPs (separate metric):** `formal_flops_20261017/` — `FlopCounterMode` on eager full `predict_action_chunk`, 32 obs × 8 configs; see supplement JSON (`measure_formal_flops.py`). **Do not** scale steady Graph ms by FLOPs ratios.
+
+Raw steady latency: `formal_deployment_molmo_steady_20261017/summary_molmoact2_steady.json` + per-config `configs/*.json` (96× `latency_ms` each). **Closed-loop SR not remeasured.**
 
 ---
 

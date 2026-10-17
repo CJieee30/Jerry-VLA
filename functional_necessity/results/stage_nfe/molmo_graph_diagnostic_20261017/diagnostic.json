@@ -1,0 +1,212 @@
+{
+  "protocol": "molmo_cuda_graph_short_diagnostic_v1",
+  "utc": "2026-10-17T08:35:21Z",
+  "hostname": "miaa-hpc2",
+  "physical_gpu_index": 3,
+  "lerobot_checkout": "/home/guorj/lerobot",
+  "lerobot_git_head": "fbb811fca92504439792b97d216f0d00c2268382",
+  "checkpoint": "/home/guorj/Skill_Efficient_VLA/functional_necessity/checkpoints/MolmoAct2-LIBERO-LeRobot",
+  "calib_path": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/molmoact2_libero/calib/calib_32_seed42.pt",
+  "steps_pattern": [
+    10,
+    10,
+    11,
+    11,
+    10
+  ],
+  "sources": {
+    "policy_reset": {
+      "module": "lerobot.policies.molmoact2.modeling_molmoact2",
+      "qualname": "MolmoAct2Policy.reset",
+      "path": "/home/guorj/lerobot/src/lerobot/policies/molmoact2/modeling_molmoact2.py",
+      "line_start": 740,
+      "line_count": 4,
+      "sha256": "5515522133a9f4762a00aa3c2468c13684390ccc66543a642bb777284153b58f"
+    },
+    "action_cuda_graph_manager": {
+      "module": "lerobot.policies.molmoact2.molmoact2_hf_model.inference",
+      "qualname": "ActionCudaGraphManager",
+      "path": "/home/guorj/lerobot/src/lerobot/policies/molmoact2/molmoact2_hf_model/inference.py",
+      "line_start": 182,
+      "line_count": 68,
+      "sha256": "916439685160d083f2f53fe47c3360479e05ad02b544dbb9e3dcd02a5d05d331"
+    },
+    "action_cuda_graph_manager_run": {
+      "module": "lerobot.policies.molmoact2.molmoact2_hf_model.inference",
+      "qualname": "ActionCudaGraphManager.run_action_flow",
+      "path": "/home/guorj/lerobot/src/lerobot/policies/molmoact2/molmoact2_hf_model/inference.py",
+      "line_start": 223,
+      "line_count": 27,
+      "sha256": "916439685160d083f2f53fe47c3360479e05ad02b544dbb9e3dcd02a5d05d331"
+    },
+    "cuda_graph_key": {
+      "module": "lerobot.policies.molmoact2.molmoact2_hf_model.inference",
+      "qualname": "_cuda_graph_key",
+      "path": "/home/guorj/lerobot/src/lerobot/policies/molmoact2/molmoact2_hf_model/inference.py",
+      "line_start": 637,
+      "line_count": 9,
+      "sha256": "916439685160d083f2f53fe47c3360479e05ad02b544dbb9e3dcd02a5d05d331"
+    },
+    "depth_decode_cache_reset": {
+      "module": "lerobot.policies.molmoact2.molmoact2_hf_model.inference",
+      "qualname": "_DepthDecodeStaticCache.reset",
+      "path": "/home/guorj/lerobot/src/lerobot/policies/molmoact2/molmoact2_hf_model/inference.py",
+      "line_start": 177,
+      "line_count": 3,
+      "sha256": "916439685160d083f2f53fe47c3360479e05ad02b544dbb9e3dcd02a5d05d331"
+    }
+  },
+  "policy_reset_note": "MolmoAct2Policy.reset clears action queue only (see source); it does not null action_flow_graph.",
+  "nfe_step_pattern_runs": [
+    {
+      "num_inference_steps": 10,
+      "predict_action_chunk_ms": 3131.960412953049,
+      "obs_index": 0,
+      "obs_fingerprint": "b5e851bad3186c4f",
+      "input_ids_len": 505
+    },
+    {
+      "num_inference_steps": 10,
+      "predict_action_chunk_ms": 373.52936062961817,
+      "obs_index": 0,
+      "obs_fingerprint": "b5e851bad3186c4f",
+      "input_ids_len": 505
+    },
+    {
+      "num_inference_steps": 11,
+      "predict_action_chunk_ms": 3042.8478359244764,
+      "obs_index": 0,
+      "obs_fingerprint": "b5e851bad3186c4f",
+      "input_ids_len": 505
+    },
+    {
+      "num_inference_steps": 11,
+      "predict_action_chunk_ms": 382.7480967156589,
+      "obs_index": 0,
+      "obs_fingerprint": "b5e851bad3186c4f",
+      "input_ids_len": 505
+    },
+    {
+      "num_inference_steps": 10,
+      "predict_action_chunk_ms": 2758.1042051315308,
+      "obs_index": 0,
+      "obs_fingerprint": "b5e851bad3186c4f",
+      "input_ids_len": 505
+    }
+  ],
+  "prefix_len_runs": [
+    {
+      "obs_index": 11,
+      "input_ids_len": 497,
+      "predict_action_chunk_ms": 2638.2674612104893,
+      "obs_fingerprint": "a3a182e98dd29e29"
+    },
+    {
+      "obs_index": 0,
+      "input_ids_len": 505,
+      "predict_action_chunk_ms": 2958.8769786059856,
+      "obs_fingerprint": "b5e851bad3186c4f"
+    },
+    {
+      "obs_index": 12,
+      "input_ids_len": 513,
+      "predict_action_chunk_ms": 2676.8996347673237,
+      "obs_fingerprint": "97943997674c0fdc"
+    }
+  ],
+  "graph_events": [
+    {
+      "phase": "nfe_step_pattern",
+      "step_index": 0,
+      "num_inference_steps": 10,
+      "graph_key_digest": "ff3b3cb77e545d74",
+      "prev_graph_key_digest": null,
+      "captured": true,
+      "replayed": false,
+      "run_action_flow_ms": 2534.641608130187,
+      "manager_id": 140427543269296
+    },
+    {
+      "phase": "nfe_step_pattern",
+      "step_index": 1,
+      "num_inference_steps": 10,
+      "graph_key_digest": "ff3b3cb77e545d74",
+      "prev_graph_key_digest": "ff3b3cb77e545d74",
+      "captured": false,
+      "replayed": true,
+      "run_action_flow_ms": 122.9440551251173,
+      "manager_id": 140427543269296
+    },
+    {
+      "phase": "nfe_step_pattern",
+      "step_index": 2,
+      "num_inference_steps": 11,
+      "graph_key_digest": "3517014c1926bf4e",
+      "prev_graph_key_digest": "ff3b3cb77e545d74",
+      "captured": true,
+      "replayed": false,
+      "run_action_flow_ms": 2740.990713238716,
+      "manager_id": 140427543269296
+    },
+    {
+      "phase": "nfe_step_pattern",
+      "step_index": 3,
+      "num_inference_steps": 11,
+      "graph_key_digest": "3517014c1926bf4e",
+      "prev_graph_key_digest": "3517014c1926bf4e",
+      "captured": false,
+      "replayed": true,
+      "run_action_flow_ms": 130.60003705322742,
+      "manager_id": 140427543269296
+    },
+    {
+      "phase": "nfe_step_pattern",
+      "step_index": 4,
+      "num_inference_steps": 10,
+      "graph_key_digest": "ff3b3cb77e545d74",
+      "prev_graph_key_digest": "3517014c1926bf4e",
+      "captured": true,
+      "replayed": false,
+      "run_action_flow_ms": 2458.54326011613,
+      "manager_id": 140427543269296
+    },
+    {
+      "phase": "prefix_len_switch_steps10",
+      "step_index": 5,
+      "num_inference_steps": 10,
+      "graph_key_digest": "fe2b7e9fc026d49e",
+      "prev_graph_key_digest": "ff3b3cb77e545d74",
+      "captured": true,
+      "replayed": false,
+      "run_action_flow_ms": 2393.4590318240225,
+      "manager_id": 140427543269296
+    },
+    {
+      "phase": "prefix_len_switch_steps10",
+      "step_index": 6,
+      "num_inference_steps": 10,
+      "graph_key_digest": "ff3b3cb77e545d74",
+      "prev_graph_key_digest": "fe2b7e9fc026d49e",
+      "captured": true,
+      "replayed": false,
+      "run_action_flow_ms": 2449.063637293875,
+      "manager_id": 140427543269296
+    },
+    {
+      "phase": "prefix_len_switch_steps10",
+      "step_index": 7,
+      "num_inference_steps": 10,
+      "graph_key_digest": "39fe142a1d47901b",
+      "prev_graph_key_digest": "ff3b3cb77e545d74",
+      "captured": true,
+      "replayed": false,
+      "run_action_flow_ms": 2405.801896005869,
+      "manager_id": 140427543269296
+    }
+  ],
+  "conclusion": [
+    "Single-slot ActionCudaGraphManager recaptures when num_inference_steps changes (pattern [10, 10, 11, 11, 10]: 3/5 captures).",
+    "KV/context shape change across prefix lengths recaptured graph (3/3 captures at NFE=10)."
+  ],
+  "recommended_timed_protocol_if_shape_switch": "Per-observation: warmup predict_action_chunk in place, then measure immediately; report first capture / key-switch separately; keep all 32 calib obs; pin CPU cores."
+}

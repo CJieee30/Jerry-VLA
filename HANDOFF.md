@@ -3,7 +3,7 @@
 > 写给完全没有前文的新对话。更新：2026-10-17。  
 > 数据核查快照：Jerry-VLA `eab85156dd53d89cc47e41e9f42676c9311eca61`。  
 > 服务器项目根目录：`/home/guorj/Skill_Efficient_VLA`。本文路径未特别说明时均相对此目录。  
-> **Molmo 前瞻池 CARE_event rev2**（`layer_calibration_molmo_v1`）：400 帧打分与 IGIA 复核已归档；**闭环 SR 复用历史**，本轮不重跑。效率：**诊断** `formal_efficiency_*_20261017.json`（eager runtime K/V-only skip 多输入诊断）；**部署** `formal_deployment_20261017/`（π0.5 materialize；Molmo **主表用 pass-1 eager expert** `summary_molmoact2_pass1_eager_fallback.json`，Graph 数值对齐见 pass-3 但 `reset()` 导致计时段间歇重捕获，见 `efficiency_analysis.md` § Formal deployment）。
+> **Molmo 前瞻池 CARE_event rev2**（`layer_calibration_molmo_v1`）：400 帧打分与 IGIA 复核已归档；**闭环 SR 复用历史**，本轮不重跑。效率：**诊断** `formal_efficiency_*_20261017.json`；**部署** π0.5 定稿 `formal_deployment_20261017/`；Molmo Graph **稳态延迟** `formal_deployment_molmo_steady_20261017/`（per-obs 预热、计时段 0 次重捕获；Graph 切换成本见 `molmo_graph_diagnostic_20261017`）；FLOPs `formal_flops_20261017/`。详见 `efficiency_analysis.md` § Formal deployment。
 
 ## 0. 接手先读这一页
 

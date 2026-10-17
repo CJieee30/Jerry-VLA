@@ -1,0 +1,1923 @@
+{
+  "protocol": "molmo_formal_deployment_steady_v1",
+  "config_id": "molmo_full_nfe1_graph",
+  "stack": "molmoact2",
+  "mode": "steady_per_obs_graph_warmup",
+  "num_inference_steps": 1,
+  "checkpoint": "/home/guorj/Skill_Efficient_VLA/functional_necessity/checkpoints/MolmoAct2-LIBERO-LeRobot",
+  "observations": [
+    {
+      "pool_index": 0,
+      "dataset_index": 0,
+      "fingerprint": "b5e851bad3186c4f"
+    },
+    {
+      "pool_index": 1,
+      "dataset_index": 268,
+      "fingerprint": "4172377da5100ef6"
+    },
+    {
+      "pool_index": 2,
+      "dataset_index": 536,
+      "fingerprint": "f2a045f9c6355425"
+    },
+    {
+      "pool_index": 3,
+      "dataset_index": 804,
+      "fingerprint": "8353bd48ed26251f"
+    },
+    {
+      "pool_index": 4,
+      "dataset_index": 1072,
+      "fingerprint": "73034c4c86b4c4dc"
+    },
+    {
+      "pool_index": 5,
+      "dataset_index": 1340,
+      "fingerprint": "42717cfaaf53c5db"
+    },
+    {
+      "pool_index": 6,
+      "dataset_index": 1608,
+      "fingerprint": "6fac2b95ccd008c7"
+    },
+    {
+      "pool_index": 7,
+      "dataset_index": 1876,
+      "fingerprint": "63b1faf5a6391367"
+    },
+    {
+      "pool_index": 8,
+      "dataset_index": 2144,
+      "fingerprint": "e38334ea6f21e7a5"
+    },
+    {
+      "pool_index": 9,
+      "dataset_index": 2412,
+      "fingerprint": "b92c7639c6a4cc4f"
+    },
+    {
+      "pool_index": 10,
+      "dataset_index": 2680,
+      "fingerprint": "34b13142e1b15a2a"
+    },
+    {
+      "pool_index": 11,
+      "dataset_index": 2948,
+      "fingerprint": "a3a182e98dd29e29"
+    },
+    {
+      "pool_index": 12,
+      "dataset_index": 3216,
+      "fingerprint": "97943997674c0fdc"
+    },
+    {
+      "pool_index": 13,
+      "dataset_index": 3484,
+      "fingerprint": "0e1817b26e80a614"
+    },
+    {
+      "pool_index": 14,
+      "dataset_index": 3752,
+      "fingerprint": "35d5c0d60f5e495c"
+    },
+    {
+      "pool_index": 15,
+      "dataset_index": 4020,
+      "fingerprint": "086baba76f3854eb"
+    },
+    {
+      "pool_index": 16,
+      "dataset_index": 4288,
+      "fingerprint": "2e8611db22ed5b14"
+    },
+    {
+      "pool_index": 17,
+      "dataset_index": 4556,
+      "fingerprint": "a23f1a02946bb1c4"
+    },
+    {
+      "pool_index": 18,
+      "dataset_index": 4824,
+      "fingerprint": "3f81e37cf3e6b041"
+    },
+    {
+      "pool_index": 19,
+      "dataset_index": 5092,
+      "fingerprint": "0261bb438d5b82eb"
+    },
+    {
+      "pool_index": 20,
+      "dataset_index": 5360,
+      "fingerprint": "e5fa7a221ee83016"
+    },
+    {
+      "pool_index": 21,
+      "dataset_index": 5628,
+      "fingerprint": "c78fd0605c3f7e6e"
+    },
+    {
+      "pool_index": 22,
+      "dataset_index": 5896,
+      "fingerprint": "a81883739af9bb16"
+    },
+    {
+      "pool_index": 23,
+      "dataset_index": 6164,
+      "fingerprint": "0f47557e1bf62ce2"
+    },
+    {
+      "pool_index": 24,
+      "dataset_index": 6432,
+      "fingerprint": "8995f225ebf15b98"
+    },
+    {
+      "pool_index": 25,
+      "dataset_index": 6700,
+      "fingerprint": "0448c36661fbe04a"
+    },
+    {
+      "pool_index": 26,
+      "dataset_index": 6968,
+      "fingerprint": "c3506902c299a105"
+    },
+    {
+      "pool_index": 27,
+      "dataset_index": 7236,
+      "fingerprint": "39dc528fb6bb1414"
+    },
+    {
+      "pool_index": 28,
+      "dataset_index": 7504,
+      "fingerprint": "c5932fbe2dccdcf0"
+    },
+    {
+      "pool_index": 29,
+      "dataset_index": 7772,
+      "fingerprint": "32ad1ba45d752e46"
+    },
+    {
+      "pool_index": 30,
+      "dataset_index": 8040,
+      "fingerprint": "c508d34836ef1474"
+    },
+    {
+      "pool_index": 31,
+      "dataset_index": 8308,
+      "fingerprint": "a4a6bd30a2f6c795"
+    }
+  ],
+  "n_obs": 32,
+  "rounds": 3,
+  "n_timed_samples": 96,
+  "capture_events_in_timed_region": 0,
+  "capture_fraction_in_timed": 0.0,
+  "setup_outside_timed_region": {
+    "graph_probe": {
+      "patched": true,
+      "manager_class": "lerobot.policies.molmoact2.molmoact2_hf_model.inference.ActionCudaGraphManager"
+    },
+    "graph_check": {
+      "per_sample": [
+        {
+          "obs_index": 0,
+          "max_abs_vs_eager": 0.0,
+          "manager_present": true,
+          "config_flag": true
+        },
+        {
+          "obs_index": 1,
+          "max_abs_vs_eager": 0.0,
+          "manager_present": true,
+          "config_flag": true
+        },
+        {
+          "obs_index": 2,
+          "max_abs_vs_eager": 0.0,
+          "manager_present": true,
+          "config_flag": true
+        }
+      ]
+    }
+  },
+  "graph_diagnostic_reference": "/home/guorj/Skill_Efficient_VLA/functional_necessity/results/stage_nfe/molmo_graph_diagnostic_20261017/diagnostic.json",
+  "graph_diagnostic_conclusion": [
+    "Single-slot ActionCudaGraphManager recaptures when num_inference_steps changes (pattern [10, 10, 11, 11, 10]: 3/5 captures).",
+    "KV/context shape change across prefix lengths recaptured graph (3/3 captures at NFE=10)."
+  ],
+  "params_stored_m": 5442.196208,
+  "params_active_m": 5442.196208,
+  "per_round": [
+    {
+      "round": 0,
+      "samples_ms": [
+        160.61033541336656,
+        159.90211721509695,
+        161.41593921929598,
+        159.90629000589252,
+        161.38556320220232,
+        162.07775194197893,
+        160.66843690350652,
+        160.71055317297578,
+        163.926862180233,
+        160.82870727404952,
+        160.3983324021101,
+        159.59422197192907,
+        178.44721907749772,
+        160.29872791841626,
+        160.85406206548214,
+        160.42846580967307,
+        161.29600489512086,
+        160.30124621465802,
+        160.85937805473804,
+        160.5721628293395,
+        160.19959701225162,
+        161.03419195860624,
+        178.10534499585629,
+        177.74056596681476,
+        161.6850788705051,
+        159.1423787176609,
+        160.1678696461022,
+        159.35643017292023,
+        159.7079997882247,
+        159.90778570994735,
+        160.38758726790547,
+        159.36892293393612
+      ],
+      "samples_detail": [
+        {
+          "round": 0,
+          "obs_index": 0,
+          "pool_index": 0,
+          "fingerprint": "b5e851bad3186c4f",
+          "latency_ms": 160.61033541336656,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 1,
+          "pool_index": 1,
+          "fingerprint": "4172377da5100ef6",
+          "latency_ms": 159.90211721509695,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 2,
+          "pool_index": 2,
+          "fingerprint": "f2a045f9c6355425",
+          "latency_ms": 161.41593921929598,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 3,
+          "pool_index": 3,
+          "fingerprint": "8353bd48ed26251f",
+          "latency_ms": 159.90629000589252,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 4,
+          "pool_index": 4,
+          "fingerprint": "73034c4c86b4c4dc",
+          "latency_ms": 161.38556320220232,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 5,
+          "pool_index": 5,
+          "fingerprint": "42717cfaaf53c5db",
+          "latency_ms": 162.07775194197893,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 6,
+          "pool_index": 6,
+          "fingerprint": "6fac2b95ccd008c7",
+          "latency_ms": 160.66843690350652,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 7,
+          "pool_index": 7,
+          "fingerprint": "63b1faf5a6391367",
+          "latency_ms": 160.71055317297578,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 8,
+          "pool_index": 8,
+          "fingerprint": "e38334ea6f21e7a5",
+          "latency_ms": 163.926862180233,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 9,
+          "pool_index": 9,
+          "fingerprint": "b92c7639c6a4cc4f",
+          "latency_ms": 160.82870727404952,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 10,
+          "pool_index": 10,
+          "fingerprint": "34b13142e1b15a2a",
+          "latency_ms": 160.3983324021101,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 11,
+          "pool_index": 11,
+          "fingerprint": "a3a182e98dd29e29",
+          "latency_ms": 159.59422197192907,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 12,
+          "pool_index": 12,
+          "fingerprint": "97943997674c0fdc",
+          "latency_ms": 178.44721907749772,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 13,
+          "pool_index": 13,
+          "fingerprint": "0e1817b26e80a614",
+          "latency_ms": 160.29872791841626,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 14,
+          "pool_index": 14,
+          "fingerprint": "35d5c0d60f5e495c",
+          "latency_ms": 160.85406206548214,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 15,
+          "pool_index": 15,
+          "fingerprint": "086baba76f3854eb",
+          "latency_ms": 160.42846580967307,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 16,
+          "pool_index": 16,
+          "fingerprint": "2e8611db22ed5b14",
+          "latency_ms": 161.29600489512086,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 17,
+          "pool_index": 17,
+          "fingerprint": "a23f1a02946bb1c4",
+          "latency_ms": 160.30124621465802,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 18,
+          "pool_index": 18,
+          "fingerprint": "3f81e37cf3e6b041",
+          "latency_ms": 160.85937805473804,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 19,
+          "pool_index": 19,
+          "fingerprint": "0261bb438d5b82eb",
+          "latency_ms": 160.5721628293395,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 20,
+          "pool_index": 20,
+          "fingerprint": "e5fa7a221ee83016",
+          "latency_ms": 160.19959701225162,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 21,
+          "pool_index": 21,
+          "fingerprint": "c78fd0605c3f7e6e",
+          "latency_ms": 161.03419195860624,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 22,
+          "pool_index": 22,
+          "fingerprint": "a81883739af9bb16",
+          "latency_ms": 178.10534499585629,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 23,
+          "pool_index": 23,
+          "fingerprint": "0f47557e1bf62ce2",
+          "latency_ms": 177.74056596681476,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 24,
+          "pool_index": 24,
+          "fingerprint": "8995f225ebf15b98",
+          "latency_ms": 161.6850788705051,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 25,
+          "pool_index": 25,
+          "fingerprint": "0448c36661fbe04a",
+          "latency_ms": 159.1423787176609,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 26,
+          "pool_index": 26,
+          "fingerprint": "c3506902c299a105",
+          "latency_ms": 160.1678696461022,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 27,
+          "pool_index": 27,
+          "fingerprint": "39dc528fb6bb1414",
+          "latency_ms": 159.35643017292023,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 28,
+          "pool_index": 28,
+          "fingerprint": "c5932fbe2dccdcf0",
+          "latency_ms": 159.7079997882247,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 29,
+          "pool_index": 29,
+          "fingerprint": "32ad1ba45d752e46",
+          "latency_ms": 159.90778570994735,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 30,
+          "pool_index": 30,
+          "fingerprint": "c508d34836ef1474",
+          "latency_ms": 160.38758726790547,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 0,
+          "obs_index": 31,
+          "pool_index": 31,
+          "fingerprint": "a4a6bd30a2f6c795",
+          "latency_ms": 159.36892293393612,
+          "capture_in_timed_region": false
+        }
+      ],
+      "n": 32,
+      "median_ms": 160.59124912135303,
+      "mean_ms": 162.22769158775918,
+      "p95_ms": 177.74056596681476,
+      "min_ms": 159.1423787176609,
+      "max_ms": 178.44721907749772,
+      "stdev_ms": 5.183054487470093
+    },
+    {
+      "round": 1,
+      "samples_ms": [
+        159.5661723986268,
+        160.1717658340931,
+        161.07487818226218,
+        159.76968873292208,
+        159.54376896843314,
+        160.12450493872166,
+        159.71520589664578,
+        160.0732752121985,
+        160.11393629014492,
+        159.0916719287634,
+        159.25732301548123,
+        159.45184277370572,
+        178.32503095269203,
+        160.0986598059535,
+        159.58851715549827,
+        160.11301707476377,
+        160.22486565634608,
+        160.20517703145742,
+        160.05249973386526,
+        160.6452357955277,
+        159.78453122079372,
+        162.26325975731015,
+        178.44242695719004,
+        179.00377931073308,
+        159.7115360200405,
+        161.14240232855082,
+        160.81312391906977,
+        160.9124382957816,
+        161.05319373309612,
+        161.84473782777786,
+        161.18433605879545,
+        161.43733588978648
+      ],
+      "samples_detail": [
+        {
+          "round": 1,
+          "obs_index": 0,
+          "pool_index": 0,
+          "fingerprint": "b5e851bad3186c4f",
+          "latency_ms": 159.5661723986268,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 1,
+          "pool_index": 1,
+          "fingerprint": "4172377da5100ef6",
+          "latency_ms": 160.1717658340931,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 2,
+          "pool_index": 2,
+          "fingerprint": "f2a045f9c6355425",
+          "latency_ms": 161.07487818226218,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 3,
+          "pool_index": 3,
+          "fingerprint": "8353bd48ed26251f",
+          "latency_ms": 159.76968873292208,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 4,
+          "pool_index": 4,
+          "fingerprint": "73034c4c86b4c4dc",
+          "latency_ms": 159.54376896843314,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 5,
+          "pool_index": 5,
+          "fingerprint": "42717cfaaf53c5db",
+          "latency_ms": 160.12450493872166,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 6,
+          "pool_index": 6,
+          "fingerprint": "6fac2b95ccd008c7",
+          "latency_ms": 159.71520589664578,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 7,
+          "pool_index": 7,
+          "fingerprint": "63b1faf5a6391367",
+          "latency_ms": 160.0732752121985,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 8,
+          "pool_index": 8,
+          "fingerprint": "e38334ea6f21e7a5",
+          "latency_ms": 160.11393629014492,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 9,
+          "pool_index": 9,
+          "fingerprint": "b92c7639c6a4cc4f",
+          "latency_ms": 159.0916719287634,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 10,
+          "pool_index": 10,
+          "fingerprint": "34b13142e1b15a2a",
+          "latency_ms": 159.25732301548123,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 11,
+          "pool_index": 11,
+          "fingerprint": "a3a182e98dd29e29",
+          "latency_ms": 159.45184277370572,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 12,
+          "pool_index": 12,
+          "fingerprint": "97943997674c0fdc",
+          "latency_ms": 178.32503095269203,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 13,
+          "pool_index": 13,
+          "fingerprint": "0e1817b26e80a614",
+          "latency_ms": 160.0986598059535,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 14,
+          "pool_index": 14,
+          "fingerprint": "35d5c0d60f5e495c",
+          "latency_ms": 159.58851715549827,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 15,
+          "pool_index": 15,
+          "fingerprint": "086baba76f3854eb",
+          "latency_ms": 160.11301707476377,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 16,
+          "pool_index": 16,
+          "fingerprint": "2e8611db22ed5b14",
+          "latency_ms": 160.22486565634608,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 17,
+          "pool_index": 17,
+          "fingerprint": "a23f1a02946bb1c4",
+          "latency_ms": 160.20517703145742,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 18,
+          "pool_index": 18,
+          "fingerprint": "3f81e37cf3e6b041",
+          "latency_ms": 160.05249973386526,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 19,
+          "pool_index": 19,
+          "fingerprint": "0261bb438d5b82eb",
+          "latency_ms": 160.6452357955277,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 20,
+          "pool_index": 20,
+          "fingerprint": "e5fa7a221ee83016",
+          "latency_ms": 159.78453122079372,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 21,
+          "pool_index": 21,
+          "fingerprint": "c78fd0605c3f7e6e",
+          "latency_ms": 162.26325975731015,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 22,
+          "pool_index": 22,
+          "fingerprint": "a81883739af9bb16",
+          "latency_ms": 178.44242695719004,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 23,
+          "pool_index": 23,
+          "fingerprint": "0f47557e1bf62ce2",
+          "latency_ms": 179.00377931073308,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 24,
+          "pool_index": 24,
+          "fingerprint": "8995f225ebf15b98",
+          "latency_ms": 159.7115360200405,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 25,
+          "pool_index": 25,
+          "fingerprint": "0448c36661fbe04a",
+          "latency_ms": 161.14240232855082,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 26,
+          "pool_index": 26,
+          "fingerprint": "c3506902c299a105",
+          "latency_ms": 160.81312391906977,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 27,
+          "pool_index": 27,
+          "fingerprint": "39dc528fb6bb1414",
+          "latency_ms": 160.9124382957816,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 28,
+          "pool_index": 28,
+          "fingerprint": "c5932fbe2dccdcf0",
+          "latency_ms": 161.05319373309612,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 29,
+          "pool_index": 29,
+          "fingerprint": "32ad1ba45d752e46",
+          "latency_ms": 161.84473782777786,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 30,
+          "pool_index": 30,
+          "fingerprint": "c508d34836ef1474",
+          "latency_ms": 161.18433605879545,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 1,
+          "obs_index": 31,
+          "pool_index": 31,
+          "fingerprint": "a4a6bd30a2f6c795",
+          "latency_ms": 161.43733588978648,
+          "capture_in_timed_region": false
+        }
+      ],
+      "n": 32,
+      "median_ms": 160.14813538640738,
+      "mean_ms": 162.02500433428213,
+      "p95_ms": 178.32503095269203,
+      "min_ms": 159.0916719287634,
+      "max_ms": 179.00377931073308,
+      "stdev_ms": 5.379400755923455
+    },
+    {
+      "round": 2,
+      "samples_ms": [
+        161.19238827377558,
+        160.43356200680137,
+        161.26223327592015,
+        161.71667585149407,
+        161.3521110266447,
+        161.11426800489426,
+        161.89058916643262,
+        162.0445530861616,
+        161.47083416581154,
+        161.12981224432588,
+        161.52684204280376,
+        160.51222290843725,
+        179.52359281480312,
+        161.74946166574955,
+        160.84418492391706,
+        161.28120990470052,
+        161.60576697438955,
+        161.49674216285348,
+        160.96887504681945,
+        162.46783593669534,
+        159.70047377049923,
+        159.15020974352956,
+        178.44565911218524,
+        180.91632798314095,
+        161.79997799918056,
+        160.3855136781931,
+        160.40394827723503,
+        160.0885489024222,
+        159.75083271041512,
+        160.586791113019,
+        159.9501660093665,
+        159.80743989348412
+      ],
+      "samples_detail": [
+        {
+          "round": 2,
+          "obs_index": 0,
+          "pool_index": 0,
+          "fingerprint": "b5e851bad3186c4f",
+          "latency_ms": 161.19238827377558,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 1,
+          "pool_index": 1,
+          "fingerprint": "4172377da5100ef6",
+          "latency_ms": 160.43356200680137,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 2,
+          "pool_index": 2,
+          "fingerprint": "f2a045f9c6355425",
+          "latency_ms": 161.26223327592015,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 3,
+          "pool_index": 3,
+          "fingerprint": "8353bd48ed26251f",
+          "latency_ms": 161.71667585149407,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 4,
+          "pool_index": 4,
+          "fingerprint": "73034c4c86b4c4dc",
+          "latency_ms": 161.3521110266447,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 5,
+          "pool_index": 5,
+          "fingerprint": "42717cfaaf53c5db",
+          "latency_ms": 161.11426800489426,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 6,
+          "pool_index": 6,
+          "fingerprint": "6fac2b95ccd008c7",
+          "latency_ms": 161.89058916643262,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 7,
+          "pool_index": 7,
+          "fingerprint": "63b1faf5a6391367",
+          "latency_ms": 162.0445530861616,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 8,
+          "pool_index": 8,
+          "fingerprint": "e38334ea6f21e7a5",
+          "latency_ms": 161.47083416581154,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 9,
+          "pool_index": 9,
+          "fingerprint": "b92c7639c6a4cc4f",
+          "latency_ms": 161.12981224432588,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 10,
+          "pool_index": 10,
+          "fingerprint": "34b13142e1b15a2a",
+          "latency_ms": 161.52684204280376,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 11,
+          "pool_index": 11,
+          "fingerprint": "a3a182e98dd29e29",
+          "latency_ms": 160.51222290843725,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 12,
+          "pool_index": 12,
+          "fingerprint": "97943997674c0fdc",
+          "latency_ms": 179.52359281480312,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 13,
+          "pool_index": 13,
+          "fingerprint": "0e1817b26e80a614",
+          "latency_ms": 161.74946166574955,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 14,
+          "pool_index": 14,
+          "fingerprint": "35d5c0d60f5e495c",
+          "latency_ms": 160.84418492391706,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 15,
+          "pool_index": 15,
+          "fingerprint": "086baba76f3854eb",
+          "latency_ms": 161.28120990470052,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 16,
+          "pool_index": 16,
+          "fingerprint": "2e8611db22ed5b14",
+          "latency_ms": 161.60576697438955,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 17,
+          "pool_index": 17,
+          "fingerprint": "a23f1a02946bb1c4",
+          "latency_ms": 161.49674216285348,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 18,
+          "pool_index": 18,
+          "fingerprint": "3f81e37cf3e6b041",
+          "latency_ms": 160.96887504681945,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 19,
+          "pool_index": 19,
+          "fingerprint": "0261bb438d5b82eb",
+          "latency_ms": 162.46783593669534,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 20,
+          "pool_index": 20,
+          "fingerprint": "e5fa7a221ee83016",
+          "latency_ms": 159.70047377049923,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 21,
+          "pool_index": 21,
+          "fingerprint": "c78fd0605c3f7e6e",
+          "latency_ms": 159.15020974352956,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 22,
+          "pool_index": 22,
+          "fingerprint": "a81883739af9bb16",
+          "latency_ms": 178.44565911218524,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 23,
+          "pool_index": 23,
+          "fingerprint": "0f47557e1bf62ce2",
+          "latency_ms": 180.91632798314095,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 24,
+          "pool_index": 24,
+          "fingerprint": "8995f225ebf15b98",
+          "latency_ms": 161.79997799918056,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 25,
+          "pool_index": 25,
+          "fingerprint": "0448c36661fbe04a",
+          "latency_ms": 160.3855136781931,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 26,
+          "pool_index": 26,
+          "fingerprint": "c3506902c299a105",
+          "latency_ms": 160.40394827723503,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 27,
+          "pool_index": 27,
+          "fingerprint": "39dc528fb6bb1414",
+          "latency_ms": 160.0885489024222,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 28,
+          "pool_index": 28,
+          "fingerprint": "c5932fbe2dccdcf0",
+          "latency_ms": 159.75083271041512,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 29,
+          "pool_index": 29,
+          "fingerprint": "32ad1ba45d752e46",
+          "latency_ms": 160.586791113019,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 30,
+          "pool_index": 30,
+          "fingerprint": "c508d34836ef1474",
+          "latency_ms": 159.9501660093665,
+          "capture_in_timed_region": false
+        },
+        {
+          "round": 2,
+          "obs_index": 31,
+          "pool_index": 31,
+          "fingerprint": "a4a6bd30a2f6c795",
+          "latency_ms": 159.80743989348412,
+          "capture_in_timed_region": false
+        }
+      ],
+      "n": 32,
+      "median_ms": 161.22731077484787,
+      "mean_ms": 162.70530158362817,
+      "p95_ms": 178.44565911218524,
+      "min_ms": 159.15020974352956,
+      "max_ms": 180.91632798314095,
+      "stdev_ms": 5.505100851293121
+    }
+  ],
+  "all_samples": {
+    "n": 96,
+    "median_ms": 160.6568363495171,
+    "mean_ms": 162.31933250188982,
+    "p95_ms": 178.44242695719004,
+    "min_ms": 159.0916719287634,
+    "max_ms": 180.91632798314095,
+    "stdev_ms": 5.365076605705641
+  },
+  "all_samples_detail": [
+    {
+      "round": 0,
+      "obs_index": 0,
+      "pool_index": 0,
+      "fingerprint": "b5e851bad3186c4f",
+      "latency_ms": 160.61033541336656,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 1,
+      "pool_index": 1,
+      "fingerprint": "4172377da5100ef6",
+      "latency_ms": 159.90211721509695,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 2,
+      "pool_index": 2,
+      "fingerprint": "f2a045f9c6355425",
+      "latency_ms": 161.41593921929598,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 3,
+      "pool_index": 3,
+      "fingerprint": "8353bd48ed26251f",
+      "latency_ms": 159.90629000589252,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 4,
+      "pool_index": 4,
+      "fingerprint": "73034c4c86b4c4dc",
+      "latency_ms": 161.38556320220232,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 5,
+      "pool_index": 5,
+      "fingerprint": "42717cfaaf53c5db",
+      "latency_ms": 162.07775194197893,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 6,
+      "pool_index": 6,
+      "fingerprint": "6fac2b95ccd008c7",
+      "latency_ms": 160.66843690350652,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 7,
+      "pool_index": 7,
+      "fingerprint": "63b1faf5a6391367",
+      "latency_ms": 160.71055317297578,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 8,
+      "pool_index": 8,
+      "fingerprint": "e38334ea6f21e7a5",
+      "latency_ms": 163.926862180233,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 9,
+      "pool_index": 9,
+      "fingerprint": "b92c7639c6a4cc4f",
+      "latency_ms": 160.82870727404952,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 10,
+      "pool_index": 10,
+      "fingerprint": "34b13142e1b15a2a",
+      "latency_ms": 160.3983324021101,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 11,
+      "pool_index": 11,
+      "fingerprint": "a3a182e98dd29e29",
+      "latency_ms": 159.59422197192907,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 12,
+      "pool_index": 12,
+      "fingerprint": "97943997674c0fdc",
+      "latency_ms": 178.44721907749772,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 13,
+      "pool_index": 13,
+      "fingerprint": "0e1817b26e80a614",
+      "latency_ms": 160.29872791841626,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 14,
+      "pool_index": 14,
+      "fingerprint": "35d5c0d60f5e495c",
+      "latency_ms": 160.85406206548214,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 15,
+      "pool_index": 15,
+      "fingerprint": "086baba76f3854eb",
+      "latency_ms": 160.42846580967307,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 16,
+      "pool_index": 16,
+      "fingerprint": "2e8611db22ed5b14",
+      "latency_ms": 161.29600489512086,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 17,
+      "pool_index": 17,
+      "fingerprint": "a23f1a02946bb1c4",
+      "latency_ms": 160.30124621465802,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 18,
+      "pool_index": 18,
+      "fingerprint": "3f81e37cf3e6b041",
+      "latency_ms": 160.85937805473804,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 19,
+      "pool_index": 19,
+      "fingerprint": "0261bb438d5b82eb",
+      "latency_ms": 160.5721628293395,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 20,
+      "pool_index": 20,
+      "fingerprint": "e5fa7a221ee83016",
+      "latency_ms": 160.19959701225162,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 21,
+      "pool_index": 21,
+      "fingerprint": "c78fd0605c3f7e6e",
+      "latency_ms": 161.03419195860624,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 22,
+      "pool_index": 22,
+      "fingerprint": "a81883739af9bb16",
+      "latency_ms": 178.10534499585629,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 23,
+      "pool_index": 23,
+      "fingerprint": "0f47557e1bf62ce2",
+      "latency_ms": 177.74056596681476,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 24,
+      "pool_index": 24,
+      "fingerprint": "8995f225ebf15b98",
+      "latency_ms": 161.6850788705051,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 25,
+      "pool_index": 25,
+      "fingerprint": "0448c36661fbe04a",
+      "latency_ms": 159.1423787176609,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 26,
+      "pool_index": 26,
+      "fingerprint": "c3506902c299a105",
+      "latency_ms": 160.1678696461022,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 27,
+      "pool_index": 27,
+      "fingerprint": "39dc528fb6bb1414",
+      "latency_ms": 159.35643017292023,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 28,
+      "pool_index": 28,
+      "fingerprint": "c5932fbe2dccdcf0",
+      "latency_ms": 159.7079997882247,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 29,
+      "pool_index": 29,
+      "fingerprint": "32ad1ba45d752e46",
+      "latency_ms": 159.90778570994735,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 30,
+      "pool_index": 30,
+      "fingerprint": "c508d34836ef1474",
+      "latency_ms": 160.38758726790547,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 0,
+      "obs_index": 31,
+      "pool_index": 31,
+      "fingerprint": "a4a6bd30a2f6c795",
+      "latency_ms": 159.36892293393612,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 0,
+      "pool_index": 0,
+      "fingerprint": "b5e851bad3186c4f",
+      "latency_ms": 159.5661723986268,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 1,
+      "pool_index": 1,
+      "fingerprint": "4172377da5100ef6",
+      "latency_ms": 160.1717658340931,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 2,
+      "pool_index": 2,
+      "fingerprint": "f2a045f9c6355425",
+      "latency_ms": 161.07487818226218,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 3,
+      "pool_index": 3,
+      "fingerprint": "8353bd48ed26251f",
+      "latency_ms": 159.76968873292208,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 4,
+      "pool_index": 4,
+      "fingerprint": "73034c4c86b4c4dc",
+      "latency_ms": 159.54376896843314,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 5,
+      "pool_index": 5,
+      "fingerprint": "42717cfaaf53c5db",
+      "latency_ms": 160.12450493872166,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 6,
+      "pool_index": 6,
+      "fingerprint": "6fac2b95ccd008c7",
+      "latency_ms": 159.71520589664578,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 7,
+      "pool_index": 7,
+      "fingerprint": "63b1faf5a6391367",
+      "latency_ms": 160.0732752121985,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 8,
+      "pool_index": 8,
+      "fingerprint": "e38334ea6f21e7a5",
+      "latency_ms": 160.11393629014492,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 9,
+      "pool_index": 9,
+      "fingerprint": "b92c7639c6a4cc4f",
+      "latency_ms": 159.0916719287634,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 10,
+      "pool_index": 10,
+      "fingerprint": "34b13142e1b15a2a",
+      "latency_ms": 159.25732301548123,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 11,
+      "pool_index": 11,
+      "fingerprint": "a3a182e98dd29e29",
+      "latency_ms": 159.45184277370572,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 12,
+      "pool_index": 12,
+      "fingerprint": "97943997674c0fdc",
+      "latency_ms": 178.32503095269203,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 13,
+      "pool_index": 13,
+      "fingerprint": "0e1817b26e80a614",
+      "latency_ms": 160.0986598059535,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 14,
+      "pool_index": 14,
+      "fingerprint": "35d5c0d60f5e495c",
+      "latency_ms": 159.58851715549827,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 15,
+      "pool_index": 15,
+      "fingerprint": "086baba76f3854eb",
+      "latency_ms": 160.11301707476377,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 16,
+      "pool_index": 16,
+      "fingerprint": "2e8611db22ed5b14",
+      "latency_ms": 160.22486565634608,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 17,
+      "pool_index": 17,
+      "fingerprint": "a23f1a02946bb1c4",
+      "latency_ms": 160.20517703145742,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 18,
+      "pool_index": 18,
+      "fingerprint": "3f81e37cf3e6b041",
+      "latency_ms": 160.05249973386526,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 19,
+      "pool_index": 19,
+      "fingerprint": "0261bb438d5b82eb",
+      "latency_ms": 160.6452357955277,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 20,
+      "pool_index": 20,
+      "fingerprint": "e5fa7a221ee83016",
+      "latency_ms": 159.78453122079372,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 21,
+      "pool_index": 21,
+      "fingerprint": "c78fd0605c3f7e6e",
+      "latency_ms": 162.26325975731015,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 22,
+      "pool_index": 22,
+      "fingerprint": "a81883739af9bb16",
+      "latency_ms": 178.44242695719004,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 23,
+      "pool_index": 23,
+      "fingerprint": "0f47557e1bf62ce2",
+      "latency_ms": 179.00377931073308,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 24,
+      "pool_index": 24,
+      "fingerprint": "8995f225ebf15b98",
+      "latency_ms": 159.7115360200405,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 25,
+      "pool_index": 25,
+      "fingerprint": "0448c36661fbe04a",
+      "latency_ms": 161.14240232855082,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 26,
+      "pool_index": 26,
+      "fingerprint": "c3506902c299a105",
+      "latency_ms": 160.81312391906977,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 27,
+      "pool_index": 27,
+      "fingerprint": "39dc528fb6bb1414",
+      "latency_ms": 160.9124382957816,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 28,
+      "pool_index": 28,
+      "fingerprint": "c5932fbe2dccdcf0",
+      "latency_ms": 161.05319373309612,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 29,
+      "pool_index": 29,
+      "fingerprint": "32ad1ba45d752e46",
+      "latency_ms": 161.84473782777786,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 30,
+      "pool_index": 30,
+      "fingerprint": "c508d34836ef1474",
+      "latency_ms": 161.18433605879545,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 1,
+      "obs_index": 31,
+      "pool_index": 31,
+      "fingerprint": "a4a6bd30a2f6c795",
+      "latency_ms": 161.43733588978648,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 0,
+      "pool_index": 0,
+      "fingerprint": "b5e851bad3186c4f",
+      "latency_ms": 161.19238827377558,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 1,
+      "pool_index": 1,
+      "fingerprint": "4172377da5100ef6",
+      "latency_ms": 160.43356200680137,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 2,
+      "pool_index": 2,
+      "fingerprint": "f2a045f9c6355425",
+      "latency_ms": 161.26223327592015,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 3,
+      "pool_index": 3,
+      "fingerprint": "8353bd48ed26251f",
+      "latency_ms": 161.71667585149407,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 4,
+      "pool_index": 4,
+      "fingerprint": "73034c4c86b4c4dc",
+      "latency_ms": 161.3521110266447,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 5,
+      "pool_index": 5,
+      "fingerprint": "42717cfaaf53c5db",
+      "latency_ms": 161.11426800489426,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 6,
+      "pool_index": 6,
+      "fingerprint": "6fac2b95ccd008c7",
+      "latency_ms": 161.89058916643262,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 7,
+      "pool_index": 7,
+      "fingerprint": "63b1faf5a6391367",
+      "latency_ms": 162.0445530861616,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 8,
+      "pool_index": 8,
+      "fingerprint": "e38334ea6f21e7a5",
+      "latency_ms": 161.47083416581154,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 9,
+      "pool_index": 9,
+      "fingerprint": "b92c7639c6a4cc4f",
+      "latency_ms": 161.12981224432588,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 10,
+      "pool_index": 10,
+      "fingerprint": "34b13142e1b15a2a",
+      "latency_ms": 161.52684204280376,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 11,
+      "pool_index": 11,
+      "fingerprint": "a3a182e98dd29e29",
+      "latency_ms": 160.51222290843725,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 12,
+      "pool_index": 12,
+      "fingerprint": "97943997674c0fdc",
+      "latency_ms": 179.52359281480312,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 13,
+      "pool_index": 13,
+      "fingerprint": "0e1817b26e80a614",
+      "latency_ms": 161.74946166574955,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 14,
+      "pool_index": 14,
+      "fingerprint": "35d5c0d60f5e495c",
+      "latency_ms": 160.84418492391706,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 15,
+      "pool_index": 15,
+      "fingerprint": "086baba76f3854eb",
+      "latency_ms": 161.28120990470052,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 16,
+      "pool_index": 16,
+      "fingerprint": "2e8611db22ed5b14",
+      "latency_ms": 161.60576697438955,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 17,
+      "pool_index": 17,
+      "fingerprint": "a23f1a02946bb1c4",
+      "latency_ms": 161.49674216285348,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 18,
+      "pool_index": 18,
+      "fingerprint": "3f81e37cf3e6b041",
+      "latency_ms": 160.96887504681945,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 19,
+      "pool_index": 19,
+      "fingerprint": "0261bb438d5b82eb",
+      "latency_ms": 162.46783593669534,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 20,
+      "pool_index": 20,
+      "fingerprint": "e5fa7a221ee83016",
+      "latency_ms": 159.70047377049923,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 21,
+      "pool_index": 21,
+      "fingerprint": "c78fd0605c3f7e6e",
+      "latency_ms": 159.15020974352956,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 22,
+      "pool_index": 22,
+      "fingerprint": "a81883739af9bb16",
+      "latency_ms": 178.44565911218524,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 23,
+      "pool_index": 23,
+      "fingerprint": "0f47557e1bf62ce2",
+      "latency_ms": 180.91632798314095,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 24,
+      "pool_index": 24,
+      "fingerprint": "8995f225ebf15b98",
+      "latency_ms": 161.79997799918056,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 25,
+      "pool_index": 25,
+      "fingerprint": "0448c36661fbe04a",
+      "latency_ms": 160.3855136781931,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 26,
+      "pool_index": 26,
+      "fingerprint": "c3506902c299a105",
+      "latency_ms": 160.40394827723503,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 27,
+      "pool_index": 27,
+      "fingerprint": "39dc528fb6bb1414",
+      "latency_ms": 160.0885489024222,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 28,
+      "pool_index": 28,
+      "fingerprint": "c5932fbe2dccdcf0",
+      "latency_ms": 159.75083271041512,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 29,
+      "pool_index": 29,
+      "fingerprint": "32ad1ba45d752e46",
+      "latency_ms": 160.586791113019,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 30,
+      "pool_index": 30,
+      "fingerprint": "c508d34836ef1474",
+      "latency_ms": 159.9501660093665,
+      "capture_in_timed_region": false
+    },
+    {
+      "round": 2,
+      "obs_index": 31,
+      "pool_index": 31,
+      "fingerprint": "a4a6bd30a2f6c795",
+      "latency_ms": 159.80743989348412,
+      "capture_in_timed_region": false
+    }
+  ],
+  "peak_allocated_bytes": 13538221056,
+  "peak_allocated_gib": 12.608450889587402,
+  "vram_note": "torch.cuda.max_memory_allocated after model+materialize; excludes host load",
+  "timing_boundary": "sync wall clock around predict_action_chunk only; per-obs graph warmup immediately before each timed sample; materialize/graph_check/reset+generator before warmup outside timed window; VLM prefix + action expert inside timed call",
+  "script_sha256": "9e1f9730c2650a84e44d02cf3870465e22f8bda7e0a7a91196a7781f24d7ebe2",
+  "environment_start": {
+    "utc": "2026-10-17T09:13:22Z",
+    "hostname": "miaa-hpc2",
+    "physical_gpu_index": 2,
+    "cuda_visible_devices": "2",
+    "logical_device": "cuda:0",
+    "nvidia_smi_row": "2, GPU-9cd769b8-7aaf-4d06-ae0b-b1eb31078c92, NVIDIA GeForce RTX 3090, 266 MiB, 23861 MiB, 0 %, 53, 1965 MHz",
+    "loadavg": "5.72 5.84 5.54 5/5441 1908628",
+    "mem_available": "MemAvailable:   199369308 kB"
+  },
+  "environment_end": {
+    "utc": "2026-10-17T09:15:49Z",
+    "hostname": "miaa-hpc2",
+    "physical_gpu_index": 2,
+    "cuda_visible_devices": "2",
+    "logical_device": "cuda:0",
+    "nvidia_smi_row": "2, GPU-9cd769b8-7aaf-4d06-ae0b-b1eb31078c92, NVIDIA GeForce RTX 3090, 12648 MiB, 11479 MiB, 0 %, 58, 1965 MHz",
+    "loadavg": "6.57 6.09 5.68 6/5448 1910313",
+    "mem_available": "MemAvailable:   198213836 kB"
+  },
+  "utc": "2026-10-17T09:15:49Z"
+}

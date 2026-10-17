@@ -1,0 +1,51 @@
+{
+  "protocol": "formal_flops_v1",
+  "stack": "molmoact2",
+  "utc": "2026-10-17T09:06:41Z",
+  "physical_gpu_index": 3,
+  "hostname": "miaa-hpc2",
+  "script_sha256": "1ac94c06521b02fd839df143193f1f92dfdb098e13bfc67b672679f20bc4c0d3",
+  "anchor_config": "molmo_full_nfe10_eager",
+  "summary_table": [
+    {
+      "config_id": "molmo_full_nfe10_eager",
+      "median_gflops": 5250.586483712,
+      "mean_gflops": 5248.5980764159995,
+      "min_gflops": 5186.730957824,
+      "max_gflops": 5314.517507072,
+      "reduction_vs_anchor_pct": 0.0,
+      "params_stored_m": 5442.196208,
+      "peak_allocated_gib": 12.663646697998047
+    },
+    {
+      "config_id": "molmo_pruned_nfe10_materialized",
+      "median_gflops": 3637.503040512,
+      "mean_gflops": 3636.34261504,
+      "min_gflops": 3600.243596288,
+      "max_gflops": 3674.804427776,
+      "reduction_vs_anchor_pct": 30.72196693081799,
+      "params_stored_m": 3911.23224,
+      "peak_allocated_gib": 9.454898834228516
+    },
+    {
+      "config_id": "molmo_full_nfe1_eager",
+      "median_gflops": 5176.654625792,
+      "mean_gflops": 5174.668706816,
+      "min_gflops": 5112.878726144,
+      "max_gflops": 5240.506022912,
+      "reduction_vs_anchor_pct": 1.408068568137022,
+      "params_stored_m": 5442.196208,
+      "peak_allocated_gib": 12.659283638000488
+    },
+    {
+      "config_id": "molmo_pruned_nfe1_materialized",
+      "median_gflops": 3563.571182592,
+      "mean_gflops": 3562.4132454399996,
+      "min_gflops": 3526.391364608,
+      "max_gflops": 3600.792943616,
+      "reduction_vs_anchor_pct": 32.130035498955024,
+      "params_stored_m": 3911.23224,
+      "peak_allocated_gib": 9.450535774230957
+    }
+  ]
+}

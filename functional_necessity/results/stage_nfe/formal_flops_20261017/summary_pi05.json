@@ -1,0 +1,51 @@
+{
+  "protocol": "formal_flops_v1",
+  "stack": "pi05",
+  "utc": "2026-10-17T08:51:23Z",
+  "physical_gpu_index": 3,
+  "hostname": "miaa-hpc2",
+  "script_sha256": "1ac94c06521b02fd839df143193f1f92dfdb098e13bfc67b672679f20bc4c0d3",
+  "anchor_config": "pi05_full_nfe10_eager",
+  "summary_table": [
+    {
+      "config_id": "pi05_full_nfe10_eager",
+      "median_gflops": 5024.398949376,
+      "mean_gflops": 5024.398949376,
+      "min_gflops": 5024.398949376,
+      "max_gflops": 5024.398949376,
+      "reduction_vs_anchor_pct": 0.0,
+      "params_stored_m": 4143.404816,
+      "peak_allocated_gib": 8.888731479644775
+    },
+    {
+      "config_id": "pi05_pruned_nfe10_materialized",
+      "median_gflops": 3711.595428864,
+      "mean_gflops": 3711.595428864,
+      "min_gflops": 3711.595428864,
+      "max_gflops": 3711.595428864,
+      "reduction_vs_anchor_pct": 26.12856848628714,
+      "params_stored_m": 3489.081104,
+      "peak_allocated_gib": 7.665332317352295
+    },
+    {
+      "config_id": "pi05_full_nfe1_eager",
+      "median_gflops": 4674.373089792,
+      "mean_gflops": 4674.373089792,
+      "min_gflops": 4674.373089792,
+      "max_gflops": 4674.373089792,
+      "reduction_vs_anchor_pct": 6.966522028022293,
+      "params_stored_m": 4143.404816,
+      "peak_allocated_gib": 8.888731479644775
+    },
+    {
+      "config_id": "pi05_pruned_nfe1_materialized",
+      "median_gflops": 3361.56956928,
+      "mean_gflops": 3361.56956928,
+      "min_gflops": 3361.56956928,
+      "max_gflops": 3361.56956928,
+      "reduction_vs_anchor_pct": 33.09509051430945,
+      "params_stored_m": 3489.081104,
+      "peak_allocated_gib": 7.665332317352295
+    }
+  ]
+}

@@ -1,0 +1,973 @@
+{
+  "config_id": "molmo_pruned_nfe10_materialized",
+  "stack": "molmoact2",
+  "status": "ok",
+  "mode": "materialized_taylor_drop16",
+  "num_inference_steps": 10,
+  "compile_model": false,
+  "cuda_graph": false,
+  "checkpoint": "/home/guorj/Skill_Efficient_VLA/functional_necessity/checkpoints/MolmoAct2-LIBERO-LeRobot",
+  "timing_boundary": "FlopCounterMode on single predict_action_chunk; excludes load/materialize/warmup",
+  "flop_count_rule": "1 mul-add = 2 FLOPs (PyTorch FlopCounterMode default)",
+  "torch_version": "2.11.0+cu128",
+  "params_stored_m": 3911.23224,
+  "params_active_m": 3911.23224,
+  "setup_outside": {
+    "materialize": {
+      "params_before": 5442196208,
+      "params_after": 3911232240,
+      "freed": 1530963968
+    },
+    "action_max_abs_vs_kvonly": 0.0
+  },
+  "precheck": {
+    "ok": true,
+    "peak_allocated_gib": 9.451838493347168,
+    "free_gib_after": 11.81982421875,
+    "total_gib": 23.56072998046875
+  },
+  "per_observation": [
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 0,
+        "dataset_index": 0,
+        "fingerprint": "b5e851bad3186c4f",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 1,
+        "dataset_index": 268,
+        "fingerprint": "4172377da5100ef6",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 2,
+        "dataset_index": 536,
+        "fingerprint": "f2a045f9c6355425",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 3,
+        "dataset_index": 804,
+        "fingerprint": "8353bd48ed26251f",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 4,
+        "dataset_index": 1072,
+        "fingerprint": "73034c4c86b4c4dc",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 5,
+        "dataset_index": 1340,
+        "fingerprint": "42717cfaaf53c5db",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 6,
+        "dataset_index": 1608,
+        "fingerprint": "6fac2b95ccd008c7",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 7,
+        "dataset_index": 1876,
+        "fingerprint": "63b1faf5a6391367",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 8,
+        "dataset_index": 2144,
+        "fingerprint": "e38334ea6f21e7a5",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 9,
+        "dataset_index": 2412,
+        "fingerprint": "b92c7639c6a4cc4f",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 10,
+        "dataset_index": 2680,
+        "fingerprint": "34b13142e1b15a2a",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3600.243596288,
+      "flop_detail": {
+        "total_flops": 3600243596288,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 11,
+        "dataset_index": 2948,
+        "fingerprint": "a3a182e98dd29e29",
+        "input_ids_len": 497
+      }
+    },
+    {
+      "gflops_per_chunk": 3674.804427776,
+      "flop_detail": {
+        "total_flops": 3674804427776,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 12,
+        "dataset_index": 3216,
+        "fingerprint": "97943997674c0fdc",
+        "input_ids_len": 513
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 13,
+        "dataset_index": 3484,
+        "fingerprint": "0e1817b26e80a614",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 14,
+        "dataset_index": 3752,
+        "fingerprint": "35d5c0d60f5e495c",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 15,
+        "dataset_index": 4020,
+        "fingerprint": "086baba76f3854eb",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 16,
+        "dataset_index": 4288,
+        "fingerprint": "2e8611db22ed5b14",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 17,
+        "dataset_index": 4556,
+        "fingerprint": "a23f1a02946bb1c4",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 18,
+        "dataset_index": 4824,
+        "fingerprint": "3f81e37cf3e6b041",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 19,
+        "dataset_index": 5092,
+        "fingerprint": "0261bb438d5b82eb",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 20,
+        "dataset_index": 5360,
+        "fingerprint": "e5fa7a221ee83016",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3600.243596288,
+      "flop_detail": {
+        "total_flops": 3600243596288,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 21,
+        "dataset_index": 5628,
+        "fingerprint": "c78fd0605c3f7e6e",
+        "input_ids_len": 497
+      }
+    },
+    {
+      "gflops_per_chunk": 3674.804427776,
+      "flop_detail": {
+        "total_flops": 3674804427776,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 22,
+        "dataset_index": 5896,
+        "fingerprint": "a81883739af9bb16",
+        "input_ids_len": 513
+      }
+    },
+    {
+      "gflops_per_chunk": 3674.804427776,
+      "flop_detail": {
+        "total_flops": 3674804427776,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 23,
+        "dataset_index": 6164,
+        "fingerprint": "0f47557e1bf62ce2",
+        "input_ids_len": 513
+      }
+    },
+    {
+      "gflops_per_chunk": 3600.243596288,
+      "flop_detail": {
+        "total_flops": 3600243596288,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 24,
+        "dataset_index": 6432,
+        "fingerprint": "8995f225ebf15b98",
+        "input_ids_len": 497
+      }
+    },
+    {
+      "gflops_per_chunk": 3600.243596288,
+      "flop_detail": {
+        "total_flops": 3600243596288,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 25,
+        "dataset_index": 6700,
+        "fingerprint": "0448c36661fbe04a",
+        "input_ids_len": 497
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 26,
+        "dataset_index": 6968,
+        "fingerprint": "c3506902c299a105",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 27,
+        "dataset_index": 7236,
+        "fingerprint": "39dc528fb6bb1414",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 28,
+        "dataset_index": 7504,
+        "fingerprint": "c5932fbe2dccdcf0",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 29,
+        "dataset_index": 7772,
+        "fingerprint": "32ad1ba45d752e46",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 30,
+        "dataset_index": 8040,
+        "fingerprint": "c508d34836ef1474",
+        "input_ids_len": 505
+      }
+    },
+    {
+      "gflops_per_chunk": 3637.503040512,
+      "flop_detail": {
+        "total_flops": 3637503040512,
+        "tracked_major_ops_flops": 0,
+        "tracked_fraction_of_total": 0.0,
+        "op_gflops": {
+          "aten::mm": 0.0,
+          "aten::bmm": 0.0,
+          "aten::addmm": 0.0,
+          "aten::conv2d": 0.0,
+          "aten::scaled_dot_product_attention": 0.0
+        },
+        "other_ops_count": 4,
+        "uncounted_note": "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; not a sum of per-module wrappers (avoids nested double count)."
+      },
+      "obs": {
+        "pool_index": 31,
+        "dataset_index": 8308,
+        "fingerprint": "a4a6bd30a2f6c795",
+        "input_ids_len": 505
+      }
+    }
+  ],
+  "summary_gflops": {
+    "n": 32,
+    "mean_gflops": 3636.34261504,
+    "median_gflops": 3637.503040512,
+    "min_gflops": 3600.243596288,
+    "max_gflops": 3674.804427776,
+    "stdev_gflops": 17.39625895320966
+  },
+  "peak_allocated_gib": 9.454898834228516,
+  "observations": [
+    {
+      "pool_index": 0,
+      "dataset_index": 0,
+      "fingerprint": "b5e851bad3186c4f",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 1,
+      "dataset_index": 268,
+      "fingerprint": "4172377da5100ef6",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 2,
+      "dataset_index": 536,
+      "fingerprint": "f2a045f9c6355425",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 3,
+      "dataset_index": 804,
+      "fingerprint": "8353bd48ed26251f",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 4,
+      "dataset_index": 1072,
+      "fingerprint": "73034c4c86b4c4dc",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 5,
+      "dataset_index": 1340,
+      "fingerprint": "42717cfaaf53c5db",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 6,
+      "dataset_index": 1608,
+      "fingerprint": "6fac2b95ccd008c7",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 7,
+      "dataset_index": 1876,
+      "fingerprint": "63b1faf5a6391367",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 8,
+      "dataset_index": 2144,
+      "fingerprint": "e38334ea6f21e7a5",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 9,
+      "dataset_index": 2412,
+      "fingerprint": "b92c7639c6a4cc4f",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 10,
+      "dataset_index": 2680,
+      "fingerprint": "34b13142e1b15a2a",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 11,
+      "dataset_index": 2948,
+      "fingerprint": "a3a182e98dd29e29",
+      "input_ids_len": 497
+    },
+    {
+      "pool_index": 12,
+      "dataset_index": 3216,
+      "fingerprint": "97943997674c0fdc",
+      "input_ids_len": 513
+    },
+    {
+      "pool_index": 13,
+      "dataset_index": 3484,
+      "fingerprint": "0e1817b26e80a614",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 14,
+      "dataset_index": 3752,
+      "fingerprint": "35d5c0d60f5e495c",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 15,
+      "dataset_index": 4020,
+      "fingerprint": "086baba76f3854eb",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 16,
+      "dataset_index": 4288,
+      "fingerprint": "2e8611db22ed5b14",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 17,
+      "dataset_index": 4556,
+      "fingerprint": "a23f1a02946bb1c4",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 18,
+      "dataset_index": 4824,
+      "fingerprint": "3f81e37cf3e6b041",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 19,
+      "dataset_index": 5092,
+      "fingerprint": "0261bb438d5b82eb",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 20,
+      "dataset_index": 5360,
+      "fingerprint": "e5fa7a221ee83016",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 21,
+      "dataset_index": 5628,
+      "fingerprint": "c78fd0605c3f7e6e",
+      "input_ids_len": 497
+    },
+    {
+      "pool_index": 22,
+      "dataset_index": 5896,
+      "fingerprint": "a81883739af9bb16",
+      "input_ids_len": 513
+    },
+    {
+      "pool_index": 23,
+      "dataset_index": 6164,
+      "fingerprint": "0f47557e1bf62ce2",
+      "input_ids_len": 513
+    },
+    {
+      "pool_index": 24,
+      "dataset_index": 6432,
+      "fingerprint": "8995f225ebf15b98",
+      "input_ids_len": 497
+    },
+    {
+      "pool_index": 25,
+      "dataset_index": 6700,
+      "fingerprint": "0448c36661fbe04a",
+      "input_ids_len": 497
+    },
+    {
+      "pool_index": 26,
+      "dataset_index": 6968,
+      "fingerprint": "c3506902c299a105",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 27,
+      "dataset_index": 7236,
+      "fingerprint": "39dc528fb6bb1414",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 28,
+      "dataset_index": 7504,
+      "fingerprint": "c5932fbe2dccdcf0",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 29,
+      "dataset_index": 7772,
+      "fingerprint": "32ad1ba45d752e46",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 30,
+      "dataset_index": 8040,
+      "fingerprint": "c508d34836ef1474",
+      "input_ids_len": 505
+    },
+    {
+      "pool_index": 31,
+      "dataset_index": 8308,
+      "fingerprint": "a4a6bd30a2f6c795",
+      "input_ids_len": 505
+    }
+  ],
+  "utc": "2026-10-17T09:01:51Z",
+  "physical_gpu_index": 3,
+  "script_sha256": "1ac94c06521b02fd839df143193f1f92dfdb098e13bfc67b672679f20bc4c0d3"
+}

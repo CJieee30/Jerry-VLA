@@ -1,0 +1,107 @@
+{
+  "protocol": "molmo_formal_deployment_steady_v1",
+  "utc": "2026-10-17T09:20:42Z",
+  "physical_gpu_index": 2,
+  "summary_table": [
+    {
+      "config_id": "molmo_full_nfe10_graph",
+      "median_ms": 244.29183267056942,
+      "mean_ms": 248.27492728460734,
+      "p95_ms": 263.0855427123606,
+      "per_round_median_ms": [
+        242.3113549593836,
+        244.0157684031874,
+        246.44174659624696
+      ],
+      "speedup_vs_anchor": 1.0,
+      "capture_fraction_in_timed": 0.0,
+      "params_stored_m": 5442.196208,
+      "peak_allocated_gib": 12.621087551116943
+    },
+    {
+      "config_id": "molmo_pruned_nfe10_materialized_graph",
+      "median_ms": 228.47576346248388,
+      "mean_ms": 231.45906728556534,
+      "p95_ms": 232.46072325855494,
+      "per_round_median_ms": [
+        227.79867169447243,
+        228.54016604833305,
+        229.0039632935077
+      ],
+      "speedup_vs_anchor": 1.069224275557274,
+      "capture_fraction_in_timed": 0.0,
+      "params_stored_m": 3911.23224,
+      "peak_allocated_gib": 9.769367694854736
+    },
+    {
+      "config_id": "molmo_full_nfe1_graph",
+      "median_ms": 160.6568363495171,
+      "mean_ms": 162.31933250188982,
+      "p95_ms": 178.44242695719004,
+      "per_round_median_ms": [
+        160.59124912135303,
+        160.14813538640738,
+        161.22731077484787
+      ],
+      "speedup_vs_anchor": 1.5205816211835526,
+      "capture_fraction_in_timed": 0.0,
+      "params_stored_m": 5442.196208,
+      "peak_allocated_gib": 12.608450889587402
+    },
+    {
+      "config_id": "molmo_pruned_nfe1_materialized_graph",
+      "median_ms": 144.37847351655364,
+      "mean_ms": 145.31846013657437,
+      "p95_ms": 150.54698986932635,
+      "per_round_median_ms": [
+        145.04890656098723,
+        143.94698292016983,
+        144.3244954571128
+      ],
+      "speedup_vs_anchor": 1.692023933488674,
+      "capture_fraction_in_timed": 0.0,
+      "params_stored_m": 3911.23224,
+      "peak_allocated_gib": 9.756731033325195
+    }
+  ],
+  "round_stability": {
+    "molmo_full_nfe10_graph": {
+      "round_medians_ms": [
+        242.3113549593836,
+        244.0157684031874,
+        246.44174659624696
+      ],
+      "spread_pct": 1.7045803064225735
+    },
+    "molmo_pruned_nfe10_materialized_graph": {
+      "round_medians_ms": [
+        227.79867169447243,
+        228.54016604833305,
+        229.0039632935077
+      ],
+      "spread_pct": 0.529103874956664
+    },
+    "molmo_full_nfe1_graph": {
+      "round_medians_ms": [
+        160.59124912135303,
+        160.14813538640738,
+        161.22731077484787
+      ],
+      "spread_pct": 0.6738607264059879
+    },
+    "molmo_pruned_nfe1_materialized_graph": {
+      "round_medians_ms": [
+        145.04890656098723,
+        143.94698292016983,
+        144.3244954571128
+      ],
+      "spread_pct": 0.7655065903177067
+    }
+  },
+  "anchor_config": "molmo_full_nfe10_graph",
+  "anchor_recheck": {
+    "first_median_ms": 244.29183267056942,
+    "recheck_median_ms": 243.62552003003657,
+    "drift_pct": 0.27275272908177084
+  }
+}
