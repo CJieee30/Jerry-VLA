@@ -232,12 +232,12 @@ Same **Language Instructions** slice and seeds as Full NFE=10 above. **Taylor Dr
 
 **Launch (2026-10-17 UTC).** `run_eval_plus_lang_drop16_serial.sh` on **GPU0** (after formal efficiency); master log `results/logs/eval_molmoact2_drop16_nfe10_lang_serial.log`. Tags: `molmoact2_drop16_materialized_nfe10_lang_{spatial,object,goal,10}`.
 
-| Batch | NFE | Status |
-| --- | ---: | --- |
-| Drop-16 materialized Language | 10 | **进行中** — Spatial suite started 2026-10-17T05:52:35Z |
-| Drop-16 materialized Language | 1 | **未开始** — queue after NFE=10 serial completes |
+| Batch | NFE | GPU | Status |
+| --- | ---: | ---: | --- |
+| Drop-16 materialized Language | 10 | 0 | **进行中** — Spatial **完成**；**Object 运行中**（2026-10-17 UTC）；Goal / Long 待 NFE=10 串行 |
+| Drop-16 materialized Language | 1 | 2（计划） | **待启动** — 入口 `scripts/molmoact2_libero/run_eval_plus_lang_drop16_nfe1_gpu2.sh`；主日志 `results/logs/eval_molmoact2_drop16_nfe1_lang_serial_gpu2.log`。2026-10-17 π0.5 稳态测量结束后 GPU2 被外部训练占用（`nvidia-smi` PID 非本项目），**未重复启动**；GPU2 空闲后执行上述脚本（完整性检查 `check_plus_eval_integrity.py`，跳过已完成套件）。GPU0 上 NFE=10 串行仍运行，**不**与其抢卡。 |
 
-Results table (four suites + Macro/Micro) will be filled when all four `eval_info.json` exist; use `summarize_plus_lang.py` with the four drop-16 dirs.
+NFE=1 标签：`molmoact2_drop16_materialized_nfe1_lang_{spatial,object,goal,10}`。结果表在四份 `eval_info.json` 齐备后用 `summarize_plus_lang.py` 汇总。
 
 ---
 

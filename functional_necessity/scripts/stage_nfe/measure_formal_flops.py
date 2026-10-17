@@ -68,23 +68,51 @@ def _summarize(values: list[float]) -> dict:
     }
 
 
-def _flop_breakdown(mode: FlopCounterMode) -> dict[str, float]:
+def _op_label(op: object) -> str:
+    if isinstance(op, str):
+        return op
+    name = getattr(op, "_qualified_op_name", None)
+    if name:
+        return str(name)
+    packet = getattr(op, "name", None)
+    if callable(packet):
+        return str(packet())
+    return str(op)
+
+
+def _global_op_counts(mode: FlopCounterMode) -> dict[str, int]:
+    """Use FlopCounterMode Global bucket only (no per-module sum — avoids double count)."""
     counts = mode.get_flop_counts()
+    global_ops = counts.get("Global") or counts.get("global")
+    if global_ops is None:
+        return {}
     by_op: dict[str, int] = {}
-    for _mod, ops in counts.items():
-        for op, n in ops.items():
-            by_op[op] = by_op.get(op, 0) + int(n)
+    for op, n in global_ops.items():
+        by_op[_op_label(op)] = by_op.get(_op_label(op), 0) + int(n)
+    return by_op
+
+
+def _flop_breakdown(mode: FlopCounterMode) -> dict[str, float]:
+    by_op = _global_op_counts(mode)
     total = int(mode.get_total_flops())
-    tracked = sum(by_op.get(op, 0) for op in COVERAGE_OPS)
+    op_gflops = {cov: 0.0 for cov in COVERAGE_OPS}
+    tracked = 0
+    for op_name, n in by_op.items():
+        for cov in COVERAGE_OPS:
+            if cov in op_name or op_name.endswith(cov.split("::")[-1]):
+                op_gflops[cov] += n / 1e9
+                tracked += int(n)
+                break
     return {
         "total_flops": total,
+        "global_op_count": len(by_op),
+        "global_op_gflops": {k: v / 1e9 for k, v in by_op.items()},
         "tracked_major_ops_flops": tracked,
         "tracked_fraction_of_total": tracked / total if total else 0.0,
-        "op_gflops": {op: by_op.get(op, 0) / 1e9 for op in COVERAGE_OPS},
-        "other_ops_count": len(by_op) - sum(1 for op in COVERAGE_OPS if by_op.get(op)),
+        "op_gflops": op_gflops,
         "uncounted_note": (
-            "Total is FlopCounterMode global get_total_flops() on one predict_action_chunk; "
-            "not a sum of per-module wrappers (avoids nested double count)."
+            "Operator breakdown from FlopCounterMode['Global'] only; "
+            "total_flops = get_total_flops() on one predict_action_chunk."
         ),
     }
 
