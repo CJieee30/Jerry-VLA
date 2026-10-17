@@ -1,0 +1,7657 @@
+{
+  "per_task": [
+    {
+      "task_group": "libero_10",
+      "task_id": 1484,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1485,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1486,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1487,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1488,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1489,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1490,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1491,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1492,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1493,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1494,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1495,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1496,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1497,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1498,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1499,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1500,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1501,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1502,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1503,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1504,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1505,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1506,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1507,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1508,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1509,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1510,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1511,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1512,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1513,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1514,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1515,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1516,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1517,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1518,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1519,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1520,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1521,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1522,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1523,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1524,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1525,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1526,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1527,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1528,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1529,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1530,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1531,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1532,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1533,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1534,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1535,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1536,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1537,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1538,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1539,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1540,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1541,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1542,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1543,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1544,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1545,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1546,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1547,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1548,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1549,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1550,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1551,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1552,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1553,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1554,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1555,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1556,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1557,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1558,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1559,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1560,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1561,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1562,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1563,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1564,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1565,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1566,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1567,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1568,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1569,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1570,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1571,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1572,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1573,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1574,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1575,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1576,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1577,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1578,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1579,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1580,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1581,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1582,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1583,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1584,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1585,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1586,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1587,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1588,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1589,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1590,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1591,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1592,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1593,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1594,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1595,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1596,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1597,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1598,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1599,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1600,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1601,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1602,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1603,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1604,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1605,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1606,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1607,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1608,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1609,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1610,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1611,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1612,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1613,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1614,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1615,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1616,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1617,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1618,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1619,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1620,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1621,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1622,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1623,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1624,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1625,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1626,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1627,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1628,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1629,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1630,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1631,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1632,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1633,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1634,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1635,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1636,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1637,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1638,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1639,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1640,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1641,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1642,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1643,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1644,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1645,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1646,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1647,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1648,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1649,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1650,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1651,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1652,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1653,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1654,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1655,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1656,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1657,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1658,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1659,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1660,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1661,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1662,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1663,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1664,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1665,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1666,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1667,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1668,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1669,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1670,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1671,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1672,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1673,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1674,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1675,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1676,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1677,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1678,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1679,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1680,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1681,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1682,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1683,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1684,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1685,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1686,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1687,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1688,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1689,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1690,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1691,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1692,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1693,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1694,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1695,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1696,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1697,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1698,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1699,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1700,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1701,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1702,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1703,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1704,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1705,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1706,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1707,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1708,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1709,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1710,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1711,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1712,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1713,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1714,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1715,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1716,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1717,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1718,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1719,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1720,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1721,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1722,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1723,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1724,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1725,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1726,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1727,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1728,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1729,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1730,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1731,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1732,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1733,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1734,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1735,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1736,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1737,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1738,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1739,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1740,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1741,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1742,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1743,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1744,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1745,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1746,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1747,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1748,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1749,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1750,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1751,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1752,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1753,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1754,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1755,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1756,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1757,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1758,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1759,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1760,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1761,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1762,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1763,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1764,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1765,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1766,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1767,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1768,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1769,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1770,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1771,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1772,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1773,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1774,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1775,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1776,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1777,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1778,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1779,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1780,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1781,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1782,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1783,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1784,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1785,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1786,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1787,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1788,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1789,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1790,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1791,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1792,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1793,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1794,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1795,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1796,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1797,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1798,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1799,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1800,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1801,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1802,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1803,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1804,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1805,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1806,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1807,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1808,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1809,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1810,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1811,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1812,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1813,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1814,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1815,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1816,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1817,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1818,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1819,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1820,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1821,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1822,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1823,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1824,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1825,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1826,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1827,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1828,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1829,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1830,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1831,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1832,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1833,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1834,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1835,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1836,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1837,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1838,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1839,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1840,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1841,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1842,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1843,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1844,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1845,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1846,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1847,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1848,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1849,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1850,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1851,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1852,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1853,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1854,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1855,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1856,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1857,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1858,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1859,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1860,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1861,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1862,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1863,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1864,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1865,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1866,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1867,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1868,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1869,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1870,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1871,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1872,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1873,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1874,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1875,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1876,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1877,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1878,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1879,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1880,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1881,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1882,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1883,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1884,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1885,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1886,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1887,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1888,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1889,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1890,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1891,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1892,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1893,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1894,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1895,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1896,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1897,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1898,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1899,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1900,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1901,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1902,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1903,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1904,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1905,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1906,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1907,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1908,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1909,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1910,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1911,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1912,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1913,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1914,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1915,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1916,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1917,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1918,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1919,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1920,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1921,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1922,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1923,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1924,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1925,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1926,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1927,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1928,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1929,
+      "metrics": {
+        "sum_rewards": [
+          1.0
+        ],
+        "max_rewards": [
+          1.0
+        ],
+        "successes": [
+          true
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1930,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1931,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    },
+    {
+      "task_group": "libero_10",
+      "task_id": 1932,
+      "metrics": {
+        "sum_rewards": [
+          0.0
+        ],
+        "max_rewards": [
+          0.0
+        ],
+        "successes": [
+          false
+        ],
+        "video_paths": [],
+        "predicted_video_paths": []
+      }
+    }
+  ],
+  "per_group": {
+    "libero_10": {
+      "avg_sum_reward": 0.8017817371937639,
+      "avg_max_reward": 0.8017817371937639,
+      "pc_success": 80.17817371937639,
+      "n_episodes": 449,
+      "video_paths": [],
+      "predicted_video_paths": []
+    }
+  },
+  "overall": {
+    "avg_sum_reward": 0.8017817371937639,
+    "avg_max_reward": 0.8017817371937639,
+    "pc_success": 80.17817371937639,
+    "n_episodes": 449,
+    "eval_s": 179215.14143133163,
+    "eval_ep_s": 399.142853969455,
+    "video_paths": [],
+    "predicted_video_paths": []
+  }
+}

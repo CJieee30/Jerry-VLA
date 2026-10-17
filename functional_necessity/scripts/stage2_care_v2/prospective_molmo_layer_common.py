@@ -6,8 +6,6 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-import numpy as np
-
 from protocol import MOLMO_ROOT, OUT_DIR
 
 RUN_NAME = "prospective_v1_20261015"
@@ -18,7 +16,14 @@ SPLIT_SUMMARY_PATH = PROSPECTIVE_DIR / "01_split" / "split_summary.json"
 MOLMO_LAYER_DIR = OUT_DIR / "layer_calibration_molmo_v1"
 CALIB_PATH = MOLMO_LAYER_DIR / "calib_molmoact2.pt"
 SCORE_DIR = MOLMO_LAYER_DIR / "scores"
+TAYLOR_GROUP_DIR = MOLMO_LAYER_DIR / "taylor_groups"
 SEL_DIR = MOLMO_LAYER_DIR / "selections"
+
+PROTOCOL_ID = "layer_calibration_molmo_v1_rev2"
+PROTOCOL_NOTE = (
+    "Rev2: per-frame IGIA/Fisher/GateProbe; Taylor = Molmo orig "
+    "sum_w |sum_i (g_i*theta_i)| / N over selected frames (not Taylor_absmean)."
+)
 
 N_OBS = 400
 N_TASKS = 40
@@ -26,11 +31,20 @@ OBS_PER_TASK = 10
 N_LAYERS = 36
 DROP_K = 16
 EXCLUDE_L0 = True
+PRIMARY_BUDGET = 80
 
-# Frozen noise/timestep draw per pool row (distinct from CARE v2 SEED=42 calib).
+# Per-frame GPU scores (one backward → three metrics).
+FRAME_METHODS = ("igia", "fisher", "gateprobe")
+
+# Taylor: grouped runs only at b=80 (see analyze).
+TAYLOR_BUDGET = 80
+TAYLOR_STOCHASTIC_SEED = 0
+
 CALIB_DRAW_SEED = 20261015
 
-METHODS = ("igia", "fisher", "taylor", "gateprobe")
+STRATEGIES = ("random", "alpha", "g_only", "care_event")
+STOCHASTIC_SEEDS = tuple(range(20))
+BUDGETS = ((40, 1), (80, 2), (120, 3))
 
 
 @dataclass
@@ -50,6 +64,19 @@ class PoolMeta:
     @property
     def shared_index(self) -> int:
         return self.pool_index
+
+
+def selection_path(method: str, budget: int, strategy: str, seed: int | None = None) -> Path:
+    base = f"{method}_b{budget}_{strategy}"
+    if seed is not None:
+        return SEL_DIR / f"{base}_seed{seed}.json"
+    return SEL_DIR / f"{base}.json"
+
+
+def taylor_group_path(strategy: str, seed: int | None = None) -> Path:
+    if strategy in ("random", "g_only"):
+        return TAYLOR_GROUP_DIR / f"taylor_{strategy}_b{TAYLOR_BUDGET}_seed{seed}.pt"
+    return TAYLOR_GROUP_DIR / f"taylor_{strategy}_b{TAYLOR_BUDGET}.pt"
 
 
 def load_calibration_pool() -> list[PoolMeta]:
@@ -77,8 +104,6 @@ def load_calibration_pool() -> list[PoolMeta]:
 
 
 def metas_for_selection(metas: list[PoolMeta]):
-    """Adapt PoolMeta to dev_nfe_rules_cpu_v2 selectors (shared_index, global_index, alpha, G, alpha_event)."""
-
     class _M:
         pass
 
@@ -109,71 +134,126 @@ def verify_no_dev_overlap() -> dict:
     }
 
 
-# Molmo Drop-16 closed-loop references (exact layer match only).
-HISTORICAL_DROP16: dict[str, tuple[str, float | None, list[int], str]] = {
+HISTORICAL_DROP16: dict[str, tuple[str, float | None, list[int], str, str]] = {
     "S1_Taylor-16": (
-        "S1 Taylor-16 (keep-KV, NFE=10, 2000 ep)",
+        "S1 Taylor-16",
         98.10,
         [1, 2, 3, 4, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35],
-        "eval_molmoact2_libero.md / drop16_taylor",
+        "eval_molmoact2_libero.md drop16_taylor; keep-KV; NFE=10; n=2000",
+        "可比性已核实",
     ),
     "S1_Fisher-16": (
-        "S1 Fisher-16 (keep-KV, NFE=10, 2000 ep)",
+        "S1 Fisher-16",
         72.75,
         [1, 2, 3, 4, 5, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35],
-        "eval_molmoact2_libero.md",
+        "eval_molmoact2_libero.md; keep-KV; NFE=10; n=2000",
+        "可比性已核实",
     ),
     "S1_IGIA-16": (
-        "S1 IGIA-16 no-L0 (keep-KV, NFE=10, 2000 ep)",
+        "S1 IGIA-16 no-L0",
         72.75,
         [1, 2, 3, 4, 5, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35],
-        "care_libero.md §8",
+        "care_libero.md §8; same layers as Fisher-16 cliff",
+        "可比性已核实",
     ),
     "S1_GP-16": (
-        "S1 GateProbe-16 (keep-KV, NFE=10, 2000 ep)",
+        "S1 GateProbe-16",
         87.00,
         [2, 3, 4, 6, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35],
-        "eval_molmoact2_libero.md",
-    ),
-    "CARE_v2_uniform_Fisher-16": (
-        "CARE v2 480-frame uniform Fisher (CPU only, no CL)",
-        None,
-        [1, 2, 3, 4, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35],
-        "stage2_care_v2/e1.json (= Taylor-16 layers)",
-    ),
-    "CARE_v2_uniform_GP-16": (
-        "CARE v2 480 uniform GateProbe",
-        None,
-        [1, 3, 21, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35] + [2],
-        "e1.json gateprobe — fix: [1,2,3,21,24-35]",
+        "eval_molmoact2_libero.md; keep-KV; NFE=10; n=2000",
+        "可比性已核实",
     ),
 }
 
-# Fix GP-16 list
-HISTORICAL_DROP16["CARE_v2_uniform_GP-16"] = (
-    "CARE v2 480 uniform GateProbe (CPU, no CL)",
-    None,
-    [1, 2, 3, 21, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35],
-    "stage2_care_v2/e1.json",
-)
+
+def historical_drop_sets() -> dict[tuple[int, ...], dict]:
+    out = {}
+    for key, (label, sr, layers, src, comp) in HISTORICAL_DROP16.items():
+        out[tuple(layers)] = {
+            "key": key,
+            "historical_label": label,
+            "historical_sr_pct": sr,
+            "historical_source": src,
+            "comparability": comp,
+        }
+    return out
 
 
 def map_historical(drop: list[int]) -> dict:
-    out = {
+    hit = historical_drop_sets().get(tuple(drop))
+    if hit:
+        return {
+            "historical_label": hit["historical_label"],
+            "historical_sr_pct": hit["historical_sr_pct"],
+            "historical_source": hit["historical_source"],
+            "comparability": hit["comparability"],
+        }
+    return {
         "historical_label": None,
         "historical_sr_pct": None,
         "historical_source": None,
         "comparability": "尚未评测",
     }
-    for _key, (label, sr, layers, src) in HISTORICAL_DROP16.items():
-        if drop == layers:
-            out["historical_label"] = label
-            out["historical_sr_pct"] = sr
-            out["historical_source"] = src
-            out["comparability"] = "可比性已核实" if sr is not None else "历史参考（仅 CPU 层集）"
+
+
+def recommend_closed_loop_candidates(
+    details_rows: list[dict],
+    *,
+    primary_budget: int = PRIMARY_BUDGET,
+    max_n: int = 2,
+) -> list[dict]:
+    """Unknown drop sets only; skip verified historical; dedupe by drop tuple."""
+    hist = historical_drop_sets()
+    verified = {t for t, m in hist.items() if m["comparability"] == "可比性已核实"}
+
+    pool = [
+        r
+        for r in details_rows
+        if int(r["budget_frames"]) == primary_budget
+        and r["method"] in ("fisher", "igia", "taylor")
+        and r.get("comparability") != "可比性已核实"
+    ]
+    # Prefer fisher care_event, then fisher alpha, then igia care_event, then taylor care_event
+    priority = {
+        ("fisher", "care_event"): 0,
+        ("fisher", "alpha"): 1,
+        ("fisher", "random"): 2,
+        ("igia", "care_event"): 3,
+        ("taylor", "care_event"): 4,
+    }
+
+    def sort_key(r):
+        return (
+            priority.get((r["method"], r["strategy"]), 99),
+            r["method"],
+            str(r["strategy"]),
+        )
+
+    seen: set[tuple[int, ...]] = set()
+    out: list[dict] = []
+    for r in sorted(pool, key=sort_key):
+        drop = tuple(json.loads(r["drop_json"]) if isinstance(r["drop_json"], str) else r["drop_layers"])
+        if drop in verified:
+            continue
+        if drop in seen:
+            continue
+        seen.add(drop)
+        out.append(
+            {
+                "method": r["method"],
+                "strategy": r["strategy"],
+                "budget_frames": primary_budget,
+                "drop_layers": list(drop),
+                "jaccard_vs_taylor_stage1": r.get("jaccard_vs_taylor_stage1"),
+                "jaccard_vs_full400_equal": r.get("jaccard_vs_full400_equal"),
+                "comparability": r.get("comparability"),
+                "why": (
+                    f"Primary budget; {r['method']} + {r['strategy']} drop not in verified historical sets."
+                ),
+            }
+        )
+        if len(out) >= max_n:
             break
-    if drop == HISTORICAL_DROP16["S1_Taylor-16"][2]:
-        out["comparability"] = "可比性已核实"
     return out
 
 

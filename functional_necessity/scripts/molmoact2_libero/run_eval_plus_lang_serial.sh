@@ -18,4 +18,9 @@ for suite in libero_spatial libero_object libero_goal libero_10; do
   bash "$DIR/run_eval_plus_lang.sh" "$TAG" "$suite" "Language Instructions" 10 3 \
     || { echo "==== FAIL $TAG ====" | tee -a "$MASTER_LOG"; exit 1; }
 done
-echo "==== SERIAL DONE $(date -Iseconds) ====" | tee -a "$MASTER_LOG"
+echo "==== LANG SERIAL DONE $(date -Iseconds) ====" | tee -a "$MASTER_LOG"
+
+echo "==== CHAIN Robot Initial States (GPU3) ====" | tee -a "$MASTER_LOG"
+bash "$DIR/run_eval_plus_init_serial.sh" \
+  || { echo "==== INIT CHAIN FAIL ====" | tee -a "$MASTER_LOG"; exit 1; }
+echo "==== LANG+INIT SERIAL DONE $(date -Iseconds) ====" | tee -a "$MASTER_LOG"

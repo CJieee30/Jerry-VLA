@@ -1,0 +1,45 @@
+{
+  "device": "cuda:0",
+  "n": 1,
+  "rtol": 0.001,
+  "atol": 0.0001,
+  "mem_process_start": {
+    "cuda": true,
+    "free_bytes": 14880669696,
+    "total_bytes": 25298141184,
+    "allocated_bytes": 0,
+    "reserved_bytes": 0,
+    "max_allocated_bytes": 0
+  },
+  "checks": [],
+  "passed": false,
+  "checkpoint": {
+    "policy_config": true,
+    "policy_training": true,
+    "transformer": true,
+    "vision_backbone": true,
+    "hf_model": false,
+    "effective": true,
+    "vlm_trainable_tensors": 288,
+    "frozen_tensors": 1006,
+    "lm_head_cpu": true
+  },
+  "mem_after_load": {
+    "cuda": true,
+    "free_bytes": 3610574848,
+    "total_bytes": 25298141184,
+    "allocated_bytes": 11248505856,
+    "reserved_bytes": 11267997696,
+    "max_allocated_bytes": 12040180736
+  },
+  "error": "CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 23.31 MiB is free. Process 3565007 has 9.43 GiB memory in use. Including non-PyTorch memory, this process has 14.08 GiB memory in use. Of the allocated memory 13.70 GiB is allocated by PyTorch, and 65.33 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/guorj/Skill_Efficient_VLA/functional_necessity/scripts/stage2_care_v2/verify_molmo_score_smoke.py\", line 89, in main\n    scored = score_frame_three(policy, blocks, final_norm, sample, device, with_gate=True)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/guorj/Skill_Efficient_VLA/functional_necessity/scripts/stage2_care_v2/molmo_score_runtime.py\", line 146, in score_frame_three\n    loss.backward()\n  File \"/home/guorj/.miniforge3/envs/lerobot/lib/python3.12/site-packages/torch/_tensor.py\", line 631, in backward\n    torch.autograd.backward(\n  File \"/home/guorj/.miniforge3/envs/lerobot/lib/python3.12/site-packages/torch/autograd/__init__.py\", line 381, in backward\n    _engine_run_backward(\n  File \"/home/guorj/.miniforge3/envs/lerobot/lib/python3.12/site-packages/torch/autograd/graph.py\", line 869, in _engine_run_backward\n    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntorch.OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB. GPU 0 has a total capacity of 23.56 GiB of which 23.31 MiB is free. Process 3565007 has 9.43 GiB memory in use. Including non-PyTorch memory, this process has 14.08 GiB memory in use. Of the allocated memory 13.70 GiB is allocated by PyTorch, and 65.33 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)\n",
+  "mem_on_fail": {
+    "cuda": true,
+    "free_bytes": 24444928,
+    "total_bytes": 25298141184,
+    "allocated_bytes": 14687433216,
+    "reserved_bytes": 14782824448,
+    "max_allocated_bytes": 14753626112
+  }
+}

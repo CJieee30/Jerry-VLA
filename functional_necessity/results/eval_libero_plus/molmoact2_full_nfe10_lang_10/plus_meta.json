@@ -1,0 +1,16 @@
+{
+  "checkpoint": "allenai/MolmoAct2-LIBERO-LeRobot",
+  "method": "full",
+  "k": 0,
+  "drop_layers": [],
+  "operator": "full",
+  "materialized": false,
+  "job_name": "molmoact2_full_nfe10_lang_10",
+  "seed": 1000,
+  "eval_seed": 1000,
+  "num_inference_steps": 10,
+  "n_episodes_per_task": 1,
+  "n_action_steps": 10,
+  "compile_model": false,
+  "enable_inference_cuda_graph": false
+}

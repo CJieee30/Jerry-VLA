@@ -1,30 +1,58 @@
 {
-  "protocol": "layer_calibration_molmo_v1",
+  "protocol": "layer_calibration_molmo_v1_rev2",
+  "protocol_note": "Rev2: per-frame IGIA/Fisher/GateProbe; Taylor = Molmo orig grouped at b=80 only (not Taylor_absmean).",
   "status": "scores_pending_gpu",
   "run_name": "prospective_v1_20261015",
   "n_obs": 400,
-  "n_tasks": 40,
-  "obs_per_task": 10,
-  "overlap_with_care_v2_dev_episodes": 0,
-  "calib_path": "layer_calibration_molmo_v1/calib_molmoact2.pt",
-  "calib_draw_seed_base": 20261015,
+  "cpu_selftest": {
+    "script": "selftest_layer_calibration_molmo_v1.py",
+    "passed": true,
+    "date": "2026-10-16"
+  },
   "scores_present": {
     "igia": false,
     "fisher": false,
-    "taylor": false,
-    "gateprobe": false
+    "gateprobe": false,
+    "taylor": false
   },
-  "primary_budget_frames": 80,
-  "budgets": [
-    {"frames": 40, "k_per_task": 1},
-    {"frames": 80, "k_per_task": 2},
-    {"frames": 120, "k_per_task": 3}
+  "gpu_attempts": [
+    {
+      "when": "2026-10-16T08:00+08:00",
+      "gpu": 1,
+      "free_before": "~14.3 GiB sharing plus_fisher6_nfe1_noise_object",
+      "mode": "original measure_grad IGIA n=1",
+      "result": "OOM"
+    },
+    {
+      "when": "2026-10-16T18:55+08:00",
+      "gpu": 2,
+      "free_before_bytes": 14880669696,
+      "occupant": "plus_fisher6_noise_10 PID 3565007 ~9.43 GiB",
+      "mode": "freeze non-VLM + checkpointing + GateProbe retain_grad n=1",
+      "checkpoint_effective": true,
+      "peak_allocated_bytes": 14753626112,
+      "result": "OOM need +96 MiB",
+      "log": "score_smoke_verify_gate_oom.json"
+    },
+    {
+      "when": "2026-10-16T18:58+08:00",
+      "gpu": 2,
+      "mode": "same freeze+checkpoint, IGIA/Fisher only (no GateProbe) n=1",
+      "checkpoint_effective": true,
+      "vlm_trainable_tensors": 288,
+      "frozen_tensors": 1006,
+      "lm_head_cpu": true,
+      "peak_allocated_bytes": 14750084096,
+      "result": "OOM need +48 MiB; stopped per no-repeat-OOM",
+      "log": "score_smoke_verify_igia_oom.json"
+    }
   ],
-  "gpu_blocker": "Shared GPU with LIBERO-plus eval (~9.8GiB resident); single-sample backward OOM on GPU2 with eval PID 3565007.",
-  "run_command": "CUDA_VISIBLE_DEVICES=<id> bash scripts/stage2_care_v2/RUN_LAYER_CALIB_MOLMO_V1.sh <id>",
+  "gpu_blocker": "GPU2 had ~14.1 GiB free but Molmo single-sample backward peaks at ~14.7 GiB allocated (~14.1 GiB process) while LIBERO-plus eval holds ~9.43 GiB. Need a card with eval gone or roughly >=16 GiB free. Do not retry OOM on shared 14 GiB.",
+  "run_command": "CUDA_VISIBLE_DEVICES=<id> bash scripts/stage2_care_v2/RUN_LAYER_CALIB_MOLMO_V1.sh <id> gpu",
   "notes": [
+    "gradient checkpointing was effective (policy_config, transformer, vision_backbone, training=True).",
+    "hf_model.gradient_checkpointing stayed false; paired-layer checkpoint uses policy.config (intended).",
     "Subset selection + equal-weight aggregation; not legacy alpha-weighted IGIA.",
-    "Does not overwrite stage2_care_v2/scores/ (480-frame CARE v2).",
-    "analyze_layer_calibration_molmo_v1.py pending until four .pt score files exist."
+    "Does not overwrite stage2_care_v2/scores/ (480-frame CARE v2)."
   ]
 }

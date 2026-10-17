@@ -2,11 +2,11 @@
 
 **π0.5** — `lerobot/pi05_libero_finetuned_v044` vs Stage-1 Fisher Drop-6 `[1, 13, 14, 15, 16, 17]`, skip keep-KV. In-distribution LIBERO 400-ep anchors: full **97.25**, Drop-6 **97.75** (`eval_pi05_libero_v044.md`). Do not mix those with Plus tables.
 
-**MolmoAct2** — `allenai/MolmoAct2-LIBERO-LeRobot`（本机 `checkpoints/MolmoAct2-LIBERO-LeRobot` + `MolmoAct2-LIBERO` 结构）。截至本文更新，Plus 仅启动 **Language Instructions × Full × NFE=10**（见下文 Molmo 专节）；无剪枝、无 NFE=1、不写入上方七维核心表直至四轮 `EXIT:0`。
+**MolmoAct2** — `allenai/MolmoAct2-LIBERO-LeRobot`（本机 `checkpoints/MolmoAct2-LIBERO-LeRobot` + `MolmoAct2-LIBERO` 结构）。Plus **Language Instructions × Full × NFE=10** 四轮已于 **2026-10-16 UTC** 全部 `EXIT:0`（见 Molmo 专节）；无剪枝、无 NFE=1，**不**写入上方 π0.5 七维核心表。
 
 两栈共用 Plus 环境配方：每语言/变体 **1** 次试验（`n_episodes=1`），`seed=1000`，`n_action_steps=10`，`num_inference_steps=10`，`compile_model=false`，`batch_size=1`，`control_mode=relative`，无视频、无 recovery。任务 id 来自 `LIBERO-plus/.../task_classification.json`（JSON 内 **1-based id 减 1**）。
 
-Avg. is the unweighted mean of four suite rates (Spatial / Object / Goal / Long). **NFE=1 batch (Fisher Drop-6, `num_inference_steps=1`, 2026-10-13–14):** GPU1 = Language + Camera + **Light** (24 suites, all `EXIT:0`); GPU3 = Init + Layout + **Background** (24 suites, all `EXIT:0`). Tags: `plus_fisher6_nfe1_{lang,init,camera,layout,light,background,noise}_*`. **Sensor Noise:** NFE=10 full/Drop-6 four suites on GPU0/2 (see § Sensor Noise); **Drop-6 NFE=1** queue **`plus_fisher6_nfe1_noise_*`** on **GPU1** (2026-10-15, running).
+Avg. is the unweighted mean of four suite rates (Spatial / Object / Goal / Long). **NFE=1 batch (Fisher Drop-6, `num_inference_steps=1`, 2026-10-13–14):** GPU1 = Language + Camera + **Light** (24 suites, all `EXIT:0`); GPU3 = Init + Layout + **Background** (24 suites, all `EXIT:0`). Tags: `plus_fisher6_nfe1_{lang,init,camera,layout,light,background,noise}_*`. **Sensor Noise NFE=10:** π0.5 full/Drop-6 **四轮完成**（GPU0/2 resume，Goal+Long 于 **2026-10-16–17 UTC** `EXIT:0`）；见 § Sensor Noise。**Drop-6 NFE=1 Sensor Noise** 仍在 GPU1 队列 `plus_fisher6_nfe1_noise_*`（进行中）。
 
 ## Core: seven Plus dimensions (Avg. %)
 
@@ -17,12 +17,12 @@ Drop-6 = Fisher `[1,13,14,15,16,17]` keep-KV, **`num_inference_steps=10`** (offi
 | Language Instructions | 89.20 | 85.24 | −3.96 | **84.67** | −0.57 |
 | Robot Initial States | 77.69 | 74.18 | −3.51 | **74.47** | +0.29 |
 | Camera Viewpoints | 66.85 | 60.68 | −6.18 | **61.24** | +0.56 |
-| Sensor Noise | 97.75† | 93.36† | −4.40 | — | — |
+| Sensor Noise | 93.83 | 89.08 | −4.75 | — | — |
 | Objects Layout | 86.52 | 82.41 | −4.11 | **80.98** | −1.43 |
 | Light Conditions | 98.47 | 95.01 | −3.46 | **95.90** | +0.89 |
 | Background Textures | 96.62 | 92.36 | −4.26 | **90.96** | −1.40 |
 
-Finished six full dims (excl. Sensor Noise†): full **85.89**, Drop-6 NFE=10 **81.65**, **−4.24**. On all six NFE=1 slices, macro Δ vs Drop-6 NFE=10 is **−0.57 / +0.29 / +0.56 / −1.43 / +0.89 / −1.40**—none approach the corresponding full-vs-Drop-6 OOD gaps at NFE=10. **Only Background Goal** at NFE=1 shows a multi-point drop vs Drop-6 NFE=10 (**−3.91** pp); Light **Long** is **+2.19** at NFE=1 (vs **−13.50** at NFE=10). Camera remains the largest full-vs-Drop-6 NFE=10 dim gap (−6.18).
+All **seven** Plus dimensions (NFE=10 full vs Drop-6): macro **87.03** vs **82.71**, **−4.32**. (Previously six dims without Sensor Noise: **85.89** / **81.65**, **−4.24**.) On all six NFE=1 slices (excl. Sensor Noise), macro Δ vs Drop-6 NFE=10 is **−0.57 / +0.29 / +0.56 / −1.43 / +0.89 / −1.40**—none approach the corresponding full-vs-Drop-6 OOD gaps at NFE=10. **Only Background Goal** at NFE=1 shows a multi-point drop vs Drop-6 NFE=10 (**−3.91** pp); Light **Long** is **+2.19** at NFE=1 (vs **−13.50** at NFE=10). Camera remains the largest full-vs-Drop-6 NFE=10 dim gap (−6.18); Sensor Noise **Long** is the largest within-dim suite gap (**−7.57** pp).
 
 ## Core: finished dims by suite (%)
 
@@ -44,10 +44,10 @@ Finished six full dims (excl. Sensor Noise†): full **85.89**, Drop-6 NFE=10 **
 | Background | Full | 99.61 | 98.79 | 93.95 | 94.12 | 96.62 |
 | Background | Drop-6 (NFE=10) | 99.61 | 98.79 | 79.36 | 91.70 | 92.36 |
 | Background | Drop-6 (NFE=1) | 98.84 | 97.18 | 75.44 | 92.39 | 90.96 |
+| Sensor Noise | Full | 98.58 | 96.92 | 92.08 | 87.75 | 93.83 |
+| Sensor Noise | Drop-6 (NFE=10) | 91.45 | 95.26 | 89.45 | 80.18 | 89.08 |
 
-Counts: Language 1367/1537 vs 1306/1537; Init 1200/1550 vs 1143/1550; Camera 1064/1599 vs 965/1599; Layout 1309/1525 vs 1254/1525; Light 1125/1142 vs 1087/1142; Background 1038/1076 vs 990/1076; Sensor Noise† 755/773 vs 723/773 (Spatial+Object only).
-
-† Sensor Noise macro Avg. is the mean of **Spatial and Object suite rates only** (773 variants). Goal (379) and Long (449) noise tasks are not evaluated yet; do not treat † as a seven-dimension overall score.
+Counts: Language 1367/1537 vs 1306/1537; Init 1200/1550 vs 1143/1550; Camera 1064/1599 vs 965/1599; Layout 1309/1525 vs 1254/1525; Light 1125/1142 vs 1087/1142; Background 1038/1076 vs 990/1076; **Sensor Noise 1498/1601 vs 1422/1601** (351+422+379+449 noise variants).
 
 ## Drop-6 NFE=1 micro counts (six finished Plus dims)
 
@@ -142,7 +142,7 @@ All `EXIT:0`. Times are UTC from `results/logs/eval_plus_*.log`.
 
 Plus language is a paraphrased-instruction OOD slice, 1 trial per variant. Fisher Drop-6 keeps the same keep-KV operator that is in-distribution neutral (97.75 vs 97.25). Here the cost is **−3.96** Avg., **−7.57** on Long, and Spatial/Object/Goal stay within about 2–4 points. That is a measured language-OOD gap, not a closed-loop collapse, and it is not a new selector. Do not put Plus rates into the in-distribution operating-point table.
 
-Per-dimension sections follow. Sensor Noise has a partial core row (Spatial+Object); Goal/Long jobs are documented in § Sensor Noise.
+Per-dimension sections follow. Sensor Noise four-suite results are in § Sensor Noise and the core tables above.
 
 ---
 
@@ -152,7 +152,9 @@ MolmoAct2 on the official **Language Instructions** slice only (not the other si
 
 **Protocol (aligned with π0.5 Plus Language except Molmo env/camera/postprocess).** `inference_action_mode=continuous`, `dtype=bfloat16`, `num_inference_steps=10`, `n_action_steps=10`, `eval_seed=1000`, `per_episode_seed=true`, `num_steps_wait=50`, `enable_inference_cuda_graph=false`. Dual-camera mapping `agentview_image→image`, `robot0_eye_in_hand_image→wrist_image`. Category **Language Instructions** from installed `task_classification.json`: Spatial **390**, Object **354**, Goal **410**, Long **383** → **1537** variants total.
 
-**Entry.** `scripts/molmoact2_libero/eval_plus_molmo.py`; shell `run_eval_plus_lang.sh` (per suite) / `run_eval_plus_lang_serial.sh` (Spatial→Object→Goal→Long). **GPU3 only** (`CUDA_VISIBLE_DEVICES=3`). Serial one process at a time. **Run in tmux** (e.g. `tmux attach -t molmo_plus_lang_nfe10_g3`); do not rely on IDE background shells. Aggregator: `scripts/molmoact2_libero/summarize_plus_lang.py`.
+**Entry.** `scripts/molmoact2_libero/eval_plus_molmo.py`; shell `run_eval_plus_lang.sh` (per suite) / `run_eval_plus_lang_serial.sh` (Spatial→Object→Goal→Long, then chains **Robot Initial States** via `run_eval_plus_init_serial.sh`). **GPU3 only** (`CUDA_VISIBLE_DEVICES=3`). Serial one process at a time. **Run in tmux** (e.g. `tmux attach -t molmo_plus_lang_nfe10_g3`); do not rely on IDE background shells. Aggregator: `scripts/molmoact2_libero/summarize_plus_lang.py`.
+
+**Robot Initial States (auto after Language Long).** Same recipe as `molmoact2_full_nfe10_lang_10` (`num_inference_steps=10`, `seed=1000`, 1 trial/variant, category from `task_classification.json`). Tags: `molmoact2_full_nfe10_init_{spatial,object,goal,10}` → `results/eval_libero_plus/molmoact2_full_nfe10_init_*`. Master log: `results/logs/eval_molmoact2_full_nfe10_init_serial.log`. One-shot watcher for an already-running Language serial: `launch_molmo_init_after_lang_gpu3.sh` (log: `results/logs/eval_molmoact2_chain_lang_to_init.log`).
 
 **Smoke (not in table).** `run_eval_plus_lang_smoke.sh` → `results/eval_libero_plus/_smoke/molmoact2_smoke_full_nfe10_lang_spatial/` — 2 Spatial language variants, **2/2** success (`EXIT:0`, 2026-10-16). Log: `results/logs/eval_molmoact2_smoke_full_nfe10_lang_spatial.log`.
 
@@ -171,17 +173,19 @@ Each dir: `eval_info.json`, `run_config.json`, `task_manifest.json`, `plus_meta.
 
 ### Results — MolmoAct2 Full NFE=10 Language
 
-*Status: **in progress** — tmux session **`molmo_plus_lang_nfe10_g3`** (restarted 2026-10-16 UTC after moving off Cursor background). Fill this table when all four suites have `eval_info.json` and `==== EXIT … exit=0` in logs. Unfinished suites are **pending**, not scored as 0%.*
+**Status: complete** — four suites `eval_info.json` + `==== EXIT … exit=0` in `results/logs/eval_molmoact2_full_nfe10_lang_*.log` (serial **`molmo_plus_lang_nfe10_g3`**, GPU3). Aggregator: `python scripts/molmoact2_libero/summarize_plus_lang.py`.
 
-| Setting | Spatial | Object | Goal | Long | Avg. | All variants |
+| Setting | Spatial | Object | Goal | Long | Avg. | Micro |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Full NFE=10 | *pending* | *pending* | *pending* | *pending* | *pending* | *pending* |
+| Full NFE=10 | 92.82 | 93.22 | 76.83 | 87.99 | **87.71** | **1344/1537 (87.44%)** |
 
-Expected variant denominators: 390 / 354 / 410 / 383 → **1537**. Macro **Avg.** = unweighted mean of four suite **pc_success** (%). **Micro** = total successes / 1537 across finished suites only until complete.
+Variant denominators: **390 / 354 / 410 / 383** → **1537**. Macro **Avg.** = unweighted mean of four suite **pc_success** (%). Counts from `per_group` in each `eval_info.json` (matches `summarize_plus_lang.py`).
 
-**Run record (informal wall-clock, not inference efficiency).** Record `overall.eval_s` from each `eval_info.json` after completion; π0.5 Language full reference (same 1537 variants): ~8.2 h total on dedicated GPU0 (2026-10-10 UTC jobs table above).
+**Long suite only (`molmoact2_full_nfe10_lang_10`, GPU3).** **87.99%** (**337/383**); `==== EXIT` **2026-10-16T19:00:29Z**; `overall.eval_s` ≈ **21 542 s** (wall-clock aggregate in json, not per-step efficiency).
 
-**Reading.** Molmo Plus Language is for OOD paraphrase stress at the **same variant ids** as π0.5. Compare qualitatively to π0.5 Full **89.20** macro / **1367/1537** micro only after this row is complete. Drop-16 / materialized Plus Language is **not run** in this batch.
+**Run record (`overall.eval_s`, seconds).** Spatial **11 939** / Object **11 298** / Goal **14 005** / Long **21 542** → **≈58.8 h** summed suite times on GPU3 (2026-10-16 UTC batch). π0.5 Language full reference (same 1537 variant ids): macro **89.20**, micro **1367/1537**.
+
+**Reading.** Molmo macro **87.71** is **−1.49 pp** vs π0.5 Full **89.20** on the same Language variant set. Spatial/Object are near parity; **Goal** Molmo **76.83** vs π0.5 **73.90** (+2.93 pp); **Long** **87.99** vs π0.5 **91.91** (−3.92 pp). Drop-16 / materialized Plus Language is **not run** in this batch.
 
 ---
 
@@ -538,65 +542,52 @@ Background Avg. **96.62 → 92.36 (−4.26)**. Spatial/Object are identical to f
 
 Official **Sensor Noise** category. Requires ImageMagick+wand (`MAGICK_HOME`); preflight in `run_eval_plus_lang.sh`. Same Plus recipe otherwise: 1 trial per variant, `seed=1000`, `n_action_steps=10`, `num_inference_steps=10`, `compile_model=false`. GPU0 = full; GPU2 = Fisher Drop-6 `[1, 13, 14, 15, 16, 17]`.
 
-**Status (2026-10-14).** **Spatial** and **Object** finished (`eval_info.json` present). **Goal** and **Long** never started.
+**Status (2026-10-17).** **All four suites** finished (`eval_info.json` + `==== EXIT … exit=0` on every `plus_{full,fisher6}_noise_{spatial,object,goal,10}` log). Goal resumed earlier on GPU0/2; **Long** (`plus_*_noise_10`) completed **2026-10-16T20:38:27Z** (full, GPU0) and **2026-10-17T00:21:02Z** (Drop-6, GPU2).
 
-**Why the queue stopped.** GPU0/2 ran `run_eval_plus_dim.sh` (`plus_full_noise` / `plus_fisher6_noise`, category Sensor Noise). Spatial exited 0 after several ImageMagick preflight failures. Object **did** finish inference and wrote complete json (422 noise variants each). Immediately after, tmux `plus-full-noise-g0-r5` / `plus-d6-noise-g2-r5` recorded:
+Source: `results/eval_libero_plus/plus_{full,fisher6}_noise_{spatial,object,goal,10}/{eval_info.json,drop_meta.json}`. Script: `run_eval_plus_dim.sh` → `run_eval_plus_lang.sh`, category `Sensor Noise`.
 
-`run_eval_plus_lang.sh: line 122: unexpected EOF while looking for matching '"'`
+Table: success rate (%) — **1601** noise variants (351 + 422 + 379 + 449).
 
-then `==== QUEUE plus_*_noise stop at plus_*_noise_object exit=2 ====` (timestamps align with object `eval_info.json` mtime). `run_eval_plus_dim.sh` **stops on first non-zero suite exit**, so **goal** / **10** were never launched. Object per-suite logs also lack `==== EXIT ... ====` (wrapper died with exit 2 before the normal tail). The repo script is now 120 lines and parses clean; the line-122 error was from the **on-disk script at job end** (truncated edit or stray quote)—not from eval itself. **Resume:** same prefix; spatial/object are skipped when json exists:
-
-`bash scripts/pi05_libero/run_eval_plus_dim.sh 0 plus_full_noise '' "Sensor Noise"`
-
-`bash scripts/pi05_libero/run_eval_plus_dim.sh 2 plus_fisher6_noise '1,13,14,15,16,17' "Sensor Noise"`
-
-Do not extrapolate a four-suite Avg. from the † core-table row until Goal/Long complete.
-
-Source (partial): `results/eval_libero_plus/plus_{full,fisher6}_noise_{spatial,object}/{eval_info.json,drop_meta.json}`. Script: `run_eval_plus_dim.sh`, category `Sensor Noise`.
-
-Table: success rate (%) for finished suites only.
-
-| Setting | Metric | Spatial | Object | Goal | Long | Avg. (S+O) |
+| Setting | Metric | Spatial | Object | Goal | Long | Avg. |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| Full | — | 98.58 | 96.92 | — | — | 97.75 |
-| Drop-6 (6/18) | Fisher | 91.45 | 95.26 | — | — | 93.36 |
+| Full | — | 98.58 | 96.92 | 92.08 | 87.75 | **93.83** |
+| Drop-6 (6/18) | Fisher | 91.45 | 95.26 | 89.45 | 80.18 | **89.08** |
+| Δ (D6−Full) | — | −7.13 | −1.66 | −2.63 | **−7.57** | **−4.75** |
 
 Counts (successes / noise variants):
 
-| Setting | Spatial | Object | Goal | Long | All (finished) |
+| Setting | Spatial | Object | Goal | Long | All |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Full | 346/351 | 409/422 | — | — | 755/773 |
-| Fisher Drop-6 | 321/351 | 402/422 | — | — | 723/773 |
+| Full | 346/351 | 409/422 | 349/379 | **394/449** | **1498/1601 (93.57%)** |
+| Fisher Drop-6 | 321/351 | 402/422 | 339/379 | **360/449** | **1422/1601 (88.82%)** |
 
-Δ vs this-machine Plus-noise full (**Spatial+Object macro 97.75 → 93.36**, **−4.40**):
+**Long only (GPU0 / GPU2 jobs that ended 2026-10-16–17).** Full **87.75%** (394/449); Drop-6 **80.18%** (360/449); **−7.57 pp**. `overall.eval_s` (wall aggregate): full **≈166 237 s**; Drop-6 **≈179 215 s**.
 
-- Spatial **−7.13** (346/351 → 321/351)
-- Object **−1.66** (409/422 → 402/422)
-- Micro (773 variants): 97.67 → 93.53, **−4.14**
-
-## Same-variant disagreement (full vs Fisher Drop-6, finished suites)
+## Same-variant disagreement (full vs Fisher Drop-6, all suites)
 
 | Suite | n | both success | both fail | full✓ drop✗ | full✗ drop✓ |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Spatial | 351 | 319 | 3 | 27 | 2 |
 | Object | 422 | 392 | 3 | 17 | 10 |
+| Goal | 379 | 325 | 16 | 24 | 14 |
+| Long | 449 | 343 | 38 | **51** | 17 |
 
-Net extra failures under Drop-6: Spatial 25, Object 7 (773 variants: 32 more failures).
+Net extra failures under Drop-6 (paired variants): **76** across 1601 tasks (Long contributes the largest full-only-fail count).
 
-## Jobs (finished suites)
-
-Spatial `EXIT:0` after several ImageMagick preflight failures. Object: `eval_info.json` written; log may be truncated before `EXIT`.
+## Jobs (Goal + Long completion)
 
 | Job | GPU | Start (UTC) | End (UTC) |
 | --- | ---: | --- | --- |
-| plus_full_noise_spatial | 0 | 2026-10-12T01:49:24Z | 2026-10-12T19:30:34Z |
-| plus_full_noise_object | 0 | 2026-10-12T19:30:50Z | ~2026-10-13T13:07:56Z (json mtime) |
-| plus_fisher6_noise_spatial | 2 | 2026-10-12T01:49:22Z | 2026-10-12T21:54:37Z |
-| plus_fisher6_noise_object | 2 | 2026-10-12T21:54:55Z | ~2026-10-13T16:20:00Z (json mtime) |
+| plus_full_noise_goal | 0 | 2026-10-14T01:21:43Z | 2026-10-14T22:24:34Z |
+| plus_full_noise_10 | 0 | 2026-10-14T22:24:48Z | **2026-10-16T20:38:27Z** |
+| plus_fisher6_noise_goal | 2 | 2026-10-14T01:21:43Z | 2026-10-14T22:30:53Z |
+| plus_fisher6_noise_10 | 2 | 2026-10-14T22:31:07Z | **2026-10-17T00:21:02Z** |
+
+(Spatial/Object job times unchanged from 2026-10-12–13 batch; see git history of this file.)
 
 ## Reading
 
-On the finished half of Sensor Noise, Drop-6 costs about **4 points** macro (similar to Language/Layout), with Spatial taking the hit (−7.13 pp). Object is nearly flat (−1.66 pp). Resume Goal/Long on GPU0/2 with the same prefix (`plus_full_noise` / `plus_fisher6_noise`) before adding Sensor Noise to any seven-dimension overall average.
+Four-suite Sensor Noise macro **93.83 → 89.08 (−4.75)**—in line with Language/Layout Drop-6 gaps. **Long** is the hardest suite under noise for **both** stacks and shows the largest Drop-6 penalty (**−7.57 pp**); Spatial is second (**−7.13**). Object is nearly flat (**−1.66**). Historical Spatial+Object-only macro was **97.75 / 93.36**; adding Goal/Long pulls the dimension average down because Long full is only **87.75%**. Sensor Noise is now included in the **seven-dimension** π0.5 core macro (**87.03 / 82.71**). Drop-6 NFE=1 noise queue on GPU1 remains separate.
 
 ---
 
