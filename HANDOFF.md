@@ -3,14 +3,17 @@
 > 写给完全没有前文的新对话。更新：2026-10-17。  
 > 数据核查快照：Jerry-VLA `eab85156dd53d89cc47e41e9f42676c9311eca61`。  
 > 服务器项目根目录：`/home/guorj/Skill_Efficient_VLA`。本文路径未特别说明时均相对此目录。  
-> **Molmo 前瞻池 CARE_event rev2**（`layer_calibration_molmo_v1`）已完成 400 帧打分与 IGIA 复核文档；**正式四配置效率测量**见 `scripts/stage_nfe/measure_formal_efficiency.py` 与 `results/stage_nfe/formal_efficiency_*.json`。
+> **Molmo 前瞻池 CARE_event rev2**（`layer_calibration_molmo_v1`）：400 帧打分与 IGIA 复核已归档；**闭环 SR 复用历史**，本轮不重跑。效率：**诊断** `formal_efficiency_*_20261017.json`（eager runtime K/V-only skip 多输入诊断）；**部署** `formal_deployment_20261017/`（π0.5 materialize；Molmo **主表用 pass-1 eager expert** `summary_molmoact2_pass1_eager_fallback.json`，Graph 数值对齐见 pass-3 但 `reset()` 导致计时段间歇重捕获，见 `efficiency_analysis.md` § Formal deployment）。
 
 ## 0. 接手先读这一页
 
-我们准备一篇面向顶会的 **training-free / no-recovery Flow-Matching VLA efficiency** 论文。用户希望近期一个月集中完成必要证据，避免扩展成庞大的机制分析或 benchmark 项目。论文当前确定两条主线：
+论文 **三项贡献**（表述边界见 `README.md`）：
 
-1. **系统性 VLM 层冗余分析与无恢复剪枝。** 在 π0.5、MolmoAct2 等微调检查点上比较表征相似度与梯度判据；说明 representation similarity 不能直接代表 functional necessity，找到有效的 keep-KV 层压缩配置。
-2. **CARE_event：Event-Aware Calibration for Few-Step Flow Matching。** 用动作命令变化和夹爪命令事件选择离线校准观测，检查低 NFE 对关键动作的影响，为部署时固定 NFE 提供诊断依据。
+1. **CARE_event 校准**：事件感知离线选样 + 少步 NFE 诊断协议（前瞻池与开环探针已完成；闭环为历史复用）。
+2. **VLM 冗余与 no-recovery 剪枝**：π0.5 / MolmoAct2 等功能必要性证据与 keep-KV / materialized 部署路径。
+3. **离线少步 NFE 校准**：在固定检查点上评估 NFE 与剪枝组合（与 CARE_event 诊断配套，非新训练）。
+
+旧版“两条主线”叙述仍大致成立，但效率与 CARE 应分栏引用，勿把 runtime-skip 诊断毫秒当作部署加速。
 
 **进度判断：第一条已有较充分实验；第二条已有选样、探针和独立回合结果，但“未知验证结果前能否给出有效 NFE 建议”仍是最重要缺口。** 旧有低 NFE 闭环先于 CARE_event，不能归功于本轮校准方法。
 

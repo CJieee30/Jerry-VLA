@@ -1,0 +1,76 @@
+{
+  "protocol": "formal_deployment_efficiency_v1",
+  "stack": "pi05",
+  "utc": "2026-10-17T06:31:07Z",
+  "physical_gpu_index": 2,
+  "summary_table": [
+    {
+      "config_id": "pi05_full_nfe10_eager",
+      "median_ms": 547.6615452207625,
+      "p95_ms": 559.0517711825669,
+      "per_round_median_ms": [
+        547.286038286984,
+        548.1147554237396,
+        547.9796838480979
+      ],
+      "speedup_vs_anchor": 1.0,
+      "params_stored_m": 4143.404816,
+      "peak_allocated_gib": 8.888731479644775
+    },
+    {
+      "config_id": "pi05_pruned_nfe10_materialized",
+      "median_ms": 524.1868807934225,
+      "p95_ms": 543.424332048744,
+      "per_round_median_ms": [
+        523.8909870386124,
+        523.9606904797256,
+        524.5951667893678
+      ],
+      "speedup_vs_anchor": 1.0447830063808696,
+      "params_stored_m": 3489.081104,
+      "peak_allocated_gib": 7.665332317352295
+    },
+    {
+      "config_id": "pi05_full_nfe1_eager",
+      "median_ms": 186.15098460577428,
+      "p95_ms": 192.87367118522525,
+      "per_round_median_ms": [
+        186.11562391743064,
+        185.90080155991018,
+        186.80003262124956
+      ],
+      "speedup_vs_anchor": 2.9420287321100442,
+      "params_stored_m": 4143.404816,
+      "peak_allocated_gib": 8.888731479644775
+    },
+    {
+      "config_id": "pi05_pruned_nfe1_materialized",
+      "median_ms": 161.4818365778774,
+      "p95_ms": 167.32473811134696,
+      "per_round_median_ms": [
+        161.27502545714378,
+        161.8008567020297,
+        161.01006069220603
+      ],
+      "speedup_vs_anchor": 3.3914745882682804,
+      "params_stored_m": 3489.081104,
+      "peak_allocated_gib": 7.665332317352295
+    }
+  ],
+  "round_stability": {
+    "pi05_full_nfe10_eager": {
+      "round_medians_ms": [
+        547.286038286984,
+        548.1147554237396,
+        547.9796838480979
+      ],
+      "spread_pct": 0.15142303636129412
+    }
+  },
+  "anchor_config": "pi05_full_nfe10_eager",
+  "anchor_recheck": {
+    "first_median_ms": 547.6615452207625,
+    "recheck_median_ms": 558.7253889534622,
+    "drift_pct": 2.0201972968980164
+  }
+}

@@ -4,7 +4,7 @@
 
 更新：2026-10-17。本文依据 Jerry-VLA 提交 `eab85156dd53d89cc47e41e9f42676c9311eca61` 中的结果，以及最新确定的研究计划整理。服务器项目目录名是 `Skill_Efficient_VLA`，对应 GitHub 仓库是 [CJieee30/Jerry-VLA](https://github.com/CJieee30/Jerry-VLA)。本文介绍研究；新对话接手实验前，请读 [HANDOFF.md](HANDOFF.md)。效率主协议见 `functional_necessity/scripts/stage_nfe/measure_formal_efficiency.py`。
 
-当前论文保留两项主贡献：**VLM backbone 的 no-recovery 层冗余分析与剪枝；CARE_event 支持的 action expert 少步推理诊断。** 面向相机角色的视觉 Token 剪枝 CROP 暂不列为主贡献。目标是形成有竞争力的顶会工作，近期优先补齐两条主线的核心证据。
+当前论文保留 **三项主贡献**：（1）**CARE_event** 事件感知离线校准与少步 NFE 诊断；（2）**VLM 冗余与 no-recovery 剪枝**（keep-KV / materialized 部署）；（3）**离线少步 NFE 校准**与固定检查点上的部署效率证据。CROP 等暂不列为主贡献。前瞻校准与独立开环已完成；LIBERO 闭环成功率以历史评测复用为准。效率分两层：**eager runtime K/V-only 多输入诊断**（`formal_efficiency_*_20261017.json`）与 **正式部署测量**（`formal_deployment_20261017/`），二者毫秒不可混算加速比。
 
 ## 1. 我们要解决什么问题
 

@@ -19,11 +19,13 @@ Source:
 
 Closed-loop Avg. is from the corresponding `eval_*.md` (this-machine anchors). §1–§2 and the π0.5 row of §3 are the original NFE=10 reference. §3 Molmo / SmolVLA language tables are K/V-only from the §5 session; do not mix those milliseconds with Table 1. §4 is a separate paired run for the operating point.
 
-## Formal four-config wall clock (2026-10-17)
+## Eager runtime K/V-only skip — multi-input diagnostic (2026-10-17)
 
-**Protocol** (`scripts/stage_nfe/measure_formal_efficiency.py`): RTX 3090, `compile_model=false`, `enable_inference_cuda_graph=false`, batch=1, **32** fixed calib observations × **3** rounds, warmup **10**; **primary** metric = `torch.cuda.synchronize()` + `perf_counter` around full `predict_action_chunk` (vision + VLM prefix + action expert; inputs preloaded on GPU; no sim/video). CUDA events logged as auxiliary only. Pruned path = **runtime** keep-KV skip (π0.5 Fisher Drop-6; Molmo Taylor Drop-16), not weight materialize. Closed-loop SR **not** remeasured here.
+**Label:** exploratory only — **not** deployment latency. Raw JSON unchanged: `results/stage_nfe/formal_efficiency_{pi05,molmoact2}_20261017.json`.
 
-| Stack | Config | Median (ms) | P95 (ms) | Speedup vs Full NFE10 | Active params (M) | Peak alloc (GiB) |
+**Protocol** (`measure_formal_efficiency.py`): both stacks use **runtime** keep-KV skip (not materialize); Molmo `enable_inference_cuda_graph=false`; 32 calib obs × 3 rounds; sync wall `predict_action_chunk`. **Active params** in the table are *analytical* skipped-compute counts — **not** stored weights and **not** materialized VRAM.
+
+| Stack | Config | Median (ms) | P95 (ms) | vs Full NFE10 (same session) | Active params (M)† | Peak alloc (GiB)† |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
 | π0.5 | Full NFE10 | 564.5 | 688.4 | 1.00 | 4143.4 | 8.89 |
 | π0.5 | Fisher Drop-6 NFE10 | 537.6 | 665.1 | 1.05 | 3489.1 | 8.88 |
@@ -34,9 +36,36 @@ Closed-loop Avg. is from the corresponding `eval_*.md` (this-machine anchors). �
 | MolmoAct2 | Full NFE1 | 261.8 | 281.7 | 4.51 | 5442.2 | 12.66 |
 | MolmoAct2 | Drop-16 NFE1 | 244.1 | 260.9 | 4.83 | 3911.2 | 12.30 |
 
-**Stability:** end-of-run Full NFE10 recheck vs start — π0.5 median drift **1.36%**; Molmo **2.26%** (practical target ≤3%). Raw: `results/stage_nfe/formal_efficiency_{pi05,molmoact2}_20261017.json`.
+†Do **not** use for materialized deployment claims.
 
-**Reading:** Molmo NFE=10 chunk time is **action-expert dominated**; runtime Drop-16 barely moves median wall clock at NFE10 (~0.08%) despite lower active params. NFE=1 is where both stacks show larger gaps; π0.5 pruning adds ~7% on top of NFE1 alone at median.
+**Stability (diagnostic):** π0.5 Full NFE10 **per-round medians** ≈ **550 / 557 / 669 ms** (~**21%** spread round 0→2); a single end recheck drift (~1.4%) **does not** prove run stability. Molmo recheck drift ~2.3% — same caveat.
+
+**NFE=1 pruning delta (same diagnostic JSON, pooled medians):** vs matched Full NFE1, median latency drops **12.2%** (π0.5 Drop-6) and **6.8%** (Molmo Drop-16). **Do not** mix these ms with the deployment table below for speedup ratios.
+
+## Formal deployment wall clock (2026-10-17)
+
+**Protocol** (`measure_formal_deployment_efficiency.py`, `formal_deployment_20261017/`): π0.5 **Full = eager**; **Pruned = materialized Fisher Drop-6** (`materialize.py`). Molmo target stack is **materialized Taylor Drop-16 + native action-expert CUDA Graph** on Full/Pruned; **headline Molmo milliseconds below are pass-1** (see ‡). No `torch.compile`. Each config: **separate process**, fresh load; 32 obs with fingerprints; warmup 10; 3 rounds; `nvidia-smi` keyed by **physical GPU index/UUID** (not confused with `cuda:0` under `CUDA_VISIBLE_DEVICES`). Stored **params_stored_m** = actual `numel` after materialize.
+
+**Results (physical GPU 2, UUID in per-config JSON):**
+
+| Stack | Config | Median (ms) | P95 | vs anchor NFE10 | Stored params (M) | Peak alloc (GiB) |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| π0.5 | Full NFE10 eager | 547.7 | 559.1 | 1.00 | 4143.4 | 8.89 |
+| π0.5 | Drop-6 NFE10 materialized | 524.2 | 543.4 | 1.04 | 3489.1 | **7.67** |
+| π0.5 | Full NFE1 eager | 186.2 | 192.9 | 2.94 | 4143.4 | 8.89 |
+| π0.5 | Drop-6 NFE1 materialized | 161.5 | 167.3 | 3.39 | 3489.1 | **7.67** |
+| Molmo | Full NFE10 ‡ | 1178.1 | 1199.4 | 1.00 | 5442.2 | 12.31 |
+| Molmo | Drop-16 NFE10 materialized ‡ | 1171.6 | 1198.1 | 1.01 | 3911.2 | **9.45** |
+| Molmo | Full NFE1 ‡ | 264.2 | 281.1 | 4.46 | 5442.2 | 12.30 |
+| Molmo | Drop-16 NFE1 materialized ‡ | 243.3 | 250.6 | 4.84 | 3911.2 | **9.45** |
+
+‡**Molmo pass-1 (`summary_molmoact2_pass1_eager_fallback.json`, 2026-10-17):** `action_cuda_graph_manager` was nulled in the disable path → timed path is **eager expert** (config flag true but `graph_fallback` in that run’s configs; per-config JSON since overwritten by graph reruns). **Pass-3** re-enabled the manager (`manager_present=true`, `max_abs_vs_eager=0` on 3 fixed obs) but each timed `predict_action_chunk` calls `policy.reset()`, so **~22%** of samples still hit **>500 ms** graph recapture (P95 ≈2.6 s) while the pooled median collapses to **~242 ms** — **not** interchangeable with pass-1 wall clock. **Use pass-1 for deployment headline latency** until graph timing matches eval (`reset` + capture policy) or Plus enables graph.
+
+**Stability (deployment):** π0.5 Full NFE10 round medians **547.3 / 548.1 / 548.0 ms** (~0.15% spread); anchor recheck drift **2.0%** (≤3% practical target). Molmo pass-1 Full NFE10 round medians **1180.4 / 1177.9 / 1175.7 ms** (~0.4% spread); anchor recheck drift **7.7%** (>5% — keep raw JSON, no slow-round deletion). **Pruned vs Full NFE1 (pass-1 medians):** π0.5 **−13.3%**; Molmo **−7.9%**.
+
+Archives: `summary_molmoact2_pass2_graph_capture_in_timed.json`, `summary_molmoact2_pass1_eager_fallback.json`; latest graph attempt configs `configs/molmo_*_graph.json`. **Do not** mix deployment ms with § diagnostic eager JSON for speedups.
+
+Raw: `summary_pi05.json`, `summary_molmoact2.json` (Molmo = pass-1). **Closed-loop SR not remeasured.**
 
 ---
 

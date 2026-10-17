@@ -1,0 +1,76 @@
+{
+  "protocol": "formal_deployment_efficiency_v1",
+  "stack": "molmoact2",
+  "utc": "2026-10-17T06:46:42Z",
+  "physical_gpu_index": 2,
+  "summary_table": [
+    {
+      "config_id": "molmo_full_nfe10_graph",
+      "median_ms": 1178.1354881823063,
+      "p95_ms": 1199.4149507954717,
+      "per_round_median_ms": [
+        1180.3975391667336,
+        1177.880713250488,
+        1175.7265701889992
+      ],
+      "speedup_vs_anchor": 1.0,
+      "params_stored_m": 5442.196208,
+      "peak_allocated_gib": 12.306621551513672
+    },
+    {
+      "config_id": "molmo_pruned_nfe10_materialized_graph",
+      "median_ms": 1171.621061861515,
+      "p95_ms": 1198.1018669903278,
+      "per_round_median_ms": [
+        1157.6803750358522,
+        1153.9849424734712,
+        1189.8496565409005
+      ],
+      "speedup_vs_anchor": 1.0055601819844728,
+      "params_stored_m": 3911.23224,
+      "peak_allocated_gib": 9.454901695251465
+    },
+    {
+      "config_id": "molmo_full_nfe1_graph",
+      "median_ms": 264.2349945381284,
+      "p95_ms": 281.12198505550623,
+      "per_round_median_ms": [
+        263.1831930484623,
+        264.4243114627898,
+        264.2582976259291
+      ],
+      "speedup_vs_anchor": 4.458665629212502,
+      "params_stored_m": 5442.196208,
+      "peak_allocated_gib": 12.302258491516113
+    },
+    {
+      "config_id": "molmo_pruned_nfe1_materialized_graph",
+      "median_ms": 243.25522617436945,
+      "p95_ms": 250.64325332641602,
+      "per_round_median_ms": [
+        243.5240384656936,
+        245.05730252712965,
+        241.97883810847998
+      ],
+      "speedup_vs_anchor": 4.843207304157975,
+      "params_stored_m": 3911.23224,
+      "peak_allocated_gib": 9.450538635253906
+    }
+  ],
+  "round_stability": {
+    "molmo_full_nfe10_graph": {
+      "round_medians_ms": [
+        1180.3975391667336,
+        1177.880713250488,
+        1175.7265701889992
+      ],
+      "spread_pct": 0.39728361135732293
+    }
+  },
+  "anchor_config": "molmo_full_nfe10_graph",
+  "anchor_recheck": {
+    "first_median_ms": 1178.1354881823063,
+    "recheck_median_ms": 1268.5868628323078,
+    "drift_pct": 7.677501913600361
+  }
+}
