@@ -12,7 +12,9 @@
   },
   "rev2_gpu_run": {
     "date": "2026-10-17",
-    "smoke": "verify_molmo_score_smoke.py --with-gate n=2 on GPU0 (dedicated)",
+    "smoke": "verify_molmo_score_smoke.py --with-gate n=2 on GPU0 (dedicated); passed=false (igia rtol)",
+    "smoke_max_allocated_bytes": 18826381312,
+    "igia_review_dir": "diagnostics_rev2_igia_20261017",
     "frame_gpu": 0,
     "taylor_gpu": 2,
     "frame_finished_utc": "2026-10-17T02:42:55+00:00",
@@ -50,16 +52,28 @@
     }
   ],
   "headline_b80": {
+    "fisher_random_taylor16_count": 14,
+    "fisher_random_cliff725_count": 6,
+    "igia_random_taylor16_count": 5,
+    "igia_random_cliff725_count": 15,
     "fisher_care_vs_random_seed_diff_frac": 0.3,
     "igia_care_vs_random_seed_diff_frac": 0.75,
     "fisher_care_same_as_alpha": true,
     "igia_care_same_as_alpha": true,
+    "care_event_budgets_taylor16": [40, 80, 120],
     "fisher_care_historical": "S1 Taylor-16 (98.10%)",
-    "taylor_care_jaccard_s1": 1.0
+    "taylor_care_jaccard_s1": 1.0,
+    "random_seeds_note": "20 seeds = repeated selection on same prospective pool",
+    "historical_sr_note": "SR% from prior closed-loop reuse, not re-evaluated this round",
+    "igia_rerun_required": false,
+    "igia_smoke_passed": false
   },
   "notes": [
-    "Taylor rows: jaccard_vs_full400_equal is NA (no full-400 Taylor matrix).",
+    "Taylor rows: jaccard_vs_full400_equal is NA (no full-400 Taylor matrix); Taylor stability: only Random/G-only seed=0 each.",
+    "GateProbe: sensitivity to selection only.",
+    "G vs alpha: same layer sets for Fisher/IGIA CARE; extra G benefit not demonstrated.",
     "Does not overwrite stage2_care_v2/scores/ (480-frame CARE v2).",
-    "Closed-loop not started this round."
+    "Closed-loop not started this round.",
+    "IGIA path review: diagnostics_rev2_igia_20261017/REVIEW_CONCLUSION.md"
   ]
 }

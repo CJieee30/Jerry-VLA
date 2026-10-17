@@ -8,68 +8,78 @@
 
 | 阶段 | GPU | 结果 |
 |------|-----|------|
-| 冒烟 `verify_molmo_score_smoke.py --with-gate n=2` | 0（整卡） | **通过**；IGIA/Fisher 与 `score.py` 一致；GateProbe 隐状态 `requires_grad` 有效 |
+| 冒烟 `verify_molmo_score_smoke.py --with-gate n=2` | 0（整卡） | **IGIA 未通过**（`passed=false`，`max_rel_err≈4.7e-3` > `rtol=1e-3`）；Fisher/GateProbe 在容差内；见 `score_smoke_verify.json` |
+| IGIA 路径复核 | 0 | `diagnostics_rev2_igia_20261017/`（2 样本×2 重复 + b=80 原实现选层核实） |
 | `score_molmo_prospective_layers.py`（400×IGIA/Fisher/GateProbe） | 0 | **完成** ~02:08–02:43 UTC |
 | `score_molmo_prospective_taylor_groups.py`（b=80 四策略） | 2 | **完成** ~02:08–02:33 UTC |
 | `analyze_layer_calibration_molmo_v1.py` | CPU | **完成** |
 
-显存：整卡冒烟峰值约 **12.0 GiB** allocated（`score_smoke_verify.json`，checkpoint 有效）。与此前共享卡 OOM 对比见 `summary.json` 历史 `gpu_attempts`。
+显存：冒烟峰值 **`max_allocated` ≈ 17.5 GiB**（`score_smoke_verify.json` → `mem_after_ref.max_allocated_bytes` ≈ 1.88×10¹⁰ B；checkpoint 有效）。共享卡 OOM 尝试见 `summary.json` 历史 `gpu_attempts`。
 
 ## 问题 1：CARE_event vs Random（主预算 80）
 
-### Fisher
+**Random 的 20 个种子**：在同一前瞻池上的**重复选样**（非 20 个独立校准池）。历史 **SR%** 来自既有闭环记录，**非**本轮新评测。
 
-- **CARE_event** Drop-16 = `[1,2,3,4,24–35]`，与 **400 帧等权 Fisher** 及 **S1 Taylor-16** 层集 **完全一致**（J=1.00）。
-- **Random**（20 种子）：仅 **2** 种 drop；约 **30%** 种子与 CARE 不同。另一模态为 **S1 Fisher/IGIA-16 悬崖层集** `[1–5,25–35]`（历史 SR **72.75%**，n=2000，keep-KV，NFE=10）。
-- **解读**：在 Fisher 下，CARE_event **未**相对 Random 改善选层——CARE 与全池/ Taylor-16 同集；Random 有时抽到已知悬崖集，但并非“更优选层”。
+### Fisher（b=80 Random，20 种子）
 
-### IGIA
+- **CARE_event / α-only**：Drop-16 = `[1,2,3,4,24–35]`，与 **400 帧等权 Fisher** 及 **S1 Taylor-16**（98.10%）**一致**。
+- **Random**：**14/20** 种子 → Taylor-16 层集；**6/20** → **S1 Fisher/IGIA-16 悬崖** `[1–5,25–35]`（历史 SR **72.75%**）。
 
-- **CARE_event** 与全池 / S1 Taylor-16 层集 **一致**（J=1.00）。
-- **Random**：**2** 种 drop，约 **75%** 种子与 CARE 不同（含悬崖集模态）。
-- **解读**：IGIA 下 Random 分歧更大，但 CARE 仍锚定在 Taylor-16 层集，**未见**相对 Random 的系统性“更好” drop。
+### IGIA（b=80 Random，20 种子）
 
-### GateProbe（补充）
+- **CARE_event / α-only**：与 Taylor-16 层集 **一致**（与 full-400 等权 IGIA 相同）。
+- **Random**：**5/20** → Taylor-16；**15/20** → 悬崖 72.75% 层集（IGIA 下 Random 更易抽到悬崖模态）。
 
-- CARE J(full400)=**0.88**；Random **6** 种 drop，**100%** 种子与 CARE 不同 → 选样对 GateProbe 最敏感。
+### CARE 多预算（Fisher / IGIA）
 
-### Taylor（b=80 分组，无 full-400 矩阵）
+- **b=40 / 80 / 120** 的 **CARE_event** 均选中 **Taylor-16（98.10%）** 层集 → 支持解读：**小预算子集选样可避免 Random 常命中的已知高损失（悬崖）层集**；不宜再写“相对 Random 没有改善”的笼统结论。
 
-- CARE / α / Random(seed=0)：**J(S1 Taylor-16)=1.00**，与历史 **98.10%** 层集一致 → **闭环可复用 S1 Taylor-16**，不必重跑。
-- G-only(seed=0)：J(S1)=**0.88**，drop 含 **L23**，与 S1 不同。
+### GateProbe（补充，敏感性）
+
+- CARE 与 full-400 的 Jaccard **0.88**；Random **6** 种 drop、**100%** 种子与 CARE 不同 → 仅作**选样敏感性**报告，不作稳定选层主张。
+
+### Taylor（b=80 分组）
+
+- 仅 **Random / G-only 各 1 个种子**（seed=0）；**不能**据此证明 Taylor 在任意种子下普遍稳定。
+- CARE / α / Random(seed=0) 与 S1 Taylor-16 对齐（J=1.00）；G-only(seed=0) J=0.88（含 L23）。
+
+### Drop-16 边界（L5 vs L24）
+
+- full-400 等权 Fisher/IGIA 的 Taylor-16 与悬崖模态差别在 **L5（悬崖含）vs L24（Taylor 含）**；两层在 full-400 排名均**不在** top-16 临界区。
+- 原 `measure_grad` IGIA 在 **b=80** 上对 **CARE_event** 与 **Random seed=0** 重算，Drop-16 与 rev2 分析 **一致**（见 `diagnostics_rev2_igia_20261017/igia_b80_ref_selection.json`）。
 
 ## 问题 2：α-only / G-only 能否替代 CARE？
 
-| 方法 | b=80 CARE vs α-only | G-only 与 CARE 不同比例 |
-|------|---------------------|-------------------------|
-| Fisher | **相同** | **30%** |
-| IGIA | **相同** | **10%** |
-| GateProbe | 不同 | **45%** |
+| 方法 | b=80 CARE vs α-only | 说明 |
+|------|---------------------|------|
+| Fisher | **层集相同** | 尚未证明 **G** 相对 α 的额外收益 |
+| IGIA | **层集相同** | 同上 |
+| GateProbe | 不同 | G-only / Random 分歧更大 |
 
-**结论**：Fisher/IGIA 下 **α-only 与 CARE_event 完全等价**（主/补预算均同）。G-only 在 Fisher b=80 下可产生 **与 CARE 不同** 的 drop（见闭环候选），但 **不能**说优于 CARE——未知 SR。
+G-only 在 Fisher/IGIA b=80 下可产生与 CARE **不同** 的 drop（见 `summary.json` 闭环候选），**未知 SR**，本轮**未**启动闭环。
 
-## 问题 3：原 Taylor 稳定性
+## 问题 3：IGIA 实现与是否重算
 
-四策略分组 Taylor 与 S1 Taylor-16 对齐良好，除 **G-only seed=0** 外均为 **1.00** 或 **0.88**（L23 替换 L4）。**无** full-400 Taylor 分数 → `jaccard_vs_full400_equal` / `full400_equal_drop` 在 Taylor 行中为 **NA**（见 `details.csv`）。
+- 冒烟与原实现 IGIA 在 2 帧上为 **小幅数值偏差**（相对误差 ~10⁻³ 量级），**逐帧 rev2 路径可重复**。
+- **选层结论**基于已落盘的 400 帧逐帧分数 + b=80 原实现子集核实；**不需要**重跑 Fisher、Taylor 或全 400 帧 IGIA。
 
-## 问题 4：历史复用 vs 闭环候选（最多 2 个，未启动）
+## 问题 4：历史复用 vs 闭环候选（未启动）
 
-| 历史标签 | SR% | 算子 / 协议 | 本轮关系 |
-|----------|-----|-------------|----------|
-| S1 Taylor-16 | 98.10 | Taylor, keep-KV, NFE=10, n=2000 | Fisher/IGIA/CARE **b=80** 及 Taylor 三组 → **层集相同，可复用** |
-| S1 Fisher-16 / IGIA-16 | 72.75 | 同上悬崖层集 | Random 部分种子命中，**非** CARE 主推 |
-| S1 GateProbe-16 | 87.00 | GateProbe-16 | GateProbe CARE drop 不同 |
+| 历史标签 | SR% | 本轮关系 |
+|----------|-----|----------|
+| S1 Taylor-16 | 98.10 | Fisher/IGIA **CARE b=40/80/120**、full-400 等权、Taylor 三组 CARE/α/Random₀ → **可复用层集** |
+| S1 Fisher/IGIA-16 | 72.75 | Random 部分种子命中；**非** CARE 目标 |
+| S1 GateProbe-16 | 87.00 | GateProbe CARE 不同 |
 
-**建议补闭环（去重后 2 个，未知性能）**：
-
-1. **Fisher + G-only**，b=80，drop `[1,2,4,23,24–35]`
-2. **IGIA + G-only**，b=80，drop `[1,2,3,23,24–35]`
+闭环候选（去重 2 个，**本轮未跑**）：见 `summary.json` → `closed_loop_recommendations`。
 
 ## 文件
 
 - `scores/molmoact2_{igia,fisher,gateprobe}.pt`（400×36）
 - `taylor_groups/taylor_*_b80*.pt`
 - `details.csv`, `drop_frequency.csv`, `selections/`
-- `rev2_launch.log`, `score_smoke_verify.json`
+- `score_smoke_verify.json`（原始冒烟，含 `passed=false`）
+- `diagnostics_rev2_igia_20261017/`（本轮 IGIA 复核）
+- `rev2_launch.log`, `score_run.log`, `taylor_group_run.log`
 
-生成：`analyze_layer_calibration_molmo_v1.py`。
+生成：`analyze_layer_calibration_molmo_v1.py` · 复核说明：`diagnostics_rev2_igia_20261017/REVIEW_CONCLUSION.md`。
