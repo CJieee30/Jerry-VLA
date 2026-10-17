@@ -2,7 +2,7 @@
 
 **π0.5** — `lerobot/pi05_libero_finetuned_v044` vs Stage-1 Fisher Drop-6 `[1, 13, 14, 15, 16, 17]`, skip keep-KV. In-distribution LIBERO 400-ep anchors: full **97.25**, Drop-6 **97.75** (`eval_pi05_libero_v044.md`). Do not mix those with Plus tables.
 
-**MolmoAct2** — `allenai/MolmoAct2-LIBERO-LeRobot`（本机 `checkpoints/MolmoAct2-LIBERO-LeRobot` + `MolmoAct2-LIBERO` 结构）。Plus **Language Instructions × Full × NFE=10** 四轮已于 **2026-10-16 UTC** 全部 `EXIT:0`（见 Molmo 专节）。**Robot Initial States × Full × NFE=10**（GPU3）：**Spatial / Object / Goal 已完成**（**2026-10-16–17 UTC**）；**Long（`init_10`）尚未启动**（Init 串行在 Goal 后 `FAIL`，见 Init 专节）。无剪枝、无 NFE=1，**不**写入上方 π0.5 七维核心表。
+**MolmoAct2** — `allenai/MolmoAct2-LIBERO-LeRobot`（本机 `checkpoints/MolmoAct2-LIBERO-LeRobot` + `MolmoAct2-LIBERO` 结构）。Plus **Language Instructions × Full × NFE=10** 四轮已于 **2026-10-16 UTC** 全部 `EXIT:0`（见 Molmo 专节）。**Robot Initial States × Full × NFE=10**（GPU3）：**Spatial / Object / Goal 已完成**；**Long（`molmoact2_full_nfe10_init_10`）已于 2026-10-17 UTC 在 GPU3 启动**（`eval_plus_molmo.py`，日志 `results/logs/eval_molmoact2_full_nfe10_init_10.log`）。无剪枝、无 NFE=1，**不**写入上方 π0.5 七维核心表。
 
 两栈共用 Plus 环境配方：每语言/变体 **1** 次试验（`n_episodes=1`），`seed=1000`，`n_action_steps=10`，`num_inference_steps=10`，`compile_model=false`，`batch_size=1`，`control_mode=relative`，无视频、无 recovery。任务 id 来自 `LIBERO-plus/.../task_classification.json`（JSON 内 **1-based id 减 1**）。
 
@@ -201,9 +201,7 @@ MolmoAct2 **Full** on the official **Robot Initial States** slice (not the other
 
 ### Results — MolmoAct2 Full NFE=10 Robot Initial States
 
-**Status (2026-10-17 UTC):** **3 / 4 suites complete** — Long **`molmoact2_full_nfe10_init_10`** not started (no output dir; Init serial logged `==== FAIL molmoact2_full_nfe10_init_goal ====` while Goal job had already been running—Goal **`eval_info.json`** is complete). Re-queue Long only:  
-`bash scripts/molmoact2_libero/run_eval_plus_lang.sh molmoact2_full_nfe10_init_10 libero_10 "Robot Initial States" 10 3`  
-(when GPU3 is free; Spatial/Object/Goal dirs are skipped if present).
+**Status (2026-10-17 UTC):** **3 / 4 suites complete** — Long **`molmoact2_full_nfe10_init_10`** **运行中**（GPU3，`run_eval_plus_lang.sh`；Goal 曾因串行脚本误报 `FAIL` 但 **`eval_info.json` 已完整**）。Spatial/Object/Goal 目录齐备则跳过。
 
 | Setting | Spatial | Object | Goal | Long | Avg. | Micro |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -220,7 +218,7 @@ Variant counts (successes): Spatial **308/350**; Object **268/398**; Goal **250/
 | Spatial | `molmoact2_full_nfe10_init_spatial` | `exit=0` **2026-10-16T22:13:42Z** | ≈11 481 s |
 | Object | `molmoact2_full_nfe10_init_object` | `exit=0` **2026-10-17T02:49:23Z** | ≈16 431 s |
 | Goal | `molmoact2_full_nfe10_init_goal` | eval end **2026-10-17T07:16:31Z** (`End of eval`; no `==== EXIT` line in log) | ≈15 930 s |
-| Long | `molmoact2_full_nfe10_init_10` | *not started* | — |
+| Long | `molmoact2_full_nfe10_init_10` | **running** (GPU3, 2026-10-17 UTC) | — |
 
 **Reading vs π0.5 Full Init** (same Init slice, π0.5 macro **77.69** on four suites): finished-suite macro Molmo **72.15** is lower; per-suite **Spatial** Molmo **88.00** vs π0.5 **86.57** (+1.43 pp), **Object** **67.34** vs **72.61** (−5.27), **Goal** **61.12** vs **77.26** (−16.14). Goal init-state OOD is the largest gap so far between the two stacks on Plus Init.
 
@@ -234,8 +232,8 @@ Same **Language Instructions** slice and seeds as Full NFE=10 above. **Taylor Dr
 
 | Batch | NFE | GPU | Status |
 | --- | ---: | ---: | --- |
-| Drop-16 materialized Language | 10 | 0 | **进行中** — Spatial **完成**；**Object 运行中**（2026-10-17 UTC）；Goal / Long 待 NFE=10 串行 |
-| Drop-16 materialized Language | 1 | 2（计划） | **待启动** — 入口 `scripts/molmoact2_libero/run_eval_plus_lang_drop16_nfe1_gpu2.sh`；主日志 `results/logs/eval_molmoact2_drop16_nfe1_lang_serial_gpu2.log`。2026-10-17 π0.5 稳态测量结束后 GPU2 被外部训练占用（`nvidia-smi` PID 非本项目），**未重复启动**；GPU2 空闲后执行上述脚本（完整性检查 `check_plus_eval_integrity.py`，跳过已完成套件）。GPU0 上 NFE=10 串行仍运行，**不**与其抢卡。 |
+| Drop-16 materialized Language | 10 | 0 | **进行中** — Spatial / Object **完整性通过**；**Goal 运行中**（2026-10-17 UTC）；Long 待 NFE=10 串行。`run_eval_plus_lang_drop16_serial.sh` **不再**自动链 NFE=1。 |
+| Drop-16 materialized Language | 1 | 2 | **进行中** — **2026-10-17T12:43:33Z** 起 `run_eval_plus_lang_drop16_nfe1_serial.sh 2`（共享锁 `results/logs/molmo_drop16_nfe1_lang.flock`）；当前 **Spatial** 套件；主日志 `results/logs/eval_molmoact2_drop16_nfe1_lang_serial_gpu2.log`。Graph=false，`compile=false`。 |
 
 NFE=1 标签：`molmoact2_drop16_materialized_nfe1_lang_{spatial,object,goal,10}`。结果表在四份 `eval_info.json` 齐备后用 `summarize_plus_lang.py` 汇总。
 

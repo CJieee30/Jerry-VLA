@@ -16,7 +16,4 @@ done
 TAG="${PREFIX}_10"
 bash "$DIR/run_eval_plus_lang.sh" "$TAG" libero_10 "Language Instructions" "$NFE" "$GPU" drop16_materialized
 
-if [[ "$NFE" == "10" ]]; then
-  echo "==== chaining Drop-16 NFE=1 Language $(date -Iseconds) ===="
-  bash "$DIR/run_eval_plus_lang_drop16_serial.sh" 1 "$GPU"
-fi
+# NFE=1 Language: use run_eval_plus_lang_drop16_nfe1_serial.sh [GPU] (cluster-wide flock; do not auto-chain here).

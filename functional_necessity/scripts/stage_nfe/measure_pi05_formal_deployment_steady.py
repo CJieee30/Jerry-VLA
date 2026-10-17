@@ -8,6 +8,7 @@ import hashlib
 import json
 import os
 import statistics
+import subprocess
 import sys
 import time
 from datetime import datetime, timezone
@@ -16,7 +17,7 @@ from pathlib import Path
 import torch
 
 FN = Path(__file__).resolve().parents[2]
-DEFAULT_OUT = FN / "results" / "stage_nfe" / "formal_deployment_pi05_steady_20261017"
+DEFAULT_OUT = FN / "results" / "stage_nfe" / "formal_deployment_pi05_exclusive_20261018"
 PI05_DROP = [1, 13, 14, 15, 16, 17]
 SCRIPT_SHA = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
 
@@ -38,6 +39,30 @@ def _p95(values: list[float]) -> float:
     return float(xs[i])
 
 
+def _gpu_compute_pids(physical_gpu: int) -> list[dict]:
+    try:
+        out = subprocess.check_output(
+            [
+                "nvidia-smi",
+                f"--id={physical_gpu}",
+                "--query-compute-apps=pid,process_name,used_gpu_memory",
+                "--format=csv,noheader,nounits",
+            ],
+            text=True,
+            stderr=subprocess.DEVNULL,
+        ).strip()
+    except Exception as exc:
+        return [{"error": str(exc)}]
+    rows = []
+    for line in out.splitlines():
+        if not line.strip():
+            continue
+        parts = [p.strip() for p in line.split(",")]
+        if len(parts) >= 3:
+            rows.append({"pid": int(parts[0]), "process_name": parts[1], "used_gpu_memory_mib": parts[2]})
+    return rows
+
+
 def _summarize(samples_ms: list[float]) -> dict:
     return {
         "n": len(samples_ms),
@@ -50,7 +75,14 @@ def _summarize(samples_ms: list[float]) -> dict:
     }
 
 
-def run_config(config_id: str, device: torch.device, n_obs: int, rounds: int) -> dict:
+def run_config(
+    config_id: str,
+    device: torch.device,
+    physical_gpu: int,
+    n_obs: int,
+    rounds: int,
+    self_pid: int,
+) -> dict:
     sys.path.insert(0, str(FN / "scripts" / "pi05_libero"))
     sys.path.insert(0, str(FN / "scripts" / "stage_nfe"))
     from common import DEFAULT_CHECKPOINT, load_policy
@@ -88,30 +120,57 @@ def run_config(config_id: str, device: torch.device, n_obs: int, rounds: int) ->
 
     params_stored = int(sum(p.numel() for p in policy.parameters()))
 
-    def _run_chunk(batch):
+    def _warmup_obs(batch) -> None:
+        policy.reset()
+        n = noise.clone()
         with torch.no_grad():
-            policy.reset()
-            policy.predict_action_chunk(batch, noise=noise.clone(), num_steps=steps)
+            policy.predict_action_chunk(batch, noise=n, num_steps=steps)
 
     def _timed_obs(batch) -> float:
         policy.reset()
+        n = noise.clone()
         with torch.no_grad():
             torch.cuda.synchronize()
             t0 = time.perf_counter()
-            policy.predict_action_chunk(batch, noise=noise.clone(), num_steps=steps)
+            policy.predict_action_chunk(batch, noise=n, num_steps=steps)
             torch.cuda.synchronize()
             return (time.perf_counter() - t0) * 1000.0
+
+    gpu_log: list[dict] = [{"phase": "start", "utc": _utc(), "compute_apps": _gpu_compute_pids(physical_gpu)}]
+    intrusion: list[dict] = []
+
+    def _check_gpu(phase: str) -> bool:
+        apps = _gpu_compute_pids(physical_gpu)
+        gpu_log.append({"phase": phase, "utc": _utc(), "compute_apps": apps})
+        foreign = [a for a in apps if isinstance(a.get("pid"), int) and a["pid"] != self_pid]
+        if foreign:
+            intrusion.append({"phase": phase, "foreign": foreign})
+            return False
+        return True
+
+    if not _check_gpu("pre_measure"):
+        _release_policy(policy)
+        return {
+            "config_id": config_id,
+            "status": "aborted_gpu_intrusion",
+            "intrusion": intrusion,
+            "gpu_monitor": gpu_log,
+        }
 
     torch.cuda.reset_peak_memory_stats()
     per_round = []
     all_ms = []
     all_detail = []
+    aborted = False
 
     for r in range(rounds):
+        if not _check_gpu(f"round_{r}_start"):
+            aborted = True
+            break
         round_ms = []
         for oi, batch in enumerate(batches):
             for _ in range(2):
-                _run_chunk(batch)
+                _warmup_obs(batch)
             ms = _timed_obs(batch)
             round_ms.append(ms)
             all_ms.append(ms)
@@ -126,10 +185,16 @@ def run_config(config_id: str, device: torch.device, n_obs: int, rounds: int) ->
             )
         per_round.append({"round": r, "samples_ms": round_ms, **_summarize(round_ms)})
 
+    _check_gpu("post_measure")
     peak = int(torch.cuda.max_memory_allocated())
     _release_policy(policy)
+    status = "aborted_gpu_intrusion" if aborted or intrusion else "ok"
+    all_samples = _summarize(all_ms) if all_ms else {"n": 0, "median_ms": None, "mean_ms": None, "p95_ms": None}
     return {
-        "protocol": "pi05_formal_deployment_steady_v1",
+        "protocol": "pi05_formal_deployment_steady_v2",
+        "status": status,
+        "intrusion": intrusion,
+        "gpu_monitor": gpu_log,
         "config_id": config_id,
         "stack": "pi05",
         "mode": "steady_per_obs_eager_warmup",
@@ -140,12 +205,12 @@ def run_config(config_id: str, device: torch.device, n_obs: int, rounds: int) ->
         "setup_outside_timed_region": setup,
         "params_stored_m": params_stored / 1e6,
         "per_round": per_round,
-        "all_samples": _summarize(all_ms),
+        "all_samples": all_samples,
         "all_samples_detail": all_detail,
         "peak_allocated_gib": peak / (1024**3),
         "timing_boundary": (
-            "noise tensor prepared once outside; reset before each warmup/timed call; "
-            "two warmup predict_action_chunk then one sync-timed call per obs"
+            "base noise tensor prepared once; each warmup/timed call: reset() + noise.clone() "
+            "outside sync window; timed region is only predict_action_chunk with CUDA sync"
         ),
         "script_sha256": SCRIPT_SHA,
     }
@@ -182,6 +247,7 @@ def main() -> None:
     parser.add_argument("--merge-only", action="store_true")
     parser.add_argument("--anchor-recheck", action="store_true")
     args = parser.parse_args()
+    self_pid = os.getpid()
 
     os.environ.setdefault("CUDA_VISIBLE_DEVICES", str(args.physical_gpu))
     device = torch.device("cuda:0")
@@ -198,7 +264,7 @@ def main() -> None:
     if args.merge_only:
         results = [json.loads((cfg_dir / f"{cid}.json").read_text()) for cid in CONFIGS]
         merged = {
-            "protocol": "pi05_formal_deployment_steady_v1",
+            "protocol": "pi05_formal_deployment_steady_v2",
             "utc": _utc(),
             "physical_gpu_index": args.physical_gpu,
             **merge_results(results, CONFIGS[0]),
@@ -220,7 +286,7 @@ def main() -> None:
     env0 = capture_environment(args.physical_gpu)
     if args.anchor_recheck:
         cid = "pi05_full_nfe10_eager"
-        payload = run_config(cid, device, args.n_obs, 1)
+        payload = run_config(cid, device, args.physical_gpu, args.n_obs, 1, self_pid)
         payload["environment_start"] = env0
         payload["environment_end"] = capture_environment(args.physical_gpu)
         payload["utc"] = _utc()
@@ -230,12 +296,15 @@ def main() -> None:
         return
 
     cid = args.config_id or CONFIGS[0]
-    payload = run_config(cid, device, args.n_obs, args.rounds)
+    payload = run_config(cid, device, args.physical_gpu, args.n_obs, args.rounds, self_pid)
     payload["environment_start"] = env0
     payload["environment_end"] = capture_environment(args.physical_gpu)
     payload["utc"] = _utc()
     path = cfg_dir / f"{cid}.json"
     path.write_text(json.dumps(payload, indent=2) + "\n")
+    if payload.get("status") == "aborted_gpu_intrusion" or payload["all_samples"].get("median_ms") is None:
+        print(f"wrote {path} status={payload.get('status')} intrusion={payload.get('intrusion')}", flush=True)
+        sys.exit(2)
     print(f"wrote {path} median={payload['all_samples']['median_ms']:.2f}ms", flush=True)
 
 
