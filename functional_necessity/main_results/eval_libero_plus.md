@@ -2,7 +2,7 @@
 
 **π0.5** — `lerobot/pi05_libero_finetuned_v044` vs Stage-1 Fisher Drop-6 `[1, 13, 14, 15, 16, 17]`, skip keep-KV. In-distribution LIBERO 400-ep anchors: full **97.25**, Drop-6 **97.75** (`eval_pi05_libero_v044.md`). Do not mix those with Plus tables.
 
-**MolmoAct2** — `allenai/MolmoAct2-LIBERO-LeRobot`（本机 `checkpoints/MolmoAct2-LIBERO-LeRobot` + `MolmoAct2-LIBERO` 结构）。Plus **Language Instructions × Full × NFE=10** 四轮已于 **2026-10-16 UTC** 全部 `EXIT:0`（见 Molmo 专节）；无剪枝、无 NFE=1，**不**写入上方 π0.5 七维核心表。
+**MolmoAct2** — `allenai/MolmoAct2-LIBERO-LeRobot`（本机 `checkpoints/MolmoAct2-LIBERO-LeRobot` + `MolmoAct2-LIBERO` 结构）。Plus **Language Instructions × Full × NFE=10** 四轮已于 **2026-10-16 UTC** 全部 `EXIT:0`（见 Molmo 专节）。**Robot Initial States × Full × NFE=10**（GPU3）：**Spatial / Object / Goal 已完成**（**2026-10-16–17 UTC**）；**Long（`init_10`）尚未启动**（Init 串行在 Goal 后 `FAIL`，见 Init 专节）。无剪枝、无 NFE=1，**不**写入上方 π0.5 七维核心表。
 
 两栈共用 Plus 环境配方：每语言/变体 **1** 次试验（`n_episodes=1`），`seed=1000`，`n_action_steps=10`，`num_inference_steps=10`，`compile_model=false`，`batch_size=1`，`control_mode=relative`，无视频、无 recovery。任务 id 来自 `LIBERO-plus/.../task_classification.json`（JSON 内 **1-based id 减 1**）。
 
@@ -190,6 +190,39 @@ Variant denominators: **390 / 354 / 410 / 383** → **1537**. Macro **Avg.** = u
 **Video / logging.** π0.5 Plus jobs: `max_episodes_rendered=0` (no eval videos). Molmo Plus writes **per-success** rollout mp4 under each job’s `videos/` (see `eval_info.json` `video_paths`); inference flags match π0.5 (`compile_model=false`, `enable_inference_cuda_graph=false`).
 
 **Reading.** Molmo macro **87.71** is **−1.49 pp** vs π0.5 Full **89.20**. **Spatial** Molmo **92.82** vs π0.5 **99.74** (**−6.92 pp**); Object **93.22** vs **91.24** (+1.98); Goal **76.83** vs **73.90** (+2.93); Long **87.99** vs **91.91** (−3.92).
+
+---
+
+# LIBERO-plus Robot Initial States — MolmoAct2 Full NFE=10
+
+MolmoAct2 **Full** on the official **Robot Initial States** slice (not the other six Plus dimensions). Same checkpoint and inference recipe as Language above (`num_inference_steps=10`, `seed=1000`, 1 trial/variant, `enable_inference_cuda_graph=false`). Category **Robot Initial States** from `task_classification.json`: Spatial **350**, Object **398**, Goal **409**, Long **393** → **1550** variants total.
+
+**Entry.** Chained after Language Long via `run_eval_plus_init_serial.sh` / `run_eval_plus_lang.sh`. **GPU3** (`CUDA_VISIBLE_DEVICES=3`), one process at a time. Tags: `molmoact2_full_nfe10_init_{spatial,object,goal,10}` → `results/eval_libero_plus/molmoact2_full_nfe10_init_*`. Master log: `results/logs/eval_molmoact2_full_nfe10_init_serial.log`; per-suite logs: `results/logs/eval_molmoact2_full_nfe10_init_*.log`.
+
+### Results — MolmoAct2 Full NFE=10 Robot Initial States
+
+**Status (2026-10-17 UTC):** **3 / 4 suites complete** — Long **`molmoact2_full_nfe10_init_10`** not started (no output dir; Init serial logged `==== FAIL molmoact2_full_nfe10_init_goal ====` while Goal job had already been running—Goal **`eval_info.json`** is complete). Re-queue Long only:  
+`bash scripts/molmoact2_libero/run_eval_plus_lang.sh molmoact2_full_nfe10_init_10 libero_10 "Robot Initial States" 10 3`  
+(when GPU3 is free; Spatial/Object/Goal dirs are skipped if present).
+
+| Setting | Spatial | Object | Goal | Long | Avg. | Micro |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Full NFE=10 | 88.00 | 67.34 | 61.12 | *pending* | **72.15**† | **826/1157 (71.39%)**† |
+
+†**Avg. / Micro over finished suites only** (350+398+409 variants). Full-dimension macro/micro needs Long **393** variants.
+
+Variant counts (successes): Spatial **308/350**; Object **268/398**; Goal **250/409**. Sources: `eval_info.json` `per_group` / `overall` in each suite dir.
+
+**Run record (finished suites).**
+
+| Suite | Tag | `EXIT` / end (UTC) | `overall.eval_s` (json) |
+| --- | --- | --- | ---: |
+| Spatial | `molmoact2_full_nfe10_init_spatial` | `exit=0` **2026-10-16T22:13:42Z** | ≈11 481 s |
+| Object | `molmoact2_full_nfe10_init_object` | `exit=0` **2026-10-17T02:49:23Z** | ≈16 431 s |
+| Goal | `molmoact2_full_nfe10_init_goal` | eval end **2026-10-17T07:16:31Z** (`End of eval`; no `==== EXIT` line in log) | ≈15 930 s |
+| Long | `molmoact2_full_nfe10_init_10` | *not started* | — |
+
+**Reading vs π0.5 Full Init** (same Init slice, π0.5 macro **77.69** on four suites): finished-suite macro Molmo **72.15** is lower; per-suite **Spatial** Molmo **88.00** vs π0.5 **86.57** (+1.43 pp), **Object** **67.34** vs **72.61** (−5.27), **Goal** **61.12** vs **77.26** (−16.14). Goal init-state OOD is the largest gap so far between the two stacks on Plus Init.
 
 ---
 
